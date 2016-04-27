@@ -209,8 +209,8 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 				continue; // Referrals are disabled on this product
 			}
 
-			if( affiliate_wp()->settings->get( 'exclude_tax' ) ) {
-				$amount = $product['line_total'] - $product['line_tax'];
+			if( !affiliate_wp()->settings->get( 'exclude_tax' ) ) {
+				$amount = $product['line_total'] + $product['line_tax'];
 			} else {
 				$amount = $product['line_total'];
 			}
