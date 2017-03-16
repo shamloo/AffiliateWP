@@ -52,6 +52,9 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 		// Shop page.
 		add_action( 'pre_get_posts', array( $this, 'force_shop_page_for_referrals' ), 5 );
+
+		// Affiliate Area link in My Account menu.
+		add_filter( 'woocommerce_account_menu_items', array( $this, 'my_account_affiliate_area_link' ), 100 );
 	}
 
 	/**
@@ -697,6 +700,52 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 	 */
 	public function strip_referral_from_paged_urls( $link ) {
 		return affiliate_wp()->tracking->strip_referral_from_paged_urls( $link );
+	}
+
+	/**
+	 * Inserts a link to the Affiliate Area in the My Account menu.
+	 *
+	 * @access public
+	 * @since  2.0.5
+	 *
+	 * @param array $items My Account menu items.
+	 * @return array (Maybe) modified menu items.
+	 */
+	public function my_account_affiliate_area_link( $items ) {
+		if ( affwp_is_affiliate() ) {
+
+			$affiliate_area_page = affwp_get_affiliate_area_page_id();
+
+			if ( $affiliate_area_page ) {
+
+				$slug = get_post_field( 'post_name', $affiliate_area_page );
+
+				if ( $slug ) {
+
+					$affiliate_area = array( $slug => __( 'Affiliate Area', 'affiliate-wp' ) );
+
+					$last_link = array();
+
+					if ( array_key_exists( 'customer-logout', $items ) ) {
+
+						// Grab the last link (probably the logout link).
+						$last_link = array_slice( $items, count( $items ) - 1, 1, true );
+
+						// Pop the last link off the end.
+						array_pop( $items );
+
+					}
+
+					// Inject the Affiliate Area link 2nd to last, reinserting the last link.
+					$items = array_merge( $items, $affiliate_area, $last_link );
+
+				}
+			}
+
+		}
+
+		return $items;
+
 	}
 
 }
