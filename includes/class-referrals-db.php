@@ -195,7 +195,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 		$args['affiliate_id']  = ! empty( $data['affiliate_id' ] ) ? absint( $data['affiliate_id'] )             : $referral->affiliate_id;
 		$args['visit_id']      = ! empty( $data['visit_id' ] )     ? absint( $data['visit_id'] )                 : $referral->visit_id;
 		$args['description']   = ! empty( $data['description' ] )  ? sanitize_text_field( $data['description'] ) : '';
-		$args['status']        = ! empty( $data['status'] )        ? sanitize_key( $data['status'] )             : '';
+		$args['status']        = ! empty( $data['status'] )        ? sanitize_key( $data['status'] )             : $referral->status;
 		$args['amount']        = ! empty( $data['amount'] )        ? affwp_sanitize_amount( $data['amount'] )    : '';
 		$args['currency']      = ! empty( $data['currency'] )      ? sanitize_text_field( $data['currency'] )    : '';
 		$args['custom']        = ! empty( $data['custom'] )        ? sanitize_text_field( $data['custom'] )      : '';
