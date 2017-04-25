@@ -57,7 +57,7 @@ function affwp_get_affiliate_id( $user_id = 0 ) {
  * @since 1.9 The `$affiliate` parameter now accepts an affiliate object.
  *
  * @param int|AffWP\Affiliate $affiliate Optional. Affiliate ID or object. Default is the current affiliate.
- * @return string username if affiliate exists, boolean false otherwise
+ * @return string|false username if affiliate exists, boolean false otherwise
  */
 function affwp_get_affiliate_username( $affiliate = 0 ) {
 
@@ -67,7 +67,7 @@ function affwp_get_affiliate_username( $affiliate = 0 ) {
 		$user_info = get_userdata( $affiliate->user_id );
 
 		if ( $user_info ) {
-			$username  = esc_html( $user_info->user_login );
+			$username  = $user_info->user_login;
 			return esc_html( $username );
 		}
 
