@@ -54,6 +54,8 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 
 			}
 
+			$price = rcp_get_registration()->get_total( true, false );
+
 		} else {
 
 			$subscription_id = absint( $_POST['rcp_level'] );
