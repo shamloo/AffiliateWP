@@ -465,9 +465,9 @@ function affwp_get_report_dates() {
 
 		case 'this_month' :
 			$dates['day']       = 1;
-			$dates['day_end']   = cal_days_in_month( CAL_GREGORIAN, $dates['m_start'], date( 'Y', $current_time ) );
 			$dates['m_start']   = date( 'n', $current_time );
 			$dates['m_end']	    = date( 'n', $current_time );
+			$dates['day_end']   = cal_days_in_month( CAL_GREGORIAN, $dates['m_start'], date( 'Y', $current_time ) );
 			$dates['year']      = date( 'Y', $current_time );
 		break;
 
