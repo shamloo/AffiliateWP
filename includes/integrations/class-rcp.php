@@ -54,6 +54,8 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 
 			}
 
+			$price = rcp_get_registration()->get_total( true, false );
+
 		} else {
 
 			$subscription_id = absint( $_POST['rcp_level'] );
@@ -67,8 +69,8 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 			$rcp_discounts = new RCP_Discounts;
 			$discount_obj  = $rcp_discounts->get_by( 'code', $_POST['rcp_discount'] );
 			$affiliate_id  = $wpdb->get_var( $wpdb->prepare( "SELECT meta_value FROM $wpdb->usermeta WHERE meta_key = %s", 'affwp_discount_rcp_' . $discount_obj->id ) );
-			$user_id       = affwp_get_affiliate_user_id( $affiliate_id );
-			$discount_aff  = get_user_meta( $user_id, 'affwp_discount_rcp_' . $discount_obj->id, true );
+			$aff_user_id   = affwp_get_affiliate_user_id( $affiliate_id );
+			$discount_aff  = get_user_meta( $aff_user_id, 'affwp_discount_rcp_' . $discount_obj->id, true );
 
 			$subscription_key = rcp_get_subscription_key( $user_id );
 			$subscription = rcp_get_subscription( $user_id );
