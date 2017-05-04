@@ -208,8 +208,7 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 				$final_count = $this->get_running_count();
 				$total_count = $this->get_total_count();
 				$skipped     = $final_count < $total_count ? $total_count - $final_count : 0;
-log_it( $final_count );
-log_it( $total_count );
+
 				if ( 0 == $final_count ) {
 
 					$message = __( 'No new affiliates were imported.', 'affiliate-wp' );
