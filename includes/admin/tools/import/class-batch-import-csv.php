@@ -156,6 +156,61 @@ class CSV extends Batch\Import implements Importer\CSV {
 	}
 
 	/**
+	 * Sets the running count in the temporary data store.
+	 *
+	 * The "running" count differs from the "current" count because the current count is used
+	 * to calculate the percentage and keep the progress bar moving, whereas the running count
+	 * is the actual number of items processed.
+	 *
+	 * @access public
+	 * @since  2.1
+	 *
+	 * @param int $count Running count.
+	 */
+	public function set_running_count( $count ) {
+		affiliate_wp()->utils->data->write( "{$this->batch_id}_running_count", $count );
+	}
+
+	/**
+	 * Retrieves the running count from the temporary data store.
+	 *
+	 * @access public
+	 * @since  2.1
+	 *
+	 * @see set_running_count()
+	 *
+	 * @return int Running count of processed affiliates.
+	 */
+	public function get_running_count() {
+		return affiliate_wp()->utils->data->get( "{$this->batch_id}_running_count", 0 );
+	}
+
+	/**
+	 * Maps referral fields for pairing with the imported CSV.
+	 *
+	 * @access public
+	 * @since  2.1
+	 *
+	 * @param array $import_fields Fields to import.
+	 */
+	public function map_fields( $import_fields = array() ) {
+		$this->field_mapping = $import_fields;
+	}
+
+	/**
+	 * Defines logic to execute once batch import processing is complete.
+	 *
+	 * @access public
+	 * @since  2.1
+	 */
+	public function finish() {
+		// Running count (the "real" count).
+		affiliate_wp()->utils->data->delete( "{$this->batch_id}_running_count" );
+
+		parent::finish();
+	}
+
+	/**
 	 * Performs the import process.
 	 *
 	 * @access public
