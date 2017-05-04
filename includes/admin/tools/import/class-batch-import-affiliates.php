@@ -110,8 +110,9 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 			return 'done';
 		}
 
-		if ( $this->csv->data ) {
-			$data = $this->csv->data;
+		$data = $this->get_data();
+
+		if ( $data ) {
 
 			$data = array_slice( $data, $offset, $this->per_step, true );
 
@@ -147,6 +148,26 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 		$this->set_running_count( $this->get_running_count() + $running_count );
 
 		return ++$this->step;
+	}
+
+	/**
+	 * Retrieves the CSV data for processing.
+	 *
+	 * @access public
+	 * @since  2.1
+	 *
+	 * @return array CSV data.
+	 */
+	public function get_data() {
+		/**
+		 * Filters the data supplied to the batch affiliate importer process.
+		 *
+		 * @since 2.1
+		 *
+		 * @param array                                        $data CSV data.
+		 * @param \AffWP\Utils\Batch_Process\Import_Affiliates $this Batch process instance.
+		 */
+		return apply_filters( 'affwp_batch_import_affiliates_data', $this->csv->data, $this );
 	}
 
 	/**
