@@ -151,26 +151,6 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 	}
 
 	/**
-	 * Retrieves the CSV data for processing.
-	 *
-	 * @access public
-	 * @since  2.1
-	 *
-	 * @return array CSV data.
-	 */
-	public function get_data() {
-		/**
-		 * Filters the data supplied to the batch affiliate importer process.
-		 *
-		 * @since 2.1
-		 *
-		 * @param array                                        $data CSV data.
-		 * @param \AffWP\Utils\Batch_Process\Import_Affiliates $this Batch process instance.
-		 */
-		return apply_filters( 'affwp_batch_import_affiliates_data', $this->csv->data, $this );
-	}
-
-	/**
 	 * Sets the running count in the temporary data store.
 	 *
 	 * The "running" count differs from the "current" count because the current count is used

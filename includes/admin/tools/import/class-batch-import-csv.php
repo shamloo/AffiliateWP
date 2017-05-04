@@ -136,14 +136,24 @@ class CSV extends Batch\Import implements Importer\CSV {
 	}
 
 	/**
-	 * Prepares the data for import.
+	 * Retrieves the CSV data for processing.
 	 *
 	 * @access public
 	 * @since  2.0
 	 *
 	 * @return array[] Multi-dimensional array of data for import.
 	 */
-	public function get_data() {}
+	public function get_data() {
+		/**
+		 * Filters the data supplied to the batch importer process.
+		 *
+		 * @since 2.1
+		 *
+		 * @param array                                 $data CSV data.
+		 * @param \AffWP\Utils\Batch_Process\Import\CSV $this Batch process instance.
+		 */
+		return apply_filters( "affwp_batch_{$this->batch_id}_data", $this->csv->data, $this );
+	}
 
 	/**
 	 * Performs the import process.
