@@ -14,6 +14,15 @@ use AffWP\Utils\Batch_Process as Batch;
 class Import_Referrals extends Batch\Import\CSV implements Batch\With_PreFetch {
 
 	/**
+	 * Capability needed to process a referrals import.
+	 *
+	 * @access public
+	 * @since  2.1
+	 * @var    string
+	 */
+	public $capability = 'manage_referrals';
+
+	/**
 	 * Instantiates the batch process.
 	 *
 	 * @param string $_file
