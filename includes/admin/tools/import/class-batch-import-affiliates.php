@@ -87,17 +87,6 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 		if ( false === $total_to_import  ) {
 			$this->set_total_count( absint( $this->total ) );
 		}
-
-		$all_affiliate_user_ids = affiliate_wp()->utils->data->get( "{$this->batch_id}_affiliate_user_ids", array() );
-
-		if ( false === $all_affiliate_user_ids ) {
-			$user_ids = affiliate_wp()->affiliates->get_affiliates( array(
-				'number' => -1,
-				'fields' => 'user_id'
-			) );
-
-			affiliate_wp()->utils->data->write( "{$this->batch_id}_affiliate_user_ids", $user_ids );
-		}
 	}
 
 	/**
@@ -256,19 +245,13 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 	 * @return int|false User ID if a user was found or derived, otherwise false.
 	 */
 	protected function create_user( $args ) {
-		$affiliate_user_ids = affiliate_wp()->utils->data->get( "{$this->batch_id}_affiliate_user_ids", array() );
-
 		$defaults = array_fill_keys( array( 'user_login', 'email' ), '' );
 		$args     = wp_parse_args( $args, $defaults );
 
 		$user_id = $this->get_user_from_args( $args );
 
 		if ( $user_id ) {
-			if ( ! in_array( $user_id, $affiliate_user_ids, true ) ) {
-				return $user_id;
-			} else {
-				return false;
-			}
+			return $user_id;
 		}
 
 		if ( ! empty( $args['user_login'] ) ) {
@@ -347,9 +330,6 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 	public function finish() {
 		// Invalidate the affiliates cache.
 		wp_cache_set( 'last_changed', microtime(), 'affiliates' );
-
-		// Pre-fetch.
-		affiliate_wp()->utils->data->delete( "{$this->batch_id}_affiliate_user_ids" );
 
 		// Running count (the "real" count).
 		affiliate_wp()->utils->data->delete( "{$this->batch_id}_running_count" );
