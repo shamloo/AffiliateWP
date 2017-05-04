@@ -125,7 +125,12 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 				$user_id = $this->create_user( $args );
 
 				if ( $user_id ) {
-					$args['user_id'] = $user_id;
+					// Check for an existing affiliate for this user.
+					if ( $affiliate = affiliate_wp()->affiliates->get_by( 'user_id', $user_id ) ) {
+						continue;
+					} else {
+						$args['user_id'] = $user_id;
+					}
 				} else {
 					continue;
 				}
