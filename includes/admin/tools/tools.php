@@ -400,7 +400,7 @@ function affwp_export_import_tab() {
 							<p>
 								<?php
 								printf(
-									__( 'Each column loaded from the CSV needs to be mapped to an affiliate field. Select the column that should be mapped to each field below. Any columns not needed can be ignored. See <a href="%s" target="_blank">this guide</a> for assistance with importing affiliate records.', 'affiliate-wp' ),
+									__( 'Each column loaded from the CSV may be mapped to an affiliate field. Select the column that should be mapped to each field below. Any columns not needed can be ignored. See <a href="%s" target="_blank">this guide</a> for assistance with importing affiliate records.', 'affiliate-wp' ),
 									''
 								);
 								?>
@@ -434,7 +434,7 @@ function affwp_export_import_tab() {
 									<td class="affwp-import-preview-field"><?php esc_html_e( '- select field to preview data -', 'affiliate-wp' ); ?></td>
 								</tr>
 								<tr>
-									<td><?php esc_html_e( 'First Name (optional)', 'affiliate-wp' ); ?></td>
+									<td><?php esc_html_e( 'First/Full Name (optional)', 'affiliate-wp' ); ?></td>
 									<td>
 										<select name="affwp-import-field[first_name]" class="affwp-import-csv-column">
 											<option value=""><?php esc_html_e( '- Ignore this field -', 'affiliate-wp' ); ?></option>
