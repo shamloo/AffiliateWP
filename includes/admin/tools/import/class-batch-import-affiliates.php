@@ -208,21 +208,31 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 				$final_count = $this->get_running_count();
 				$total_count = $this->get_total_count();
 				$skipped     = $final_count < $total_count ? $total_count - $final_count : 0;
+log_it( $final_count );
+log_it( $total_count );
+				if ( 0 == $final_count ) {
 
-				$message = sprintf(
-					_n(
-						'%s affiliate was successfully imported.',
-						'%s affiliates were successfully imported.',
-						$final_count,
-						'affiliate-wp'
-					), number_format_i18n( $final_count )
-				);
+					$message = __( 'No new affiliates were imported.', 'affiliate-wp' );
+
+				} else {
+
+					$message = sprintf(
+						_n(
+							'%s affiliate was successfully imported.',
+							'%s affiliates were successfully imported.',
+							$final_count,
+							'affiliate-wp'
+						), number_format_i18n( $final_count )
+					);
+
+				}
+
 
 				if ( $skipped > 0 ) {
 					$message .= sprintf( ' ' .
 						_n(
-							'%s existing affiliate or invalid row was skipped.',
-							'%s existing affiliates or invalid rows were skipped.',
+							'%s other existing affiliate or invalid row was skipped.',
+							'%s other existing affiliates or invalid rows were skipped.',
 							$skipped,
 							'affiliate-wp'
 						), number_format_i18n( $skipped )
