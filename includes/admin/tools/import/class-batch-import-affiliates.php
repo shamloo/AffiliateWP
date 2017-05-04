@@ -237,6 +237,10 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 						), number_format_i18n( $skipped )
 					);
 				}
+
+				// Add a link to manage affiliates in the success message.
+				$message .= ' ' . affwp_admin_link( 'affiliates', __( 'Manage your affiliates.', 'affiliate-wp' ) );
+
 				break;
 
 			default:
