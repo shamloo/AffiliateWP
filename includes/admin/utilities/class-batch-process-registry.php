@@ -121,6 +121,11 @@ class Registry extends Utils\Registry {
 			'file'  => AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/import/class-batch-import-affiliates.php',
 		) );
 
+		$this->register_process( 'import-referrals', array(
+			'class' => 'AffWP\Utils\Batch_Process\Import_Referrals',
+			'file'  => AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/import/class-batch-import-referrals.php',
+		) );
+
 		//
 		// Other stuff.
 		//
