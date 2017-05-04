@@ -102,8 +102,8 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 			wp_die( __( 'You do not have permission to import data.', 'affiliate-wp' ), __( 'Error', 'affiliate-wp' ), array( 'response' => 403 ) );
 		}
 
+		$running_count = 0;
 		$current_count = $this->get_current_count();
-		$running_count = $this->get_running_count();
 		$offset        = $this->get_offset();
 
 		if ( $current_count >= $this->get_total_count() ) {
@@ -139,7 +139,7 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 		}
 
 		$this->set_current_count( $current_count + $this->per_step );
-		$this->set_running_count( $running_count + $running_count );
+		$this->set_running_count( $this->get_running_count() + $running_count );
 
 		return ++$this->step;
 	}
