@@ -139,7 +139,7 @@ class CSV extends Batch\Import implements Importer\CSV {
 	 * Retrieves the CSV data for processing.
 	 *
 	 * @access public
-	 * @since  2.0
+	 * @since  2.1
 	 *
 	 * @return array[] Multi-dimensional array of data for import.
 	 */
@@ -186,18 +186,6 @@ class CSV extends Batch\Import implements Importer\CSV {
 	}
 
 	/**
-	 * Maps referral fields for pairing with the imported CSV.
-	 *
-	 * @access public
-	 * @since  2.1
-	 *
-	 * @param array $import_fields Fields to import.
-	 */
-	public function map_fields( $import_fields = array() ) {
-		$this->field_mapping = $import_fields;
-	}
-
-	/**
 	 * Defines logic to execute once batch import processing is complete.
 	 *
 	 * @access public
@@ -214,7 +202,7 @@ class CSV extends Batch\Import implements Importer\CSV {
 	 * Performs the import process.
 	 *
 	 * @access public
-	 * @since  2.0
+	 * @since  2.1
 	 *
 	 * @return void
 	 */
