@@ -407,7 +407,8 @@ jQuery(document).ready(function($) {
 
 			if( response.success ) {
 
-				var $form = $( '.affwp-batch-import-form' );
+				// Select only the current form.
+				var $form = $('.affwp-batch-import-form .notice-wrap').parent();
 
 				$form.find( '.affwp-import-file-wrap, .notice-wrap' ).remove();
 				$form.find( '.affwp-import-options' ).slideDown();
