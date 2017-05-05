@@ -344,6 +344,7 @@ final class Affiliate_WP {
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affwp-payout.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affwp-referral.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affwp-visit.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affwp-coupon.php';
 
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/actions.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/abstracts/class-affwp-registry.php';
