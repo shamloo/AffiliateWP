@@ -373,8 +373,6 @@ jQuery(document).ready(function($) {
 		before_submit: function( arr, $form, options ) {
 			var self = this;
 
-			var $form = $( '.affwp-batch-import-form' );
-
 			$form.find('.notice-wrap').remove();
 			$form.append( '<div class="notice-wrap"><span class="spinner is-active"></span><div class="affwp-batch-progress"><div></div></div></div>' );
 
