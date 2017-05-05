@@ -8,7 +8,7 @@
  * @since 2.1
  */
 
-namespace AffWP\Coupon;
+namespace AffWP\Affiliate;
 
 /**
  * Implements a coupon object.
@@ -22,7 +22,16 @@ namespace AffWP\Coupon;
 final class Coupon extends \AffWP\Base_Object {
 
 	/**
-	 * Coupon ID.
+	 * Coupon ID. This is the primary key for this object.
+	 * Stored as an internal coupon ID.
+	 *
+	 * @since  2.1
+	 * @var    int
+	 */
+	public $affwp_coupon_id = 0;
+
+	/**
+	 * The coupon ID as it exists within the integration. Stored as an internal coupon ID.
 	 *
 	 * @since  2.1
 	 * @var    int
@@ -54,7 +63,7 @@ final class Coupon extends \AffWP\Base_Object {
 	public $integration;
 
 	/**
-	 * Coupon status.
+	 * Coupon status. Either active or inactive.
 	 *
 	 * @since  2.1
 	 * @var    string
@@ -72,10 +81,59 @@ final class Coupon extends \AffWP\Base_Object {
 	/**
 	 * ID of the WordPress user who generated the coupon.
 	 *
-	 * @since  2.1.5
+	 * @since  2.1
 	 * @var    int
 	 */
 	public $owner = 0;
+
+	/**
+	 * Gets coupon data from the active integration in which it was generated.
+	 *
+	 * Specify either the AffiliateWP `affwp_coupon_id`, or the coupon ID from the integration, `coupon_id`.
+	 *
+	 * @since  2.1
+	 *
+	 * @return array $data Coupon data.
+	 */
+	public function data( $coupon_id = 0, $affwp_coupon_id = 0 ) {
+
+		$affwp_coupon_id = $this->affwp_coupon_id;
+		$coupon_id       = $this->coupon_id;
+
+		// Bail if either coupon ID is not set.
+		if ( ! $affwp_coupon_id || ! $coupon_id ) {
+			return false;
+		}
+
+		$data = array();
+
+		switch ( $this->integration ) {
+			case 'edd':
+				// Get EDD-specific coupon meta
+				$discount = edd_get_discount( $coupon_id );
+				$data[ 'type' ]   = $discount->type;
+				$data[ 'code' ]   = $discount->code;
+				$data[ 'uses' ]   = $discount->uses;
+				$data[ 'status' ] = edd_is_discount_expired( $coupon_id ) ? 'inactive' : 'active';
+				$data[ 'expiration_date' ] = $discount->expires;
+				$data[ 'integration' ] = $this->integration;
+				$data[ 'affiliate_id' ] = $this->affiliate_id;
+
+				break;
+
+			// case 'woocommerce':
+			// 	// Get WooCommerce-specific coupon meta
+			// 	break;
+
+			// case 'rcp':
+			// 	// Get RCP-specific coupon meta
+			// 	break;
+
+			default:
+				$data = false;
+				break;
+		}
+	}
 
 	/**
 	 * Token to use for generating cache keys.

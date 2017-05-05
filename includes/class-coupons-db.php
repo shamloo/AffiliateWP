@@ -79,6 +79,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 	public function get_columns() {
 		return array(
 			'coupon_id'       => '%d',
+			'affwp_coupon_id' => '%d',
 			'affiliate_id'    => '%d',
 			'referrals'       => '%s',
 			'integration'     => '%s',
@@ -97,6 +98,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 	public function get_column_defaults() {
 		return array(
 			'coupon_id'       => 0,
+			'affwp_coupon_id' => 0,
 			'owner'           => 0,
 			'status'          => 'active',
 			'expiration_date' => date( 'Y-m-d H:i:s' )
@@ -112,14 +114,13 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 	 * @param array $args {
 	 *     Optional. Array of arguments for adding a new coupon. Default empty array.
 	 *
-	 *     @type int        $affiliate_id  Affiliate ID the coupon should be associated with.
-	 *     @type array      $referrals     Referral ID or array of IDs to associate the coupon with.
-	 *     @type float      $amount        Coupon amount.
-	 *     @type int        $owner         ID of the user who generated the coupon. Default is the ID
-	 *                                     of the current user.
-	 *     @type string     $coupon_method Coupon method.
-	 *     @type string     $status        Coupon status. Will be 'paid' unless there's a problem.
-	 *     @type int|string $date          Date string or timestamp for when the coupon was created.
+	 *     @type int        $affiliate_id    Affiliate ID the coupon should be associated with.
+	 *     @type array      $referrals       Referral ID or array of IDs to associate the coupon with.
+	 *     @type float      $amount          Coupon amount.
+	 *     @type int        $owner           ID of the user who generated the coupon. Default is the ID
+	 *                                       of the current user.
+	 *     @type string     $status          Coupon status. Will be 'paid' unless there's a problem.
+	 *     @type int|string $expiration_date Date string or timestamp for when the coupon expires.
 	 * }
 	 * @return int|false Coupon ID if successfully added, otherwise false.
 	 */
@@ -183,13 +184,6 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 			 */
 			do_action( 'affwp_insert_coupon', $add );
 
-			// Add the coupon IDs to the referral records.
-			foreach ( $referrals as $referral ) {
-				if ( affiliate_wp()->referrals->update( $referral->ID, array( 'coupon_id' => $add ), '', 'referral' ) ) {
-					affwp_set_referral_status( $referral, 'paid' );
-				}
-			}
-
 			return $add;
 		}
 
@@ -236,33 +230,14 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 	 *                          referral IDs.
 	 * @return array List of coupon IDs for all referrals.
 	 */
-	public function get_coupon_ids_by_affiliates( $affiliates ) {
+	public function get_coupon_ids_by_affiliate( $affiliate ) {
 		$coupon_ids = array();
 
-		if ( ! empty( $affiliates ) ) {
-			foreach ( $affiliates as $affiliate => $referrals ) {
-				foreach ( $referrals as $referral ) {
-					$coupon_ids[] = (int) affiliate_wp()->referrals->get_column( 'coupon_id', $referral );
-				}
-			}
+		if ( ! empty( $affiliate ) ) {
+			$coupon_ids[] = (int) affiliate_wp()->referrals->get_column( 'coupon_id', $referral );
 		}
 
 		return array_unique( $coupon_ids );
-	}
-
-	/**
-	 * Retrieves all coupon IDs for a set of referrals, regardless of affiliate association.
-	 *
-	 * @access public
-	 * @since  2.1
-	 *
-	 * @param array  $referrals Array of referral IDs.
-	 * @param string $status    Optional. Required referral status. Pass an empty string to disable.
-	 *                          Default 'paid'.
-	 * @return array Array of coupon IDs.
-	 */
-	public function get_coupon_ids_by_referrals( $referrals, $status = 'paid' ) {
-		return $this->get_coupon_ids_by_affiliates( $this->get_affiliate_ids_by_referrals( $referrals, $status ) );
 	}
 
 	/**
@@ -314,6 +289,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 		$defaults = array(
 			'number'          => 20,
 			'offset'          => 0,
+			'affwp_coupon_id' => 0,
 			'coupon_id'       => 0,
 			'affiliate_id'    => 0,
 			'referrals'       => 0,
@@ -336,21 +312,21 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 		$where = $join = '';
 
 		// Specific coupons.
-		if( ! empty( $args['coupon_id'] ) ) {
+		if( ! empty( $args['affwp_coupon_id'] ) ) {
 
 			$where .= empty( $where ) ? "WHERE " : "AND ";
 
-			if( is_array( $args['coupon_id'] ) ) {
-				$coupon_ids = implode( ',', array_map( 'intval', $args['coupon_id'] ) );
+			if( is_array( $args['affwp_coupon_id'] ) ) {
+				$affwp_coupon_ids = implode( ',', array_map( 'intval', $args['affwp_coupon_id'] ) );
 			} else {
-				$coupon_ids = intval( $args['coupon_id'] );
+				$affwp_coupon_ids = intval( $args['affwp_coupon_id'] );
 			}
 
-			$coupon_ids = esc_sql( $coupon_ids );
+			$affwp_coupon_ids = esc_sql( $affwp_coupon_ids );
 
-			$where .= "`coupon_id` IN( {$coupon_ids} ) ";
+			$where .= "`affwp_coupon_id` IN( {$affwp_coupon_ids} ) ";
 
-			unset( $coupon_ids );
+			unset( $affwp_coupon_ids );
 		}
 
 		// Affiliate(s).
@@ -369,69 +345,14 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 			$where .= "`affiliate_id` IN( {$affiliates} ) ";
 		}
 
-		// Referral ID(s).
-		if ( ! empty( $args['referrals'] ) ) {
-
-			if ( ! is_array( $args['referrals'] ) ) {
-				$args['referrals'] = (array) $args['referrals'];
-			}
-
-			$coupon_ids = $this->get_coupon_ids_by_referrals( $args['referrals'] );
-
-			if ( ! empty( $coupon_ids ) ) {
-				$where .= empty( $where ) ? "WHERE " : "AND ";
-
-				$coupon_ids = esc_sql( implode( ',', $coupon_ids ) );
-
-				if ( ! empty( $args['search'] ) ) {
-					$where .= "`coupon_id` LIKE '%%" . $coupon_ids . "%%' ";
-				} else {
-					$where .= "`coupon_id` IN( {$coupon_ids} ) ";
-				}
-			}
-
-			unset( $coupon_ids );
-		}
-
-		// Amount.
-		if ( ! empty( $args['amount'] ) ) {
-
-			$amount = $args['amount'];
+		// Coupon integration.
+		if ( ! empty( $args['integration'] ) ) {
 
 			$where .= empty( $where ) ? "WHERE " : "AND ";
 
-			if ( is_array( $amount ) && ! empty( $amount['min'] ) && ! empty( $amount['max'] ) ) {
+			$integration = esc_sql( $args['integration'] );
 
-				$minimum = absint( $amount['min'] );
-				$maximum = absint( $amount['max'] );
-
-				$where .= "`amount` BETWEEN {$minimum} AND {$maximum} ";
-			} else {
-
-				$amount  = absint( $amount );
-				$compare = '=';
-
-				if ( ! empty( $args['amount_compare'] ) ) {
-					$compare = $args['amount_compare'];
-
-					if ( ! in_array( $compare, array( '>', '<', '>=', '<=', '=', '!=' ) ) ) {
-						$compare = '=';
-					}
-				}
-
-				$where .= "`amount` {$compare} {$amount} ";
-			}
-
-		}
-
-		// Coupon method.
-		if ( ! empty( $args['coupon_method'] ) ) {
-
-			$where .= empty( $where ) ? "WHERE " : "AND ";
-
-			$payment_method = esc_sql( $args['coupon_method'] );
-
-			$where .= "`coupon_method` = '" . $coupon_method . "' ";
+			$where .= "`integration` = '" . $integration . "' ";
 		}
 
 		// Owners.
@@ -454,8 +375,8 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 
 			$where .= empty( $where ) ? "WHERE " : "AND ";
 
-			if ( ! in_array( $args['status'], array( 'paid', 'failed' ), true ) ) {
-				$args['status'] = 'paid';
+			if ( ! in_array( $args['status'], array( 'active', 'inactive' ), true ) ) {
+				$args['status'] = 'active';
 			}
 
 			$status = esc_sql( $args['status'] );
@@ -463,70 +384,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 			$where .= "`status` = '" . $status . "' ";
 		}
 
-		// Date.
-		if( ! empty( $args['date'] ) ) {
-
-			if( is_array( $args['date'] ) ) {
-
-				if( ! empty( $args['date']['start'] ) ) {
-
-					if( false !== strpos( $args['date']['start'], ':' ) ) {
-						$format = 'Y-m-d H:i:s';
-					} else {
-						$format = 'Y-m-d 00:00:00';
-					}
-
-					$start = esc_sql( date( $format, strtotime( $args['date']['start'] ) ) );
-
-					if ( ! empty( $where ) ) {
-						$where .= " AND `date` >= '{$start}'";
-					} else {
-						$where .= " WHERE `date` >= '{$start}'";
-					}
-
-				}
-
-				if ( ! empty( $args['date']['end'] ) ) {
-
-					if ( false !== strpos( $args['date']['end'], ':' ) ) {
-						$format = 'Y-m-d H:i:s';
-					} else {
-						$format = 'Y-m-d 23:59:59';
-					}
-
-					$end = esc_sql( date( $format, strtotime( $args['date']['end'] ) ) );
-
-					if( ! empty( $where ) ) {
-						$where .= " AND `date` <= '{$end}'";
-					} else {
-						$where .= " WHERE `date` <= '{$end}'";
-					}
-
-				}
-
-			} else {
-
-				$year  = date( 'Y', strtotime( $args['date'] ) );
-				$month = date( 'm', strtotime( $args['date'] ) );
-				$day   = date( 'd', strtotime( $args['date'] ) );
-
-				if( empty( $where ) ) {
-					$where .= " WHERE";
-				} else {
-					$where .= " AND";
-				}
-
-				$where .= " $year = YEAR ( date ) AND $month = MONTH ( date ) AND $day = DAY ( date )";
-			}
-
-		}
-
 		$orderby = array_key_exists( $args['orderby'], $this->get_columns() ) ? $args['orderby'] : $this->primary_key;
-
-		// Non-column orderby exception;
-		if ( 'amount' === $args['orderby'] ) {
-			$orderby = 'amount+0';
-		}
 
 		// There can be only two orders.
 		if ( 'DESC' === strtoupper( $args['order'] ) ) {
@@ -593,15 +451,15 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 	 * @access public
 	 * @since  2.1
 	*/
-	public function coupon_exists( $coupon_id = 0 ) {
+	public function coupon_exists( $affwp_coupon_id = 0 ) {
 
 		global $wpdb;
 
-		if ( empty( $coupon_id ) ) {
+		if ( empty( $affwp_coupon_id ) ) {
 			return false;
 		}
 
-		$coupon = $wpdb->query( $wpdb->prepare( "SELECT 1 FROM {$this->table_name} WHERE {$this->primary_key} = %d;", $coupon_id ) );
+		$coupon = $wpdb->query( $wpdb->prepare( "SELECT 1 FROM {$this->table_name} WHERE {$this->primary_key} = %d;", $affwp_coupon_id ) );
 
 		return ! empty( $coupon );
 	}
@@ -635,13 +493,14 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 
 		$sql = "CREATE TABLE " . $this->table_name . " (
 			coupon_id bigint(20) NOT NULL AUTO_INCREMENT,
+			affwp_coupon_id bigint(20) NOT NULL AUTO_INCREMENT,
 			affiliate_id bigint(20) NOT NULL,
 			referrals mediumtext NOT NULL,
 			integration mediumtext NOT NULL,
 			owner bigint(20) NOT NULL,
 			status tinytext NOT NULL,
 			expiration_date datetime NOT NULL,
-			PRIMARY KEY  (coupon_id),
+			PRIMARY KEY  (affwp_coupon_id),
 			KEY affiliate_id (affiliate_id)
 			) CHARACTER SET utf8 COLLATE utf8_general_ci;";
 
