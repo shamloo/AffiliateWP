@@ -54,14 +54,6 @@ final class Coupon extends \AffWP\Base_Object {
 	public $integration;
 
 	/**
-	 * Coupon method.
-	 *
-	 * @since  2.1
-	 * @var    string
-	 */
-	public $coupon_method;
-
-	/**
 	 * Coupon status.
 	 *
 	 * @since  2.1
