@@ -623,10 +623,12 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	*/
 	public function paid_earnings( $date = '', $affiliate_id = 0, $format = true ) {
 
-		$args                 = array();
-		$args['status']       = 'paid';
-		$args['affiliate_id'] = $affiliate_id;
-		$args['number']       = '-1';
+		$args = array(
+			'status'       => 'paid',
+			'affiliate_id' => $affiliate_id,
+			'number'       => -1,
+			'fields'       => 'amount',
+		);
 
 		if( 'alltime' == $date ) {
 			return $this->get_alltime_earnings();
@@ -659,8 +661,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 		}
 
 		$referrals = $this->get_referrals( $args );
-
-		$earnings  = array_sum( wp_list_pluck( $referrals, 'amount' ) );
+		$earnings  = array_sum( $referrals );
 
 		if( $format ) {
 			$earnings = affwp_currency_filter( affwp_format_amount( $earnings ) );
