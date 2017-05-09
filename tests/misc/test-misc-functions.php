@@ -327,4 +327,31 @@ class Tests extends UnitTestCase {
 		$this->assertEqualSets( $fields, affwp_get_referral_import_fields() );
 	}
 
+	/**
+	 * @covers ::affwp_do_import_fields()
+	 */
+	public function test_do_import_fields_with_valid_field_type_should_output_fields_markup() {
+		ob_start();
+
+		affwp_do_import_fields( 'affiliates' );
+
+		$output   = ob_get_clean();
+		$expected = '<select name="affwp-import-field[email]" class="affwp-import-csv-column">';
+
+		$this->assertContains( $expected, $output );
+	}
+
+	/**
+	 * @covers ::affwp_do_import_fields()
+	 */
+	public function test_do_import_fields_with_invalid_field_type_should_output_nothing() {
+		ob_start();
+
+		affwp_do_import_fields( 'foo' );
+
+		$output = ob_get_clean();
+
+		$this->assertSame( '', $output );
+	}
+
 }
