@@ -282,4 +282,49 @@ class Tests extends UnitTestCase {
 		$this->assertSame( 'http://' . WP_TESTS_DOMAIN . '/wp-admin/admin.php?page=affiliate-wp', affwp_admin_url( 'foo' ) );
 	}
 
+	/**
+	 * @covers ::affwp_get_affiliate_import_fields()
+	 */
+	public function test_get_affiliate_import_fields_default_fields() {
+		$fields = array(
+			'email'           => __( 'Email (required)', 'affiliate-wp' ),
+			'user_login'      => __( 'Username', 'affiliate-wp' ),
+			'first_name'      => __( 'First/Full Name', 'affiliate-wp' ),
+			'last_name'       => __( 'Last Name', 'affiliate-wp' ),
+			'rate'            => __( 'Rate', 'affiliate-wp' ),
+			'rate_type'       => __( 'Rate Type', 'affiliate-wp' ),
+			'earnings'        => __( 'Earnings', 'afiliate-wp' ),
+			'unpaid_earnings' => __( 'Unpaid Earnings', 'affiliate-wp' ),
+			'referrals'       => __( 'Referral Count', 'affiliate-wp' ),
+			'visits'          => __( 'Visit Count', 'affiliate-wp' ),
+			'date_registered' => __( 'Registration Date', 'affiliate-wp' )
+		);
+
+		$this->assertEqualSets( $fields, affwp_get_affiliate_import_fields() );
+	}
+
+	/**
+	 * @covers ::affwp_get_referral_import_fields()
+	 */
+	public function test_get_referral_import_fields_default_fields() {
+		$fields = array(
+			'affiliate'       => __( 'Affiliate ID or Username (required)', 'affiliate-wp' ),
+			'amount'          => __( 'Amount (required)', 'affiliate-wp' ),
+			'email'           => __( 'Affiliate Email', 'affiliate-wp' ),
+			'username'        => __( 'Affiliate Username', 'affiliate-wp' ),
+			'first_name'      => __( 'Affiliate First/Full Name', 'affiliate-wp' ),
+			'last_name'       => __( 'Affiliate Last Name', 'affiliate-wp' ),
+			'payment_email'   => __( 'Payment Email', 'affiliate-wp' ),
+			'currency'        => __( 'Currency', 'affiliate-wp' ),
+			'description'     => __( 'Description', 'affiliate-wp' ),
+			'campaign'        => __( 'Campaign', 'affiliate-wp' ),
+			'reference'       => __( 'Reference', 'affiliate-wp' ),
+			'context'         => __( 'Context', 'affiliate-wp' ),
+			'status'          => __( 'Status', 'affiliate-wp' ),
+			'date'            => __( 'Date', 'affiliate-wp' )
+		);
+
+		$this->assertEqualSets( $fields, affwp_get_referral_import_fields() );
+	}
+
 }

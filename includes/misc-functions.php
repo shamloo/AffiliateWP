@@ -1047,3 +1047,99 @@ function affwp_allowed_mime_types( $mime_types = array() ) {
 	return $mime_types;
 }
 add_filter( 'upload_mimes', 'affwp_allowed_mime_types' );
+
+/**
+ * Retrieves the list of affiliate import fields.
+ *
+ * @since 2.1
+ *
+ * @return array Array of affiliate import fields and associated lable.s
+ */
+function affwp_get_affiliate_import_fields() {
+
+	$fields = array(
+		'email'           => __( 'Email (required)', 'affiliate-wp' ),
+		'user_login'      => __( 'Username', 'affiliate-wp' ),
+		'first_name'      => __( 'First/Full Name', 'affiliate-wp' ),
+		'last_name'       => __( 'Last Name', 'affiliate-wp' ),
+		'rate'            => __( 'Rate', 'affiliate-wp' ),
+		'rate_type'       => __( 'Rate Type', 'affiliate-wp' ),
+		'earnings'        => __( 'Earnings', 'afiliate-wp' ),
+		'unpaid_earnings' => __( 'Unpaid Earnings', 'affiliate-wp' ),
+		'referrals'       => __( 'Referral Count', 'affiliate-wp' ),
+		'visits'          => __( 'Visit Count', 'affiliate-wp' ),
+		'date_registered' => __( 'Registration Date', 'affiliate-wp' )
+	);
+
+	return $fields;
+}
+
+/**
+ * Retrieves the list of affiliate import fields.
+ *
+ * @since 2.1
+ *
+ * @return array Array of affiliate import fields and associated labels.
+ */
+function affwp_get_referral_import_fields() {
+
+	return array(
+		'affiliate'       => __( 'Affiliate ID or Username (required)', 'affiliate-wp' ),
+		'amount'          => __( 'Amount (required)', 'affiliate-wp' ),
+		'email'           => __( 'Affiliate Email', 'affiliate-wp' ),
+		'username'        => __( 'Affiliate Username', 'affiliate-wp' ),
+		'first_name'      => __( 'Affiliate First/Full Name', 'affiliate-wp' ),
+		'last_name'       => __( 'Affiliate Last Name', 'affiliate-wp' ),
+		'payment_email'   => __( 'Payment Email', 'affiliate-wp' ),
+		'currency'        => __( 'Currency', 'affiliate-wp' ),
+		'description'     => __( 'Description', 'affiliate-wp' ),
+		'campaign'        => __( 'Campaign', 'affiliate-wp' ),
+		'reference'       => __( 'Reference', 'affiliate-wp' ),
+		'context'         => __( 'Context', 'affiliate-wp' ),
+		'status'          => __( 'Status', 'affiliate-wp' ),
+		'date'            => __( 'Date', 'affiliate-wp' )
+	);
+
+}
+
+/**
+ * Outputs import fields markup for the given import type.
+ *
+ * @since 2.1
+ *
+ * @param string $type Import fields type. Accepts 'affiliates' or 'referrals'.
+ */
+function affwp_do_import_fields( $type ) {
+	$fields = array();
+
+	switch( $type ) {
+		case 'affiliates':
+			$fields = affwp_get_affiliate_import_fields();
+			break;
+
+		case 'referrals':
+			$fields = affwp_get_referral_import_fields();
+			break;
+
+		default: break;
+	}
+
+	if ( ! empty( $fields ) ) {
+
+		foreach ( $fields as $key => $label ) {
+			?>
+			<tr>
+				<td><?php echo esc_html( $label ); ?></td>
+				<td>
+					<select name="affwp-import-field[<?php echo esc_attr( $key ); ?>]" class="affwp-import-csv-column">
+						<option value=""><?php esc_html_e( '- Ignore this field -', 'affiliate-wp' ); ?></option>
+					</select>
+				</td>
+				<td class="affwp-import-preview-field"><?php esc_html_e( '- Select field to preview data -', 'affiliate-wp' ); ?></td>
+			</tr>
+			<?php
+		}
+
+	}
+
+}
