@@ -215,13 +215,13 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 	 *
 	 * If a user account is found matching the given payment email, that user ID is returned instead.
 	 *
-	 * @access protected
+	 * @access public
 	 * @since  2.1
 	 *
 	 * @param array $args Arguments for adding a new affiliate.
 	 * @return int|false User ID if a user was found or derived, otherwise false.
 	 */
-	protected function create_user( $args ) {
+	public function create_user( $args ) {
 		$defaults = array_fill_keys( array( 'user_login', 'email' ), '' );
 		$args     = wp_parse_args( $args, $defaults );
 
