@@ -1074,11 +1074,11 @@ function affwp_get_affiliate_import_fields() {
 }
 
 /**
- * Retrieves the list of affiliate import fields.
+ * Retrieves the list of referral import fields.
  *
  * @since 2.1
  *
- * @return array Array of affiliate import fields and associated labels.
+ * @return array Array of referral import fields and associated labels.
  */
 function affwp_get_referral_import_fields() {
 
