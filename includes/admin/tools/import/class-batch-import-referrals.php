@@ -103,25 +103,22 @@ class Import_Referrals extends Batch\Import\CSV implements Batch\With_PreFetch {
 				$args = $this->map_row( $row );
 
 				// Required fields.
-//				if ( empty( $args['email'] ) ) {
-//					continue;
-//				}
+				if ( empty( $args['amount'] ) || empty( $args['affiliate'] ) ) {
+					continue;
+				}
 
-				// Match with affiliate (maybe instantiate Import_Affiliates to leverage user-creation logic?
-//				$user_id = $this->create_user( $args );
-//
-//				if ( $user_id ) {
-//					// Check for an existing affiliate for this user.
-//					if ( $affiliate = affiliate_wp()->affiliates->get_by( 'user_id', $user_id ) ) {
-//						continue;
-//					} else {
-//						$args['user_id'] = $user_id;
-//					}
-//				} else {
-//					continue;
-//				}
-//
-//				$args['user_id'] = $user_id;
+				// Match with an affiliate or create one.
+				if ( $affiliate = affwp_get_affiliate( $args['affiliate'] ) ) {
+					$args['affiliate_id'] = $affiliate->ID;
+				} else {
+					$affiliate_id = $this->maybe_create_affiliate( $args );
+
+					if ( $affiliate_id ) {
+						$args['affiliate_id'] = $affiliate_id;
+					} else {
+						continue;
+					}
+				}
 
 				if ( false !== affwp_add_referral( $args ) ) {
 					$running_count++;
@@ -133,6 +130,57 @@ class Import_Referrals extends Batch\Import\CSV implements Batch\With_PreFetch {
 		$this->set_running_count( $this->get_running_count() + $running_count );
 
 		return ++$this->step;
+	}
+
+	/**
+	 * Helper that attempts to create a new affiliate account from the given fields.
+	 *
+	 * @access public
+	 * @since  2.1
+	 *
+	 * @param array $args Incoming referral arguments.
+	 * @return int|false Affiliate ID or false.
+	 */
+	public function maybe_create_affiliate( $args ) {
+
+		$affiliate_id = 0;
+
+		if ( ! empty( $args['email'] ) ) {
+			$args['email'] = sanitize_text_field( $args['email'] );
+		} elseif ( ! empty( $args['payment_email'] ) ) {
+			$args['email'] = sanitize_text_field( $args['payment_email'] );
+		} else {
+			$args['email'] = '';
+		}
+
+		if ( ! empty( $args['username'] ) ) {
+			$args['user_login'] = sanitize_text_field( $args['username'] );
+		}
+
+		$affiliates_process = affiliate_wp()->utils->batch->get( 'import-affiliates' );
+
+		if ( $affiliates_process ) {
+			require_once( $affiliates_process['file'] );
+
+			/** @var \AffWP\Utils\Batch_Process\Import_Affiliates $affiliates_importer */
+			$affiliates_importer = new $affiliates_process['class'];
+
+			$user_id = $affiliates_importer->create_user( $args );
+
+			if ( $user_id ) {
+				// Check for an existing affiliate for this user.
+				if ( $affiliate = affiliate_wp()->affiliates->get_by( 'user_id', $user_id ) ) {
+					$affiliate_id = $affiliate->ID;
+				} else {
+					$new_affiliate = affwp_add_affiliate( $args );
+
+					$affiliate_id = $new_affiliate ? $new_affiliate : false;
+				}
+			}
+		}
+
+		return $affiliate_id;
+
 	}
 
 	/**
