@@ -1057,7 +1057,7 @@ add_filter( 'upload_mimes', 'affwp_allowed_mime_types' );
  */
 function affwp_get_affiliate_import_fields() {
 
-	$fields = array(
+	return array(
 		'email'           => __( 'Email (required)', 'affiliate-wp' ),
 		'user_login'      => __( 'Username', 'affiliate-wp' ),
 		'first_name'      => __( 'First/Full Name', 'affiliate-wp' ),
@@ -1071,7 +1071,6 @@ function affwp_get_affiliate_import_fields() {
 		'date_registered' => __( 'Registration Date', 'affiliate-wp' )
 	);
 
-	return $fields;
 }
 
 /**
