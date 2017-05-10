@@ -23,6 +23,15 @@ class Import_Referrals extends Batch\Import\CSV implements Batch\With_PreFetch {
 	public $capability = 'manage_referrals';
 
 	/**
+	 * The number of items to process per step.
+	 *
+	 * @access public
+	 * @since  2.1
+	 * @var    int
+	 */
+	public $per_step = 10;
+
+	/**
 	 * Instantiates the batch process.
 	 *
 	 * @param string $_file
