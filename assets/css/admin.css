@@ -154,7 +154,7 @@ table.affiliates #unpaid {
 }
 
 .affwp-required-import-field {
-	background-color: #fadedc;
+	background-color: #fadedc !important;
 }
 
 .affwp-status.pending i,
