@@ -1053,11 +1053,18 @@ add_filter( 'upload_mimes', 'affwp_allowed_mime_types' );
  *
  * @since 2.1
  *
- * @return array Array of affiliate import fields and associated lable.s
+ * @return array Array of affiliate import fields and associated labels.
  */
 function affwp_get_affiliate_import_fields() {
 
-	return array(
+	/**
+	 * Filters the list of affiliate import fields.
+	 *
+	 * @since 2.1
+	 *
+	 * @param array $fields List of affiliate import fields and associated labels.
+	 */
+	$fields = apply_filters( 'affwp_affiliate_import_fields', array(
 		'email'           => __( 'Email (required)', 'affiliate-wp' ),
 		'user_login'      => __( 'Username', 'affiliate-wp' ),
 		'first_name'      => __( 'First/Full Name', 'affiliate-wp' ),
@@ -1069,8 +1076,9 @@ function affwp_get_affiliate_import_fields() {
 		'referrals'       => __( 'Referral Count', 'affiliate-wp' ),
 		'visits'          => __( 'Visit Count', 'affiliate-wp' ),
 		'date_registered' => __( 'Registration Date', 'affiliate-wp' )
-	);
+	) );
 
+	return $fields;
 }
 
 /**
@@ -1082,7 +1090,14 @@ function affwp_get_affiliate_import_fields() {
  */
 function affwp_get_referral_import_fields() {
 
-	return array(
+	/**
+	 * Filters the list of referral import fields.
+	 *
+	 * @since 2.1
+	 *
+	 * @param array $fields List of referral import fields and associated labels.
+	 */
+	$fields = apply_filters( 'affwp_referral_import_fields', array(
 		'affiliate'       => __( 'Affiliate ID or Username (required)', 'affiliate-wp' ),
 		'amount'          => __( 'Amount (required)', 'affiliate-wp' ),
 		'email'           => __( 'Affiliate Email', 'affiliate-wp' ),
@@ -1097,8 +1112,9 @@ function affwp_get_referral_import_fields() {
 		'context'         => __( 'Context', 'affiliate-wp' ),
 		'status'          => __( 'Status', 'affiliate-wp' ),
 		'date'            => __( 'Date', 'affiliate-wp' )
-	);
+	) );
 
+	return $fields;
 }
 
 /**
