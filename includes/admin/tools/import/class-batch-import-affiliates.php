@@ -140,7 +140,7 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 				$args['referrals'] = empty( $args['referrals'] ) ? 0 : absint( $args['referrals'] );
 				$args['user_id']   = $user_id;
 
-				// Earnings are anitized when increased.
+				// Earnings are sanitized when increased.
 				$args['earnings']        = empty( $args['earnings'] )  ? 0 : $args['earnings'];
 				$args['unpaid_earnings'] = empty( $args['unpaid_earnings'] ) ? 0 : $args['unpaid_earnings'];
 
