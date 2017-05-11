@@ -129,7 +129,9 @@ class Import_Referrals extends Batch\Import\CSV implements Batch\With_PreFetch {
 					}
 				}
 
-				if ( false !== affwp_add_referral( $args ) ) {
+				unset( $args['affiliate'] );
+
+				if ( false !== $referral = affwp_add_referral( $args ) ) {
 					$running_count++;
 				}
 			}
@@ -153,6 +155,9 @@ class Import_Referrals extends Batch\Import\CSV implements Batch\With_PreFetch {
 	public function maybe_create_affiliate( $args ) {
 
 		$affiliate_id = 0;
+
+		unset( $args['affiliate'] );
+		unset( $args['amount'] );
 
 		if ( ! empty( $args['email'] ) ) {
 			$args['email'] = sanitize_text_field( $args['email'] );
@@ -181,6 +186,8 @@ class Import_Referrals extends Batch\Import\CSV implements Batch\With_PreFetch {
 				if ( $affiliate = affiliate_wp()->affiliates->get_by( 'user_id', $user_id ) ) {
 					$affiliate_id = $affiliate->ID;
 				} else {
+					$args['user_id'] = $user_id;
+
 					$new_affiliate = affwp_add_affiliate( $args );
 
 					$affiliate_id = $new_affiliate ? $new_affiliate : false;
