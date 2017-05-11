@@ -353,21 +353,25 @@ jQuery(document).ready(function($) {
 	AffWP_Batch_Import = $.extend( {}, AffWP_Batch, {
 
 		submit: function() {
-			var	self = this,
-				form = $( '.affwp-batch-import-form' );
+			var	self = this;
 
-			form.ajaxForm( {
-				beforeSubmit: self.before_submit,
-				complete:     self.complete,
-				dataType:     'json',
-				error:        self.error,
-				data:         {
-					action:   'process_batch_import',
-					batch_id: form.data( 'batch_id' ),
-					nonce:    form.data( 'nonce' )
-				},
-				url:          ajaxurl
+			// Handle multiple importers on the same screen.
+			$( '.affwp-batch-import-form' ).each( function( index, obj ) {
+				$( this ).ajaxForm( {
+					beforeSubmit: self.before_submit,
+					complete:     self.complete,
+					dataType:     'json',
+					error:        self.error,
+					data:         {
+						action:   'process_batch_import',
+						batch_id: $( this ).data( 'batch_id' ),
+						nonce:    $( this ).data( 'nonce' )
+					},
+					url:          ajaxurl,
+					resetForm:    true
+				} );
 			} );
+
 		},
 
 		before_submit: function( arr, $form, options ) {
