@@ -141,7 +141,6 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 				$args['user_id']   = $user_id;
 
 				if ( false !== $affiliate = affwp_add_affiliate( $args ) ) {
-					log_it( $affiliate );
 					// Set visit and referral counts.
 					affiliate_wp()->affiliates->update( $affiliate, array(
 						'visits'    => $args['visits'],
