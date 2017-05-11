@@ -136,24 +136,30 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 					continue;
 				}
 
-				$args['visits']    = empty( $args['visits'] )    ? 0 : absint( $args['visits']    );
-				$args['referrals'] = empty( $args['referrals'] ) ? 0 : absint( $args['referrals'] );
 				$args['user_id']   = $user_id;
 
-				// Earnings are sanitized when increased.
-				$args['earnings']        = empty( $args['earnings'] )  ? 0 : $args['earnings'];
-				$args['unpaid_earnings'] = empty( $args['unpaid_earnings'] ) ? 0 : $args['unpaid_earnings'];
-
 				if ( false !== $affiliate = affwp_add_affiliate( $args ) ) {
-					// Set visit and referral counts.
-					affiliate_wp()->affiliates->update( $affiliate, array(
-						'visits'    => $args['visits'],
-						'referrals' => $args['referrals']
-					), '', 'affiliate' );
+					$data = array();
 
-					// Set earnings.
-					affwp_increase_affiliate_earnings( $affiliate, $args['earnings'] );
-					affwp_increase_affiliate_unpaid_earnings( $affiliate, $args['unpaid_earnings'] );
+					if ( ! empty( $args['visits'] ) ) {
+						$data['visits'] = absint( $args['visits'] );
+					}
+
+					if ( ! empty( $args['referrals'] ) ) {
+						$data['referrals'] = absint( $args['referrals'] );
+					}
+
+					// Set visit and referral counts.
+					affiliate_wp()->affiliates->update( $affiliate, $data, '', 'affiliate' );
+
+					// Set earnings (sanitized during increase).
+					if ( ! empty( $args['earnings'] ) ) {
+						affwp_increase_affiliate_earnings( $affiliate, $args['earnings'] );
+					}
+
+					if ( ! empty( $args['unpaid_earnings'] ) ) {
+						affwp_increase_affiliate_unpaid_earnings( $affiliate, $args['unpaid_earnings'] );
+					}
 
 					// Increment the count.
 					$running_count++;
