@@ -136,9 +136,19 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 					continue;
 				}
 
-				$args['user_id'] = $user_id;
+				$args['visits']    = empty( $args['visits'] )    ? 0 : absint( $args['visits']    );
+				$args['referrals'] = empty( $args['referrals'] ) ? 0 : absint( $args['referrals'] );
+				$args['user_id']   = $user_id;
 
-				if ( false !== affwp_add_affiliate( $args ) ) {
+				if ( false !== $affiliate = affwp_add_affiliate( $args ) ) {
+					log_it( $affiliate );
+					// Set visit and referral counts.
+					affiliate_wp()->affiliates->update( $affiliate, array(
+						'visits'    => $args['visits'],
+						'referrals' => $args['referrals']
+					), '', 'affiliate' );
+
+					// Increment the count.
 					$running_count++;
 				}
 			}
