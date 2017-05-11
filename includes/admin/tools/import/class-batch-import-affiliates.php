@@ -222,7 +222,7 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 	 * @return int|false User ID if a user was found or derived, otherwise false.
 	 */
 	public function create_user( $args ) {
-		$defaults = array_fill_keys( array( 'user_login', 'email' ), '' );
+		$defaults = array_fill_keys( array( 'user_login', 'email', 'payment_email' ), '' );
 		$args     = wp_parse_args( $args, $defaults );
 
 		$user_id = $this->get_user_from_args( $args );
@@ -266,6 +266,8 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 		if ( $user = get_user_by( 'login', $args['user_login'] ) ) {
 			$user_id = $user->ID;
 		} elseif ( $user = get_user_by( 'email', $args['email'] ) ) {
+			$user_id = $user->ID;
+		} elseif ( $user = get_user_by( 'email', $args['payment_email'] ) ) {
 			$user_id = $user->ID;
 		} else {
 			$user_id = false;

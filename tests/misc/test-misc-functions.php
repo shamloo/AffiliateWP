@@ -291,13 +291,16 @@ class Tests extends UnitTestCase {
 			'user_login'      => __( 'Username', 'affiliate-wp' ),
 			'first_name'      => __( 'First/Full Name', 'affiliate-wp' ),
 			'last_name'       => __( 'Last Name', 'affiliate-wp' ),
+			'payment_email'   => __( 'Payment Email', 'affiliate-wp' ),
 			'rate'            => __( 'Rate', 'affiliate-wp' ),
 			'rate_type'       => __( 'Rate Type', 'affiliate-wp' ),
 			'earnings'        => __( 'Earnings', 'afiliate-wp' ),
 			'unpaid_earnings' => __( 'Unpaid Earnings', 'affiliate-wp' ),
 			'referrals'       => __( 'Referral Count', 'affiliate-wp' ),
 			'visits'          => __( 'Visit Count', 'affiliate-wp' ),
-			'date_registered' => __( 'Registration Date', 'affiliate-wp' )
+			'status'          => __( 'Status', 'affiliate-wp' ),
+			'website'         => __( 'Website', 'affiliate-wp' ),
+			'date_registered' => __( 'Registration Date', 'affiliate-wp' ),
 		);
 
 		$this->assertEqualSets( $fields, affwp_get_affiliate_import_fields() );

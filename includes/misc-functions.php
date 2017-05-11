@@ -1058,7 +1058,7 @@ add_filter( 'upload_mimes', 'affwp_allowed_mime_types' );
 function affwp_get_affiliate_import_fields() {
 
 	/**
-	 * Filters the list of affiliate import fields.
+	 * Filters the list of core affiliate import fields.
 	 *
 	 * @since 2.1
 	 *
@@ -1069,13 +1069,16 @@ function affwp_get_affiliate_import_fields() {
 		'user_login'      => __( 'Username', 'affiliate-wp' ),
 		'first_name'      => __( 'First/Full Name', 'affiliate-wp' ),
 		'last_name'       => __( 'Last Name', 'affiliate-wp' ),
+		'payment_email'   => __( 'Payment Email', 'affiliate-wp' ),
 		'rate'            => __( 'Rate', 'affiliate-wp' ),
 		'rate_type'       => __( 'Rate Type', 'affiliate-wp' ),
 		'earnings'        => __( 'Earnings', 'afiliate-wp' ),
 		'unpaid_earnings' => __( 'Unpaid Earnings', 'affiliate-wp' ),
 		'referrals'       => __( 'Referral Count', 'affiliate-wp' ),
 		'visits'          => __( 'Visit Count', 'affiliate-wp' ),
-		'date_registered' => __( 'Registration Date', 'affiliate-wp' )
+		'status'          => __( 'Status', 'affiliate-wp' ),
+		'website'         => __( 'Website', 'affiliate-wp' ),
+		'date_registered' => __( 'Registration Date', 'affiliate-wp' ),
 	) );
 
 	return $fields;
@@ -1091,7 +1094,7 @@ function affwp_get_affiliate_import_fields() {
 function affwp_get_referral_import_fields() {
 
 	/**
-	 * Filters the list of referral import fields.
+	 * Filters the list of core referral import fields.
 	 *
 	 * @since 2.1
 	 *
