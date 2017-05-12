@@ -726,11 +726,22 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 			if ( $affiliate_area_page ) {
 
-				$slug = get_post_field( 'post_name', $affiliate_area_page );
+				/**
+				 * Filters the title used for the Affiliate Area page in the WooCommerce My Account navigation.
+				 *
+				 * The page title is used by default.
+				 *
+				 * @since 2.1
+				 *
+				 * @param string $title               Affiliate Area page title.
+				 * @param int    $affiliate_area_page Affiliate Area page ID.
+				 */
+				$title = apply_filters( 'affwp_woocommerce_affiliate_area_title', get_the_title( $affiliate_area_page ), $affiliate_area_page );
+				$slug  = get_post_field( 'post_name', $affiliate_area_page );
 
 				if ( $slug ) {
 
-					$affiliate_area = array( $slug => __( 'Affiliate Area', 'affiliate-wp' ) );
+					$affiliate_area = array( $slug => $title );
 
 					$last_link = array();
 
