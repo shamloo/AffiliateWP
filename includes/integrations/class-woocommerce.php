@@ -55,6 +55,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 		// Affiliate Area link in My Account menu.
 		add_filter( 'woocommerce_account_menu_items', array( $this, 'my_account_affiliate_area_link' ), 100 );
+		add_filter( 'woocommerce_get_settings_account', array( $this, 'account_settings' ) );
 	}
 
 	/**
@@ -720,6 +721,12 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 	 * @return array (Maybe) modified menu items.
 	 */
 	public function my_account_affiliate_area_link( $items ) {
+
+		// Only add the link if enabled in WooCommerce > Accounts settings.
+		if ( 'no' === get_option( 'affwp_woocommerce_affiliate_area_link' ) ) {
+			return $items;
+		}
+
 		if ( affwp_is_affiliate() ) {
 
 			$affiliate_area_page = affwp_get_affiliate_area_page_id();
@@ -765,6 +772,54 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 		return $items;
 
+	}
+
+	/**
+	 * Adds AffiliateWP-specific settings to the WooCommerce > Accounts settings page.
+	 *
+	 * @access public
+	 * @since  2.1
+	 *
+	 * @param array $settings Account settings.
+	 * @return array Modified Account settings.
+	 */
+	public function account_settings( $settings ) {
+
+		/**
+		 * Filters the AffiliateWP-specific settings for the WooCommerce > Accounts settings screen.
+		 *
+		 * @since 2.1
+		 *
+		 * @param array $affwp_settings AffiliateWP settings.
+		 */
+		$affwp_settings = apply_filters( 'affwp_woocommerce_account_settings', array(
+			array(
+				'title' => __( 'AffiliateWP', 'affiliate-wp' ),
+				'desc'  => __( 'AffiliateWP settings for the My Account page.', 'affiliate-wp' ),
+				'id'    => 'affwp_account_settings',
+				'type'  => 'title',
+			),
+
+			array(
+				'title'         => __( 'Affiliate Area Link', 'woocommerce' ),
+				'desc'          => __( 'Display a link to the Affiliate Area in the My Account navigation.', 'affiliate-wp' ),
+				'id'            => 'affwp_woocommerce_affiliate_area_link',
+				'default'       => 'no',
+				'type'          => 'checkbox',
+				'autoload'      => false,
+			),
+
+			array(
+				'type' => 'sectionend',
+				'id'   => 'affwp_account_settings'
+			),
+
+			get_option()
+		) );
+
+		$settings = array_merge( $settings, $affwp_settings );
+
+		return $settings;
 	}
 
 }
