@@ -801,7 +801,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 			),
 
 			array(
-				'title'         => __( 'Affiliate Area Link', 'woocommerce' ),
+				'title'         => __( 'Affiliate Area Link', 'affiliate-wp' ),
 				'desc'          => __( 'Display a link to the Affiliate Area in the My Account navigation.', 'affiliate-wp' ),
 				'id'            => 'affwp_woocommerce_affiliate_area_link',
 				'default'       => 'no',
