@@ -239,4 +239,33 @@ class Referrals_DB_Tests extends UnitTestCase {
 		) );
 		affwp_delete_visit( $visit_id );
 	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::get_by()
+	 */
+	public function test_get_by_with_empty_column_should_return_false() {
+		$this->assertFalse( affiliate_wp()->referrals->get_by( '', 10 ) );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::get_by()
+	 */
+	public function test_get_by_with_empty_row_id_should_return_false() {
+		$this->assertFalse( affiliate_wp()->referrals->get_by( 'affiliate_id', '' ) );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::paid_earnings()
+	 */
+	public function test_paid_earnings_with_empty_date_set_affiliate_id_format_true_should_retrieve_all_time_paid_earnings() {
+		$total = 0;
+		foreach ( self::$referrals as $referral_id ) {
+			$total += affwp_get_referral( $referral_id )->amount;
+		}
+
+		$total = affwp_currency_filter( affwp_format_amount( $total ) );
+
+		$this->assertSame( $total, affiliate_wp()->referrals->paid_earnings( '', self::$affiliate_id ) );
+	}
+
 }

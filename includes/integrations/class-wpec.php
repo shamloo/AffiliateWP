@@ -21,9 +21,7 @@ class Affiliate_WP_WPEC extends Affiliate_WP_Base {
 
 			if ( $this->is_affiliate_email( wpsc_get_buyers_email( $order_id ) ) ) {
 
-				if( $this->debug ) {
-					$this->log( 'Referral not created because affiliate\'s own account was used.' );
-				}
+				$this->log( 'Referral not created because affiliate\'s own account was used.' );
 
 				return; // Customers cannot refer themselves
 			}

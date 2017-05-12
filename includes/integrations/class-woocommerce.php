@@ -79,12 +79,16 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 				$affiliate_id = $coupon_affiliate_id;
 			}
 
-			// Customers cannot refer themselves
-			if ( $this->is_affiliate_email( $this->order->billing_email, $affiliate_id ) ) {
+			if ( true === version_compare( WC()->version, '3.0.0', '>=' ) ) {
+				$billing_email = $this->order->get_billing_email();
+			} else {
+				$billing_email = $this->order->billing_email;
+			}
 
-				if( $this->debug ) {
-					$this->log( 'Referral not created because affiliate\'s own account was used.' );
-				}
+			// Customers cannot refer themselves
+			if ( $this->is_affiliate_email( $billing_email, $affiliate_id ) ) {
+
+				$this->log( 'Referral not created because affiliate\'s own account was used.' );
 
 				return false;
 			}
@@ -145,9 +149,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 			if ( 0 == $amount && affiliate_wp()->settings->get( 'ignore_zero_referrals' ) ) {
 
-				if( $this->debug ) {
-					$this->log( 'Referral not created due to 0.00 amount.' );
-				}
+				$this->log( 'Referral not created due to 0.00 amount.' );
 
 				return false; // Ignore a zero amount referral
 			}
@@ -169,9 +171,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 					'context'      => $this->context
 				) );
 
-				if( $this->debug ) {
-					$this->log( sprintf( 'WooCommerce Referral #%d updated successfully.', $existing->referral_id ) );
-				}
+				$this->log( sprintf( 'WooCommerce Referral #%d updated successfully.', $existing->referral_id ) );
 
 			} else {
 
@@ -189,9 +189,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 				if ( $referral_id ) {
 
-					if( $this->debug ) {
-						$this->log( sprintf( 'Referral #%d created successfully.', $referral_id ) );
-					}
+					$this->log( sprintf( 'Referral #%d created successfully.', $referral_id ) );
 
 					$amount = affwp_currency_filter( affwp_format_amount( $amount ) );
 					$name   = affiliate_wp()->affiliates->get_affiliate_name( $affiliate_id );
@@ -200,9 +198,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 				} else {
 
-					if( $this->debug ) {
-						$this->log( 'Referral failed to be created.' );
-					}
+					$this->log( 'Referral failed to be created.' );
 
 				}
 			}
@@ -282,8 +278,14 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 		$this->order = apply_filters( 'affwp_get_woocommerce_order', new WC_Order( $order_id ) );
 
+		if ( true === version_compare( WC()->version, '3.0.0', '>=' ) ) {
+			$payment_method = $this->order->get_payment_method();
+		} else {
+			$payment_method = get_post_meta( $order_id, '_payment_method', true );
+		}
+
 		// If the WC status is 'wc-processing' and a COD order, leave as 'pending'.
-		if ( 'wc-processing' == $this->order->post_status && 'cod' === get_post_meta( $order_id, '_payment_method', true ) ) {
+		if ( 'wc-processing' == $this->order->get_status() && 'cod' === $payment_method ) {
 			return;
 		}
 
@@ -408,9 +410,15 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 		}
 
 		foreach ( $coupons as $code ) {
+			$coupon = new WC_Coupon( $code );
 
-			$coupon       = new WC_Coupon( $code );
-			$affiliate_id = get_post_meta( $coupon->id, 'affwp_discount_affiliate', true );
+			if ( true === version_compare( WC()->version, '3.0.0', '>=' ) ) {
+				$coupon_id = $coupon->get_id();
+			} else {
+				$coupon_id = $coupon->id;
+			}
+
+			$affiliate_id = get_post_meta( $coupon_id, 'affwp_discount_affiliate', true );
 
 			if ( $affiliate_id ) {
 
