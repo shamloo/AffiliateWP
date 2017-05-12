@@ -792,7 +792,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 		 *
 		 * @param array $affwp_settings AffiliateWP settings.
 		 */
-		$affwp_settings = apply_filters( 'affwp_woocommerce_account_settings', array(
+		$affwp_settings = apply_filters( 'affwp_woocommerce_accounts_settings', array(
 			array(
 				'title' => __( 'AffiliateWP', 'affiliate-wp' ),
 				'desc'  => __( 'AffiliateWP settings for the My Account page.', 'affiliate-wp' ),
