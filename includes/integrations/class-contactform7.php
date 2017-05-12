@@ -13,21 +13,21 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	 * The Help Scout docs url for this integration.
 	 *
 	 * @since 2.0
-	 * @var string Documentation URl.
+	 * @var string Documentation URL.
 	 */
 	public $doc_url;
 
 	/**
 	 * The PayPal transaction success page url
-	 * Specific to the paypal1 integration.
+	 * Specific to the `Contact Form 7 - PayPal Add-on` CF7 add-on.
 	 *
 	 * @since 2.0
 	 */
 	public $return_url;
 
 	/**
-	 * The PayPal transaction cancellation page url
-	 * Specific to the paypal1 integration.
+	 * The PayPal transaction cancellation page url.
+	 * Specific to the `Contact Form 7 - PayPal Add-on` CF7 add-on.
 	 *
 	 * @since 2.0
 	 */
@@ -59,10 +59,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 		// Add PayPal meta to the contact form submision object.
 		add_action( 'wpcf7_submit', array( $this, 'add_paypal_meta' ), 1, 2 );
 
-		// Process paypal redirect after generating the initial referral.
-		remove_action( 'wpcf7_mail_sent', 'cf7pp_after_send_mail' );
-		add_action( 'wpcf7_submit', array( $this, 'add_pending_referral' ), 10, 2 );
-		add_action( 'affwp_cf7_submit', 'affwp_cf7_paypal_redirect', 10, 3 );
+		$this->maybe_unhook_cf7pp();
 
 		// Mark referral complete.
 		add_action( 'wp_footer', array( $this, 'mark_referral_complete' ), 9999 );
@@ -70,7 +67,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 		// Revoke referral.
 		add_action( 'wp_footer', array( $this, 'revoke' ), 9999 );
 
-		// Set reference
+		// Set reference.
 		add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );
 	}
 
@@ -81,6 +78,24 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	 */
 	public function include_cf7_functions() {
 		require_once ( AFFILIATEWP_PLUGIN_DIR . 'includes/integrations/extras/contactform7-functions.php' );
+	}
+
+	/**
+	 * Unhooks the `cf7pp_after_send_mail` function only if a referring affiliate is found.
+	 *
+	 * If referred, processes the PayPal redirect after generating the initial referral.
+	 *
+	 * @since  2.0.3
+	 *
+	 * @return void
+	 */
+	public function maybe_unhook_cf7pp() {
+
+		if ( $this->was_referred() ) {
+			remove_action( 'wpcf7_mail_sent', 'cf7pp_after_send_mail' );
+			add_action( 'wpcf7_submit', array( $this, 'add_pending_referral' ), 10, 2 );
+			add_action( 'affwp_cf7_submit', 'affwp_cf7_paypal_redirect', 10, 3 );
+		}
 	}
 
 	/**
@@ -191,7 +206,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Get forms which have AffiliateWP enabled.
+	 * Gets forms which have AffiliateWP enabled.
 	 *
 	 * @since  2.0
 	 *
@@ -205,11 +220,16 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 			$enabled = array();
 		}
 
+		/**
+		 * The Contact Form 7 forms for which AffiliateWP is enabled.
+		 *
+		 * @param array $enabled An array of integers, each being the ID of a Contact Form 7 form for which AffiliateWP is enabled.
+		 */
 		return apply_filters( 'affwp_cf7_enabled_forms', $enabled );
 	}
 
 	/**
-	 * Check if a form has referrals enabled.
+	 * Checks if a form has referrals enabled.
 	 *
 	 * @since  2.0
 	 *
@@ -256,7 +276,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Provide CF7 form meta via ajax.
+	 * Provides CF7 form meta via ajax.
 	 *
 	 * @since  2.0
 	 *
@@ -289,7 +309,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Returns PayPal form submission meta as argument strings, allowing for transactions to be trackable by AffiliateWP.
+	 * Returns PayPal form submission meta as arguments, allowing for transactions to be trackable by AffiliateWP.
 	 *
 	 * @since  2.0
 	 *
@@ -329,7 +349,6 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 
 	/**
 	 * Utility function which returns the current page ID.
-	 * Falls back to usage of the $post global.
 	 *
 	 * @since  2.0
 	 *
@@ -353,8 +372,8 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	 *
 	 * @since 2.0
 	 *
-	 * @param object $contact_form CF7 form submission object.
-	 * @param object $result       Submitted CF7 form submission data.
+	 * @param object $contact_form  CF7 form submission object.
+	 * @param object $result        Submitted CF7 form submission data.
 	 */
 	public function add_pending_referral( $contactform, $result ) {
 
@@ -442,9 +461,8 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 		$txn_id          = ! empty( $_GET['tx'] )          ? sanitize_text_field( $_GET['tx'] ) : false;
 
 		if ( ! $form_id || ! $referral_id ) {
-			if( $this->debug ) {
-				$this->log( 'CF7 integration: The form ID or referral ID could not be determined.' );
-			}
+			$this->log( 'CF7 integration: The form ID or referral ID could not be determined.' );
+
 			return false;
 		}
 
@@ -453,9 +471,8 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 
 		// Bail if not on the return page.
 		if ( (int) $return_page_id !== (int) $current_page_id ) {
-			if( $this->debug ) {
-				$this->log( 'CF7 integration: The specified success page ID does not match the current page ID.' );
-			}
+			$this->log( 'CF7 integration: The specified success page ID does not match the current page ID.' );
+
 			return false;
 		}
 
@@ -470,7 +487,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 			$this->complete_referral( $referral );
 
 
-		} else if( $this->debug ) {
+		} else {
 
 			$this->log( sprintf( 'CF7 integration: Referral could not be retrieved during mark_referral_complete(). ID given: %d.' ), $referral_id );
 
@@ -479,7 +496,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Update referral status. Fires when the cancel page url is hit from a PayPal transaction.
+	 * Updates the status of the referral. Fires when the cancel page url is loaded from a PayPal transaction.
 	 *
 	 * @param  string $reference        The reference.
 	 * @param  int    $current_page_id  The current page ID.
@@ -494,9 +511,8 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 		$referral_id     = ! empty( $_GET['referral_id'] ) ? absint( $_GET['referral_id'] ) : false;
 
 		if ( ! $form_id || ! $referral_id ) {
-			if( $this->debug ) {
-				$this->log( 'CF7 integration: The form ID or referral ID could not be determined.' );
-			}
+			$this->log( 'CF7 integration: The form ID or referral ID could not be determined.' );
+
 			return false;
 		}
 
@@ -505,9 +521,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 
 		// Bail if not on the cancel page
 		if ( (int) $cancel_page_id !== (int) $current_page_id ) {
-			if( $this->debug ) {
-				$this->log( 'CF7 integration: The specified cancel page ID does not match the current page ID.' );
-			}
+			$this->log( 'CF7 integration: The specified cancel page ID does not match the current page ID.' );
 
 			return false;
 
@@ -519,7 +533,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 
 			$this->reject_referral( $referral );
 
-		} else if( $this->debug ) {
+		} else {
 
 			$this->log( sprintf( 'CF7 integration: Referral could not be retrieved during revoke(). ID given: %d.' ), $referral_id );
 
@@ -528,7 +542,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Link to Contact Form 7 form in the referral reference column.
+	 * Generates a link to the associated Contact Form 7 form in the referral reference column.
 	 *
 	 * @param  int    $reference
 	 * @param  object $referral
@@ -540,9 +554,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 
 		if ( ! $referral ) {
 
-			if( $this->debug ) {
-				$this->log( 'CF7 integration: No referral data found when attempting to add a referral reference.' );
-			}
+			$this->log( 'CF7 integration: No referral data found when attempting to add a referral reference.' );
 
 			return false;
 		}

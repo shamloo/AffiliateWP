@@ -55,6 +55,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 		// Affiliate Area link in My Account menu.
 		add_filter( 'woocommerce_account_menu_items', array( $this, 'my_account_affiliate_area_link' ), 100 );
+		add_filter( 'woocommerce_get_settings_account', array( $this, 'account_settings' ) );
 	}
 
 	/**
@@ -79,12 +80,16 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 				$affiliate_id = $coupon_affiliate_id;
 			}
 
-			// Customers cannot refer themselves
-			if ( $this->is_affiliate_email( $this->order->billing_email, $affiliate_id ) ) {
+			if ( true === version_compare( WC()->version, '3.0.0', '>=' ) ) {
+				$billing_email = $this->order->get_billing_email();
+			} else {
+				$billing_email = $this->order->billing_email;
+			}
 
-				if( $this->debug ) {
-					$this->log( 'Referral not created because affiliate\'s own account was used.' );
-				}
+			// Customers cannot refer themselves
+			if ( $this->is_affiliate_email( $billing_email, $affiliate_id ) ) {
+
+				$this->log( 'Referral not created because affiliate\'s own account was used.' );
 
 				return false;
 			}
@@ -145,9 +150,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 			if ( 0 == $amount && affiliate_wp()->settings->get( 'ignore_zero_referrals' ) ) {
 
-				if( $this->debug ) {
-					$this->log( 'Referral not created due to 0.00 amount.' );
-				}
+				$this->log( 'Referral not created due to 0.00 amount.' );
 
 				return false; // Ignore a zero amount referral
 			}
@@ -169,9 +172,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 					'context'      => $this->context
 				) );
 
-				if( $this->debug ) {
-					$this->log( sprintf( 'WooCommerce Referral #%d updated successfully.', $existing->referral_id ) );
-				}
+				$this->log( sprintf( 'WooCommerce Referral #%d updated successfully.', $existing->referral_id ) );
 
 			} else {
 
@@ -189,9 +190,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 				if ( $referral_id ) {
 
-					if( $this->debug ) {
-						$this->log( sprintf( 'Referral #%d created successfully.', $referral_id ) );
-					}
+					$this->log( sprintf( 'Referral #%d created successfully.', $referral_id ) );
 
 					$amount = affwp_currency_filter( affwp_format_amount( $amount ) );
 					$name   = affiliate_wp()->affiliates->get_affiliate_name( $affiliate_id );
@@ -200,9 +199,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 				} else {
 
-					if( $this->debug ) {
-						$this->log( 'Referral failed to be created.' );
-					}
+					$this->log( 'Referral failed to be created.' );
 
 				}
 			}
@@ -282,8 +279,14 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 		$this->order = apply_filters( 'affwp_get_woocommerce_order', new WC_Order( $order_id ) );
 
+		if ( true === version_compare( WC()->version, '3.0.0', '>=' ) ) {
+			$payment_method = $this->order->get_payment_method();
+		} else {
+			$payment_method = get_post_meta( $order_id, '_payment_method', true );
+		}
+
 		// If the WC status is 'wc-processing' and a COD order, leave as 'pending'.
-		if ( 'wc-processing' == $this->order->post_status && 'cod' === get_post_meta( $order_id, '_payment_method', true ) ) {
+		if ( 'wc-processing' == $this->order->get_status() && 'cod' === $payment_method ) {
 			return;
 		}
 
@@ -408,9 +411,15 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 		}
 
 		foreach ( $coupons as $code ) {
+			$coupon = new WC_Coupon( $code );
 
-			$coupon       = new WC_Coupon( $code );
-			$affiliate_id = get_post_meta( $coupon->id, 'affwp_discount_affiliate', true );
+			if ( true === version_compare( WC()->version, '3.0.0', '>=' ) ) {
+				$coupon_id = $coupon->get_id();
+			} else {
+				$coupon_id = $coupon->id;
+			}
+
+			$affiliate_id = get_post_meta( $coupon_id, 'affwp_discount_affiliate', true );
 
 			if ( $affiliate_id ) {
 
@@ -712,17 +721,34 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 	 * @return array (Maybe) modified menu items.
 	 */
 	public function my_account_affiliate_area_link( $items ) {
+
+		// Only add the link if enabled in WooCommerce > Settings > Accounts settings.
+		if ( 'yes' !== get_option( 'affwp_woocommerce_affiliate_area_link' ) ) {
+			return $items;
+		}
+
 		if ( affwp_is_affiliate() ) {
 
 			$affiliate_area_page = affwp_get_affiliate_area_page_id();
 
 			if ( $affiliate_area_page ) {
 
-				$slug = get_post_field( 'post_name', $affiliate_area_page );
+				/**
+				 * Filters the title used for the Affiliate Area page in the WooCommerce My Account navigation.
+				 *
+				 * The page title is used by default.
+				 *
+				 * @since 2.1
+				 *
+				 * @param string $title               Affiliate Area page title.
+				 * @param int    $affiliate_area_page Affiliate Area page ID.
+				 */
+				$title = apply_filters( 'affwp_woocommerce_affiliate_area_title', get_the_title( $affiliate_area_page ), $affiliate_area_page );
+				$slug  = get_post_field( 'post_name', $affiliate_area_page );
 
 				if ( $slug ) {
 
-					$affiliate_area = array( $slug => __( 'Affiliate Area', 'affiliate-wp' ) );
+					$affiliate_area = array( $slug => $title );
 
 					$last_link = array();
 
@@ -746,6 +772,53 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 		return $items;
 
+	}
+
+	/**
+	 * Adds AffiliateWP-specific settings to the WooCommerce > Settings > Accounts settings page.
+	 *
+	 * @access public
+	 * @since  2.1
+	 *
+	 * @param array $settings Account settings.
+	 * @return array Modified Account settings.
+	 */
+	public function account_settings( $settings ) {
+
+		/**
+		 * Filters the AffiliateWP-specific settings for the WooCommerce > Settings > Accounts settings screen.
+		 *
+		 * @since 2.1
+		 *
+		 * @param array $affwp_settings AffiliateWP settings.
+		 */
+		$affwp_settings = apply_filters( 'affwp_woocommerce_accounts_settings', array(
+			array(
+				'title' => __( 'AffiliateWP', 'affiliate-wp' ),
+				'desc'  => __( 'AffiliateWP settings for the My Account page.', 'affiliate-wp' ),
+				'id'    => 'affwp_account_settings',
+				'type'  => 'title',
+			),
+
+			array(
+				'title'         => __( 'Affiliate Area Link', 'affiliate-wp' ),
+				'desc'          => __( 'Display a link to the Affiliate Area in the My Account navigation.', 'affiliate-wp' ),
+				'id'            => 'affwp_woocommerce_affiliate_area_link',
+				'default'       => 'no',
+				'type'          => 'checkbox',
+				'autoload'      => false,
+			),
+
+			array(
+				'type' => 'sectionend',
+				'id'   => 'affwp_account_settings'
+			),
+
+		) );
+
+		$settings = array_merge( $settings, $affwp_settings );
+
+		return $settings;
 	}
 
 }

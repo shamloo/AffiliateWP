@@ -42,8 +42,10 @@ abstract class Affiliate_WP_Base {
 	 * @since   1.0
 	 */
 	public function __construct() {
-		$this->affiliate_id = affiliate_wp()->tracking->get_affiliate_id();
+		// Keep $debug initialization for back-compat.
+		$this->debug = affiliate_wp()->settings->get( 'debug_mode', false );
 
+		$this->affiliate_id = affiliate_wp()->tracking->get_affiliate_id();
 		$this->init();
 
 	}
@@ -55,9 +57,7 @@ abstract class Affiliate_WP_Base {
 	 * @since   1.0
 	 * @return  void
 	 */
-	public function init() {
-
-	}
+	public function init() {}
 
 	/**
 	 * Determines if the current session was referred through an affiliate link
@@ -124,7 +124,11 @@ abstract class Affiliate_WP_Base {
 
 		$referral_id = affiliate_wp()->referrals->add( $args );
 
-		affiliate_wp()->utils->log( sprintf( 'Pending Referral #%d created successfully', $referral_id ) );
+		if ( $referral_id ) {
+			affiliate_wp()->utils->log( sprintf( 'Pending Referral #%d created successfully.', $referral_id ) );
+		} else {
+			affiliate_wp()->utils->log( 'Pending referral could not be created due to an error.' );
+		}
 
 		return $referral_id;
 
@@ -296,7 +300,9 @@ abstract class Affiliate_WP_Base {
 		$is_affiliate_email = false;
 
 		// allow an affiliate ID to be passed in
-		$affiliate_id = isset( $affiliate_id ) ? $affiliate_id : $this->get_affiliate_id();
+		if( empty( $affiliate_id ) ) {
+			$affiliate_id = $this->get_affiliate_id();
+		}
 
 		// Get affiliate emails
 		$user_email  = affwp_get_affiliate_email( $affiliate_id );
@@ -390,11 +396,7 @@ abstract class Affiliate_WP_Base {
 	 */
 	public function log( $message = '' ) {
 
-		if( $this->debug ) {
-
-			$this->logs->log( $message );
-
-		}
+		affiliate_wp()->utils->log( $message );
 
 	}
 

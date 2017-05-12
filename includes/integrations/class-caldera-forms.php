@@ -146,9 +146,7 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 		// Customers cannot refer themselves
 		if ( $this->is_affiliate_email( $customer_email, $affiliate_id ) ) {
 
-			if ( $this->debug ) {
-				$this->log( 'Referral not created because affiliate\'s own account was used.' );
-			}
+			$this->log( 'Referral not created because affiliate\'s own account was used.' );
 
 			return false;
 		}

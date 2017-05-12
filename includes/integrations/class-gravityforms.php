@@ -69,9 +69,7 @@ class Affiliate_WP_Gravity_Forms extends Affiliate_WP_Base {
 			foreach ( $emails as $customer_email ) {
 				if ( $this->is_affiliate_email( $customer_email, $affiliate_id ) ) {
 
-					if ( $this->debug ) {
-						$this->log( 'Referral not created because affiliate\'s own account was used.' );
-					}
+					$this->log( 'Referral not created because affiliate\'s own account was used.' );
 
 					return false;
 
