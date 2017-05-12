@@ -723,7 +723,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 	public function my_account_affiliate_area_link( $items ) {
 
 		// Only add the link if enabled in WooCommerce > Settings > Accounts settings.
-		if ( 'no' === get_option( 'affwp_woocommerce_affiliate_area_link' ) ) {
+		if ( 'yes' !== get_option( 'affwp_woocommerce_affiliate_area_link' ) ) {
 			return $items;
 		}
 
