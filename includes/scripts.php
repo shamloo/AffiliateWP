@@ -115,11 +115,15 @@ function affwp_enqueue_admin_js() {
 
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-	$admin_deps = array( 'jquery', 'jquery-ui-autocomplete' );
+	// Batch processing.
+	wp_register_script( 'affwp-batch', AFFILIATEWP_PLUGIN_URL . 'assets/js/batch' . $suffix . '.js', array( 'jquery-form' ), AFFILIATEWP_VERSION );
 
-	if ( affwp_is_admin_page( 'affiliate-wp-tools' ) ) {
-		$admin_deps[] = 'jquery-form';
-	}
+	wp_localize_script( 'affwp-batch', 'affwp_batch_vars', array(
+		'unsupported_browser'   => __( 'We are sorry but your browser is not compatible with this kind of file upload. Please upgrade your browser.', 'affiliate-wp' ),
+		'import_field_required' => __( 'This field must be mapped for the import to proceed.', 'affiliate-wp' ),
+	) );
+
+	$admin_deps = array( 'jquery', 'jquery-ui-autocomplete', 'affwp-batch' );
 
 	wp_enqueue_script( 'affwp-admin', AFFILIATEWP_PLUGIN_URL . 'assets/js/admin' . $suffix . '.js', $admin_deps, AFFILIATEWP_VERSION );
 	wp_localize_script( 'affwp-admin', 'affwp_vars', array(
@@ -128,7 +132,6 @@ function affwp_enqueue_admin_js() {
 		'currency_sign'           => affwp_currency_filter(''),
 		'currency_pos'            => affiliate_wp()->settings->get( 'currency_position', 'before' ),
 		'confirm_delete_referral' => __( 'Are you sure you want to delete this referral?', 'affiliate-wp' ),
-		'import_field_required'   => __( 'This field must be mapped for the import to proceed.', 'affiliate-wp' ),
 	) );
 }
 
