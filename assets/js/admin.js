@@ -422,17 +422,38 @@ jQuery(document).ready(function($) {
 				var row     = select.parent().parent();
 				var options = '';
 
+				var selectName, selectRegex;
+
 				var columns = response.data.columns.sort(function(a,b) {
 					if( a < b ) return -1;
 					if( a > b ) return 1;
 					return 0;
 				});
 
-				$.each( columns, function( key, value ) {
-					options += '<option value="' + value + '">' + value + '</option>';
-				});
+				$.each( select, function( selectKey, selectValue ) {
 
-				select.append( options );
+					selectName = $( selectValue ).attr( 'name' );
+
+					$.each( columns, function( columnKey, columnValue ) {
+
+						columnRegex = new RegExp( "\\[" + columnValue + "\\]" );
+
+						if ( selectName.length && selectName.match( columnRegex ) ) {
+							// If the column matches a select, auto-map it. Boom.
+							options += '<option value="' + columnValue + '" selected="selected">' + columnValue + '</option>';
+						} else {
+							options += '<option value="' + columnValue + '">' + columnValue + '</option>';
+						}
+
+					} );
+
+					// Add the options markup to the select.
+					$( this ).append( options );
+
+					// Reset options.
+					options = '';
+
+				} );
 
 				select.on( 'change', function() {
 					var $key = $(this).val();
