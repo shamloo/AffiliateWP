@@ -814,7 +814,6 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 				'id'   => 'affwp_account_settings'
 			),
 
-			get_option()
 		) );
 
 		$settings = array_merge( $settings, $affwp_settings );
