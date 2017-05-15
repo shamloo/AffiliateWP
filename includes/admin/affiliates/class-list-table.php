@@ -250,6 +250,7 @@ class AffWP_Affiliates_Table extends List_Table {
 		$base         = affwp_admin_url( 'affiliates', array( 'affiliate_id' => $affiliate->affiliate_id ) );
 		$row_actions  = array();
 		$name         = affiliate_wp()->affiliates->get_affiliate_name( $affiliate->affiliate_id );
+		$username     = affwp_get_affiliate_username( $affiliate->ID );
 
 		$base_query_args = array(
 			'page'         => 'affiliate-wp-affiliates',
@@ -276,10 +277,12 @@ class AffWP_Affiliates_Table extends List_Table {
 		// Reports.
 		$row_actions['reports'] = $this->get_row_action_link(
 			__( 'Reports', 'affiliate-wp' ),
-			array_merge( $base_query_args, array(
-				'affwp_notice' => false,
-				'action'       => 'view_affiliate',
-			) )
+			array(
+				'page'            => 'affiliate-wp-reports',
+				'tab'             => 'referral',
+				'affiliate_login' => $username,
+				'range'           => 'this_month'
+			)
 		);
 
 		if ( $name ) {

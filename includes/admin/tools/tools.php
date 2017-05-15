@@ -223,9 +223,9 @@ function affwp_migration_tab() {
 						</form>
 					<?php else : ?>
 						<?php if ( current_user_can( 'update_core' ) ) : ?>
-							<p><?php printf( __( '<strong>NOTE:</strong> WordPress 4.4 or newer is required to use the User Accounts migration tool. <a href="%s" aria-label="Update WordPress now">Update WordPress now</a>.', 'affiliate-wp' ), network_admin_url( 'update-core' ) ); ?></p>
+							<p><?php printf( __( '<strong>NOTE:</strong> WordPress 4.5 or newer is required to use the User Accounts migration tool. <a href="%s" aria-label="Update WordPress now">Update WordPress now</a>.', 'affiliate-wp' ), network_admin_url( 'update-core' ) ); ?></p>
 						<?php else : ?>
-							<p><?php _e( '<strong>NOTE:</strong> WordPress 4.4 or newer is required to use the User Accounts migration tool.', 'affiliate-wp' ); ?></p>
+							<p><?php _e( '<strong>NOTE:</strong> WordPress 4.5 or newer is required to use the User Accounts migration tool.', 'affiliate-wp' ); ?></p>
 						<?php endif; // 'update_core' ?>
 					<?php endif; // $tool_is_compatible ?>
 				</div><!-- .inside -->

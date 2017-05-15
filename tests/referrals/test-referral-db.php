@@ -254,4 +254,18 @@ class Referrals_DB_Tests extends UnitTestCase {
 		$this->assertFalse( affiliate_wp()->referrals->get_by( 'affiliate_id', '' ) );
 	}
 
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::paid_earnings()
+	 */
+	public function test_paid_earnings_with_empty_date_set_affiliate_id_format_true_should_retrieve_all_time_paid_earnings() {
+		$total = 0;
+		foreach ( self::$referrals as $referral_id ) {
+			$total += affwp_get_referral( $referral_id )->amount;
+		}
+
+		$total = affwp_currency_filter( affwp_format_amount( $total ) );
+
+		$this->assertSame( $total, affiliate_wp()->referrals->paid_earnings( '', self::$affiliate_id ) );
+	}
+
 }
