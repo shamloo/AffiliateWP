@@ -35,26 +35,6 @@ class Affiliate_WP_Tracking {
 	 */
 	public function __construct() {
 
-		/**
-		 * Filters whether to completely short-circuit tracking a visit.
-		 *
-		 * An explicitly true value must be passed back to the filter to execute the short-circuit.
-		 *
-		 * Example:
-		 *
-		 *     add_filter( 'affwp_tracking_skip_track_visit', '__return_true' );
-		 *
-		 * @since 2.0.5
-		 *
-		 * @param bool                   $skip Whether to skip tracking a visit. Default false.
-		 * @param \Affiliate_WP_Tracking $this Tracking class instance.
-		 */
-		if ( true === apply_filters( 'affwp_tracking_skip_track_visit', false, $this ) ) {
-			affiliate_wp()->utils->log( 'Visit creation skipped during tracking via affwp_tracking_skip_track_visit hook.' );
-
-			return;
-		}
-
 		$this->set_expiration_time();
 		$this->set_referral_var();
 
@@ -261,11 +241,34 @@ class Affiliate_WP_Tracking {
 	 */
 	public function track_visit() {
 
-		$affiliate_id = isset( $_POST['affiliate'] ) ? absint( $_POST['affiliate'] ) : '';
+		$affiliate_id = isset( $_POST['affiliate'] ) ? absint( $_POST['affiliate'] ) : 0;
 		$is_valid     = $this->is_valid_affiliate( $affiliate_id );
 		$referrer     = isset( $_POST['referrer'] ) ? sanitize_text_field( $_POST['referrer'] ) : '';
 
-		if ( ! empty( $affiliate_id ) && $is_valid ) {
+		/**
+		 * Filters whether to completely short-circuit tracking a visit.
+		 *
+		 * An explicitly true value must be passed back to the filter to execute the short-circuit.
+		 *
+		 * Example:
+		 *
+		 *     add_filter( 'affwp_tracking_skip_track_visit', '__return_true' );
+		 *
+		 * @since 2.0.5
+		 *
+		 * @param bool                   $skip_visit   Whether to skip tracking a visit. Default false.
+		 * @param int                    $affiliate_id Affiliate ID.
+		 * @param bool                   $is_valid     Whether the affiliate is valid.
+		 * @param string                 $referrer     Visit referrer.
+		 * @param \Affiliate_WP_Tracking $this         Tracking class instance.
+		 */
+		if ( true === apply_filters( 'affwp_tracking_skip_track_visit', false, $affiliate_id, $is_valid, $referrer, $this ) ) {
+
+			affiliate_wp()->utils->log( 'Visit creation skipped during track_visit() via the affwp_tracking_skip_track_visit hook.' );
+
+			die( '-3' );
+
+		} elseif ( ! empty( $affiliate_id ) && $is_valid ) {
 
 			if( ! affwp_is_url_banned( $referrer ) ) {
 				// Store the visit in the DB
@@ -317,10 +320,32 @@ class Affiliate_WP_Tracking {
 
 		$affiliate_id = absint( $_POST['affiliate'] );
 		$is_valid     = $this->is_valid_affiliate( $affiliate_id );
+		$visit_id     = $this->get_visit_id();
 
-		if( $is_valid ) {
+		/**
+		 * Filters whether to completely short-circuit tracking a conversion.
+		 *
+		 * An explicitly true value must be passed back to the filter to execute the short-circuit.
+		 *
+		 * Example:
+		 *
+		 *     add_filter( 'affwp_tracking_skip_track_conversion', '__return_true' );
+		 *
+		 * @since 2.0.5
+		 *
+		 * @param bool                   $skip_visit   Whether to skip tracking the conversion. Default false.
+		 * @param int                    $affiliate_id Affiliate ID.
+		 * @param bool                   $is_valid     Whether the affiliate is valid.
+		 * @param int|false              $visit_id     Visit ID derived from the cookie, otherwise false.
+		 * @param \Affiliate_WP_Tracking $this         Tracking class instance.
+		 */
+		if ( true === apply_filters( 'affwp_tracking_skip_track_conversion', false, $affiliate_id, $is_valid, $visit_id, $this ) ) {
 
-			$visit_id = $this->get_visit_id();
+			affiliate_wp()->utils->log( 'Conversion handling skipped during track_conversion() via the affwp_tracking_skip_track_conversion hook.' );
+
+			die( '-6' );
+
+		} elseif( $is_valid ) {
 
 			affiliate_wp()->utils->log( sprintf( 'Valid affiliate ID, %d, in track_conversion()', $affiliate_id ) );
 
@@ -420,11 +445,15 @@ class Affiliate_WP_Tracking {
 		$affiliate_id = absint( $affiliate_id );
 		$is_valid     = $this->is_valid_affiliate( $affiliate_id );
 		$visit_id     = $this->get_visit_id();
+		$referrer     = ! empty( $_SERVER['HTTP_REFERER'] ) ? sanitize_text_field( $_SERVER['HTTP_REFERER'] ) : '';
 
-		if ( $is_valid && ! $visit_id ) {
-			if ( ( ! empty( $_SERVER['HTTP_REFERER'] ) && ! affwp_is_url_banned( sanitize_text_field( $_SERVER['HTTP_REFERER'] ) ) )
-				|| empty( $_SERVER['HTTP_REFERER'] )
-			) {
+		/** This filter is documented in includes/class-tracking.php. */
+		if ( true === apply_filters( 'affwp_tracking_skip_track_visit', false, $affiliate_id, $is_valid, $referrer, $this ) ) {
+
+			affiliate_wp()->utils->log( 'Visit creation skipped during fallback_track_visit() via the affwp_tracking_skip_track_visit hook.' );
+
+		} elseif ( $is_valid && ! $visit_id ) {
+			if ( ( ! empty( $referrer ) && ! affwp_is_url_banned( $referrer ) ) || empty( $referrer ) ) {
 
 				$this->set_affiliate_id( $affiliate_id );
 
@@ -434,7 +463,7 @@ class Affiliate_WP_Tracking {
 					'ip'           => $this->get_ip(),
 					'url'          => $this->get_current_page_url(),
 					'campaign'     => $this->get_campaign(),
-					'referrer'     => ! empty( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : ''
+					'referrer'     => $referrer,
 				) );
 
 				$this->set_visit_id( $visit_id );
