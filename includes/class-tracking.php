@@ -75,7 +75,7 @@ class Affiliate_WP_Tracking {
 	 *
 	 * @access public
 	 * @since  1.0
-	 * @since  2.1 Converted to a wrapper for a new protected _header_scripts() helper.
+	 * @since  2.1 Converted to a wrapper for a new protected print_header_script() helper.
 	 */
 	public function header_scripts() {
 		// Back-compat for direct calls.
