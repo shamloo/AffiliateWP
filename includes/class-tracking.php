@@ -254,7 +254,7 @@ class Affiliate_WP_Tracking {
 		 *
 		 *     add_filter( 'affwp_tracking_skip_track_visit', '__return_true' );
 		 *
-		 * @since 2.0.5
+		 * @since 2.1
 		 *
 		 * @param bool                   $skip_visit   Whether to skip tracking a visit. Default false.
 		 * @param int                    $affiliate_id Affiliate ID.
@@ -331,7 +331,7 @@ class Affiliate_WP_Tracking {
 		 *
 		 *     add_filter( 'affwp_tracking_skip_track_conversion', '__return_true' );
 		 *
-		 * @since 2.0.5
+		 * @since 2.1
 		 *
 		 * @param bool                   $skip_visit   Whether to skip tracking the conversion. Default false.
 		 * @param int                    $affiliate_id Affiliate ID.
