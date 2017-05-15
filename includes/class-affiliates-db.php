@@ -475,7 +475,6 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 
 		$defaults = array(
 			'status'          => 'active',
-			'date_registered' => current_time( 'mysql' ),
 			'earnings'        => 0,
 			'referrals'       => 0,
 			'visits'          => 0
@@ -485,6 +484,16 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 
 		if(  ! empty( $args['user_id'] ) && affiliate_wp()->affiliates->get_by( 'user_id', $args['user_id'] ) ) {
 			return false;
+		}
+
+		$current_date = current_time( 'mysql' );
+
+		if ( empty( $args['date_registered'] ) ) {
+			$args['date_registered'] = $current_date;
+		} elseif ( $args['date_registered'] !== $current_date ) {
+			$time = strtotime( $args['date_registered'] );
+
+			$args['date_registered'] = gmdate( 'Y-m-d H:i:s', ( $time + ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) ) );
 		}
 
 		$add = $this->insert( $args, 'affiliate' );
