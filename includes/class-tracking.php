@@ -610,9 +610,12 @@ class Affiliate_WP_Tracking {
 	}
 
 	/**
-	 * Get the visit ID
+	 * Retrieves the visit ID from the affwp_ref_visit_id cookie (if set).
 	 *
-	 * @since 1.0
+	 * @access public
+	 * @since  1.0
+	 *
+	 * @return int|false Visit ID from the cookie or false.
 	 */
 	public function get_visit_id() {
 		return ! empty( $_COOKIE['affwp_ref_visit_id'] ) ? absint( $_COOKIE['affwp_ref_visit_id'] ) : false;
