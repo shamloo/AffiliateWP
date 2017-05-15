@@ -237,12 +237,12 @@ class Import_Referrals extends Batch\Import\CSV implements Batch\With_PreFetch {
 
 				if ( $skipped > 0 ) {
 					$message .= sprintf( ' ' .
-	                     _n(
-		                     '%s other existing referral or invalid row was skipped.',
-		                     '%s other existing referrals or invalid rows were skipped.',
-		                     $skipped,
-		                     'affiliate-wp'
-	                     ), number_format_i18n( $skipped )
+						_n(
+							'%s other existing referral or invalid row was skipped.',
+							'%s other existing referrals or invalid rows were skipped.',
+							$skipped,
+							'affiliate-wp'
+						), number_format_i18n( $skipped )
 					);
 				}
 
