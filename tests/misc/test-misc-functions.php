@@ -307,6 +307,17 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers ::affwp_get_affiliate_import_fields()
+	 */
+	public function test_get_affiliate_import_fields_with_required_field_email_unset_should_still_contain_field() {
+		add_filter( 'affwp_affiliate_import_fields', function( $fields ) {
+			unset( $fields['email'] );
+		} );
+
+		$this->assertArrayHasKey( 'email', affwp_get_affiliate_import_fields() );
+	}
+
+	/**
 	 * @covers ::affwp_get_referral_import_fields()
 	 */
 	public function test_get_referral_import_fields_default_fields() {
@@ -328,6 +339,28 @@ class Tests extends UnitTestCase {
 		);
 
 		$this->assertEqualSets( $fields, affwp_get_referral_import_fields() );
+	}
+
+	/**
+	 * @covers ::affwp_get_referral_import_fields()
+	 */
+	public function test_get_referral_import_fields_with_required_field_affiliate_unset_should_still_contain_field() {
+		add_filter( 'affwp_affiliate_import_fields', function( $fields ) {
+			unset( $fields['affiliate'] );
+		} );
+
+		$this->assertArrayHasKey( 'affiliate', affwp_get_referral_import_fields() );
+	}
+
+	/**
+	 * @covers ::affwp_get_referral_import_fields()
+	 */
+	public function test_get_referral_import_fields_with_required_field_amount_unset_should_still_contain_field() {
+		add_filter( 'affwp_affiliate_import_fields', function( $fields ) {
+			unset( $fields['amount'] );
+		} );
+
+		$this->assertArrayHasKey( 'amount', affwp_get_referral_import_fields() );
 	}
 
 	/**

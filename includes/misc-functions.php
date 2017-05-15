@@ -1081,6 +1081,11 @@ function affwp_get_affiliate_import_fields() {
 		'date_registered' => __( 'Registration Date', 'affiliate-wp' ),
 	) );
 
+	// Ensure required fields are set.
+	if ( empty( $fields['email'] ) ) {
+		$fields['email'] = __( 'Email (required)', 'affiliate-wp' );
+	}
+
 	return $fields;
 }
 
@@ -1116,6 +1121,15 @@ function affwp_get_referral_import_fields() {
 		'status'          => __( 'Status', 'affiliate-wp' ),
 		'date'            => __( 'Date', 'affiliate-wp' )
 	) );
+
+	// Ensure required fields are set.
+	if ( empty( $fields['affiliate'] ) ) {
+		$fields['affiliate'] = __( 'Affiliate ID or Username (required)', 'affiliate-wp' );
+	}
+
+	if ( empty( $fields['amount'] ) ) {
+		$fields['amount'] = __( 'Amount (required)', 'affiliate-wp' );
+	}
 
 	return $fields;
 }
