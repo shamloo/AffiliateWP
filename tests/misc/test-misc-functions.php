@@ -345,7 +345,7 @@ class Tests extends UnitTestCase {
 	 * @covers ::affwp_get_referral_import_fields()
 	 */
 	public function test_get_referral_import_fields_with_required_field_affiliate_unset_should_still_contain_field() {
-		add_filter( 'affwp_affiliate_import_fields', function( $fields ) {
+		add_filter( 'affwp_referral_import_fields', function( $fields ) {
 			unset( $fields['affiliate'] );
 		} );
 
@@ -356,7 +356,7 @@ class Tests extends UnitTestCase {
 	 * @covers ::affwp_get_referral_import_fields()
 	 */
 	public function test_get_referral_import_fields_with_required_field_amount_unset_should_still_contain_field() {
-		add_filter( 'affwp_affiliate_import_fields', function( $fields ) {
+		add_filter( 'affwp_referral_import_fields', function( $fields ) {
 			unset( $fields['amount'] );
 		} );
 
