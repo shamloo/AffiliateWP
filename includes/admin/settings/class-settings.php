@@ -680,6 +680,27 @@ class Affiliate_WP_Settings {
 					)
 				)
 			),
+			/**
+			 * Filters the default "Coupons" settings.
+			 *
+			 * @param array $settings Array of coupon settings.
+			 */
+			'coupons' => apply_filters( 'affwp_settings_coupons',
+				array(
+					'affwp_auto_generate_coupons_enabled' => array(
+						'name' => __( 'Automatically generate affiliate coupons', 'affiliate-wp' ),
+						'desc' => __( 'If checked, a coupon will be generated automatically for an affiliate when their affiliate account is registered and approved.', 'affiliate-wp' ),
+						'type' => 'checkbox'
+					),
+					'affwp_auto_generate_coupons_template_id' => array(
+						'name' => __( 'Coupon template', 'affiliate-wp' ),
+						'desc' => __( 'Create a coupon in your desired integration and select the coupon here. The settings used for this coupon will be used as a template for auto-generated affiliate coupons.', 'affiliate-wp' ),
+						'type' => 'select',
+						'options' => affwp_get_coupons_by_integration(),
+						'sanitize_callback' => 'sanitize_text_field'
+					),
+				)
+			),
 			/** Misc Settings */
 
 			/**
