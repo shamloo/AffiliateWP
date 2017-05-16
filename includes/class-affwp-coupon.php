@@ -19,7 +19,7 @@ namespace AffWP\Affiliate;
  *
  * @property-read int $ID Alias for `$coupon_id`.
  */
-final class Coupon extends \AffWP\Base_Object {
+abstract class Coupon extends \AffWP\Base_Object {
 
 	/**
 	 * Coupon ID. This is the primary key for this object.
@@ -87,52 +87,71 @@ final class Coupon extends \AffWP\Base_Object {
 	public $owner = 0;
 
 	/**
-	 * Gets coupon data from the active integration in which it was generated.
+	 * Object constructor.
 	 *
-	 * Specify either the AffiliateWP `affwp_coupon_id`, or the coupon ID from the integration, `coupon_id`.
+	 * @access public
+	 * @since  2.1
+	 *
+	 * @param mixed $object Object for which to populate members.
+	 */
+	public function __construct( $object ) {
+		foreach ( get_object_vars( $object ) as $key => $value ) {
+			$this->$key = $value;
+		}
+
+		$this->init();
+	}
+
+	/**
+	 * Defines the integration property of this class, such as `edd` or `woocommerce`.
+	 * Must be set by extending classes.
 	 *
 	 * @since  2.1
 	 *
-	 * @return array $data Coupon data.
+	 * @return string Integration string.
 	 */
-	public function data( $coupon_id = 0, $affwp_coupon_id = 0 ) {
+	abstract public function init();
+
+	/**
+	 * Gets coupon data from the active integration in which it was generated.
+	 *
+	 * This data should be specified by each integration's
+	 * AffWP_{integration}_Coupon class which extends `AFFWP_Coupon`,
+	 * and be hooked onto an action within the integration which fires
+	 * at the time of coupon creation.
+	 *
+	 * If an object is provided by the integration, it should be casted to an array.
+	 *
+	 * @since  2.1
+	 * @param  array|object $coupon     An array or object of coupon data provided by the integration.
+	 *                                  Objects will be casted to arrays.
+	 * @param  int          $coupon_id  The coupon ID.
+	 * @return array        $data       Coupon data.
+	 */
+	public function data( $coupon, $coupon_id ) {
 
 		$affwp_coupon_id = $this->affwp_coupon_id;
 		$coupon_id       = $this->coupon_id;
 
-		// Bail if either coupon ID is not set.
-		if ( ! $affwp_coupon_id || ! $coupon_id ) {
-			return false;
+		if ( ! isset( $coupon_id ) || false === $coupon_id ) {
+
+			// Attempt to determine the coupon ID from the array.
+			if ( isset( $coupon ) && isset( $coupon['id'] ) && is_int( $coupon['id'] ) ) {
+
+				// Cast to an array if needed.
+				if ( is_object( $coupon ) ) {
+					$coupon = (array) $coupon;
+				}
+
+				$coupon_id = $coupon['id'];
+
+			} else {
+				// Bail if the integration's coupon ID is still not set.
+				return false;
+			}
 		}
 
 		$data = array();
-
-		switch ( $this->integration ) {
-			case 'edd':
-				// Get EDD-specific coupon meta
-				$discount = edd_get_discount( $coupon_id );
-				$data[ 'type' ]   = $discount->type;
-				$data[ 'code' ]   = $discount->code;
-				$data[ 'uses' ]   = $discount->uses;
-				$data[ 'status' ] = edd_is_discount_expired( $coupon_id ) ? 'inactive' : 'active';
-				$data[ 'expiration_date' ] = $discount->expires;
-				$data[ 'integration' ] = $this->integration;
-				$data[ 'affiliate_id' ] = $this->affiliate_id;
-
-				break;
-
-			// case 'woocommerce':
-			// 	// Get WooCommerce-specific coupon meta
-			// 	break;
-
-			// case 'rcp':
-			// 	// Get RCP-specific coupon meta
-			// 	break;
-
-			default:
-				$data = false;
-				break;
-		}
 	}
 
 	/**
