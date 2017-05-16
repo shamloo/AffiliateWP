@@ -808,4 +808,43 @@ class Tests extends UnitTestCase {
 		// Clean up.
 		affwp_delete_affiliate( $affiliate );
 	}
+
+	/**
+	 * @covers \Affiliate_WP_DB_Affiliates::add()
+	 */
+	public function test_add_without_date_registered_should_use_current_time() {
+		$user = $this->factory->user->create();
+
+		$current_time = current_time( 'mysql' );
+
+		$affiliate_id = affiliate_wp()->affiliates->add( array(
+			'user_id' => $user
+		) );
+
+		$this->assertSame( $current_time, affwp_get_affiliate( $affiliate_id )->date_registered );
+
+		// Clean up.
+		affwp_delete_affiliate( $affiliate_id );
+
+	}
+
+	/**
+	 * @covers \Affiliate_WP_DB_Affiliates::add()
+	 */
+	public function test_add_with_date_registered_should_use_supplied_date() {
+		$user = $this->factory->user->create();
+
+		$affiliate_id = affiliate_wp()->affiliates->add( array(
+			'user_id'         => $user,
+			'date_registered' => '05/04/2017',
+		) );
+
+		$expected_date = gmdate( 'Y-m-d H:i:s', ( strtotime( '05/04/2017' ) + ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) ) );
+
+		$this->assertSame( $expected_date, affwp_get_affiliate( $affiliate_id )->date_registered );
+
+		// Clean up.
+		affwp_delete_affiliate( $affiliate_id );
+	}
+
 }

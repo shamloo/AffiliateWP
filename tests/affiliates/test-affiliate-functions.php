@@ -1573,6 +1573,43 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers ::affwp_add_affiliate()
+	 */
+	public function test_add_affiliate_with_no_date_registered_should_use_current_time() {
+		$user = $this->factory->user->create();
+
+		$current_time = current_time( 'mysql' );
+
+		$affiliate_id = affwp_add_affiliate( array(
+			'user_id' => $user
+		) );
+
+		$this->assertSame( $current_time, affwp_get_affiliate( $affiliate_id )->date_registered );
+
+		// Clean up.
+		affwp_delete_affiliate( $affiliate_id );
+	}
+
+	/**
+	 * @covers ::affwp_add_affiliate()
+	 */
+	public function test_add_affiliate_with_date_registered_should_use_supplied_date() {
+		$user = $this->factory->user->create();
+
+		$affiliate_id = affwp_add_affiliate( array(
+			'user_id'         => $user,
+			'date_registered' => '05/04/2017',
+		) );
+
+		$expected_date = gmdate( 'Y-m-d H:i:s', ( strtotime( '05/04/2017' ) + ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) ) );
+
+		$this->assertSame( $expected_date, affwp_get_affiliate( $affiliate_id )->date_registered );
+
+		// Clean up.
+		affwp_delete_affiliate( $affiliate_id );
+	}
+
+	/**
 	 * @gcovers affwp_update_affiliate()
 	 */
 	public function test_update_affiliate_with_empty_affiliate_id_should_return_false() {

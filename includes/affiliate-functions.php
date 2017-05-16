@@ -1106,12 +1106,13 @@ function affwp_add_affiliate( $data = array() ) {
 	$user_id = absint( $data['user_id'] );
 
 	$args = array(
-		'user_id'       => $user_id,
-		'status'        => $status,
-		'rate'          => ! empty( $data['rate'] ) ? sanitize_text_field( $data['rate'] ) : '',
-		'rate_type'     => ! empty( $data['rate_type' ] ) ? sanitize_text_field( $data['rate_type'] ) : '',
-		'payment_email' => ! empty( $data['payment_email'] ) ? sanitize_text_field( $data['payment_email'] ) : '',
-		'notes'         => ! empty( $data['notes' ] ) ? wp_kses_post( $data['notes'] ) : ''
+		'user_id'         => $user_id,
+		'status'          => $status,
+		'rate'            => ! empty( $data['rate'] ) ? sanitize_text_field( $data['rate'] ) : '',
+		'rate_type'       => ! empty( $data['rate_type' ] ) ? sanitize_text_field( $data['rate_type'] ) : '',
+		'payment_email'   => ! empty( $data['payment_email'] ) ? sanitize_text_field( $data['payment_email'] ) : '',
+		'notes'           => ! empty( $data['notes' ] ) ? wp_kses_post( $data['notes'] ) : '',
+		'date_registered' => ! empty( $data['date_registered'] ) ? sanitize_text_field( $data['date_registered'] ) : '',
 	);
 
 	$affiliate_id = affiliate_wp()->affiliates->add( $args );
