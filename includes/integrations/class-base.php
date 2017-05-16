@@ -300,7 +300,9 @@ abstract class Affiliate_WP_Base {
 		$is_affiliate_email = false;
 
 		// allow an affiliate ID to be passed in
-		$affiliate_id = isset( $affiliate_id ) ? $affiliate_id : $this->get_affiliate_id();
+		if( empty( $affiliate_id ) ) {
+			$affiliate_id = $this->get_affiliate_id();
+		}
 
 		// Get affiliate emails
 		$user_email  = affwp_get_affiliate_email( $affiliate_id );
