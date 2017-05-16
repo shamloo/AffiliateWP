@@ -512,6 +512,17 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 		$affiliate_id = affwp_get_affiliate_id( $data['user_id'] );
 
 		update_post_meta( $discount_id, 'affwp_discount_affiliate', $affiliate_id );
+
+		/**
+		 * Fires when an affiliate ID is stored in the post meta of an EDD discount.
+		 *
+		 * @param $discount_id   EDD discount ID.
+		 * @param $affiliate_id  Affiliate ID.
+		 *
+		 * @see   AffWP\Affiliate\EDD_Coupon::create_coupon()
+		 * @since 2.1
+		 */
+		do_action( 'affwp_edd_coupon_store_discount_affiliate', $discount_id, $affiliate_id );
 	}
 
 	/**
