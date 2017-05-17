@@ -52,6 +52,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 		// Shop page.
 		add_action( 'pre_get_posts', array( $this, 'force_shop_page_for_referrals' ), 5 );
+		add_action( 'init', array( $this, 'wc_300__product_base_rewrites' ) );
 
 		// Affiliate Area link in My Account menu.
 		add_filter( 'woocommerce_account_menu_items', array( $this, 'my_account_affiliate_area_link' ), 100 );
@@ -693,6 +694,31 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 				$GLOBALS['wp_rewrite']->use_verbose_page_rules = true;
 			}
 		}
+	}
+
+	/**
+	 * Sets up verbose rewrites for the product base in conjunction with pretty affiliate URLs.
+	 *
+	 * @access public
+	 * @since  2.0.9
+	 *
+	 * @see wc_get_permalink_structure()
+	 */
+	public function wc_300__product_base_rewrites() {
+
+		if ( function_exists( 'wc_get_permalink_structure' ) ) {
+
+			$permalinks = wc_get_permalink_structure();
+
+			if ( $permalinks['use_verbose_page_rules'] && ( $shop_page_id = wc_get_page_id( 'shop' ) ) ) {
+
+				$uri = get_page_uri( $shop_page_id );
+				$ref = affiliate_wp()->tracking->get_referral_var();
+
+				add_rewrite_rule( $uri . '/' . $ref . '(/(.*))?/?$', 'index.php?post_type=product&' . $ref . '=$matches[2]', 'top' );
+			}
+		}
+
 	}
 
 	/**
