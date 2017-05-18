@@ -1576,13 +1576,14 @@ class Tests extends UnitTestCase {
 	 * @covers ::affwp_add_affiliate()
 	 */
 	public function test_add_affiliate_with_no_date_registered_should_use_current_time() {
-		$current_time = current_time( 'mysql' );
-
 		$affiliate_id = affwp_add_affiliate( array(
 			'user_id' => $this->factory->user->create()
 		) );
 
-		$this->assertSame( $current_time, affwp_get_affiliate( $affiliate_id )->date_registered );
+		$expected = $this->get_current_time_for_comparison();
+		$actual   = $this->get_affiliate_date_for_comparison( $affiliate_id );
+
+		$this->assertSame( $expected, $actual );
 
 		// Clean up.
 		affwp_delete_affiliate( $affiliate_id );
