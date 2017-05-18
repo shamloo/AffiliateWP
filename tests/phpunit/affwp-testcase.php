@@ -66,11 +66,12 @@ class UnitTestCase extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * Retrieves the current time based on specified type for use in test comparisons.
+	 * Retrieves the current time for use in test comparisons.
 	 *
-	 * Serves as a tests wrapper for core's current_time() with the distinct difference
-	 * that it doesn't include seconds in the resulting string. This is an attempt to
-	 * avoid race conditions for assertions that take longer than a second to execute.
+	 * Serves as a tests wrapper for core's current_time( 'mysql' ) with the distinct
+	 * difference that it doesn't include seconds in the resulting string. This is an
+	 * attempt to avoid race conditions for assertions that take longer than a second
+	 * to execute.
 	 *
 	 * @access public
 	 * @since  2.1
