@@ -829,11 +829,28 @@ class Tests extends UnitTestCase {
 	/**
 	 * @covers \Affiliate_WP_DB_Affiliates::add()
 	 */
-	public function test_add_with_date_registered_should_use_supplied_date() {
-		$user = $this->factory->user->create();
+	public function test_add_without_date_registered_should_use_current_time_with_gmt_offset() {
+		// Set up.
+		$original_gmt_offset = get_option( 'gmt_offset', '0' );
+		update_option( 'gmt_offset', '-5' );
 
 		$affiliate_id = affiliate_wp()->affiliates->add( array(
-			'user_id'         => $user,
+			'user_id' => $this->factory->user->create()
+		) );
+
+		$this->assertSame( current_time( 'mysql' ), affwp_get_affiliate( $affiliate_id )->date_registered );
+
+		// Clean up.
+		affwp_delete_affiliate( $affiliate_id );
+		update_option( 'gmt_offset', $original_gmt_offset );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_DB_Affiliates::add()
+	 */
+	public function test_add_with_date_registered_should_use_supplied_date() {
+		$affiliate_id = affiliate_wp()->affiliates->add( array(
+			'user_id'         => $this->factory->user->create(),
 			'date_registered' => '05/04/2017',
 		) );
 
@@ -843,6 +860,32 @@ class Tests extends UnitTestCase {
 
 		// Clean up.
 		affwp_delete_affiliate( $affiliate_id );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_DB_Affiliates::add()
+	 */
+	public function test_add_with_date_registered_should_use_supplied_date_and_should_not_use_gmt_offset() {
+		// Set up.
+		$original_gmt_offset = get_option( 'gmt_offset', '0' );
+		update_option( 'gmt_offset', '-5' );
+
+		$affiliate_id = affiliate_wp()->affiliates->add( array(
+			'user_id'         => $this->factory->user->create(),
+			'date_registered' => '05/04/2017',
+		) );
+
+		$date_with_offset = gmdate( 'Y-m-d H:i:s', ( strtotime( '05/04/2017' ) + ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) ) );
+		$expected_date    = gmdate( 'Y-m-d H:i:s', strtotime( '05/04/2017' ) );
+
+		$result = affwp_get_affiliate( $affiliate_id )->date_registered;
+
+		$this->assertSame( $expected_date, $result );
+		$this->assertNotEquals( $date_with_offset, $result );
+
+		// Clean up.
+		affwp_delete_affiliate( $affiliate_id );
+		update_option( 'gmt_offset', $original_gmt_offset );
 	}
 
 }
