@@ -89,7 +89,7 @@ class UnitTestCase extends \WP_UnitTestCase {
 	 * Modifies the returned date to omit the seconds value. This is an attempt to avoid race
 	 * conditions for assertions that take longer than a second to execute.
 	 *
-	 * @access pubic
+	 * @access public
 	 * @since  2.1
 	 *
 	 * @param int|\AffWP\Affiliate $affiliate Affiliate ID or object.
