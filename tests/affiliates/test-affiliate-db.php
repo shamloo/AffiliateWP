@@ -839,7 +839,7 @@ class Tests extends UnitTestCase {
 			'date_registered' => '05/04/2017',
 		) );
 
-		$expected_date = gmdate( 'Y-m-d H:i:s', ( strtotime( '05/04/2017' ) + ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) ) );
+		$expected_date = gmdate( 'Y-m-d H:i:s', ( strtotime( '05/04/2017' ) ) );
 
 		$this->assertSame( $expected_date, affwp_get_affiliate( $affiliate_id )->date_registered );
 
