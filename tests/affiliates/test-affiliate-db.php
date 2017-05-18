@@ -813,12 +813,10 @@ class Tests extends UnitTestCase {
 	 * @covers \Affiliate_WP_DB_Affiliates::add()
 	 */
 	public function test_add_without_date_registered_should_use_current_time() {
-		$user = $this->factory->user->create();
-
 		$current_time = current_time( 'mysql' );
 
 		$affiliate_id = affiliate_wp()->affiliates->add( array(
-			'user_id' => $user
+			'user_id' => $this->factory->user->create()
 		) );
 
 		$this->assertSame( $current_time, affwp_get_affiliate( $affiliate_id )->date_registered );
