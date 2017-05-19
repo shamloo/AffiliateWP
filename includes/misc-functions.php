@@ -1077,7 +1077,7 @@ function affwp_get_affiliate_import_fields() {
 		'referrals'       => __( 'Referral Count', 'affiliate-wp' ),
 		'visits'          => __( 'Visit Count', 'affiliate-wp' ),
 		'status'          => __( 'Status', 'affiliate-wp' ),
-		'website'         => __( 'Website', 'affiliate-wp' ),
+		'website_url'     => __( 'Website', 'affiliate-wp' ),
 		'date_registered' => __( 'Registration Date', 'affiliate-wp' ),
 	) );
 
