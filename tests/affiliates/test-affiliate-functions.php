@@ -4,6 +4,9 @@ namespace AffWP\Affiliate\Functions;
 use AffWP\Tests\UnitTestCase;
 use AffWP\Affiliate;
 
+// Needed for actions to fire.
+require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/affiliates/actions.php';
+
 /**
  * Tests for Affiliate functions in affiliate-functions.php.
  *
@@ -1552,8 +1555,6 @@ class Tests extends UnitTestCase {
 	 */
 	public function test_add_affiliate_with_notes() {
 
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/affiliates/actions.php';
-
 		$affiliate_id = affwp_add_affiliate( array(
 			'user_id' => $this->factory->user->create(),
 			'notes'   => 'These are test notes'
@@ -1654,6 +1655,41 @@ class Tests extends UnitTestCase {
 		// Clean up.
 		affwp_delete_affiliate( $affiliate_id );
 		update_option( 'gmt_offset', $original_gmt_offset );
+	}
+
+	/**
+	 * @covers ::affwp_add_affiliate()
+	 */
+	public function test_add_affiliate_without_website_url_should_not_change_the_user_url() {
+		$affiliate_id = affwp_add_affiliate( array(
+			'user_id' => $user_id = $this->factory->user->create()
+		) );
+
+		$user_data = get_user_by( 'id', $user_id );
+
+		$this->assertSame( '', $user_data->user_url );
+
+		// Clean up.
+		affwp_delete_affiliate( $affiliate_id );
+	}
+
+	/**
+	 * @covers ::affwp_add_affiliate()
+	 */
+	public function test_add_affiliate_with_website_url_should_set_that_url() {
+		$website_url = 'https://affiliatewp.com/awesome';
+
+		$affiliate_id = affwp_add_affiliate( array(
+			'user_id'     => $user_id = $this->factory->user->create(),
+			'website_url' => $website_url
+		) );
+
+		$user_data = get_user_by( 'id', $user_id );
+
+		$this->assertSame( $website_url, $user_data->user_url );
+
+		// Clean up.
+		affwp_delete_affiliate( $affiliate_id );
 	}
 
 	/**
