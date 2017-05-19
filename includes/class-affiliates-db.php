@@ -493,7 +493,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 		} elseif ( $args['date_registered'] !== $current_date ) {
 			$time = strtotime( $args['date_registered'] );
 
-			$args['date_registered'] = gmdate( 'Y-m-d H:i:s', ( $time + ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) ) );
+			$args['date_registered'] = gmdate( 'Y-m-d H:i:s', $time );
 		}
 
 		$add = $this->insert( $args, 'affiliate' );
