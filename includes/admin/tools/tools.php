@@ -401,7 +401,7 @@ function affwp_export_import_tab() {
 								<?php
 								printf(
 									__( 'Each column loaded from the CSV may be mapped to an affiliate field. Select the column that should be mapped to each field below. Any columns not needed can be ignored. See <a href="%s" target="_blank">this guide</a> for assistance with importing affiliate records.', 'affiliate-wp' ),
-									''
+									esc_url( 'http://docs.affiliatewp.com/article/1893-importing-affiliates-from-csv' )
 								);
 								?>
 							</p>
@@ -448,7 +448,7 @@ function affwp_export_import_tab() {
 								<?php
 								printf(
 									__( 'Each column loaded from the CSV may be mapped to a referral field. Select the column that should be mapped to each field below. Any columns not needed can be ignored. See <a href="%s" target="_blank">this guide</a> for assistance with importing referral records.', 'affiliate-wp' ),
-									''
+									esc_url( 'http://docs.affiliatewp.com/article/1896-importing-referrals-from-csv' )
 								);
 								?>
 							</p>
