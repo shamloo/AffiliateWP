@@ -1084,7 +1084,6 @@ function affwp_get_affiliate_campaigns( $affiliate = 0 ) {
  *     @type string $user_name       User login. Used to retrieve the affiliate ID if `affiliate_id` and
  *                                   `user_id` not given.
  *     @type string $notes           Notes about the affiliate for use by administrators.
- *     @type string $website_url     The affiliate's website URL.
  * }
  * @return int|false The ID for the newly-added affiliate, otherwise false.
  */
@@ -1113,7 +1112,6 @@ function affwp_add_affiliate( $data = array() ) {
 		'rate_type'       => ! empty( $data['rate_type' ] ) ? sanitize_text_field( $data['rate_type'] ) : '',
 		'payment_email'   => ! empty( $data['payment_email'] ) ? sanitize_text_field( $data['payment_email'] ) : '',
 		'notes'           => ! empty( $data['notes' ] ) ? wp_kses_post( $data['notes'] ) : '',
-		'website_url'     => ! empty( $data['website_url'] ) ? sanitize_text_field( $data['website_url'] ) : '',
 		'date_registered' => ! empty( $data['date_registered'] ) ? sanitize_text_field( $data['date_registered'] ) : '',
 	);
 
