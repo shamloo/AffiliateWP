@@ -232,11 +232,13 @@ jQuery(document).ready(function($) {
 
 					$.each( columns, function( columnKey, columnValue ) {
 
-						columnRegex = new RegExp( "\\[" + columnValue + "\\]" );
+						processedColumnValue = columnValue.toLowerCase().replace( / /g, '_' );
+
+						columnRegex = new RegExp( "\\[" + processedColumnValue + "\\]" );
 
 						if ( selectName.length && selectName.match( columnRegex ) ) {
 							// If the column matches a select, auto-map it. Boom.
-							options += '<option value="' + columnValue + '" selected="selected">' + columnValue + '</option>';
+							options += '<option value="' + processedColumnValue + '" selected="selected">' + columnValue + '</option>';
 
 							// Update the preview if there's a first-row value.
 							if ( false != response.data.first_row[ columnValue ] ) {
@@ -246,7 +248,7 @@ jQuery(document).ready(function($) {
 							}
 
 						} else {
-							options += '<option value="' + columnValue + '">' + columnValue + '</option>';
+							options += '<option value="' + processedColumnValue + '">' + columnValue + '</option>';
 						}
 
 					} );
