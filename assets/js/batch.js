@@ -238,7 +238,7 @@ jQuery(document).ready(function($) {
 
 						if ( selectName.length && selectName.match( columnRegex ) ) {
 							// If the column matches a select, auto-map it. Boom.
-							options += '<option value="' + processedColumnValue + '" selected="selected">' + columnValue + '</option>';
+							options += '<option value="' + columnValue + '" selected="selected">' + columnValue + '</option>';
 
 							// Update the preview if there's a first-row value.
 							if ( false != response.data.first_row[ columnValue ] ) {
@@ -248,7 +248,7 @@ jQuery(document).ready(function($) {
 							}
 
 						} else {
-							options += '<option value="' + processedColumnValue + '">' + columnValue + '</option>';
+							options += '<option value="' + columnValue + '">' + columnValue + '</option>';
 						}
 
 					} );
