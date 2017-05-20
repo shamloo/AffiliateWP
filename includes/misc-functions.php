@@ -1066,8 +1066,8 @@ function affwp_get_affiliate_import_fields() {
 	 */
 	$fields = apply_filters( 'affwp_affiliate_import_fields', array(
 		'email'           => __( 'Email (required)', 'affiliate-wp' ),
-		'user_login'      => __( 'Username', 'affiliate-wp' ),
-		'first_name'      => __( 'First/Full Name', 'affiliate-wp' ),
+		'username'        => __( 'Username', 'affiliate-wp' ),
+		'name'            => __( 'First/Full Name', 'affiliate-wp' ),
 		'last_name'       => __( 'Last Name', 'affiliate-wp' ),
 		'payment_email'   => __( 'Payment Email', 'affiliate-wp' ),
 		'rate'            => __( 'Rate', 'affiliate-wp' ),

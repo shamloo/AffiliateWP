@@ -245,7 +245,7 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 	 * @return int|false User ID if a user was found or derived, otherwise false.
 	 */
 	public function create_user( $args ) {
-		$defaults = array_fill_keys( array( 'user_login', 'email', 'payment_email' ), '' );
+		$defaults = array_fill_keys( array( 'username', 'email', 'payment_email' ), '' );
 		$args     = wp_parse_args( $args, $defaults );
 
 		$user_id = $this->get_user_from_args( $args );
@@ -254,8 +254,8 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 			return $user_id;
 		}
 
-		if ( ! empty( $args['user_login'] ) ) {
-			$user_login = $args['user_login'];
+		if ( ! empty( $args['username'] ) ) {
+			$user_login = $args['username'];
 		} else {
 			$user_login = $this->generate_login_from_email( $args['email'] );
 		}
@@ -264,7 +264,7 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 			'user_login' => sanitize_user( $user_login, $this->use_strict ),
 			'user_email' => sanitize_text_field( $args['email'] ),
 			'user_pass'  => wp_generate_password( 20, false ),
-			'first_name' => ! empty( $args['first_name'] ) ? sanitize_text_field( $args['first_name'] ) : '',
+			'first_name' => ! empty( $args['name'] ) ? sanitize_text_field( $args['name'] ) : '',
 			'last_name'  => ! empty( $args['last_name'] ) ? sanitize_text_field( $args['last_name'] ) : '',
 		) );
 
@@ -286,7 +286,7 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 	 */
 	protected function get_user_from_args( $args ) {
 
-		if ( $user = get_user_by( 'login', $args['user_login'] ) ) {
+		if ( $user = get_user_by( 'login', $args['username'] ) ) {
 			$user_id = $user->ID;
 		} elseif ( $user = get_user_by( 'email', $args['email'] ) ) {
 			$user_id = $user->ID;
