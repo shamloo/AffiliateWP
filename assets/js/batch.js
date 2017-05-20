@@ -227,7 +227,8 @@ jQuery(document).ready(function($) {
 
 				$.each( select, function( selectKey, selectValue ) {
 
-					selectName = $( selectValue ).attr( 'name' );
+					currentSelect = $( this );
+					selectName    = $( selectValue ).attr( 'name' );
 
 					$.each( columns, function( columnKey, columnValue ) {
 
@@ -236,6 +237,14 @@ jQuery(document).ready(function($) {
 						if ( selectName.length && selectName.match( columnRegex ) ) {
 							// If the column matches a select, auto-map it. Boom.
 							options += '<option value="' + columnValue + '" selected="selected">' + columnValue + '</option>';
+
+							// Update the preview if there's a first-row value.
+							if ( false != response.data.first_row[ columnValue ] ) {
+								currentSelect.parent().next().html( response.data.first_row[ columnValue ] );
+							} else {
+								currentSelect.parent().next().html( '' );
+							}
+
 						} else {
 							options += '<option value="' + columnValue + '">' + columnValue + '</option>';
 						}
