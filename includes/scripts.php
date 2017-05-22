@@ -115,7 +115,17 @@ function affwp_enqueue_admin_js() {
 
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-	wp_enqueue_script( 'affwp-admin', AFFILIATEWP_PLUGIN_URL . 'assets/js/admin' . $suffix . '.js', array( 'jquery', 'jquery-ui-autocomplete'  ), AFFILIATEWP_VERSION );
+	// Batch processing.
+	wp_register_script( 'affwp-batch', AFFILIATEWP_PLUGIN_URL . 'assets/js/batch' . $suffix . '.js', array( 'jquery-form' ), AFFILIATEWP_VERSION );
+
+	wp_localize_script( 'affwp-batch', 'affwp_batch_vars', array(
+		'unsupported_browser'   => __( 'We are sorry but your browser is not compatible with this kind of file upload. Please upgrade your browser.', 'affiliate-wp' ),
+		'import_field_required' => __( 'This field must be mapped for the import to proceed.', 'affiliate-wp' ),
+	) );
+
+	$admin_deps = array( 'jquery', 'jquery-ui-autocomplete', 'affwp-batch' );
+
+	wp_enqueue_script( 'affwp-admin', AFFILIATEWP_PLUGIN_URL . 'assets/js/admin' . $suffix . '.js', $admin_deps, AFFILIATEWP_VERSION );
 	wp_localize_script( 'affwp-admin', 'affwp_vars', array(
 		'post_id'                 => isset( $post->ID ) ? $post->ID : null,
 		'affwp_version'           => AFFILIATEWP_VERSION,

@@ -153,6 +153,10 @@ table.affiliates #unpaid {
 	margin-top: 0em;
 }
 
+.affwp-required-import-field {
+	background-color: #fadedc !important;
+}
+
 .affwp-status.pending i,
 .affwp-status.unpaid i,
 .affwp-status.paid i,
