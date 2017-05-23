@@ -158,7 +158,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 			if ( $referral = affwp_get_referral( $referral_id ) ) {
 				// Only keep it if the referral is real and the affiliate IDs match.
 				if ( $args['affiliate_id'] === $referral->affiliate_id ) {
-					$referrals[] = $referral;
+					$referrals[] = $referral_id;
 				}
 			}
 		}
