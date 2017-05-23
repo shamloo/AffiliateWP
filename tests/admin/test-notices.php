@@ -612,6 +612,18 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers \Affiliate_WP_Admin_Notices::license_notices()
+	 */
+	public function test_license_notices_transient_set_should_display_nothing() {
+		set_transient( 'affwp_license_notice', 'foo' );
+
+		$this->assertSame( '', self::$notices->license_notices() );
+
+		// Clean up.
+		delete_transient( 'affwp_license_notice' );
+	}
+
+	/**
 	 * Sets $_GET variables for the current test.
 	 *
 	 * @param array $vars $_GET variables to set.
