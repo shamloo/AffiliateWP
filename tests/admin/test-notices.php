@@ -74,13 +74,14 @@ class Tests extends UnitTestCase {
 
 		wp_set_current_user( $user_id );
 
-		add_filter( 'user_has_cap', function( $all_caps, $caps, $args, $user ) use ( $user_id ) {
-			if ( isset( $user->ID ) && $user->ID == $user_id ) {
-				$all_caps[] = 'manage_affiliates';
-			}
-
-			return $all_caps;
-		}, 999, 4 );
+		var_dump( get_current_user() );
+//		add_filter( 'user_has_cap', function( $all_caps, $caps, $args, $user ) use ( $user_id ) {
+//			if ( isset( $user->ID ) && $user->ID == $user_id ) {
+//				$all_caps[] = 'manage_affiliates';
+//			}
+//
+//			return $all_caps;
+//		}, 999, 4 );
 	}
 
 	/**
