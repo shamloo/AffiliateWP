@@ -81,7 +81,7 @@ class Tests extends UnitTestCase {
 	public function test_show_notices_lacking_manage_affiliates_should_return_null() {
 		wp_set_current_user( 0 );
 
-		$this->assertNull( self::$notices->show_notices() );
+		$this->assertNull( self::$notices->show_notices( false ) );
 
 		wp_set_current_user( self::$user_id );
 	}
