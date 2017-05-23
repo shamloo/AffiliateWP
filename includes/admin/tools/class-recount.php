@@ -24,7 +24,7 @@ class Affiliate_WP_Recount {
 			return;
 		}
 
-		$data = affiliate_wp()->utils->process_post_data( $data, 'user_name' );
+		$data = affiliate_wp()->utils->process_request_data( $data, 'user_name' );
 
 		$user_id      = ! empty( $data['user_id'] ) ? absint( $data['user_id'] ) : false;
 		$affiliate_id = affwp_get_affiliate_id( $user_id );

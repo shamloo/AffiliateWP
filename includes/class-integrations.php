@@ -11,6 +11,7 @@ class Affiliate_WP_Integrations {
 	public function get_integrations() {
 
 		return apply_filters( 'affwp_integrations', array(
+			'contactform7'   => 'Contact Form 7',
 			'edd'            => 'Easy Digital Downloads',
 			'caldera-forms'  => 'Caldera Forms',
 			'formidablepro'  => 'Formidable Pro',
@@ -24,14 +25,14 @@ class Affiliate_WP_Integrations {
 			'memberpress'    => 'MemberPress',
 			'ninja-forms'    => 'Ninja Forms',
 			'optimizemember' => 'OptimizeMember',
-			'paypal'         => 'PayPal',
+			'paypal'         => 'PayPal Buttons',
 			'pmp'            => 'Paid Memberships Pro',
 			'pms'            => 'Paid Member Subscriptions',
 			'rcp'            => 'Restrict Content Pro',
 			's2member'       => 's2Member',
 			'shopp'	         => 'Shopp',
 			'sproutinvoices' => 'Sprout Invoices',
-			'stripe'         => 'Stripe (through WP Simple Pay)',
+			'stripe'         => 'Stripe Checkout (through WP Simple Pay)',
 			'woocommerce'    => 'WooCommerce',
 			'wpeasycart'     => 'WP EasyCart',
 			'wpec'           => 'WP eCommerce',

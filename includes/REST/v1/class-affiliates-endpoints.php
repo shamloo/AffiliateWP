@@ -352,6 +352,10 @@ class Endpoints extends Controller {
 					'description' => __( 'The affiliate status.', 'affiliate-wp' ),
 					'type'        => 'string',
 				),
+				'unpaid_earnings' => array(
+					'description' => __( 'Unpaid affiliate earnings.', 'affiliate-wp' ),
+					'type'        => 'float',
+				),
 				'earnings'        => array(
 					'description' => __( 'Affiliate earnings.', 'affiliate-wp' ),
 					'type'        => 'float',

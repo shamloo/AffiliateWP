@@ -67,7 +67,7 @@ class Affiliate_WP_Campaigns_DB extends Affiliate_WP_DB {
 	 *     @type string       $fields           Specific fields to retrieve. Accepts 'ids' or '*' (all). Default '*'.
 	 * }
 	 * @param bool  $count Optional. Whether to return only the total number of results found. Default false.
-	 * @return array
+	 * @return array|int Array of results or integer if `$count` is true.
 	 */
 	public function get_campaigns( $args = array(), $count = false ) {
 		global $wpdb;
@@ -241,7 +241,8 @@ class Affiliate_WP_Campaigns_DB extends Affiliate_WP_DB {
 
 		$last_changed = wp_cache_get( 'last_changed', $this->cache_group );
 		if ( ! $last_changed ) {
-			wp_cache_set( 'last_changed', microtime(), $this->cache_group );
+			$last_changed = microtime();
+			wp_cache_set( 'last_changed', $last_changed, $this->cache_group );
 		}
 
 		$cache_key = "{$key}:{$last_changed}";
@@ -259,6 +260,19 @@ class Affiliate_WP_Campaigns_DB extends Affiliate_WP_DB {
 
 		return $results;
 
+	}
+
+	/**
+	 * Retrieves the number of results found for a given query.
+	 *
+	 * @access public
+	 * @since  2.0.2
+	 *
+	 * @param array $args get_campaigns() arguments.
+	 * @return int Number of campaigns for the given arguments.
+	 */
+	public function count( $args = array() ) {
+		return $this->get_campaigns( $args, true );
 	}
 
 	/**

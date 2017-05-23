@@ -20,6 +20,12 @@ class Affiliate_WP_Upgrades {
 	 */
 	private $logs;
 
+	/**
+	 * Signals whether the upgrade was successful.
+	 *
+	 * @access public
+	 * @var    bool
+	 */
 	private $upgraded = false;
 
 	/**
@@ -41,6 +47,15 @@ class Affiliate_WP_Upgrades {
 	private $utils;
 
 	/**
+	 * Upgrade routine registry.
+	 *
+	 * @access private
+	 * @since  2.0.5
+	 * @var    \AffWP\Utils\Upgrades\Registry
+	 */
+	private $registry;
+
+	/**
 	 * Sets up the Upgrades class instance.
 	 *
 	 * @access public
@@ -49,23 +64,23 @@ class Affiliate_WP_Upgrades {
 	 */
 	public function __construct( $utils ) {
 
-		$this->utils   = $utils;
-		$this->version = get_option( 'affwp_version' );
+		$this->utils    = $utils;
+		$this->version  = get_option( 'affwp_version' );
+		$this->registry = new \AffWP\Utils\Upgrades\Registry;
 
 		add_action( 'admin_init', array( $this, 'init' ), -9999 );
 
 		$settings = new Affiliate_WP_Settings;
 		$this->debug = (bool) $settings->get( 'debug_mode', false );
 
-		if ( $this->debug ) {
-			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-logging.php';
-
-			$this->logs = new Affiliate_WP_Logging;
-		}
-
-		add_action( 'affwp_batch_process_init', array( $this, 'register_batch_upgrades' ) );
+		$this->register_core_upgrades();
 	}
 
+	/**
+	 * Initializes upgrade routines for the current version of AffiliateWP.
+	 *
+	 * @access public
+	 */
 	public function init() {
 
 		if ( empty( $this->version ) ) {
@@ -112,9 +127,12 @@ class Affiliate_WP_Upgrades {
 			$this->v195_upgrade();
 		}
 
-		// TODO: switch && to || before final release.
-		if ( version_compare( $this->version, '2.0', '<' ) && ! affwp_has_upgrade_completed( 'upgrade_v20_recount_unpaid_earnings' ) ) {
+		if ( true === version_compare( AFFILIATEWP_VERSION, '2.0', '<' ) ) {
 			$this->v20_upgrade();
+		}
+
+		if ( version_compare( $this->version, '2.0.2', '<' ) ) {
+			$this->v202_upgrade();
 		}
 
 		// Inconsistency between current and saved version.
@@ -131,16 +149,94 @@ class Affiliate_WP_Upgrades {
 	}
 
 	/**
-	 * Registers batch upgrade routines.
+	 * Registers core upgrade routines.
+	 *
+	 * @access private
+	 * @since  2.0.5
+	 *
+	 * @see \Affiliate_WP_Upgrades::add_routine()
+	 */
+	private function register_core_upgrades() {
+		$this->add_routine( 'upgrade_v20_recount_unpaid_earnings', array(
+			'version' => '2.0',
+			'compare' => '<',
+			'batch_process' => array(
+				'id'    => 'recount-affiliate-stats-upgrade',
+				'class' => 'AffWP\Utils\Batch_Process\Upgrade_Recount_Stats',
+				'file'  => AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/upgrades/class-batch-upgrade-recount-affiliate-stats.php'
+			)
+		) );
+
+	}
+
+	/**
+	 * Registers a new upgrade routine.
 	 *
 	 * @access public
-	 * @since  2.0
+	 * @since  2.0.5
+	 *
+	 * @param string $upgrade_id Upgrade ID.
+	 * @param array  $args {
+	 *     Arguments for registering a new upgrade routine.
+	 *
+	 *     @type string $version       Version the upgrade routine should be run against.
+	 *     @type string $compare       Comparison operator to use when determining if the routine
+	 *                                 should be executed.
+	 *     @type array  $batch_process {
+	 *         Optional. Arguments for registering a batch process.
+	 *
+	 *         @type string $id    Batch process ID.
+	 *         @type string $class Batch processor class to use.
+	 *         @type string $file  File containing the batch processor class.
+	 *     }
+	 * }
+	 * @return bool True if the upgrade routine was added, otherwise false.
 	 */
-	public function register_batch_upgrades() {
-		$this->utils->batch->register_process( 'recount-affiliate-stats-upgrade', array(
-			'class' => 'AffWP\Utils\Batch_Process\Upgrade_Recount_Stats',
-			'file'  => AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/upgrades/class-batch-upgrade-recount-affiliate-stats.php',
-		) );
+	public function add_routine( $upgrade_id, $args ) {
+		// Register the batch process if one has been defined.
+		if ( ! empty( $args['batch_process'] ) ) {
+
+			$utils = $this->utils;
+			$batch = $args['batch_process'];
+
+			// Log an error if it's too late to register the batch process.
+			if ( did_action( 'affwp_batch_process_init' ) ) {
+
+				$utils->log( sprintf( 'The %s batch process was registered too late. Registrations must occur while/before <code>affwp_batch_process_init</code> fires.',
+					esc_html( $args['batch_process']['id'] )
+				) );
+
+				return false;
+
+			} else {
+
+				add_action( 'affwp_batch_process_init', function() use ( $utils, $batch ) {
+					$utils->batch->register_process( $batch['id'], array(
+						'class' => $batch['class'],
+						'file'  => $batch['file'],
+					) );
+				} );
+
+			}
+
+			unset( $args['batch_process'] );
+		}
+
+		// Add the routine to the registry.
+		return $this->registry->add_upgrade( $upgrade_id, $args );
+	}
+
+	/**
+	 * Retrieves an upgrade routine from the registry.
+	 *
+	 * @access public
+	 * @since  2.0.5
+	 *
+	 * @param string $upgrade_id Upgrade ID.
+	 * @return array|false Upgrade entry from the registry, otherwise false.
+	 */
+	public function get_routine( $upgrade_id ) {
+		return $this->registry->get( $upgrade_id );
 	}
 
 	/**
@@ -152,9 +248,7 @@ class Affiliate_WP_Upgrades {
 	 * @param string $message Optional. Message to log.
 	 */
 	private function log( $message = '' ) {
-		if ( $this->debug ) {
-			$this->logs->log( $message );
-		}
+		$this->utils->log( $message );
 	}
 
 	/**
@@ -459,13 +553,13 @@ class Affiliate_WP_Upgrades {
 	 */
 	private function v19_upgrade() {
 		@affiliate_wp()->referrals->create_table();
-		$this->log( 'Upgrade: The Referrals table upgrade for 1.9 has completed.' );
+		@affiliate_wp()->utils->log( 'Upgrade: The Referrals table upgrade for 1.9 has completed.' );
 
 		@affiliate_wp()->affiliates->payouts->create_table();
-		$this->log( 'Upgrade: The Payouts table creation process for 1.9 has completed.' );
+		@affiliate_wp()->utils->log( 'Upgrade: The Payouts table creation process for 1.9 has completed.' );
 
 		@affiliate_wp()->REST->consumers->create_table();
-		$this->log( 'Upgrade: The API consumers table creation process for 1.9 has completed' );
+		@affiliate_wp()->utils->log( 'Upgrade: The API consumers table creation process for 1.9 has completed' );
 
 		$this->upgraded = true;
 	}
@@ -478,10 +572,10 @@ class Affiliate_WP_Upgrades {
 	 */
 	private function v195_upgrade() {
 		@affiliate_wp()->affiliates->payouts->create_table();
-		$this->log( 'Upgrade: The Payouts table upgrade for 1.9.5 has completed.' );
+		@affiliate_wp()->utils->log( 'Upgrade: The Payouts table upgrade for 1.9.5 has completed.' );
 
 		wp_cache_set( 'last_changed', microtime(), 'payouts' );
-		$this->log( 'Upgrade: The Payouts cache has been invalidated following the 1.9.5 upgrade routine.' );
+		@affiliate_wp()->utils->log( 'Upgrade: The Payouts cache has been invalidated following the 1.9.5 upgrade routine.' );
 
 		$this->upgraded = true;
 	}
@@ -494,9 +588,8 @@ class Affiliate_WP_Upgrades {
 	 */
 	private function v20_upgrade() {
 		// New primitive and meta capabilities.
-		$caps = new \Affiliate_WP_Capabilities;
-		$caps->add_caps();
-		$this->log( 'Upgrade: Core capabilities have been upgraded.' );
+		@affiliate_wp()->capabilities->add_caps();
+		@affiliate_wp()->utils->log( 'Upgrade: Core capabilities have been upgraded.' );
 
 
 		// Update settings
@@ -506,19 +599,32 @@ class Affiliate_WP_Upgrades {
 				'website_url' => __( 'Website URL', 'affiliate-wp' )
 			)
 		), $save = true );
-		$this->log( 'Upgrade: The default required registration field settings have been configured.' );
+		@affiliate_wp()->utils->log( 'Upgrade: The default required registration field settings have been configured.' );
 
 		// Affiliate schema update.
 		@affiliate_wp()->affiliates->create_table();
-		$this->log( 'Upgrade: The unpaid_earnings column has been added to the affiliates table.' );
+		@affiliate_wp()->utils->log( 'Upgrade: The unpaid_earnings column has been added to the affiliates table.' );
 
 		wp_cache_set( 'last_changed', microtime(), 'affiliates' );
-		$this->log( 'Upgrade: The Affiliates cache has been invalidated following the 2.0 upgrade.' );
-
-		// Set the DB Upgrade flag.
-		@affiliate_wp()->settings->set( array( 'affwp_upgrade_needed' => true ), $save = true );
+		@affiliate_wp()->utils->log( 'Upgrade: The Affiliates cache has been invalidated following the 2.0 upgrade.' );
 
 		$this->upgraded = true;
 	}
 
+	/**
+	 * Performs database upgrades for version 2.0.2.
+	 *
+	 * @since 2.0.2
+	 * @access private
+	 */
+	private function v202_upgrade() {
+		// New 'context' column for visits.
+		@affiliate_wp()->visits->create_table();
+		$this->log( 'Upgrade: The context column has been added to the Visits table.' );
+
+		wp_cache_set( 'last_changed', microtime(), 'visits' );
+		$this->log( 'Upgrade: The Visits cache has been invalidated following the 2.0.2 upgrade.' );
+
+		$this->upgraded = true;
+	}
 }

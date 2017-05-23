@@ -12,6 +12,7 @@ class Affiliate_WP_Stripe extends Affiliate_WP_Base {
 
 		$this->context = 'stripe';
 
+		add_action( 'simpay_subscription_created', array( $this, 'insert_referral' ) );
 		add_action( 'simpay_charge_created', array( $this, 'insert_referral' ) );
 
 		add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );
@@ -25,46 +26,83 @@ class Affiliate_WP_Stripe extends Affiliate_WP_Base {
 	 * @access  public
 	 * @since   2.0
 	*/
-	public function insert_referral( $charge ) {
+	public function insert_referral( $object ) {
 
 		if( $this->was_referred() ) {
 
-			if( $this->is_zero_decimal( $charge->currency ) ) {
-				$amount = $charge->amount;
-			} else {
-				$amount = round( $charge->amount / 100, 2 );
+			switch( $object->object ) {
+
+				case 'subscription' :
+
+					$this->log( 'Processing referral for Stripe subscription.' );
+
+					$stripe_amount = ! empty( $object->plan->trial_period_days ) ? 0 : $object->plan->amount;
+					$currency      = $object->plan->currency;
+					$description   = $object->plan->name;
+					$mode          = $object->plan->livemode;
+
+					break;
+
+				case 'charge' :
+				default :
+
+					if( did_action( 'simpay_subscription_created' ) ) {
+
+						$this->log( 'insert_referral() short circuited because simpay_subscription_created already fired.' );
+
+						return; // This was a subscription purchase and we've already processed the referral creation
+					}
+
+
+					$this->log( 'Processing referral for Stripe charge.' );
+
+					$stripe_amount = $object->amount;
+					$currency      = $object->currency;
+					$description   = $object->description;
+					$mode          = $object->livemode;
+
+					break;
+
 			}
 
-			if( is_object( $charge->customer ) && ! empty( $charge->customer->email ) ) {
-				$email = $charge->customer->email;
+			if( $this->is_zero_decimal( $currency ) ) {
+				$amount = $stripe_amount;
+			} else {
+				$amount = round( $stripe_amount / 100, 2 );
+			}
+
+			if( is_object( $object->customer ) && ! empty( $object->customer->email ) ) {
+				$email = $object->customer->email;
 			} else {
 				$email = sanitize_text_field( $_POST['stripeEmail'] );
 			}
 
 			if( $this->is_affiliate_email( $email, $this->affiliate_id ) ) {
 
-				if( $this->debug ) {
-					$this->log( 'Referral not created because affiliate\'s own account was used.' );
-				}
+				$this->log( 'Referral not created because affiliate\'s own account was used.' );
 
 				return;
 
 			}
 
-			$referral_total = $this->calculate_referral_amount( $amount, $charge->id );
-			$referral_id    = $this->insert_pending_referral( $referral_total, $charge->id, $charge->description, array(), array( 'livemode' => $charge->livemode ) );
+			$referral_total = $this->calculate_referral_amount( $amount, $object->id );
+			$referral_id    = $this->insert_pending_referral( $referral_total, $object->id, $description, array(), array( 'livemode' => $mode ) );
 
-			if( $referral_id && $this->debug ) {
+			if( $referral_id ) {
 
 				$this->log( 'Pending referral created successfully during insert_referral()' );
 
-				if( $this->complete_referral( $charge->id ) && $this->debug ) {
+				if( $this->complete_referral( $object->id ) ) {
 
 					$this->log( 'Referral completed successfully during insert_referral()' );
 
+					return;
+
 				}
 
-			} elseif ( $this->debug ) {
+				$this->log( 'Referral failed to be set to completed with complete_referral()' );
+
+			} else {
 
 				$this->log( 'Pending referral failed to be created during insert_referral()' );
 
@@ -126,7 +164,9 @@ class Affiliate_WP_Stripe extends Affiliate_WP_Base {
 			$test   = empty( $custom['livemode'] ) ? 'test/' : '';
 		}
 
-		$url = 'https://dashboard.stripe.com/' . $test . 'payments/' . $reference ;
+		$endpoint = false !== strpos( $reference, 'sub_' ) ? 'subscriptions' : 'payments';
+
+		$url = 'https://dashboard.stripe.com/' . $test . $endpoint  . '/' . $reference ;
 
 		return '<a href="' . esc_url( $url ) . '">' . $reference . '</a>';
 	}

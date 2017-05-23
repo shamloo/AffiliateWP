@@ -26,7 +26,7 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
 	 * @since  2.0
 	 * @return void
 	 */
-	public function add_settings() {
+	public function add_settings( $instance ) {
 
 		//  Enable affiliate referral creation for this form
 		wpforms_panel_field(
@@ -57,9 +57,7 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
 		// prevent referral creation unless referrals enabled for the form
 		if ( ! $form_data['settings']['affwp_allow_referrals'] ) {
 
-			if ( $this->debug ) {
-				$this->log( 'Referral not created because referrals are not enabled onform.' );
-			}
+			$this->log( 'Referral not created because referrals are not enabled onform.' );
 
 			return;
 		}
@@ -77,9 +75,7 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
 		// Customers cannot refer themselves
 		if ( $this->is_affiliate_email( $customer_email, $affiliate_id ) ) {
 
-			if ( $this->debug ) {
-				$this->log( 'Referral not created because affiliate\'s own account was used.' );
-			}
+			$this->log( 'Referral not created because affiliate\'s own account was used.' );
 
 			return;
 		}
@@ -101,7 +97,7 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
 
 		// set the referral to "unpaid" if there's no total
 		if ( empty( $referral_total ) ) {
-			$this->mark_referral_complete( $entry_id );
+			$this->complete_referral( $entry_id );
 		}
 
 	}

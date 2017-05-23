@@ -195,7 +195,7 @@ class Affiliate_WP_Jigoshop extends Affiliate_WP_Base {
 			return;
 		}
 
-		$data = affiliate_wp()->utils->process_post_data( $_POST, 'user_name' );
+		$data = affiliate_wp()->utils->process_request_data( $_POST, 'user_name' );
 
 		$affiliate_id = affwp_get_affiliate_id( $data['user_id'] );
 

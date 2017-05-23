@@ -23,6 +23,11 @@
 	top: 1px;
 }
 
+select.affwp-graphs-date-options {
+	vertical-align: top;
+	height: 26px;
+}
+
 table.affwp_table {
 	text-align: left;
 	width: 100%;
@@ -59,7 +64,7 @@ table.affwp_table td a {
     padding-bottom: 8px;
 }
 
-#affwp-dashboard-widgets-wrap p:last-child {
+#affwp-dashboard-widgets-wrap p:last-child:not( .affwp-batch-success ) {
 	margin-bottom: 0px;
 }
 
@@ -107,6 +112,15 @@ table.affiliates #unpaid {
     max-width: 100%;
 }
 
+.affiliates_page_affiliate-wp-creatives td {
+	vertical-align: middle;
+}
+
+.affiliates_page_affiliate-wp-creatives .column-image img {
+	max-width: 100%;
+	height: auto;
+}
+
 /* Review page */
 #affwp_review_affiliate .button + .button {
 	margin-left: 8px;
@@ -137,6 +151,10 @@ table.affiliates #unpaid {
 
 #affwp-referrals-export-wrap h2 {
 	margin-top: 0em;
+}
+
+.affwp-required-import-field {
+	background-color: #fadedc !important;
 }
 
 .affwp-status.pending i,
@@ -292,6 +310,11 @@ table.affiliates #unpaid {
 	box-sizing: content-box;
 }
 
+.affwp-inline-button {
+	position: relative;
+	left: 8px;
+}
+
 /* WooCommerce Admin Tweaks */
 .affwp-woo-coupon-field .affwp-ajax-search-wrap {
 	position: relative;
@@ -369,13 +392,11 @@ table.affiliates #unpaid {
 	width: 0;
 }
 .notice-wrap {
-	background-color: #f4f4f4;
 	border-style: solid;
 	border-width: 1px 0;
 	border-color: #eae9e9;
-	padding: 12px;
+	padding: 12px 12px 12px 0;
 	overflow: auto;
-	margin: 20px -12px -23px;
 }
 .notice-wrap #affwp-batch-success {
 	margin: 5px 0;

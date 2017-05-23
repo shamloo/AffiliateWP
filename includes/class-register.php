@@ -234,13 +234,14 @@ class Affiliate_WP_Register {
 
 
 	/**
-	 * Make fields required/not required, based on the "Required Registration Fields" admin setting
+	 * Makes fields required/not required, based on the "Required Registration Fields"
+	 * admin setting
 	 *
 	 * @access public
 	 * @since  2.0
-	 * @param  array $required_fields The required fields
-	 * @return array $required_fields The required fields
 	 *
+	 * @param array $required_fields The required fields
+	 * @return array $required_fields The required fields
 	 */
 	public function maybe_required_fields( $required_fields ) {
 
@@ -290,8 +291,6 @@ class Affiliate_WP_Register {
 	 */
 	private function register_user() {
 
-		$status = affiliate_wp()->settings->get( 'require_approval' ) ? 'pending' : 'active';
-
 		if ( ! empty( $_POST['affwp_user_name'] ) ) {
 			$name       = explode( ' ', sanitize_text_field( $_POST['affwp_user_name'] ) );
 			$user_first = $name[0];
@@ -331,17 +330,13 @@ class Affiliate_WP_Register {
 		}
 
 		// website URL
-		$website_url = isset( $_POST['affwp_user_url'] ) ? esc_url( $_POST['affwp_user_url'] ) : '';
-
-		if ( $website_url ) {
-			wp_update_user( array( 'ID' => $user_id, 'user_url' => $website_url ) );
-		}
+		$website_url = isset( $_POST['affwp_user_url'] ) ? sanitize_text_field( $_POST['affwp_user_url'] ) : '';
 
 		$affiliate_id = affwp_add_affiliate( array(
-			'status'        => $status,
 			'user_id'       => $user_id,
 			'payment_email' => ! empty( $_POST['affwp_payment_email'] ) ? sanitize_text_field( $_POST['affwp_payment_email'] ) : '',
 			'status'        => affiliate_wp()->settings->get( 'require_approval' ) ? 'pending' : 'active',
+			'website_url'   => $website_url,
 		) );
 
 		if ( ! is_user_logged_in() ) {

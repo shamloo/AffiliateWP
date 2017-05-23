@@ -79,7 +79,7 @@ class Export_Referrals extends Batch\Export\CSV implements Batch\With_PreFetch {
 
 		if ( null !== $data ) {
 
-			$data = affiliate_wp()->utils->process_post_data( $data, 'user_name' );
+			$data = affiliate_wp()->utils->process_request_data( $data, 'user_name' );
 
 			if ( ! empty( $data['user_id'] ) ) {
 				if ( $affiliate_id = affwp_get_affiliate_id( absint( $data['user_id'] ) ) ) {
@@ -224,7 +224,7 @@ class Export_Referrals extends Batch\Export\CSV implements Batch\With_PreFetch {
 
 		}
 
-		return $data;
+		return $this->prepare_data( $data );
 	}
 
 	/**

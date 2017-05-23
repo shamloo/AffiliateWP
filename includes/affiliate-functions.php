@@ -17,18 +17,22 @@ function affwp_is_affiliate( $user_id = 0 ) {
  * If no user ID is given, it will check the currently logged in user
  *
  * @since 1.0
+ * @since 2.0.3 The current user is no longer taken into consideration in the admin
+ *              or if doing Ajax when `$user_id` is empty.
  *
  * @param int $user_id Optional. User ID. Default is the ID of the current user.
  * @return int|false Affiliate ID, or false if the current user isn't logged-in or `$user_id` is empty.
  */
 function affwp_get_affiliate_id( $user_id = 0 ) {
 
-	if ( ! is_user_logged_in() && empty( $user_id ) ) {
-		return false;
-	}
-
 	if ( empty( $user_id ) ) {
-		$user_id = get_current_user_id();
+		$is_admin_doing_ajax = is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX );
+
+		if ( ! $is_admin_doing_ajax && ! is_user_logged_in() ) {
+			return false;
+		} elseif ( ! $is_admin_doing_ajax && is_user_logged_in() ) {
+			$user_id = get_current_user_id();
+		}
 	}
 
 	$cache_key    = md5( 'affwp_get_affiliate_id' . $user_id );
@@ -53,7 +57,7 @@ function affwp_get_affiliate_id( $user_id = 0 ) {
  * @since 1.9 The `$affiliate` parameter now accepts an affiliate object.
  *
  * @param int|AffWP\Affiliate $affiliate Optional. Affiliate ID or object. Default is the current affiliate.
- * @return string username if affiliate exists, boolean false otherwise
+ * @return string|false username if affiliate exists, boolean false otherwise
  */
 function affwp_get_affiliate_username( $affiliate = 0 ) {
 
@@ -63,7 +67,7 @@ function affwp_get_affiliate_username( $affiliate = 0 ) {
 		$user_info = get_userdata( $affiliate->user_id );
 
 		if ( $user_info ) {
-			$username  = esc_html( $user_info->user_login );
+			$username  = $user_info->user_login;
 			return esc_html( $username );
 		}
 
@@ -993,7 +997,7 @@ function affwp_decrease_affiliate_visit_count( $affiliate = 0 ) {
  * @since 1.0
  *
  * @param int|AffWP\Affiliate $affiliate Optional. Affiliate ID or object. Default is the current affiliate.
- * @return float|false The affiliate's conversion rate, otherwise false.
+ * @return string|false The affiliate's conversion rate, otherwise false.
  */
 function affwp_get_affiliate_conversion_rate( $affiliate = 0 ) {
 
@@ -1011,18 +1015,20 @@ function affwp_get_affiliate_conversion_rate( $affiliate = 0 ) {
 	$visits = affwp_get_affiliate_visit_count( $affiliate->ID );
 
 	if ( $visits > 0 ) {
-		$rate = round( ( $referrals / $visits ) * 100, 2 );
+		$rate = $referrals / $visits;
 	}
+
+	$rate = affwp_format_rate( $rate );
 
 	/**
 	 * Filters the conversion rate.
 	 *
 	 * @since 1.0
 	 *
-	 * @param float $rate         Formatted conversion rate.
-	 * @param int   $affiliate_id Affiliate ID.
+	 * @param string $rate         Formatted conversion rate.
+	 * @param int    $affiliate_id Affiliate ID.
 	 */
-	return apply_filters( 'affwp_get_affiliate_conversion_rate', $rate . '%', $affiliate->ID );
+	return apply_filters( 'affwp_get_affiliate_conversion_rate', $rate, $affiliate->ID );
 
 }
 
@@ -1040,7 +1046,10 @@ function affwp_get_affiliate_campaigns( $affiliate = 0 ) {
 		return false;
 	}
 
-	$campaigns = affiliate_wp()->campaigns->get_campaigns( $affiliate->ID );
+	$campaigns = affiliate_wp()->campaigns->get_campaigns( array(
+		'affiliate_id' => $affiliate->ID,
+		'number'       => 100,
+	) );
 
 	/**
 	 * Filters the list of campaigns associated with an affiliate.
@@ -1075,6 +1084,7 @@ function affwp_get_affiliate_campaigns( $affiliate = 0 ) {
  *     @type string $user_name       User login. Used to retrieve the affiliate ID if `affiliate_id` and
  *                                   `user_id` not given.
  *     @type string $notes           Notes about the affiliate for use by administrators.
+ *     @type string $website_url     The affiliate's website URL.
  * }
  * @return int|false The ID for the newly-added affiliate, otherwise false.
  */
@@ -1088,7 +1098,7 @@ function affwp_add_affiliate( $data = array() ) {
 		$status = 'active';
 	}
 
-	$data = affiliate_wp()->utils->process_post_data( $data, 'user_name' );
+	$data = affiliate_wp()->utils->process_request_data( $data, 'user_name' );
 
 	if ( empty( $data['user_id'] ) ) {
 		return false;
@@ -1097,12 +1107,14 @@ function affwp_add_affiliate( $data = array() ) {
 	$user_id = absint( $data['user_id'] );
 
 	$args = array(
-		'user_id'       => $user_id,
-		'status'        => $status,
-		'rate'          => ! empty( $data['rate'] ) ? sanitize_text_field( $data['rate'] ) : '',
-		'rate_type'     => ! empty( $data['rate_type' ] ) ? sanitize_text_field( $data['rate_type'] ) : '',
-		'payment_email' => ! empty( $data['payment_email'] ) ? sanitize_text_field( $data['payment_email'] ) : '',
-		'notes'         => ! empty( $data['notes' ] ) ? wp_kses_post( $data['notes'] ) : ''
+		'user_id'         => $user_id,
+		'status'          => $status,
+		'rate'            => ! empty( $data['rate'] ) ? sanitize_text_field( $data['rate'] ) : '',
+		'rate_type'       => ! empty( $data['rate_type' ] ) ? sanitize_text_field( $data['rate_type'] ) : '',
+		'payment_email'   => ! empty( $data['payment_email'] ) ? sanitize_text_field( $data['payment_email'] ) : '',
+		'notes'           => ! empty( $data['notes' ] ) ? wp_kses_post( $data['notes'] ) : '',
+		'website_url'     => ! empty( $data['website_url'] ) ? sanitize_text_field( $data['website_url'] ) : '',
+		'date_registered' => ! empty( $data['date_registered'] ) ? sanitize_text_field( $data['date_registered'] ) : '',
 	);
 
 	$affiliate_id = affiliate_wp()->affiliates->add( $args );
@@ -1213,13 +1225,12 @@ function affwp_update_profile_settings( $data = array() ) {
 		return false;
 	}
 
-	if ( affwp_get_affiliate_id() != $data['affiliate_id'] && ! current_user_can( 'manage_affiliates' ) ) {
-
-		return false;
-	}
-
 	$affiliate_id = absint( $data['affiliate_id'] );
 	$user_id      = affwp_get_affiliate_user_id( $affiliate_id );
+
+	if ( $user_id !== get_current_user_id() && ! current_user_can( 'manage_affiliate' ) ) {
+		return false;
+	}
 
 	if ( ! empty( $data['referral_notifications'] ) ) {
 
@@ -1327,7 +1338,8 @@ function affwp_get_affiliate_referral_url( $args = array() ) {
 
 	$url_scheme      = isset( $url_parts['scheme'] ) ? $url_parts['scheme'] : 'http';
 	$url_host        = isset( $url_parts['host'] ) ? $url_parts['host'] : '';
-	$constructed_url = $url_scheme . '://' . $url_host . $url_parts['path'];
+	$url_path        = isset( $url_parts['path'] ) ? $url_parts['path'] : '';
+	$constructed_url = $url_scheme . '://' . $url_host . $url_path;
 	$base_url        = $constructed_url;
 
 	// set up URLs
