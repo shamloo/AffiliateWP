@@ -187,6 +187,75 @@ abstract class Coupon extends \AffWP\Base_Object {
 	public static $object_type = 'coupons';
 
 	/**
+	 * Get all coupons for the relevant integration.
+	 * The desired return format is specified below.
+	 *
+	 * @since  2.1
+	 *
+	 * @return mixed array|bool An array of coupon objects, otherwise false.
+	 */
+	abstract public function get_integration_coupons();
+
+	/**
+	 * Gets the coupon template used as a basis for generating all automatic affiliate coupons.
+	 *
+	 * @since  2.1
+	 *
+	 * @return mixed int|bool Returns a coupon ID if a coupon template is located
+	 * for the specified integration, otherwise returns false.
+	 */
+	public function get_coupon_template( $integration, $coupons ) {
+
+		$integration = $this->integration;
+		$coupons     = $this->get_integration_coupons();
+
+		if ( ! $integration || ! affiliate_wp()->settings->get( 'auto_generate_coupons_enabled' ) ) {
+			return false;
+		}
+
+		/**
+		 * Redefine this method in the desired coupon-supporting core integration.
+		 *
+		 * Loop through the coupons for that integration, and search for a post meta key of:
+		 * `affwp_is_coupon_template`
+		 *
+		 * @var boolean
+		 */
+		$template_id = false;
+
+		return (bool) $template_id;
+	}
+
+	/**
+	 * Sets the coupon template used as a template when generating all automatic affiliate coupons.
+	 *
+	 * For auto-generated coupons, there can be only one AffiliateWP coupon template per integration.
+	 *
+	 * For each relevant integration, this is set via post meta in the coupon itself.
+	 * If `affwp_is_coupon_template` meta is true,
+	 * this template is used as the coupon template for this integration.
+	 *
+	 * The manner by which meta is set in the coupon will vary for each integration.
+	 *
+	 * For example, in EDD, `affwp_is_coupon_template` post meta is stored
+	 * in the post meta of an edd_discount post type post.
+	 *
+	 * @since  2.1
+	 *
+	 * @return mixed int|bool Returns a coupon ID if a coupon template is located, otherwise returns false.
+	 */
+	public function set_coupon_template( $discount_id ) {
+
+		if ( ! affiliate_wp()->settings->get( 'auto_generate_coupons_enabled' ) ) {
+			return false;
+		}
+
+		update_post_meta( $discount_id, 'affwp_is_coupon_template', true );
+
+		return edd_get_discount( $discount_id );
+	}
+
+	/**
 	 * Sanitizes an affiliate object field.
 	 *
 	 *

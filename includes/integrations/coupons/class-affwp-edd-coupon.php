@@ -34,6 +34,8 @@ class EDD_Coupon extends \AffWP\Affiliate\Coupon {
 		$this->integration = 'edd';
 
 		add_action( 'affwp_edd_coupon_store_discount_affiliate', array( $this, 'create_affwp_coupon' ), 10, 2 );
+
+		// edd_add_discount
 	}
 
 	/**
@@ -127,21 +129,64 @@ class EDD_Coupon extends \AffWP\Affiliate\Coupon {
 		return affiliate_wp()->coupons->add( $args );
 	}
 
+	public function get_integration_coupons() {
+		$discounts = edd_get_discounts(
+			array(
+				'meta_key'       => 'affwp_is_coupon_template',
+				'meta_value'     => 1,
+				'post_status'    => 'active'
+			)
+		);
+
+		return $discounts;
+	}
+
 	/**
 	 * Gets the EDD coupon template used as a basis for generating all automatic affiliate coupons.
-	 *
+	 * Searches for post meta of `affwp_is_coupon_template`.
 	 * @since  2.1
 	 *
-	 * @return mixed array|bool Returns an array if a coupon template is located, otherwise returns false.
+	 * @return mixed int|bool Returns an EDD discount ID if a coupon template is located in EDD, otherwise returns false.
 	 */
 	public function get_coupon_template() {
 
-		if ( ! affiliate_wp()->settings->get( 'affwp_auto_generate_coupons_enabled' ) ) {
+		if ( ! affiliate_wp()->settings->get( 'auto_generate_coupons_enabled' ) ) {
 			return false;
 		}
 
-		$discount_id = affiliate_wp()->settings->get( 'affwp_auto_generate_coupons_template_id' );
+		$discount = edd_get_discount(
+			array(
+				'meta_key'       => 'affwp_is_coupon_template',
+				'meta_value'     => 1,
+				'post_status'    => 'active'
+			)
+		);
 
-		return edd_get_discount( $discount_id );
+
+		return $discount->id;
+	}
+
+	/**
+	 * Gets the EDD coupon template used as a basis for generating all automatic affiliate coupons.
+	 * Searches for post meta of `affwp_is_coupon_template`.
+	 * @since  2.1
+	 *
+	 * @return mixed int|bool Returns an EDD discount ID if a coupon template is located in EDD, otherwise returns false.
+	 */
+	public function set_coupon_template( $details, $discount_id = 0 ) {
+
+		if ( ! $discount_id || ! affiliate_wp()->settings->get( 'auto_generate_coupons_enabled' ) ) {
+			return false;
+		}
+
+		$discount = edd_get_discount(
+			array(
+				'meta_key'       => 'affwp_is_coupon_template',
+				'meta_value'     => 1,
+				'post_status'    => 'active'
+			)
+		);
+
+
 	}
 }
