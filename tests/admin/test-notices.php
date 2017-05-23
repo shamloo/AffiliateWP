@@ -70,7 +70,17 @@ class Tests extends UnitTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		wp_set_current_user( self::$user_id );
+		$user_id = self::$user_id;
+
+		wp_set_current_user( $user_id );
+
+		add_filter( 'user_has_cap', function( $all_caps, $caps, $args, $user ) use ( $user_id ) {
+			if ( isset( $user->ID ) && $user->ID == $user_id ) {
+				$all_caps[] = 'manage_affiliates';
+			}
+
+			return $all_caps;
+		}, 999, 4 );
 	}
 
 	/**
@@ -94,9 +104,6 @@ class Tests extends UnitTestCase {
 		) );
 
 		$expected = '<div class="updated"><p>Settings updated.</p></div>';
-		if ( ! current_user_can( 'manage_affiliates' ) ) {
-			var_dump( 'permission fail' );
-		}
 
 		$this->assertContains( $expected, self::$notices->show_notices( false ) );
 	}
