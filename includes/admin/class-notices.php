@@ -456,7 +456,7 @@ class Affiliate_WP_Admin_Notices {
 
 		$output = $this->prepare_message_for_output( $message, $class );
 
-		if ( true === $echo ) {
+		if ( true === $this->display_notices ) {
 			echo $output;
 		} else {
 			return $output;
