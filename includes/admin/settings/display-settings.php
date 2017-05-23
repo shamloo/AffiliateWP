@@ -60,6 +60,7 @@ function affwp_get_settings_tabs() {
 	$tabs['general']      = __( 'General', 'affiliate-wp' );
 	$tabs['integrations'] = __( 'Integrations', 'affiliate-wp' );
 	$tabs['emails']       = __( 'Emails', 'affiliate-wp' );
+	$tabs['coupons']      = __( 'Coupons', 'affiliate-wp' );
 	$tabs['misc']         = __( 'Misc', 'affiliate-wp' );
 
 	/**
