@@ -73,6 +73,8 @@ class Tests extends UnitTestCase {
 		$this->_flush_roles();
 
 		wp_set_current_user( self::$user_id );
+
+		self::$notices->set_display_notices( false );
 	}
 
 	/**
@@ -81,7 +83,7 @@ class Tests extends UnitTestCase {
 	public function test_show_notices_lacking_manage_affiliates_should_return_null() {
 		wp_set_current_user( 0 );
 
-		$this->assertNull( self::$notices->show_notices( false ) );
+		$this->assertNull( self::$notices->show_notices() );
 
 		wp_set_current_user( self::$user_id );
 	}
@@ -97,7 +99,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="updated"><p>Settings updated.</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -111,7 +113,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="updated"><p>AffiliateWP Rocks</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -124,7 +126,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="error"><p>Affiliate wasn&#8217;t added, please try again.</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -137,7 +139,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="updated"><p>Affiliate updated successfully';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -150,7 +152,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="error"><p>Affiliate update failed, please try again</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -163,7 +165,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="updated"><p>Affiliate account(s) deleted successfully</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -176,7 +178,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="error"><p>Affiliate deletion failed, please try again</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -189,7 +191,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="updated"><p>Affiliate account activated</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -202,7 +204,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="updated"><p>Affiliate account deactivated</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -215,7 +217,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="updated"><p>Affiliate request was accepted</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -228,7 +230,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="updated"><p>Affiliate request was rejected</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -241,7 +243,7 @@ class Tests extends UnitTestCase {
 
 		$expected = 'added successfully';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -254,7 +256,7 @@ class Tests extends UnitTestCase {
 
 		$expected = 'added successfully';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -267,7 +269,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="updated"><p>Affiliate stats have been recounted!</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -280,7 +282,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="updated"><p>Referral added successfully</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -293,7 +295,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="updated"><p>Referral updated successfully</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -306,7 +308,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="updated"><p>Referral update failed, please try again</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -319,7 +321,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="updated"><p>Referral deleted successfully</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -332,7 +334,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="error"><p>Referral deletion failed, please try again</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -345,7 +347,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="updated"><p>Creative updated successfully';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -358,7 +360,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="updated"><p>Creative added successfully</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -371,7 +373,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="updated"><p>Creative deleted successfully</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -384,7 +386,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="updated"><p>Creative activated</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -397,7 +399,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="updated"><p>Creative deactivated</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -410,7 +412,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="updated"><p>Settings successfully imported</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -423,7 +425,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="error"><p>Your license key has been disabled.';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -436,7 +438,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="error"><p>Invalid license.';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -449,7 +451,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="error"><p>Your license key is not active for this URL.';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -462,7 +464,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="error"><p>Your license key is not active for this URL.';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -475,7 +477,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="error"><p>This appears to be an invalid license key.</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -488,7 +490,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="error"><p>Your license key has reached its activation limit.';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -501,7 +503,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="updated"><p>The API keys were successfully generated.</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -514,7 +516,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="error"><p>The API keys could not be generated.</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -527,7 +529,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="updated"><p>The API keys were successfully regenerated.</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**
@@ -540,7 +542,7 @@ class Tests extends UnitTestCase {
 
 		$expected = '<div class="updated"><p>The API keys were successfully revoked.</p></div>';
 
-		$this->assertContains( $expected, self::$notices->show_notices( false ) );
+		$this->assertContains( $expected, self::$notices->show_notices() );
 	}
 
 	/**

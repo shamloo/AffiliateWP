@@ -16,6 +16,17 @@ class Affiliate_WP_Admin_Notices {
 	private $version;
 
 	/**
+	 * Whether to display notices.
+	 *
+	 * Used primarily for unit testing expected output.
+	 *
+	 * @access private
+	 * @since  2.1
+	 * @var    bool Default true.
+	 */
+	private $display_notices = true;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 1.0
@@ -32,16 +43,29 @@ class Affiliate_WP_Admin_Notices {
 	}
 
 	/**
+	 * Sets the display_notices property for unit testing purposes.
+	 *
+	 * If set to false, notice output will be returned rather than echoed.
+	 *
+	 * @access public
+	 * @since  2.1
+	 *
+	 * @param bool $display Whether to display notice output.
+	 */
+	public function set_display_notices( $display ) {
+		$this->display_notices = (bool) $display;
+	}
+
+	/**
 	 * Outputs general admin notices.
 	 *
 	 * @access public
 	 * @since 1.0
 	 * @since 1.8.3 Notices are hidden for users lacking the 'manage_affiliates' capability
 	 *
-	 * @param bool $echo Optional. Whether to echo the output or return. Default true.
-	 * @return string|void Output if `$echo` is false, otherwise void.
+	 * @return string|void Output if `$display_notices` is false, otherwise void.
 	 */
-	public function show_notices( $echo = true ) {
+	public function show_notices() {
 		// Don't display notices for users who can't manage affiliates.
 		if ( ! current_user_can( 'manage_affiliates' ) ) {
 			return;
@@ -378,7 +402,7 @@ class Affiliate_WP_Admin_Notices {
 
 		$output = $this->prepare_message_for_output( $message, $class );
 
-		if ( true === $echo ) {
+		if ( true === $this->display_notices ) {
 			echo $output;
 		} else {
 			return $output;
@@ -416,10 +440,9 @@ class Affiliate_WP_Admin_Notices {
 	 * @access public
 	 * @since  2.1
 	 *
-	 * @param bool $echo Optional. Whether to echo the output or return. Default true.
-	 * @return string|void Output if `$echo` is false, otherwise void.
+	 * @return string|void Output if `$display_notices` is false, otherwise void.
 	 */
-	public function integration_notices( $echo = true ) {
+	public function integration_notices() {
 		$message = $class = '';
 
 		$integrations = affiliate_wp()->integrations->get_enabled_integrations();
@@ -447,10 +470,9 @@ class Affiliate_WP_Admin_Notices {
 	 * @access public
 	 * @since  2.1
 	 *
-	 * @param bool $echo Optional. Whether to echo the output or return. Default true.
-	 * @return string|void Output if `$echo` is false, otherwise void.
+	 * @return string|void Output if `$display_notices` is false, otherwise void.
 	 */
-	public function license_notices( $echo = true ) {
+	public function license_notices() {
 		$license = affiliate_wp()->settings->check_license();
 
 		$message = $status = $class = $output = '';
@@ -496,7 +518,8 @@ class Affiliate_WP_Admin_Notices {
 
 		$output = $this->prepare_message_for_output( $message, $class );
 
-		if ( true === $echo ) {
+
+		if ( true === $this->display_notices ) {
 			echo $output;
 		} else {
 			return $output;
