@@ -94,7 +94,10 @@ class Tests extends UnitTestCase {
 		) );
 
 		$expected = '<div class="updated"><p>Settings updated.</p></div>';
-var_dump( $expected );
+		if ( ! current_user_can( 'manage_affiliates' ) ) {
+			var_dump( 'permission fail' );
+		}
+
 		$this->assertContains( $expected, self::$notices->show_notices( false ) );
 	}
 
