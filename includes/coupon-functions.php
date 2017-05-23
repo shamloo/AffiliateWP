@@ -168,6 +168,7 @@ function affwp_get_coupon_status_label( $coupon ) {
 function affwp_get_coupons_by_integration( $integration = '' ) {
 
 	if ( ! isset( $integration ) ) {
+		affiliate_wp()->utils->log( 'Unable to determine integration when querying coupons.' );
 		return false;
 	}
 
@@ -188,6 +189,7 @@ function affwp_get_coupons_by_integration( $integration = '' ) {
 			break;
 
 		default:
+			affiliate_wp()->utils->log( 'Unable to determine integration when querying coupons.' );
 			return false;
 			break;
 	}
