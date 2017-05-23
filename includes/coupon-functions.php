@@ -70,7 +70,7 @@ function affwp_add_coupon( $args = array() ) {
 /**
  * Deletes a coupon.
  *
- * @param  int|\AffWP\Affiliate\Coupon $coupon Coupon ID or object.
+ * @param  int|\AffWP\Affiliate\Coupon $affwp_coupon_id  AffiliateWP coupon ID or object.
  * @return bool True if the coupon was successfully deleted, otherwise false.
  * @since  2.1
  */
@@ -85,10 +85,10 @@ function affwp_delete_coupon( $coupon ) {
 		 *
 		 * @since 2.1
 		 *
-		 * @param int $coupon_id   AffiliateWP coupon ID.
-		 * @param int $integration Coupon integration.
+		 * @param int    $affwp_coupon_id  AffiliateWP coupon ID.
+	     * @param object $coupon           AffiliateWP coupon object.
 		 */
-		do_action( 'affwp_delete_coupon', $coupon->affwp_coupon_id, $coupon->integration );
+		do_action( 'affwp_delete_coupon', $coupon->affwp_coupon_id, $coupon );
 
 		return true;
 	}
