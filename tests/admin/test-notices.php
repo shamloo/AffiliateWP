@@ -94,7 +94,7 @@ class Tests extends UnitTestCase {
 		) );
 
 		$expected = '<div class="updated"><p>Settings updated.</p></div>';
-
+var_dump( $expected );
 		$this->assertContains( $expected, self::$notices->show_notices( false ) );
 	}
 
