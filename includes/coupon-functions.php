@@ -46,7 +46,8 @@ function affwp_get_coupon( $coupon = 0 ) {
  */
 function affwp_add_coupon( $args = array() ) {
 
-	if ( empty( $args['integration'] ) || empty( $args['affiliate_id'] ) ) {
+	if ( empty( $args['integration'] ) || empty( $args['affiliate_id'] ) || empty( $args['coupon_id'] ) ) {
+		affiliate_wp()->utils->log( 'Unable to add new coupon object. Please ensure that the integration name, the affiliate ID, and the coupon ID from the integration are specified.' );
 		return false;
 	}
 
