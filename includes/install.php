@@ -2,8 +2,6 @@
 
 function affiliate_wp_install() {
 
-	require_once ABSPATH . WPINC . '/class-wp-roles.php';
-
 	// Create affiliate caps
 	$roles = new Affiliate_WP_Capabilities;
 	$roles->add_caps();
