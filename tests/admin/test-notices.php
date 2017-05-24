@@ -31,6 +31,8 @@ class Tests extends UnitTestCase {
 	 */
 	protected static $user_id;
 
+	protected static $settings_copy;
+
 	/**
 	 * Sets up fixtures once.
 	 *
@@ -51,6 +53,15 @@ class Tests extends UnitTestCase {
 				'edd' => 'Easy Digital Downloads'
 			)
 		) );
+
+		self::$settings_copy = get_option( 'affwp_settings' );
+
+		var_dump( self::$settings_copy );
+	}
+
+	public static function wpTearDownAfterClass() {
+		var_dump( get_option( 'affwp_settings' ) );
+		update_option( 'affwp_settings', self::$settings_copy );
 	}
 
 	/**
