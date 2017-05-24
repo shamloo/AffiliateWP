@@ -62,6 +62,9 @@ class Tests extends UnitTestCase {
 	public static function wpTearDownAfterClass() {
 		var_dump( get_option( 'affwp_settings' ) );
 		update_option( 'affwp_settings', self::$settings_copy );
+
+		var_dump( self::$settings_copy );
+		var_dump( get_option( 'affwp_settings' ) );
 	}
 
 	/**
