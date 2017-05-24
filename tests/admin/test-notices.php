@@ -54,18 +54,18 @@ class Tests extends UnitTestCase {
 			)
 		) );
 
-		self::$settings_copy = get_option( 'affwp_settings' );
-
-		var_dump( self::$settings_copy );
+//		self::$settings_copy = get_option( 'affwp_settings' );
+//
+//		var_dump( self::$settings_copy );
 	}
 
-	public static function wpTearDownAfterClass() {
-		var_dump( get_option( 'affwp_settings' ) );
-		update_option( 'affwp_settings', self::$settings_copy );
-
-		var_dump( self::$settings_copy );
-		var_dump( get_option( 'affwp_settings' ) );
-	}
+//	public static function wpTearDownAfterClass() {
+//		var_dump( get_option( 'affwp_settings' ) );
+//		update_option( 'affwp_settings', self::$settings_copy );
+//
+//		var_dump( self::$settings_copy );
+//		var_dump( get_option( 'affwp_settings' ) );
+//	}
 
 	/**
 	 * Helper to retrieve the Notices instance.
@@ -611,18 +611,6 @@ class Tests extends UnitTestCase {
 //		// Clean up state.
 //		delete_user_meta( self::$user_id, '_affwp_no_integrations_dismissed' );
 //	}
-
-	/**
-	 * @covers \Affiliate_WP_Admin_Notices::license_notices()
-	 */
-	public function test_license_notices_transient_set_should_display_nothing() {
-		set_transient( 'affwp_license_notice', 'foo' );
-
-		$this->assertSame( '', self::$notices->license_notices() );
-
-		// Clean up.
-		delete_transient( 'affwp_license_notice' );
-	}
 
 	/**
 	 * Sets $_GET variables for the current test.
