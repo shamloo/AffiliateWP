@@ -569,47 +569,34 @@ class Tests extends UnitTestCase {
 	/**
 	 * @covers \Affiliate_WP_Admin_Notices::integration_notices()
 	 */
-	public function test_integration_notices_with_no_integrations_and_notice_dismissed_meta_unset_should_display_notice() {
-		delete_user_meta( self::$user_id, '_affwp_no_integrations_dismissed' );
-
-		affiliate_wp()->settings->set( array(
-			'integrations' => array()
-		) );
-
-		$expected = '<div class="error"><p>' . sprintf( __( 'There are currently no AffiliateWP <a href="%s">integrations</a> enabled. If you are using AffiliateWP without any integrations, you may disregard this message.', 'affiliate-wp' ), affwp_admin_url( 'settings', array( 'tab' => 'integrations' ) ) ) . '</p>';
-		$expected .= '<p><a href="' . wp_nonce_url( add_query_arg( array( 'affwp_action' => 'dismiss_notices', 'affwp_notice' => 'no_integrations' ) ), 'affwp_dismiss_notice', 'affwp_dismiss_notice_nonce' ) . '">' . _x( 'Dismiss Notice', 'Integrations', 'affiliate-wp' ) . '</a></p></div>';
-
-		$this->assertSame( $expected, self::$notices->integration_notices() );
-
-		// Clean up.
-		affiliate_wp()->settings->set( array(
-			'integrations' => array(
-				'edd' => 'Easy Digital Downloads'
-			)
-		) );
-	}
+//	public function test_integration_notices_with_no_integrations_and_notice_dismissed_meta_unset_should_display_notice() {
+//		delete_user_meta( self::$user_id, '_affwp_no_integrations_dismissed' );
+//
+//		affiliate_wp()->settings->set( array(
+//			'integrations' => array()
+//		) );
+//
+//		$expected = '<div class="error"><p>' . sprintf( __( 'There are currently no AffiliateWP <a href="%s">integrations</a> enabled. If you are using AffiliateWP without any integrations, you may disregard this message.', 'affiliate-wp' ), affwp_admin_url( 'settings', array( 'tab' => 'integrations' ) ) ) . '</p>';
+//		$expected .= '<p><a href="' . wp_nonce_url( add_query_arg( array( 'affwp_action' => 'dismiss_notices', 'affwp_notice' => 'no_integrations' ) ), 'affwp_dismiss_notice', 'affwp_dismiss_notice_nonce' ) . '">' . _x( 'Dismiss Notice', 'Integrations', 'affiliate-wp' ) . '</a></p></div>';
+//
+//		$this->assertSame( $expected, self::$notices->integration_notices() );
+//	}
 
 	/**
 	 * @covers \Affiliate_WP_Admin_Notices::integration_notices()
 	 */
-	public function test_integration_notices_with_no_integrations_and_notice_dismissed_meta_set_should_display_nothing() {
-		add_user_meta( self::$user_id, '_affwp_no_integrations_dismissed', true );
-
-		affiliate_wp()->settings->set( array(
-			'integrations' => array()
-		) );
-
-		$this->assertSame( '', self::$notices->integration_notices() );
-
-		// Clean up state.
-		delete_user_meta( self::$user_id, '_affwp_no_integrations_dismissed' );
-
-		affiliate_wp()->settings->set( array(
-			'integrations' => array(
-				'edd' => 'Easy Digital Downloads'
-			)
-		) );
-	}
+//	public function test_integration_notices_with_no_integrations_and_notice_dismissed_meta_set_should_display_nothing() {
+//		add_user_meta( self::$user_id, '_affwp_no_integrations_dismissed', true );
+//
+//		affiliate_wp()->settings->set( array(
+//			'integrations' => array()
+//		) );
+//
+//		$this->assertSame( '', self::$notices->integration_notices() );
+//
+//		// Clean up state.
+//		delete_user_meta( self::$user_id, '_affwp_no_integrations_dismissed' );
+//	}
 
 	/**
 	 * @covers \Affiliate_WP_Admin_Notices::license_notices()
