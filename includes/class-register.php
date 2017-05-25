@@ -336,10 +336,12 @@ class Affiliate_WP_Register {
 			wp_update_user( array( 'ID' => $user_id, 'user_url' => $website_url ) );
 		}
 
+		$status = affiliate_wp()->settings->get( 'require_approval' ) ? 'pending' : 'active';
+
 		$affiliate_id = affwp_add_affiliate( array(
 			'user_id'       => $user_id,
 			'payment_email' => ! empty( $_POST['affwp_payment_email'] ) ? sanitize_text_field( $_POST['affwp_payment_email'] ) : '',
-			'status'        => affiliate_wp()->settings->get( 'require_approval' ) ? 'pending' : 'active',
+			'status'        => $status,
 		) );
 
 		if ( ! is_user_logged_in() ) {
