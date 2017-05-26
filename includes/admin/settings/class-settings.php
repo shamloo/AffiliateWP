@@ -694,9 +694,10 @@ class Affiliate_WP_Settings {
 						'type' => 'checkbox'
 					),
 					'auto_generate_coupons_templates' => array(
-						'name' => __( 'Coupon template', 'affiliate-wp' ),
-						'desc' => __( 'Create a coupon in your desired integration, and select it as an AffiliateWP coupon template. The coupon templates which are enabled will appear here for each integration supported.', 'affiliate-wp' ),
-						'type' => 'heading',
+						'name' => __( 'Coupon templates', 'affiliate-wp' ),
+						'desc' => __( 'Create a coupon in your desired integration, and it will show here. Each integration can have one coupon template.', 'affiliate-wp' ),
+						'type' => '',
+						'callback' => affwp_get_coupon_templates(),
 						'options' => affwp_get_coupons_by_integration(),
 						'sanitize_callback' => 'sanitize_text_field'
 					),
