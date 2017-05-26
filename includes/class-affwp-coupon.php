@@ -129,20 +129,21 @@ abstract class Coupon extends \AffWP\Base_Object {
 	/**
 	 * Gets coupon data from the active integration in which it was generated.
 	 *
-	 * This data should be specified by each integration's
+	 * This data should be specified by each integrations
 	 * AffWP_{integration}_Coupon class which extends `AFFWP_Coupon`,
-	 * and be hooked onto an action within the integration which fires
+	 * and should be hooked onto an action within the integration which fires
 	 * at the time of coupon creation.
 	 *
 	 * If an object is provided by the integration, it should be casted to an array.
 	 *
+	 * This method does not directly provide data.
+	 *
 	 * @since  2.1
-	 * @param  array|object $coupon     An array or object of coupon data provided by the integration.
-	 *                                  Objects will be casted to arrays.
-	 * @param  int          $coupon_id  The coupon ID.
-	 * @return array        $data       Coupon data.
+	 * @param  int  $coupon_id  The coupon ID.
+	 * @return bool $data       Returns false in the base class.
+	 *                          Returns an aray in each integration coupon class, otherwise returns false.
 	 */
-	public function data( $coupon, $coupon_id ) {
+	public function data( $coupon_id ) {
 
 		$affwp_coupon_id = $this->affwp_coupon_id;
 		$coupon_id       = $this->coupon_id;
@@ -150,7 +151,7 @@ abstract class Coupon extends \AffWP\Base_Object {
 		if ( ! isset( $coupon_id ) || false === $coupon_id ) {
 
 			// Attempt to determine the coupon ID from the array.
-			if ( isset( $coupon ) && isset( $coupon['id'] ) && is_int( $coupon['id'] ) ) {
+			if ( isset( $coupon['id'] ) && is_int( $coupon['id'] ) ) {
 
 				// Cast to an array if needed.
 				if ( is_object( $coupon ) ) {
@@ -165,7 +166,9 @@ abstract class Coupon extends \AffWP\Base_Object {
 			}
 		}
 
-		$data = array();
+		$data = false;
+
+		return $data;
 	}
 
 	/**
@@ -211,36 +214,6 @@ abstract class Coupon extends \AffWP\Base_Object {
 	abstract public function get_integration_coupons();
 
 	/**
-	 * Gets the coupon template used as a basis for generating all automatic affiliate coupons.
-	 *
-	 * @since  2.1
-	 *
-	 * @return mixed int|bool Returns a coupon ID if a coupon template is located
-	 * for the specified integration, otherwise returns false.
-	 */
-	public function get_coupon_template( $integration, $coupons ) {
-
-		$integration = $this->integration;
-		$coupons     = $this->get_integration_coupons();
-
-		if ( ! $integration || ! affiliate_wp()->settings->get( 'auto_generate_coupons_enabled' ) ) {
-			return false;
-		}
-
-		/**
-		 * Redefine this method in the desired coupon-supporting core integration.
-		 *
-		 * Loop through the coupons for that integration, and search for a post meta key of:
-		 * `affwp_is_coupon_template`
-		 *
-		 * @var boolean
-		 */
-		$template_id = false;
-
-		return (bool) $template_id;
-	}
-
-	/**
 	 * Sets the coupon template used as a template when generating all automatic affiliate coupons.
 	 *
 	 * For auto-generated coupons, there can be only one AffiliateWP coupon template per integration.
@@ -258,7 +231,7 @@ abstract class Coupon extends \AffWP\Base_Object {
 	 *
 	 * @return mixed int|bool Returns a coupon ID if a coupon template is located, otherwise returns false.
 	 */
-	public function set_coupon_template( $discount_id ) {
+	public function set_coupon_template( $meta, $discount_id ) {
 
 		if ( ! affiliate_wp()->settings->get( 'auto_generate_coupons_enabled' ) ) {
 			return false;

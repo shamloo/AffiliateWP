@@ -234,3 +234,26 @@ function affwp_has_coupon_support( $integration ) {
 
 	return in_array( $integration, $supported );
 }
+
+function affwp_get_coupon_templates() {
+
+	$templates    = array();
+	$integrations = affiliate_wp()->integrations->get_enabled_integrations();
+
+	if ( ! empty( $integrations ) ) {
+
+		$output = array();
+
+		foreach ( $integrations as $key => $value ) {
+
+			$template_id  = affiliate_wp()->coupons->get_coupon_template_id( $key );
+			$template_url = affiliate_wp()->coupons->get_coupon_template_url( $template_id, $key );
+
+			if ( affwp_has_coupon_support( $key ) && $template_id ) {
+				$output[ $key ] = $value . ' : ' . $template_url;
+			}
+		}
+
+		return ! empty( $output ) ? $output : false;
+	}
+}

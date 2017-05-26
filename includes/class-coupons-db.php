@@ -29,7 +29,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 	 * @since  2.1
 	 * @var    string
 	 */
-	public $query_object_type = 'AffWP\Affiliate\Coupon';
+	public $query_object_type = 'AffWP\Coupon';
 
 	/**
 	 * Constructor.
@@ -464,6 +464,81 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 		$coupon = $wpdb->query( $wpdb->prepare( "SELECT 1 FROM {$this->table_name} WHERE {$this->primary_key} = %d;", $affwp_coupon_id ) );
 
 		return ! empty( $coupon );
+	}
+
+	/**
+	 * Get the ID of the coupon template url in use for the integration.
+	 *
+	 * @since  2.1
+	 *
+	 * @param  int     $template_id The ID of the coupon template in use.
+	 * @param  string  $integration The integration.
+	 *
+	 * @return mixed string|bool    Returns the edit screen url of the coupon template if set,
+	 *                              otherwise returns false.
+	 */
+	public function get_coupon_template_url( $template_id, $integration ) {
+		$template_id = $this->get_coupon_template_id( $integration );
+
+		if ( ! isset( $template_id ) || ! isset( $integration ) ) {
+			return false;
+		}
+
+		switch ( $integration ) {
+			case 'edd':
+				return edd_get_discount( $template_id );
+				break;
+
+			default:
+				return false;
+				break;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Gets the coupon template used as a basis for generating all automatic affiliate coupons.
+	 *
+	 * @param  string $integration  The integration.
+	 * @return mixed int|bool       Returns a coupon ID if a coupon template is located
+	 *                              for the specified integration, otherwise returns false.
+	 * @since  2.1
+	 */
+	public function get_coupon_template_id( $integration ) {
+
+		if ( ! isset( $integration ) || ! affiliate_wp()->settings->get( 'auto_generate_coupons_enabled' ) ) {
+			return false;
+		}
+
+		/**
+		 *
+		 * Loops through the coupons for that integration, and search for a post meta key of:
+		 * `affwp_is_coupon_template`
+		 *
+		 * @var boolean
+		 */
+		$template_id = false;
+
+		switch ( $integration ) {
+			case 'edd':
+				$edd         = new AffWP\Affiliate\EDD_Coupon;
+				$template_id = $edd::get_coupon_template_id();
+				break;
+
+			default:
+				return false;
+				break;
+		}
+
+		/**
+		 * Returns the coupon template ID.
+		 *
+		 * @param int    $template_id  The coupon template ID.
+		 * @param string $integration  The integration to query. Required.
+		 * @since 2.1
+		 */
+		return apply_filters( 'affwp_get_coupon_template_id', $template_id, $integration );
 	}
 
 	/**

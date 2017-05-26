@@ -460,6 +460,11 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 	*/
 	public function discount_edit( $discount_id = 0 ) {
 
+		$path = AFFILIATEWP_PLUGIN_DIR . 'includes/integrations/coupons/class-' . $this->context . '-coupon.php';
+		if ( affwp_has_coupon_support( $this->context ) && file_exists( $path ) ) {
+			include $path;
+		}
+
 		add_filter( 'affwp_is_admin_page', '__return_true' );
 		affwp_admin_scripts();
 

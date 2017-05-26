@@ -156,7 +156,7 @@ class EDD_Coupon extends \AffWP\Affiliate\Coupon {
 	 *
 	 * @return mixed int|bool Returns an EDD discount ID if a coupon template is located in EDD, otherwise returns false.
 	 */
-	public function get_coupon_template() {
+	public function get_coupon_template_id() {
 
 		if ( ! affiliate_wp()->settings->get( 'auto_generate_coupons_enabled' ) ) {
 			return false;
@@ -203,6 +203,7 @@ class EDD_Coupon extends \AffWP\Affiliate\Coupon {
 					</th>
 					<td>
 						<input type="checkbox" name="_affwp_is_coupon_template" id="affwp_is_coupon_template" value="1"<?php checked( $disabled, true ); ?> />
+
 						<p class="description"><?php _e( 'Check this option if you would like to use this discount as the template from which all EDD affiliate coupons are generated.', 'affiliate-wp' ); ?></p>
 					</td>
 				</tr>
