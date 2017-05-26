@@ -183,7 +183,7 @@ function affwp_get_coupons_by_integration( $integration = '' ) {
 			break;
 
 		default:
-			affiliate_wp()->utils->log( 'Unable to determine integration when querying coupons.' );
+			affiliate_wp()->utils->log( 'Unable to determine integration when querying coupons in core function affwp_get_coupons_by_integration.' );
 			return false;
 			break;
 	}
