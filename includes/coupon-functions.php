@@ -201,3 +201,36 @@ function affwp_get_coupons_by_integration( $integration = '' ) {
 
 	return $coupon_ids;
 }
+
+/**
+ * Checks whether the specified integration has support for coupons in AffiliateWP.
+ *
+ * @param  string  $integration The integration to check.
+ * @return bool                 Returns true if the integration is supported, otherwise false.
+ * @since  2.1
+ */
+function affwp_has_coupon_support( $integration ) {
+
+	// $integrations = affiliate_wp()->integrations->get_enabled_integrations();
+	// $is_enabled   = in_array( $integration, $integrations );
+
+	if ( empty( $integration ) ) {
+		affiliate_wp()->utils->log( 'An integration must be provided when querying via affwp_has_coupon_support.' );
+		return false;
+	}
+
+	$supported = array(
+		'woocommerce',
+		'edd',
+		'exchange',
+		'rcp',
+		'pmp',
+		'pms',
+		'memberpress',
+		'jigoshop',
+		'lifterlms',
+		'gravityforms'
+	);
+
+	return in_array( $integration, $supported );
+}
