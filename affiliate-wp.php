@@ -431,6 +431,7 @@ final class Affiliate_WP {
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/REST/v1/class-affiliates-endpoints.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/REST/v1/class-creatives-endpoints.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/REST/v1/class-payouts-endpoints.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/REST/v1/class-coupons-endpoints.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/REST/v1/class-referrals-endpoints.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/REST/v1/class-visits-endpoints.php';
 
@@ -475,6 +476,7 @@ final class Affiliate_WP {
 		self::$instance->emails         = new Affiliate_WP_Emails;
 		self::$instance->creatives      = new Affiliate_WP_Creatives_DB;
 		self::$instance->creative       = new Affiliate_WP_Creatives;
+		self::$instance->coupons        = new Affiliate_WP_Coupons_DB;
 		self::$instance->rewrites       = new Affiliate_WP_Rewrites;
 		self::$instance->REST           = new Affiliate_WP_REST;
 		self::$instance->capabilities   = new Affiliate_WP_Capabilities;
