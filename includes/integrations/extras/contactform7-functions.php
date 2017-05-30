@@ -50,6 +50,15 @@ function affwp_cf7_get_url_args( $cf7 ) {
  */
 function affwp_cf7_paypal_redirect( $cf7, $result, $referral_id ) {
 
+	$affwp_cf7 = new Affiliate_WP_Contact_Form_7;
+
+	if ( ! $affwp_cf7->was_referred() ) {
+		// No referral var was recorded. Let the PayPal plugin take over.
+		if( function_exists( 'cf7pp_after_send_mail' ) ) {
+			cf7pp_after_send_mail( $contactform );
+		}
+	}
+
 	global $postid;
 
 	$postid = $cf7->id();

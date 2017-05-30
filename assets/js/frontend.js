@@ -1,5 +1,10 @@
 jQuery(document).ready( function($) {
 
+	// datepicker
+	if( $('.affwp-datepicker').length ) {
+		$('.affwp-datepicker').datepicker({dateFormat: 'mm/dd/yy'});
+	}
+
 	// Remove whitespace from the campaign name.
 	$( '#affwp-campaign' ).on( 'focusout', function( event ) {
 		$( this ).val( $( this ).val().replace( /\s/g, '' ) );
@@ -13,6 +18,9 @@ jQuery(document).ready( function($) {
 		    affId               = $( this ).find( 'input[type="hidden"].affwp-affiliate-id' ).val(),
 		    prettyAffiliateUrls = affwp_vars.pretty_affiliate_urls,
 		    add                 = '';
+
+		// Strip any whitespace from the beginning or end of the URL.
+		url = url.trim();
 
 		// URL has fragment
 		if ( url.indexOf( '#' ) > 0 ) {
