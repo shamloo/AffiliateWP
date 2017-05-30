@@ -640,8 +640,10 @@ class Affiliate_WP_Upgrades {
 	 */
 	private function v21_upgrade() {
 		// Schedule a rewrites flush.
-		update_option( 'affwp_flush_rewrites', '1' );
+		flush_rewrite_rules();
 		$this->log( 'Upgrade: Rewrite rules flushed following the 2.1 upgrade.' );
+
+		$this->upgraded = true;
 	}
 
 }
