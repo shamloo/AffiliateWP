@@ -235,25 +235,41 @@ function affwp_has_coupon_support( $integration ) {
 	return in_array( $integration, $supported );
 }
 
+/**
+ * Returns a list of active integrations with both coupon support and a selected coupon template.
+ *
+ * @since  2.1
+ *
+ * @return string $output  List of integration coupon templates.
+ */
 function affwp_get_coupon_templates() {
 
 	$templates    = array();
+	$has_template = false;
 	$integrations = affiliate_wp()->integrations->get_enabled_integrations();
 
 	if ( ! empty( $integrations ) ) {
 
-		$output = array();
+		$output = '<ul class="affwp-coupon-template-list">';
 
-		foreach ( $integrations as $key => $value ) {
+		foreach ( $integrations as $integration_id => $integration_term ) {
 
-			$template_id  = affiliate_wp()->coupons->get_coupon_template_id( $key );
-			$template_url = affiliate_wp()->coupons->get_coupon_template_url( $template_id, $key );
+			$template_id  = affiliate_wp()->coupons->get_coupon_template_id( $integration_id );
+			$template_url = affiliate_wp()->coupons->get_coupon_template_url( $template_id, $integration_id );
 
-			if ( affwp_has_coupon_support( $key ) && $template_id ) {
-				$output[ $key ] = $value . ' : ' . $template_url;
+
+			// Ensure that this integration has both coupon support,
+			// and a template has also been selected.
+			if ( affwp_has_coupon_support( $integration_id ) && $template_id ) {
+
+				$has_template = true;
+
+				$output .= '<li>' . $integration_id . ': ' . $integration_term . ' : <a href="' . $template_url . '">(' . $template_id . ')</a></li>';
 			}
 		}
 
-		return ! empty( $output ) ? $output : false;
+		$output .= '</ul>';
+
+		echo $has_template ? $output : __( 'No coupon templates have been selected for any active AffiliateWP integrations.', 'affiliate-wp' );
 	}
 }

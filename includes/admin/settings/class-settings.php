@@ -690,15 +690,14 @@ class Affiliate_WP_Settings {
 				array(
 					'auto_generate_coupons_enabled' => array(
 						'name' => __( 'Automatically generate affiliate coupons', 'affiliate-wp' ),
-						'desc' => __( 'If checked, a coupon will be generated automatically for an affiliate when their affiliate account is registered and approved.', 'affiliate-wp' ),
+						'desc' => __( 'If checked, a coupon will be generated automatically for an affiliate when their affiliate account is registered and approved. Click here to generate affiliate coupons for all existing affiliates (WIP).', 'affiliate-wp' ),
 						'type' => 'checkbox'
 					),
 					'auto_generate_coupons_templates' => array(
 						'name' => __( 'Coupon templates', 'affiliate-wp' ),
 						'desc' => __( 'Create a coupon in your desired integration, and it will show here. Each integration can have one coupon template.', 'affiliate-wp' ),
-						'type' => '',
-						'callback' => affwp_get_coupon_templates(),
-						'options' => affwp_get_coupons_by_integration(),
+						'type' => 'textarea',
+						'callback' => 'affwp_get_coupon_templates',
 						'sanitize_callback' => 'sanitize_text_field'
 					),
 				)
