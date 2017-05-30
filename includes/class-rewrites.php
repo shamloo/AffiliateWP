@@ -92,7 +92,7 @@ class Affiliate_WP_Rewrites {
 
 		}
 
-		add_rewrite_endpoint( affiliate_wp()->tracking->get_referral_var(), EP_ALL );
+		add_rewrite_endpoint( affiliate_wp()->tracking->get_referral_var(), EP_ALL, false );
 
 	}
 

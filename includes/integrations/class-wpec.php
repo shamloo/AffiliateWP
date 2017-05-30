@@ -12,7 +12,7 @@ class Affiliate_WP_WPEC extends Affiliate_WP_Base {
 
 		add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );
 
-		add_action( 'affwp_pre_flush_rewrites', array( $this, 'products_page_rewrite' ) );
+		add_action( 'init', array( $this, 'products_page_rewrite' ) );
 	}
 
 	public function add_pending_referral( $order_id = 0, $current_status, $previous_status, $order ) {
