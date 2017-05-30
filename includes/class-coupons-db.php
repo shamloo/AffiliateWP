@@ -507,7 +507,9 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 	 */
 	public function get_coupon_template_id( $integration ) {
 
+
 		if ( ! isset( $integration ) || ! affiliate_wp()->settings->get( 'auto_generate_coupons_enabled' ) ) {
+			error_log('bailing method');
 			return false;
 		}
 
@@ -522,6 +524,8 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 
 		switch ( $integration ) {
 			case 'edd':
+				error_log('Checking EDD coupon template ID');
+				require_once AFFILIATEWP_PLUGIN_DIR . 'includes/integrations/coupons/class-edd-coupon.php';
 				$edd         = new AffWP\Affiliate\EDD_Coupon;
 				$template_id = $edd::get_coupon_template_id();
 				break;

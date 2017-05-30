@@ -44,6 +44,8 @@ class EDD_Coupon extends \AffWP\Affiliate\Coupon {
 		add_action( 'edd_edit_discount_form_bottom', array( $this, 'discount_edit' ) );
 		add_action( 'edd_post_update_discount', array( $this, 'store_discount_affiliate' ), 10, 2 );
 		add_action( 'edd_post_insert_discount', array( $this, 'store_discount_affiliate' ), 10, 2 );
+
+		add_action( 'affwp_add_edd_discount', array( $this, 'create_affwp_coupon' );
 	}
 
 	/**
@@ -89,16 +91,33 @@ class EDD_Coupon extends \AffWP\Affiliate\Coupon {
 	 * Requires a coupon object or array from the integration in which
 	 * the coupon is generated.
 	 *
-	 * @param  array  $args  An array of coupon arguments.
-	 * @return bool          Returns true if an EDD discount was created, otherwise false.
+	 * @param  array $args          An array of coupon template data, used to populate the new coupon.
+	 * @param  int   $affiliate_id  Affiliate ID.
+	 * @return bool                 Returns true if an EDD discount was created, otherwise false.
 	 * @since  2.1
 	 */
-	public function create_coupon( $args ) {
+	public function create_coupon( $affiliate_id, $args ) {
 
+		if ( ! $affiliate_id ) {
+
+			$suffix = false;
+
+			if ( edd_get_discount( $args->id ) ) {
+				$suffix = ' from coupon template' . $args->id . '.';
+			}
+
+			$suffix = $suffix ? $suffix : '.';
+
+			affiliate_wp()->utils->log( 'Missing affiliate ID when creating affiliate coupon' . $suffix );
+
+			return false;
+		}
+
+		// Get coupon
 		$args = $this->get_coupon_template();
 
 		$details = array(
-			'code'              => $args[ 'code' ],
+			'code'              => $args[ 'code' ] . '-' . date( 'U' ) . '-' . $affiliate_id,
 			'name'              => $args[ 'name' ],
 			'status'            => $args[ 'status' ],
 			'uses'              => $args[ 'uses' ],
@@ -115,6 +134,17 @@ class EDD_Coupon extends \AffWP\Affiliate\Coupon {
 			'is_single_use'     => $args[ 'is_single_use' ]
 		);
 
+		if ( edd_store_discount( $details ) ) {
+			/**
+			 * Fires when an EDD discount is created via AffiliateWP.
+			 *
+			 * @param $details EDD disount properties.
+			 * @since 2.1
+			 */
+			do_action( 'affwp_add_edd_discount', $details );
+		}
+
+
 		return edd_store_discount( $details );
 	}
 
@@ -126,17 +156,23 @@ class EDD_Coupon extends \AffWP\Affiliate\Coupon {
 	 * @return bool          Returns true if a coupon object was created, otherwise false.
 	 * @since  2.1
 	 */
-	public function create_affwp_coupon( $discount_id = 0, $args = array() ) {
+	public function create_affwp_coupon( $details ) {
 
-		if ( 0 === $discount_id ) {
+		if ( ! $details ) {
 			return false;
 		}
 
-		$args = $this->data( $discount_id );
+		$discount_id = $details->id );
 
-		return affiliate_wp()->coupons->add( $args );
+		return affiliate_wp()->coupons->add( $details );
 	}
 
+	/**
+	 * Gets the active coupons for this integration.
+	 *
+	 * @return array $discounts Array of EDD discount objects.
+	 * @since  2.1
+	 */
 	public function get_integration_coupons() {
 		$discounts = edd_get_discounts(
 			array(

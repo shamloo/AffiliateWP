@@ -94,10 +94,10 @@ abstract class Coupon extends \AffWP\Base_Object {
 	 *
 	 * @param mixed $object Object for which to populate members.
 	 */
-	public function __construct( $object ) {
-		foreach ( get_object_vars( $object ) as $key => $value ) {
-			$this->$key = $value;
-		}
+	public function __construct() {
+		// foreach ( get_object_vars( $object ) as $key => $value ) {
+		// 	$this->$key = $value;
+		// }
 
 		// Load coupon-specific classes for each active integration.
 		$integrations = affiliate_wp()->integrations->get_enabled_integrations();
