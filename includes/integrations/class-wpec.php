@@ -103,9 +103,18 @@ class Affiliate_WP_WPEC extends Affiliate_WP_Base {
 	 * @since  2.1
 	 */
 	public function products_page_rewrite() {
-		$ref = affiliate_wp()->tracking->get_referral_var();
+		$wpec_page_ids = get_option( 'wpsc_shortcode_page_ids', array() );
 
-		add_rewrite_rule( 'products-page/' . $ref . '(/(.*))?/?$', 'index.php?pagename=products-page&' . $ref . '=$matches[1]', 'top');
+		if ( ! empty( $wpec_page_ids['[productspage]'] ) ) {
+			$products_page = get_page_uri( $wpec_page_ids['[productspage]'] );
+
+			if ( $products_page ) {
+				$ref = affiliate_wp()->tracking->get_referral_var();
+
+				add_rewrite_rule( $products_page . '/' . $ref . '(/(.*))?/?$', 'index.php?pagename=' . $products_page . '&' . $ref . '=$matches[1]', 'top');
+			}
+		}
+
 	}
 
 }
