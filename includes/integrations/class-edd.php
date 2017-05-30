@@ -476,6 +476,8 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 			$user         = get_userdata( $user_id );
 			$user_name    = $user ? $user->user_login : '';
 		}
+
+		$disabled = get_post_meta( $discount_id, 'affwp_is_coupon_template', true );
 ?>
 		<table class="form-table">
 			<tbody>
@@ -487,7 +489,20 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 						<span class="affwp-ajax-search-wrap">
 							<input type="text" name="user_name" id="user_name" value="<?php echo esc_attr( $user_name ); ?>" class="affwp-user-search" data-affwp-status="active" autocomplete="off" style="width: 300px;" />
 						</span>
-						<p class="description"><?php _e( 'If you would like to connect this discount to an affiliate, enter the name of the affiliate it belongs to.', 'affiliate-wp' ); ?></p>
+						<p class="description"><?php _e( 'If you would like to connect this discount to an affiliate, enter the name of the affiliate it belongs to.', 'affiliate-wp' ); ?>
+						</p>
+					</td>
+				</tr>
+				<tr class="form-field">
+					<th scope="row" valign="top">
+						<label for="affwp_is_coupon_template"><?php _e( 'Use as Affiliate Coupon Template?', 'affiliate-wp' ); ?>
+						</label>
+					</th>
+					<td>
+						<input type="checkbox" name="affwp_is_coupon_template" id="affwp_is_coupon_template" value="1"<?php checked( $disabled, true ); ?> />
+
+						<p class="description"><?php _e( 'Check this option if you would like to use this discount as the template from which all EDD affiliate coupons are generated.', 'affiliate-wp' ); ?>
+						</p>
 					</td>
 				</tr>
 			</tbody>
@@ -512,22 +527,33 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 			return;
 		}
 
+		if( empty( $_POST['affwp_is_coupon_template'] ) || 0 == $_POST['affwp_is_coupon_template'] ) {
+			return;
+		}
+
 		$data = affiliate_wp()->utils->process_request_data( $_POST, 'user_name' );
 
 		$affiliate_id = affwp_get_affiliate_id( $data['user_id'] );
+		$is_template  = $_POST['affwp_is_coupon_template'] ? $_POST['affwp_is_coupon_template'] : false;
 
 		update_post_meta( $discount_id, 'affwp_discount_affiliate', $affiliate_id );
+		update_post_meta( $discount_id, 'affwp_is_coupon_template', $is_template );
+
+
+		error_log( get_post_meta( $discount_id, 'affwp_is_coupon_template', $is_template ) );
 
 		/**
 		 * Fires when an affiliate ID is stored in the post meta of an EDD discount.
 		 *
-		 * @param $discount_id   EDD discount ID.
-		 * @param $affiliate_id  Affiliate ID.
+		 * @param int  $discount_id   EDD discount ID.
+		 * @param int  $affiliate_id  Affiliate ID.
+		 * @param bool $is_template   Returns true if this EDD discount is used
+		 *                            as the affiliate coupon template.
 		 *
 		 * @see   AffWP\Affiliate\EDD_Coupon::create_coupon()
 		 * @since 2.1
 		 */
-		do_action( 'affwp_edd_coupon_store_discount_affiliate', $discount_id, $affiliate_id );
+		do_action( 'affwp_edd_coupon_store_discount_affiliate', $discount_id, $affiliate_id, $is_template );
 	}
 
 	/**

@@ -231,15 +231,14 @@ abstract class Coupon extends \AffWP\Base_Object {
 	 *
 	 * @return mixed int|bool Returns a coupon ID if a coupon template is located, otherwise returns false.
 	 */
-	public function set_coupon_template( $meta, $discount_id ) {
+	public function __set_coupon_template() {
 
-		if ( ! affiliate_wp()->settings->get( 'auto_generate_coupons_enabled' ) ) {
+		if ( ! method_exists( array( $this, 'set_coupon_template' ) ) ) {
+			affiliate_wp()->utils->log( 'A set_coupon_template method must be defined when extending the AffWP\Affiliate\Coupon class for an integration.' );
 			return false;
 		}
 
-		update_post_meta( $discount_id, 'affwp_is_coupon_template', true );
-
-		return edd_get_discount( $discount_id );
+		return $this->set_coupon_template();
 	}
 
 	/**
