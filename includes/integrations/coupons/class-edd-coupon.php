@@ -45,7 +45,7 @@ class EDD_Coupon extends \AffWP\Affiliate\Coupon {
 		add_action( 'edd_post_update_discount', array( $this, 'store_discount_affiliate' ), 10, 2 );
 		add_action( 'edd_post_insert_discount', array( $this, 'store_discount_affiliate' ), 10, 2 );
 
-		add_action( 'affwp_add_edd_discount', array( $this, 'create_affwp_coupon' );
+		add_action( 'affwp_add_edd_discount', array( $this, 'create_affwp_coupon' ) );
 	}
 
 	/**
@@ -162,7 +162,7 @@ class EDD_Coupon extends \AffWP\Affiliate\Coupon {
 			return false;
 		}
 
-		$discount_id = $details->id );
+		$discount_id = $details->id;
 
 		return affiliate_wp()->coupons->add( $details );
 	}

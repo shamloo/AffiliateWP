@@ -509,14 +509,13 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 
 
 		if ( ! isset( $integration ) || ! affiliate_wp()->settings->get( 'auto_generate_coupons_enabled' ) ) {
-			error_log('bailing method');
 			return false;
 		}
 
 		/**
 		 *
-		 * Loops through the coupons for that integration, and search for a post meta key of:
-		 * `affwp_is_coupon_template`
+		 * Loops through the coupons for the integration,
+		 * and searches for a post meta key of `affwp_is_coupon_template`.
 		 *
 		 * @var boolean
 		 */
@@ -524,10 +523,31 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 
 		switch ( $integration ) {
 			case 'edd':
-				error_log('Checking EDD coupon template ID');
-				require_once AFFILIATEWP_PLUGIN_DIR . 'includes/integrations/coupons/class-edd-coupon.php';
-				$edd         = new AffWP\Affiliate\EDD_Coupon;
-				$template_id = $edd::get_coupon_template_id();
+
+					$args = array(
+						'post_type'  => 'edd_discount',
+						'meta_key'   => 'affwp_is_coupon_template',
+						'orderby'    => 'meta_value_num',
+						'meta_query' => array(
+							array(
+								'key'     => 'affwp_is_coupon_template',
+								'value'   => true
+							),
+						),
+					);
+
+					$discount = new WP_Query( $args );
+
+					if ( $discount->have_posts() ) {
+						while ( $discount->have_posts() ) {
+							$template_id = $discount->id;
+						}
+					} else {
+						return;
+					}
+
+					wp_reset_postdata();
+
 				break;
 
 			default:
@@ -537,6 +557,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 
 		/**
 		 * Returns the coupon template ID.
+		 * Specify the coupon template ID, as well as the integration.
 		 *
 		 * @param int    $template_id  The coupon template ID.
 		 * @param string $integration  The integration to query. Required.
