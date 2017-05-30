@@ -539,9 +539,6 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 		update_post_meta( $discount_id, 'affwp_discount_affiliate', $affiliate_id );
 		update_post_meta( $discount_id, 'affwp_is_coupon_template', $is_template );
 
-
-		error_log( get_post_meta( $discount_id, 'affwp_is_coupon_template', $is_template ) );
-
 		/**
 		 * Fires when an affiliate ID is stored in the post meta of an EDD discount.
 		 *
