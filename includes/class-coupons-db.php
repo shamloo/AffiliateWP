@@ -471,22 +471,31 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 	 *
 	 * @since  2.1
 	 *
-	 * @param  int     $template_id The ID of the coupon template in use.
-	 * @param  string  $integration The integration.
+	 * @param  int                $template_id  The ID of the coupon template in use.
+	 * @param  string             $integration  The integration.
 	 *
-	 * @return mixed string|bool    Returns the edit screen url of the coupon template if set,
-	 *                              otherwise returns false.
+	 * @return mixed  string|bool $url          Returns the edit screen url of the coupon template if set,
+	 *                                          otherwise returns false.
 	 */
 	public function get_coupon_template_url( $template_id, $integration ) {
-		$template_id = $this->get_coupon_template_id( $integration );
 
-		if ( ! isset( $template_id ) || ! isset( $integration ) ) {
+		$url = false;
+
+		if ( ! $template_id || ! isset($template_id ) ) {
+			$template_id = $this->get_coupon_template_id( $integration );
+
+			if ( ! is_int( $template_id ) ) {
+				return false;
+			}
+		}
+
+		if ( ! isset( $integration ) ) {
 			return false;
 		}
 
 		switch ( $integration ) {
 			case 'edd':
-				return edd_get_discount( $template_id );
+				$url = admin_url( 'edit.php?post_type=download&page=edd-discounts&edd-action=edit_discount&discount=' ) . $template_id;
 				break;
 
 			default:
@@ -494,7 +503,14 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 				break;
 		}
 
-		return false;
+		/**
+		 * Returns the coupon template URL for the given integration.
+		 *
+		 * @param string $url         The coupon template url.
+		 * @param string $integration The integration.
+		 * @since 2.1
+		 */
+		return apply_filters( 'affwp_coupon_template_url', $url, $integration );
 	}
 
 	/**
@@ -524,6 +540,16 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 		switch ( $integration ) {
 			case 'edd':
 
+					$discount = edd_get_discount(
+						array(
+							'meta_key'       => 'affwp_is_coupon_template',
+							'meta_value'     => 1,
+							'post_status'    => 'active'
+						)
+					);
+
+					$template_id = $discount->id;
+
 					$args = array(
 						'post_type'  => 'edd_discount',
 						'meta_key'   => 'affwp_is_coupon_template',
@@ -531,7 +557,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 						'meta_query' => array(
 							array(
 								'key'     => 'affwp_is_coupon_template',
-								'value'   => true
+								'value'   => 1
 							),
 						),
 					);
@@ -540,6 +566,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 
 					if ( $discount->have_posts() ) {
 						while ( $discount->have_posts() ) {
+
 							$template_id = $discount->id;
 						}
 					} else {
@@ -551,7 +578,6 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 				break;
 
 			default:
-				return false;
 				break;
 		}
 
@@ -559,8 +585,8 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 		 * Returns the coupon template ID.
 		 * Specify the coupon template ID, as well as the integration.
 		 *
-		 * @param int    $template_id  The coupon template ID.
-		 * @param string $integration  The integration to query. Required.
+		 * @param mixed bool|int $template_id  Returns the coupon template ID if set, otherwise false.
+		 * @param string         $integration  The integration to query. Required.
 		 * @since 2.1
 		 */
 		return apply_filters( 'affwp_get_coupon_template_id', $template_id, $integration );

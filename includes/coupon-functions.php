@@ -254,17 +254,21 @@ function affwp_get_coupon_templates() {
 
 		foreach ( $integrations as $integration_id => $integration_term ) {
 
-			$template_id  = affiliate_wp()->coupons->get_coupon_template_id( $integration_id );
-			$template_url = affiliate_wp()->coupons->get_coupon_template_url( $template_id, $integration_id );
-
-
 			// Ensure that this integration has both coupon support,
 			// and a template has also been selected.
-			if ( affwp_has_coupon_support( $integration_id ) && $template_id ) {
+			if ( affwp_has_coupon_support( $integration_id ) ) {
 
-				$has_template = true;
+				$template_id  = affiliate_wp()->coupons->get_coupon_template_id( $integration_id );
 
-				$output .= '<li>' . $integration_id . ': ' . $integration_term . ' : <a href="' . $template_url . '">(' . $template_id . ')</a></li>';
+				if ( $template_id ) {
+
+					$has_template = true;
+					$template_url = affiliate_wp()->coupons->get_coupon_template_url( $template_id, $integration_id );
+
+					$output .= '<li>' . $integration_id . ': ' . $integration_term . ' : <a href="' . $template_url . '">(' . $template_id . ')</a></li>';
+				} else {
+					return false;
+				}
 			}
 		}
 
