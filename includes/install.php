@@ -57,6 +57,31 @@ function affiliate_wp_install() {
 	// Clear rewrite rules
 	$affiliate_wp_install->rewrites->flush_rewrites();
 
+	// Set past upgrade routines complete for all sites.
+	if ( ! is_multisite() ) {
+
+		$sites = array( 1 );
+
+	} elseif ( true === version_compare( $GLOBALS['wp_version'], '4.6', '<' ) ) {
+
+		$sites = wp_list_pluck( 'blog_id', wp_get_sites() );
+
+	} else {
+
+		$sites = get_sites( array( 'fields' => 'ids' ) );
+
+	}
+
+	foreach ( $sites as $site_id ) {
+
+		switch_to_blog( $site_id );
+
+		affwp_set_upgrade_complete( 'upgrade_v20_recount_unpaid_earnings' );
+
+		restore_current_blog();
+
+	}
+
 	// Bail if activating from network, or bulk
 	if ( is_network_admin() || isset( $_GET['activate-multi'] ) ) {
 		return;
