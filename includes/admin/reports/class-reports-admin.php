@@ -68,7 +68,7 @@ class Reports {
 				break;
 
 			case 'payouts':
-				$manage_button .= sprintf( $manage_button_template,
+				$manage_button = sprintf( $manage_button_template,
 					esc_url( affwp_admin_url( 'payouts' ) ),
 					__( 'View Payouts', 'affiliate-wp' )
 				);
