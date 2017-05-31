@@ -17,8 +17,10 @@ include_once( 'affiliate-wp.php' );
 
 // Needed for site-related functionality.
 if ( ! is_multisite() ) {
-	require_once ABSPATH . WPINC . '/class-wp-site-query.php';
-	require_once ABSPATH . WPINC . '/class-wp-network-query.php';
+	if ( true === version_compare( $GLOBALS['wp_version'], '4.6', '>=' ) ) {
+		require_once ABSPATH . WPINC . '/class-wp-site-query.php';
+		require_once ABSPATH . WPINC . '/class-wp-network-query.php';
+	}
 	require_once ABSPATH . WPINC . '/ms-blogs.php';
 }
 
