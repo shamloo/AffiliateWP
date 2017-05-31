@@ -23,7 +23,7 @@ function affwp_do_actions() {
 		do_action( "affwp_{$action}", $_REQUEST );
 	}
 }
-add_action( 'init', 'affwp_do_actions' );
+add_action( 'init', 'affwp_do_actions', 9 );
 
 // Process affiliate notification settings
 add_action( 'affwp_update_profile_settings', 'affwp_update_profile_settings' );
@@ -56,6 +56,8 @@ function affwp_remove_query_args( $query_args ) {
 		$query_args[] = 'filter_from';
 		$query_args[] = 'filter_to';
 	}
+
+	$query_args[] = 'affwp_notice';
 
 	return $query_args;
 }

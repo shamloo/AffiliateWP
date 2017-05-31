@@ -68,7 +68,7 @@ class Tests extends UnitTestCase {
 	/**
 	 * @covers ::affwp_add_creative()
 	 */
-	public function test_add_creative_should_always_true_no_matter_what_you_pass_in_the_array() {
+	public function test_add_creative_should_always_return_truthy_no_matter_what_you_pass_in_the_array() {
 		$creative1 = affwp_add_creative( array(
 			'these'    => 'values',
 			'can'      => 'be',
@@ -77,12 +77,30 @@ class Tests extends UnitTestCase {
 
 		$creative2 = affwp_add_creative();
 
-		$this->assertTrue( $creative1 );
-		$this->assertTrue( $creative2 );
+		$this->assertEquals( true, $creative1 );
+		$this->assertEquals( true, $creative2 );
 
 		// Clean up.
 		affwp_delete_creative( $creative1 );
 		affwp_delete_creative( $creative2 );
+	}
+
+	/**
+	 * @covers ::affwp_add_creative()
+	 */
+	public function test_add_creative_should_return_new_creative_id_no_matter_what_is_passed_in_the_array() {
+		$creative_id = affwp_add_creative( array(
+			'text' => 'Foo Bar Baz'
+		) );
+
+		$this->assertTrue( is_numeric( $creative_id ) );
+
+		$created = affwp_get_creative( $creative_id );
+
+		$this->assertSame( 'Foo Bar Baz', $created->text );
+
+		// Clean up.
+		affwp_delete_creative( $creative_id );
 	}
 
 	/**

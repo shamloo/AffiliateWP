@@ -13,6 +13,15 @@ use \AffWP\REST\v1\Controller;
 class Endpoints extends Controller {
 
 	/**
+	 * Object type.
+	 *
+	 * @since 1.9.5
+	 * @access public
+	 * @var string
+	 */
+	public $object_type = 'affwp_visit';
+
+	/**
 	 * Route base for visits.
 	 *
 	 * @since 1.9
@@ -31,28 +40,32 @@ class Endpoints extends Controller {
 
 		// /visits/
 		register_rest_route( $this->namespace, '/' . $this->rest_base, array(
-			'methods'  => \WP_REST_Server::READABLE,
-			'callback' => array( $this, 'get_items' ),
-			'args'     => $this->get_collection_params(),
-			'permission_callback' => function( $request ) {
-				return current_user_can( 'manage_affiliates' );
-			}
+			array(
+				'methods'             => \WP_REST_Server::READABLE,
+				'callback'            => array( $this, 'get_items' ),
+				'args'                => $this->get_collection_params(),
+				'permission_callback' => function( $request ) {
+					return current_user_can( 'manage_visits' );
+				}
+			),
+			'schema' => array( $this, 'get_public_item_schema' ),
 		) );
 
 		// /visits/ID
 		register_rest_route( $this->namespace, '/' . $this->rest_base . '/(?P<id>\d+)', array(
-			'methods'  => \WP_REST_Server::READABLE,
-			'callback' => array( $this, 'get_item' ),
-			'args'     => array(
-				'id' => array(
-					'required'          => true,
-					'validate_callback' => function( $param, $request, $key ) {
-						return is_numeric( $param );
-					}
-				)
+			array(
+				'methods'             => \WP_REST_Server::READABLE,
+				'callback'            => array( $this, 'get_item' ),
+				'permission_callback' => function( $request ) {
+					return current_user_can( 'manage_visits' );
+				}
 			),
-			'permission_callback' => function( $request ) {
-				return current_user_can( 'manage_affiliates' );
+			'schema' => array( $this, 'get_public_item_schema' ),
+		) );
+
+		$this->register_field( 'id', array(
+			'get_callback' => function( $object, $field_name, $request, $object_type ) {
+				return $object->ID;
 			}
 		) );
 	}
@@ -64,7 +77,7 @@ class Endpoints extends Controller {
 	 * @access public
 	 *
 	 * @param \WP_REST_Request $request Request arguments.
-	 * @return array|\WP_Error Array of visits, otherwise WP_Error.
+	 * @return \WP_REST_Response|\WP_Error Array of visits, otherwise WP_Error.
 	 */
 	public function get_items( $request ) {
 
@@ -77,6 +90,7 @@ class Endpoints extends Controller {
 		$args['referral_id']     = isset( $request['referral_id'] )     ? $request['referral_id'] : 0;
 		$args['referral_status'] = isset( $request['referral_status'] ) ? $request['referral_status'] : '';
 		$args['campaign']        = isset( $request['campaign'] )        ? $request['campaign'] : '';
+		$args['context']         = isset( $request['visit_context'] )   ? $request['visit_context'] : '';
 		$args['date']            = isset( $request['date'] )            ? $request['date'] : '';
 		$args['order']           = isset( $request['order'] )           ? $request['order'] : 'ASC';
 		$args['orderby']         = isset( $request['orderby'] )         ? $request['orderby'] : '';
@@ -106,6 +120,12 @@ class Endpoints extends Controller {
 				'No visits were found.',
 				array( 'status' => 404 )
 			);
+		} else {
+			$inst = $this;
+			array_map( function( $visit ) use ( $inst, $request ) {
+				$visit = $inst->process_for_output( $visit, $request );
+				return $visit;
+			}, $visits );
 		}
 
 		return $this->response( $visits );
@@ -127,6 +147,9 @@ class Endpoints extends Controller {
 				'Invalid visit ID',
 				array( 'status' => 404 )
 			);
+		} else {
+			// Populate extra fields.
+			$visit = $this->process_for_output( $visit, $request );
 		}
 
 		return $this->response( $visit );
@@ -179,6 +202,17 @@ class Endpoints extends Controller {
 			},
 		);
 
+		// 'visit_context' so as not to conflict with the global 'content' parameter.
+		$params['visit_context'] = array(
+			'description'       => __( 'The context under which the visit was created.', 'affiliate-wp' ),
+			'sanitize_callback' => function( $param, $request, $key ) {
+				return sanitize_key( substr( $param, 0, 50 ) );
+			},
+			'validate_callback' => function( $param, $request, $key ) {
+				return is_string( $param );
+			}
+		);
+
 		$params['campaign'] = array(
 			'description'       => __( 'The associated campaign.', 'affiliate-wp' ),
 			'sanitize_callback' => 'sanitize_text_field',
@@ -204,4 +238,63 @@ class Endpoints extends Controller {
 
 		return $params;
 	}
+
+	/**
+	 * Retrieves the schema for a single visit, conforming to JSON Schema.
+	 *
+	 * @access public
+	 * @since  2.0
+	 *
+	 * @return array Item schema data.
+	 */
+	public function get_item_schema() {
+
+		$schema = array(
+			'$schema'    => 'http://json-schema.org/schema#',
+			'title'      => $this->get_object_type(),
+			'type'       => 'object',
+			// Base properties for every visit.
+			'properties' => array(
+				'visit_id'     => array(
+					'description' => __( 'The unique visit ID.', 'affiliate-wp' ),
+					'type'        => 'integer',
+				),
+				'affiliate_id' => array(
+					'description' => __( 'ID for the affiliate account associated with the visit.', 'affiliate-wp' ),
+					'type'        => 'integer',
+				),
+				'referral_id'  => array(
+					'description' => __( 'ID for the referral associated with the visit.', 'affiliate-wp' ),
+					'type'        => 'integer',
+				),
+				'url'          => array(
+					'description' => __( 'The visit URL.', 'affiliate-wp' ),
+					'type'        => 'string',
+				),
+				'referrer'     => array(
+					'description' => __( 'Visit referrer.', 'affiliate-wp' ),
+					'type'        => 'string',
+				),
+				'campaign'     => array(
+					'description' => __( 'Campaign associated with the visit.', 'affiliate-wp' ),
+					'type'        => 'string',
+				),
+				'context'      => array(
+					'description' => __( 'Context under which the visit was generated.', 'affiliate-wp' ),
+					'type'        => 'string',
+				),
+				'ip'           => array(
+					'description' => __( 'Visitor IP address.', 'affiliate-wp' ),
+					'type'        => 'string',
+				),
+				'date'         => array(
+					'description' => __( 'The date the visit was generated.', 'affiliate-wp' ),
+					'type'        => 'string',
+				),
+			),
+		);
+
+		return $this->add_additional_fields_schema( $schema );
+	}
+
 }

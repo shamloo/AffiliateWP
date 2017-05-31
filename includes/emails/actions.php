@@ -55,7 +55,7 @@ function affwp_notify_on_registration( $affiliate_id = 0, $status = '', $args = 
 		}
 
 		if( affiliate_wp()->settings->get( 'require_approval' ) ) {
-			$message .= sprintf( __( 'Review pending applications: %s', 'affiliate-wp' ), admin_url( 'admin.php?page=affiliate-wp-affiliates&status=pending' ) ) . "\n\n";
+			$message .= sprintf( __( 'Review pending applications: %s', 'affiliate-wp' ), affwp_admin_url( 'affiliates', array( 'status' => 'pending' ) ) ) . "\n\n";
 		}
 
 	}
@@ -124,8 +124,16 @@ function affwp_notify_on_approval( $affiliate_id = 0, $status = '', $old_status 
 	$args         = array( 'affiliate_id' => $affiliate_id );
 	$subject      = apply_filters( 'affwp_application_accepted_subject', $subject, $args );
 	$message      = apply_filters( 'affwp_application_accepted_email', $message, $args );
+	$user_id      = affwp_get_affiliate_user_id( $affiliate_id );
 
-	if ( apply_filters( 'affwp_notify_on_approval', true ) ) {
+	/**
+	 * Filters whether to notify an affiliate upon approval of their application.
+	 *
+	 * @since 1.6
+	 *
+	 * @param bool $notify Whether to notify the affiliate upon approval. Default true.
+	 */
+	if ( apply_filters( 'affwp_notify_on_approval', true ) && ! get_user_meta( $user_id, 'affwp_disable_affiliate_email', true ) ) {
 		$emails->send( $email, $subject, $message );
 	}
 

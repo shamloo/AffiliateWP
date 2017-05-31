@@ -13,6 +13,15 @@ use AffWP\REST\v1\Controller;
 class Endpoints extends Controller {
 
 	/**
+	 * Object type.
+	 *
+	 * @since 1.9.5
+	 * @access public
+	 * @var string
+	 */
+	public $object_type = 'affwp_affiliate';
+
+	/**
 	 * Route base for affiliates.
 	 *
 	 * @since 1.9
@@ -31,33 +40,46 @@ class Endpoints extends Controller {
 
 		// /affiliates/
 		register_rest_route( $this->namespace, '/' . $this->rest_base, array(
-			'methods'  => \WP_REST_Server::READABLE,
-			'callback' => array( $this, 'get_items' ),
-			'args'     => $this->get_collection_params(),
-			'permission_callback' => function( $request ) {
-				return current_user_can( 'manage_affiliates' );
-			}
+			array(
+				'methods'  => \WP_REST_Server::READABLE,
+				'callback' => array( $this, 'get_items' ),
+				'args'     => $this->get_collection_params(),
+				'permission_callback' => function( $request ) {
+					return current_user_can( 'manage_affiliates' );
+				},
+			),
+			'schema' => array( $this, 'get_public_item_schema' ),
 		) );
 
 		// /affiliates/ID
 		register_rest_route( $this->namespace, '/' . $this->rest_base . '/(?P<id>\d+)', array(
-			'methods'  => \WP_REST_Server::READABLE,
-			'callback' => array( $this, 'get_item' ),
-			'args'     => array(
-				'id' => array(
-					'required'          => true,
-					'validate_callback' => function( $param, $request, $key ) {
-						return is_numeric( $param );
-					}
+			array(
+				'methods'  => \WP_REST_Server::READABLE,
+				'callback' => array( $this, 'get_item' ),
+				'args'     => array(
+					'user' => array(
+						'description'       => __( 'Whether to include a modified user object in the response.', 'affiliate-wp' ),
+						'validate_callback' => function( $param, $request, $key ) {
+							return is_string( $param );
+						}
+					),
+					'meta' => array(
+						'description'       => __( 'Whether to include the affiliate meta in the response.', 'affiliate-wp' ),
+						'validate_callback' => function( $param, $request, $key ) {
+							return is_string( $param );
+						}
+					),
 				),
-				'user' => array(
-					'validate_callback' => function( $param, $request, $key ) {
-						return is_string( $param );
-					}
-				)
+				'permission_callback' => function( $request ) {
+					return current_user_can( 'manage_affiliates' );
+				},
 			),
-			'permission_callback' => function( $request ) {
-				return current_user_can( 'manage_affiliates' );
+			'schema' => array( $this, 'get_public_item_schema' ),
+		) );
+
+		$this->register_field( 'id', array(
+			'get_callback' => function( $object, $field_name, $request, $object_type ) {
+				return $object->ID;
 			}
 		) );
 	}
@@ -91,6 +113,7 @@ class Endpoints extends Controller {
 		}
 
 		$args['user'] = $user = ! empty( $request['user'] );
+		$args['meta'] = $meta = ! empty( $request['meta'] );
 
 		/**
 		 * Filters the query arguments used to retrieve affiliates in a REST request.
@@ -112,8 +135,8 @@ class Endpoints extends Controller {
 			);
 		} else {
 			$inst = $this;
-			array_map( function( $affiliate ) use ( $user, $inst ) {
-				$affiliate = $inst->process_for_output( $affiliate, $user );
+			array_map( function( $affiliate ) use ( $user, $meta, $inst, $request ) {
+				$affiliate = $inst->process_for_output( $affiliate, $request, $user, $meta );
 				return $affiliate;
 			}, $affiliates );
 		}
@@ -139,8 +162,10 @@ class Endpoints extends Controller {
 			);
 		} else {
 			$user = $request->get_param( 'user' );
+			$meta = $request->get_param( 'meta' );
+
 			// Populate extra fields and return.
-			$affiliate = $this->process_for_output( $affiliate, $user );
+			$affiliate = $this->process_for_output( $affiliate, $request, $user, $meta );
 		}
 
 		return $this->response( $affiliate );
@@ -152,19 +177,26 @@ class Endpoints extends Controller {
 	 * Populates non-public properties with derived values.
 	 *
 	 * @since 1.9
+	 * @since 1.9.5 Added the `$meta` and `$request` parameters.
 	 * @access protected
 	 *
 	 * @param \AffWP\Affiliate $affiliate Affiliate object.
+	 * @param \WP_REST_Request $request   Full details about the request.
 	 * @param bool             $user      Optional. Whether to lazy load the user object. Default false.
+	 * @param bool             $meta      Optional. Whether to lazy load the affiliate meta. Default false.
 	 * @return \AffWP\Affiliate Affiliate object.
 	 */
-	protected function process_for_output( $affiliate, $user = false ) {
+	protected function process_for_output( $affiliate, $request, $user = false, $meta = false ) {
 
 		if ( true == $user ) {
 			$affiliate->user = $affiliate->get_user();
 		}
 
-		return $affiliate;
+		if ( true == $meta ) {
+			$affiliate->meta = $affiliate->get_meta();
+		}
+
+		return parent::process_for_output( $affiliate, $request );
 	}
 
 	/**
@@ -244,4 +276,106 @@ class Endpoints extends Controller {
 
 		return $params;
 	}
+
+	/**
+	 * Retrieves the schema for a single affiliate, conforming to JSON Schema.
+	 *
+	 * @access public
+	 * @since  2.0
+	 *
+	 * @return array Item schema data.
+	 */
+	public function get_item_schema() {
+
+		$schema = array(
+			'$schema'    => 'http://json-schema.org/schema#',
+			'title'      => $this->get_object_type(),
+			'type'       => 'object',
+			// Base properties for every affiliate.
+			'properties' => array(
+				'affiliate_id' => array(
+					'description' => __( 'The unique affiliate ID.', 'affiliate-wp' ),
+					'type'        => 'integer',
+				),
+				'user_id'         => array(
+					'description' => __( 'ID for the user account associated with the affiliate.', 'affiliate-wp' ),
+					'type'        => 'integer',
+				),
+				'rate'            => array(
+					'description' => __( 'The affiliate rate.', 'affiliate-wp' ),
+					'type'        => 'object',
+					'properties'  => array(
+						'raw'       => array(
+							'description' => __( 'The affiliate rate, as it exists in the database', 'affiliate-wp' ),
+							'type'        => 'string',
+						),
+						'inherited' => array(
+							'description' => __( 'The affiliate rate, as inherited from global settings.', 'affiliate-wp' ),
+							'type'        => 'string',
+						),
+					),
+				),
+				'rate_type'       => array(
+					'description' => __( 'The affiliate rate type', 'affiliate-wp' ),
+					'type'        => 'object',
+					'properties'  => array(
+						'raw'       => array(
+							'description' => __( 'The affiliate rate type, as it exists in the database', 'affiliate-wp' ),
+							'type'        => 'string',
+						),
+						'inherited' => array(
+							'description' => __( 'The affiliate rate type, as inherited from global settings.', 'affiliate-wp' ),
+							'type'        => 'string',
+						),
+					),
+				),
+				'account_email'   => array(
+					'description' => __( 'The affiliate account email. Synced with the associated user account.', 'affiliatewp-rest-api' ),
+					'type'        => 'string',
+					'readonly'    => true,
+				),
+				'payment_email'   => array(
+					'description' => __( 'The affiliate payment email address.', 'affiliate-wp' ),
+					'type'        => 'object',
+					'properties'  => array(
+						'raw'       => array(
+							'description' => __( 'The affiliate payment email address, as it exists in the database', 'affiliate-wp' ),
+							'type'        => 'string',
+						),
+						'inherited' => array(
+							'description' => __( 'The affiliate payment email address, as inherited from the user email address.', 'affiliate-wp' ),
+							'type'        => 'string',
+						)
+					),
+				),
+				'status'          => array(
+					'description' => __( 'The affiliate status.', 'affiliate-wp' ),
+					'type'        => 'string',
+				),
+				'unpaid_earnings' => array(
+					'description' => __( 'Unpaid affiliate earnings.', 'affiliate-wp' ),
+					'type'        => 'float',
+				),
+				'earnings'        => array(
+					'description' => __( 'Affiliate earnings.', 'affiliate-wp' ),
+					'type'        => 'float',
+				),
+				'referrals'       => array(
+					'description' => __( 'The number of paid referrals associated with the affiliate.', 'affiliate-wp' ),
+					'type'        => 'integer',
+				),
+				'visits'          => array(
+					'description' => __( 'The number of visits associated with the affiliate.', 'affiliate-wp' ),
+					'type'        => 'integer',
+				),
+				'date_registered' => array(
+					'description' => __( 'The date the affiliate was registered.', 'affiliate-wp' ),
+					'type'        => 'string',
+				),
+			),
+		);
+
+		return $this->add_additional_fields_schema( $schema );
+	}
+
 }

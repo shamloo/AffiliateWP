@@ -93,6 +93,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 			'payment_email'   => '%s',
 			'status'          => '%s',
 			'earnings'        => '%s',
+			'unpaid_earnings' => '%s',
 			'referrals'       => '%d',
 			'visits'          => '%d',
 			'date_registered' => '%s',
@@ -319,6 +320,11 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 				$orderby = 'earnings+0';
 				break;
 
+			case 'unpaid_earnings':
+				// Unpaid earnings.
+				$orderby = 'unpaid_earnings+0';
+				break;
+
 			case 'referrals':
 				// Referrals.
 				$orderby = 'referrals+0';
@@ -361,7 +367,8 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 
 		$last_changed = wp_cache_get( 'last_changed', $this->cache_group );
 		if ( ! $last_changed ) {
-			wp_cache_set( 'last_changed', microtime(), $this->cache_group );
+			$last_changed = microtime();
+			wp_cache_set( 'last_changed', $last_changed, $this->cache_group );
 		}
 
 		$cache_key = "{$key}:{$last_changed}";
@@ -461,6 +468,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	 *     @type int    $referrals       Number of affiliate referrals.
 	 *     @type int    $visits          Number of visits.
 	 *     @type int    $user_id         User ID used to correspond to the affiliate.
+	 *     @type string $website_url     The affiliate's website URL.
 	 * }
 	 * @return int|false Affiliate ID if successfully added, otherwise false.
 	*/
@@ -468,7 +476,6 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 
 		$defaults = array(
 			'status'          => 'active',
-			'date_registered' => current_time( 'mysql' ),
 			'earnings'        => 0,
 			'referrals'       => 0,
 			'visits'          => 0
@@ -480,10 +487,32 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 			return false;
 		}
 
+		$current_date = current_time( 'mysql' );
+
+		if ( empty( $args['date_registered'] ) ) {
+			$args['date_registered'] = $current_date;
+		} elseif ( $args['date_registered'] !== $current_date ) {
+			$time = strtotime( $args['date_registered'] );
+
+			$args['date_registered'] = gmdate( 'Y-m-d H:i:s', $time );
+		}
+
+		if ( ! empty( $data['website_url'] ) ) {
+			$args['website_url'] = sanitize_text_field( $data['website_url'] );
+		}
+
 		$add = $this->insert( $args, 'affiliate' );
 
 		if ( $add ) {
-			do_action( 'affwp_insert_affiliate', $add );
+
+			/**
+			 * Fires immediately after an affiliate has been added to the database.
+			 *
+			 * @param int   $add  The new affiliate ID.
+			 * @param array $args The arguments passed to the insert method.
+			 */
+			do_action( 'affwp_insert_affiliate', $add, $args );
+
 			return $add;
 		}
 
@@ -508,6 +537,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 			payment_email mediumtext NOT NULL,
 			status tinytext NOT NULL,
 			earnings mediumtext NOT NULL,
+			unpaid_earnings mediumtext NOT NULL,
 			referrals bigint(20) NOT NULL,
 			visits bigint(20) NOT NULL,
 			date_registered datetime NOT NULL,

@@ -3,7 +3,7 @@
  * Creatives Admin
  *
  * @package     AffiliateWP
- * @subpackage  Admin/Affiliates
+ * @subpackage  Admin/Creatives
  * @copyright   Copyright (c) 2014, Pippin Williamson
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       1.2
@@ -43,8 +43,14 @@ function affwp_creatives_admin() {
 			<h2><?php _e( 'Creatives', 'affiliate-wp' ); ?>
 				<a href="<?php echo esc_url( add_query_arg( array( 'affwp_notice' => false, 'action' => 'add_creative' ) ) ); ?>" class="add-new-h2"><?php _e( 'Add New', 'affiliate-wp' ); ?></a>
 			</h2>
-			<?php do_action( 'affwp_affiliates_page_top' ); ?>
-			<form id="affwp-creatives-filter" method="get" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-creatives' ); ?>">
+			<?php
+			/**
+			 * Fires at the top of the creatives admin screen.
+			 */
+			do_action( 'affwp_creatives_page_top' );
+			?>
+
+			<form id="affwp-creatives-filter" method="get" action="<?php echo esc_url( affwp_admin_url( 'creatives' ) ); ?>">
 
 				<input type="hidden" name="page" value="affiliate-wp-creatives" />
 
@@ -52,7 +58,12 @@ function affwp_creatives_admin() {
 				<?php $creatives_table->display() ?>
 			</form>
 
-			<?php do_action( 'affwp_affiliates_page_bottom' ); ?>
+			<?php
+			/**
+			 * Fires at the bottom of the creatives admin screen.
+			 */
+			do_action( 'affwp_creatives_page_bottom' );
+			?>
 		</div>
 
 <?php

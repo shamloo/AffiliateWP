@@ -21,18 +21,14 @@ class Affiliate_WP_Membermouse extends Affiliate_WP_Base {
 
 			if( ! $membership->isFree() ) {
 				
-				if( $this->debug ) {
-					$this->log( 'Referral not created because membership is free.' );
-				}
+				$this->log( 'Referral not created because membership is free.' );
 
 				return;
 			}
 
 			if ( $this->is_affiliate_email( $member_data['email'] ) ) {
-				
-				if( $this->debug ) {
-					$this->log( 'Referral not created because affiliate\'s own account was used.' );
-				}
+
+				$this->log( 'Referral not created because affiliate\'s own account was used.' );
 
 				return; // Customers cannot refer themselves
 			}

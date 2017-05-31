@@ -5,7 +5,7 @@
  * @since 1.9
  *
  * @param int|AffWP\REST\Consumer $consumer Consumer ID or object.
- * @return \AffWP\Affiliate|false Consumer object, otherwise false.
+ * @return \AffWP\REST\Consumer|false Consumer object, otherwise false.
  */
 function affwp_get_rest_consumer( $consumer = null ) {
 
@@ -68,4 +68,56 @@ function affwp_auth_hash( $data, $key, $add_auth_key = true ) {
 		$data = $data . $auth_key;
 	}
 	return hash_hmac( 'md5', $data, $key );
+}
+
+/**
+ * Registers a new field on an existing AffiliateWP object type.
+ *
+ * Intended to be forward-compatible with register_rest_field().
+ *
+ * @since 1.9.5
+ *
+ * @param string $object_type Object the field is being registered to. Accepts 'affiliate', 'creative',
+ *                            'payout', 'referral', 'visit', or the above prefixed with 'affwp_'. Fields
+ *                            are actually registered with the prefixed object types, e.g. 'affwp_affiliate'.
+ * @param string $field_name  The attribute name.
+ * @param array  $args {
+ *     Optional. An array of arguments used to handle the registered field.
+ *
+ *     @type string|array|null $get_callback    Optional. The callback function used to retrieve the field
+ *                                              value. Default is 'null', the field will not be returned in
+ *                                              the response.
+ *     @type string|array|null $schema          Optional. The callback function used to create the schema for
+ *                                              this field. Default is 'null', no schema entry will be returned.
+ * }
+ * @return false|void False if the REST API is not available (<4.4), otherwise void.
+ */
+function affwp_register_rest_field( $object_type, $field_name, $args = array() ) {
+	if ( version_compare( $GLOBALS['wp_version'], '4.4', '<' ) ) {
+		return false;
+	}
+
+	switch ( $object_type ) {
+		case 'affiliate' :
+		case 'affwp_affiliate' :
+			affiliate_wp()->affiliates->REST->register_field( $field_name, $args );
+			break;
+		case 'creative' :
+		case 'affwp_creative' :
+			affiliate_wp()->creatives->REST->register_field( $field_name, $args );
+			break;
+		case 'payout' :
+		case 'affwp_payout' :
+			affiliate_wp()->affiliates->payouts->REST->register_field( $field_name, $args );
+			break;
+		case 'referral' :
+		case 'affwp_referral' :
+			affiliate_wp()->referrals->REST->register_field( $field_name, $args );
+			break;
+		case 'visit' :
+		case 'affwp_visit' :
+			affiliate_wp()->visits->REST->register_field( $field_name, $args );
+			break;
+		default : break;
+	}
 }

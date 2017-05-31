@@ -12,14 +12,8 @@ class Affiliate_WP_Visits_Graph extends Affiliate_WP_Graph {
 	 */
 	public function __construct( $_data = array() ) {
 
-		if( empty( $_data ) ) {
-
-			$this->data = $this->get_data();
-
-		}
-
 		// Generate unique ID
-		$this->id   = md5( rand() );
+		$this->id = md5( rand() );
 
 		// Setup default options;
 		$this->options = array(

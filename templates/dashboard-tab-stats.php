@@ -1,3 +1,6 @@
+<?php
+$affiliate_id = affwp_get_affiliate_id();
+?>
 <div id="affwp-affiliate-dashboard-referral-counts" class="affwp-tab-content">
 
 	<h4><?php _e( 'Statistics', 'affiliate-wp' ); ?></h4>
@@ -14,15 +17,22 @@
 
 		<tbody>
 			<tr>
-				<td><?php echo affwp_count_referrals( affwp_get_affiliate_id(), 'unpaid' ); ?></td>
-				<td><?php echo affwp_count_referrals( affwp_get_affiliate_id(), 'paid' ); ?></td>
-				<td><?php echo affwp_count_visits( affwp_get_affiliate_id() ); ?></td>
-				<td><?php echo affwp_get_affiliate_conversion_rate( affwp_get_affiliate_id() ); ?></td>
+				<td><?php echo affwp_count_referrals( $affiliate_id, 'unpaid' ); ?></td>
+				<td><?php echo affwp_count_referrals( $affiliate_id, 'paid' ); ?></td>
+				<td><?php echo affwp_count_visits( $affiliate_id ); ?></td>
+				<td><?php echo affwp_get_affiliate_conversion_rate( $affiliate_id ); ?></td>
 			</tr>
 		</tbody>
 	</table>
 
-	<?php do_action( 'affwp_affiliate_dashboard_after_counts', affwp_get_affiliate_id() ); ?>
+	<?php
+	/**
+	 * Fires immediately after stats counts in the affiliate area.
+     *
+  	 * @param int $affiliate_id Affiliate ID of the currently logged-in affiliate.
+	 */
+	do_action( 'affwp_affiliate_dashboard_after_counts', $affiliate_id );
+	?>
 
 </div>
 
@@ -38,14 +48,21 @@
 
 		<tbody>
 			<tr>
-				<td><?php echo affwp_get_affiliate_unpaid_earnings( affwp_get_affiliate_id(), true ); ?></td>
-				<td><?php echo affwp_get_affiliate_earnings( affwp_get_affiliate_id(), true ); ?></td>
-				<td><?php echo affwp_get_affiliate_rate( affwp_get_affiliate_id(), true ); ?></td>
+				<td><?php echo affwp_get_affiliate_unpaid_earnings( $affiliate_id, true ); ?></td>
+				<td><?php echo affwp_get_affiliate_earnings( $affiliate_id, true ); ?></td>
+				<td><?php echo affwp_get_affiliate_rate( $affiliate_id, true ); ?></td>
 			</tr>
 		</tbody>
 	</table>
 
-	<?php do_action( 'affwp_affiliate_dashboard_after_earnings', affwp_get_affiliate_id() ); ?>
+	<?php
+	/**
+	 * Fires immediately after earnings stats in the affiliate area.
+     *
+  	 * @param int $affiliate_id Affiliate ID of the currently logged-in affiliate.
+	 */
+	do_action( 'affwp_affiliate_dashboard_after_earnings', $affiliate_id );
+	?>
 
 </div>
 
@@ -62,7 +79,7 @@
 		</thead>
 
 		<tbody>
-			<?php if( $campaigns = affwp_get_affiliate_campaigns( affwp_get_affiliate_id() ) ) : ?>
+			<?php if( $campaigns = affwp_get_affiliate_campaigns( $affiliate_id ) ) : ?>
 				<?php foreach( $campaigns as $campaign ) : ?>
 					<tr>
 						<td><?php echo ! empty( $campaign->campaign ) ? esc_html( $campaign->campaign ) : __( 'None set', 'affiliate-wp' ); ?></td>
@@ -80,6 +97,13 @@
 		</tbody>
 	</table>
 
-	<?php do_action( 'affwp_affiliate_dashboard_after_campaign_stats', affwp_get_affiliate_id() ); ?>
+	<?php
+	/**
+	 * Fires immediately after campaign stats in the affiliate area.
+     *
+  	 * @param int $affiliate_id Affiliate ID of the currently logged-in affiliate.
+	 */
+	do_action( 'affwp_affiliate_dashboard_after_campaign_stats', $affiliate_id );
+	?>
 
 </div>

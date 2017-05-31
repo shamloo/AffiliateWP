@@ -82,9 +82,7 @@ class Affiliate_WP_PMP extends Affiliate_WP_Base {
 
 			if ( $user instanceof WP_User && $this->is_affiliate_email( $user->user_email, $affiliate_id ) ) {
 
-				if( $this->debug ) {
-					$this->log( 'Referral not created because affiliate\'s own account was used.' );
-				}
+				$this->log( 'Referral not created because affiliate\'s own account was used.' );
 
 				return; // Customers cannot refer themselves
 			}
@@ -258,7 +256,6 @@ class Affiliate_WP_PMP extends Affiliate_WP_Base {
 					<td class="form-field affwp-pmp-coupon-field">
 						<span class="affwp-ajax-search-wrap">
 							<span class="affwp-pmp-coupon-input-wrap">
-								<input type="hidden" name="user_id" id="user_id" value="<?php echo esc_attr( $user_id ); ?>" />
 								<input type="text" name="user_name" id="user_name" value="<?php echo esc_attr( $user_name ); ?>" class="affwp-user-search" data-affwp-status="active" autocomplete="off" style="width:150px" />
 							</span>
 							<small class="pmpro_lite"><?php _e( 'If you would like to connect this discount to an affiliate, enter the name of the affiliate it belongs to.', 'affiliate-wp' ); ?></small>
@@ -289,22 +286,15 @@ class Affiliate_WP_PMP extends Affiliate_WP_Base {
 			return;
 		}
 
-		$user_name = sanitize_text_field( $_POST['user_name'] );
+		// Store a copy of the username (if present) for use after processing.
+		$user_name = empty( $_POST['user_name'] ) ? '' : sanitize_text_field( $_POST['user_name'] );
 
-		if( empty( $_POST['user_id'] ) ) {
-			$user = get_user_by( 'login', $_POST['user_name'] );
-
-			if( $user ) {
-				$user_id = $user->ID;
-			}
-		} else {
-			$user_id = absint( $_POST['user_id'] );
-		}
+		$data = affiliate_wp()->utils->process_request_data( $_POST, 'user_name' );
 
 		$coupon       = $wpdb->get_row( "SELECT * FROM $wpdb->pmpro_discount_codes WHERE code = '" . esc_sql( $_REQUEST['code'] ) . "' LIMIT 1" );
-		$affiliate_id = affwp_get_affiliate_id( $user_id );
+		$affiliate_id = affwp_get_affiliate_id( $data['user_id'] );
 
-		if( empty( $_POST['user_name'] ) ) {
+		if( empty( $user_name ) ) {
 			affwp_delete_affiliate_meta( $affiliate_id, 'affwp_discount_pmp_' . $coupon->id );
 			return;
 		}

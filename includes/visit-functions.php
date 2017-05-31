@@ -62,7 +62,7 @@ function affwp_delete_visit( $visit ) {
 		return false;
 	}
 
-	if ( affiliate_wp()->visits->delete( $visit->ID ) ) {
+	if ( affiliate_wp()->visits->delete( $visit->ID, 'visit' ) ) {
 		// Decrease the visit count
 		affwp_decrease_affiliate_visit_count( $visit->affiliate_id );
 

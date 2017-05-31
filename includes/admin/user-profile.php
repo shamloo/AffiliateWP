@@ -46,16 +46,64 @@ function affwp_user_profile_fields( $user ) {
 			<th><label><?php esc_attr_e( 'Affiliate Actions', 'affiliate-wp' ); ?></label></th>
 			<td>
 				<?php if( $affiliate ):
-					echo '<a href="' . esc_url( add_query_arg( array( 'affwp_notice' => false, 'affiliate_id' => $affiliate->affiliate_id, 'action' => 'view_affiliate' ), admin_url( 'admin.php?page=affiliate-wp-affiliates' ) ) ) . '" class="button">' . __( 'Reports', 'affiliate-wp' ) . '</a>';
+					echo affwp_admin_link(
+						'affiliates',
+						__( 'Reports', 'affiliate-wp' ),
+						array(
+							'affwp_notice' => false,
+							'affiliate_id' => $affiliate->affiliate_id,
+							'action'       => 'view_affiliate'
+						),
+						array( 'class' => 'button' )
+					);
 					echo ' ';
-					echo '<a href="' . esc_url( add_query_arg( array( 'affwp_notice' => false, 'action' => 'edit_affiliate', 'affiliate_id' => $affiliate->affiliate_id ), admin_url( 'admin.php?page=affiliate-wp-affiliates' ) ) ) . '" class="button">' . __( 'Edit', 'affiliate-wp' ) . '</a>';
+					echo affwp_admin_link(
+						'affiliates',
+						__( 'Edit', 'affiliate-wp' ),
+						array(
+							'affwp_notice' => false,
+							'action'       => 'edit_affiliate',
+							'affiliate_id' => $affiliate->affiliate_id
+						),
+						array( 'class' => 'button' )
+					);
 				else: ?>
 					<a href="<?php echo add_query_arg( array( 'user_id' => $user->ID, 'register_affiliate' => 1 ), admin_url( 'user-edit.php' ) ); ?>" class="button"><?php esc_attr_e( 'Register', 'affiliate-wp' ); ?></a>
 				<?php endif; ?>
 			</td>
 		</tr>
+
+		<?php if ( ! affiliate_wp()->emails->is_email_disabled()
+			&& ( $affiliate && ! in_array( $affiliate->status, array( 'active', 'inactive' ), true ) )
+		) : ?>
+			<tr>
+				<th scope="row"><label for="disable-affiliate-email"><?php _e( 'Disable Affiliate Email',  'affiliate-wp' ); ?></label></th>
+				<td>
+					<label for="disable-affiliate-email"><input type="checkbox" id="disable-affiliate-email" name="disable_affiliate_email" value="1" <?php checked( true, get_user_meta( $user->ID, 'affwp_disable_affiliate_email', true ) ); ?> /> <?php _e( 'Disable the application accepted email sent to the affiliate.', 'affiliate-wp' ); ?></label>
+				</td>
+			</tr>
+		<?php endif; ?>
 	</table>
 	<?php
 }
 add_action( 'show_user_profile', 'affwp_user_profile_fields' );
 add_action( 'edit_user_profile', 'affwp_user_profile_fields' );
+
+/**
+ * Save AffWP user settings.
+ *
+ * @since 1.9.5
+ *
+ * @param int $user_id Current user ID.
+ */
+function affwp_user_profile_update( $user_id ) {
+	if ( current_user_can( 'edit_user', $user_id ) ) {
+		if ( isset( $_REQUEST['disable_affiliate_email'] ) ) {
+			update_user_meta( $user_id, 'affwp_disable_affiliate_email', 1 );
+		} else {
+			delete_user_meta( $user_id, 'affwp_disable_affiliate_email' );
+		}
+	}
+}
+add_action( 'personal_options_update',  'affwp_user_profile_update' );
+add_action( 'edit_user_profile_update', 'affwp_user_profile_update' );

@@ -234,4 +234,160 @@ class Tests extends UnitTestCase {
 		$this->assertSame( home_url( '?action=logout' ), affwp_get_logout_url() );
 	}
 
+	/**
+	 * @dataProvider _admin_urls
+	 * @covers ::affwp_admin_url()
+	 */
+	public function test_admin_url_types( $expected, $actual ) {
+		$this->assertSame( $expected, $actual );
+	}
+
+
+	/**
+	 * Data provider for admin URLs tests.
+	 */
+	public function _admin_urls() {
+		return array(
+			array( $this->_build_admin_url( '' ),           affwp_admin_url( '' ) ),
+			array( $this->_build_admin_url( 'affiliates' ), affwp_admin_url( 'affiliates' ) ),
+			array( $this->_build_admin_url( 'creatives' ),  affwp_admin_url( 'creatives' ) ),
+			array( $this->_build_admin_url( 'payouts' ),    affwp_admin_url( 'payouts' ) ),
+			array( $this->_build_admin_url( 'referrals' ),  affwp_admin_url( 'referrals' ) ),
+			array( $this->_build_admin_url( 'visits' ),     affwp_admin_url( 'visits' ) ),
+			array( $this->_build_admin_url( 'reports' ),    affwp_admin_url( 'reports' ) ),
+			array( $this->_build_admin_url( 'settings' ),   affwp_admin_url( 'settings' ) ),
+			array( $this->_build_admin_url( 'tools' ),      affwp_admin_url( 'tools' ) ),
+			array( $this->_build_admin_url( 'add-ons' ),    affwp_admin_url( 'add-ons' ) ),
+		);
+	}
+
+	/**
+	 * Helper that builds a simple admin URL.
+	 *
+	 * @param string $type Optional. Admin URL type. Default empty.
+	 * @return string Admin URL.
+	 */
+	protected function _build_admin_url( $type = '' ) {
+		if ( ! empty( $type ) ) {
+			$type = "-{$type}";
+		}
+
+		return 'http://' . WP_TESTS_DOMAIN . "/wp-admin/admin.php?page=affiliate-wp{$type}";
+	}
+
+	/**
+	 * @covers ::affwp_admin_url()
+	 */
+	public function test_admin_url_should_return_affiliate_wp_page_if_invalid_type() {
+		$this->assertSame( 'http://' . WP_TESTS_DOMAIN . '/wp-admin/admin.php?page=affiliate-wp', affwp_admin_url( 'foo' ) );
+	}
+
+	/**
+	 * @covers ::affwp_get_affiliate_import_fields()
+	 */
+	public function test_get_affiliate_import_fields_default_fields() {
+		$fields = array(
+			'email'           => __( 'Email (required)', 'affiliate-wp' ),
+			'username'        => __( 'Username', 'affiliate-wp' ),
+			'name'            => __( 'First/Full Name', 'affiliate-wp' ),
+			'last_name'       => __( 'Last Name', 'affiliate-wp' ),
+			'payment_email'   => __( 'Payment Email', 'affiliate-wp' ),
+			'rate'            => __( 'Rate', 'affiliate-wp' ),
+			'rate_type'       => __( 'Rate Type', 'affiliate-wp' ),
+			'earnings'        => __( 'Earnings', 'afiliate-wp' ),
+			'unpaid_earnings' => __( 'Unpaid Earnings', 'affiliate-wp' ),
+			'referrals'       => __( 'Referral Count', 'affiliate-wp' ),
+			'visits'          => __( 'Visit Count', 'affiliate-wp' ),
+			'status'          => __( 'Status', 'affiliate-wp' ),
+			'website_url'     => __( 'Website', 'affiliate-wp' ),
+			'date_registered' => __( 'Registration Date', 'affiliate-wp' ),
+		);
+
+		$this->assertEqualSets( $fields, affwp_get_affiliate_import_fields() );
+	}
+
+	/**
+	 * @covers ::affwp_get_affiliate_import_fields()
+	 */
+	public function test_get_affiliate_import_fields_with_required_field_email_unset_should_still_contain_field() {
+		add_filter( 'affwp_affiliate_import_fields', function( $fields ) {
+			unset( $fields['email'] );
+		} );
+
+		$this->assertArrayHasKey( 'email', affwp_get_affiliate_import_fields() );
+	}
+
+	/**
+	 * @covers ::affwp_get_referral_import_fields()
+	 */
+	public function test_get_referral_import_fields_default_fields() {
+		$fields = array(
+			'affiliate'       => __( 'Affiliate ID or Username (required)', 'affiliate-wp' ),
+			'amount'          => __( 'Amount (required)', 'affiliate-wp' ),
+			'email'           => __( 'Affiliate Email', 'affiliate-wp' ),
+			'username'        => __( 'Affiliate Username', 'affiliate-wp' ),
+			'first_name'      => __( 'Affiliate First/Full Name', 'affiliate-wp' ),
+			'last_name'       => __( 'Affiliate Last Name', 'affiliate-wp' ),
+			'payment_email'   => __( 'Payment Email', 'affiliate-wp' ),
+			'currency'        => __( 'Currency', 'affiliate-wp' ),
+			'description'     => __( 'Description', 'affiliate-wp' ),
+			'campaign'        => __( 'Campaign', 'affiliate-wp' ),
+			'reference'       => __( 'Reference', 'affiliate-wp' ),
+			'context'         => __( 'Context', 'affiliate-wp' ),
+			'status'          => __( 'Status', 'affiliate-wp' ),
+			'date'            => __( 'Date', 'affiliate-wp' )
+		);
+
+		$this->assertEqualSets( $fields, affwp_get_referral_import_fields() );
+	}
+
+	/**
+	 * @covers ::affwp_get_referral_import_fields()
+	 */
+	public function test_get_referral_import_fields_with_required_field_affiliate_unset_should_still_contain_field() {
+		add_filter( 'affwp_referral_import_fields', function( $fields ) {
+			unset( $fields['affiliate'] );
+		} );
+
+		$this->assertArrayHasKey( 'affiliate', affwp_get_referral_import_fields() );
+	}
+
+	/**
+	 * @covers ::affwp_get_referral_import_fields()
+	 */
+	public function test_get_referral_import_fields_with_required_field_amount_unset_should_still_contain_field() {
+		add_filter( 'affwp_referral_import_fields', function( $fields ) {
+			unset( $fields['amount'] );
+		} );
+
+		$this->assertArrayHasKey( 'amount', affwp_get_referral_import_fields() );
+	}
+
+	/**
+	 * @covers ::affwp_do_import_fields()
+	 */
+	public function test_do_import_fields_with_valid_field_type_should_output_fields_markup() {
+		ob_start();
+
+		affwp_do_import_fields( 'affiliates' );
+
+		$output   = ob_get_clean();
+		$expected = '<select name="affwp-import-field[email]" class="affwp-import-csv-column">';
+
+		$this->assertContains( $expected, $output );
+	}
+
+	/**
+	 * @covers ::affwp_do_import_fields()
+	 */
+	public function test_do_import_fields_with_invalid_field_type_should_output_nothing() {
+		ob_start();
+
+		affwp_do_import_fields( 'foo' );
+
+		$output = ob_get_clean();
+
+		$this->assertSame( '', $output );
+	}
+
 }

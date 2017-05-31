@@ -2,6 +2,15 @@
 
 function affiliate_wp_install() {
 
+	// Needed for site-related functionality.
+	if ( ! is_multisite() ) {
+		if ( true === version_compare( $GLOBALS['wp_version'], '4.6', '>=' ) ) {
+			require_once ABSPATH . WPINC . '/class-wp-site-query.php';
+			require_once ABSPATH . WPINC . '/class-wp-network-query.php';
+		}
+		require_once ABSPATH . WPINC . '/ms-blogs.php';
+	}
+
 	// Create affiliate caps
 	$roles = new Affiliate_WP_Capabilities;
 	$roles->add_caps();
@@ -32,7 +41,7 @@ function affiliate_wp_install() {
 				'post_title'     => __( 'Affiliate Area', 'affiliate-wp' ),
 				'post_content'   => '[affiliate_area]',
 				'post_status'    => 'publish',
-				'post_author'    => 1,
+				'post_author'    => get_current_user_id(),
 				'post_type'      => 'page',
 				'comment_status' => 'closed'
 			)
@@ -40,17 +49,51 @@ function affiliate_wp_install() {
 
 		// Update settings.
 		$affiliate_wp_install->settings->set( array(
-			'affiliates_page' => $affiliate_area
+			'affiliates_page'              => $affiliate_area,
+			'required_registration_fields' => array(
+				'your_name'   => __( 'Your Name', 'affiliate-wp' ),
+				'website_url' => __( 'Website URL', 'affiliate-wp' )
+			)
 		), $save = true );
+
 	}
 
 	// 3 equals unchecked
 	update_option( 'affwp_js_works', 3 );
 	update_option( 'affwp_is_installed', '1' );
 	update_option( 'affwp_version', AFFILIATEWP_VERSION );
-	
+
 	// Clear rewrite rules
 	$affiliate_wp_install->rewrites->flush_rewrites();
+
+	// Set past upgrade routines complete for all sites.
+	if ( ! is_multisite() ) {
+
+		$sites = array( 1 );
+
+	} elseif ( true === version_compare( $GLOBALS['wp_version'], '4.6', '<' ) ) {
+
+		$sites = wp_list_pluck( 'blog_id', wp_get_sites() );
+
+	} else {
+
+		$sites = get_sites( array( 'fields' => 'ids' ) );
+
+	}
+
+	$completed_upgrades = array(
+		'upgrade_v20_recount_unpaid_earnings'
+	);
+
+	foreach ( $sites as $site_id ) {
+
+		switch_to_blog( $site_id );
+
+		update_option( 'affwp_completed_upgrades', $completed_upgrades );
+
+		restore_current_blog();
+
+	}
 
 	// Bail if activating from network, or bulk
 	if ( is_network_admin() || isset( $_GET['activate-multi'] ) ) {

@@ -43,7 +43,7 @@ class Affiliate_WP_Migrate_WP_Affiliate extends Affiliate_WP_Migrate_Base {
 		$offset     = ($step - 1) * 100;
 		$affiliates = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}affiliates_tbl LIMIT $offset, 100;" );
 
-		$to_delete = array();
+		$to_delete = $inserted = array();
 
 		if( $affiliates ) {
 			foreach( $affiliates as $affiliate ) {
@@ -90,7 +90,15 @@ class Affiliate_WP_Migrate_WP_Affiliate extends Affiliate_WP_Migrate_Base {
 				// Insert a new affiliate - we need to always insert to make sure the affiliate_ids will match
 				$id = affiliate_wp()->affiliates->insert( $args, 'affiliate' );
 
+				$inserted[] = $id;
 			}
+
+			if ( ! $current_count = affiliate_wp()->utils->data->get( 'affwp_migrate_affiliates_total_count' ) ) {
+				$current_count = 0;
+			}
+			$current_count = $current_count + count( $inserted );
+
+			affiliate_wp()->utils->data->write( 'affwp_migrate_affiliates_total_count', $current_count );
 
 			return true;
 
@@ -103,9 +111,16 @@ class Affiliate_WP_Migrate_WP_Affiliate extends Affiliate_WP_Migrate_Base {
 
 	}
 
+	/**
+	 * Signifies the affiliate migration has completed.
+	 *
+	 * @access public
+	 */
 	public function finish() {
 		delete_option( 'affwp_migrate_direct_affiliates' );
-		wp_redirect( admin_url( 'admin.php?page=affiliate-wp' ) ); exit;
+
+		wp_safe_redirect( affwp_admin_url( 'affiliates', array( 'affwp_notice' => 'affiliates_migrated' ) ) );
+		exit;
 	}
 
 }

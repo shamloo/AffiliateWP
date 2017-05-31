@@ -24,16 +24,6 @@ class Affiliate_WP_Rewrites {
 
 		add_action( 'init', array( $this, 'rewrites' ), 999999 );
 
-		if ( function_exists( 'wc_get_page_id' ) && get_option( 'page_on_front' ) == wc_get_page_id( 'shop' ) ) {
-
-			add_action( 'pre_get_posts', array( $this, 'unset_query_arg' ), -1 );
-
-		} else {
-
-			add_action( 'pre_get_posts', array( $this, 'unset_query_arg' ), 999999 );
-
-		}
-
 		add_action( 'redirect_canonical', array( $this, 'prevent_canonical_redirect' ), 0, 2 );
 	}
 
@@ -61,10 +51,16 @@ class Affiliate_WP_Rewrites {
 	 */
 	public function flush_rewrites() {
 
+		/**
+		 * Fires immediately prior to flushing rewrite rules.
+		 */
 		do_action( 'affwp_pre_flush_rewrites' );
 
 		flush_rewrite_rules();
 
+		/**
+		 * Fires immediately after flushing rewrite rules.
+		 */
 		do_action( 'affwp_post_flush_rewrites' );
 	}
 
@@ -86,7 +82,7 @@ class Affiliate_WP_Rewrites {
 
 		}
 
-		add_rewrite_endpoint( affiliate_wp()->tracking->get_referral_var(), EP_ALL );
+		add_rewrite_endpoint( affiliate_wp()->tracking->get_referral_var(), EP_ALL, false );
 
 	}
 

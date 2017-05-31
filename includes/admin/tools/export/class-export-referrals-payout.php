@@ -11,6 +11,8 @@
  * @since       1.0
  */
 
+use AffWP\Utils\Exporter;
+
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
@@ -19,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  *
  * @since 1.0
  */
-class Affiliate_WP_Referral_Payout_Export extends Affiliate_WP_Referral_Export {
+class Affiliate_WP_Referral_Payout_Export extends Affiliate_WP_Referral_Export implements Exporter\CSV {
 
 	/**
 	 * Our export type. Used for export-type specific filters/actions
@@ -36,6 +38,15 @@ class Affiliate_WP_Referral_Payout_Export extends Affiliate_WP_Referral_Export {
 	 * @var    array
 	 */
 	public $referrals = array();
+
+	/**
+	 * ID of the specific affiliate to include referrals for.
+	 *
+	 * @access public
+	 * @since  2.0
+	 * @var    int
+	 */
+	public $affiliate_id = 0;
 
 	/**
 	 * Constructor.
@@ -66,10 +77,11 @@ class Affiliate_WP_Referral_Payout_Export extends Affiliate_WP_Referral_Export {
 	}
 
 	/**
-	 * Get the data being exported
+	 * Retrieves the data being exported.
 	 *
 	 * @access public
-	 * @since 1.0
+	 * @since  1.0
+	 *
 	 * @return array $data Data for Export
 	 */
 	public function get_data() {
@@ -144,7 +156,10 @@ class Affiliate_WP_Referral_Payout_Export extends Affiliate_WP_Referral_Export {
 
 		}
 
+		/** This filter is documented in includes/admin/tools/export/class-export.php */
 		$data = apply_filters( 'affwp_export_get_data', $data );
+
+		/** This filter is documented in includes/admin/tools/export/class-export.php */
 		$data = apply_filters( 'affwp_export_get_data_' . $this->export_type, $data );
 
 		return $data;
@@ -160,9 +175,10 @@ class Affiliate_WP_Referral_Payout_Export extends Affiliate_WP_Referral_Export {
 	 */
 	public function get_referrals_for_export( $args = array() ) {
 		$args = wp_parse_args( $args, array(
-			'status' => 'unpaid',
-			'date'   => ! empty( $this->date ) ? $this->date : '',
-			'number' => -1
+			'status'       => 'unpaid',
+			'date'         => ! empty( $this->date ) ? $this->date : '',
+			'number'       => -1,
+			'affiliate_id' => $this->affiliate_id,
 		) );
 
 		return affiliate_wp()->referrals->get_referrals( $args );

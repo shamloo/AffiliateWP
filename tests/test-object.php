@@ -152,4 +152,21 @@ class Tests extends UnitTestCase {
 			$this->assertFalse( $affiliate->save() );
 		}
 	}
+
+	/**
+	 * @covers AffWP\Base_Object::fill_vars()
+	 */
+	public function test_fill_vars_with_defaults_should_always_populate_those_values() {
+		$affiliate = affwp_get_affiliate( self::$affiliate_id );
+
+		$this->assertFalse( isset( $affiliate->test ) );
+
+		// Set filled to null to force fill_vars() to populate the defaults.
+		$affiliate->set( 'filled', null );
+
+		// Apply defaults.
+		$affiliate::fill_vars( $affiliate, array( 'test' => true ) );
+
+		$this->assertTrue( isset( $affiliate->test ) );
+	}
 }

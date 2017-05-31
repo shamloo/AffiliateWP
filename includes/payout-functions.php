@@ -81,7 +81,7 @@ function affwp_delete_payout( $payout ) {
 		}
 	}
 
-	if ( affiliate_wp()->affiliates->payouts->delete( $payout->ID ) ) {
+	if ( affiliate_wp()->affiliates->payouts->delete( $payout->ID, 'payout' ) ) {
 		/**
 		 * Fires immediately after a payout has been deleted.
 		 *

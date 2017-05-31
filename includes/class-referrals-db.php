@@ -144,6 +144,10 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 			$args['products'] = maybe_serialize( $args['products'] );
 		}
 
+		if ( ! empty( $args['custom'] ) ) {
+			$args['custom']	 = maybe_serialize( $args['custom'] );
+		}
+
 		$add  = $this->insert( $args, 'referral' );
 
 		if ( $add ) {
@@ -174,44 +178,64 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	*/
 	public function update_referral( $referral = 0, $data = array() ) {
 
+		$args = array();
+
 		if ( ! $referral = affwp_get_referral( $referral ) ) {
 			return false;
 		}
 
-		if( isset( $data['amount'] ) ) {
-			$data['amount'] = affwp_sanitize_amount( $data['amount'] );
-		}
-
 		if( ! empty( $data['products'] ) ) {
-			$data['products'] = maybe_serialize( $data['products'] );
+			$args['products'] = maybe_serialize( $data['products'] );
 		}
 
 		if ( ! empty( $data['date'] ) ) {
-			$data['date'] = date_i18n( 'Y-m-d H:i:s', strtotime( $data['date'] ) );
+			$args['date'] = date_i18n( 'Y-m-d H:i:s', strtotime( $data['date'] ) );
 		}
 
-		$update = $this->update( $referral->ID, $data, '', 'referral' );
+		$args['affiliate_id']  = ! empty( $data['affiliate_id' ] ) ? absint( $data['affiliate_id'] )             : $referral->affiliate_id;
+		$args['visit_id']      = ! empty( $data['visit_id' ] )     ? absint( $data['visit_id'] )                 : $referral->visit_id;
+		$args['description']   = ! empty( $data['description' ] )  ? sanitize_text_field( $data['description'] ) : '';
+		$args['status']        = ! empty( $data['status'] )        ? sanitize_key( $data['status'] )             : $referral->status;
+		$args['amount']        = ! empty( $data['amount'] )        ? affwp_sanitize_amount( $data['amount'] )    : '';
+		$args['currency']      = ! empty( $data['currency'] )      ? sanitize_text_field( $data['currency'] )    : '';
+		$args['custom']        = ! empty( $data['custom'] )        ? sanitize_text_field( $data['custom'] )      : '';
+		$args['context']       = ! empty( $data['context'] )       ? sanitize_text_field( $data['context'] )     : '';
+		$args['campaign']      = ! empty( $data['campaign'] )      ? sanitize_text_field( $data['campaign'] )    : '';
+		$args['reference']     = ! empty( $data['reference'] )     ? sanitize_text_field( $data['reference'] )   : '';
+
+		$update = $this->update( $referral->ID, $args, '', 'referral' );
 
 		if( $update ) {
 
-			if( ! empty( $data['status'] ) && $referral->status !== $data['status'] ) {
+			if( ! empty( $args['status'] ) && $referral->status !== $args['status'] ) {
 
-				affwp_set_referral_status( $referral->ID, $data['status'] );
+				affwp_set_referral_status( $referral->ID, $args['status'] );
 
 			} elseif( 'paid' === $referral->status ) {
 
-				if( $referral->amount > $data['amount'] ) {
+				if( $referral->amount > $args['amount'] ) {
 
-					$change = $referral->amount - $data['amount'];
+					$change = $referral->amount - $args['amount'];
 					affwp_decrease_affiliate_earnings( $referral->affiliate_id, $change );
 
-				} elseif( $referral->amount < $data['amount'] ) {
+				} elseif( $referral->amount < $args['amount'] ) {
 
-					$change = $data['amount'] - $referral->amount;
+					$change = $args['amount'] - $referral->amount;
 					affwp_increase_affiliate_earnings( $referral->affiliate_id, $change );
 
 				}
 
+			} elseif( 'unpaid' === $referral->status ) {
+
+				if ( $referral->amount > $args['amount'] ) {
+
+					affwp_decrease_affiliate_unpaid_earnings( $referral->affiliate_id, $referral->amount - $args['amount'] );
+
+				} elseif ( $referral->amount < $args['amount'] ) {
+
+					affwp_increase_affiliate_unpaid_earnings( $referral->affiliate_id, $args['amount'] - $referral->amount );
+
+				}
 			}
 
 			return $update;
@@ -229,10 +253,14 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	 *
 	 * @param string $column  Column name. See get_columns().
 	 * @param string $context Optional. Context for which to retrieve a referral. Default empty.
-	 * @return object|null Database query result object or null on failure.
+	 * @return object|false Database query result object or false on failure.
 	*/
 	public function get_by( $column, $row_id, $context = '' ) {
 		global $wpdb;
+
+		if( empty( $column ) || empty( $row_id ) ) {
+			return false;
+		}
 
 		$and = '';
 		if( ! empty( $context ) ) {
@@ -284,6 +312,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	 *     @type string       $fields         Fields to query for. Accepts 'ids' or '*' (all). Default '*'.
 	 * }
 	 * @param   bool  $count  Optional. Whether to return only the total number of results found. Default false.
+	 * @return \AffWP\Referral[]|int|false
 	*/
 	public function get_referrals( $args = array(), $count = false ) {
 
@@ -555,7 +584,8 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 		$last_changed = wp_cache_get( 'last_changed', $this->cache_group );
 		if ( ! $last_changed ) {
-			wp_cache_set( 'last_changed', microtime(), $this->cache_group );
+			$last_changed = microtime();
+			wp_cache_set( 'last_changed', $last_changed, $this->cache_group );
 		}
 
 		$cache_key = "{$key}:{$last_changed}";
@@ -593,10 +623,12 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	*/
 	public function paid_earnings( $date = '', $affiliate_id = 0, $format = true ) {
 
-		$args                 = array();
-		$args['status']       = 'paid';
-		$args['affiliate_id'] = $affiliate_id;
-		$args['number']       = '-1';
+		$args = array(
+			'status'       => 'paid',
+			'affiliate_id' => $affiliate_id,
+			'number'       => -1,
+			'fields'       => 'amount',
+		);
 
 		if( 'alltime' == $date ) {
 			return $this->get_alltime_earnings();
@@ -629,8 +661,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 		}
 
 		$referrals = $this->get_referrals( $args );
-
-		$earnings  = array_sum( wp_list_pluck( $referrals, 'amount' ) );
+		$earnings  = array_sum( $referrals );
 
 		if( $format ) {
 			$earnings = affwp_currency_filter( affwp_format_amount( $earnings ) );
@@ -723,7 +754,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 		if ( ! empty( $date ) ) {
 
 			// Whitelist for back-compat string values.
-			if ( is_string( $date ) && ! in_array( $date, array( 'month', 'last-month' ) ) ) {
+			if ( is_string( $date ) && ! in_array( $date, array( 'month', 'last-month', 'today' ) ) ) {
 				$date = '';
 			}
 

@@ -9,14 +9,8 @@ class Affiliate_WP_Referrals_Graph extends Affiliate_WP_Graph {
 	 */
 	public function __construct( $_data = array() ) {
 
-		if( empty( $_data ) ) {
-
-			$this->data = $this->get_data();
-
-		}
-
 		// Generate unique ID
-		$this->id   = md5( rand() );
+		$this->id = md5( rand() );
 
 		// Setup default options;
 		$this->options = array(
@@ -37,6 +31,7 @@ class Affiliate_WP_Referrals_Graph extends Affiliate_WP_Graph {
 			'points'          => true,
 			'affiliate_id'    => false,
 			'show_controls'   => true,
+			'form_wrapper'    => true,
 		);
 
 	}

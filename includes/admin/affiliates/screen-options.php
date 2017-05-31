@@ -40,6 +40,11 @@ function affwp_affiliates_screen_options() {
 		new AffWP_Affiliates_Table();
 	}
 
+	/**
+	 * Fires in the affiliates screen options area.
+	 *
+	 * @param string $screen The current screen.
+	 */
 	do_action( 'affwp_affiliates_screen_options', $screen );
 
 }

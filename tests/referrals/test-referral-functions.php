@@ -41,8 +41,9 @@ class Tests extends UnitTestCase {
 	public static function wpSetUpBeforeClass() {
 
 		$args = array(
-			'user_id'  => 1,
-			'earnings' => 0
+			'user_id'         => 1,
+			'earnings'        => 0,
+			'unpaid_earnings' => 0,
 		);
 
 		self::$_affiliate_id = parent::affwp()->affiliate->create( $args );
@@ -64,6 +65,15 @@ class Tests extends UnitTestCase {
 		);
 
 		self::$_visit_id = parent::affwp()->visit->create( $args );
+	}
+
+	/**
+	 * Runs during test teardown.
+	 */
+	public function tearDown() {
+		affiliate_wp()->settings->set( array( 'referral_url_blacklist' => '' ) );
+
+		parent::tearDown();
 	}
 
 	/**
@@ -95,6 +105,30 @@ class Tests extends UnitTestCase {
 	 */
 	public function test_get_referral_with_invalid_referral_id_should_return_false() {
 		$this->assertFalse( affwp_get_referral( 0 ) );
+	}
+
+	/**
+	 * @covers ::affwp_get_referral()
+	 */
+	public function test_get_referral_with_string_custom_value_should_retrieve_the_string_unserialized() {
+		$referral = $this->factory->referral->create_and_get( array(
+			'affiliate_id' => self::$_affiliate_id,
+			'custom'       => 'foobar',
+		) );
+
+		$this->assertFalse( is_serialized( $referral->custom ) );
+	}
+
+	/**
+	 * @covers ::affwp_get_referral()
+	 */
+	public function test_get_referral_with_array_custom_value_should_retrieve_the_array_unserialized() {
+		$referral = $this->factory->referral->create_and_get( array(
+			'affiliate_id' => self::$_affiliate_id,
+			'custom'       => array( 'foo', 'bar' ),
+		) );
+
+		$this->assertFalse( is_serialized( $referral->custom ) );
 	}
 
 	/**
@@ -245,6 +279,39 @@ class Tests extends UnitTestCase {
 	/**
 	 * @covers ::affwp_set_referral_status()
 	 */
+	public function test_set_referral_status_with_new_status_unpaid_should_increase_unpaid_earnings() {
+		$referral            = affwp_get_referral( self::$_referral_id );
+		$old_unpaid_earnings = affwp_get_affiliate_unpaid_earnings( self::$_affiliate_id );
+
+		// Should be zero to start.
+		$this->assertSame( floatval( 0 ), $old_unpaid_earnings );
+
+		// Switch to paid so we can switch from paid to unpaid.
+		affwp_set_referral_status( $referral, 'paid' );
+
+		affwp_set_referral_status( $referral, 'unpaid' );
+
+		$new_unpaid_earnings = affwp_get_affiliate_unpaid_earnings( self::$_affiliate_id );
+
+		$this->assertSame( floatval( $referral->amount ) + $old_unpaid_earnings, $new_unpaid_earnings );
+	}
+
+	/**
+	 * @covers ::affwp_set_referral_status()
+	 */
+	public function test_set_referral_status_with_new_status_not_unpaid_old_status_unpaid_should_decrease_unpaid_earnings() {
+		// Start off with an unpaid referral.
+		affwp_set_referral_status( self::$_referral_id, 'unpaid' );
+
+		// Switch to pending.
+		affwp_set_referral_status( self::$_referral_id, 'pending' );
+
+		$this->assertSame( floatval( 0 ), affwp_get_affiliate_unpaid_earnings( self::$_affiliate_id ) );
+	}
+
+	/**
+	 * @covers ::affwp_set_referral_status()
+	 */
 	public function test_set_referral_status_with_new_status_unpaid_old_status_pending_should_be_marked_accepted() {
 		affiliate_wp()->referrals->update( self::$_referral_id, array(
 			'visit_id' => self::$_visit_id
@@ -309,7 +376,7 @@ class Tests extends UnitTestCase {
 	/**
 	 * @covers ::affwp_add_referral()
 	 */
-	public function test_add_referral_with_emty_user_id_empty_affiliate_should_return_zero() {
+	public function test_add_referral_with_empty_user_id_empty_affiliate_should_return_zero() {
 		$this->assertSame( 0, affwp_add_referral( null ) );
 	}
 
@@ -340,6 +407,100 @@ class Tests extends UnitTestCase {
 		) );
 
 		$this->assertInstanceOf( 'AffWP\Referral', affwp_get_referral( $referral_id ) );
+	}
+
+	/**
+	 * @covers ::affwp_add_referral()
+	 */
+	public function test_add_referral_with_un_associated_visit_id_should_store_visit_id() {
+		$referral_id = affwp_add_referral( array(
+			'affiliate_id' => self::$_affiliate_id,
+			'visit_id'     => self::$_visit_id,
+		) );
+
+		$result = affwp_get_referral( $referral_id );
+
+		$this->assertSame( self::$_visit_id, $result->visit_id );
+
+		// Clean up.
+		affwp_delete_referral( $referral_id );
+	}
+
+	/**
+	 * @covers ::affwp_add_referral()
+	 */
+	public function test_add_referral_with_already_associated_visit_id_should_not_store_visit_id() {
+		// Associate the visit.
+		affiliate_wp()->referrals->update_referral( self::$_referral_id, array(
+			'visit_id' => self::$_visit_id
+		) );
+
+		$referral_id = affwp_add_referral( array(
+			'affiliate_id' => self::$_affiliate_id,
+			'visit_id'     => self::$_visit_id,
+		) );
+
+		$result = affwp_get_referral( $referral_id );
+
+		$this->assertNotSame( self::$_visit_id, $result->visit_id );
+		$this->assertSame( 0, $result->visit_id );
+
+		// Clean up.
+		affiliate_wp()->referrals->update_referral( self::$_referral_id, array( 'visit_id' => 0 ) );
+		affwp_delete_referral( $referral_id );
+	}
+
+	/**
+	 * @covers ::affwp_add_referral()
+	 */
+	public function test_add_referral_with_empty_custom_field_should_store_empty_custom_value() {
+		$referral_id = affwp_add_referral( array(
+			'affiliate_id' => self::$_affiliate_id,
+			'custom'       => '',
+		) );
+
+		$result = affwp_get_referral( $referral_id );
+
+		$this->assertSame( '', $result->custom );
+
+		// Clean up.
+		affwp_delete_referral( $referral_id );
+	}
+
+	/**
+	 * @covers ::affwp_add_referral()
+	 */
+	public function test_add_referral_with_string_custom_value_should_store_that_value() {
+		$referral_id = affwp_add_referral( array(
+			'affiliate_id' => self::$_affiliate_id,
+			'custom'       => 'foo'
+		) );
+
+		$result = affwp_get_referral( $referral_id );
+
+		$this->assertSame( 'foo', $result->custom );
+
+		// Clean up.
+		affwp_delete_referral( $referral_id );
+	}
+
+	/**
+	 * @covers ::affwp_add_referral()
+	 */
+	public function test_add_referral_with_array_custom_value_should_store_that_array() {
+		$custom = array( 'foo', 'bar' );
+
+		$referral_id = affwp_add_referral( array(
+			'affiliate_id' => self::$_affiliate_id,
+			'custom'       => $custom,
+		) );
+
+		$result = affwp_get_referral( $referral_id );
+
+		$this->assertEqualSets( $custom, $result->custom );
+
+		// Clean up.
+		affwp_delete_referral( $referral_id );
 	}
 
 	/**
@@ -395,7 +556,7 @@ class Tests extends UnitTestCase {
 
 		$new_earnings = affwp_get_affiliate_earnings( self::$_affiliate_id );
 
-		$this->assertEquals( $old_earnings - 10, $new_earnings );
+		$this->assertSame( $old_earnings - 10, $new_earnings );
 	}
 
 	/**
@@ -412,5 +573,71 @@ class Tests extends UnitTestCase {
 		$new_count = affwp_get_affiliate_referral_count( self::$_affiliate_id );
 
 		$this->assertEquals( --$old_count, $new_count );
+	}
+
+	/**
+	 * @covers ::affwp_delete_referral()
+	 */
+	public function test_delete_referral_with_status_unpaid_should_decrease_unpaid_earnings() {
+		// Needs to be unpaid.
+		affwp_set_referral_status( self::$_referral_id, 'unpaid' );
+
+		$old_unpaid_earnings = affwp_get_affiliate_unpaid_earnings( self::$_affiliate_id );
+
+		affwp_delete_referral( self::$_referral_id );
+
+		$new_unpaid_earnings = affwp_get_affiliate_unpaid_earnings( self::$_affiliate_id );
+
+		$this->assertSame( $old_unpaid_earnings - 10, $new_unpaid_earnings );
+	}
+
+	/**
+	 * @covers ::affwp_get_banned_urls()
+	 * @group settings
+	 */
+	public function test_get_banned_urls_should_return_urls_entered_one_per_line() {
+		$urls = array( 'https://google.com', 'http://google.de', 'http://google.co.nz' );
+
+		affiliate_wp()->settings->set( array( 'referral_url_blacklist' => implode( "\n", $urls ) ) );
+
+		$result = affwp_get_banned_urls();
+
+		$this->assertEqualSets( $urls, $result );
+	}
+
+	/**
+	 * @covers ::affwp_get_banned_urls()
+	 * @group settings
+	 */
+	public function test_get_banned_urls_should_return_empty_array_if_empty() {
+		$this->assertEmpty( affwp_get_banned_urls() );
+	}
+
+	/**
+	 * @covers ::affwp_is_url_banned()
+	 * @group settings
+	 */
+	public function test_is_url_banned_should_return_false_if_no_urls_are_set() {
+		$this->assertFalse( affwp_is_url_banned( WP_TESTS_DOMAIN ) );
+	}
+
+	/**
+	 * @covers ::affwp_is_url_banned()
+	 * @group settings
+	 */
+	public function test_is_url_banned_should_return_false_if_url_not_in_blacklist() {
+		affiliate_wp()->settings->set( array( 'referral_url_blacklist' => 'https://google.com' ) );
+
+		$this->assertFalse( affwp_is_url_banned( WP_TESTS_DOMAIN ) );
+	}
+
+	/**
+	 * @covers ::affwp_is_url_banned()
+	 * @group settings
+	 */
+	public function test_is_url_banned_should_return_true_if_url_is_in_blacklist() {
+		affiliate_wp()->settings->set( array( 'referral_url_blacklist' => WP_TESTS_DOMAIN ) );
+
+		$this->assertTrue( affwp_is_url_banned( WP_TESTS_DOMAIN ) );
 	}
 }

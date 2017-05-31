@@ -11,6 +11,8 @@
  * @since       1.3
  */
 
+use AffWP\Utils\Exporter;
+
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
@@ -19,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  *
  * @since 1.3
  */
-class Affiliate_WP_Affiliate_Export extends Affiliate_WP_Export {
+class Affiliate_WP_Affiliate_Export extends Affiliate_WP_Export implements Exporter\CSV {
 
 	/**
 	 * Our export type. Used for export-type specific filters/actions
@@ -54,6 +56,7 @@ class Affiliate_WP_Affiliate_Export extends Affiliate_WP_Export {
 			'earnings'        => __( 'Earnings', 'affiliate-wp' ),
 			'referrals'       => __( 'Referrals', 'affiliate-wp' ),
 			'visits'          => __( 'Visits', 'affiliate-wp' ),
+			'conversion_rate' => __( 'Conversion Rate', 'affiliate-wp' ),
 			'status'          => __( 'Status', 'affiliate-wp' ),
 			'date_registered' => __( 'Date Registered', 'affiliate-wp' )
 		);
@@ -61,10 +64,11 @@ class Affiliate_WP_Affiliate_Export extends Affiliate_WP_Export {
 	}
 
 	/**
-	 * Get the data being exported
+	 * Retrieves the data being exported.
 	 *
 	 * @access public
-	 * @since 1.3
+	 * @since  1.3
+	 *
 	 * @return array $data Data for Export
 	 */
 	public function get_data() {
@@ -92,6 +96,7 @@ class Affiliate_WP_Affiliate_Export extends Affiliate_WP_Export {
 					'earnings'        => $affiliate->earnings,
 					'referrals'       => $affiliate->referrals,
 					'visits'          => $affiliate->visits,
+					'conversion_rate' => affwp_get_affiliate_conversion_rate( $affiliate->affiliate_id ),
 					'status'          => $affiliate->status,
 					'date_registered' => $affiliate->date_registered,
 				);
@@ -100,7 +105,10 @@ class Affiliate_WP_Affiliate_Export extends Affiliate_WP_Export {
 
 		}
 
+		/** This filter is documented in includes/admin/tools/export/class-export.php */
 		$data = apply_filters( 'affwp_export_get_data', $data );
+
+		/** This filter is documented in includes/admin/tools/export/class-export.php */
 		$data = apply_filters( 'affwp_export_get_data_' . $this->export_type, $data );
 
 		return $data;

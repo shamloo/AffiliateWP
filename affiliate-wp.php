@@ -5,7 +5,7 @@
  * Description: Affiliate Plugin for WordPress
  * Author: AffiliateWP, LLC
  * Author URI: https://affiliatewp.com
- * Version: 1.9.4
+ * Version: 2.0.9.2
  * Text Domain: affiliate-wp
  * Domain Path: languages
  *
@@ -24,7 +24,7 @@
  * @package AffiliateWP
  * @category Core
  * @author Pippin Williamson
- * @version 1.9.4
+ * @version 2.0.9.2
  */
 
 // Exit if accessed directly
@@ -56,7 +56,7 @@ final class Affiliate_WP {
 	 * @since  1.0
 	 * @var    string
 	 */
-	private $version = '1.9.4';
+	private $version = '2.0.9.2';
 
 	/**
 	 * The affiliates DB instance variable.
@@ -203,6 +203,24 @@ final class Affiliate_WP {
 	public $REST;
 
 	/**
+	 * The capabilities class instance variable.
+	 *
+	 * @access public
+	 * @since  2.0
+	 * @var    Affiliate_WP_Capabilities
+	 */
+	public $capabilities;
+
+	/**
+	 * The utilities class instance variable.
+	 *
+	 * @access public
+	 * @since  2.0
+	 * @var    Affiliate_WP_Utilities
+	 */
+	public $utils;
+
+	/**
 	 * Main Affiliate_WP Instance
 	 *
 	 * Insures that only one instance of Affiliate_WP exists in memory at any one
@@ -328,11 +346,13 @@ final class Affiliate_WP {
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affwp-visit.php';
 
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/actions.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/abstracts/class-affwp-registry.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/settings/class-settings.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/abstracts/class-db.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affiliates-db.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-payouts-db.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-capabilities.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-utilities.php';
 
 		if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 
@@ -358,7 +378,6 @@ final class Affiliate_WP {
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/settings/display-settings.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/visits/visits.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/tools.php';
-			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/class-upgrades.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/plugins.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/class-migrate.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/add-ons.php';
@@ -375,7 +394,6 @@ final class Affiliate_WP {
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-visits-graph.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-integrations.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-login.php';
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-logging.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-referrals-db.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-register.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-templates.php';
@@ -456,6 +474,8 @@ final class Affiliate_WP {
 		self::$instance->creative       = new Affiliate_WP_Creatives;
 		self::$instance->rewrites       = new Affiliate_WP_Rewrites;
 		self::$instance->REST           = new Affiliate_WP_REST;
+		self::$instance->capabilities   = new Affiliate_WP_Capabilities;
+		self::$instance->utils          = new Affiliate_WP_Utilities;
 
 		self::$instance->updater();
 	}
@@ -477,11 +497,12 @@ final class Affiliate_WP {
 
 		// setup the updater
 		$affwp_updater = new AFFWP_Plugin_Updater( 'https://affiliatewp.com', __FILE__, array(
-				'version' 	=> AFFILIATEWP_VERSION,
-				'license' 	=> $license_key,
+				'version'   => AFFILIATEWP_VERSION,
+				'license'   => $license_key,
 				'item_name' => 'AffiliateWP',
 				'item_id'   => 17,
-				'author' 	=> 'Pippin Williamson'
+				'author'    => 'Pippin Williamson',
+				'beta'      => $this->settings->get( 'betas', false )
 			)
 		);
 
@@ -498,11 +519,32 @@ final class Affiliate_WP {
 
 		// Set filter for plugin's languages directory
 		$lang_dir = dirname( plugin_basename( AFFILIATEWP_PLUGIN_FILE ) ) . '/languages/';
+
+		/**
+		 * Filters the languages directory path to use for AffiliateWP.
+		 *
+		 * @param string $lang_dir The languages directory path.
+		 */
 		$lang_dir = apply_filters( 'aff_wp_languages_directory', $lang_dir );
 
 		// Traditional WordPress plugin locale filter
-		$locale        = apply_filters( 'plugin_locale',  get_locale(), 'affiliate-wp' );
-		$mofile        = sprintf( '%1$s-%2$s.mo', 'affiliate-wp', $locale );
+
+		global $wp_version;
+
+		$get_locale = get_locale();
+
+		if ( $wp_version >= 4.7 ) {
+			$get_locale = get_user_locale();
+		}
+
+		/**
+		 * Defines the plugin language locale used in AffiliateWP.
+		 *
+		 * @var $get_locale The locale to use. Uses get_user_locale()` in WordPress 4.7 or greater,
+		 *                  otherwise uses `get_locale()`.
+		 */
+		$locale = apply_filters( 'plugin_locale', $get_locale, 'affiliate-wp' );
+		$mofile = sprintf( '%1$s-%2$s.mo', 'affiliate-wp', $locale );
 
 		// Setup paths to current locale file
 		$mofile_local  = $lang_dir . $mofile;
