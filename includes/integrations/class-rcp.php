@@ -91,9 +91,7 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 
 				if( 0 == $amount && affiliate_wp()->settings->get( 'ignore_zero_referrals' ) ) {
 
-					if( $this->debug ) {
-						$this->log( 'Referral not created due to 0.00 amount.' );
-					}
+					$this->log( 'Referral not created due to 0.00 amount.' );
 
 					return false; // Ignore a zero amount referral
 				}
@@ -117,9 +115,7 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 
 			if ( $this->is_affiliate_email( $user->user_email ) ) {
 
-				if( $this->debug ) {
-					$this->log( 'Referral not created because affiliate\'s own account was used.' );
-				}
+				$this->log( 'Referral not created because affiliate\'s own account was used.' );
 
 				return; // Customers cannot refer themselves
 			}

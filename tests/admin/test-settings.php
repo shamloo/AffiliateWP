@@ -7,6 +7,7 @@ use AffWP\Tests\UnitTestCase;
  * Tests for Affiliate_WP_Settings
  *
  * @covers Affiliate_WP_Settings
+ * @group settings
  */
 class Tests extends UnitTestCase {
 

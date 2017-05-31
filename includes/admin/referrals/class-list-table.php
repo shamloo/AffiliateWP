@@ -802,6 +802,11 @@ class AffWP_Referrals_Table extends List_Table {
 		) );
 
 		$referrals = affiliate_wp()->referrals->get_referrals( $args );
+
+		// Retrieve the "current" total count for pagination purposes.
+		$args['number']      = -1;
+		$this->current_count = affiliate_wp()->referrals->count( $args );
+
 		return $referrals;
 	}
 
@@ -845,7 +850,7 @@ class AffWP_Referrals_Table extends List_Table {
 				$total_items = $this->rejected_count;
 				break;
 			case 'any':
-				$total_items = $this->total_count;
+				$total_items = $this->current_count;
 				break;
 		}
 

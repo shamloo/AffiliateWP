@@ -34,9 +34,7 @@ class Affiliate_WP_Stripe extends Affiliate_WP_Base {
 
 				case 'subscription' :
 
-					if( $this->debug ) {
-						$this->log( 'Processing referral for Stripe subscription.' );
-					}
+					$this->log( 'Processing referral for Stripe subscription.' );
 
 					$stripe_amount = ! empty( $object->plan->trial_period_days ) ? 0 : $object->plan->amount;
 					$currency      = $object->plan->currency;
@@ -50,17 +48,13 @@ class Affiliate_WP_Stripe extends Affiliate_WP_Base {
 
 					if( did_action( 'simpay_subscription_created' ) ) {
 
-						if( $this->debug ) {
-							$this->log( 'insert_referral() short circuited because simpay_subscription_created already fired.' );
-						}
+						$this->log( 'insert_referral() short circuited because simpay_subscription_created already fired.' );
 
 						return; // This was a subscription purchase and we've already processed the referral creation
 					}
 
 
-					if( $this->debug ) {
-						$this->log( 'Processing referral for Stripe charge.' );
-					}
+					$this->log( 'Processing referral for Stripe charge.' );
 
 					$stripe_amount = $object->amount;
 					$currency      = $object->currency;
@@ -85,9 +79,7 @@ class Affiliate_WP_Stripe extends Affiliate_WP_Base {
 
 			if( $this->is_affiliate_email( $email, $this->affiliate_id ) ) {
 
-				if( $this->debug ) {
-					$this->log( 'Referral not created because affiliate\'s own account was used.' );
-				}
+				$this->log( 'Referral not created because affiliate\'s own account was used.' );
 
 				return;
 
@@ -96,11 +88,11 @@ class Affiliate_WP_Stripe extends Affiliate_WP_Base {
 			$referral_total = $this->calculate_referral_amount( $amount, $object->id );
 			$referral_id    = $this->insert_pending_referral( $referral_total, $object->id, $description, array(), array( 'livemode' => $mode ) );
 
-			if( $referral_id && $this->debug ) {
+			if( $referral_id ) {
 
 				$this->log( 'Pending referral created successfully during insert_referral()' );
 
-				if( $this->complete_referral( $object->id ) && $this->debug ) {
+				if( $this->complete_referral( $object->id ) ) {
 
 					$this->log( 'Referral completed successfully during insert_referral()' );
 
@@ -110,7 +102,7 @@ class Affiliate_WP_Stripe extends Affiliate_WP_Base {
 
 				$this->log( 'Referral failed to be set to completed with complete_referral()' );
 
-			} elseif ( $this->debug ) {
+			} else {
 
 				$this->log( 'Pending referral failed to be created during insert_referral()' );
 

@@ -15,6 +15,15 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) exit;
 // Load AffiliateWP file
 include_once( 'affiliate-wp.php' );
 
+// Needed for site-related functionality.
+if ( ! is_multisite() ) {
+	if ( true === version_compare( $GLOBALS['wp_version'], '4.6', '>=' ) ) {
+		require_once ABSPATH . WPINC . '/class-wp-site-query.php';
+		require_once ABSPATH . WPINC . '/class-wp-network-query.php';
+	}
+	require_once ABSPATH . WPINC . '/ms-blogs.php';
+}
+
 global $wpdb, $wp_roles;
 
 $affiliate_wp_settings = new Affiliate_WP_Settings;
@@ -24,24 +33,59 @@ if( $affiliate_wp_settings->get( 'uninstall_on_delete' ) ) {
 	// Remove the affiliate area page
 	wp_delete_post( $affiliate_wp_settings->get( 'affiliates_page' ) );
 
-	// Remove all plugin settings.
-	delete_option( 'affwp_settings' );
-
-	// Remove other options.
-	$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'affwp\_%';" );
-
 	// Remove all capabilities and roles
 	$caps = new Affiliate_WP_Capabilities;
 	$caps->remove_caps();
 
+	if ( defined( 'AFFILIATE_WP_NETWORK_WIDE' ) && AFFILIATE_WP_NETWORK_WIDE ) {
+
+		$sites = array( 1 );
+
+	} else {
+
+		if ( true === version_compare( $GLOBALS['wp_version'], '4.6', '<' ) ) {
+
+			$sites = wp_list_pluck( 'blog_id', wp_get_sites() );
+
+		} else {
+
+			$sites = get_sites( array( 'fields' => 'ids' ) );
+
+		}
+
+	}
+
+	$db_segments = array(
+		'affiliate_wp_affiliates',
+		'affiliate_wp_affiliatemeta',
+		'affiliate_wp_campaigns',
+		'affiliate_wp_creatives',
+		'affiliate_wp_payouts',
+		'affiliate_wp_referrals',
+		'affiliate_wp_rest_consumers',
+		'affiliate_wp_visits'
+	);
+
 	// Remove all database tables
-	$wpdb->query( "DROP TABLE IF EXISTS " . $wpdb->prefix . "affiliate_wp_affiliates" );
-	$wpdb->query( "DROP TABLE IF EXISTS " . $wpdb->prefix . "affiliate_wp_affiliatemeta" );
-	$wpdb->query( "DROP TABLE IF EXISTS " . $wpdb->prefix . "affiliate_wp_creatives" );
-	$wpdb->query( "DROP TABLE IF EXISTS " . $wpdb->prefix . "affiliate_wp_payouts" );
-	$wpdb->query( "DROP TABLE IF EXISTS " . $wpdb->prefix . "affiliate_wp_referrals" );
-	$wpdb->query( "DROP TABLE IF EXISTS " . $wpdb->prefix . "affiliate_wp_rest_consumers" );
-	$wpdb->query( "DROP TABLE IF EXISTS " . $wpdb->prefix . "affiliate_wp_visits" );
-	$wpdb->query( "DROP VIEW " . $wpdb->prefix . "affiliate_wp_campaigns" );
+	foreach ( $sites as $site_id ) {
+
+		switch_to_blog( $site_id );
+
+		// Remove all affwp_ options.
+		$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'affwp\_%';" );
+
+		foreach ( $db_segments as $segment ) {
+			// Table.
+			$wpdb->query( "DROP TABLE IF EXISTS " . $wpdb->prefix . $segment );
+
+			// Options.
+			$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '%$segment%'" );
+		}
+
+		$wpdb->query( "DROP VIEW " . $wpdb->prefix . "affiliate_wp_campaigns" );
+
+		restore_current_blog();
+
+	}
 
 }
