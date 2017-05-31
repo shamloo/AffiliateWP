@@ -16,6 +16,7 @@ function affiliate_wp_install() {
 	$affiliate_wp_install->settings       = new Affiliate_WP_Settings;
 	$affiliate_wp_install->rewrites       = new Affiliate_WP_Rewrites;
 	$affiliate_wp_install->REST           = new Affiliate_WP_REST;
+	$affiliate_wp_install->utils                = new Affiliate_WP_Utilities;
 
 	$affiliate_wp_install->affiliates->create_table();
 	$affiliate_wp_install->affiliate_meta->create_table();
