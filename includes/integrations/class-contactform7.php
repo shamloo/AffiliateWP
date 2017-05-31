@@ -58,7 +58,8 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 
 		// Add PayPal meta to the contact form submision object.
 		add_action( 'wpcf7_submit', array( $this, 'add_paypal_meta' ), 1, 2 );
-		$this->maybe_unhook_cf7pp();
+
+		add_action( 'wpcf7_mail_sent', array( $this, 'maybe_unhook_cf7pp' ), -999 );
 
 		// Mark referral complete.
 		add_action( 'wp_footer', array( $this, 'mark_referral_complete' ), 9999 );

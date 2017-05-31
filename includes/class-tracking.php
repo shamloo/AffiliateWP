@@ -483,8 +483,14 @@ class Affiliate_WP_Tracking {
 
 			affiliate_wp()->utils->log( 'Visit creation skipped during fallback_track_visit() via the affwp_tracking_skip_track_visit hook.' );
 
-		} elseif ( $is_valid && ! $visit_id ) {
+		} elseif ( $is_valid && ( ! $visit_id || affiliate_wp()->settings->get( 'referral_credit_last' ) ) ) {
+			
 			if ( ( ! empty( $referrer ) && ! affwp_is_url_banned( $referrer ) ) || empty( $referrer ) ) {
+
+				if( $this->get_affiliate_id() === $affiliate_id && affiliate_wp()->settings->get( 'referral_credit_last' ) ) {
+					affiliate_wp()->utils->log( 'Visit creation skipped during fallback_track_visit() with Credit Last Referrer enabled because ID already tracked.' );
+					return;
+				}
 
 				$this->set_affiliate_id( $affiliate_id );
 
