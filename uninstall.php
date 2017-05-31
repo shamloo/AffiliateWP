@@ -15,6 +15,15 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) exit;
 // Load AffiliateWP file
 include_once( 'affiliate-wp.php' );
 
+// Needed for site-related functionality.
+if ( ! is_multisite() ) {
+	if ( true === version_compare( $GLOBALS['wp_version'], '4.6', '>=' ) ) {
+		require_once ABSPATH . WPINC . '/class-wp-site-query.php';
+		require_once ABSPATH . WPINC . '/class-wp-network-query.php';
+	}
+	require_once ABSPATH . WPINC . '/ms-blogs.php';
+}
+
 global $wpdb, $wp_roles;
 
 $affiliate_wp_settings = new Affiliate_WP_Settings;
