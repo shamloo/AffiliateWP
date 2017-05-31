@@ -390,4 +390,31 @@ class Tests extends UnitTestCase {
 		$this->assertSame( '', $output );
 	}
 
+	/**
+	 * @covers ::affwp_required_field_attr()
+	 */
+	public function test_required_field_attr_with_invalid_field_should_return_an_empty_string() {
+		$this->assertSame( '', affwp_required_field_attr( 'foo' ) );
+	}
+
+	/**
+	 * @covers ::affwp_required_field_attr()
+	 */
+	public function test_required_field_attr_with_required_field_should_return_a_required_attribute() {
+		$original_required_fields = affiliate_wp()->settings->get( 'required_registration_fields', array() );
+
+		affiliate_wp()->settings->set( array(
+			'required_registration_fields' => array(
+				'your_name' => __( 'Your Name', 'affiliate-wp' )
+			)
+		) );
+
+		$this->assertSame( " required='required'", affwp_required_field_attr( 'your_name' ) );
+
+		// Clean up.
+		affiliate_wp()->settings->set( array(
+			'required_registration_fields' => $original_required_fields
+		) );
+	}
+
 }
