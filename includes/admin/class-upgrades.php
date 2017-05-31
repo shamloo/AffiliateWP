@@ -135,6 +135,10 @@ class Affiliate_WP_Upgrades {
 			$this->v202_upgrade();
 		}
 
+		if ( version_compare( $this->version, '2.1.', '<' ) ) {
+//			$this->v21_upgrade();
+		}
+
 		// Inconsistency between current and saved version.
 		if ( version_compare( $this->version, AFFILIATEWP_VERSION, '<>' ) ) {
 			$this->upgraded = true;
@@ -627,4 +631,19 @@ class Affiliate_WP_Upgrades {
 
 		$this->upgraded = true;
 	}
+
+	/**
+	 * Performs database upgrades for version 2.1.
+	 *
+	 * @access private
+	 * @since  2.1
+	 */
+	private function v21_upgrade() {
+		// Schedule a rewrites flush.
+		flush_rewrite_rules();
+		$this->log( 'Upgrade: Rewrite rules flushed following the 2.1 upgrade.' );
+
+		$this->upgraded = true;
+	}
+
 }

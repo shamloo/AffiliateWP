@@ -12,6 +12,7 @@ class Affiliate_WP_WPEC extends Affiliate_WP_Base {
 
 		add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );
 
+		add_action( 'init', array( $this, 'products_page_rewrite' ) );
 	}
 
 	public function add_pending_referral( $order_id = 0, $current_status, $previous_status, $order ) {
@@ -93,6 +94,27 @@ class Affiliate_WP_WPEC extends Affiliate_WP_Base {
 		$url = admin_url( 'index.php?page=wpsc-purchase-logs&c=item_details&id=' . $reference );
 
 		return '<a href="' . esc_url( $url ) . '">' . $reference . '</a>';
+	}
+
+	/**
+	 * Adds a rewrite rule allowing affiliate URLs to point directly to the products page.
+	 *
+	 * @access public
+	 * @since  2.1
+	 */
+	public function products_page_rewrite() {
+		$wpec_page_ids = get_option( 'wpsc_shortcode_page_ids', array() );
+
+		if ( ! empty( $wpec_page_ids['[productspage]'] ) ) {
+			$products_page = get_page_uri( $wpec_page_ids['[productspage]'] );
+
+			if ( $products_page ) {
+				$ref = affiliate_wp()->tracking->get_referral_var();
+
+				add_rewrite_rule( $products_page . '/' . $ref . '(/(.*))?/?$', 'index.php?pagename=' . $products_page . '&' . $ref . '=$matches[1]', 'top');
+			}
+		}
+
 	}
 
 }
