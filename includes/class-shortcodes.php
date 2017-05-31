@@ -31,21 +31,39 @@ class Affiliate_WP_Shortcodes {
 
 		affwp_enqueue_script( 'affwp-frontend', 'affiliate_area' );
 
+		/**
+		 * Filters the display of the registration form
+		 *
+		 * @since 2.0
+		 * @param bool $show Whether to show the registration form. Default true.
+		 */
+		$show_registration = apply_filters( 'affwp_affiliate_area_show_registration', true );
+
+		/**
+		 * Filters the display of the login form
+		 *
+		 * @since 2.0
+		 * @param bool $show Whether to show the login form. Default true.
+		 */
+		$show_login = apply_filters( 'affwp_affiliate_area_show_login', true );
+
 		ob_start();
 
 		if ( is_user_logged_in() && affwp_is_affiliate() ) {
-
 			affiliate_wp()->templates->get_template_part( 'dashboard' );
-
 		} elseif ( is_user_logged_in() && affiliate_wp()->settings->get( 'allow_affiliate_registration' ) ) {
 
-			affiliate_wp()->templates->get_template_part( 'register' );
+			if ( true === $show_registration ) {
+				affiliate_wp()->templates->get_template_part( 'register' );
+			}
 
 		} else {
 
 			if ( affiliate_wp()->settings->get( 'allow_affiliate_registration' ) ) {
 
-				affiliate_wp()->templates->get_template_part( 'register' );
+				if ( true === $show_registration ) {
+					affiliate_wp()->templates->get_template_part( 'register' );
+				}
 
 			} else {
 				affiliate_wp()->templates->get_template_part( 'no', 'access' );
@@ -53,7 +71,9 @@ class Affiliate_WP_Shortcodes {
 
 			if ( ! is_user_logged_in() ) {
 
-				affiliate_wp()->templates->get_template_part( 'login' );
+				if ( true === $show_login ) {
+					affiliate_wp()->templates->get_template_part( 'login' );
+				}
 
 			}
 

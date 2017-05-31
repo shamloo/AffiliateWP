@@ -40,15 +40,20 @@ function affiliate_wp_install() {
 
 		// Update settings.
 		$affiliate_wp_install->settings->set( array(
-			'affiliates_page' => $affiliate_area
+			'affiliates_page'              => $affiliate_area,
+			'required_registration_fields' => array(
+				'your_name'   => __( 'Your Name', 'affiliate-wp' ),
+				'website_url' => __( 'Website URL', 'affiliate-wp' )
+			)
 		), $save = true );
+
 	}
 
 	// 3 equals unchecked
 	update_option( 'affwp_js_works', 3 );
 	update_option( 'affwp_is_installed', '1' );
 	update_option( 'affwp_version', AFFILIATEWP_VERSION );
-	
+
 	// Clear rewrite rules
 	$affiliate_wp_install->rewrites->flush_rewrites();
 

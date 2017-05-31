@@ -32,6 +32,7 @@ class Sub_Commands extends Base {
 		'rate_type',
 		'status',
 		'earnings',
+		'unpaid_earnings',
 		'referrals',
 		'visits',
 		'date_registered',
@@ -347,6 +348,7 @@ class Sub_Commands extends Base {
 	 * * rate_type
 	 * * status
 	 * * earnings
+	 * * unpaid_earnings
 	 * * referrals
 	 * * visits
 	 * * date_registered

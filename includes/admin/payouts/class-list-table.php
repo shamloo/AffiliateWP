@@ -119,7 +119,7 @@ class AffWP_Payouts_Table extends List_Table {
 	 * @return array $views All the views available.
 	 */
 	public function get_views() {
-		$base         = admin_url( 'admin.php?page=affiliate-wp-payouts' );
+		$base         = affwp_admin_url( 'payouts' );
 		$current      = isset( $_GET['status'] ) ? $_GET['status'] : '';
 		$total_count  = '&nbsp;<span class="count">(' . $this->total_count    . ')</span>';
 		$paid_count   = '&nbsp;<span class="count">(' . $this->paid_count . ')</span>';
@@ -254,11 +254,10 @@ class AffWP_Payouts_Table extends List_Table {
 	 * @return string Linked affiliate name and ID.
 	 */
 	function column_affiliate( $payout ) {
-		$url = add_query_arg( array(
-			'page'         => 'affiliate-wp-affiliates',
+		$url = affwp_admin_url( 'affiliates', array(
 			'action'       => 'view_affiliate',
 			'affiliate_id' => $payout->affiliate_id
-		), admin_url( 'admin.php' ) );
+		) );
 
 		$name      = affiliate_wp()->affiliates->get_affiliate_name( $payout->affiliate_id );
 		$affiliate = affwp_get_affiliate( $payout->affiliate_id );
@@ -296,13 +295,9 @@ class AffWP_Payouts_Table extends List_Table {
 	public function column_referrals( $payout ) {
 		$referrals = affiliate_wp()->affiliates->payouts->get_referral_ids( $payout );
 		$links     = array();
-		$base      = admin_url( 'admin.php?page=affiliate-wp-referrals&action=edit_referral&referral_id=' );
 
 		foreach ( $referrals as $referral_id ) {
-			$links[] = sprintf( '<a href="%1$s">%2$s</a>',
-				esc_url( $base . $referral_id ),
-				esc_html( $referral_id )
-			);
+			$links[] = affwp_admin_link( 'referrals', esc_html( $referral_id ), array( 'action' => 'edit_referral', 'referral_id' => $referral_id ) );
 		}
 
 		$value = implode( ', ', $links );
@@ -335,9 +330,8 @@ class AffWP_Payouts_Table extends List_Table {
 			$user = get_user_by( 'id', $payout->owner );
 			// If the owner exists, use it.
 			if ( $user ) {
-				$value = sprintf( '<a href="%1$s">%2$s</a> %3$s',
-					esc_url( add_query_arg( array( 'owner' => $payout->owner ), admin_url( 'admin.php?page=affiliate-wp-payouts' ) ) ),
-					esc_html( $user->data->display_name ),
+				$value = sprintf( '%1$s %2$s',
+					affwp_admin_link( 'payouts', esc_html( $user->data->display_name ), array( 'owner' => $payout->owner ) ),
 					sprintf( _x( '(User ID: %d)', 'payout owner ID', 'affiliate-wp' ),
 						esc_html( $payout->owner )
 					)
@@ -656,6 +650,11 @@ class AffWP_Payouts_Table extends List_Table {
 		) );
 
 		$payouts = affiliate_wp()->affiliates->payouts->get_payouts( $args );
+
+		// Retrieve the "current" total count for pagination purposes.
+		$args['number']      = -1;
+		$this->current_count = affiliate_wp()->affiliates->payouts->count( $args );
+
 		return $payouts;
 	}
 
@@ -672,6 +671,8 @@ class AffWP_Payouts_Table extends List_Table {
 
 		$this->process_bulk_action();
 
+		$data = $this->payouts_data();
+
 		$current_page = $this->get_pagenum();
 
 		$status = isset( $_GET['status'] ) ? $_GET['status'] : 'any';
@@ -684,17 +685,16 @@ class AffWP_Payouts_Table extends List_Table {
 				$total_items = $this->failed_count;
 				break;
 			case 'any':
-				$total_items = $this->total_count;
+				$total_items = $this->current_count;
 				break;
 		}
 
-		$this->items = $this->payouts_data();
+		$this->items = $data;
 
 		$this->set_pagination_args( array(
-				'total_items' => $total_items,
-				'per_page'    => $per_page,
-				'total_pages' => ceil( $total_items / $per_page )
-			)
-		);
+			'total_items' => $total_items,
+			'per_page'    => $per_page,
+			'total_pages' => ceil( $total_items / $per_page )
+		) );
 	}
 }

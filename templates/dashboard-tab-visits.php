@@ -7,6 +7,8 @@
 	</span>
 
 	<?php
+	affwp_enqueue_style( 'dashicons', 'visits' );
+
 	$per_page = 30;
 	$page     = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 	$pages    = absint( ceil( affwp_get_affiliate_visit_count( affwp_get_affiliate_id() ) / $per_page ) );

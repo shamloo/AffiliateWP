@@ -15,7 +15,12 @@
 
 	<?php if ( $creatives ) : ?>
 
-		<?php do_action( 'affwp_before_creatives' ); ?>
+		<?php
+		/**
+		 * Fires immediately before creatives in the creatives tab of the affiliate area.
+		 */
+		do_action( 'affwp_before_creatives' );
+		?>
 
 		<?php echo affiliate_wp()->creative->affiliate_creatives( $args ); ?>
 
@@ -37,7 +42,12 @@
 
 		<?php endif; ?>
 
-		<?php do_action( 'affwp_after_creatives' ); ?>
+		<?php
+		/**
+		 * Fires immediately after creatives in the creatives tab of the affiliate area.
+		 */
+		do_action( 'affwp_after_creatives' );
+		?>
 
 	<?php else : ?>
 

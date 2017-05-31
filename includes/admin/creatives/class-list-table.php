@@ -87,7 +87,7 @@ class AffWP_Creatives_Table extends List_Table {
 	 * @return array $views All the views available
 	 */
 	public function get_views() {
-		$base           = admin_url( 'admin.php?page=affiliate-wp-creatives' );
+		$base           = affwp_admin_url( 'creatives' );
 
 		$current        = isset( $_GET['status'] ) ? $_GET['status'] : '';
 		$total_count    = '&nbsp;<span class="count">(' . $this->total_count    . ')</span>';
@@ -112,14 +112,22 @@ class AffWP_Creatives_Table extends List_Table {
 	 */
 	public function get_columns() {
 		$columns = array(
-			'name'       => __( 'Name', 'affiliate-wp' ),
-			'url'        => __( 'URL', 'affiliate-wp' ),
-			'shortcode'  => __( 'Shortcode', 'affiliate-wp' ),
-			'status'     => __( 'Status', 'affiliate-wp' ),
-			'actions'    => __( 'Actions', 'affiliate-wp' ),
+			'name'      => __( 'Name', 'affiliate-wp' ),
+			'url'       => __( 'URL', 'affiliate-wp' ),
+			'shortcode' => __( 'Shortcode', 'affiliate-wp' ),
+			'status'    => __( 'Status', 'affiliate-wp' ),
+			'image'     => __( 'Image Preview', 'affiliate-wp' ),
+			'actions'   => __( 'Actions', 'affiliate-wp' ),
 		);
 
-		return $this->prepare_columns( $columns );
+		/**
+		 * Filters the creatives list table columns.
+		 *
+		 * @param function               $prepared_columns Prepared columns.
+		 * @param array                  $columns          The columns for this list table.
+		 * @param \AffWP_Creatives_Table $this             List table instance.
+		 */
+		return apply_filters( 'affwp_creative_table_columns', $this->prepare_columns( $columns ), $columns, $this );
 	}
 
 	/**
@@ -166,6 +174,23 @@ class AffWP_Creatives_Table extends List_Table {
 	 */
 	function column_url( $creative ) {
 		return $creative->url;
+	}
+
+	/**
+	 * Render the image column
+	 *
+	 * @access public
+	 * @since 2.0
+	 * @return string image src of creative
+	 */
+	function column_image( $creative ) {
+		global $wpdb;
+
+		// Get the creative's attachment ID based on the image URL
+		$attachment_id = attachment_url_to_postid( $creative->image );
+
+		return affwp_admin_link( 'creatives', wp_get_attachment_image( $attachment_id, 'thumbnail' ), array( 'creative_id' => $creative->ID, 'action' => 'edit_creative' ) );
+
 	}
 
 	/**
@@ -351,6 +376,10 @@ class AffWP_Creatives_Table extends List_Table {
 
 		$creatives = affiliate_wp()->creatives->get_creatives( $args );
 
+		// Retrieve the "current" total count for pagination purposes.
+		$args['number']      = -1;
+		$this->current_count = affiliate_wp()->creatives->count( $args );
+
 		return $creatives;
 
 	}
@@ -389,18 +418,17 @@ class AffWP_Creatives_Table extends List_Table {
 				$total_items = $this->inactive_count;
 				break;
 			case 'any':
-				$total_items = $this->total_count;
+				$total_items = $this->current_count;
 				break;
 		}
 
 		$this->items = $data;
 
 		$this->set_pagination_args( array(
-				'total_items' => $total_items,
-				'per_page'    => $per_page,
-				'total_pages' => ceil( $total_items / $per_page )
-			)
-		);
+			'total_items' => $total_items,
+			'per_page'    => $per_page,
+			'total_pages' => ceil( $total_items / $per_page )
+		) );
 
 	}
 }

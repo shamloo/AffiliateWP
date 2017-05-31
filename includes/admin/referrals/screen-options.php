@@ -30,6 +30,11 @@ function affwp_referrals_screen_options() {
 	// Instantiate the list table to make the columns array available to screen options.
 	new AffWP_Referrals_Table;
 
+	/**
+	 * Fires in the screen-options area of the referrals screen.
+	 *
+	 * @param string $screen The current screen.
+	 */
 	do_action( 'affwp_referrals_screen_options', $screen );
 
 }

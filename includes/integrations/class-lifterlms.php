@@ -116,9 +116,8 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 
 		$this->add_order_note( $order->get( 'id' ), $note );
 
-		if ( $this->debug ) {
-			$this->log( $note );
-		}
+		$this->log( $note );
+
 
 	}
 
@@ -151,9 +150,7 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 			 */
 			if ( 'woocommerce' === $order->payment_type ) {
 
-				if ( $this->debug ) {
-					$this->log( __( 'Referral not created because WooCommerce was used for payment.', 'affiliate-wp' ) );
-				}
+				$this->log( __( 'Referral not created because WooCommerce was used for payment.', 'affiliate-wp' ) );
 
 				return;
 			}
@@ -182,9 +179,8 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 			// Customers cannot refer themselves.
 			if ( $this->is_affiliate_email( $order->user_data->user_email, $affiliate_id ) ) {
 
-				if( $this->debug ) {
-					$this->log( __( 'Referral not created because affiliate\'s own account was used.', 'affiliate-wp' ) );
-				}
+				$this->log( __( 'Referral not created because affiliate\'s own account was used.', 'affiliate-wp' ) );
+
 				return;
 			}
 
@@ -193,9 +189,7 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 			// Ignore a zero amount referral.
 			if ( 0 == $amount && affiliate_wp()->settings->get( 'ignore_zero_referrals' ) ) {
 
-				if ( $this->debug ) {
-					$this->log( __( 'Referral not created due to 0.00 amount.', 'affiliate-wp' ) );
-				}
+				$this->log( __( 'Referral not created due to 0.00 amount.', 'affiliate-wp' ) );
 
 				return;
 			}
@@ -229,10 +223,7 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 				 */
 				$this->complete_referral( $order->id );
 
-				if( $this->debug ) {
-					$this->log( sprintf( __( 'LifterLMS Referral #%d updated successfully.', 'affiliate-wp' ), $existing->referral_id ) );
-
-				}
+				$this->log( sprintf( __( 'LifterLMS Referral #%d updated successfully.', 'affiliate-wp' ), $existing->referral_id ) );
 
 			} else { // No referral exists, so create a new one.
 
@@ -256,15 +247,12 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 					 */
 					$this->complete_referral( $order->id );
 
-					if( $this->debug ) {
-						$this->log( sprintf( __( 'Referral #%d created successfully.', 'affiliate-wp' ), $referral_id ) );
-					}
+					$this->log( sprintf( __( 'Referral #%d created successfully.', 'affiliate-wp' ), $referral_id ) );
 
 				} else {
 
-					if( $this->debug ) {
-						$this->log( __( 'Referral failed to be created.', 'affiliate-wp' ) );
-					}
+					$this->log( __( 'Referral failed to be created.', 'affiliate-wp' ) );
+
 				}
 			}
 		}
@@ -318,9 +306,7 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 			// Customers cannot refer themselves.
 			if ( $this->is_affiliate_email( $order->get( 'billing_email', $affiliate_id ) ) ) {
 
-				if ( $this->debug ) {
-					$this->log( __( 'Referral not created because affiliate\'s own account was used.', 'affiliate-wp' ) );
-				}
+				$this->log( __( 'Referral not created because affiliate\'s own account was used.', 'affiliate-wp' ) );
 
 				return;
 			}
@@ -330,9 +316,7 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 			// Ignore a zero amount referral.
 			if ( 0 == $amount && affiliate_wp()->settings->get( 'ignore_zero_referrals' ) ) {
 
-				if ( $this->debug ) {
-					$this->log( __( 'Referral not created due to 0.00 amount.', 'affiliate-wp' ) );
-				}
+				$this->log( __( 'Referral not created due to 0.00 amount.', 'affiliate-wp' ) );
 
 				return;
 			}
@@ -359,9 +343,7 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 
 				$this->add_order_note( $order_id, $note );
 
-				if ( $this->debug ) {
-					$this->log( $note );
-				}
+				$this->log( $note );
 
 			} else { // No referral exists, so create a new one.
 
@@ -383,16 +365,11 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 
 					$this->add_order_note( $order_id, $note );
 
-					if ( $this->debug ) {
-						$this->log( $note );
-					}
+					$this->log( $note );
 
 				} else {
 
-					if ( $this->debug ) {
-						$this->log( __( 'LifterLMS Referral failed to be created.', 'affiliate-wp' ) );
-
-					}
+					$this->log( __( 'LifterLMS Referral failed to be created.', 'affiliate-wp' ) );
 
 				}
 			}
@@ -454,7 +431,6 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 		$html = '
 			<span class="affwp-ajax-search-wrap">
 				<span class="affwp-llms-coupon-input-wrap">
-					<input type="hidden" name="_affwp_affiliate_user_id" id="user_id" value="' . esc_attr( $user_id ) . '" />
 					<input type="text" name="_affwp_affiliate_user_name" id="user_name" value="' . esc_attr( $user_name ) . '" class="affwp-user-search input-full" data-affwp-status="active" autocomplete="off" />
 					<img class="affwp-ajax waiting" src="' . esc_url( admin_url( 'images/wpspin_light.gif' ) ) . '" style="display: none;"/>
 				</span>
@@ -508,28 +484,23 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 			return;
 		}
 
-		// Locate the userid if we didn't get one from ajax methods
-		if ( empty( $_POST['_affwp_affiliate_user_id'] ) ) {
-
-			$user = get_user_by( 'login', $_POST['_affwp_affiliate_user_name'] );
-			if( $user ) {
-				$user_id = $user->ID;
-			}
-		}
-		// Use the posted user id
-		else {
-			$user_id = absint( $_POST['_affwp_affiliate_user_id'] );
-		}
+		$data = affiliate_wp()->utils->process_request_data( $_POST, '_affwp_affiliate_user_name' );
 
 		/*
 		 * Locate an affiliate, looks like this returns null if the
 		 * user is not a valid affiliate.
 		 */
-		$affiliate_id = affwp_get_affiliate_id( $user_id );
+		$affiliate_id = affwp_get_affiliate_id( $data['user_id'] );
 
 		// $affiliate_id is null if none found so update regardless of the value
 		update_post_meta( $post_id, '_affwp_affiliate_id', $affiliate_id );
 
+		/**
+		 * Fires when processing LifterLMS coupon meta within the LifterLMS integration.
+		 *
+		 * @param int      $post_id The post ID.
+		 * @param stdClass $post    The post object.
+		 */
 		do_action( 'affwp_lifterlms_process_llms_coupon_meta', $post_id, $post );
 
 	}
@@ -702,12 +673,12 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 
 				<div class="llms-metabox-field d-1of4">
 					<label><?php _e( 'Affiliate', 'affiliate-wp' ); ?></label>
-					<a href="<?php echo esc_url( admin_url( 'admin.php?page=affiliate-wp-referrals&affiliate_id=' . $referral->affiliate_id ) ); ?>"><?php echo $affiliate_name; ?></a>
+					<?php echo affwp_admin_link( 'referrals', $affiliate_name, array( 'affiliate_id' => $referral->affiliate_id ) ); ?>
 				</div>
 
 				<div class="llms-metabox-field d-1of4">
 					<label><?php _e( 'Reference', 'affiliate-wp' ); ?></label>
-					<a href="<?php echo esc_url( admin_url( 'admin.php?page=affiliate-wp-referrals&action=edit_referral&referral_id=' . $referral->referral_id ) ); ?>">#<?php echo $referral->referral_id; ?></a>
+					<?php echo affwp_admin_link( 'referrals', $referral->referral_id, array('action' => 'edit_referral', 'referral_id' => $referral->referral_id ) ); ?>
 				</div>
 
 			</div>
@@ -728,11 +699,11 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 							</tr>
 							<tr>
 								<td><label><?php _e( 'Affiliate', 'affiliate-wp' ); ?></label></td>
-								<td><a href="<?php echo esc_url( admin_url( 'admin.php?page=affiliate-wp-referrals&affiliate_id=' . $referral->affiliate_id ) ); ?>"><?php echo $affiliate_name; ?></a></td>
+								<td><?php echo affwp_admin_link( 'referrals', $affiliate_name, array( 'affiliate_id' => $referral->affiliate_id ) ); ?></td>
 							</tr>
 							<tr>
 								<td><label><?php _e( 'Reference', 'affiliate-wp' ); ?></label></td>
-								<td><a href="<?php echo esc_url( admin_url( 'admin.php?page=affiliate-wp-referrals&action=edit_referral&referral_id=' . $referral->referral_id ) ); ?>">#<?php echo $referral->referral_id; ?></a></td>
+								<td><?php echo affwp_admin_link( 'referrals', $referral->referral_id, array( 'action' => 'edit_referral', 'referral_id' => $referral->referral_id ) ); ?></td>
 							</tr>
 						</table>
 					</td>
@@ -902,10 +873,16 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 		}
 
 		$note = sprintf( __( 'Referral #%d rejected', 'affiliate-wp' ), $referral->referral_id );
+<<<<<<< HEAD
 		$this->add_order_note( $order_id, $note );
 		if ( $this->debug ) {
 			$this->log( $note );
 		}
+=======
+		$order->add_note( $note );
+
+		$this->log( $note );
+>>>>>>> release/2.1
 
 	}
 

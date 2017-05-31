@@ -109,7 +109,7 @@ class Database extends \Affiliate_WP_DB {
 	 *     @type string    $fields      Fields to return results for. Accepts 'ids' or empty (all). Default empty.
 	 * }
 	 * @param bool  $count Optional. Whether to return only the total number of results found. Default false.
-	 * @return array Array of consumer objects (if found).
+	 * @return array|int Array of consumer objects (if found) or integer if `$count` is true.
 	 */
 	public function get_consumers( $args = array(), $count = false ) {
 		global $wpdb;
@@ -191,7 +191,8 @@ class Database extends \Affiliate_WP_DB {
 
 		$last_changed = wp_cache_get( 'last_changed', $this->cache_group );
 		if ( ! $last_changed ) {
-			wp_cache_set( 'last_changed', microtime(), $this->cache_group );
+			$last_changed = microtime();
+			wp_cache_set( 'last_changed', $last_changed, $this->cache_group );
 		}
 
 		$cache_key = "{$key}:{$last_changed}";

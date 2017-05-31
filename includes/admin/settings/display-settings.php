@@ -48,10 +48,11 @@ function affwp_settings_admin() {
 
 
 /**
- * Retrieve settings tabs
+ * Retrieves the settings tabs.
  *
  * @since 1.0
- * @return array $tabs
+ *
+ * @return array $tabs Settings tabs.
  */
 function affwp_get_settings_tabs() {
 
@@ -61,5 +62,10 @@ function affwp_get_settings_tabs() {
 	$tabs['emails']       = __( 'Emails', 'affiliate-wp' );
 	$tabs['misc']         = __( 'Misc', 'affiliate-wp' );
 
+	/**
+	 * Filters the list of settings tabs.
+	 *
+	 * @param array $tabs Settings tabs.
+	 */
 	return apply_filters( 'affwp_settings_tabs', $tabs );
 }

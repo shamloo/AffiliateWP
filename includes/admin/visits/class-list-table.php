@@ -104,12 +104,20 @@ class AffWP_Visits_Table extends List_Table {
 			'referrer'     => __( 'Referring URL', 'affiliate-wp' ),
 			'affiliate'    => __( 'Affiliate', 'affiliate-wp' ),
 			'referral_id'  => __( 'Referral ID', 'affiliate-wp' ),
+			'context'      => __( 'Context', 'affiliate-wp' ),
 			'ip'           => __( 'IP', 'affiliate-wp' ),
 			'converted'    => __( 'Converted', 'affiliate-wp' ),
 			'date'         => __( 'Date', 'affiliate-wp' ),
 		);
 
-		return apply_filters( 'affwp_visit_table_columns', $this->prepare_columns( $columns ) );
+		/**
+		 * Filters the visits list table columns.
+		 *
+		 * @param function                $prepared_columns Prepared columns.
+		 * @param array                   $columns          The columns for this list table.
+		 * @param \AffWP_Affiliates_Table $this             List table instance.
+		 */
+		return apply_filters( 'affwp_visit_table_columns', $this->prepare_columns( $columns ), $columns, $this );
 	}
 
 	/**
@@ -127,14 +135,13 @@ class AffWP_Visits_Table extends List_Table {
 	}
 
 	/**
-	 * This function renders most of the columns in the list table.
+	 * Renders most of the columns in the list table.
 	 *
 	 * @access public
-	 * @since 1.0
+	 * @since  1.0
 	 *
-	 * @param array $item Contains all the data of the visit
-	 * @param string $column_name The name of the column
-	 *
+	 * @param \AffWP\Visit $visit       The current visit object.
+	 * @param string       $column_name The name of the column
 	 * @return string Column Name
 	 */
 	function column_default( $visit, $column_name ) {
@@ -144,87 +151,182 @@ class AffWP_Visits_Table extends List_Table {
 				break;
 		}
 
+		/**
+		 * Filters the default column value for the visits list table.
+		 *
+		 * The dynamic portion of the hook name, `$column_name`, refers to the column name.
+		 *
+		 * @param mixed        $value The name of the column
+		 * @param \AffWP\Visit $visit All the data of the visit.
+		 */
 		return apply_filters( 'affwp_visit_table_' . $column_name, $value, $visit );
 	}
 
 	/**
-	 * Render the affiliate column
+	 * Render the affiliate column in the visits list table.
 	 *
 	 * @access public
-	 * @since 1.0
-	 * @param array $referral Contains all the data for the checkbox column
+	 * @since  1.0
+	 *
+	 * @param \AffWP\Visit $visit The current visit object.
 	 * @return string The affiliate
 	 */
 	function column_affiliate( $visit ) {
-		$value = '<a href="' . esc_url( admin_url( 'admin.php?page=affiliate-wp-visits&affiliate=' . $visit->affiliate_id ) ) . '">' . affiliate_wp()->affiliates->get_affiliate_name( $visit->affiliate_id ) . '</a>';
+		$value = affwp_admin_link( 'visits', affiliate_wp()->affiliates->get_affiliate_name( $visit->affiliate_id ), array( 'affiliate' => $visit->affiliate_id ) );
+
+		/**
+		 * Filters the affiliate column of the visits list table.
+		 *
+		 * @param string       $value The value of the affiliate column in the visits list table.
+		 * @param \AffWP\Visit $visit The current visit object.
+		 */
 		return apply_filters( 'affwp_visit_table_affiliate', $value, $visit );
 	}
 
 	/**
-	 * Render the referrer column
+	 * Renders the 'Referral ID' column in the visits list table.
 	 *
 	 * @access public
-	 * @since 1.0
-	 * @param array $referral Contains all the data for the checkbox column
-	 * @return string Referring URL
+	 * @since  2.0.2
+	 *
+	 * @param \AffWP\Visit $visit The current visit object.
+	 * @return string The 'Referral ID' column markup.
+	 */
+	function column_referral_id( $visit ) {
+		if ( $visit->referral_id ) {
+			$value = affwp_admin_link( 'referrals', $visit->referral_id, array(
+				'action'      => 'edit_referral',
+				'referral_id' => $visit->referral_id
+			) );
+		} else {
+			$value = $visit->referral_id;
+		}
+
+		/**
+		 * Filters the 'Referral ID' column of the visits list table.
+		 *
+		 * @since 2.0.2
+		 *
+		 * @param string       $value The value of the 'Referral ID' column in the visits list table.
+		 * @param \AffWP\Visit $visit The current visit object.
+		 */
+		return apply_filters( 'affwp_visit_table_referral_id', $value, $visit );
+	}
+
+	/**
+	 * Renders the 'Context' column in the visits list table.
+	 *
+	 * @access public
+	 * @since  2.0.2
+	 *
+	 * @param \AffWP\Visit $visit The current visit object.
+	 * @return string The 'Context' column markup.
+	 */
+	function column_context( $visit ) {
+
+		if ( $visit->context ) {
+			$query_args = array_merge( $_GET, array(
+				'context' => $visit->context
+			) );
+
+			$value = affwp_admin_link( 'visits', $visit->context, $query_args );
+		} else {
+			$value = _x( 'None', 'visit context', 'affiliate-wp' );
+		}
+
+		/**
+		 * Filters the 'Context' column of the visits list table.
+		 *
+		 * @since 2.0.2
+		 *
+		 * @param string       $value The value of the 'Context' column in the visits list table.
+		 * @param \AffWP\Visit $visit The current visit object.
+		 */
+		return apply_filters( 'affwp_visit_table_context', $value, $visit );
+	}
+
+	/**
+	 * Renders the referrer column in the visits list table.
+	 *
+	 * @access public
+	 * @since  1.0
+	 *
+	 * @param \AffWP\Visit $visit The current visit object.
+	 * @return string Referring URL.
 	 */
 	function column_referrer( $visit ) {
 		$value = ! empty( $visit->referrer ) ? '<a href="' . esc_url( $visit->referrer ) . '" taret="_blank">' . $visit->referrer . '</a>' : __( 'Direct traffic', 'affiliate-wp' );
+
+		/**
+		 * Filters the referrer column of the visits list table.
+		 *
+		 * @param string       $value The value of the referrer column in the visits list table.
+		 * @param \AffWP\Visit $visit Visit data.
+		 */
 		return apply_filters( 'affwp_visit_table_referrer', $value, $visit );
 	}
 
 	/**
-	 * Render the converted column
+	 * Renders the converted column in the visits list table.
 	 *
 	 * @access public
-	 * @since 1.0
-	 * @param array $referral Contains all the data for the checkbox column
-	 * @return string Converted status icon
+	 * @since  1.0
+	 *
+	 * @param \AffWP\Visit $visit The current visit object.
+	 * @return string Converted status icon.
 	 */
 	function column_converted( $visit ) {
 		$converted = ! empty( $visit->referral_id ) ? 'yes' : 'no';
 		$value = '<span class="visit-converted ' . $converted . '"><i></i></span>';
+
+		/**
+		 * Filters the converted column of the visits list table.
+		 *
+		 * @param string       $value The value of the converted column in the visits list table.
+		 * @param \AffWP\Visit $visit The current visit object.
+		 */
 		return apply_filters( 'affwp_visit_table_converted', $value, $visit );
 	}
 
 	/**
-	 * Message to be displayed when there are no items
+	 * Renders the message to be displayed when there are no visits.
 	 *
-	 * @since 1.7.2
 	 * @access public
+	 * @since  1.7.2
 	 */
 	function no_items() {
 		_e( 'No visits found.', 'affiliate-wp' );
 	}
 
 	/**
-	 * Process the bulk actions
+	 * Processes the bulk actions.
 	 *
 	 * @access public
-	 * @since 1.0
-	 * @return void
+	 * @since  1.0
 	 */
-	public function process_bulk_action() {
-
-	}
+	public function process_bulk_action() {}
 
 	/**
-	 * Retrieve all the data for all the Affiliates
+	 * Retrieves all the data for all the affiliates.
 	 *
 	 * @access public
-	 * @since 1.0
-	 * @return array $visits_data Array of all the data for the Affiliates
+	 * @since  1.0
+	 *
+	 * @return array Array of all the data for the visits.
 	 */
 	public function visits_data() {
 
-		$page         = isset( $_GET['paged'] )     ? absint( $_GET['paged'] )                 : 1;
+		$page        = isset( $_GET['paged'] )     ? absint( $_GET['paged'] )                 : 1;
+		$referral_id = isset( $_GET['referral'] )  ? absint( $_GET['referral'] )              : false;
+		$campaign    = isset( $_GET['campaign'] )  ? sanitize_text_field( $_GET['campaign'] ) : false;
+		$context     = isset( $_GET['context'] )   ? sanitize_key( $_GET['context'] )         : false;
+		$order       = isset( $_GET['order'] )     ? $_GET['order']                           : 'DESC';
+		$orderby     = isset( $_GET['orderby'] )   ? $_GET['orderby']                         : 'date';
+		$search      = isset( $_GET['s'] )         ? sanitize_text_field( $_GET['s'] )        : '';
+
+		// Kept for back-compat. See $_REQUEST['user_name'].
 		$user_id      = isset( $_GET['user_id'] )   ? absint( $_GET['user_id'] )               : false;
-		$referral_id  = isset( $_GET['referral'] )  ? absint( $_GET['referral'] )              : false;
 		$affiliate_id = isset( $_GET['affiliate'] ) ? absint( $_GET['affiliate'] )             : false;
-		$campaign     = isset( $_GET['campaign'] )  ? sanitize_text_field( $_GET['campaign'] ) : false;
-		$order        = isset( $_GET['order'] )     ? $_GET['order']                           : 'DESC';
-		$orderby      = isset( $_GET['orderby'] )   ? $_GET['orderby']                         : 'date';
-		$search       = isset( $_GET['s'] )         ? sanitize_text_field( $_GET['s'] )        : '';
 
 		$from   = ! empty( $_REQUEST['filter_from'] )   ? $_REQUEST['filter_from']   : '';
 		$to     = ! empty( $_REQUEST['filter_to'] )     ? $_REQUEST['filter_to']     : '';
@@ -238,9 +340,17 @@ class AffWP_Visits_Table extends List_Table {
 			$date['end']   = $to . ' 23:59:59';
 		}
 
-		if( ! empty( $user_id ) && empty( $affiliate_id ) ) {
+		if ( $user_id && ! $affiliate_id ) {
 
 			$affiliate_id = affiliate_wp()->affiliates->get_column_by( 'affiliate_id', 'user_id', $user_id );
+
+		} elseif ( ! $user_id && ! $affiliate_id && isset( $_REQUEST['user_name'] ) ) {
+
+			$data = affiliate_wp()->utils->process_request_data( $_REQUEST, 'user_name' );
+
+			if( ! empty( $data['user_id'] ) ) {
+				$affiliate_id = affiliate_wp()->affiliates->get_column_by( 'affiliate_id', 'user_id', $data['user_id'] );
+			}
 
 		}
 
@@ -253,6 +363,9 @@ class AffWP_Visits_Table extends List_Table {
 		} elseif ( strpos( $search, 'campaign:' ) !== false ) {
 			$campaign = trim( str_replace( 'campaign:', '', $search ) );
 			$search   = '';
+		} elseif ( strpos( $search, 'context:' ) !== false ) {
+			$context = trim( str_replace( 'context:', '', $search ) );
+			$search   = '';
 		}
 
 		$per_page = $this->get_items_per_page( 'affwp_edit_visits_per_page', $this->per_page );
@@ -264,6 +377,7 @@ class AffWP_Visits_Table extends List_Table {
 			'referral_id'     => $referral_id,
 			'date'            => $date,
 			'campaign'        => $campaign,
+			'context'         => $context,
 			'orderby'         => $orderby,
 			'order'           => $order,
 			'search'          => $search,
@@ -271,6 +385,10 @@ class AffWP_Visits_Table extends List_Table {
 		) );
 
 		$this->total_count = affiliate_wp()->visits->count( $args );
+
+		// Retrieve the "current" total count for pagination purposes.
+		$args['number']      = -1;
+		$this->current_count = affiliate_wp()->visits->count( $args );
 
 		return affiliate_wp()->visits->get_visits( $args );
 
@@ -303,10 +421,9 @@ class AffWP_Visits_Table extends List_Table {
 		$this->items = $data;
 
 		$this->set_pagination_args( array(
-				'total_items' => $this->total_count,
-				'per_page'    => $per_page,
-				'total_pages' => ceil( $this->total_count / $per_page )
-			)
-		);
+			'total_items' => $this->current_count,
+			'per_page'    => $per_page,
+			'total_pages' => ceil( $this->total_count / $per_page )
+		) );
 	}
 }

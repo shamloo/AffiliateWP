@@ -98,9 +98,7 @@ class Affiliate_WP_MarketPress extends Affiliate_WP_Base {
 
 			if ( $this->is_affiliate_email( $customer_email ) ) {
 
-				if( $this->debug ) {
-					$this->log( 'Referral not created because affiliate\'s own account was used.' );
-				}
+				$this->log( 'Referral not created because affiliate\'s own account was used.' );
 
 				return; // Customers cannot refer themselves
 

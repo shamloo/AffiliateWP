@@ -54,34 +54,26 @@ class Reports {
 		switch( $active_tab ) {
 			case 'referrals':
 				$manage_button = sprintf( $manage_button_template,
-					esc_url( add_query_arg( array(
-						'page' => 'affiliate-wp-referrals'
-					), admin_url( 'admin.php' ) ) ),
+					esc_url( affwp_admin_url( 'referrals' ) ),
 					__( 'Manage Referrals', 'affiliate-wp' )
 				);
 				break;
 
 			case 'affiliates':
 				$manage_button = sprintf( $manage_button_template,
-					esc_url( add_query_arg( array(
-						'page' => 'affiliate-wp-affiliates'
-					), admin_url( 'admin.php' ) ) ),
+					esc_url( affwp_admin_url( 'affiliates' ) ),
 					__( 'Manage Affiliates', 'affiliate-wp' )
 				);
 
 				$manage_button .= sprintf( $manage_button_template,
-					esc_url( add_query_arg( array(
-						'page' => 'affiliate-wp-payouts',
-					), admin_url( 'admin.php' ) ) ),
+					esc_url( affwp_admin_url( 'payouts' ) ),
 					__( 'View Payouts', 'affiliate-wp' )
 				);
 				break;
 
 			case 'visits':
 				$manage_button = sprintf( $manage_button_template,
-					esc_url( add_query_arg( array(
-						'page' => 'affiliate-wp-visits'
-					), admin_url( 'admin.php' ) ) ),
+					esc_url( affwp_admin_url( 'visits' ) ),
 					__( 'Manage Visits', 'affiliate-wp' )
 				);
 				break;
@@ -98,7 +90,12 @@ class Reports {
 				<?php echo $manage_button; ?>
 			</h1>
 
-			<?php do_action( 'affwp_reports_page_top' ); ?>
+			<?php
+			/**
+			 * Fires at the top of the admin reports page screen.
+			 */
+			do_action( 'affwp_reports_page_top' );
+			?>
 
 			<h2 class="nav-tab-wrapper">
 				<?php
@@ -109,14 +106,32 @@ class Reports {
 				?>
 			</h2>
 
-
-			<?php do_action( 'affwp_reports_page_middle' ); ?>
+			<?php
+			/**
+			 * Fires in the middle of the admin reports page screen.
+			 */
+			do_action( 'affwp_reports_page_middle' );
+			?>
 
 			<div id="tab_container">
-				<?php do_action( 'affwp_reports_tab_' . $active_tab ); ?>
+
+				<?php
+				/**
+				 * Fires inside the tab container element of the currently-active admin reports screen tab.
+				 *
+				 * The dynamic portion of the hook name, `$active_tab`, refers to the active reports tab.
+				 */
+				do_action( 'affwp_reports_tab_' . $active_tab );
+				?>
+
 			</div><!-- #tab_container-->
 
-			<?php do_action( 'affwp_reports_page_bottom' ); ?>
+			<?php
+			/**
+			 * Fires at the bottom of the admin reports page screen.
+			 */
+			do_action( 'affwp_reports_page_bottom' );
+			?>
 
 		</div>
 		<?php

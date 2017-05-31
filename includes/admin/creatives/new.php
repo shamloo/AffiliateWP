@@ -4,7 +4,12 @@
 
 	<form method="post" id="affwp_add_creative">
 
-		<?php do_action( 'affwp_new_creative_top' ); ?>
+		<?php
+		/**
+		 * Fires at the top of the new-creative admin screen.
+		 */
+		do_action( 'affwp_new_creative_top' );
+		?>
 
 		<p><?php printf( __( 'Use this screen to add a new creative, such as a text link or image banner.', 'affiliate-wp' ), admin_url( 'user-new.php' ) ); ?></p>
 
@@ -31,7 +36,7 @@
 
 				<td>
 					<textarea name="description" id="description" class="large-text" rows="8"></textarea>
-					<p class="description"><?php _e( 'An optional description for this creative. This is displayed below the creative for affiliates.', 'affiliate-wp' ); ?></p>
+					<p class="description"><?php _e( 'An optional description for this creative. This is visible to affiliates and is displayed below the creative.', 'affiliate-wp' ); ?></p>
 				</td>
 
 			</tr>
@@ -44,7 +49,7 @@
 
 				<td>
 					<input type="text" name="url" id="url" class="regular-text" />
-					<p class="description"><?php _e( 'Where the creative should link to. The affiliate&#8217;s referral ID will be automatically appended.', 'affiliate-wp' ); ?></p>
+					<p class="description"><?php _e( 'The URL this creative should link to. Based on your Referral Settings, the affiliate&#8217;s ID or username will be automatically appended.', 'affiliate-wp' ); ?></p>
 				</td>
 
 			</tr>
@@ -97,7 +102,12 @@
 
 		</table>
 
-		<?php do_action( 'affwp_new_creative_bottom' ); ?>
+		<?php
+		/**
+		 * Fires at the bottom of the new-creative admin screen.
+		 */
+		do_action( 'affwp_new_creative_bottom' );
+		?>
 
 		<input type="hidden" name="affwp_action" value="add_creative" />
 

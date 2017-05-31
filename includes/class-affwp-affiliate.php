@@ -92,6 +92,15 @@ final class Affiliate extends Base_Object {
 	public $earnings;
 
 	/**
+	 * Affiliate unpaid earnings.
+	 *
+	 * @access public
+	 * @since  2.0
+	 * @var    float
+	 */
+	public $unpaid_earnings;
+
+	/**
 	 * Affiliate referrals
 	 *
 	 * @since 1.8\9
@@ -222,7 +231,7 @@ final class Affiliate extends Base_Object {
 			$value = (int) $value;
 		}
 
-		if ( 'earnings' === $field ) {
+		if ( in_array( $field, array( 'earnings', 'unpaid_earnings' ) ) ) {
 			$value = floatval( $value );
 		}
 

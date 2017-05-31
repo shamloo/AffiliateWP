@@ -54,6 +54,8 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 
 			}
 
+			$price = rcp_get_registration()->get_total( true, false );
+
 		} else {
 
 			$subscription_id = absint( $_POST['rcp_level'] );
@@ -67,8 +69,8 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 			$rcp_discounts = new RCP_Discounts;
 			$discount_obj  = $rcp_discounts->get_by( 'code', $_POST['rcp_discount'] );
 			$affiliate_id  = $wpdb->get_var( $wpdb->prepare( "SELECT meta_value FROM $wpdb->usermeta WHERE meta_key = %s", 'affwp_discount_rcp_' . $discount_obj->id ) );
-			$user_id       = affwp_get_affiliate_user_id( $affiliate_id );
-			$discount_aff  = get_user_meta( $user_id, 'affwp_discount_rcp_' . $discount_obj->id, true );
+			$aff_user_id   = affwp_get_affiliate_user_id( $affiliate_id );
+			$discount_aff  = get_user_meta( $aff_user_id, 'affwp_discount_rcp_' . $discount_obj->id, true );
 
 			$subscription_key = rcp_get_subscription_key( $user_id );
 			$subscription = rcp_get_subscription( $user_id );
@@ -89,9 +91,7 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 
 				if( 0 == $amount && affiliate_wp()->settings->get( 'ignore_zero_referrals' ) ) {
 
-					if( $this->debug ) {
-						$this->log( 'Referral not created due to 0.00 amount.' );
-					}
+					$this->log( 'Referral not created due to 0.00 amount.' );
 
 					return false; // Ignore a zero amount referral
 				}
@@ -115,9 +115,7 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 
 			if ( $this->is_affiliate_email( $user->user_email ) ) {
 
-				if( $this->debug ) {
-					$this->log( 'Referral not created because affiliate\'s own account was used.' );
-				}
+				$this->log( 'Referral not created because affiliate\'s own account was used.' );
 
 				return; // Customers cannot refer themselves
 			}
@@ -237,7 +235,6 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 					</th>
 					<td>
 						<span class="affwp-ajax-search-wrap">
-							<input type="hidden" name="user_id" id="user_id" value="<?php echo esc_attr( $user_id ); ?>" />
 							<input type="text" name="user_name" id="user_name" value="<?php echo esc_attr( $user_name ); ?>" class="affwp-user-search" data-affwp-status="active" autocomplete="off" style="width: 300px;" />
 						</span>
 						<p class="description"><?php _e( 'If you would like to connect this discount to an affiliate, enter the name of the affiliate it belongs to.', 'affiliate-wp' ); ?></p>
@@ -260,32 +257,11 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 			return;
 		}
 
-		// Get the user ID. Always retrieve the user ID from the posted user_name field
-		if ( ! empty( $_POST['user_name'] ) ) {
+		$data = affiliate_wp()->utils->process_request_data( $_POST, 'user_name' );
 
-			// get user
-			$user = get_user_by( 'login', $_POST['user_name'] );
+		$affiliate_id = affwp_get_affiliate_id( $data['user_id'] );
 
-			// If user exists
-			if ( $user ) {
-				// Make sure they are a valid affiliate
-				if ( affwp_is_affiliate( $user->ID ) ) {
-					$user_id = absint( $user->ID );
-				}
-
-			} else {
-				// No user ID
-				$user_id = '';
-			}
-
-		} else {
-			// No user ID
-			$user_id = '';
-		}
-
-		$affiliate_id = affwp_get_affiliate_id( $user_id );
-
-		update_user_meta( $user_id, 'affwp_discount_rcp_' . $discount_id, $affiliate_id );
+		update_user_meta( $data['user_id'], 'affwp_discount_rcp_' . $discount_id, $affiliate_id );
 
 	}
 

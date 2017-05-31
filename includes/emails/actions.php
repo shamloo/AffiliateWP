@@ -55,7 +55,7 @@ function affwp_notify_on_registration( $affiliate_id = 0, $status = '', $args = 
 		}
 
 		if( affiliate_wp()->settings->get( 'require_approval' ) ) {
-			$message .= sprintf( __( 'Review pending applications: %s', 'affiliate-wp' ), admin_url( 'admin.php?page=affiliate-wp-affiliates&status=pending' ) ) . "\n\n";
+			$message .= sprintf( __( 'Review pending applications: %s', 'affiliate-wp' ), affwp_admin_url( 'affiliates', array( 'status' => 'pending' ) ) ) . "\n\n";
 		}
 
 	}

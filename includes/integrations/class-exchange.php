@@ -78,19 +78,14 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 
 					if ( ! $affiliate_id ) {
 
-						if( $this->debug ) {
-							$this->log( 'Referral not created because of missing affiliate ID.' );
-						}
+						$this->log( 'Referral not created because of missing affiliate ID.' );
 
 						continue;
 					}
 
 					if ( ! affiliate_wp()->tracking->is_valid_affiliate( $affiliate_id ) ) {
 
-						if( $this->debug ) {
-							$this->log( 'Referral not created because affiliate is invalid.' );
-						}
-
+						$this->log( 'Referral not created because affiliate is invalid.' );
 						continue;
 					}
 
@@ -107,9 +102,7 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 
 			if ( $this->is_affiliate_email( $email, $affiliate_id ) ) {
 
-				if( $this->debug ) {
-					$this->log( 'Referral not created because affiliate\'s own account was used.' );
-				}
+				$this->log( 'Referral not created because affiliate\'s own account was used.' );
 
 				return; // Customers cannot refer themselves
 			}
@@ -351,7 +344,6 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 			</th>
 			<td>
 				<span class="affwp-ajax-search-wrap">
-					<input type="hidden" name="user_id" id="user_id" value="<?php echo esc_attr( $user_id ); ?>" />
 					<input type="text" name="user_name" id="user_name" value="<?php echo esc_attr( $user_name ); ?>" class="affwp-user-search" data-affwp-status="active" autocomplete="off" />
 				</span>
 				<p class="description"><?php _e( 'If you would like to connect this coupon to an affiliate, enter the name of the affiliate it belongs to.', 'affiliate-wp' ); ?></p>
@@ -377,16 +369,9 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 			return;
 		}
 
-		if( empty( $_POST['user_id'] ) ) {
-			$user = get_user_by( 'login', $_POST['user_name'] );
-			if( $user ) {
-				$user_id = $user->ID;
-			}
-		} else {
-			$user_id = absint( $_POST['user_id'] );
-		}
+		$data = affiliate_wp()->utils->process_request_data( $_POST, 'user_name' );
 
-		$affiliate_id = affwp_get_affiliate_id( $user_id );
+		$affiliate_id = affwp_get_affiliate_id( $data['user_id'] );
 
 		update_post_meta( $coupon_id, 'affwp_coupon_affiliate', $affiliate_id );
 

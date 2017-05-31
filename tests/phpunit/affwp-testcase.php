@@ -64,4 +64,48 @@ class UnitTestCase extends \WP_UnitTestCase {
 			$wp_roles->_init();
 		}
 	}
+
+	/**
+	 * Retrieves the current time for use in test comparisons.
+	 *
+	 * Serves as a tests wrapper for core's current_time( 'mysql' ) with the distinct
+	 * difference that it doesn't include seconds in the resulting string. This is an
+	 * attempt to avoid race conditions for assertions that take longer than a second
+	 * to execute.
+	 *
+	 * @access public
+	 * @since  2.1
+	 *
+	 * @param bool $gmt Optional. Whether to use GMT timezone. Default false.
+	 * @return string Current time expressed as a string.
+	 */
+	public function get_current_time_for_comparison( $gmt = false ) {
+		return ( $gmt ) ? gmdate( 'Y-m-d H:i' ) : gmdate( 'Y-m-d H:i', ( time() + ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) ) );
+	}
+
+	/**
+	 * Retrieves the date_registered value for a given affiliate for use in test comparisons.
+	 *
+	 * Modifies the returned date to omit the seconds value. This is an attempt to avoid race
+	 * conditions for assertions that take longer than a second to execute.
+	 *
+	 * @access public
+	 * @since  2.1
+	 *
+	 * @param int|\AffWP\Affiliate $affiliate Affiliate ID or object.
+	 * @param bool                 $gmt       Optional. Whether to use GMT timezone. Default false.
+	 * @return string Affiliate registered date expressed as a string, otherwise an empty string.
+	 */
+	public function get_affiliate_date_for_comparison( $affiliate ) {
+		$date_registered = '';
+
+		if ( $affiliate = affwp_get_affiliate( $affiliate ) ) {
+			$original = strtotime( $affiliate->date_registered );
+
+			$date_registered = gmdate( 'Y-m-d H:i', $original );
+		}
+
+		return $date_registered;
+	}
+
 }
