@@ -42,7 +42,7 @@ if ( is_user_logged_in() ) {
 
 ?>
 
-<form id="affwp-register-form" class="affwp-form" action="" method="post" novalidate="novalidate">
+<form id="affwp-register-form" class="affwp-form" action="" method="post">
 	<?php
 	/**
 	 * Fires at the top of the affiliate registration templates' form (inside the form element).
