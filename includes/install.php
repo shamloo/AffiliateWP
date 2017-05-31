@@ -2,6 +2,13 @@
 
 function affiliate_wp_install() {
 
+	// Needed for site-related functionality.
+	if ( ! is_multisite() ) {
+		require_once ABSPATH . WPINC . '/class-wp-site-query.php';
+		require_once ABSPATH . WPINC . '/class-wp-network-query.php';
+		require_once ABSPATH . WPINC . '/ms-blogs.php';
+	}
+
 	// Create affiliate caps
 	$roles = new Affiliate_WP_Capabilities;
 	$roles->add_caps();
@@ -16,7 +23,6 @@ function affiliate_wp_install() {
 	$affiliate_wp_install->settings       = new Affiliate_WP_Settings;
 	$affiliate_wp_install->rewrites       = new Affiliate_WP_Rewrites;
 	$affiliate_wp_install->REST           = new Affiliate_WP_REST;
-	$affiliate_wp_install->utils                = new Affiliate_WP_Utilities;
 
 	$affiliate_wp_install->affiliates->create_table();
 	$affiliate_wp_install->affiliate_meta->create_table();
@@ -73,11 +79,15 @@ function affiliate_wp_install() {
 
 	}
 
+	$completed_upgrades = array(
+		'upgrade_v20_recount_unpaid_earnings'
+	);
+
 	foreach ( $sites as $site_id ) {
 
 		switch_to_blog( $site_id );
 
-		affwp_set_upgrade_complete( 'upgrade_v20_recount_unpaid_earnings' );
+		update_option( 'affwp_completed_upgrades', $completed_upgrades );
 
 		restore_current_blog();
 
