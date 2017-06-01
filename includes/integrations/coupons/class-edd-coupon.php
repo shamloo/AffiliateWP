@@ -166,7 +166,7 @@ class EDD_Coupon extends \AffWP\Affiliate\Coupon {
 
 		$discount_id = $details->id;
 
-		return affiliate_wp()->coupons->add( $details );
+		return affiliate_wp()->affiliates->coupons->add( $details );
 	}
 
 	/**

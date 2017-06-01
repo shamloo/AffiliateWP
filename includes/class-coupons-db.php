@@ -29,7 +29,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 	 * @since  2.1
 	 * @var    string
 	 */
-	public $query_object_type = 'AffWP\Coupon';
+	public $query_object_type = 'AffWP\Affiliate\Coupon';
 
 	/**
 	 * Constructor.

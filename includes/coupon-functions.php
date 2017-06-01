@@ -103,15 +103,14 @@ function affwp_delete_coupon( $coupon ) {
  *
  * @param  integer $affiliate_id Affiliate ID.
  *
- * @return object  $coupons      An array of coupon objects associated with the affiliate.
+ * @return array   $coupons      An array of coupon objects associated with the affiliate.
  */
 function affwp_get_affiliate_coupons( $affiliate_id = 0 ) {
 	$args = array(
 		'affiliate_id' => $affiliate_id
 		);
 
-	// return affiliate_wp()->coupons->get( $args );
-	return false;
+	return affiliate_wp()->affiliates->coupons->get( $args );
 }
 
 /**
@@ -258,12 +257,12 @@ function affwp_get_coupon_templates() {
 			// and a template has also been selected.
 			if ( affwp_has_coupon_support( $integration_id ) ) {
 
-				$template_id  = affiliate_wp()->coupons->get_coupon_template_id( $integration_id );
+				$template_id  = affiliate_wp()->affiliates->coupons->get_coupon_template_id( $integration_id );
 
 				if ( $template_id ) {
 
 					$has_template = true;
-					$template_url = affiliate_wp()->coupons->get_coupon_template_url( $template_id, $integration_id );
+					$template_url = affiliate_wp()->affiliates->coupons->get_coupon_template_url( $template_id, $integration_id );
 
 					$output .= '<li>' . $integration_id . ': ' . $integration_term . ' : <a href="' . $template_url . '">(' . $template_id . ')</a></li>';
 				} else {
