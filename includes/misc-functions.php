@@ -536,11 +536,38 @@ function affwp_abs_number_round( $val, $precision = 2 ) {
 	if ( is_null( $val ) || '' === $val || false === $val ) {
 
 		return;
+	}
 
+	$period_decimal_sep   = preg_match( '/\.\d{1,2}$/', $val );
+	$comma_decimal_sep    = preg_match( '/\,\d{1,2}$/', $val );
+	$period_space_thousands_sep = preg_match( '/\d{1,3}(?:[.|\s]\d{3})+/', $val );
+	$comma_thousands_sep        = preg_match( '/\d{1,3}(?:,\d{3})+/', $val );
+
+	// Convert period and space thousand separators.
+	if ( $period_space_thousands_sep ) {
+		$val = str_replace( ' ', '', $val );
+
+		if ( ! $comma_decimal_sep ) {
+			if ( ! $period_decimal_sep ) {
+				$val = str_replace( '.', '', $val );
+			}
+		} else {
+			$val = str_replace( '.', ':', $val );
+		}
+	}
+
+	// Convert comma decimal separators.
+	if ( $comma_decimal_sep ) {
+		$val = str_replace( ',', '.', $val );
+	}
+
+	// Clean up temporary replacements.
+	if ( $period_space_thousands_sep && $comma_decimal_sep || $comma_thousands_sep ) {
+		$val = str_replace( array( ':', ',' ), '', $val );
 	}
 
 	// Value cannot be negative
-	$val = abs( $val );
+	$val = abs( floatval( $val ) );
 
 	// Decimal precision must be a absolute integer
 	$precision = absint( $precision );
@@ -549,11 +576,7 @@ function affwp_abs_number_round( $val, $precision = 2 ) {
 	$val = sprintf( ( round( $val, $precision ) == intval( $val ) ) ? '%d' : "%.{$precision}f", $val );
 
 	// Convert number to the proper type (int, float, or string) depending on its value
-	if ( false !== strpos( $val, '.' ) ) {
-
-		$val = ( '0' !== substr( $val, -1 ) ) ? floatval( $val ) : (string) $val;
-
-	} else {
+	if ( false === strpos( $val, '.' ) ) {
 
 		$val = absint( $val );
 
