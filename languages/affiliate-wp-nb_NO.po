@@ -3,24 +3,21 @@ msgstr ""
 "Project-Id-Version: AffiliateWP v1.6\n"
 "Report-Msgid-Bugs-To: https://affiliatewp.com/support/\n"
 "POT-Creation-Date: 2017-02-17 03:04:25+00:00\n"
-"PO-Revision-Date: 2015-04-13 17:17:43+0000\n"
+"PO-Revision-Date: 2017-06-01 00:42-0600\n"
 "Last-Translator: keymaster <post@arctic-fritid.no>\n"
 "Language-Team: \n"
-"Language: \n"
+"Language: nb_NO\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: CSL v1.x\n"
-"X-Poedit-Language: Norwegian (Bokmål)\n"
-"X-Poedit-Country: NORWAY\n"
+"X-Generator: Poedit 2.0.1\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
-"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
-"X-Poedit-Basepath: ../\n"
-"X-Poedit-Bookmarks: \n"
-"X-Poedit-SearchPath-0: .\n"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: ..\n"
 "X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
 
 # @ affiliate-wp
 #: affiliate-wp.php:271 affiliate-wp.php:283
@@ -67,14 +64,12 @@ msgstr "Feil"
 
 # @ affiliate-wp
 #: includes/REST/class-rest.php:68
-#, fuzzy
 msgid "User ID Required"
 msgstr "Bruker ID"
 
 # @ affiliate-wp
 #. translators: 1: Generate, regenerate, or revoke
 #: includes/REST/class-rest.php:81 includes/REST/class-rest.php:84
-#, fuzzy
 msgid "You do not have permission to %s API keys for this user."
 msgstr "Du har ikke tillatelse til å eksportere data."
 
@@ -84,7 +79,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/REST/v1/class-affiliates-endpoints.php:67
-#, fuzzy
 msgid "Whether to include the affiliate meta in the response."
 msgstr "Affiliatens brukernavn."
 
@@ -112,13 +106,11 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/REST/v1/class-affiliates-endpoints.php:256
-#, fuzzy
 msgid "Affiliates table column to order by."
 msgstr "Affiliate Plugin for WordPress"
 
 # @ affiliate-wp
 #: includes/REST/v1/class-affiliates-endpoints.php:263
-#, fuzzy
 msgid "The date array or string to query affiliate registrations within."
 msgstr "Varsle administrator ved nye affiliate registreringer?"
 
@@ -128,7 +120,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/REST/v1/class-affiliates-endpoints.php:297
-#, fuzzy
 msgid "The unique affiliate ID."
 msgstr "Affiliate ID"
 
@@ -138,7 +129,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/REST/v1/class-affiliates-endpoints.php:305
-#, fuzzy
 msgid "The affiliate rate."
 msgstr "Affiliate sats"
 
@@ -148,13 +138,11 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/REST/v1/class-affiliates-endpoints.php:313
-#, fuzzy
 msgid "The affiliate rate, as inherited from global settings."
 msgstr "Affiliaten's provisjonstype."
 
 # @ affiliate-wp
 #: includes/REST/v1/class-affiliates-endpoints.php:319
-#, fuzzy
 msgid "The affiliate rate type"
 msgstr "Affiliaten's provisjonstype."
 
@@ -164,13 +152,11 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/REST/v1/class-affiliates-endpoints.php:327
-#, fuzzy
 msgid "The affiliate rate type, as inherited from global settings."
 msgstr "Affiliaten's provisjonstype."
 
 # @ affiliate-wp
 #: includes/REST/v1/class-affiliates-endpoints.php:333
-#, fuzzy
 msgid "The affiliate account email. Synced with the associated user account."
 msgstr ""
 "Start med å skrive inn navnet for denne affiliaten for å utføre et søk etter "
@@ -178,7 +164,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/REST/v1/class-affiliates-endpoints.php:338
-#, fuzzy
 msgid "The affiliate payment email address."
 msgstr "Din affiliate konto er ikke aktiv"
 
@@ -194,19 +179,16 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/REST/v1/class-affiliates-endpoints.php:352
-#, fuzzy
 msgid "The affiliate status."
 msgstr "Affiliate satser:"
 
 # @ affiliate-wp
 #: includes/REST/v1/class-affiliates-endpoints.php:356
-#, fuzzy
 msgid "Unpaid affiliate earnings."
 msgstr "Gå til AffiliateWP innstillinger"
 
 # @ affiliate-wp
 #: includes/REST/v1/class-affiliates-endpoints.php:360
-#, fuzzy
 msgid "Affiliate earnings."
 msgstr "Gå til AffiliateWP innstillinger"
 
@@ -216,13 +198,11 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/REST/v1/class-affiliates-endpoints.php:368
-#, fuzzy
 msgid "The number of visits associated with the affiliate."
 msgstr "Affiliatens nettsted."
 
 # @ affiliate-wp
 #: includes/REST/v1/class-affiliates-endpoints.php:372
-#, fuzzy
 msgid "The date the affiliate was registered."
 msgstr "Affiliate forespørselen ble avvist."
 
@@ -244,19 +224,16 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/REST/v1/class-creatives-endpoints.php:215
-#, fuzzy
 msgid "The unique creative ID."
 msgstr "Tekst for banneret / tekst lenken."
 
 # @ affiliate-wp
 #: includes/REST/v1/class-creatives-endpoints.php:219
-#, fuzzy
 msgid "Name of the creative."
 msgstr "Tekst for banneret / tekst lenken."
 
 # @ affiliate-wp
 #: includes/REST/v1/class-creatives-endpoints.php:223
-#, fuzzy
 msgid "Description for the creative."
 msgstr "Tekst for banneret / tekst lenken."
 
@@ -266,7 +243,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/REST/v1/class-creatives-endpoints.php:231
-#, fuzzy
 msgid "Text for the creative."
 msgstr "Tekst for banneret / tekst lenken."
 
@@ -276,13 +252,11 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/REST/v1/class-creatives-endpoints.php:239
-#, fuzzy
 msgid "The creative status."
 msgstr "Emne nytt salg mail"
 
 # @ affiliate-wp
 #: includes/REST/v1/class-creatives-endpoints.php:243
-#, fuzzy
 msgid "The date the creative was created."
 msgstr "Annonsematerialet ble opprettet"
 
@@ -334,7 +308,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/REST/v1/class-payouts-endpoints.php:274
-#, fuzzy
 msgid "The affiliate ID associated with the payout."
 msgstr "Er du sikker på at du vil slette dette annonsematerialet?"
 
@@ -348,7 +321,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/REST/v1/class-payouts-endpoints.php:289
-#, fuzzy
 msgid "Total referrals amount for the payout."
 msgstr "Deaktiver provisjoner på dette produktet"
 
@@ -403,49 +375,41 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/REST/v1/class-referrals-endpoints.php:270
-#, fuzzy
 msgid "The unique referral ID."
 msgstr "Provisjon av et gitt salg."
 
 # @ affiliate-wp
 #: includes/REST/v1/class-referrals-endpoints.php:274
-#, fuzzy
 msgid "ID for the affiliate account associated with the referral."
 msgstr "Din affiliate konto forespørsel har blitt avvist"
 
 # @ affiliate-wp
 #: includes/REST/v1/class-referrals-endpoints.php:278
-#, fuzzy
 msgid "ID for the visit associated with the referral."
 msgstr "Velg status for dette salget."
 
 # @ affiliate-wp
 #: includes/REST/v1/class-referrals-endpoints.php:282
-#, fuzzy
 msgid "Referral description."
 msgstr "Beskrivelse av henvisning / salg"
 
 # @ affiliate-wp
 #: includes/REST/v1/class-referrals-endpoints.php:286
-#, fuzzy
 msgid "The referral status."
 msgstr "Henvisningsstatuser:"
 
 # @ affiliate-wp
 #: includes/REST/v1/class-referrals-endpoints.php:290
-#, fuzzy
 msgid "Referral amount."
 msgstr "Provisjons sats"
 
 # @ affiliate-wp
 #: includes/REST/v1/class-referrals-endpoints.php:294
-#, fuzzy
 msgid "Currency for the referral amount."
 msgstr "Provisjons sats"
 
 # @ affiliate-wp
 #: includes/REST/v1/class-referrals-endpoints.php:298
-#, fuzzy
 msgid "Custom referral data."
 msgstr "Ingen salg funnet."
 
@@ -468,7 +432,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/REST/v1/class-referrals-endpoints.php:318
-#, fuzzy
 msgid "The date the referral was generated."
 msgstr "Provisjon i henhold til dette salget, f.eks. 20."
 
@@ -515,7 +478,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/REST/v1/class-visits-endpoints.php:207
-#, fuzzy
 msgid "The context under which the visit was created."
 msgstr "Innstillingene ble importert"
 
@@ -533,7 +495,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/REST/v1/class-visits-endpoints.php:263
-#, fuzzy
 msgid "ID for the affiliate account associated with the visit."
 msgstr "Din affiliate konto er ikke aktiv"
 
@@ -543,13 +504,11 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/REST/v1/class-visits-endpoints.php:271
-#, fuzzy
 msgid "The visit URL."
 msgstr "Nettsteds URL:"
 
 # @ affiliate-wp
 #: includes/REST/v1/class-visits-endpoints.php:275
-#, fuzzy
 msgid "Visit referrer."
 msgstr "Rediger salget"
 
@@ -559,7 +518,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/REST/v1/class-visits-endpoints.php:283
-#, fuzzy
 msgid "Context under which the visit was generated."
 msgstr "Innstillingene ble importert"
 
@@ -569,13 +527,11 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/REST/v1/class-visits-endpoints.php:291
-#, fuzzy
 msgid "The date the visit was generated."
 msgstr "Innstillingene ble importert"
 
 # @ affiliate-wp
 #: includes/abstracts/class-affwp-reports-tab.php:115
-#, fuzzy
 msgid "Date Filters"
 msgstr "Filtrer"
 
@@ -659,7 +615,6 @@ msgstr ""
 # @ default
 # @ affiliate-wp
 #: includes/admin/AFFWP_Plugin_Updater.php:201
-#, fuzzy
 msgid ""
 "There is a new version of %1$s available. %2$sView version %3$s details%4$s."
 msgstr ""
@@ -669,7 +624,6 @@ msgstr ""
 # @ default
 # @ affiliate-wp
 #: includes/admin/AFFWP_Plugin_Updater.php:209
-#, fuzzy
 msgid ""
 "There is a new version of %1$s available. %2$sView version %3$s details%4$s "
 "or %5$supdate now%6$s."
@@ -687,7 +641,6 @@ msgstr "Du har ikke tillatelse til å installere plugin oppdateringer"
 
 # @ affiliate-wp
 #: includes/admin/add-ons.php:33
-#, fuzzy
 msgid "Add-ons for AffiliateWP"
 msgstr "Legg til affiliaten"
 
@@ -939,7 +892,6 @@ msgstr "Rapporter"
 
 # @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:288
-#, fuzzy
 msgid "Edit User"
 msgstr "Rediger salget"
 
@@ -1000,7 +952,6 @@ msgstr "Slett affiliatene"
 
 # @ affiliate-wp
 #: includes/admin/affiliates/delete.php:43
-#, fuzzy
 msgid "You have specified the following affiliate for deletion:"
 msgid_plural "You have specified the following affiliates for deletion:"
 msgstr[0] "Du har oppgitt disse affiliatene for sletting:"
@@ -1008,7 +959,6 @@ msgstr[1] "Du har oppgitt disse affiliatene for sletting:"
 
 # @ affiliate-wp
 #: includes/admin/affiliates/delete.php:62
-#, fuzzy
 msgid "Deleting this affiliate will also delete their referral and visit data."
 msgid_plural ""
 "Deleting these affiliates will also delete their referral and visit data."
@@ -1034,7 +984,6 @@ msgstr "Rediger affiliaten"
 
 # @ affiliate-wp
 #: includes/admin/affiliates/edit.php:34
-#, fuzzy
 msgid "Affiliate Name"
 msgstr "Navn på affiliate"
 
@@ -1051,19 +1000,16 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/affiliates/edit.php:57
-#, fuzzy
 msgid "The affiliate&#8217;s ID. This cannot be changed."
 msgstr "Affiliaten's ID. Denne kan ikke endres."
 
 # @ affiliate-wp
 #: includes/admin/affiliates/edit.php:65
-#, fuzzy
 msgid "Affiliate URL"
 msgstr "Affiliate URLs"
 
 # @ affiliate-wp
 #: includes/admin/affiliates/edit.php:70
-#, fuzzy
 msgid "The affiliate&#8217;s referral URL. This is based on global settings."
 msgstr "Affiliaten's provisjonstype."
 
@@ -1074,31 +1020,26 @@ msgstr "Bruker ID"
 
 # @ affiliate-wp
 #: includes/admin/affiliates/edit.php:83
-#, fuzzy
 msgid "The affiliate&#8217;s user ID. This cannot be changed."
 msgstr "Affiliaten's bruker ID. Denne kan ikke endres."
 
 # @ affiliate-wp
 #: includes/admin/affiliates/edit.php:96
-#, fuzzy
 msgid "The affiliate&#8217;s username. This cannot be changed."
 msgstr "Affiliaten's bruker ID. Denne kan ikke endres."
 
 # @ affiliate-wp
 #: includes/admin/affiliates/edit.php:104
-#, fuzzy
 msgid "Registration Date"
 msgstr "Melding registrerings mail"
 
 # @ affiliate-wp
 #: includes/admin/affiliates/edit.php:109
-#, fuzzy
 msgid "The affiliate&#8217;s registration date. This cannot be changed."
 msgstr "Affiliaten's bruker ID. Denne kan ikke endres."
 
 # @ affiliate-wp
 #: includes/admin/affiliates/edit.php:117 includes/admin/affiliates/new.php:40
-#, fuzzy
 msgid "Affiliate Status"
 msgstr "Affiliate satser:"
 
@@ -1110,7 +1051,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/affiliates/edit.php:139
-#, fuzzy
 msgid "Website"
 msgstr "Nettsteds URL:"
 
@@ -1134,7 +1074,6 @@ msgstr "Nettstedets standard"
 
 # @ affiliate-wp
 #: includes/admin/affiliates/edit.php:166 includes/admin/affiliates/new.php:67
-#, fuzzy
 msgid "The affiliate&#8217;s referral rate type."
 msgstr "Affiliaten's provisjonstype."
 
@@ -1153,7 +1092,6 @@ msgstr "Provisjons sats"
 
 # @ affiliate-wp
 #: includes/admin/affiliates/edit.php:179 includes/admin/affiliates/new.php:80
-#, fuzzy
 msgid ""
 "The affiliate&#8217;s referral rate, such as 20 for 20%. If left blank, the "
 "site default will be used."
@@ -1168,7 +1106,6 @@ msgstr "E-postadresse"
 
 # @ affiliate-wp
 #: includes/admin/affiliates/edit.php:192
-#, fuzzy
 msgid ""
 "The affiliate&#8217;s account email. Updating this will change the email "
 "address shown on the user&#8217;s profile page."
@@ -1189,7 +1126,6 @@ msgstr "E-post for utbetalinger:"
 
 # @ affiliate-wp
 #: includes/admin/affiliates/edit.php:205 includes/admin/affiliates/new.php:93
-#, fuzzy
 msgid ""
 "Affiliate&#8217;s payment email for systems such as PayPal, Moneybookers, or "
 "others. Leave blank to use the affiliate&#8217;s user email."
@@ -1200,19 +1136,16 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/affiliates/edit.php:213
-#, fuzzy
 msgid "Promotion Methods"
 msgstr "Markedsføringsmetode"
 
 # @ affiliate-wp
 #: includes/admin/affiliates/edit.php:218
-#, fuzzy
 msgid "Promotion methods entered by the affiliate during registration."
 msgstr "Affiliatens markedsføringsmetode."
 
 # @ affiliate-wp
 #: includes/admin/affiliates/edit.php:226 includes/admin/affiliates/new.php:101
-#, fuzzy
 msgid "Affiliate Notes"
 msgstr "Affiliate satser:"
 
@@ -1238,7 +1171,6 @@ msgstr "Ny affiliate"
 
 # @ affiliate-wp
 #: includes/admin/affiliates/new.php:18
-#, fuzzy
 msgid ""
 "Use this form to register a new affiliate. Each affiliate is tied directly "
 "to a user account, so if the user account for the affiliate does not yet "
@@ -1265,13 +1197,11 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/affiliates/new.php:49
-#, fuzzy
 msgid "The status assigned to the affiliate&#8217;s account."
 msgstr "Affiliatens brukernavn."
 
 # @ affiliate-wp
 #: includes/admin/affiliates/new.php:114
-#, fuzzy
 msgid "Welcome Email"
 msgstr "Fra e-post"
 
@@ -1309,7 +1239,6 @@ msgstr "Nettsteds URL:"
 
 # @ affiliate-wp
 #: includes/admin/affiliates/review.php:70
-#, fuzzy
 msgid "Affiliate&#8217;s Website URL"
 msgstr "Affiliaten's nettsteds URL"
 
@@ -1375,13 +1304,11 @@ msgstr "Totalt antall besøk"
 
 # @ affiliate-wp
 #: includes/admin/affiliates/view.php:30
-#, fuzzy
 msgid "Conversion rate"
 msgstr "Konverteringsfrekvens"
 
 # @ affiliate-wp
 #: includes/admin/affiliates/view.php:86
-#, fuzzy
 msgid "Recent Payouts"
 msgstr "Nylige salg"
 
@@ -1495,7 +1422,6 @@ msgstr "Innstillinger ble oppdatert."
 
 # @ affiliate-wp
 #: includes/admin/class-notices.php:82
-#, fuzzy
 msgid "%d affiliate was added successfully."
 msgid_plural "%d affiliates were added successfully"
 msgstr[0] "Affiliaten ble oppdatert"
@@ -1503,7 +1429,6 @@ msgstr[1] "Affiliaten ble oppdatert"
 
 # @ affiliate-wp
 #: includes/admin/class-notices.php:95
-#, fuzzy
 msgid "Affiliate wasn&#8217;t added, please try again."
 msgstr "Affiliaten ble ikke opprettet, vennligst prøv igjen."
 
@@ -1554,7 +1479,6 @@ msgstr "Affiliate forespørselen ble avvist."
 
 # @ affiliate-wp
 #: includes/admin/class-notices.php:162
-#, fuzzy
 msgid "%d affiliate from WP Affiliate was added successfully."
 msgid_plural "%d affiliates from WP Affiliate were added successfully"
 msgstr[0] "Affiliaten ble oppdatert"
@@ -1562,7 +1486,6 @@ msgstr[1] "Affiliaten ble oppdatert"
 
 # @ affiliate-wp
 #: includes/admin/class-notices.php:183
-#, fuzzy
 msgid "%d affiliate from Affiliates Pro was added successfully."
 msgid_plural "%d affiliates from Affiliates Pro were added successfully"
 msgstr[0] "Affiliaten ble oppdatert"
@@ -1600,7 +1523,6 @@ msgstr "Slettingen feilet, vennligst prøv igjen."
 
 # @ affiliate-wp
 #: includes/admin/class-notices.php:234
-#, fuzzy
 msgid "A payout has been created."
 msgstr "Emne nytt salg mail"
 
@@ -1641,7 +1563,6 @@ msgstr "Innstillingene ble importert"
 
 # @ affiliate-wp
 #: includes/admin/class-notices.php:282
-#, fuzzy
 msgid ""
 "Your license key expired on %s. Please <a href=\"%s\" target=\"_blank"
 "\">renew your license key</a>."
@@ -1806,7 +1727,6 @@ msgstr "Beskrivelse"
 
 # @ affiliate-wp
 #: includes/admin/creatives/edit.php:41 includes/admin/creatives/new.php:39
-#, fuzzy
 msgid ""
 "An optional description for this creative. This is visible to affiliates and "
 "is displayed below the creative."
@@ -1816,7 +1736,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/creatives/edit.php:54 includes/admin/creatives/new.php:52
-#, fuzzy
 msgid ""
 "The URL this creative should link to. Based on your Referral Settings, the "
 "affiliate&#8217;s ID or username will be automatically appended."
@@ -1907,7 +1826,6 @@ msgstr "Nylige besøk"
 # @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:81
 #: templates/dashboard-tab-visits.php:49
-#, fuzzy
 msgid "Visit converted: %s"
 msgstr "Konvertert"
 
@@ -1982,7 +1900,6 @@ msgstr "Affiliate"
 #: includes/admin/payouts/class-list-table.php:152
 #: includes/admin/payouts/view.php:72
 #: includes/admin/tools/export/class-batch-export-payouts.php:148
-#, fuzzy
 msgid "Generated By"
 msgstr "Generer URL"
 
@@ -1991,7 +1908,6 @@ msgstr "Generer URL"
 #: includes/admin/payouts/view.php:103
 #: includes/admin/tools/export/class-batch-export-payouts.php:149
 #: templates/dashboard-tab-payouts.php:36
-#, fuzzy
 msgid "Payout Method"
 msgstr "Markedsføringsmetode"
 
@@ -2002,7 +1918,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/payouts/class-list-table.php:422
-#, fuzzy
 msgid "View"
 msgstr "Vis %s"
 
@@ -2013,20 +1928,17 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/payouts/class-list-table.php:513
-#, fuzzy
 msgid "No payouts found."
 msgstr "Ingen besøk funnet."
 
 # @ affiliate-wp
 #: includes/admin/payouts/payouts.php:39
 #: includes/admin/reports/class-reports-admin.php:58
-#, fuzzy
 msgid "Manage Referrals"
 msgstr "Ubekreftede salg"
 
 # @ affiliate-wp
 #: includes/admin/payouts/screen-options.php:32
-#, fuzzy
 msgid "Number of payouts per page:"
 msgstr "Ingen salg er registrert ennå"
 
@@ -2055,7 +1967,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/payouts/view.php:167
-#, fuzzy
 msgid "Referrals Paid"
 msgstr "Salg"
 
@@ -2182,7 +2093,6 @@ msgstr "<a href=\"%s\">Publiser et problem</a> på <a href=\"%s\">GitHub</a>."
 
 # @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:39
-#, fuzzy
 msgid "This screen provides access to your site&#8217;s referral history."
 msgstr ""
 "Denne siden gir deg tilgang til nettstedets henvisnings og salgshistorie."
@@ -2247,20 +2157,17 @@ msgstr "Henvisninger og salg kan søkes på flere forskjellige måter:"
 
 # @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:56
-#, fuzzy
 msgid "You can enter the referral&#8217;s ID number"
 msgstr "Du kan skrive inn henvisningens / salgets ID nummer"
 
 # @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:57
-#, fuzzy
 msgid "You can enter the referral reference prefixed by &#8220;ref:&#8221;"
 msgstr ""
 "Du kan skrive inn henvisningens / salgets referanse prefikset med 'ref:'"
 
 # @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:58
-#, fuzzy
 msgid "You can enter the referral context prefixed by &#8220;context:&#8221;"
 msgstr ""
 "Du kan skrive inn henvisningens / salgets kontekst prefikset med 'context:'"
@@ -2268,7 +2175,6 @@ msgstr ""
 # @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:59
 #: includes/admin/visits/contextual-help.php:60
-#, fuzzy
 msgid ""
 "You can enter the affiliate&#8217;s ID number prefixed by &#8220;affiliate:"
 "&#8221;"
@@ -2277,7 +2183,6 @@ msgstr "Du kan skrive inn affiliatens ID nummer prefikset med 'affiliate:'"
 # @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:60
 #: includes/admin/visits/contextual-help.php:61
-#, fuzzy
 msgid "You can enter a URL campaign prefixed by &#8220;campaign:&#8221;"
 msgstr ""
 "Du kan skrive inn henvisningens / salgets kontekst prefikset med 'context:'"
@@ -2289,7 +2194,6 @@ msgstr "Eksportere henvisninger / salg"
 
 # @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:68
-#, fuzzy
 msgid ""
 "Referrals can be exported directly to a CSV file in order to make it easier "
 "for your own accounting needs and for you to payout your affiliates&#8217;s "
@@ -2301,7 +2205,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:69
-#, fuzzy
 msgid ""
 "The CSV file generated is structured properly for PayPal&#8217;s Mass "
 "Payment system so you can easily payout all of your affiliates at once via "
@@ -2323,7 +2226,6 @@ msgstr "Bruker ID"
 
 # @ affiliate-wp
 #: includes/admin/referrals/edit.php:36
-#, fuzzy
 msgid "The referral ID. This cannot be changed."
 msgstr "Affiliaten's ID. Denne kan ikke endres."
 
@@ -2335,7 +2237,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/referrals/edit.php:67
-#, fuzzy
 msgid ""
 "The name and ID of the affiliate who generated this referral. This "
 "association cannot be changed."
@@ -2344,14 +2245,12 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/referrals/edit.php:75
-#, fuzzy
 msgid "Payout"
 msgstr "Nylige salg"
 
 # @ affiliate-wp
 #. translators: 1: Payout total amount with view link
 #: includes/admin/referrals/edit.php:84
-#, fuzzy
 msgid "Total: %1$s"
 msgstr "Totaler"
 
@@ -2381,7 +2280,6 @@ msgstr "Provisjon i henhold til dette salget, f.eks. 20."
 
 # @ affiliate-wp
 #: includes/admin/referrals/edit.php:159
-#, fuzzy
 msgid "Visit"
 msgstr "Besøkende"
 
@@ -2414,7 +2312,6 @@ msgstr "Kontekst"
 
 # @ affiliate-wp
 #: includes/admin/referrals/edit.php:234
-#, fuzzy
 msgid ""
 "Context for this referral (optional). Usually this is used to identify the "
 "payment system or integration that was used for the transaction."
@@ -2513,7 +2410,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/referrals/referrals.php:72
-#, fuzzy
 msgid ""
 "To generate a payout for a specific affiliate, enter the affiliate&#8217;s "
 "login name, first name, or last name. Leave blank to generate a payout for "
@@ -2530,7 +2426,6 @@ msgstr "Generer CSV fil"
 
 # @ affiliate-wp
 #: includes/admin/referrals/screen-options.php:24
-#, fuzzy
 msgid "Number of referrals per page:"
 msgstr "Ingen salg er registrert ennå"
 
@@ -2541,25 +2436,21 @@ msgstr "Affiliate registreringer"
 
 # @ affiliate-wp
 #: includes/admin/reports/class-reports-admin.php:65
-#, fuzzy
 msgid "Manage Affiliates"
 msgstr "Legge til affiliater"
 
 # @ affiliate-wp
 #: includes/admin/reports/class-reports-admin.php:70
-#, fuzzy
 msgid "View Payouts"
 msgstr "Nylige salg"
 
 # @ affiliate-wp
 #: includes/admin/reports/class-reports-admin.php:77
-#, fuzzy
 msgid "Manage Visits"
 msgstr "Søk i besøkende"
 
 # @ affiliate-wp
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:38
-#, fuzzy
 msgid "Total Affiliates"
 msgstr "Eksporter affiliater"
 
@@ -2572,26 +2463,22 @@ msgstr ""
 # @ affiliate-wp
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:71
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:135
-#, fuzzy
 msgid "Affiliate #%d"
 msgstr "Affiliate: #%d %s"
 
 # @ affiliate-wp
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:75
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:84
-#, fuzzy
 msgid "Top Earning Affiliate"
 msgstr "Rediger affiliaten"
 
 # @ affiliate-wp
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:99
-#, fuzzy
 msgid "New Affiliates"
 msgstr "Ny affiliate"
 
 # @ affiliate-wp
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:139
-#, fuzzy
 msgid "%d referral"
 msgid_plural "%d referrals"
 msgstr[0] "Legg til salg"
@@ -2603,7 +2490,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:178
-#, fuzzy
 msgid "Average Payout"
 msgstr "Provisjons sats"
 
@@ -2649,14 +2535,12 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/reports/tabs/class-referrals-reports-tab.php:81
-#, fuzzy
 msgid "Average Referral Amount"
 msgstr "Provisjons sats"
 
 # @ affiliate-wp
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:38
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:45
-#, fuzzy
 msgid "Total Visits"
 msgstr "Totalt antall besøk"
 
@@ -2680,7 +2564,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:113
-#, fuzzy
 msgid "Direct Traffic"
 msgstr "Direkte trafikk"
 
@@ -2778,7 +2661,6 @@ msgstr "SEO vennlige URLs"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:495
-#, fuzzy
 msgid ""
 "Show pretty affiliate referral URLs to affiliates. For example: <strong>%s "
 "or %s</strong>"
@@ -2788,7 +2670,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:499
-#, fuzzy
 msgid "Credit Last Referrer"
 msgstr "Rediger salget"
 
@@ -2798,7 +2679,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:505
-#, fuzzy
 msgid ""
 "Choose a referral rate type. Referrals can be based on either a percentage "
 "or a flat rate amount."
@@ -2806,7 +2686,6 @@ msgstr "Skal provisjoner være basert på en prosentandel eller et flatt beløp?
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:511
-#, fuzzy
 msgid ""
 "The default referral rate. A percentage if the Referral Rate Type is set to "
 "Percentage, a flat amount otherwise. Referral rates can also be set for each "
@@ -2823,7 +2702,6 @@ msgstr "Ekskluder fraktkostnader"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:519
-#, fuzzy
 msgid "Exclude shipping costs from referral calculations."
 msgstr "Skal fraktkostnadene være ekskludert fra provisjonsberegninger?"
 
@@ -2834,7 +2712,6 @@ msgstr "Ekskluder merverdiavgift"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:524
-#, fuzzy
 msgid "Exclude taxes from referral calculations."
 msgstr "Skal merverdiavgiften være ekskludert fra provisjonsberegninger?"
 
@@ -2845,7 +2722,6 @@ msgstr "Varighet på informasjonskapsel (cookie)"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:529
-#, fuzzy
 msgid "Enter how many days the referral tracking cookie should be valid for."
 msgstr ""
 "Hvor mange dager skal henvisningens informasjonskapsel (tracking cookie) "
@@ -2880,13 +2756,11 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:546
-#, fuzzy
 msgid "Currency Symbol Position"
 msgstr "Valutasymbolet"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:547
-#, fuzzy
 msgid "Choose the location of the currency symbol."
 msgstr "Velg plasseringen av valutasymbolet."
 
@@ -2922,13 +2796,11 @@ msgstr "Symbolet (vanligvis , eller .) for å skille desimaler."
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:569
-#, fuzzy
 msgid "Affiliate Form Settings"
 msgstr "Gå til AffiliateWP innstillinger"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:573
-#, fuzzy
 msgid "Affiliate Area Forms"
 msgstr "Affiliate område"
 
@@ -2941,19 +2813,16 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:577
-#, fuzzy
 msgid "Affiliate Registration Form and Affiliate Login Form"
 msgstr "Affiliate registreringer"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:578
-#, fuzzy
 msgid "Affiliate Registration Form Only"
 msgstr "Affiliate registrering"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:579
-#, fuzzy
 msgid "Affiliate Login Form Only"
 msgstr "Affiliate rabattkode?"
 
@@ -2965,7 +2834,6 @@ msgstr "Integrasjoner"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:597
-#, fuzzy
 msgid ""
 "Choose the integrations to enable. If you are not using any of these, you "
 "may use the <strong>[affiliate_conversion_script]</strong> shortcode to "
@@ -2979,13 +2847,11 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:613
-#, fuzzy
 msgid "Disable All Emails"
 msgstr "Deaktiver henvisninger / salg"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:614
-#, fuzzy
 msgid "Disable all email notifications."
 msgstr "Aktiver e-post varsel ved godkjent henvisning eller salg."
 
@@ -3016,7 +2882,6 @@ msgstr "Fra navn"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:630
-#, fuzzy
 msgid "The name that emails come from. This is usually your site name."
 msgstr ""
 "Navnet på avsender. Dette bør sannsynligvis være navnet på ditt nettsted."
@@ -3028,7 +2893,6 @@ msgstr "Fra e-post"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:636
-#, fuzzy
 msgid ""
 "The email address to send emails from. This will act as the \"from\" and "
 "\"reply-to\" address."
@@ -3038,13 +2902,11 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:641
-#, fuzzy
 msgid "Notify Admin"
 msgstr "Varsle administrator"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:642
-#, fuzzy
 msgid "Notify site admin of new affiliate registrations."
 msgstr "Varsle administrator ved nye affiliate registreringer?"
 
@@ -3129,7 +2991,6 @@ msgstr ""
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:667
 #: includes/admin/settings/class-settings.php:679
-#, fuzzy
 msgid "Congratulations {name}!"
 msgstr "Gratulere %s!"
 
@@ -3199,25 +3060,21 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:693
-#, fuzzy
 msgid "Allow Affiliate Registration"
 msgstr "Tillat affiliate registrering"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:694
-#, fuzzy
 msgid "Allow users to register affiliate accounts for themselves."
 msgstr "Skal brukere selv kunne registrere seg som affiliate?"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:698
-#, fuzzy
 msgid "Require Approval"
 msgstr "Krever godkjenning"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:699
-#, fuzzy
 msgid ""
 "Require that Pending affiliate accounts must be approved before they can "
 "begin earning referrals."
@@ -3232,7 +3089,6 @@ msgstr "Registrer nye brukere automatisk"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:704
-#, fuzzy
 msgid "Automatically register new users as affiliates."
 msgstr "Registrere nye brukere som affiliater automatisk?"
 
@@ -3246,7 +3102,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:713
-#, fuzzy
 msgid "Default Referral URL"
 msgstr "Standard henvisnings ID"
 
@@ -3285,13 +3140,11 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:733
-#, fuzzy
 msgid "Reject Unpaid Referrals on Refund"
 msgstr "Avvis ubekreftede salg ved refusjon?"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:734
-#, fuzzy
 msgid ""
 "Automatically reject Unpaid referrals when the originating purchase is "
 "refunded or revoked."
@@ -3301,13 +3154,11 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:738
-#, fuzzy
 msgid "Use Fallback Referral Tracking Method"
 msgstr "Bruk reserve sporingsmetode?"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:739
-#, fuzzy
 msgid ""
 "The method used to track referral links can fail on sites that have jQuery "
 "errors. Enable Fallback Tracking if referrals are not being tracked properly."
@@ -3318,13 +3169,11 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:743
-#, fuzzy
 msgid "Ignore Referrals with Zero Amount"
 msgstr "Provisjons sats"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:744
-#, fuzzy
 msgid ""
 "Ignore referrals with a zero amount. This can be useful for multi-price "
 "products that start at zero, or if a discount was used which resulted in a "
@@ -3350,7 +3199,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:753
-#, fuzzy
 msgid "Referral URL Blacklist"
 msgstr "Henvisningslenker / URLs"
 
@@ -3373,7 +3221,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:764
-#, fuzzy
 msgid "Remove Data on Uninstall"
 msgstr "Fjern data når plugin slettes?"
 
@@ -3383,7 +3230,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:795
-#, fuzzy
 msgid "Required Registration Fields"
 msgstr "Moderer registreringer"
 
@@ -3401,13 +3247,11 @@ msgstr "Hvordan vil du markedsføre oss?"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:830
-#, fuzzy
 msgid "Application Pending Email Subject"
 msgstr "Emne søknad akseptert mail"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:831
-#, fuzzy
 msgid "Enter the subject line for pending affiliate application emails."
 msgstr ""
 "Skrive inn et emne for nytt salg mailen som sendt til affiliaten når nye "
@@ -3416,19 +3260,16 @@ msgstr ""
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:833
 #: includes/emails/actions.php:165
-#, fuzzy
 msgid "Your Affiliate Application Is Being Reviewed"
 msgstr "Din affiliate søknad hos %s har blitt godkjent!"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:836
-#, fuzzy
 msgid "Application Pending Email Content"
 msgstr "Melding søknad akseptert mail"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:837
-#, fuzzy
 msgid ""
 "Enter the email to send when an application is pending. HTML is accepted. "
 "Available template tags:"
@@ -3454,13 +3295,11 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:842
-#, fuzzy
 msgid "Application Rejection Email Subject"
 msgstr "Emne søknad akseptert mail"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:843
-#, fuzzy
 msgid "Enter the subject line for rejected affiliate application emails."
 msgstr ""
 "Skrive inn et emne for nytt salg mailen som sendt til affiliaten når nye "
@@ -3469,19 +3308,16 @@ msgstr ""
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:845
 #: includes/emails/actions.php:204
-#, fuzzy
 msgid "Your Affiliate Application Has Been Rejected"
 msgstr "Din affiliate søknad hos %s har blitt godkjent!"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:848
-#, fuzzy
 msgid "Application Rejection Email Content"
 msgstr "Melding søknad akseptert mail"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:849
-#, fuzzy
 msgid ""
 "Enter the email to send when an application is rejected. HTML is accepted. "
 "Available template tags:"
@@ -3502,7 +3338,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:1021
-#, fuzzy
 msgid ""
 "Your license key is globally defined via <code>AFFILIATEWP_LICENSE_KEY</"
 "code> set in <code>wp-config.php</code>.<br />It cannot be modified from "
@@ -3560,7 +3395,6 @@ msgstr "Last opp"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:1233
-#, fuzzy
 msgid ""
 "Your license key is globally defined via <code>AFFILIATEWP_LICENSE_KEY</"
 "code> set in <code>wp-config.php</code>.<br />It cannot be modified from "
@@ -3594,7 +3428,6 @@ msgstr "Diverse"
 
 # @ affiliate-wp
 #: includes/admin/tools/class-batch-recount-affiliate-stats.php:156
-#, fuzzy
 msgid "%s affiliate&#8217;s was successfully processed."
 msgid_plural "%s affiliates&#8217; were successfully processed."
 msgstr[0] "Affiliaten ble oppdatert"
@@ -3611,7 +3444,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/tools/class-rest-consumers-table.php:61
-#, fuzzy
 msgid "No API consumers found."
 msgstr "Ingen brukere funnet"
 
@@ -3637,7 +3469,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/tools/class-rest-consumers-table.php:228
-#, fuzzy
 msgid "Enter username"
 msgstr "Ugyldig brukernavn"
 
@@ -3669,13 +3500,11 @@ msgstr "Registreringsdato"
 
 # @ affiliate-wp
 #: includes/admin/tools/export/class-batch-export-affiliates.php:117
-#, fuzzy
 msgid "No valid affiliate status was selected for export."
 msgstr "Ingen affiliate ID er spesifisert for sletting"
 
 # @ affiliate-wp
 #: includes/admin/tools/export/class-batch-export-affiliates.php:187
-#, fuzzy
 msgid "%s affiliate was successfully exported."
 msgid_plural "%s affiliates were successfully exported."
 msgstr[0] "Affiliaten ble oppdatert"
@@ -3687,7 +3516,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/tools/export/class-batch-export-payouts.php:274
-#, fuzzy
 msgid "%s payout log was successfully exported."
 msgid_plural "%s payout logs were successfully exported."
 msgstr[0] "Annonsematerialet ble opprettet"
@@ -3705,7 +3533,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/tools/export/class-batch-export-referrals.php:247
-#, fuzzy
 msgid "%s referral was successfully exported."
 msgid_plural "%s referrals were successfully exported."
 msgstr[0] "Henvisningen ble opprettet"
@@ -3724,7 +3551,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/tools/export/class-batch-generate-payouts.php:299
-#, fuzzy
 msgid "A payout log for %s affiliate was successfully generated."
 msgid_plural "A payout log for %s affiliates was successfully generated."
 msgstr[0] "Affiliaten ble oppdatert"
@@ -3775,7 +3601,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:96
-#, fuzzy
 msgid "Debug Assistant"
 msgstr "Migreringsassistent"
 
@@ -3791,7 +3616,6 @@ msgstr "Bruk dette verktøyet for å rekalkulere affiliate statistikkene."
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:157
-#, fuzzy
 msgid ""
 "Enter the name of the affiliate or begin typing to perform a search based on "
 "the affiliate&#8217;s name."
@@ -3820,7 +3644,6 @@ msgstr "Brukerkontoer"
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:208
-#, fuzzy
 msgid ""
 "Use this tool to create affiliate accounts for each of your existing "
 "WordPress user accounts that belong to the selected roles below."
@@ -3836,13 +3659,11 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:211
-#, fuzzy
 msgid "Select User Roles"
 msgstr "Velg felt"
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:221
-#, fuzzy
 msgid "Create Affiliate Accounts for Users"
 msgstr "Opprett affiliate kontoer"
 
@@ -3861,7 +3682,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:237
-#, fuzzy
 msgid ""
 "Use this tool to migrate existing affiliate / referral data from Affiliates "
 "Pro to AffiliateWP."
@@ -3871,7 +3691,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:238
-#, fuzzy
 msgid ""
 "<strong>NOTE:</strong> This tool should only ever be used on a fresh "
 "install. If you have already collected affiliate or referral data, do not "
@@ -3888,7 +3707,6 @@ msgstr "Migrer data fra Affiliates Pro"
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:253
-#, fuzzy
 msgid ""
 "Use this tool to migrate existing affiliate accounts from WP Affiliate to "
 "AffiliateWP."
@@ -3934,7 +3752,6 @@ msgstr "Eksporter henvisninger / salg til en CSV fil."
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:317 includes/admin/tools/tools.php:341
-#, fuzzy
 msgid ""
 "To search for an affiliate, enter the affiliate&#8217;s login name, first "
 "name, or last name. Leave blank to export referrals for all affiliates."
@@ -3945,13 +3762,11 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:327
-#, fuzzy
 msgid "Export Payouts"
 msgstr "Totalt antall besøk"
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:329
-#, fuzzy
 msgid "Export payouts to a CSV file."
 msgstr "Eksporter affiliater til en CSV fil."
 
@@ -4001,7 +3816,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:457
-#, fuzzy
 msgid "Use this tool to help debug various operations in AffiliateWP."
 msgstr ""
 "Bruk dette verktøyet for å migrere eksisterende affiliate kontoer fra WP "
@@ -4013,7 +3827,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:531
-#, fuzzy
 msgid "Invalid batch ID."
 msgstr "Ugyldig e-postadresse"
 
@@ -4023,7 +3836,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/tools/upgrades/class-batch-upgrade-recount-affiliate-stats.php:38
-#, fuzzy
 msgid "Your database has been successfully upgraded. %s"
 msgstr "Henvisningen ble opprettet"
 
@@ -4033,19 +3845,16 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/user-profile.php:22
-#, fuzzy
 msgid "Affiliate Registration Status"
 msgstr "Affiliate registreringer"
 
 # @ affiliate-wp
 #: includes/admin/user-profile.php:40
-#, fuzzy
 msgid "Not Registered"
 msgstr "Registreringsdato"
 
 # @ affiliate-wp
 #: includes/admin/user-profile.php:46
-#, fuzzy
 msgid "Affiliate Actions"
 msgstr "Gå til AffiliateWP innstillinger"
 
@@ -4056,7 +3865,6 @@ msgstr "Send søknad"
 
 # @ affiliate-wp
 #: includes/admin/user-profile.php:80 includes/class-register.php:506
-#, fuzzy
 msgid "Disable Affiliate Email"
 msgstr "Deaktiver henvisninger / salg"
 
@@ -4070,7 +3878,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/utilities/class-batch-migrate-users.php:167
-#, fuzzy
 msgid "%s affiliate was added successfully."
 msgid_plural "%s affiliates were added successfully."
 msgstr[0] "Affiliaten ble oppdatert"
@@ -4078,7 +3885,6 @@ msgstr[1] "Affiliaten ble oppdatert"
 
 # @ affiliate-wp
 #: includes/admin/utilities/class-batch-migrate-wp-affiliate.php:209
-#, fuzzy
 msgid "%s affiliate was successfully converted."
 msgid_plural "%s affiliates were successfully converted."
 msgstr[0] "Affiliaten ble oppdatert"
@@ -4098,7 +3904,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/utilities/class-batch-process.php:143
-#, fuzzy
 msgid "%s item was successfully processed."
 msgid_plural "%s items were successfully processed."
 msgstr[0] "Innstillingene ble importert"
@@ -4140,7 +3945,6 @@ msgstr "Ingen besøk funnet."
 
 # @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:39
-#, fuzzy
 msgid "This screen provides access to your site&#8217;s visit history."
 msgstr "Denne siden gir deg tilgang til nettstedets besøkslogg."
 
@@ -4184,7 +3988,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:44
-#, fuzzy
 msgid ""
 "<strong>Context</strong>: this is the context of how the visit was "
 "generated, if set."
@@ -4242,7 +4045,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:58
-#, fuzzy
 msgid ""
 "You can enter the referral&#8217;s ID number prefixed by &#8220;referral:"
 "&#8221;"
@@ -4251,7 +4053,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:59
-#, fuzzy
 msgid "You can enter a visit context prefixed by &#8220;context:&#8221;"
 msgstr ""
 "Du kan skrive inn henvisningens / salgets kontekst prefikset med 'context:'"
@@ -4266,7 +4067,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/visits/visits.php:65
-#, fuzzy
 msgid "Unconverted"
 msgstr "Konvertert"
 
@@ -4322,7 +4122,6 @@ msgstr "Betalte inntekter"
 
 # @ affiliate-wp
 #: includes/class-register.php:77
-#, fuzzy
 msgid "Please enter a valid website URL"
 msgstr "Vennligst skriv inn en nettsteds URL, f.eks. http://www.ditt-domene.no"
 
@@ -4350,7 +4149,6 @@ msgstr "Denne e-postadressen er allerede brukt"
 
 # @ affiliate-wp
 #: includes/class-register.php:107
-#, fuzzy
 msgid "Invalid account email"
 msgstr "Ugyldig e-post for utbetalinger"
 
@@ -4375,7 +4173,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/class-register.php:146
-#, fuzzy
 msgid "Nice try honey bear, don&#8217;t touch our honey"
 msgstr "Godt forsøk honningbjørn, ikke rør honningen vår"
 
@@ -4396,7 +4193,6 @@ msgstr "Vennligst skriv inn en nettsteds URL, f.eks. http://www.ditt-domene.no"
 
 # @ affiliate-wp
 #: includes/class-register.php:272
-#, fuzzy
 msgid "Please enter your payment email"
 msgstr "Vennligst skriv inn ditt navn"
 
@@ -4406,13 +4202,11 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/class-register.php:499
-#, fuzzy
 msgid "Add as Affiliate"
 msgstr "Legg til affiliaten"
 
 # @ affiliate-wp
 #: includes/class-register.php:501
-#, fuzzy
 msgid "Add the user as an affiliate."
 msgstr "Du er allerede registrert som affiliate"
 
@@ -4442,13 +4236,11 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/cli/class-affiliate-sub-commands.php:167
-#, fuzzy
 msgid "An affiliate with the username \"%s\" has been created."
 msgstr "Din affiliate søknad hos %s har blitt godkjent!"
 
 # @ affiliate-wp
 #: includes/cli/class-affiliate-sub-commands.php:169
-#, fuzzy
 msgid "The affiliate account could not be added."
 msgstr "Din affiliate konto er ikke aktiv"
 
@@ -4463,19 +4255,16 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/cli/class-affiliate-sub-commands.php:231
-#, fuzzy
 msgid "The affiliate was updated successfully."
 msgstr "Affiliaten ble oppdatert"
 
 # @ affiliate-wp
 #: includes/cli/class-affiliate-sub-commands.php:233
-#, fuzzy
 msgid "The affiliate account could not be updated."
 msgstr "Din affiliate konto er ikke aktiv"
 
 # @ affiliate-wp
 #: includes/cli/class-affiliate-sub-commands.php:288
-#, fuzzy
 msgid ""
 "Are you sure you want to delete this affiliate, all its data and its "
 "associated user account?"
@@ -4483,13 +4272,11 @@ msgstr "Er du sikker på at du vil slette dette annonsematerialet?"
 
 # @ affiliate-wp
 #: includes/cli/class-affiliate-sub-commands.php:290
-#, fuzzy
 msgid "Are you sure you want to delete this affiliate and all its data?"
 msgstr "Er du sikker på at du vil slette dette annonsematerialet?"
 
 # @ affiliate-wp
 #: includes/cli/class-affiliate-sub-commands.php:293
-#, fuzzy
 msgid "Are you sure you want to delete this affiliate?"
 msgstr "Er du sikker på at du vil slette dette annonsematerialet?"
 
@@ -4500,25 +4287,21 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/cli/class-affiliate-sub-commands.php:313
-#, fuzzy
 msgid "The affiliate account has been successfully deleted."
 msgstr "Affiliate konto(ene) ble slettet"
 
 # @ affiliate-wp
 #: includes/cli/class-affiliate-sub-commands.php:316
-#, fuzzy
 msgid "The affiliate account could not be deleted."
 msgstr "Din affiliate konto forespørsel har blitt avvist"
 
 # @ affiliate-wp
 #: includes/cli/class-affiliate-sub-commands.php:393
-#, fuzzy
 msgid "Number of affiliates: %d"
 msgstr "Ingen affiliater funnet."
 
 # @ affiliate-wp
 #: includes/cli/class-command.php:24
-#, fuzzy
 msgid "AffiliateWP is not installed"
 msgstr "AffiliateWP migrering"
 
@@ -4528,7 +4311,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/cli/class-command.php:41
-#, fuzzy
 msgid "License status is: %s"
 msgstr "Lisens innstillinger"
 
@@ -4538,7 +4320,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/cli/class-command.php:59
-#, fuzzy
 msgid "Affiliates require approval: %s"
 msgstr "Krever godkjenning"
 
@@ -4548,31 +4329,26 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/cli/class-command.php:85
-#, fuzzy
 msgid "Integrations: %s"
 msgstr "Integrasjoner"
 
 # @ affiliate-wp
 #: includes/cli/class-command.php:92
-#, fuzzy
 msgid "Global referral rate: %s"
 msgstr "Affiliaten's provisjonstype."
 
 # @ affiliate-wp
 #: includes/cli/class-command.php:95
-#, fuzzy
 msgid "Global referral rate type: %s"
 msgstr "Affiliaten's provisjonstype."
 
 # @ affiliate-wp
 #: includes/cli/class-command.php:98
-#, fuzzy
 msgid "Currency: %s"
 msgstr "Valuta"
 
 # @ affiliate-wp
 #: includes/cli/class-command.php:105
-#, fuzzy
 msgid "Referral variable: %s"
 msgstr "Henvisnings variabel"
 
@@ -4582,25 +4358,21 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/cli/class-command.php:126
-#, fuzzy
 msgid "Referral URL (ID): %s"
 msgstr "Henvisnings URL:"
 
 # @ affiliate-wp
 #: includes/cli/class-command.php:129
-#, fuzzy
 msgid "Referral URL (Username): %s"
 msgstr "Lenke / URL Generator"
 
 # @ affiliate-wp
 #: includes/cli/class-command.php:134
-#, fuzzy
 msgid "Affiliate Area URL: %s"
 msgstr "Affiliate område"
 
 # @ affiliate-wp
 #: includes/cli/class-command.php:139
-#, fuzzy
 msgid "Terms of Use URL: %s"
 msgstr "Vilkår og betingelser"
 
@@ -4610,37 +4382,31 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/cli/class-command.php:190
-#, fuzzy
 msgid "Total Affiliates: %s"
 msgstr "Eksporter affiliater"
 
 # @ affiliate-wp
 #: includes/cli/class-command.php:193
-#, fuzzy
 msgid "Total Creatives: %s"
 msgstr "Eksporter affiliater"
 
 # @ affiliate-wp
 #: includes/cli/class-command.php:196
-#, fuzzy
 msgid "Total Payouts: %s"
 msgstr "Totalt antall besøk"
 
 # @ affiliate-wp
 #: includes/cli/class-command.php:199
-#, fuzzy
 msgid "Total Referrals: %s"
 msgstr "Totalt antall betalte salg"
 
 # @ affiliate-wp
 #: includes/cli/class-command.php:202
-#, fuzzy
 msgid "Total Visits: %s"
 msgstr "Totalt antall besøk"
 
 # @ affiliate-wp
 #: includes/cli/class-command.php:220
-#, fuzzy
 msgid "Are you sure you want to clear the debug log?"
 msgstr "Er du sikker på at du vil slette dette annonsematerialet?"
 
@@ -4658,7 +4424,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/cli/class-creative-sub-commands.php:135
-#, fuzzy
 msgid "The creative could not be created."
 msgstr "Emne nytt salg mail"
 
@@ -4671,7 +4436,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/cli/class-creative-sub-commands.php:199
-#, fuzzy
 msgid "The creative was successfully updated."
 msgstr "Annonsematerialet ble opprettet"
 
@@ -4681,7 +4445,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/cli/class-creative-sub-commands.php:236
-#, fuzzy
 msgid "The creative was successfully deleted."
 msgstr "Annonsematerialet ble opprettet"
 
@@ -4691,7 +4454,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/cli/class-creative-sub-commands.php:314
-#, fuzzy
 msgid "Number of creatives: %d"
 msgstr "Inget annonsemateriale funnet."
 
@@ -4729,7 +4491,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/cli/class-payout-sub-commands.php:298
-#, fuzzy
 msgid "Are you sure you want to overwrite this payout's referrals?"
 msgstr "Er du sikker på at du vil slette dette annonsematerialet?"
 
@@ -4739,14 +4500,12 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/cli/class-payout-sub-commands.php:312
-#, fuzzy
 msgid ""
 "Are you sure you want to overwrite the affiliate associated with this payout?"
 msgstr "Er du sikker på at du vil slette dette annonsematerialet?"
 
 # @ affiliate-wp
 #: includes/cli/class-payout-sub-commands.php:316
-#, fuzzy
 msgid "The supplied affiliate ID or username is invalid and has been ignored."
 msgstr "Affiliaten's bruker ID. Denne kan ikke endres."
 
@@ -4758,7 +4517,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/cli/class-payout-sub-commands.php:327
-#, fuzzy
 msgid "Payout #%d has been updated successfully."
 msgstr "Annonsematerialet ble oppdatert"
 
@@ -4773,7 +4531,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/cli/class-payout-sub-commands.php:361
-#, fuzzy
 msgid "Are you sure you want to delete this payout?"
 msgstr "Er du sikker på at du vil slette dette annonsematerialet?"
 
@@ -4804,13 +4561,11 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/cli/class-referral-sub-commands.php:144
-#, fuzzy
 msgid "A referral with the ID \"%d\" has been created."
 msgstr "Emne nytt salg mail"
 
 # @ affiliate-wp
 #: includes/cli/class-referral-sub-commands.php:146
-#, fuzzy
 msgid "The referral could not be added."
 msgstr "Emne nytt salg mail"
 
@@ -4823,37 +4578,31 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/cli/class-referral-sub-commands.php:219
-#, fuzzy
 msgid "The referral was updated successfully."
 msgstr "Salget ble oppdatert"
 
 # @ affiliate-wp
 #: includes/cli/class-referral-sub-commands.php:221
-#, fuzzy
 msgid "The referral could not be updated"
 msgstr "Emne nytt salg mail"
 
 # @ affiliate-wp
 #: includes/cli/class-referral-sub-commands.php:254 includes/scripts.php:109
-#, fuzzy
 msgid "Are you sure you want to delete this referral?"
 msgstr "Er du sikker på at du vil slette dette annonsematerialet?"
 
 # @ affiliate-wp
 #: includes/cli/class-referral-sub-commands.php:259
-#, fuzzy
 msgid "The referral has been successfully deleted."
 msgstr "Henvisningen ble opprettet"
 
 # @ affiliate-wp
 #: includes/cli/class-referral-sub-commands.php:261
-#, fuzzy
 msgid "The referral could not be deleted."
 msgstr "Emne nytt salg mail"
 
 # @ affiliate-wp
 #: includes/cli/class-referral-sub-commands.php:338
-#, fuzzy
 msgid "Number of referrals: %d"
 msgstr "Ingen salg er registrert ennå"
 
@@ -4871,13 +4620,11 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/cli/class-visit-sub-commands.php:179
-#, fuzzy
 msgid "The visit was successfully created."
 msgstr "Innstillingene ble importert"
 
 # @ affiliate-wp
 #: includes/cli/class-visit-sub-commands.php:181
-#, fuzzy
 msgid "The visit could not be created."
 msgstr "Emne nytt salg mail"
 
@@ -4894,7 +4641,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/cli/class-visit-sub-commands.php:277
-#, fuzzy
 msgid "The visit was updated successfully."
 msgstr "Affiliaten ble oppdatert"
 
@@ -4904,7 +4650,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/cli/class-visit-sub-commands.php:311
-#, fuzzy
 msgid "Are you sure you want to delete this visit?"
 msgstr "Er du sikker på at du vil slette dette annonsematerialet?"
 
@@ -4918,7 +4663,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/cli/class-visit-sub-commands.php:396
-#, fuzzy
 msgid "Number of visits: %d"
 msgstr "Ingen besøk funnet."
 
@@ -4964,7 +4708,6 @@ msgstr "Logg inn på din konto hos %s"
 
 # @ affiliate-wp
 #: includes/emails/actions.php:169
-#, fuzzy
 msgid "Hi %s!"
 msgstr "på %s!"
 
@@ -5030,7 +4773,6 @@ msgstr "Affiliatens markedsføringsmetode."
 
 # @ affiliate-wp
 #: includes/emails/class-affwp-emails.php:447
-#, fuzzy
 msgid "The reason an affiliate area was rejected"
 msgstr "Affiliate forespørselen ble avvist."
 
@@ -5051,19 +4793,16 @@ msgstr "Navnet på ditt nettsted"
 
 # @ affiliate-wp
 #: includes/emails/class-affwp-emails.php:467
-#, fuzzy
 msgid "The affiliate&#8217;s referral URL"
 msgstr "Affiliaten's provisjonstype."
 
 # @ affiliate-wp
 #: includes/emails/class-affwp-emails.php:472
-#, fuzzy
 msgid "The affiliate&#8217;s ID"
 msgstr "Affiliate ID"
 
 # @ affiliate-wp
 #: includes/emails/class-affwp-emails.php:477
-#, fuzzy
 msgid "The affiliate&#8217;s referral rate"
 msgstr "Affiliaten's provisjonstype."
 
@@ -5081,7 +4820,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/emails/functions.php:121
-#, fuzzy
 msgid "No reason provided"
 msgstr "Ingen salg er registrert ennå"
 
@@ -5091,7 +4829,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/integrations/class-caldera-forms.php:74
-#, fuzzy
 msgid "Total"
 msgstr "Totaler"
 
@@ -5106,14 +4843,12 @@ msgstr ""
 #: includes/integrations/class-caldera-forms.php:247
 #: includes/integrations/class-give.php:247
 #: includes/integrations/class-ninja-forms.php:196
-#, fuzzy
 msgid "Allow Referrals"
 msgstr "Salg"
 
 # @ affiliate-wp
 #: includes/integrations/class-caldera-forms.php:252
 #: includes/integrations/class-gravityforms.php:286
-#, fuzzy
 msgid "Enable affiliate referral creation for this form"
 msgstr "Affiliaten's provisjonstype."
 
@@ -5123,7 +4858,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/integrations/class-contactform7.php:114
-#, fuzzy
 msgid "Enable referrals on all Contact Form 7 forms"
 msgstr "Affiliaten's provisjonstype."
 
@@ -5137,7 +4871,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/integrations/class-contactform7.php:130
-#, fuzzy
 msgid "Enable referrals for specific Contact Form 7 forms"
 msgstr "Affiliaten's provisjonstype."
 
@@ -5215,13 +4948,11 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/integrations/class-edd.php:620
-#, fuzzy
 msgid "Disable Referrals on Upgrades"
 msgstr "Deaktiver provisjoner på dette produktet"
 
 # @ affiliate-wp
 #: includes/integrations/class-edd.php:621
-#, fuzzy
 msgid ""
 "Should AffiliateWP prevent referral commissions from being recorded on "
 "license upgrade purchases with EDD Software Licensing?"
@@ -5245,7 +4976,6 @@ msgstr "Deaktiver henvisninger / salg på dette %s"
 #: includes/integrations/class-edd.php:659
 #: includes/integrations/class-memberpress.php:190
 #: includes/integrations/class-zippycourses.php:87
-#, fuzzy
 msgid ""
 "These settings will be used to calculate affiliate earnings per-sale. Leave "
 "blank to use the site default referral rate."
@@ -5300,13 +5030,11 @@ msgstr "AffiliateWP: Henvisning / Salg #%d for %s for %s avvist"
 
 # @ affiliate-wp
 #: includes/integrations/class-give.php:127
-#, fuzzy
 msgid "Custom Amount"
 msgstr "Kjøpesum"
 
 # @ affiliate-wp
 #: includes/integrations/class-give.php:248
-#, fuzzy
 msgid "Enable affiliate referral creation for this donation form"
 msgstr "Affiliaten's provisjonstype."
 
@@ -5321,7 +5049,6 @@ msgstr "Affiliate sats"
 
 # @ affiliate-wp
 #: includes/integrations/class-give.php:254
-#, fuzzy
 msgid ""
 "This setting will be used to calculate affiliate earnings per-donation. "
 "Leave blank to use default affiliate rates."
@@ -5338,13 +5065,11 @@ msgstr "Henvisning / Salg #%d for %s for %s avvist"
 # @ affiliate-wp
 #: includes/integrations/class-gravityforms.php:290
 #: includes/integrations/class-wpforms.php:37
-#, fuzzy
 msgid "Allow referrals"
 msgstr "Deaktiver henvisninger / salg"
 
 # @ affiliate-wp
 #: includes/integrations/class-gravityforms.php:321
-#, fuzzy
 msgid "Affiliate Coupon"
 msgstr "Affiliate rabattkode?"
 
@@ -5357,13 +5082,11 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/integrations/class-jigoshop.php:153
-#, fuzzy
 msgid "Affiliate Data"
 msgstr "Affiliate sats"
 
 # @ affiliate-wp
 #: includes/integrations/class-lifterlms.php:115
-#, fuzzy
 msgid "Referral #%d completed"
 msgstr "Salget ble oppdatert"
 
@@ -5374,7 +5097,6 @@ msgstr ""
 # @ affiliate-wp
 #: includes/integrations/class-lifterlms.php:183
 #: includes/integrations/class-lifterlms.php:318
-#, fuzzy
 msgid "Referral not created because affiliate's own account was used."
 msgstr "Slett affiliatene's brukerkontoer i tillegg?"
 
@@ -5385,37 +5107,31 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/integrations/class-lifterlms.php:230
-#, fuzzy
 msgid "LifterLMS Referral #%d updated successfully."
 msgstr "Salget ble oppdatert"
 
 # @ affiliate-wp
 #: includes/integrations/class-lifterlms.php:257
-#, fuzzy
 msgid "Referral #%d created successfully."
 msgstr "Salget ble oppdatert"
 
 # @ affiliate-wp
 #: includes/integrations/class-lifterlms.php:263
-#, fuzzy
 msgid "Referral failed to be created."
 msgstr "Emne nytt salg mail"
 
 # @ affiliate-wp
 #: includes/integrations/class-lifterlms.php:354
-#, fuzzy
 msgid "Referral #%d updated successfully."
 msgstr "Salget ble oppdatert"
 
 # @ affiliate-wp
 #: includes/integrations/class-lifterlms.php:378
-#, fuzzy
 msgid "Pending referral #%d created successfully."
 msgstr "Salget ble oppdatert"
 
 # @ affiliate-wp
 #: includes/integrations/class-lifterlms.php:389
-#, fuzzy
 msgid "LifterLMS Referral failed to be created."
 msgstr "Emne nytt salg mail"
 
@@ -5425,7 +5141,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/integrations/class-lifterlms.php:444
-#, fuzzy
 msgid "Affiliate Discount"
 msgstr "Affiliate rabatt?"
 
@@ -5436,7 +5151,6 @@ msgstr ""
 # @ affiliate-wp
 #: includes/integrations/class-lifterlms.php:664
 #: includes/integrations/class-lifterlms.php:690
-#, fuzzy
 msgid "Referral Details"
 msgstr "Henvisnings innstillinger"
 
@@ -5444,13 +5158,11 @@ msgstr "Henvisnings innstillinger"
 #: includes/integrations/class-lifterlms.php:744
 #: includes/integrations/class-pmp.php:362
 #: includes/integrations/class-rcp.php:386
-#, fuzzy
 msgid "Disable Referrals"
 msgstr "Deaktiver henvisninger / salg"
 
 # @ affiliate-wp
 #: includes/integrations/class-lifterlms.php:745
-#, fuzzy
 msgid ""
 "Check this box to prevent orders for this %s from generating referral "
 "commissions for affiliates."
@@ -5460,7 +5172,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/integrations/class-lifterlms.php:753
-#, fuzzy
 msgid "Enable %s Referral Rate"
 msgstr "Provisjons sats"
 
@@ -5470,50 +5181,42 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/integrations/class-lifterlms.php:762
-#, fuzzy
 msgid "%s Referral Rate"
 msgstr "Provisjons sats"
 
 # @ affiliate-wp
 #: includes/integrations/class-lifterlms.php:763
-#, fuzzy
 msgid "Enter a referral rate for this %s"
 msgstr "Affiliaten's provisjonstype."
 
 # @ affiliate-wp
 #: includes/integrations/class-lifterlms.php:870
-#, fuzzy
 msgid "Referral #%d rejected"
 msgstr "Henvisning / Salg #%d for %s for %s avvist"
 
 # @ affiliate-wp
 #: includes/integrations/class-memberpress.php:186
-#, fuzzy
 msgid "Disable referrals on this membership"
 msgstr "Deaktiver henvisninger / salg på dette %s"
 
 # @ affiliate-wp
 #: includes/integrations/class-ninja-forms.php:197
-#, fuzzy
 msgid "Enable affiliate referral creation for this form?"
 msgstr "Affiliaten's provisjonstype."
 
 # @ affiliate-wp
 #: includes/integrations/class-paypal.php:90
-#, fuzzy
 msgid "Pending PayPal referral"
 msgstr "Totalt antall ventende salg"
 
 # @ affiliate-wp
 #: includes/integrations/class-pmp.php:348
 #: includes/integrations/class-zippycourses.php:55
-#, fuzzy
 msgid "Affiliate Settings"
 msgstr "Gå til AffiliateWP innstillinger"
 
 # @ affiliate-wp
 #: includes/integrations/class-pmp.php:357
-#, fuzzy
 msgid ""
 "The membership-level referral rate, such as 20 for 20%%. Affiliate-level "
 "referral rates will override this value. If left blank, the site default "
@@ -5528,7 +5231,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/integrations/class-pms.php:51
-#, fuzzy
 msgid ""
 "This rate will be used to calculate affiliate earnings when members register "
 "their account with this subscription. Leave blank to use the site default "
@@ -5540,7 +5242,6 @@ msgstr ""
 # @ affiliate-wp
 #: includes/integrations/class-rcp.php:349
 #: includes/integrations/class-rcp.php:380
-#, fuzzy
 msgid ""
 "This rate will be used to calculate affiliate earnings when members "
 "subscribe to this level. Leave blank to use the site default referral rate."
@@ -5550,7 +5251,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/integrations/class-rcp.php:391
-#, fuzzy
 msgid "Disable referrals on this subscription level."
 msgstr "Deaktiver provisjoner på dette produktet"
 
@@ -5561,7 +5261,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/integrations/class-woocommerce.php:494
-#, fuzzy
 msgid "Configure affiliate rates for this product"
 msgstr "Deaktiver provisjoner på dette produktet"
 
@@ -5595,13 +5294,11 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/integrations/class-woocommerce.php:534
-#, fuzzy
 msgid "Referral rate (optional)"
 msgstr "Beskrivelse av henvisning / salg"
 
 # @ affiliate-wp
 #: includes/integrations/class-woocommerce.php:536
-#, fuzzy
 msgid "Disable referrals for this product variation"
 msgstr "Deaktiver provisjoner på dette produktet"
 
@@ -5617,13 +5314,11 @@ msgstr "Administrer affiliate satser pr. produkt."
 
 # @ affiliate-wp
 #: includes/integrations/extras/class-ninja-forms-action-add-referral.php:47
-#, fuzzy
 msgid "Total Field"
 msgstr "Totalt antall besøk"
 
 # @ affiliate-wp
 #: includes/integrations/extras/class-ninja-forms-action-add-referral.php:63
-#, fuzzy
 msgid "Customer Email"
 msgstr "Fra e-post"
 
@@ -5643,7 +5338,6 @@ msgstr "Euros"
 
 # @ affiliate-wp
 #: includes/misc-functions.php:28
-#, fuzzy
 msgid "Argentine Peso"
 msgstr "Mexican Peso"
 
@@ -5689,7 +5383,6 @@ msgstr "Colombian Peso"
 
 # @ affiliate-wp
 #: includes/misc-functions.php:37
-#, fuzzy
 msgid "Croatia Kuna"
 msgstr "Croatia kuna"
 
@@ -5725,7 +5418,6 @@ msgstr "Hungarian Forint"
 
 # @ affiliate-wp
 #: includes/misc-functions.php:44
-#, fuzzy
 msgid "Icelandic Krona"
 msgstr "Islandske kroner"
 
@@ -5746,7 +5438,6 @@ msgstr "Israeli Shekel"
 
 # @ affiliate-wp
 #: includes/misc-functions.php:48
-#, fuzzy
 msgid "Iranian Rial"
 msgstr "Brazilian Real"
 
@@ -5796,7 +5487,6 @@ msgstr "New Zealand Dollar"
 
 # @ affiliate-wp
 #: includes/misc-functions.php:58
-#, fuzzy
 msgid "Pakistani Rupee"
 msgstr "Indian Rupee"
 
@@ -5841,7 +5531,6 @@ msgstr "Singapore Dollar"
 
 # @ affiliate-wp
 #: includes/misc-functions.php:67
-#, fuzzy
 msgid "South African Rand"
 msgstr "South African rand"
 
@@ -5895,7 +5584,6 @@ msgstr "Vietnamese Dong"
 
 # @ affiliate-wp
 #: includes/scripts.php:139
-#, fuzzy
 msgid "Please enter a valid URL for this site"
 msgstr "Vennligst skriv inn en nettsteds URL, f.eks. http://www.ditt-domene.no"
 
@@ -5916,7 +5604,6 @@ msgstr "Statistiske grafer"
 
 # @ affiliate-wp
 #: templates/dashboard-tab-payouts.php:3
-#, fuzzy
 msgid "Referral Payouts"
 msgstr "Provisjons sats"
 
@@ -6077,7 +5764,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: templates/login.php:15
-#, fuzzy
 msgid "Log into your account"
 msgstr "Logg inn på din konto"
 
@@ -6097,7 +5783,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: templates/login.php:48
-#, fuzzy
 msgid "Lost your password?"
 msgstr "Mistet passordet?"
 
@@ -6114,7 +5799,6 @@ msgstr "Affiliate området er kun tilgjengelig for registrerte brukere."
 
 # @ affiliate-wp
 #: templates/register.php:54
-#, fuzzy
 msgid "Register a new affiliate account"
 msgstr "Registrere en ny affiliate konto"
 
@@ -6142,7 +5826,6 @@ msgstr "Affiliate Plugin for WordPress"
 
 # @ affiliate-wp
 #: includes/admin/affiliates/affiliates.php:58
-#, fuzzy
 msgctxt "affiliates"
 msgid "Reports"
 msgstr "Rapporter"
@@ -6174,140 +5857,120 @@ msgstr "Annonsemateriell ID #%d: %s"
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:66
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:69
 #: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:67
-#, fuzzy
 msgctxt "Affiliate column table header"
 msgid "Affiliate"
 msgstr "Affiliate"
 
 # @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-most-valuable.php:75
-#, fuzzy
 msgctxt "Earnings column table header"
 msgid "Earnings"
 msgstr "Inntekter"
 
 # @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-most-valuable.php:76
-#, fuzzy
 msgctxt "Referrals column table header"
 msgid "Referrals"
 msgstr "Salg"
 
 # @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-most-valuable.php:77
-#, fuzzy
 msgctxt "Visits column table header"
 msgid "Visits"
 msgstr "Besøkende"
 
 # @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:67
-#, fuzzy
 msgctxt "URL column table header"
 msgid "URL"
 msgstr "Lenke / URL"
 
 # @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:68
-#, fuzzy
 msgctxt "Converted column table header"
 msgid "Converted"
 msgstr "Konvertert"
 
 # @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:70
-#, fuzzy
 msgctxt "Amount column table header"
 msgid "Amount"
 msgstr "Beløp (provisjon)"
 
 # @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:71
-#, fuzzy
 msgctxt "Description column table header"
 msgid "Description"
 msgstr "Beskrivelse"
 
 # @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:68
-#, fuzzy
 msgctxt "Status column table header"
 msgid "Status"
 msgstr "Status"
 
 # @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:69
-#, fuzzy
 msgctxt "Actions column table header"
 msgid "Actions"
 msgstr "Handlinger"
 
 # @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:54
-#, fuzzy
 msgctxt "Paid earnings column table header"
 msgid "Paid earnings"
 msgstr "Betalte inntekter"
 
 # @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:55
-#, fuzzy
 msgctxt "Paid earnings this month column table header"
 msgid "Paid earnings this month"
 msgstr "Betalte inntekter denne måned"
 
 # @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:56
-#, fuzzy
 msgctxt "Paid earnings today column table header"
 msgid "Paid earnings today"
 msgstr "Betalte inntekter i dag"
 
 # @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:80
-#, fuzzy
 msgctxt "Unpaid referrals column table header"
 msgid "Unpaid referrals"
 msgstr "Ubekreftede salg"
 
 # @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:81
-#, fuzzy
 msgctxt "Unpaid referrals this month column table header"
 msgid "Unpaid referrals this month"
 msgstr "Ubekreftede salg denne måned"
 
 # @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:82
-#, fuzzy
 msgctxt "Unpaid referrals today column table header"
 msgid "Unpaid referrals today"
 msgstr "Ubekreftede salg i dag"
 
 # @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:105
-#, fuzzy
 msgctxt "Unpaid earnings column table header"
 msgid "Unpaid earnings"
 msgstr "Ubetalte inntekter"
 
 # @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:106
-#, fuzzy
 msgctxt "Unpaid earnings this month"
 msgid "Unpaid earnings this month"
 msgstr "Ubetalte inntekter denne måned"
 
 # @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:107
-#, fuzzy
 msgctxt "Unpaid earnings today column table header"
 msgid "Unpaid earnings today"
 msgstr "Ubetalte inntekter i dag"
 
 # @ affiliate-wp
 #: includes/admin/payouts/class-list-table.php:129
-#, fuzzy
 msgctxt "payouts"
 msgid "All"
 msgstr "Alle"
@@ -6315,7 +5978,6 @@ msgstr "Alle"
 # @ affiliate-wp
 #: includes/admin/payouts/class-list-table.php:149
 #: includes/admin/tools/export/class-batch-export-payouts.php:147
-#, fuzzy
 msgctxt "payout"
 msgid "Amount"
 msgstr "Beløp (provisjon)"
@@ -6323,7 +5985,6 @@ msgstr "Beløp (provisjon)"
 # @ affiliate-wp
 #: includes/admin/payouts/class-list-table.php:154
 #: includes/admin/tools/export/class-batch-export-payouts.php:150
-#, fuzzy
 msgctxt "payout"
 msgid "Status"
 msgstr "Status"
@@ -6331,14 +5992,12 @@ msgstr "Status"
 # @ affiliate-wp
 #: includes/admin/payouts/class-list-table.php:155
 #: includes/admin/tools/export/class-batch-export-payouts.php:151
-#, fuzzy
 msgctxt "payout"
 msgid "Date"
 msgstr "Dato"
 
 # @ affiliate-wp
 #: includes/payout-functions.php:133 includes/payout-functions.php:137
-#, fuzzy
 msgctxt "payout"
 msgid "Paid"
 msgstr "Betalt"
@@ -6352,7 +6011,6 @@ msgstr ""
 # @ affiliate-wp
 #: includes/admin/payouts/class-list-table.php:335
 #: includes/admin/payouts/view.php:86
-#, fuzzy
 msgctxt "payout owner ID"
 msgid "(User ID: %d)"
 msgstr "Bruker ID"
@@ -6370,7 +6028,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/referrals/referrals.php:39
-#, fuzzy
 msgctxt "referrals"
 msgid "Reports"
 msgstr "Rapporter"
@@ -6382,21 +6039,18 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/visits/visits.php:42
-#, fuzzy
 msgctxt "visits"
 msgid "Reports"
 msgstr "Rapporter"
 
 # @ affiliate-wp
 #: includes/class-graph.php:419
-#, fuzzy
 msgctxt "date filter"
 msgid "From"
 msgstr "Fra"
 
 # @ affiliate-wp
 #: includes/class-graph.php:421
-#, fuzzy
 msgctxt "date filter"
 msgid "To"
 msgstr "Til"
@@ -6408,7 +6062,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/cli/class-command.php:38
-#, fuzzy
 msgctxt "license status"
 msgid "Invalid"
 msgstr "Ugyldig e-postadresse"
@@ -6460,7 +6113,6 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/cli/class-visit-sub-commands.php:437
-#, fuzzy
 msgctxt "direct traffic"
 msgid "Direct"
 msgstr "Direkte trafikk"
