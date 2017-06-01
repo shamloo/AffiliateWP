@@ -82,7 +82,7 @@ if ( is_user_logged_in() ) {
 
 		<p>
 			<label for="affwp-user-url"><?php _e( 'Website URL', 'affiliate-wp' ); ?></label>
-			<input id="affwp-user-url" class="required" type="text" name="affwp_user_url" value="<?php if( ! empty( $url ) ) { echo $url; } ?>" title="<?php esc_attr_e( 'Website URL', 'affiliate-wp' ); ?>" <?php echo affwp_required_field_attr( 'website_url' ); ?> />
+			<input id="affwp-user-url" type="text" name="affwp_user_url" value="<?php if( ! empty( $url ) ) { echo $url; } ?>" title="<?php esc_attr_e( 'Website URL', 'affiliate-wp' ); ?>" <?php echo affwp_required_field_attr( 'website_url' ); ?> />
 		</p>
 
 		<p>
