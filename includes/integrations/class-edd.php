@@ -501,7 +501,7 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 					<td>
 						<input type="checkbox" name="affwp_is_coupon_template" id="affwp_is_coupon_template" value="1"<?php checked( $disabled, true ); ?> />
 
-						<p class="description"><?php _e( 'Check this option if you would like to use this discount as the template from which all EDD affiliate coupons are generated.', 'affiliate-wp' ); ?>
+						<p class="description"><?php _e( 'Check this option if you would like to use this discount as the template from which all EDD affiliate discounts are generated.', 'affiliate-wp' ); ?>
 						</p>
 					</td>
 				</tr>
@@ -534,10 +534,15 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 		$data = affiliate_wp()->utils->process_request_data( $_POST, 'user_name' );
 
 		$affiliate_id = affwp_get_affiliate_id( $data['user_id'] );
-		$is_template  = $_POST['affwp_is_coupon_template'] ? $_POST['affwp_is_coupon_template'] : false;
+		$is_template  = ( 0 !== $_POST['affwp_is_coupon_template'] ) ? true : false;
 
 		update_post_meta( $discount_id, 'affwp_discount_affiliate', $affiliate_id );
 		update_post_meta( $discount_id, 'affwp_is_coupon_template', $is_template );
+
+		// Create an AffiliateWP coupon object.
+		if ( affwp_add_coupon( $data ) ) {
+			affiliate_wp()->utils->log( 'Coupon data: ' . print_r( $data, true ) );
+		}
 
 		/**
 		 * Fires when an affiliate ID is stored in the post meta of an EDD discount.
