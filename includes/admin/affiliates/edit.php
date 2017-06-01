@@ -234,6 +234,41 @@ $coupons          = affwp_get_affiliate_coupons( $affiliate->affiliate_id );
 
 			</tr>
 
+			<tr class="form-row">
+
+				<th scope="row">
+					<label for="coupons"><?php _e( 'Coupons', 'affiliate-wp' ); ?></label>
+				</th>
+
+				<td>
+					<ul id="coupons">
+						<?php
+
+							if ( affwp_get_affiliate_coupons( $affiliate_id ) ) {
+								$coupons = affwp_get_affiliate_coupons( $affiliate_id );
+
+								$list = array();
+
+								foreach ( $coupons as $coupon ) {
+
+									// Ensure that this coupon is associated with the affiliate.
+									if ( $affiliate_id === $coupon[ 'affiliate_id' ] ) {
+
+										$list[] = '<li>' . $coupon[ 'integration' ] . ': <a href="">' . affwp_get_coupon_edit_url( $coupon[ 'coupon_id' ], $coupon[ 'integration' ] ) . '</li>';
+									}
+								}
+
+								echo $list;
+							}
+
+						?>
+					</ul>
+					<p class="description">
+						<?php echo __( 'The current coupons for this affiliate. Coupons can be created for the affiliate below.', 'affiliate-wp' ); ?>
+					</p>
+				</td>
+			</tr>
+
 			<?php if( 'rejected' == $affiliate->status && ! empty( $reason ) ) : ?>
 				<tr class="form-row">
 
