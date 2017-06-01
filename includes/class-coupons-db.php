@@ -477,7 +477,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 	 * @return mixed  string|bool $url          Returns the edit screen url of the coupon template if set,
 	 *                                          otherwise returns false.
 	 */
-	public function get_coupon_template_url( $template_id, $integration ) {
+	public function get_coupon_edit_url( $template_id, $integration ) {
 
 		$url = false;
 
