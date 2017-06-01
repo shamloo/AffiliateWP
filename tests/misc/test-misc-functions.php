@@ -210,6 +210,76 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers ::affwp_abs_number_round()
+	 */
+	public function test_abs_number_round_positive_number_without_separators_should_be_unchanged() {
+		$this->assertEquals( '5', affwp_abs_number_round( '5' ) );
+	}
+
+	/**
+	 * @covers ::affwp_abs_number_round()
+	 */
+	public function test_abs_number_round_negative_number_without_separators_should_be_changed_to_positive() {
+		$this->assertEquals( '5', affwp_abs_number_round( '-5' ) );
+	}
+
+	/**
+	 * @covers ::affwp_abs_number_round()
+	 */
+	public function test_abs_number_round_with_period_decimal_separator_should_be_unchanged() {
+		$this->assertEquals( '0.50', affwp_abs_number_round( '0.50' ) );
+	}
+
+	/**
+	 * @covers ::affwp_abs_number_round()
+	 */
+	public function test_abs_number_round_with_comma_decimal_separator_should_be_should_be_normalized() {
+		$this->assertEquals( '0.50', affwp_abs_number_round( '0,50' ) );
+	}
+
+	/**
+	 * @covers ::affwp_abs_number_round()
+	 */
+	public function test_abs_number_round_with_period_thousands_and_comma_decimal_seps_should_be_normalized() {
+		$this->assertEquals( '1234.56', affwp_abs_number_round( '1.234,56' ) );
+	}
+
+	/**
+	 * @covers ::affwp_abs_number_round()
+	 */
+	public function test_abs_number_round_with_space_thousands_and_comma_decimal_seps_should_be_normalized() {
+		$this->assertEquals( '1234.56', affwp_abs_number_round( '1 234,56' ) );
+	}
+
+	/**
+	 * @covers ::affwp_abs_number_round()
+	 */
+	public function test_abs_number_round_with_space_thousands_and_period_decimal_seps_should_be_normalized() {
+		$this->assertEquals( '1234.56', affwp_abs_number_round( '1 234.56' ) );
+	}
+
+	/**
+	 * @covers ::affwp_abs_number_round()
+	 */
+	public function test_abs_number_round_with_comma_thousands_separator_should_be_normalized() {
+		$this->assertEquals( '1234', affwp_abs_number_round( '1,234' ) );
+	}
+
+	/**
+	 * @covers ::affwp_abs_number_round()
+	 */
+	public function test_abs_number_round_with_period_thousands_separator_should_be_normalized() {
+		$this->assertEquals( '1234', affwp_abs_number_round( '1.234' ) );
+	}
+
+	/**
+	 * @covers ::affwp_abs_number_round()
+	 */
+	public function test_abs_number_round_with_space_thousands_separator_should_be_normalized() {
+		$this->assertEquals( '1234', affwp_abs_number_round( '1 234' ) );
+	}
+
+	/**
 	 * @covers ::affwp_get_logout_url
 	 */
 	public function test_affwp_get_logout_url() {
