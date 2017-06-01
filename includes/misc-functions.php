@@ -1198,3 +1198,19 @@ function affwp_do_import_fields( $type ) {
 	}
 
 }
+
+/**
+ * Retrieves an HTML5 required attribute if the given registration field is required.
+ *
+ * @since 2.1
+ *
+ * @param string $field Registration field to check.
+ * @return string An HTML5 required attribute if required, otherwise an empty string.
+ */
+function affwp_required_field_attr( $field ) {
+	$required_fields = affiliate_wp()->settings->get( 'required_registration_fields', array() );
+
+	$required = __checked_selected_helper( array_key_exists( $field, $required_fields ), true, false, 'required' );
+
+	return $required;
+}
