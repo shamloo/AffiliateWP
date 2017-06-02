@@ -634,6 +634,10 @@ class AffWP_Affiliates_Table extends List_Table {
 				affwp_set_affiliate_status( $id, 'inactive' );
 			}
 
+			if ( 'delete' === $this->current_action() ) {
+				affwp_delete_affiliate( $id );
+			}
+
 			/**
 			 * Fires after an affiliate bulk action is performed.
 			 *
