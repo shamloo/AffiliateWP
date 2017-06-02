@@ -114,9 +114,38 @@ class Tab extends Reports\Tab {
 		$this->register_tile( 'average_payout_amount', array(
 			'label'           => __( 'Average Payout', 'affiliate-wp' ),
 			'type'            => 'amount',
-			'context'         => 'secondary',
+			'context'         => 'primary',
 			'data'            => array_sum( $payouts ) / count( $payouts ),
 			'comparison_data' => $this->get_date_comparison_label(),
+		) );
+	}
+
+	/**
+	 * Registers the 'Average Payout' date-based tile.
+	 *
+	 * @access public
+	 * @since  2.1
+	 *
+	 * @see register_tile()
+	 */
+	public function average_referrals_per_payout_tile() {
+		$payout_referrals = affiliate_wp()->affiliates->payouts->get_payouts( array(
+			'number' => -1,
+			'fields' => 'referrals'
+		) );
+
+		$counts = array();
+
+		foreach ( $payout_referrals as $referrals ) {
+			$counts[] = count( explode( ',', $referrals ) );
+		}
+
+		$this->register_tile( 'average_referrals_per_payout', array(
+			'label'           => __( 'Average Referrals Per Payout', 'affiliate-wp' ),
+			'type'            => 'number',
+			'context'         => 'secondary',
+			'data'            => array_sum( $counts ) / count( $payout_referrals ),
+			'comparison_data' => __( 'All Time', 'affiliate-wp' ),
 		) );
 	}
 
@@ -131,6 +160,7 @@ class Tab extends Reports\Tab {
 		$this->total_earnings_paid_tile();
 		$this->total_payouts_count_tile();
 		$this->average_payout_tile();
+		$this->average_referrals_per_payout_tile();
 	}
 
 	/**
