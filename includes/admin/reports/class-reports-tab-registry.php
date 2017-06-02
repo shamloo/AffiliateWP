@@ -18,15 +18,15 @@ class Registry extends Utils\Registry {
 	 * Each sub-class will need to do various initialization operations in this method.
 	 *
 	 * @access public
-	 * @since  2.0.5
+	 * @since  2.1
 	 */
 	public function init() {}
 
 	/**
-	 * Adds a tab to
+	 * Adds a tile to a given reports tab (collection).
 	 *
 	 * @access public
-	 * @since  2.0.5
+	 * @since  2.1
 	 *
 	 * @param int    $tile_id   Tile ID.
 	 * @param array  $attributes {
