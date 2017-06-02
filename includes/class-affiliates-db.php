@@ -17,6 +17,15 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	public $payouts;
 
 	/**
+	 * The coupons class instance variable.
+	 *
+	 * @access public
+	 * @since  2.1
+	 * @var    Affiliate_WP_Coupons_DB
+	 */
+	public $coupons;
+
+	/**
 	 * Cache group for queries.
 	 *
 	 * @internal DO NOT change. This is used externally both as a cache group and shortcut
@@ -56,6 +65,8 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 		$this->version     = '1.1';
 
 		$this->payouts = new Affiliate_WP_Payouts_DB;
+
+		$this->coupons = new Affiliate_WP_Coupons_DB;
 
 		// REST endpoints.
 		if ( version_compare( $wp_version, '4.4', '>=' ) ) {
