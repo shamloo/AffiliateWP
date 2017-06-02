@@ -59,7 +59,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 		// Add PayPal meta to the contact form submision object.
 		add_action( 'wpcf7_submit', array( $this, 'add_paypal_meta' ), 1, 2 );
 
-		$this->maybe_unhook_cf7pp();
+		add_action( 'wpcf7_mail_sent', array( $this, 'maybe_unhook_cf7pp' ), -999 );
 
 		// Mark referral complete.
 		add_action( 'wp_footer', array( $this, 'mark_referral_complete' ), 9999 );
@@ -168,19 +168,15 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 			'post_status' => array( 'publish' )
 		);
 
-		$query = new WP_Query( $args );
+		$forms = get_posts( $args );
 
 		// The Loop
-		if ( $query->have_posts() ) {
-			while ( $query->have_posts() ) {
-				$query->the_post();
-				$post_id               = get_the_ID();
+		if ( $forms ) {
+			foreach( $forms as $form ) {
 
-				$all_forms[ $post_id ] = get_the_title();
+				$all_forms[ $form->ID ] = get_the_title( $form->ID );
 			}
 		}
-
-		wp_reset_postdata();
 
 		return $all_forms;
 	}
