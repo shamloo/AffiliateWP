@@ -315,3 +315,42 @@ function affwp_get_coupon_templates() {
 		echo $has_template ? $output : __( 'No coupon templates have been selected for any active AffiliateWP integrations.', 'affiliate-wp' );
 	}
 }
+
+/**
+ * Gets the coupon creation admin url for the specified integration.
+ *
+ * @since  2.1
+ *
+ * @param  string  $integration The integration.
+ *
+ * @return string|false         The coupon creation admin url, otherwise false.
+ */
+function affwp_get_coupon_create_url( $integration ) {
+
+	$url = false;
+
+	if ( empty( $integration ) || ! $integration ) {
+		return false;
+	}
+
+	if ( affwp_has_coupon_support( $integration ) ) {
+
+		$user_name = affwp_get_affiliate_username( $affiliate_id );
+
+		switch ( $integration ) {
+			case 'edd':
+				$url = admin_url( 'edit.php?post_type=download&page=edd-discounts&edd-action=add_discount&user_name=' . $user_name);
+				break;
+
+			default:
+				break;
+		}
+
+	} else {
+		affiliate_wp()->utils->log( 'affwp_get_coupon_create_url: This integration does not presently have AffiliateWP coupon support.' );
+		return false;
+	}
+
+
+	return $url;
+}
