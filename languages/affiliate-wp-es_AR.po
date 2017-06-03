@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: AffiliateWP\n"
 "Report-Msgid-Bugs-To: https://affiliatewp.com/support/\n"
 "POT-Creation-Date: 2017-02-17 03:04:25+00:00\n"
-"PO-Revision-Date: 2015-04-09 10:01-0600\n"
+"PO-Revision-Date: 2017-06-01 00:28-0600\n"
 "Last-Translator: Chris Christoff <chriscct7@gmail.com>\n"
 "Language-Team: AffiliateWP <support@affiliatewp.com>\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.3\n"
+"X-Generator: Poedit 2.0.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
@@ -61,13 +61,11 @@ msgid "Error"
 msgstr "Error"
 
 #: includes/REST/class-rest.php:68
-#, fuzzy
 msgid "User ID Required"
 msgstr "ID de Usuario"
 
 #. translators: 1: Generate, regenerate, or revoke
 #: includes/REST/class-rest.php:81 includes/REST/class-rest.php:84
-#, fuzzy
 msgid "You do not have permission to %s API keys for this user."
 msgstr "No tenés permiso para exportar información."
 
@@ -106,7 +104,6 @@ msgid "Affiliates table column to order by."
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:263
-#, fuzzy
 msgid "The date array or string to query affiliate registrations within."
 msgstr ""
 "¿Notificar a los administradores del sitio nuevos registros de afiliados?"
@@ -116,7 +113,6 @@ msgid "Use any get_affiliates() arguments to modify the response."
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:297
-#, fuzzy
 msgid "The unique affiliate ID."
 msgstr "ID del Afiliado"
 
@@ -125,7 +121,6 @@ msgid "ID for the user account associated with the affiliate."
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:305
-#, fuzzy
 msgid "The affiliate rate."
 msgstr "Tasa de Afiliado"
 
@@ -134,12 +129,10 @@ msgid "The affiliate rate, as it exists in the database"
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:313
-#, fuzzy
 msgid "The affiliate rate, as inherited from global settings."
 msgstr "Tipo de tasa de referencia del afiliado."
 
 #: includes/REST/v1/class-affiliates-endpoints.php:319
-#, fuzzy
 msgid "The affiliate rate type"
 msgstr "Tipo de tasa de referencia del afiliado."
 
@@ -148,19 +141,16 @@ msgid "The affiliate rate type, as it exists in the database"
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:327
-#, fuzzy
 msgid "The affiliate rate type, as inherited from global settings."
 msgstr "Tipo de tasa de referencia del afiliado."
 
 #: includes/REST/v1/class-affiliates-endpoints.php:333
-#, fuzzy
 msgid "The affiliate account email. Synced with the associated user account."
 msgstr ""
 "Empezá a tipear el nombre del afiliado para poder buscar la cuenta de "
 "usuario asociada. "
 
 #: includes/REST/v1/class-affiliates-endpoints.php:338
-#, fuzzy
 msgid "The affiliate payment email address."
 msgstr "La cuenta de afiliado no esta activa"
 
@@ -175,17 +165,14 @@ msgid ""
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:352
-#, fuzzy
 msgid "The affiliate status."
 msgstr "Tasas de Afiliado:"
 
 #: includes/REST/v1/class-affiliates-endpoints.php:356
-#, fuzzy
 msgid "Unpaid affiliate earnings."
 msgstr "Ir a los ajustes de AffiliateWP"
 
 #: includes/REST/v1/class-affiliates-endpoints.php:360
-#, fuzzy
 msgid "Affiliate earnings."
 msgstr "Ir a los ajustes de AffiliateWP"
 
@@ -194,12 +181,10 @@ msgid "The number of paid referrals associated with the affiliate."
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:368
-#, fuzzy
 msgid "The number of visits associated with the affiliate."
 msgstr "Afiliados No Registrados "
 
 #: includes/REST/v1/class-affiliates-endpoints.php:372
-#, fuzzy
 msgid "The date the affiliate was registered."
 msgstr "La petición del afiliado fue rechazada"
 
@@ -220,17 +205,14 @@ msgid "Use any get_creatives() arguments to modify the response."
 msgstr ""
 
 #: includes/REST/v1/class-creatives-endpoints.php:215
-#, fuzzy
 msgid "The unique creative ID."
 msgstr "Texto para este material de promoción. "
 
 #: includes/REST/v1/class-creatives-endpoints.php:219
-#, fuzzy
 msgid "Name of the creative."
 msgstr "Texto para este material de promoción. "
 
 #: includes/REST/v1/class-creatives-endpoints.php:223
-#, fuzzy
 msgid "Description for the creative."
 msgstr "Texto para este material de promoción. "
 
@@ -239,7 +221,6 @@ msgid "URL the creative points to."
 msgstr ""
 
 #: includes/REST/v1/class-creatives-endpoints.php:231
-#, fuzzy
 msgid "Text for the creative."
 msgstr "Texto para este material de promoción. "
 
@@ -248,12 +229,10 @@ msgid "ID of the media library image associated with the creative"
 msgstr ""
 
 #: includes/REST/v1/class-creatives-endpoints.php:239
-#, fuzzy
 msgid "The creative status."
 msgstr "Nueva Referencia"
 
 #: includes/REST/v1/class-creatives-endpoints.php:243
-#, fuzzy
 msgid "The date the creative was created."
 msgstr "Material de promoción agregado exitosamente"
 
@@ -304,7 +283,6 @@ msgid "The unique payout ID."
 msgstr ""
 
 #: includes/REST/v1/class-payouts-endpoints.php:274
-#, fuzzy
 msgid "The affiliate ID associated with the payout."
 msgstr "¿Estás seguro que querés eliminar este material de promoción?"
 
@@ -317,7 +295,6 @@ msgid "The number of referrals associated with the affiliate."
 msgstr ""
 
 #: includes/REST/v1/class-payouts-endpoints.php:289
-#, fuzzy
 msgid "Total referrals amount for the payout."
 msgstr "Tipo de tasa de referencia del afiliado."
 
@@ -371,42 +348,34 @@ msgid "Use any get_referrals() arguments to modify the response."
 msgstr ""
 
 #: includes/REST/v1/class-referrals-endpoints.php:270
-#, fuzzy
 msgid "The unique referral ID."
 msgstr "El monto de la referencia, como por ejemplo 15."
 
 #: includes/REST/v1/class-referrals-endpoints.php:274
-#, fuzzy
 msgid "ID for the affiliate account associated with the referral."
 msgstr "La solicitud de tu cuenta de afiliado fue rechazada"
 
 #: includes/REST/v1/class-referrals-endpoints.php:278
-#, fuzzy
 msgid "ID for the visit associated with the referral."
 msgstr "Seleccionar el estado de la referencia."
 
 #: includes/REST/v1/class-referrals-endpoints.php:282
-#, fuzzy
 msgid "Referral description."
 msgstr "Configuración de Referencia"
 
 #: includes/REST/v1/class-referrals-endpoints.php:286
-#, fuzzy
 msgid "The referral status."
 msgstr "Estados de referencia:"
 
 #: includes/REST/v1/class-referrals-endpoints.php:290
-#, fuzzy
 msgid "Referral amount."
 msgstr "Tasa de Referencia"
 
 #: includes/REST/v1/class-referrals-endpoints.php:294
-#, fuzzy
 msgid "Currency for the referral amount."
 msgstr "Tasa de Referencia"
 
 #: includes/REST/v1/class-referrals-endpoints.php:298
-#, fuzzy
 msgid "Custom referral data."
 msgstr "No se encontraron referencias."
 
@@ -428,7 +397,6 @@ msgid "Products associated with the referral."
 msgstr ""
 
 #: includes/REST/v1/class-referrals-endpoints.php:318
-#, fuzzy
 msgid "The date the referral was generated."
 msgstr "El monto de la referencia, como por ejemplo 15."
 
@@ -474,7 +442,6 @@ msgid "The referral status or array of statuses to retrieve visits for."
 msgstr ""
 
 #: includes/REST/v1/class-visits-endpoints.php:207
-#, fuzzy
 msgid "The context under which the visit was created."
 msgstr "Ajustes importados exitosamente"
 
@@ -491,7 +458,6 @@ msgid "The unique visit ID."
 msgstr ""
 
 #: includes/REST/v1/class-visits-endpoints.php:263
-#, fuzzy
 msgid "ID for the affiliate account associated with the visit."
 msgstr "La cuenta de afiliado no esta activa"
 
@@ -500,12 +466,10 @@ msgid "ID for the referral associated with the visit."
 msgstr ""
 
 #: includes/REST/v1/class-visits-endpoints.php:271
-#, fuzzy
 msgid "The visit URL."
 msgstr "URL del sitio web"
 
 #: includes/REST/v1/class-visits-endpoints.php:275
-#, fuzzy
 msgid "Visit referrer."
 msgstr "Agregar Referencia"
 
@@ -514,7 +478,6 @@ msgid "Campaign associated with the visit."
 msgstr ""
 
 #: includes/REST/v1/class-visits-endpoints.php:283
-#, fuzzy
 msgid "Context under which the visit was generated."
 msgstr "Ajustes importados exitosamente"
 
@@ -523,12 +486,10 @@ msgid "Visitor IP address."
 msgstr ""
 
 #: includes/REST/v1/class-visits-endpoints.php:291
-#, fuzzy
 msgid "The date the visit was generated."
 msgstr "Ajustes importados exitosamente"
 
 #: includes/abstracts/class-affwp-reports-tab.php:115
-#, fuzzy
 msgid "Date Filters"
 msgstr "Filtrar"
 
@@ -612,12 +573,10 @@ msgstr ""
 
 #: includes/admin/AFFWP_Plugin_Updater.php:402
 #: includes/admin/class-addon-updater.php:283
-#, fuzzy
 msgid "You do not have permission to install plugin updates"
 msgstr "No poseés permiso para manejar afiliados"
 
 #: includes/admin/add-ons.php:33
-#, fuzzy
 msgid "Add-ons for AffiliateWP"
 msgstr "Agregar Afiliado"
 
@@ -844,7 +803,6 @@ msgid "Reports"
 msgstr "Reportes"
 
 #: includes/admin/affiliates/class-list-table.php:288
-#, fuzzy
 msgid "Edit User"
 msgstr "Agregar Referencia"
 
@@ -896,14 +854,12 @@ msgid "Delete Affiliates"
 msgstr "Borrar Afiliados"
 
 #: includes/admin/affiliates/delete.php:43
-#, fuzzy
 msgid "You have specified the following affiliate for deletion:"
 msgid_plural "You have specified the following affiliates for deletion:"
 msgstr[0] "Especificaste estos afiliados para ser eliminados:"
 msgstr[1] "Especificaste estos afiliados para ser eliminados:"
 
 #: includes/admin/affiliates/delete.php:62
-#, fuzzy
 msgid "Deleting this affiliate will also delete their referral and visit data."
 msgid_plural ""
 "Deleting these affiliates will also delete their referral and visit data."
@@ -927,7 +883,6 @@ msgid "Edit Affiliate"
 msgstr "Editar Afiliados"
 
 #: includes/admin/affiliates/edit.php:34
-#, fuzzy
 msgid "Affiliate Name"
 msgstr "Nombre de Afiliado "
 
@@ -943,17 +898,14 @@ msgid "A link to the user edit screen for this user."
 msgstr ""
 
 #: includes/admin/affiliates/edit.php:57
-#, fuzzy
 msgid "The affiliate&#8217;s ID. This cannot be changed."
 msgstr "El ID del afiliado. Esto no puede ser modificado."
 
 #: includes/admin/affiliates/edit.php:65
-#, fuzzy
 msgid "Affiliate URL"
 msgstr "URLs de Afiliados"
 
 #: includes/admin/affiliates/edit.php:70
-#, fuzzy
 msgid "The affiliate&#8217;s referral URL. This is based on global settings."
 msgstr "Tipo de tasa de referencia del afiliado."
 
@@ -962,27 +914,22 @@ msgid "User ID"
 msgstr "ID de Usuario"
 
 #: includes/admin/affiliates/edit.php:83
-#, fuzzy
 msgid "The affiliate&#8217;s user ID. This cannot be changed."
 msgstr "El ID de usuario del afiliado. Esto no puede ser modificado."
 
 #: includes/admin/affiliates/edit.php:96
-#, fuzzy
 msgid "The affiliate&#8217;s username. This cannot be changed."
 msgstr "El ID de usuario del afiliado. Esto no puede ser modificado."
 
 #: includes/admin/affiliates/edit.php:104
-#, fuzzy
 msgid "Registration Date"
 msgstr "Registro de Afiliado"
 
 #: includes/admin/affiliates/edit.php:109
-#, fuzzy
 msgid "The affiliate&#8217;s registration date. This cannot be changed."
 msgstr "El ID de usuario del afiliado. Esto no puede ser modificado."
 
 #: includes/admin/affiliates/edit.php:117 includes/admin/affiliates/new.php:40
-#, fuzzy
 msgid "Affiliate Status"
 msgstr "Tasas de Afiliado:"
 
@@ -993,7 +940,6 @@ msgid ""
 msgstr ""
 
 #: includes/admin/affiliates/edit.php:139
-#, fuzzy
 msgid "Website"
 msgstr "URL del sitio web"
 
@@ -1014,7 +960,6 @@ msgid "Site Default"
 msgstr "Predeterminado por el sitio"
 
 #: includes/admin/affiliates/edit.php:166 includes/admin/affiliates/new.php:67
-#, fuzzy
 msgid "The affiliate&#8217;s referral rate type."
 msgstr "Tipo de tasa de referencia del afiliado."
 
@@ -1031,7 +976,6 @@ msgid "Referral Rate"
 msgstr "Tasa de Referencia"
 
 #: includes/admin/affiliates/edit.php:179 includes/admin/affiliates/new.php:80
-#, fuzzy
 msgid ""
 "The affiliate&#8217;s referral rate, such as 20 for 20%. If left blank, the "
 "site default will be used."
@@ -1044,7 +988,6 @@ msgid "Account Email"
 msgstr "Email de la cuenta"
 
 #: includes/admin/affiliates/edit.php:192
-#, fuzzy
 msgid ""
 "The affiliate&#8217;s account email. Updating this will change the email "
 "address shown on the user&#8217;s profile page."
@@ -1063,7 +1006,6 @@ msgid "Payment Email"
 msgstr "Email de pago"
 
 #: includes/admin/affiliates/edit.php:205 includes/admin/affiliates/new.php:93
-#, fuzzy
 msgid ""
 "Affiliate&#8217;s payment email for systems such as PayPal, Moneybookers, or "
 "others. Leave blank to use the affiliate&#8217;s user email."
@@ -1072,18 +1014,15 @@ msgstr ""
 "blanco para utilizar el email de usuario del afiliado."
 
 #: includes/admin/affiliates/edit.php:213
-#, fuzzy
 msgid "Promotion Methods"
 msgstr "Método de promoción"
 
 #: includes/admin/affiliates/edit.php:218
-#, fuzzy
 msgid "Promotion methods entered by the affiliate during registration."
 msgstr ""
 "¿Notificar a los administradores del sitio nuevos registros de afiliados?"
 
 #: includes/admin/affiliates/edit.php:226 includes/admin/affiliates/new.php:101
-#, fuzzy
 msgid "Affiliate Notes"
 msgstr "Tasas de Afiliado:"
 
@@ -1106,7 +1045,6 @@ msgid "New Affiliate"
 msgstr "Nuevo Afiliado"
 
 #: includes/admin/affiliates/new.php:18
-#, fuzzy
 msgid ""
 "Use this form to register a new affiliate. Each affiliate is tied directly "
 "to a user account, so if the user account for the affiliate does not yet "
@@ -1130,12 +1068,10 @@ msgstr ""
 "usuario asociada. "
 
 #: includes/admin/affiliates/new.php:49
-#, fuzzy
 msgid "The status assigned to the affiliate&#8217;s account."
 msgstr "No poseés permiso para borrar cuentas de afiliados"
 
 #: includes/admin/affiliates/new.php:114
-#, fuzzy
 msgid "Welcome Email"
 msgstr "Email"
 
@@ -1167,7 +1103,6 @@ msgid "Website URL"
 msgstr "URL del sitio web"
 
 #: includes/admin/affiliates/review.php:70
-#, fuzzy
 msgid "Affiliate&#8217;s Website URL"
 msgstr "URL del sitio web del afiliado"
 
@@ -1222,12 +1157,10 @@ msgid "Total visits"
 msgstr "Visitas totales"
 
 #: includes/admin/affiliates/view.php:30
-#, fuzzy
 msgid "Conversion rate"
 msgstr "Tasa de Conversión"
 
 #: includes/admin/affiliates/view.php:86
-#, fuzzy
 msgid "Recent Payouts"
 msgstr "Referencias Recientes"
 
@@ -1324,14 +1257,12 @@ msgid "Settings updated."
 msgstr "Ajustes actualizados"
 
 #: includes/admin/class-notices.php:82
-#, fuzzy
 msgid "%d affiliate was added successfully."
 msgid_plural "%d affiliates were added successfully"
 msgstr[0] "Afiliado actualizado exitosamente"
 msgstr[1] "Afiliado actualizado exitosamente"
 
 #: includes/admin/class-notices.php:95
-#, fuzzy
 msgid "Affiliate wasn&#8217;t added, please try again."
 msgstr "El afiliado no fue agregado, por favor intentá nuevamente."
 
@@ -1372,14 +1303,12 @@ msgid "Affiliate request was rejected"
 msgstr "La petición del afiliado fue rechazada"
 
 #: includes/admin/class-notices.php:162
-#, fuzzy
 msgid "%d affiliate from WP Affiliate was added successfully."
 msgid_plural "%d affiliates from WP Affiliate were added successfully"
 msgstr[0] "Afiliado actualizado exitosamente"
 msgstr[1] "Afiliado actualizado exitosamente"
 
 #: includes/admin/class-notices.php:183
-#, fuzzy
 msgid "%d affiliate from Affiliates Pro was added successfully."
 msgid_plural "%d affiliates from Affiliates Pro were added successfully"
 msgstr[0] "Afiliado actualizado exitosamente"
@@ -1410,7 +1339,6 @@ msgid "Referral deletion failed, please try again"
 msgstr "La eliminación de la referencia falló, por favor intentá nuevamente."
 
 #: includes/admin/class-notices.php:234
-#, fuzzy
 msgid "A payout has been created."
 msgstr "Nueva Referencia"
 
@@ -1443,7 +1371,6 @@ msgid "Settings successfully imported"
 msgstr "Ajustes importados exitosamente"
 
 #: includes/admin/class-notices.php:282
-#, fuzzy
 msgid ""
 "Your license key expired on %s. Please <a href=\"%s\" target=\"_blank"
 "\">renew your license key</a>."
@@ -1597,7 +1524,6 @@ msgid ""
 msgstr ""
 
 #: includes/admin/creatives/edit.php:54 includes/admin/creatives/new.php:52
-#, fuzzy
 msgid ""
 "The URL this creative should link to. Based on your Referral Settings, the "
 "affiliate&#8217;s ID or username will be automatically appended."
@@ -1674,7 +1600,6 @@ msgstr "Visitas Referidas Recientes"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:81
 #: templates/dashboard-tab-visits.php:49
-#, fuzzy
 msgid "Visit converted: %s"
 msgstr "Convertido"
 
@@ -1739,7 +1664,6 @@ msgstr "Afiliado"
 #: includes/admin/payouts/class-list-table.php:152
 #: includes/admin/payouts/view.php:72
 #: includes/admin/tools/export/class-batch-export-payouts.php:148
-#, fuzzy
 msgid "Generated By"
 msgstr "Generar URL"
 
@@ -1747,7 +1671,6 @@ msgstr "Generar URL"
 #: includes/admin/payouts/view.php:103
 #: includes/admin/tools/export/class-batch-export-payouts.php:149
 #: templates/dashboard-tab-payouts.php:36
-#, fuzzy
 msgid "Payout Method"
 msgstr "Método de promoción"
 
@@ -1757,7 +1680,6 @@ msgid "(none)"
 msgstr ""
 
 #: includes/admin/payouts/class-list-table.php:422
-#, fuzzy
 msgid "View"
 msgstr "Ver %s"
 
@@ -1767,18 +1689,15 @@ msgid "Retry Payment"
 msgstr ""
 
 #: includes/admin/payouts/class-list-table.php:513
-#, fuzzy
 msgid "No payouts found."
 msgstr "No se encontraron visitas."
 
 #: includes/admin/payouts/payouts.php:39
 #: includes/admin/reports/class-reports-admin.php:58
-#, fuzzy
 msgid "Manage Referrals"
 msgstr "Referencias No Pagas"
 
 #: includes/admin/payouts/screen-options.php:32
-#, fuzzy
 msgid "Number of payouts per page:"
 msgstr "Aún no se grabaron referencias "
 
@@ -1805,7 +1724,6 @@ msgid "Payout Date"
 msgstr ""
 
 #: includes/admin/payouts/view.php:167
-#, fuzzy
 msgid "Referrals Paid"
 msgstr "Referencias"
 
@@ -1915,7 +1833,6 @@ msgid "<a href=\"%s\">Post an issue</a> on <a href=\"%s\">GitHub</a>."
 msgstr "<a href=\"%s\">Publicar un problema</a> en <a href=\"%s\">GitHub</a>."
 
 #: includes/admin/referrals/contextual-help.php:39
-#, fuzzy
 msgid "This screen provides access to your site&#8217;s referral history."
 msgstr ""
 "Esta pantalla provee acceso al historial de las referencias de tu sitio."
@@ -1970,23 +1887,19 @@ msgid "Referrals can be searched in several different ways:"
 msgstr "Las referencias pueden ser buscadas en varias maneras diferentes:"
 
 #: includes/admin/referrals/contextual-help.php:56
-#, fuzzy
 msgid "You can enter the referral&#8217;s ID number"
 msgstr "Podés ingresar el número de ID de la referencia"
 
 #: includes/admin/referrals/contextual-help.php:57
-#, fuzzy
 msgid "You can enter the referral reference prefixed by &#8220;ref:&#8221;"
 msgstr "Podés ingresar la alusión de la referencia con el prefijo 'ref:'"
 
 #: includes/admin/referrals/contextual-help.php:58
-#, fuzzy
 msgid "You can enter the referral context prefixed by &#8220;context:&#8221;"
 msgstr "Podés ingresar el contexto de la referencia con el prefijo 'context:'"
 
 #: includes/admin/referrals/contextual-help.php:59
 #: includes/admin/visits/contextual-help.php:60
-#, fuzzy
 msgid ""
 "You can enter the affiliate&#8217;s ID number prefixed by &#8220;affiliate:"
 "&#8221;"
@@ -1995,7 +1908,6 @@ msgstr ""
 
 #: includes/admin/referrals/contextual-help.php:60
 #: includes/admin/visits/contextual-help.php:61
-#, fuzzy
 msgid "You can enter a URL campaign prefixed by &#8220;campaign:&#8221;"
 msgstr "Podés ingresar el contexto de la referencia con el prefijo 'context:'"
 
@@ -2004,7 +1916,6 @@ msgid "Exporting Referrals"
 msgstr "Exportando Referencias"
 
 #: includes/admin/referrals/contextual-help.php:68
-#, fuzzy
 msgid ""
 "Referrals can be exported directly to a CSV file in order to make it easier "
 "for your own accounting needs and for you to payout your affiliates&#8217;s "
@@ -2014,7 +1925,6 @@ msgstr ""
 "tus tareas de contabilidad y los pagos a tus afiliados sean más sencillos. "
 
 #: includes/admin/referrals/contextual-help.php:69
-#, fuzzy
 msgid ""
 "The CSV file generated is structured properly for PayPal&#8217;s Mass "
 "Payment system so you can easily payout all of your affiliates at once via "
@@ -2025,7 +1935,6 @@ msgstr ""
 "Paypal. "
 
 #: includes/admin/referrals/edit.php:12
-#, fuzzy
 msgid "Edit Referral"
 msgstr "Agregar Referencia"
 
@@ -2035,7 +1944,6 @@ msgid "Referral ID"
 msgstr "ID de referencia "
 
 #: includes/admin/referrals/edit.php:36
-#, fuzzy
 msgid "The referral ID. This cannot be changed."
 msgstr "El ID del afiliado. Esto no puede ser modificado."
 
@@ -2046,20 +1954,17 @@ msgid "%1$s (ID: #%2$s)"
 msgstr ""
 
 #: includes/admin/referrals/edit.php:67
-#, fuzzy
 msgid ""
 "The name and ID of the affiliate who generated this referral. This "
 "association cannot be changed."
 msgstr "El ID de usuario del afiliado. Esto no puede ser modificado."
 
 #: includes/admin/referrals/edit.php:75
-#, fuzzy
 msgid "Payout"
 msgstr "Referencias Recientes"
 
 #. translators: 1: Payout total amount with view link
 #: includes/admin/referrals/edit.php:84
-#, fuzzy
 msgid "Total: %1$s"
 msgstr "Totales"
 
@@ -2087,7 +1992,6 @@ msgid "The amount of the referral, such as 15."
 msgstr "El monto de la referencia, como por ejemplo 15."
 
 #: includes/admin/referrals/edit.php:159
-#, fuzzy
 msgid "Visit"
 msgstr "Visitas"
 
@@ -2116,7 +2020,6 @@ msgid "Context"
 msgstr "Contexto"
 
 #: includes/admin/referrals/edit.php:234
-#, fuzzy
 msgid ""
 "Context for this referral (optional). Usually this is used to identify the "
 "payment system or integration that was used for the transaction."
@@ -2135,7 +2038,6 @@ msgid "Select the status of the referral."
 msgstr "Seleccionar el estado de la referencia."
 
 #: includes/admin/referrals/edit.php:276
-#, fuzzy
 msgid "Update Referral"
 msgstr "Referencias No Pagas"
 
@@ -2204,7 +2106,6 @@ msgstr ""
 "em>, ir a la página <a href=\"%s\">Herramientas &rarr; Exportar</a>."
 
 #: includes/admin/referrals/referrals.php:72
-#, fuzzy
 msgid ""
 "To generate a payout for a specific affiliate, enter the affiliate&#8217;s "
 "login name, first name, or last name. Leave blank to generate a payout for "
@@ -2219,7 +2120,6 @@ msgid "Generate CSV File"
 msgstr "Generar archivo CSV"
 
 #: includes/admin/referrals/screen-options.php:24
-#, fuzzy
 msgid "Number of referrals per page:"
 msgstr "Aún no se grabaron referencias "
 
@@ -2228,22 +2128,18 @@ msgid "Affiliate Registrations"
 msgstr "Registro de Afiliado"
 
 #: includes/admin/reports/class-reports-admin.php:65
-#, fuzzy
 msgid "Manage Affiliates"
 msgstr "Agregando Afiliados"
 
 #: includes/admin/reports/class-reports-admin.php:70
-#, fuzzy
 msgid "View Payouts"
 msgstr "Referencias Recientes"
 
 #: includes/admin/reports/class-reports-admin.php:77
-#, fuzzy
 msgid "Manage Visits"
 msgstr "Buscando Visitas"
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:38
-#, fuzzy
 msgid "Total Affiliates"
 msgstr "Editar Afiliados"
 
@@ -2255,23 +2151,19 @@ msgstr ""
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:71
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:135
-#, fuzzy
 msgid "Affiliate #%d"
 msgstr "Afiliado: #%d %s"
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:75
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:84
-#, fuzzy
 msgid "Top Earning Affiliate"
 msgstr "Editar Afiliados"
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:99
-#, fuzzy
 msgid "New Affiliates"
 msgstr "Nuevo Afiliado"
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:139
-#, fuzzy
 msgid "%d referral"
 msgid_plural "%d referrals"
 msgstr[0] "Agregar Referencia"
@@ -2282,7 +2174,6 @@ msgid "Highest Converting Affiliate"
 msgstr ""
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:178
-#, fuzzy
 msgid "Average Payout"
 msgstr "Tasa de Referencia"
 
@@ -2326,13 +2217,11 @@ msgid "Most Active Campaign (%s)"
 msgstr ""
 
 #: includes/admin/reports/tabs/class-referrals-reports-tab.php:81
-#, fuzzy
 msgid "Average Referral Amount"
 msgstr "Tasa de Referencia"
 
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:38
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:45
-#, fuzzy
 msgid "Total Visits"
 msgstr "Visitas totales"
 
@@ -2353,7 +2242,6 @@ msgid "Top Referrer"
 msgstr ""
 
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:113
-#, fuzzy
 msgid "Direct Traffic"
 msgstr "Tráfico directo"
 
@@ -2412,7 +2300,6 @@ msgstr ""
 "La URL variable para URLs de referencia. Por ejemplo: <strong>%s</strong>."
 
 #: includes/admin/settings/class-settings.php:477
-#, fuzzy
 msgid "Default Referral Format"
 msgstr "Tasa de referencia por producto"
 
@@ -2428,12 +2315,10 @@ msgid "ID"
 msgstr "ID"
 
 #: includes/admin/settings/class-settings.php:494
-#, fuzzy
 msgid "Pretty Affiliate URLs"
 msgstr "URLs de Afiliados"
 
 #: includes/admin/settings/class-settings.php:495
-#, fuzzy
 msgid ""
 "Show pretty affiliate referral URLs to affiliates. For example: <strong>%s "
 "or %s</strong>"
@@ -2441,7 +2326,6 @@ msgstr ""
 "La URL variable para URLs de referencia. Por ejemplo: <strong>%s</strong>."
 
 #: includes/admin/settings/class-settings.php:499
-#, fuzzy
 msgid "Credit Last Referrer"
 msgstr "Agregar Referencia"
 
@@ -2450,14 +2334,12 @@ msgid "Credit the last affiliate who referred the customer."
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:505
-#, fuzzy
 msgid ""
 "Choose a referral rate type. Referrals can be based on either a percentage "
 "or a flat rate amount."
 msgstr "¿Las referencias deberían basarse en un porcentaje o en un monto fijo?"
 
 #: includes/admin/settings/class-settings.php:511
-#, fuzzy
 msgid ""
 "The default referral rate. A percentage if the Referral Rate Type is set to "
 "Percentage, a flat amount otherwise. Referral rates can also be set for each "
@@ -2488,7 +2370,6 @@ msgid "Cookie Expiration"
 msgstr "Vencimiento de Cookies"
 
 #: includes/admin/settings/class-settings.php:529
-#, fuzzy
 msgid "Enter how many days the referral tracking cookie should be valid for."
 msgstr ""
 "¿Cuántos días debería ser válido el seguimiento de la cookie de la "
@@ -2519,12 +2400,10 @@ msgstr ""
 "moneda."
 
 #: includes/admin/settings/class-settings.php:546
-#, fuzzy
 msgid "Currency Symbol Position"
 msgstr "Posición del símbolo de moneda"
 
 #: includes/admin/settings/class-settings.php:547
-#, fuzzy
 msgid "Choose the location of the currency symbol."
 msgstr "Elegir la ubicación del símbolo de la moneda."
 
@@ -2553,12 +2432,10 @@ msgid "The symbol (usually , or .) to separate decimal points"
 msgstr "El símbolo (usualmente , ó .) para separar puntos decimales"
 
 #: includes/admin/settings/class-settings.php:569
-#, fuzzy
 msgid "Affiliate Form Settings"
 msgstr "Ir a los ajustes de AffiliateWP"
 
 #: includes/admin/settings/class-settings.php:573
-#, fuzzy
 msgid "Affiliate Area Forms"
 msgstr "Área de Afiliados"
 
@@ -2570,17 +2447,14 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:577
-#, fuzzy
 msgid "Affiliate Registration Form and Affiliate Login Form"
 msgstr "Formulario de registro conserva valores en error"
 
 #: includes/admin/settings/class-settings.php:578
-#, fuzzy
 msgid "Affiliate Registration Form Only"
 msgstr "Registro de Afiliado"
 
 #: includes/admin/settings/class-settings.php:579
-#, fuzzy
 msgid "Affiliate Login Form Only"
 msgstr "¿Descuento de Afiliado?"
 
@@ -2590,7 +2464,6 @@ msgid "Integrations"
 msgstr "Integraciones"
 
 #: includes/admin/settings/class-settings.php:597
-#, fuzzy
 msgid ""
 "Choose the integrations to enable. If you are not using any of these, you "
 "may use the <strong>[affiliate_conversion_script]</strong> shortcode to "
@@ -2603,12 +2476,10 @@ msgstr ""
 "\"_blank\">documentación</a> para obtener ayuda sobre esto."
 
 #: includes/admin/settings/class-settings.php:613
-#, fuzzy
 msgid "Disable All Emails"
 msgstr "Total de referencias pendientes"
 
 #: includes/admin/settings/class-settings.php:614
-#, fuzzy
 msgid "Disable all email notifications."
 msgstr "Habilitar Notificaciones de Nuevas Referencias"
 
@@ -2629,7 +2500,6 @@ msgid "Choose a template to use for email messages."
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:629
-#, fuzzy
 msgid "From Name"
 msgstr "Tu Nombre"
 
@@ -2638,7 +2508,6 @@ msgid "The name that emails come from. This is usually your site name."
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:635
-#, fuzzy
 msgid "From Email"
 msgstr "Email"
 
@@ -2649,12 +2518,10 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:641
-#, fuzzy
 msgid "Notify Admin"
 msgstr "Notificar a los Administradores"
 
 #: includes/admin/settings/class-settings.php:642
-#, fuzzy
 msgid "Notify site admin of new affiliate registrations."
 msgstr ""
 "¿Notificar a los administradores del sitio nuevos registros de afiliados?"
@@ -2689,12 +2556,10 @@ msgid "A new affiliate has registered on your site, %s"
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:655
-#, fuzzy
 msgid "Name: "
 msgstr "Nombre: %s"
 
 #: includes/admin/settings/class-settings.php:658
-#, fuzzy
 msgid "Application Accepted Email Subject"
 msgstr "Aplicación de Afiliado Aceptada "
 
@@ -2710,7 +2575,6 @@ msgid "Affiliate Application Accepted"
 msgstr "Aplicación de Afiliado Aceptada "
 
 #: includes/admin/settings/class-settings.php:664
-#, fuzzy
 msgid "Application Accepted Email Content"
 msgstr "Aplicación de Afiliado Aceptada "
 
@@ -2722,29 +2586,19 @@ msgstr ""
 
 #: includes/admin/settings/class-settings.php:667
 #: includes/admin/settings/class-settings.php:679
-#, fuzzy
 msgid "Congratulations {name}!"
-msgstr ""
-"Felicitaciones %s!\n"
-"\n"
+msgstr "Felicitaciones %s!"
 
 #: includes/admin/settings/class-settings.php:667
 #: includes/emails/actions.php:119
-#, fuzzy
 msgid "Your affiliate application on %s has been accepted!"
-msgstr ""
-"Tu solicitud de afiliado en %s fue aceptada!\n"
-"\n"
+msgstr "Tu solicitud de afiliado en %s fue aceptada!"
 
 #: includes/admin/settings/class-settings.php:667
-#, fuzzy
 msgid "Log into your affiliate area at"
-msgstr ""
-"Ingresá a tu área de afiliado en %s\n"
-"\n"
+msgstr "Ingresá a tu área de afiliado en %s"
 
 #: includes/admin/settings/class-settings.php:670
-#, fuzzy
 msgid "New Referral Email Subject"
 msgstr "Nueva Referencia"
 
@@ -2760,7 +2614,6 @@ msgid "Referral Awarded!"
 msgstr "Referencia Adjudicada! "
 
 #: includes/admin/settings/class-settings.php:676
-#, fuzzy
 msgid "New Referral Email Content"
 msgstr "Nueva Referencia"
 
@@ -2771,44 +2624,34 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:679
-#, fuzzy
 msgid "You have been awarded a new referral of"
-msgstr ""
-"Se te adjudicó una nueva referencia de %s en %s!\n"
-"\n"
+msgstr "Se te adjudicó una nueva referencia de %s en %s!"
 
 #: includes/admin/settings/class-settings.php:679
-#, fuzzy
 msgid "on %s!"
 msgstr "Versión %s"
 
 #: includes/admin/settings/class-settings.php:679
-#, fuzzy
 msgid ""
 "Log into your affiliate area to view your earnings or disable these "
 "notifications:"
 msgstr ""
 "Ingresá en tu área de afiliado para ver tus ganancias o deshabilitar estas "
-"notificaciones: %s\n"
-"\n"
+"notificaciones: %s"
 
 #: includes/admin/settings/class-settings.php:693
-#, fuzzy
 msgid "Allow Affiliate Registration"
 msgstr "Permitir el registro del afiliado"
 
 #: includes/admin/settings/class-settings.php:694
-#, fuzzy
 msgid "Allow users to register affiliate accounts for themselves."
 msgstr "¿Los afiliados deberían poder registrar cuentas por sí mismos?"
 
 #: includes/admin/settings/class-settings.php:698
-#, fuzzy
 msgid "Require Approval"
 msgstr "Requerir aprobación"
 
 #: includes/admin/settings/class-settings.php:699
-#, fuzzy
 msgid ""
 "Require that Pending affiliate accounts must be approved before they can "
 "begin earning referrals."
@@ -2821,7 +2664,6 @@ msgid "Auto Register New Users"
 msgstr "Auto Registrar Nuevos Usuarios"
 
 #: includes/admin/settings/class-settings.php:704
-#, fuzzy
 msgid "Automatically register new users as affiliates."
 msgstr "¿Registrar automáticamente nuevos usuarios como afiliados?"
 
@@ -2834,7 +2676,6 @@ msgid "Add a logout link to the Affiliate Area."
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:713
-#, fuzzy
 msgid "Default Referral URL"
 msgstr "Tasa de referencia por producto"
 
@@ -2872,12 +2713,10 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:733
-#, fuzzy
 msgid "Reject Unpaid Referrals on Refund"
 msgstr "¿Rechazar las Referencias No Pagas cuando haya un Reembolso?"
 
 #: includes/admin/settings/class-settings.php:734
-#, fuzzy
 msgid ""
 "Automatically reject Unpaid referrals when the originating purchase is "
 "refunded or revoked."
@@ -2886,12 +2725,10 @@ msgstr ""
 "hace una devolución de la compra?"
 
 #: includes/admin/settings/class-settings.php:738
-#, fuzzy
 msgid "Use Fallback Referral Tracking Method"
 msgstr "¿Usar el método alternativo de rastreo de referencias?"
 
 #: includes/admin/settings/class-settings.php:739
-#, fuzzy
 msgid ""
 "The method used to track referral links can fail on sites that have jQuery "
 "errors. Enable Fallback Tracking if referrals are not being tracked properly."
@@ -2901,12 +2738,10 @@ msgstr ""
 "seguidas correctamente."
 
 #: includes/admin/settings/class-settings.php:743
-#, fuzzy
 msgid "Ignore Referrals with Zero Amount"
 msgstr "Tasa de Referencia"
 
 #: includes/admin/settings/class-settings.php:744
-#, fuzzy
 msgid ""
 "Ignore referrals with a zero amount. This can be useful for multi-price "
 "products that start at zero, or if a discount was used which resulted in a "
@@ -2930,7 +2765,6 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:753
-#, fuzzy
 msgid "Referral URL Blacklist"
 msgstr "Visitas de URL de Referencia"
 
@@ -2952,7 +2786,6 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:764
-#, fuzzy
 msgid "Remove Data on Uninstall"
 msgstr "¿Eliminar la información al Desinstalar?"
 
@@ -2961,7 +2794,6 @@ msgid "Remove all saved data for AffiliateWP when the plugin is deleted."
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:795
-#, fuzzy
 msgid "Required Registration Fields"
 msgstr "Moderar registros"
 
@@ -2977,7 +2809,6 @@ msgid "How will you promote us?"
 msgstr "¿Cómo vas a promovernos?"
 
 #: includes/admin/settings/class-settings.php:830
-#, fuzzy
 msgid "Application Pending Email Subject"
 msgstr "Aplicación de Afiliado Aceptada "
 
@@ -2987,14 +2818,10 @@ msgstr ""
 
 #: includes/admin/settings/class-settings.php:833
 #: includes/emails/actions.php:165
-#, fuzzy
 msgid "Your Affiliate Application Is Being Reviewed"
-msgstr ""
-"Tu solicitud de afiliado en %s fue aceptada!\n"
-"\n"
+msgstr "Tu solicitud de afiliado en %s fue aceptada!"
 
 #: includes/admin/settings/class-settings.php:836
-#, fuzzy
 msgid "Application Pending Email Content"
 msgstr "Aplicación de Afiliado Aceptada "
 
@@ -3021,7 +2848,6 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:842
-#, fuzzy
 msgid "Application Rejection Email Subject"
 msgstr "Aplicación de Afiliado Aceptada "
 
@@ -3031,14 +2857,10 @@ msgstr ""
 
 #: includes/admin/settings/class-settings.php:845
 #: includes/emails/actions.php:204
-#, fuzzy
 msgid "Your Affiliate Application Has Been Rejected"
-msgstr ""
-"Tu solicitud de afiliado en %s fue aceptada!\n"
-"\n"
+msgstr "Tu solicitud de afiliado en %s fue aceptada!"
 
 #: includes/admin/settings/class-settings.php:848
-#, fuzzy
 msgid "Application Rejection Email Content"
 msgstr "Aplicación de Afiliado Aceptada "
 
@@ -3060,7 +2882,6 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:1021
-#, fuzzy
 msgid ""
 "Your license key is globally defined via <code>AFFILIATEWP_LICENSE_KEY</"
 "code> set in <code>wp-config.php</code>.<br />It cannot be modified from "
@@ -3110,7 +2931,6 @@ msgid "Upload File"
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:1233
-#, fuzzy
 msgid ""
 "Your license key is globally defined via <code>AFFILIATEWP_LICENSE_KEY</"
 "code> set in <code>wp-config.php</code>.<br />It cannot be modified from "
@@ -3132,7 +2952,6 @@ msgid "General"
 msgstr "General"
 
 #: includes/admin/settings/display-settings.php:62
-#, fuzzy
 msgid "Emails"
 msgstr "Email"
 
@@ -3141,7 +2960,6 @@ msgid "Misc"
 msgstr "Misceláneo"
 
 #: includes/admin/tools/class-batch-recount-affiliate-stats.php:156
-#, fuzzy
 msgid "%s affiliate&#8217;s was successfully processed."
 msgid_plural "%s affiliates&#8217; were successfully processed."
 msgstr[0] "Afiliado actualizado exitosamente"
@@ -3157,7 +2975,6 @@ msgid "API Keys"
 msgstr ""
 
 #: includes/admin/tools/class-rest-consumers-table.php:61
-#, fuzzy
 msgid "No API consumers found."
 msgstr "No se encontraron usuarios"
 
@@ -3182,7 +2999,6 @@ msgid "Secret Key"
 msgstr ""
 
 #: includes/admin/tools/class-rest-consumers-table.php:228
-#, fuzzy
 msgid "Enter username"
 msgstr "Nombre de Usuario Inválido"
 
@@ -3201,23 +3017,19 @@ msgstr "Email"
 
 #: includes/admin/tools/export/class-batch-export-affiliates.php:98
 #: includes/admin/tools/export/class-export-affiliates.php:55
-#, fuzzy
 msgid "Rate Type"
 msgstr "Tipo de Tasa de la Referencia"
 
 #: includes/admin/tools/export/class-batch-export-affiliates.php:105
 #: includes/admin/tools/export/class-export-affiliates.php:61
-#, fuzzy
 msgid "Date Registered"
 msgstr "Registrar"
 
 #: includes/admin/tools/export/class-batch-export-affiliates.php:117
-#, fuzzy
 msgid "No valid affiliate status was selected for export."
 msgstr "No hay un ID de afiliado especificado para ser borrado"
 
 #: includes/admin/tools/export/class-batch-export-affiliates.php:187
-#, fuzzy
 msgid "%s affiliate was successfully exported."
 msgid_plural "%s affiliates were successfully exported."
 msgstr[0] "Afiliado actualizado exitosamente"
@@ -3228,7 +3040,6 @@ msgid "No valid payout status was selected for export."
 msgstr ""
 
 #: includes/admin/tools/export/class-batch-export-payouts.php:274
-#, fuzzy
 msgid "%s payout log was successfully exported."
 msgid_plural "%s payout logs were successfully exported."
 msgstr[0] "Material de promoción agregado exitosamente"
@@ -3245,7 +3056,6 @@ msgid "No valid referral status was selected for export."
 msgstr ""
 
 #: includes/admin/tools/export/class-batch-export-referrals.php:247
-#, fuzzy
 msgid "%s referral was successfully exported."
 msgid_plural "%s referrals were successfully exported."
 msgstr[0] "Referencia agregada exitosamente"
@@ -3262,7 +3072,6 @@ msgid "No unpaid referrals were found matching your criteria."
 msgstr ""
 
 #: includes/admin/tools/export/class-batch-generate-payouts.php:299
-#, fuzzy
 msgid "A payout log for %s affiliate was successfully generated."
 msgid_plural "A payout log for %s affiliates was successfully generated."
 msgstr[0] "Afiliado actualizado exitosamente"
@@ -3306,7 +3115,6 @@ msgid "System Info"
 msgstr ""
 
 #: includes/admin/tools/tools.php:96
-#, fuzzy
 msgid "Debug Assistant"
 msgstr "Asistente para la migración "
 
@@ -3319,7 +3127,6 @@ msgid "Use this tool to recount affiliate statistics."
 msgstr "Usá esta herramienta para recontar las estadísticas de los afiliados."
 
 #: includes/admin/tools/tools.php:157
-#, fuzzy
 msgid ""
 "Enter the name of the affiliate or begin typing to perform a search based on "
 "the affiliate&#8217;s name."
@@ -3340,12 +3147,10 @@ msgstr ""
 "plataformas existentes."
 
 #: includes/admin/tools/tools.php:205
-#, fuzzy
 msgid "User Accounts"
 msgstr "Recontar "
 
 #: includes/admin/tools/tools.php:208
-#, fuzzy
 msgid ""
 "Use this tool to create affiliate accounts for each of your existing "
 "WordPress user accounts that belong to the selected roles below."
@@ -3364,7 +3169,6 @@ msgid "Select User Roles"
 msgstr ""
 
 #: includes/admin/tools/tools.php:221
-#, fuzzy
 msgid "Create Affiliate Accounts for Users"
 msgstr "Registrar una Nueva Cuenta de Afiliado"
 
@@ -3382,7 +3186,6 @@ msgid ""
 msgstr ""
 
 #: includes/admin/tools/tools.php:237
-#, fuzzy
 msgid ""
 "Use this tool to migrate existing affiliate / referral data from Affiliates "
 "Pro to AffiliateWP."
@@ -3391,7 +3194,6 @@ msgstr ""
 "de Affiliates Pro a AffiliateWP."
 
 #: includes/admin/tools/tools.php:238
-#, fuzzy
 msgid ""
 "<strong>NOTE:</strong> This tool should only ever be used on a fresh "
 "install. If you have already collected affiliate or referral data, do not "
@@ -3406,7 +3208,6 @@ msgid "Migrate Data from Affiliates Pro"
 msgstr "Migrar la data de los Afiliados Pro"
 
 #: includes/admin/tools/tools.php:253
-#, fuzzy
 msgid ""
 "Use this tool to migrate existing affiliate accounts from WP Affiliate to "
 "AffiliateWP."
@@ -3415,17 +3216,14 @@ msgstr ""
 "de Affiliates Pro a AffiliateWP."
 
 #: includes/admin/tools/tools.php:256
-#, fuzzy
 msgid "Migrate Data from WP Affiliate"
 msgstr "Migrar la data de los Afiliados Pro"
 
 #: includes/admin/tools/tools.php:280
-#, fuzzy
 msgid "Export Affiliates"
 msgstr "Editar Afiliados"
 
 #: includes/admin/tools/tools.php:282
-#, fuzzy
 msgid "Export affiliates to a CSV file."
 msgstr "Exportar referencias a un archivo CSV."
 
@@ -3447,7 +3245,6 @@ msgid "Export referrals to a CSV file."
 msgstr "Exportar referencias a un archivo CSV."
 
 #: includes/admin/tools/tools.php:317 includes/admin/tools/tools.php:341
-#, fuzzy
 msgid ""
 "To search for an affiliate, enter the affiliate&#8217;s login name, first "
 "name, or last name. Leave blank to export referrals for all affiliates."
@@ -3457,12 +3254,10 @@ msgstr ""
 "todos los afiliados. "
 
 #: includes/admin/tools/tools.php:327
-#, fuzzy
 msgid "Export Payouts"
 msgstr "Visitas totales"
 
 #: includes/admin/tools/tools.php:329
-#, fuzzy
 msgid "Export payouts to a CSV file."
 msgstr "Exportar referencias a un archivo CSV."
 
@@ -3506,7 +3301,6 @@ msgid "Debug Log"
 msgstr ""
 
 #: includes/admin/tools/tools.php:457
-#, fuzzy
 msgid "Use this tool to help debug various operations in AffiliateWP."
 msgstr ""
 "Usá esta herramienta para migrar un afiliado existente / data de referencia "
@@ -3517,7 +3311,6 @@ msgid "Clear Debug Log"
 msgstr ""
 
 #: includes/admin/tools/tools.php:531
-#, fuzzy
 msgid "Invalid batch ID."
 msgstr "Email inválido "
 
@@ -3526,7 +3319,6 @@ msgid "Invalid batch export class."
 msgstr ""
 
 #: includes/admin/tools/upgrades/class-batch-upgrade-recount-affiliate-stats.php:38
-#, fuzzy
 msgid "Your database has been successfully upgraded. %s"
 msgstr "Referencia agregada exitosamente"
 
@@ -3535,17 +3327,14 @@ msgid "Dismiss Notice"
 msgstr ""
 
 #: includes/admin/user-profile.php:22
-#, fuzzy
 msgid "Affiliate Registration Status"
 msgstr "Registro de Afiliado"
 
 #: includes/admin/user-profile.php:40
-#, fuzzy
 msgid "Not Registered"
 msgstr "Registrar"
 
 #: includes/admin/user-profile.php:46
-#, fuzzy
 msgid "Affiliate Actions"
 msgstr "Ir a los ajustes de AffiliateWP"
 
@@ -3554,7 +3343,6 @@ msgid "Register"
 msgstr "Registrar"
 
 #: includes/admin/user-profile.php:80 includes/class-register.php:506
-#, fuzzy
 msgid "Disable Affiliate Email"
 msgstr "Total de referencias pendientes"
 
@@ -3567,14 +3355,12 @@ msgid "No user roles were selected for migration."
 msgstr ""
 
 #: includes/admin/utilities/class-batch-migrate-users.php:167
-#, fuzzy
 msgid "%s affiliate was added successfully."
 msgid_plural "%s affiliates were added successfully."
 msgstr[0] "Afiliado actualizado exitosamente"
 msgstr[1] "Afiliado actualizado exitosamente"
 
 #: includes/admin/utilities/class-batch-migrate-wp-affiliate.php:209
-#, fuzzy
 msgid "%s affiliate was successfully converted."
 msgid_plural "%s affiliates were successfully converted."
 msgstr[0] "Afiliado actualizado exitosamente"
@@ -3593,7 +3379,6 @@ msgid "An invalid batch class handler file has been supplied."
 msgstr ""
 
 #: includes/admin/utilities/class-batch-process.php:143
-#, fuzzy
 msgid "%s item was successfully processed."
 msgid_plural "%s items were successfully processed."
 msgstr[0] "Ajustes importados exitosamente"
@@ -3628,7 +3413,6 @@ msgid "No visits found."
 msgstr "No se encontraron visitas."
 
 #: includes/admin/visits/contextual-help.php:39
-#, fuzzy
 msgid "This screen provides access to your site&#8217;s visit history."
 msgstr "Esta pantalla provee acceso al historial de visitas de tu sitio."
 
@@ -3665,7 +3449,6 @@ msgstr ""
 "creada desde esta visita, si hay alguna. "
 
 #: includes/admin/visits/contextual-help.php:44
-#, fuzzy
 msgid ""
 "<strong>Context</strong>: this is the context of how the visit was "
 "generated, if set."
@@ -3716,7 +3499,6 @@ msgstr ""
 "a o vinieron de un sitio específico"
 
 #: includes/admin/visits/contextual-help.php:58
-#, fuzzy
 msgid ""
 "You can enter the referral&#8217;s ID number prefixed by &#8220;referral:"
 "&#8221;"
@@ -3724,7 +3506,6 @@ msgstr ""
 "Podes ingresar el numero de ID de la referencia con el prefijo 'referencia:'"
 
 #: includes/admin/visits/contextual-help.php:59
-#, fuzzy
 msgid "You can enter a visit context prefixed by &#8220;context:&#8221;"
 msgstr "Podés ingresar el contexto de la referencia con el prefijo 'context:'"
 
@@ -3737,7 +3518,6 @@ msgid "Filter by status"
 msgstr ""
 
 #: includes/admin/visits/visits.php:65
-#, fuzzy
 msgid "Unconverted"
 msgstr "Convertido"
 
@@ -3762,7 +3542,6 @@ msgid "Please enter a password"
 msgstr "Por favor ingresá una contraseña"
 
 #: includes/class-login.php:80
-#, fuzzy
 msgid "Incorrect username or password"
 msgstr "Contraseña inválida "
 
@@ -3783,7 +3562,6 @@ msgid "Paid Referral Earnings"
 msgstr "Ingresos de Referencia Pagados"
 
 #: includes/class-register.php:77
-#, fuzzy
 msgid "Please enter a valid website URL"
 msgstr "Por favor ingresá una URL de sitio web"
 
@@ -3808,7 +3586,6 @@ msgid "Email address already taken"
 msgstr "Dirección de email ya tomada"
 
 #: includes/class-register.php:107
-#, fuzzy
 msgid "Invalid account email"
 msgstr "Email de pago inválido "
 
@@ -3829,7 +3606,6 @@ msgid "Please verify that you are not a robot"
 msgstr ""
 
 #: includes/class-register.php:146
-#, fuzzy
 msgid "Nice try honey bear, don&#8217;t touch our honey"
 msgstr "Buen intento osito de miel, no toques nuestra miel"
 
@@ -3846,7 +3622,6 @@ msgid "Please enter a website URL"
 msgstr "Por favor ingresá una URL de sitio web"
 
 #: includes/class-register.php:272
-#, fuzzy
 msgid "Please enter your payment email"
 msgstr "Por favor ingresá tu nombre"
 
@@ -3855,12 +3630,10 @@ msgid "Please tell us how you will promote us"
 msgstr ""
 
 #: includes/class-register.php:499
-#, fuzzy
 msgid "Add as Affiliate"
 msgstr "Agregar Afiliado"
 
 #: includes/class-register.php:501
-#, fuzzy
 msgid "Add the user as an affiliate."
 msgstr "Ya estás registrado como un afiliado "
 
@@ -3887,14 +3660,10 @@ msgid "An affiliate already exists for this user account."
 msgstr ""
 
 #: includes/cli/class-affiliate-sub-commands.php:167
-#, fuzzy
 msgid "An affiliate with the username \"%s\" has been created."
-msgstr ""
-"Tu solicitud de afiliado en %s fue aceptada!\n"
-"\n"
+msgstr "Tu solicitud de afiliado en %s fue aceptada!"
 
 #: includes/cli/class-affiliate-sub-commands.php:169
-#, fuzzy
 msgid "The affiliate account could not be added."
 msgstr "La cuenta de afiliado no esta activa"
 
@@ -3908,29 +3677,24 @@ msgid "A valid affiliate username or ID is required to proceed."
 msgstr ""
 
 #: includes/cli/class-affiliate-sub-commands.php:231
-#, fuzzy
 msgid "The affiliate was updated successfully."
 msgstr "Afiliado actualizado exitosamente"
 
 #: includes/cli/class-affiliate-sub-commands.php:233
-#, fuzzy
 msgid "The affiliate account could not be updated."
 msgstr "La cuenta de afiliado no esta activa"
 
 #: includes/cli/class-affiliate-sub-commands.php:288
-#, fuzzy
 msgid ""
 "Are you sure you want to delete this affiliate, all its data and its "
 "associated user account?"
 msgstr "¿Estás seguro que querés eliminar este material de promoción?"
 
 #: includes/cli/class-affiliate-sub-commands.php:290
-#, fuzzy
 msgid "Are you sure you want to delete this affiliate and all its data?"
 msgstr "¿Estás seguro que querés eliminar este material de promoción?"
 
 #: includes/cli/class-affiliate-sub-commands.php:293
-#, fuzzy
 msgid "Are you sure you want to delete this affiliate?"
 msgstr "¿Estás seguro que querés eliminar este material de promoción?"
 
@@ -3940,22 +3704,18 @@ msgid ""
 msgstr ""
 
 #: includes/cli/class-affiliate-sub-commands.php:313
-#, fuzzy
 msgid "The affiliate account has been successfully deleted."
 msgstr "Cuenta(s) de afiliado eliminada(s) exitosamente"
 
 #: includes/cli/class-affiliate-sub-commands.php:316
-#, fuzzy
 msgid "The affiliate account could not be deleted."
 msgstr "La solicitud de tu cuenta de afiliado fue rechazada"
 
 #: includes/cli/class-affiliate-sub-commands.php:393
-#, fuzzy
 msgid "Number of affiliates: %d"
 msgstr "No se encontraron afiliados."
 
 #: includes/cli/class-command.php:24
-#, fuzzy
 msgid "AffiliateWP is not installed"
 msgstr "Migración de AffiliateWP"
 
@@ -3964,7 +3724,6 @@ msgid "You are running AffiliateWP version: %s"
 msgstr ""
 
 #: includes/cli/class-command.php:41
-#, fuzzy
 msgid "License status is: %s"
 msgstr "Configuración de Licencia"
 
@@ -3973,7 +3732,6 @@ msgid "Debug mode is: %s"
 msgstr ""
 
 #: includes/cli/class-command.php:59
-#, fuzzy
 msgid "Affiliates require approval: %s"
 msgstr "Requerir aprobación"
 
@@ -3982,27 +3740,22 @@ msgid "Email notifications are: %s"
 msgstr ""
 
 #: includes/cli/class-command.php:85
-#, fuzzy
 msgid "Integrations: %s"
 msgstr "Integraciones"
 
 #: includes/cli/class-command.php:92
-#, fuzzy
 msgid "Global referral rate: %s"
 msgstr "Tipo de tasa de referencia del afiliado."
 
 #: includes/cli/class-command.php:95
-#, fuzzy
 msgid "Global referral rate type: %s"
 msgstr "Tipo de tasa de referencia del afiliado."
 
 #: includes/cli/class-command.php:98
-#, fuzzy
 msgid "Currency: %s"
 msgstr "Moneda"
 
 #: includes/cli/class-command.php:105
-#, fuzzy
 msgid "Referral variable: %s"
 msgstr "Variable de Referencia"
 
@@ -4011,22 +3764,18 @@ msgid "Show pretty referral URLs: %s"
 msgstr ""
 
 #: includes/cli/class-command.php:126
-#, fuzzy
 msgid "Referral URL (ID): %s"
 msgstr "URL de Referencia "
 
 #: includes/cli/class-command.php:129
-#, fuzzy
 msgid "Referral URL (Username): %s"
 msgstr "Generador de URL de Referencias"
 
 #: includes/cli/class-command.php:134
-#, fuzzy
 msgid "Affiliate Area URL: %s"
 msgstr "Área de Afiliados"
 
 #: includes/cli/class-command.php:139
-#, fuzzy
 msgid "Terms of Use URL: %s"
 msgstr "Términos de Uso"
 
@@ -4035,32 +3784,26 @@ msgid "Found %s sites. Retrieving stats ..."
 msgstr ""
 
 #: includes/cli/class-command.php:190
-#, fuzzy
 msgid "Total Affiliates: %s"
 msgstr "Editar Afiliados"
 
 #: includes/cli/class-command.php:193
-#, fuzzy
 msgid "Total Creatives: %s"
 msgstr "Editar Afiliados"
 
 #: includes/cli/class-command.php:196
-#, fuzzy
 msgid "Total Payouts: %s"
 msgstr "Visitas totales"
 
 #: includes/cli/class-command.php:199
-#, fuzzy
 msgid "Total Referrals: %s"
 msgstr "Total de referencias pagas"
 
 #: includes/cli/class-command.php:202
-#, fuzzy
 msgid "Total Visits: %s"
 msgstr "Visitas totales"
 
 #: includes/cli/class-command.php:220
-#, fuzzy
 msgid "Are you sure you want to clear the debug log?"
 msgstr "¿Estás seguro que querés eliminar este material de promoción?"
 
@@ -4077,7 +3820,6 @@ msgid "A creative with the ID %d has been successfully created."
 msgstr ""
 
 #: includes/cli/class-creative-sub-commands.php:135
-#, fuzzy
 msgid "The creative could not be created."
 msgstr "Nueva Referencia"
 
@@ -4089,7 +3831,6 @@ msgid "A valid creative ID is required to proceed."
 msgstr ""
 
 #: includes/cli/class-creative-sub-commands.php:199
-#, fuzzy
 msgid "The creative was successfully updated."
 msgstr "Material de promoción agregado exitosamente"
 
@@ -4098,7 +3839,6 @@ msgid "The creative could not be updated."
 msgstr ""
 
 #: includes/cli/class-creative-sub-commands.php:236
-#, fuzzy
 msgid "The creative was successfully deleted."
 msgstr "Material de promoción agregado exitosamente"
 
@@ -4107,7 +3847,6 @@ msgid "The creative could not be deleted."
 msgstr ""
 
 #: includes/cli/class-creative-sub-commands.php:314
-#, fuzzy
 msgid "Number of creatives: %d"
 msgstr "No se encontraron materiales de promoción."
 
@@ -4144,7 +3883,6 @@ msgid "Referral #%d is not valid and has been skipped."
 msgstr ""
 
 #: includes/cli/class-payout-sub-commands.php:298
-#, fuzzy
 msgid "Are you sure you want to overwrite this payout's referrals?"
 msgstr "¿Estás seguro que querés eliminar este material de promoción?"
 
@@ -4153,13 +3891,11 @@ msgid "All values passed via the --referrals argument are invalid."
 msgstr ""
 
 #: includes/cli/class-payout-sub-commands.php:312
-#, fuzzy
 msgid ""
 "Are you sure you want to overwrite the affiliate associated with this payout?"
 msgstr "¿Estás seguro que querés eliminar este material de promoción?"
 
 #: includes/cli/class-payout-sub-commands.php:316
-#, fuzzy
 msgid "The supplied affiliate ID or username is invalid and has been ignored."
 msgstr "El ID de usuario del afiliado. Esto no puede ser modificado."
 
@@ -4170,7 +3906,6 @@ msgid ""
 msgstr ""
 
 #: includes/cli/class-payout-sub-commands.php:327
-#, fuzzy
 msgid "Payout #%d has been updated successfully."
 msgstr "Material de promoción actualizado exitosamente"
 
@@ -4184,7 +3919,6 @@ msgid "A valid payout ID is required to proceed."
 msgstr ""
 
 #: includes/cli/class-payout-sub-commands.php:361
-#, fuzzy
 msgid "Are you sure you want to delete this payout?"
 msgstr "¿Estás seguro que querés eliminar este material de promoción?"
 
@@ -4214,12 +3948,10 @@ msgid ""
 msgstr ""
 
 #: includes/cli/class-referral-sub-commands.php:144
-#, fuzzy
 msgid "A referral with the ID \"%d\" has been created."
 msgstr "Nueva Referencia"
 
 #: includes/cli/class-referral-sub-commands.php:146
-#, fuzzy
 msgid "The referral could not be added."
 msgstr "Nueva Referencia"
 
@@ -4231,32 +3963,26 @@ msgid "A valid referral ID is required to proceed."
 msgstr ""
 
 #: includes/cli/class-referral-sub-commands.php:219
-#, fuzzy
 msgid "The referral was updated successfully."
 msgstr "Referencia actualizada exitosamente"
 
 #: includes/cli/class-referral-sub-commands.php:221
-#, fuzzy
 msgid "The referral could not be updated"
 msgstr "Nueva Referencia"
 
 #: includes/cli/class-referral-sub-commands.php:254 includes/scripts.php:109
-#, fuzzy
 msgid "Are you sure you want to delete this referral?"
 msgstr "¿Estás seguro que querés eliminar este material de promoción?"
 
 #: includes/cli/class-referral-sub-commands.php:259
-#, fuzzy
 msgid "The referral has been successfully deleted."
 msgstr "Referencia agregada exitosamente"
 
 #: includes/cli/class-referral-sub-commands.php:261
-#, fuzzy
 msgid "The referral could not be deleted."
 msgstr "Nueva Referencia"
 
 #: includes/cli/class-referral-sub-commands.php:338
-#, fuzzy
 msgid "Number of referrals: %d"
 msgstr "Aún no se grabaron referencias "
 
@@ -4273,12 +3999,10 @@ msgid "A valid date string must be supplied. Using the current time."
 msgstr ""
 
 #: includes/cli/class-visit-sub-commands.php:179
-#, fuzzy
 msgid "The visit was successfully created."
 msgstr "Ajustes importados exitosamente"
 
 #: includes/cli/class-visit-sub-commands.php:181
-#, fuzzy
 msgid "The visit could not be created."
 msgstr "Nueva Referencia"
 
@@ -4294,7 +4018,6 @@ msgid "A valid new date string must be supplied. Using the original date."
 msgstr ""
 
 #: includes/cli/class-visit-sub-commands.php:277
-#, fuzzy
 msgid "The visit was updated successfully."
 msgstr "Afiliado actualizado exitosamente"
 
@@ -4303,7 +4026,6 @@ msgid "The visit could not be updated."
 msgstr ""
 
 #: includes/cli/class-visit-sub-commands.php:311
-#, fuzzy
 msgid "Are you sure you want to delete this visit?"
 msgstr "¿Estás seguro que querés eliminar este material de promoción?"
 
@@ -4316,7 +4038,6 @@ msgid "The visit could not be deleted."
 msgstr ""
 
 #: includes/cli/class-visit-sub-commands.php:396
-#, fuzzy
 msgid "Number of visits: %d"
 msgstr "No se encontraron visitas."
 
@@ -4325,7 +4046,6 @@ msgid "Creative"
 msgstr "Material de promoción "
 
 #: includes/emails/actions.php:46
-#, fuzzy
 msgid "A new affiliate has registered on your site, "
 msgstr "Aún no hay registros de afiliado"
 
@@ -4334,12 +4054,10 @@ msgid "Name: %s"
 msgstr "Nombre: %s"
 
 #: includes/emails/actions.php:50
-#, fuzzy
 msgid "Website URL: %s"
 msgstr "URL del Sitio Web:"
 
 #: includes/emails/actions.php:54
-#, fuzzy
 msgid "Promotion method: %s"
 msgstr "Método de Promoción: "
 
@@ -4348,21 +4066,14 @@ msgid "Review pending applications: %s"
 msgstr ""
 
 #: includes/emails/actions.php:118 includes/emails/actions.php:252
-#, fuzzy
 msgid "Congratulations %s!"
-msgstr ""
-"Felicitaciones %s!\n"
-"\n"
+msgstr "Felicitaciones %s!"
 
 #: includes/emails/actions.php:120
-#, fuzzy
 msgid "Log into your affiliate area at %s"
-msgstr ""
-"Ingresá a tu área de afiliado en %s\n"
-"\n"
+msgstr "Ingresá a tu área de afiliado en %s"
 
 #: includes/emails/actions.php:169
-#, fuzzy
 msgid "Hi %s!"
 msgstr "Versión %s"
 
@@ -4371,21 +4082,16 @@ msgid "Hi %s,"
 msgstr ""
 
 #: includes/emails/actions.php:253
-#, fuzzy
 msgid "You have been awarded a new referral of %s on %s!"
-msgstr ""
-"Se te adjudicó una nueva referencia de %s en %s!\n"
-"\n"
+msgstr "Se te adjudicó una nueva referencia de %s en %s!"
 
 #: includes/emails/actions.php:254
-#, fuzzy
 msgid ""
 "log into your affiliate area to view your earnings or disable these "
 "notifications: %s"
 msgstr ""
 "Ingresá en tu área de afiliado para ver tus ganancias o deshabilitar estas "
-"notificaciones: %s\n"
-"\n"
+"notificaciones: %s"
 
 #: includes/emails/class-affwp-emails.php:198
 msgid "Default Template"
@@ -4414,7 +4120,6 @@ msgid "The email address of the affiliate"
 msgstr ""
 
 #: includes/emails/class-affwp-emails.php:437
-#, fuzzy
 msgid "The website of the affiliate"
 msgstr "Afiliados No Registrados "
 
@@ -4423,7 +4128,6 @@ msgid "The promo method used by the affiliate"
 msgstr ""
 
 #: includes/emails/class-affwp-emails.php:447
-#, fuzzy
 msgid "The reason an affiliate area was rejected"
 msgstr "La petición del afiliado fue rechazada"
 
@@ -4432,27 +4136,22 @@ msgid "The affiliate login URL to your website"
 msgstr ""
 
 #: includes/emails/class-affwp-emails.php:457
-#, fuzzy
 msgid "The amount of a given referral"
 msgstr "El monto de la referencia, como por ejemplo 15."
 
 #: includes/emails/class-affwp-emails.php:462
-#, fuzzy
 msgid "Your site name"
 msgstr "Tu Nombre"
 
 #: includes/emails/class-affwp-emails.php:467
-#, fuzzy
 msgid "The affiliate&#8217;s referral URL"
 msgstr "Tipo de tasa de referencia del afiliado."
 
 #: includes/emails/class-affwp-emails.php:472
-#, fuzzy
 msgid "The affiliate&#8217;s ID"
 msgstr "ID del Afiliado"
 
 #: includes/emails/class-affwp-emails.php:477
-#, fuzzy
 msgid "The affiliate&#8217;s referral rate"
 msgstr "Tipo de tasa de referencia del afiliado."
 
@@ -4469,7 +4168,6 @@ msgid "The name of the campaign associated with the referral (if any)."
 msgstr ""
 
 #: includes/emails/functions.php:121
-#, fuzzy
 msgid "No reason provided"
 msgstr "Aún no se grabaron referencias "
 
@@ -4478,7 +4176,6 @@ msgid "(no campaign)"
 msgstr ""
 
 #: includes/integrations/class-caldera-forms.php:74
-#, fuzzy
 msgid "Total"
 msgstr "Totales"
 
@@ -4492,13 +4189,11 @@ msgstr ""
 #: includes/integrations/class-caldera-forms.php:247
 #: includes/integrations/class-give.php:247
 #: includes/integrations/class-ninja-forms.php:196
-#, fuzzy
 msgid "Allow Referrals"
 msgstr "Referencias"
 
 #: includes/integrations/class-caldera-forms.php:252
 #: includes/integrations/class-gravityforms.php:286
-#, fuzzy
 msgid "Enable affiliate referral creation for this form"
 msgstr "Tipo de tasa de referencia del afiliado."
 
@@ -4507,7 +4202,6 @@ msgid "Contact Form 7"
 msgstr ""
 
 #: includes/integrations/class-contactform7.php:114
-#, fuzzy
 msgid "Enable referrals on all Contact Form 7 forms"
 msgstr "Tipo de tasa de referencia del afiliado."
 
@@ -4520,7 +4214,6 @@ msgid ""
 msgstr ""
 
 #: includes/integrations/class-contactform7.php:130
-#, fuzzy
 msgid "Enable referrals for specific Contact Form 7 forms"
 msgstr "Tipo de tasa de referencia del afiliado."
 
@@ -4577,7 +4270,6 @@ msgstr ""
 "referencia del monto base usado para calcular la comisión total."
 
 #: includes/integrations/class-edd.php:614
-#, fuzzy
 msgid "Disable Renewal Referrals"
 msgstr "Referencias Recientes"
 
@@ -4588,7 +4280,6 @@ msgid ""
 msgstr ""
 
 #: includes/integrations/class-edd.php:620
-#, fuzzy
 msgid "Disable Referrals on Upgrades"
 msgstr "Total de referencias pendientes"
 
@@ -4611,7 +4302,6 @@ msgstr ""
 #: includes/integrations/class-edd.php:659
 #: includes/integrations/class-memberpress.php:190
 #: includes/integrations/class-zippycourses.php:87
-#, fuzzy
 msgid ""
 "These settings will be used to calculate affiliate earnings per-sale. Leave "
 "blank to use the site default referral rate."
@@ -4621,12 +4311,10 @@ msgstr ""
 "predeterminados. "
 
 #: includes/integrations/class-exchange.php:305
-#, fuzzy
 msgid "Affiliate coupon?"
 msgstr "¿Descuento de Afiliado?"
 
 #: includes/integrations/class-exchange.php:311
-#, fuzzy
 msgid ""
 "If you would like to connect this coupon to an affiliate, enter the name of "
 "the affiliate it belongs to."
@@ -4635,12 +4323,10 @@ msgstr ""
 "afiliado al cuál le pertenece."
 
 #: includes/integrations/class-formidablepro.php:71
-#, fuzzy
 msgid " AffiliateWP"
 msgstr "Afiliado"
 
 #: includes/integrations/class-formidablepro.php:76
-#, fuzzy
 msgid "Referral description"
 msgstr "Configuración de Referencia"
 
@@ -4654,22 +4340,18 @@ msgid "Purchase Amount"
 msgstr ""
 
 #: includes/integrations/class-formidablepro.php:200
-#, fuzzy
 msgid "AffiliateWP: Referral #%d for %s recorded for %s"
 msgstr "Referencia #%d para %s guardado para %s"
 
 #: includes/integrations/class-formidablepro.php:225
-#, fuzzy
 msgid "AffiliateWP: Referral #%d for %s for %s rejected"
 msgstr "Referencia #%d para %s guardado para %s"
 
 #: includes/integrations/class-give.php:127
-#, fuzzy
 msgid "Custom Amount"
 msgstr "Cantidad "
 
 #: includes/integrations/class-give.php:248
-#, fuzzy
 msgid "Enable affiliate referral creation for this donation form"
 msgstr "Tipo de tasa de referencia del afiliado."
 
@@ -4682,7 +4364,6 @@ msgid "Affiliate Rate"
 msgstr "Tasa de Afiliado"
 
 #: includes/integrations/class-give.php:254
-#, fuzzy
 msgid ""
 "This setting will be used to calculate affiliate earnings per-donation. "
 "Leave blank to use default affiliate rates."
@@ -4693,18 +4374,15 @@ msgstr ""
 
 #: includes/integrations/class-gravityforms.php:166
 #: includes/integrations/class-sproutinvoices.php:76
-#, fuzzy
 msgid "Referral #%d for %s for %s rejected"
 msgstr "Referencia #%d para %s guardado para %s"
 
 #: includes/integrations/class-gravityforms.php:290
 #: includes/integrations/class-wpforms.php:37
-#, fuzzy
 msgid "Allow referrals"
 msgstr "Total de referencias pendientes"
 
 #: includes/integrations/class-gravityforms.php:321
-#, fuzzy
 msgid "Affiliate Coupon"
 msgstr "¿Descuento de Afiliado?"
 
@@ -4716,12 +4394,10 @@ msgid ""
 msgstr ""
 
 #: includes/integrations/class-jigoshop.php:153
-#, fuzzy
 msgid "Affiliate Data"
 msgstr "Tasa de Afiliado"
 
 #: includes/integrations/class-lifterlms.php:115
-#, fuzzy
 msgid "Referral #%d completed"
 msgstr "Referencia actualizada exitosamente"
 
@@ -4731,7 +4407,6 @@ msgstr ""
 
 #: includes/integrations/class-lifterlms.php:183
 #: includes/integrations/class-lifterlms.php:318
-#, fuzzy
 msgid "Referral not created because affiliate's own account was used."
 msgstr "¿Eliminar también la cuenta de usuario del afiliado?"
 
@@ -4741,32 +4416,26 @@ msgid "Referral not created due to 0.00 amount."
 msgstr ""
 
 #: includes/integrations/class-lifterlms.php:230
-#, fuzzy
 msgid "LifterLMS Referral #%d updated successfully."
 msgstr "Referencia actualizada exitosamente"
 
 #: includes/integrations/class-lifterlms.php:257
-#, fuzzy
 msgid "Referral #%d created successfully."
 msgstr "Referencia actualizada exitosamente"
 
 #: includes/integrations/class-lifterlms.php:263
-#, fuzzy
 msgid "Referral failed to be created."
 msgstr "Nueva Referencia"
 
 #: includes/integrations/class-lifterlms.php:354
-#, fuzzy
 msgid "Referral #%d updated successfully."
 msgstr "Referencia actualizada exitosamente"
 
 #: includes/integrations/class-lifterlms.php:378
-#, fuzzy
 msgid "Pending referral #%d created successfully."
 msgstr "Referencia actualizada exitosamente"
 
 #: includes/integrations/class-lifterlms.php:389
-#, fuzzy
 msgid "LifterLMS Referral failed to be created."
 msgstr "Nueva Referencia"
 
@@ -4775,7 +4444,6 @@ msgid "Search for an affiliate by username or email."
 msgstr ""
 
 #: includes/integrations/class-lifterlms.php:444
-#, fuzzy
 msgid "Affiliate Discount"
 msgstr "¿Descuento de Afiliado?"
 
@@ -4785,14 +4453,12 @@ msgstr ""
 
 #: includes/integrations/class-lifterlms.php:664
 #: includes/integrations/class-lifterlms.php:690
-#, fuzzy
 msgid "Referral Details"
 msgstr "Configuración de Referencia"
 
 #: includes/integrations/class-lifterlms.php:744
 #: includes/integrations/class-pmp.php:362
 #: includes/integrations/class-rcp.php:386
-#, fuzzy
 msgid "Disable Referrals"
 msgstr "Total de referencias pendientes"
 
@@ -4803,7 +4469,6 @@ msgid ""
 msgstr ""
 
 #: includes/integrations/class-lifterlms.php:753
-#, fuzzy
 msgid "Enable %s Referral Rate"
 msgstr "Tasa de Referencia"
 
@@ -4812,43 +4477,35 @@ msgid "Check this box to enable %s referral rate overrides"
 msgstr ""
 
 #: includes/integrations/class-lifterlms.php:762
-#, fuzzy
 msgid "%s Referral Rate"
 msgstr "Tasa de Referencia"
 
 #: includes/integrations/class-lifterlms.php:763
-#, fuzzy
 msgid "Enter a referral rate for this %s"
 msgstr "Tipo de tasa de referencia del afiliado."
 
 #: includes/integrations/class-lifterlms.php:870
-#, fuzzy
 msgid "Referral #%d rejected"
 msgstr "Referencia #%d para %s guardado para %s"
 
 #: includes/integrations/class-memberpress.php:186
-#, fuzzy
 msgid "Disable referrals on this membership"
 msgstr "Total de referencias pendientes"
 
 #: includes/integrations/class-ninja-forms.php:197
-#, fuzzy
 msgid "Enable affiliate referral creation for this form?"
 msgstr "Tipo de tasa de referencia del afiliado."
 
 #: includes/integrations/class-paypal.php:90
-#, fuzzy
 msgid "Pending PayPal referral"
 msgstr "Total de referencias pendientes"
 
 #: includes/integrations/class-pmp.php:348
 #: includes/integrations/class-zippycourses.php:55
-#, fuzzy
 msgid "Affiliate Settings"
 msgstr "Ir a los ajustes de AffiliateWP"
 
 #: includes/integrations/class-pmp.php:357
-#, fuzzy
 msgid ""
 "The membership-level referral rate, such as 20 for 20%%. Affiliate-level "
 "referral rates will override this value. If left blank, the site default "
@@ -4862,7 +4519,6 @@ msgid "Check to disable per-membership referrals."
 msgstr ""
 
 #: includes/integrations/class-pms.php:51
-#, fuzzy
 msgid ""
 "This rate will be used to calculate affiliate earnings when members register "
 "their account with this subscription. Leave blank to use the site default "
@@ -4874,7 +4530,6 @@ msgstr ""
 
 #: includes/integrations/class-rcp.php:349
 #: includes/integrations/class-rcp.php:380
-#, fuzzy
 msgid ""
 "This rate will be used to calculate affiliate earnings when members "
 "subscribe to this level. Leave blank to use the site default referral rate."
@@ -4884,7 +4539,6 @@ msgstr ""
 "predeterminados. "
 
 #: includes/integrations/class-rcp.php:391
-#, fuzzy
 msgid "Disable referrals on this subscription level."
 msgstr "Total de referencias pendientes"
 
@@ -4894,7 +4548,6 @@ msgid "(Variation ID %d)"
 msgstr ""
 
 #: includes/integrations/class-woocommerce.php:494
-#, fuzzy
 msgid "Configure affiliate rates for this product"
 msgstr "Tipo de tasa de referencia del afiliado."
 
@@ -4909,7 +4562,6 @@ msgstr ""
 "predeterminados. "
 
 #: includes/integrations/class-woocommerce.php:504
-#, fuzzy
 msgid "Disable referrals"
 msgstr "Total de referencias pendientes"
 
@@ -4924,12 +4576,10 @@ msgid "Configure affiliate rates for this product variation"
 msgstr ""
 
 #: includes/integrations/class-woocommerce.php:534
-#, fuzzy
 msgid "Referral rate (optional)"
 msgstr "Configuración de Referencia"
 
 #: includes/integrations/class-woocommerce.php:536
-#, fuzzy
 msgid "Disable referrals for this product variation"
 msgstr "Total de referencias pendientes"
 
@@ -4942,12 +4592,10 @@ msgid "Manage per-product affiliate rates."
 msgstr ""
 
 #: includes/integrations/extras/class-ninja-forms-action-add-referral.php:47
-#, fuzzy
 msgid "Total Field"
 msgstr "Visitas totales"
 
 #: includes/integrations/extras/class-ninja-forms-action-add-referral.php:63
-#, fuzzy
 msgid "Customer Email"
 msgstr "Email"
 
@@ -4956,7 +4604,6 @@ msgid "Redirecting to Paypal..."
 msgstr ""
 
 #: includes/misc-functions.php:26
-#, fuzzy
 msgid "US Dollars"
 msgstr "Dólares Americanos (&#36;)"
 
@@ -4965,12 +4612,10 @@ msgid "Euros"
 msgstr ""
 
 #: includes/misc-functions.php:28
-#, fuzzy
 msgid "Argentine Peso"
 msgstr "Peso Mexicano (&#36;)"
 
 #: includes/misc-functions.php:29
-#, fuzzy
 msgid "Australian Dollars"
 msgstr "Dólares Australianos (&#36;)"
 
@@ -4979,7 +4624,6 @@ msgid "Bangladeshi Taka"
 msgstr ""
 
 #: includes/misc-functions.php:31
-#, fuzzy
 msgid "Brazilian Real"
 msgstr "Real Brasileño (R&#36;)"
 
@@ -4988,12 +4632,10 @@ msgid "Bulgarian Lev"
 msgstr ""
 
 #: includes/misc-functions.php:33
-#, fuzzy
 msgid "Canadian Dollars"
 msgstr "Dólares Canadienses (&#36;)"
 
 #: includes/misc-functions.php:34
-#, fuzzy
 msgid "Chilean Peso"
 msgstr "Pesos Filipinos"
 
@@ -5026,7 +4668,6 @@ msgid "Egyptian Pound"
 msgstr ""
 
 #: includes/misc-functions.php:42
-#, fuzzy
 msgid "Hong Kong Dollar"
 msgstr "Dólar de Hong Kong (&#36;)"
 
@@ -5035,7 +4676,6 @@ msgid "Hungarian Forint"
 msgstr "Florín Húngaro "
 
 #: includes/misc-functions.php:44
-#, fuzzy
 msgid "Icelandic Krona"
 msgstr "Corona Sueca"
 
@@ -5044,22 +4684,18 @@ msgid "Indonesia Rupiah"
 msgstr ""
 
 #: includes/misc-functions.php:46
-#, fuzzy
 msgid "Indian Rupee"
 msgstr "Rupia India (&#8377;)"
 
 #: includes/misc-functions.php:47
-#, fuzzy
 msgid "Israeli Shekel"
 msgstr "Shekel Israelí (&#8362;)"
 
 #: includes/misc-functions.php:48
-#, fuzzy
 msgid "Iranian Rial"
 msgstr "Real Brasileño (R&#36;)"
 
 #: includes/misc-functions.php:49
-#, fuzzy
 msgid "Japanese Yen"
 msgstr "Yen Japonés (&yen;)"
 
@@ -5076,7 +4712,6 @@ msgid "Malaysian Ringgits"
 msgstr "Ringgits de Malasia"
 
 #: includes/misc-functions.php:53
-#, fuzzy
 msgid "Mexican Peso"
 msgstr "Peso Mexicano (&#36;)"
 
@@ -5093,12 +4728,10 @@ msgid "Norwegian Krone"
 msgstr "Corona Noruega"
 
 #: includes/misc-functions.php:57
-#, fuzzy
 msgid "New Zealand Dollar"
 msgstr "Dólar Neozelandés (&#36;)"
 
 #: includes/misc-functions.php:58
-#, fuzzy
 msgid "Pakistani Rupee"
 msgstr "Rupia India (&#8377;)"
 
@@ -5115,7 +4748,6 @@ msgid "Polish Zloty"
 msgstr "Zloty Polaco"
 
 #: includes/misc-functions.php:62
-#, fuzzy
 msgid "Pounds Sterling"
 msgstr "Libras Esterlinas (&pound;)"
 
@@ -5124,7 +4756,6 @@ msgid "Romanian Leu"
 msgstr ""
 
 #: includes/misc-functions.php:64
-#, fuzzy
 msgid "Russian Ruble"
 msgstr "Rublos Rusos"
 
@@ -5133,7 +4764,6 @@ msgid "Saudi Arabian Riyal"
 msgstr ""
 
 #: includes/misc-functions.php:66
-#, fuzzy
 msgid "Singapore Dollar"
 msgstr "Dólar de Singapur (&#36;)"
 
@@ -5158,7 +4788,6 @@ msgid "Taiwan New Dollars"
 msgstr "Nuevos Dólares Taiwaneses "
 
 #: includes/misc-functions.php:72
-#, fuzzy
 msgid "Thai Baht"
 msgstr "Baht Tailandés (&#3647;)"
 
@@ -5167,7 +4796,6 @@ msgid "Tunisian Dinar"
 msgstr ""
 
 #: includes/misc-functions.php:74
-#, fuzzy
 msgid "Turkish Lira"
 msgstr "Lira Turca (&#8378;)"
 
@@ -5184,7 +4812,6 @@ msgid "Vietnamese Dong"
 msgstr ""
 
 #: includes/scripts.php:139
-#, fuzzy
 msgid "Please enter a valid URL for this site"
 msgstr "Por favor ingresá una URL de sitio web"
 
@@ -5201,7 +4828,6 @@ msgid "Referral Graphs"
 msgstr "Gráficos de referencia"
 
 #: templates/dashboard-tab-payouts.php:3
-#, fuzzy
 msgid "Referral Payouts"
 msgstr "Tasa de Referencia"
 
@@ -5210,7 +4836,6 @@ msgid "None of your referrals have been paid out yet."
 msgstr ""
 
 #: templates/dashboard-tab-referrals.php:70
-#, fuzzy
 msgid "You have not made any referrals yet."
 msgstr "Todavia no recibiste visitas."
 
@@ -5255,12 +4880,10 @@ msgid "Referral URL Generator"
 msgstr "Generador de URL de Referencias"
 
 #: templates/dashboard-tab-urls.php:17
-#, fuzzy
 msgid "Your affiliate ID is: <strong>%s</strong>"
 msgstr "Tu ID de afiliado es: <strong>%d</strong>"
 
 #: templates/dashboard-tab-urls.php:19
-#, fuzzy
 msgid "Your affiliate username is: <strong>%s</strong>"
 msgstr "Tu ID de afiliado es: <strong>%d</strong>"
 
@@ -5340,7 +4963,6 @@ msgid "Log out"
 msgstr ""
 
 #: templates/login.php:15
-#, fuzzy
 msgid "Log into your account"
 msgstr "Ingresá en tu Cuenta"
 
@@ -5357,7 +4979,6 @@ msgid "Log In"
 msgstr ""
 
 #: templates/login.php:48
-#, fuzzy
 msgid "Lost your password?"
 msgstr "¿Perdiste la Contraseña?"
 
@@ -5372,7 +4993,6 @@ msgid "The affiliate area is available only for registered affiliates."
 msgstr "El área de afiliados está disponible solo para afiliados registrados."
 
 #: templates/register.php:54
-#, fuzzy
 msgid "Register a new affiliate account"
 msgstr "Registrar una Nueva Cuenta de Afiliado"
 
@@ -5393,7 +5013,6 @@ msgid "Affiliate Plugin for WordPress"
 msgstr ""
 
 #: includes/admin/affiliates/affiliates.php:58
-#, fuzzy
 msgctxt "affiliates"
 msgid "Reports"
 msgstr "Reportes"
@@ -5422,148 +5041,124 @@ msgstr "ID de Material de Promoción #%d: %s"
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:66
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:69
 #: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:67
-#, fuzzy
 msgctxt "Affiliate column table header"
 msgid "Affiliate"
 msgstr "Afiliado"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-most-valuable.php:75
-#, fuzzy
 msgctxt "Earnings column table header"
 msgid "Earnings"
 msgstr "Ganancias"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-most-valuable.php:76
-#, fuzzy
 msgctxt "Referrals column table header"
 msgid "Referrals"
 msgstr "Referencias"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-most-valuable.php:77
-#, fuzzy
 msgctxt "Visits column table header"
 msgid "Visits"
 msgstr "Visitas"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:67
-#, fuzzy
 msgctxt "URL column table header"
 msgid "URL"
 msgstr "URL"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:68
-#, fuzzy
 msgctxt "Converted column table header"
 msgid "Converted"
 msgstr "Convertido"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:70
-#, fuzzy
 msgctxt "Amount column table header"
 msgid "Amount"
 msgstr "Cantidad "
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:71
-#, fuzzy
 msgctxt "Description column table header"
 msgid "Description"
 msgstr "Descripción "
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:68
-#, fuzzy
 msgctxt "Status column table header"
 msgid "Status"
 msgstr "Estado"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:69
-#, fuzzy
 msgctxt "Actions column table header"
 msgid "Actions"
 msgstr "Acciones"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:54
-#, fuzzy
 msgctxt "Paid earnings column table header"
 msgid "Paid earnings"
 msgstr "Ganancias Pagas"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:55
-#, fuzzy
 msgctxt "Paid earnings this month column table header"
 msgid "Paid earnings this month"
 msgstr "Ganancias Pagadas Este Mes"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:56
-#, fuzzy
 msgctxt "Paid earnings today column table header"
 msgid "Paid earnings today"
 msgstr "Ganancias Pagadas Hoy"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:80
-#, fuzzy
 msgctxt "Unpaid referrals column table header"
 msgid "Unpaid referrals"
 msgstr "Referencias No Pagas"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:81
-#, fuzzy
 msgctxt "Unpaid referrals this month column table header"
 msgid "Unpaid referrals this month"
 msgstr "Referencias No Pagadas Este Mes"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:82
-#, fuzzy
 msgctxt "Unpaid referrals today column table header"
 msgid "Unpaid referrals today"
 msgstr "Referencias No Pagadas Hoy"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:105
-#, fuzzy
 msgctxt "Unpaid earnings column table header"
 msgid "Unpaid earnings"
 msgstr "Ganancias No Pagas"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:106
-#, fuzzy
 msgctxt "Unpaid earnings this month"
 msgid "Unpaid earnings this month"
 msgstr "Ganancias No Pagadas Este Mes"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:107
-#, fuzzy
 msgctxt "Unpaid earnings today column table header"
 msgid "Unpaid earnings today"
 msgstr "Ganancias No Pagadas Hoy"
 
 #: includes/admin/payouts/class-list-table.php:129
-#, fuzzy
 msgctxt "payouts"
 msgid "All"
 msgstr "Todos"
 
 #: includes/admin/payouts/class-list-table.php:149
 #: includes/admin/tools/export/class-batch-export-payouts.php:147
-#, fuzzy
 msgctxt "payout"
 msgid "Amount"
 msgstr "Cantidad "
 
 #: includes/admin/payouts/class-list-table.php:154
 #: includes/admin/tools/export/class-batch-export-payouts.php:150
-#, fuzzy
 msgctxt "payout"
 msgid "Status"
 msgstr "Estado"
 
 #: includes/admin/payouts/class-list-table.php:155
 #: includes/admin/tools/export/class-batch-export-payouts.php:151
-#, fuzzy
 msgctxt "payout"
 msgid "Date"
 msgstr "Fecha"
 
 #: includes/payout-functions.php:133 includes/payout-functions.php:137
-#, fuzzy
 msgctxt "payout"
 msgid "Paid"
 msgstr "Pago"
@@ -5576,7 +5171,6 @@ msgstr ""
 
 #: includes/admin/payouts/class-list-table.php:335
 #: includes/admin/payouts/view.php:86
-#, fuzzy
 msgctxt "payout owner ID"
 msgid "(User ID: %d)"
 msgstr "ID de Usuario"
@@ -5593,7 +5187,6 @@ msgid "None"
 msgstr ""
 
 #: includes/admin/referrals/referrals.php:39
-#, fuzzy
 msgctxt "referrals"
 msgid "Reports"
 msgstr "Reportes"
@@ -5604,19 +5197,16 @@ msgid "None"
 msgstr ""
 
 #: includes/admin/visits/visits.php:42
-#, fuzzy
 msgctxt "visits"
 msgid "Reports"
 msgstr "Reportes"
 
 #: includes/class-graph.php:419
-#, fuzzy
 msgctxt "date filter"
 msgid "From"
 msgstr "De"
 
 #: includes/class-graph.php:421
-#, fuzzy
 msgctxt "date filter"
 msgid "To"
 msgstr "Hasta"
@@ -5627,7 +5217,6 @@ msgid "Valid"
 msgstr ""
 
 #: includes/cli/class-command.php:38
-#, fuzzy
 msgctxt "license status"
 msgid "Invalid"
 msgstr "Email inválido "
@@ -5678,7 +5267,6 @@ msgid "Disabled"
 msgstr ""
 
 #: includes/cli/class-visit-sub-commands.php:437
-#, fuzzy
 msgctxt "direct traffic"
 msgid "Direct"
 msgstr "Tráfico directo"
