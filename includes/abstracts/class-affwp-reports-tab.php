@@ -84,12 +84,23 @@ abstract class Tab {
 	public $affiliate_id = 0;
 
 	/**
+	 * Registry instance.
+	 *
+	 * @access public
+	 * @since  2.1
+	 * @var    \AffWP\Admin\Reports\Registry
+	 */
+	public $registry;
+
+	/**
 	 * Sets up Reports tabs.
 	 *
 	 * @access private
 	 * @since  1.9
 	 */
 	public function __construct() {
+		$this->registry = new Registry;
+
 		// Deliberately hooked with an anonymous function. Use the 'affwp_reports_tabs' hook to remove tabs.
 		$inst = $this;
 		add_filter( 'affwp_reports_tabs', function( $tabs ) use ( $inst ) {
@@ -277,7 +288,7 @@ abstract class Tab {
 			'display_callback'  => array( $this, 'default_tile' )
 		) );
 
-		$this->tiles[ $tile_id ] = $args;
+		$this->registry->add_tile( $this->tab_id, $tile_id, $args );
 	}
 
 	/**
@@ -289,7 +300,7 @@ abstract class Tab {
 	 * @param string $tile_id ID for the tile to unregister.
 	 */
 	protected function unregister_tile( $tile_id ) {
-		unset( $this->tiles[ $tile_id ] );
+		$this->registry->remove_tile( $this->tab_id, $tile_id );
 	}
 
 	/**
@@ -324,7 +335,7 @@ abstract class Tab {
 				'context'          => $atts['context'],
 				'action'           => "affwp_reports_{$this->tab_id}_meta_boxes",
 				'display_callback' => $atts['display_callback'],
-				'extra_args'       => $this->tiles[ $tile_id ],
+				'extra_args'       => $atts,
 			);
 
 			new \AffWP\Admin\Meta_Box( $args );
@@ -350,7 +361,7 @@ abstract class Tab {
 		 * @param array                    $tiles Registered tiles.
 		 * @param \AffWP\Admin\Reports\Tab $this  Tab instance.
 		 */
-		 return (array) apply_filters( "affwp_reports_{$this->tab_id}_tiles", $this->tiles, $this );
+		 return (array) apply_filters( "affwp_reports_{$this->tab_id}_tiles", $this->registry->get_tiles( $this->tab_id ), $this );
 	}
 
 	/**
