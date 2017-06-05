@@ -297,7 +297,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 			'referrals'       => 0,
 			'integration'     => '',
 			'owner'           => '',
-			'status'          => 'paid',
+			'status'          => '',
 			'expiration_date' => '',
 			'order'           => 'DESC',
 			'orderby'         => 'coupon_id',
@@ -331,7 +331,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 			unset( $affwp_coupon_ids );
 		}
 
-		// Affiliate(s).
+		// Affiliate.
 		if ( ! empty( $args['affiliate_id'] ) ) {
 
 			$where .= empty( $where ) ? "WHERE " : "AND ";
@@ -620,8 +620,8 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
 		$sql = "CREATE TABLE " . $this->table_name . " (
-			coupon_id bigint(20) NOT NULL AUTO_INCREMENT,
 			affwp_coupon_id bigint(20) NOT NULL AUTO_INCREMENT,
+			coupon_id bigint(20) NOT NULL,
 			affiliate_id bigint(20) NOT NULL,
 			referrals mediumtext NOT NULL,
 			integration mediumtext NOT NULL,
@@ -629,7 +629,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 			status tinytext NOT NULL,
 			expiration_date datetime NOT NULL,
 			PRIMARY KEY  (affwp_coupon_id),
-			KEY affiliate_id (affiliate_id)
+			KEY affwp_coupon_id (affwp_coupon_id)
 			) CHARACTER SET utf8 COLLATE utf8_general_ci;";
 
 		dbDelta( $sql );
