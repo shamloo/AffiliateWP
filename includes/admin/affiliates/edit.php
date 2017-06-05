@@ -237,52 +237,50 @@ $coupons          = affwp_get_affiliate_coupons( $affiliate->affiliate_id );
 			<tr class="form-row">
 
 				<th scope="row">
-					<label for="coupons"><?php _e( 'Existing Coupons', 'affiliate-wp' ); ?></label>
+					<label for="coupons"><?php _e( 'Coupons', 'affiliate-wp' ); ?></label>
 				</th>
 
 				<td>
 					<ul id="coupons">
 						<?php
 
-							if ( affwp_get_affiliate_coupons( $affiliate_id ) ) {
-								error_log('has affiliate coupons');
-								$coupons = affwp_get_affiliate_coupons( $affiliate_id );
+							$output = '';
 
-								$list = array();
+							if ( affwp_get_affiliate_coupons( $affiliate_id ) ) {
+
+								$coupons = affwp_get_affiliate_coupons( $affiliate_id );
 
 								foreach ( $coupons as $coupon ) {
 
 									// Ensure that this coupon is associated with the affiliate.
 									if ( $affiliate_id === $coupon[ 'affiliate_id' ] ) {
 
-										$list[] = '<li>' . $coupon[ 'integration' ] . ': <a href="">' . affwp_get_coupon_edit_url( $coupon[ 'coupon_id' ], $coupon[ 'integration' ] ) . '</li>';
+										$output .= '<li>' . $coupon[ 'integration' ] . ': <a href="">' . affwp_get_coupon_edit_url( $coupon[ 'coupon_id' ], $coupon[ 'integration' ] ) . '</li>';
+									} elseif ( affwp_has_coupon_support( $coupon[ 'integration' ] ) ) {
+											$output .= '<li>None. <a class="affwp-inline-link" href="' . $thing . '">Create coupon</a>';
 									} else {
-											if ( affwp_has_coupon_support( $coupon[ 'integration' ] ) ) {
-
-												$list[] = '<li>None. <a class="affwp-inline-link" href="' . $thing . '">Create coupon</a>';
-										}
+										$output .= __( 'No currently-active integrations support coupons at this time.', 'affiliate-wp' );
 									}
 
 								}
-
 
 							}
 
 							$integrations = affiliate_wp()->integrations->get_enabled_integrations();
 
-							foreach ( $integrations as $integration ) {
+							foreach ( $integrations as $integration_id => $integration_term ) {
 
-								if ( affwp_has_coupon_support( $integration ) ) {
+								if ( affwp_has_coupon_support( $integration_id ) ) {
 
-									$list[] = '<li>' . affwp_get_coupon_create_url( $integration ) . '</li>';
+									$output .= '<li>' . $integration_term . ': ' . affwp_get_coupon_create_url( $integration_id, $affiliate_id, true ) . '</li>';
 								}
 							}
 
-							echo $list;
+							echo $output;
 						?>
 					</ul>
 					<p class="description">
-						<?php echo __( 'The current coupons for this affiliate. Coupons can be created for those.', 'affiliate-wp' ); ?>
+						<?php echo __( 'The current coupons for this affiliate. Coupons may be created for those integrations without existing coupons for this affiliate.', 'affiliate-wp' ); ?>
 					</p>
 				</td>
 			</tr>
