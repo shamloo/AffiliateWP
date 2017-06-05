@@ -90,6 +90,8 @@ class Registry extends Utils\Registry {
 					$items[ $parts[1] ] = $attributes;
 				}
 			}
+		} else {
+			$items = $all_items;
 		}
 
 		return $items;
