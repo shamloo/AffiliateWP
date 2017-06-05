@@ -71,7 +71,11 @@ class Tests extends UnitTestCase {
 	 * Runs during test teardown.
 	 */
 	public function tearDown() {
-		affiliate_wp()->settings->set( array( 'referral_url_blacklist' => '' ) );
+		affiliate_wp()->settings->set( array(
+			'referral_url_blacklist' => '',
+			'thousands_separator'    => ',',
+			'decimal_separator'      => '.',
+		) );
 
 		parent::tearDown();
 	}
@@ -117,6 +121,9 @@ class Tests extends UnitTestCase {
 		) );
 
 		$this->assertFalse( is_serialized( $referral->custom ) );
+
+		// Clean up.
+		affwp_delete_referral( $referral );
 	}
 
 	/**
@@ -129,6 +136,9 @@ class Tests extends UnitTestCase {
 		) );
 
 		$this->assertFalse( is_serialized( $referral->custom ) );
+
+		// Clean up.
+		affwp_delete_referral( $referral );
 	}
 
 	/**
@@ -639,5 +649,74 @@ class Tests extends UnitTestCase {
 		affiliate_wp()->settings->set( array( 'referral_url_blacklist' => WP_TESTS_DOMAIN ) );
 
 		$this->assertTrue( affwp_is_url_banned( WP_TESTS_DOMAIN ) );
+	}
+
+	/**
+	 * @covers ::affwp_calc_referral_amount()
+	 */
+	public function test_calc_referral_amount_should_normalize_a_percentage_rate_using_default_period_decimal_separator() {
+		$result = affwp_calc_referral_amount( 10, self::$_affiliate_id, 0, '0.50' );
+
+		$this->assertSame( '0.05', $result );
+	}
+
+	/**
+	 * @covers ::affwp_calc_referral_amount()
+	 */
+	public function test_calc_referral_amount_should_normalize_a_percentage_rate_using_comma_decimal_separator() {
+		$affiliate_id = $this->factory->affiliate->create();
+
+		affiliate_wp()->settings->set( array(
+			'thousands_separator' => '.',
+			'decimal_separator'   => ',',
+		) );
+
+		$result = affwp_calc_referral_amount( 10, $affiliate_id, 0, '0,50' );
+
+		$this->assertSame( '0.05', $result );
+
+		// Clean up.
+		affwp_delete_affiliate( $affiliate_id );
+	}
+
+	/**
+	 * @covers ::affwp_calc_referral_amount()
+	 */
+	public function test_calc_referral_amount_should_normalize_a_flat_rate_using_default_period_decimal_separator() {
+		$affiliate_id = $this->factory->affiliate->create( array(
+			'rate_type' => 'flat',
+		) );
+
+		$result = affwp_calc_referral_amount( 10, $affiliate_id, 0, '0.50' );
+
+		$this->assertSame( '0.50', $result );
+
+		// Clean up.
+		affwp_delete_affiliate( $affiliate_id );
+	}
+
+	/**
+	 * @covers ::affwp_calc_referral_amount()
+	 */
+	public function test_calc_referral_amount_should_normalize_a_flat_rate_using_comma_decimal_separator() {
+		affiliate_wp()->settings->set( array(
+			'thousands_separator' => '.',
+			'decimal_separator'   => ',',
+		) );
+
+		affwp_update_affiliate( array(
+			'affiliate_id' => self::$_affiliate_id,
+			'rate_type'    => 'flat',
+		) );
+
+		$result = affwp_calc_referral_amount( 10, self::$_affiliate_id, 0, '0,50' );
+
+		$this->assertSame( '0.50', $result );
+
+		// Clean up.
+		affwp_update_affiliate( array(
+			'affiliate_id' => self::$_affiliate_id,
+			'rate_type'    => 'percentage',
+		) );
 	}
 }

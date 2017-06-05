@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: AffiliateWP\n"
 "Report-Msgid-Bugs-To: https://affiliatewp.com/support/\n"
 "POT-Creation-Date: 2017-02-17 03:04:25+00:00\n"
-"PO-Revision-Date: 2015-04-11 22:44+0200\n"
+"PO-Revision-Date: 2017-06-01 00:45-0600\n"
 "Last-Translator: Chris Christoff <chriscct7@gmail.com>\n"
 "Language-Team: AffiliateWP <support@affiliatewp.com>\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 2.0.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
@@ -62,13 +62,11 @@ msgid "Error"
 msgstr "Hata"
 
 #: includes/REST/class-rest.php:68
-#, fuzzy
 msgid "User ID Required"
 msgstr "Kullanıcı Numarası"
 
 #. translators: 1: Generate, regenerate, or revoke
 #: includes/REST/class-rest.php:81 includes/REST/class-rest.php:84
-#, fuzzy
 msgid "You do not have permission to %s API keys for this user."
 msgstr "Verileri dışa aktarmak için izniniz yok"
 
@@ -77,7 +75,6 @@ msgid "Whether to include a modified user object in the response."
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:67
-#, fuzzy
 msgid "Whether to include the affiliate meta in the response."
 msgstr "Sitede satış ortağına ait kullanıcı adı"
 
@@ -108,7 +105,6 @@ msgid "Affiliates table column to order by."
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:263
-#, fuzzy
 msgid "The date array or string to query affiliate registrations within."
 msgstr "Yeni satış ortaklığı kayıtlarında yönetim bilgilendirilsin mi ?"
 
@@ -117,7 +113,6 @@ msgid "Use any get_affiliates() arguments to modify the response."
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:297
-#, fuzzy
 msgid "The unique affiliate ID."
 msgstr "Satış Ortağı Numarası"
 
@@ -126,7 +121,6 @@ msgid "ID for the user account associated with the affiliate."
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:305
-#, fuzzy
 msgid "The affiliate rate."
 msgstr "Satış ortaklığı oranı"
 
@@ -135,12 +129,10 @@ msgid "The affiliate rate, as it exists in the database"
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:313
-#, fuzzy
 msgid "The affiliate rate, as inherited from global settings."
 msgstr "Satış ortağının referans oranı tipi"
 
 #: includes/REST/v1/class-affiliates-endpoints.php:319
-#, fuzzy
 msgid "The affiliate rate type"
 msgstr "Satış ortağının referans oranı tipi"
 
@@ -149,18 +141,15 @@ msgid "The affiliate rate type, as it exists in the database"
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:327
-#, fuzzy
 msgid "The affiliate rate type, as inherited from global settings."
 msgstr "Satış ortağının referans oranı tipi"
 
 #: includes/REST/v1/class-affiliates-endpoints.php:333
-#, fuzzy
 msgid "The affiliate account email. Synced with the associated user account."
 msgstr ""
 "Satış ortağının bağlı olduğu kullanıcı hesabını incelemek için ismini giriniz"
 
 #: includes/REST/v1/class-affiliates-endpoints.php:338
-#, fuzzy
 msgid "The affiliate payment email address."
 msgstr "Satış ortaklığı hesabınız aktif değil"
 
@@ -175,17 +164,14 @@ msgid ""
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:352
-#, fuzzy
 msgid "The affiliate status."
 msgstr "Satış Ortaklığı Oranları : "
 
 #: includes/REST/v1/class-affiliates-endpoints.php:356
-#, fuzzy
 msgid "Unpaid affiliate earnings."
 msgstr "AffiliateWP Ayarlarına Git"
 
 #: includes/REST/v1/class-affiliates-endpoints.php:360
-#, fuzzy
 msgid "Affiliate earnings."
 msgstr "AffiliateWP Ayarlarına Git"
 
@@ -194,12 +180,10 @@ msgid "The number of paid referrals associated with the affiliate."
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:368
-#, fuzzy
 msgid "The number of visits associated with the affiliate."
 msgstr "Satış ortağının websitesi"
 
 #: includes/REST/v1/class-affiliates-endpoints.php:372
-#, fuzzy
 msgid "The date the affiliate was registered."
 msgstr "Satış ortağı isteği reddedildi"
 
@@ -220,17 +204,14 @@ msgid "Use any get_creatives() arguments to modify the response."
 msgstr ""
 
 #: includes/REST/v1/class-creatives-endpoints.php:215
-#, fuzzy
 msgid "The unique creative ID."
 msgstr "Bu reklam için yazı"
 
 #: includes/REST/v1/class-creatives-endpoints.php:219
-#, fuzzy
 msgid "Name of the creative."
 msgstr "Bu reklam için yazı"
 
 #: includes/REST/v1/class-creatives-endpoints.php:223
-#, fuzzy
 msgid "Description for the creative."
 msgstr "Bu reklam için yazı"
 
@@ -239,7 +220,6 @@ msgid "URL the creative points to."
 msgstr ""
 
 #: includes/REST/v1/class-creatives-endpoints.php:231
-#, fuzzy
 msgid "Text for the creative."
 msgstr "Bu reklam için yazı"
 
@@ -248,12 +228,10 @@ msgid "ID of the media library image associated with the creative"
 msgstr ""
 
 #: includes/REST/v1/class-creatives-endpoints.php:239
-#, fuzzy
 msgid "The creative status."
 msgstr "Yeni Referans E-Posta Konusu"
 
 #: includes/REST/v1/class-creatives-endpoints.php:243
-#, fuzzy
 msgid "The date the creative was created."
 msgstr "Reklam başarı ile eklendi"
 
@@ -304,7 +282,6 @@ msgid "The unique payout ID."
 msgstr ""
 
 #: includes/REST/v1/class-payouts-endpoints.php:274
-#, fuzzy
 msgid "The affiliate ID associated with the payout."
 msgstr "Bu reklamı silmek için emin misiniz ?"
 
@@ -317,7 +294,6 @@ msgid "The number of referrals associated with the affiliate."
 msgstr ""
 
 #: includes/REST/v1/class-payouts-endpoints.php:289
-#, fuzzy
 msgid "Total referrals amount for the payout."
 msgstr "Bu ürün için referansları devre dışı bırak"
 
@@ -371,42 +347,34 @@ msgid "Use any get_referrals() arguments to modify the response."
 msgstr ""
 
 #: includes/REST/v1/class-referrals-endpoints.php:270
-#, fuzzy
 msgid "The unique referral ID."
 msgstr "Verilen referansın miktarı"
 
 #: includes/REST/v1/class-referrals-endpoints.php:274
-#, fuzzy
 msgid "ID for the affiliate account associated with the referral."
 msgstr "Satış ortaklığı için hesap talebiniz reddedildi"
 
 #: includes/REST/v1/class-referrals-endpoints.php:278
-#, fuzzy
 msgid "ID for the visit associated with the referral."
 msgstr "Referansın durumunu seçiniz"
 
 #: includes/REST/v1/class-referrals-endpoints.php:282
-#, fuzzy
 msgid "Referral description."
 msgstr "Referans açıklaması"
 
 #: includes/REST/v1/class-referrals-endpoints.php:286
-#, fuzzy
 msgid "The referral status."
 msgstr "Referans durumları"
 
 #: includes/REST/v1/class-referrals-endpoints.php:290
-#, fuzzy
 msgid "Referral amount."
 msgstr "Referans Oranı"
 
 #: includes/REST/v1/class-referrals-endpoints.php:294
-#, fuzzy
 msgid "Currency for the referral amount."
 msgstr "Referans Oranı"
 
 #: includes/REST/v1/class-referrals-endpoints.php:298
-#, fuzzy
 msgid "Custom referral data."
 msgstr "Referans bulunamadı"
 
@@ -428,7 +396,6 @@ msgid "Products associated with the referral."
 msgstr ""
 
 #: includes/REST/v1/class-referrals-endpoints.php:318
-#, fuzzy
 msgid "The date the referral was generated."
 msgstr "Referans sayısı , örneğin 15"
 
@@ -474,7 +441,6 @@ msgid "The referral status or array of statuses to retrieve visits for."
 msgstr ""
 
 #: includes/REST/v1/class-visits-endpoints.php:207
-#, fuzzy
 msgid "The context under which the visit was created."
 msgstr "Ayarlar başarı ile girildi"
 
@@ -491,7 +457,6 @@ msgid "The unique visit ID."
 msgstr ""
 
 #: includes/REST/v1/class-visits-endpoints.php:263
-#, fuzzy
 msgid "ID for the affiliate account associated with the visit."
 msgstr "Satış ortaklığı hesabınız aktif değil"
 
@@ -500,12 +465,10 @@ msgid "ID for the referral associated with the visit."
 msgstr ""
 
 #: includes/REST/v1/class-visits-endpoints.php:271
-#, fuzzy
 msgid "The visit URL."
 msgstr "Website Linkiniz"
 
 #: includes/REST/v1/class-visits-endpoints.php:275
-#, fuzzy
 msgid "Visit referrer."
 msgstr "Referansı Düzenle"
 
@@ -514,7 +477,6 @@ msgid "Campaign associated with the visit."
 msgstr ""
 
 #: includes/REST/v1/class-visits-endpoints.php:283
-#, fuzzy
 msgid "Context under which the visit was generated."
 msgstr "Ayarlar başarı ile girildi"
 
@@ -523,12 +485,10 @@ msgid "Visitor IP address."
 msgstr ""
 
 #: includes/REST/v1/class-visits-endpoints.php:291
-#, fuzzy
 msgid "The date the visit was generated."
 msgstr "Ayarlar başarı ile girildi"
 
 #: includes/abstracts/class-affwp-reports-tab.php:115
-#, fuzzy
 msgid "Date Filters"
 msgstr "Filitrele"
 
@@ -600,7 +560,6 @@ msgid "%1$s to %2$s"
 msgstr ""
 
 #: includes/admin/AFFWP_Plugin_Updater.php:201
-#, fuzzy
 msgid ""
 "There is a new version of %1$s available. %2$sView version %3$s details%4$s."
 msgstr ""
@@ -608,7 +567,6 @@ msgstr ""
 "\"%2$s\">%3$s versiyon detaylarını görüntüle</a>."
 
 #: includes/admin/AFFWP_Plugin_Updater.php:209
-#, fuzzy
 msgid ""
 "There is a new version of %1$s available. %2$sView version %3$s details%4$s "
 "or %5$supdate now%6$s."
@@ -623,7 +581,6 @@ msgid "You do not have permission to install plugin updates"
 msgstr "Eklenti güncellemelerini yüklemek için yetkiniz yok"
 
 #: includes/admin/add-ons.php:33
-#, fuzzy
 msgid "Add-ons for AffiliateWP"
 msgstr "Satış Ortağı Ekle"
 
@@ -850,7 +807,6 @@ msgid "Reports"
 msgstr "Raporlar"
 
 #: includes/admin/affiliates/class-list-table.php:288
-#, fuzzy
 msgid "Edit User"
 msgstr "Referansı Düzenle"
 
@@ -902,14 +858,12 @@ msgid "Delete Affiliates"
 msgstr "Satış Ortaklarını Sil"
 
 #: includes/admin/affiliates/delete.php:43
-#, fuzzy
 msgid "You have specified the following affiliate for deletion:"
 msgid_plural "You have specified the following affiliates for deletion:"
 msgstr[0] "Bu satış ortaklarının silinmesini ayarladınız :"
 msgstr[1] "Bu satış ortaklarının silinmesini ayarladınız :"
 
 #: includes/admin/affiliates/delete.php:62
-#, fuzzy
 msgid "Deleting this affiliate will also delete their referral and visit data."
 msgid_plural ""
 "Deleting these affiliates will also delete their referral and visit data."
@@ -933,7 +887,6 @@ msgid "Edit Affiliate"
 msgstr "Satış Ortağını Düzenle"
 
 #: includes/admin/affiliates/edit.php:34
-#, fuzzy
 msgid "Affiliate Name"
 msgstr "Satış Ortağı Adı"
 
@@ -949,17 +902,14 @@ msgid "A link to the user edit screen for this user."
 msgstr ""
 
 #: includes/admin/affiliates/edit.php:57
-#, fuzzy
 msgid "The affiliate&#8217;s ID. This cannot be changed."
 msgstr "Satış Ortağının Numaraı . Değiştirilemez"
 
 #: includes/admin/affiliates/edit.php:65
-#, fuzzy
 msgid "Affiliate URL"
 msgstr "Satış Ortaklığı Linkleri"
 
 #: includes/admin/affiliates/edit.php:70
-#, fuzzy
 msgid "The affiliate&#8217;s referral URL. This is based on global settings."
 msgstr "Satış ortağının referans oranı tipi"
 
@@ -968,27 +918,22 @@ msgid "User ID"
 msgstr "Kullanıcı Numarası"
 
 #: includes/admin/affiliates/edit.php:83
-#, fuzzy
 msgid "The affiliate&#8217;s user ID. This cannot be changed."
 msgstr "Satış ortağının kullanıcı numarası . Bu değiştirilemez"
 
 #: includes/admin/affiliates/edit.php:96
-#, fuzzy
 msgid "The affiliate&#8217;s username. This cannot be changed."
 msgstr "Satış ortağının kullanıcı numarası . Bu değiştirilemez"
 
 #: includes/admin/affiliates/edit.php:104
-#, fuzzy
 msgid "Registration Date"
 msgstr "Kayıt E-Posta İçeriği"
 
 #: includes/admin/affiliates/edit.php:109
-#, fuzzy
 msgid "The affiliate&#8217;s registration date. This cannot be changed."
 msgstr "Satış ortağının kullanıcı numarası . Bu değiştirilemez"
 
 #: includes/admin/affiliates/edit.php:117 includes/admin/affiliates/new.php:40
-#, fuzzy
 msgid "Affiliate Status"
 msgstr "Satış Ortaklığı Oranları : "
 
@@ -999,7 +944,6 @@ msgid ""
 msgstr ""
 
 #: includes/admin/affiliates/edit.php:139
-#, fuzzy
 msgid "Website"
 msgstr "Website Linkiniz"
 
@@ -1020,7 +964,6 @@ msgid "Site Default"
 msgstr "Site Varsayılanı"
 
 #: includes/admin/affiliates/edit.php:166 includes/admin/affiliates/new.php:67
-#, fuzzy
 msgid "The affiliate&#8217;s referral rate type."
 msgstr "Satış ortağının referans oranı tipi"
 
@@ -1037,7 +980,6 @@ msgid "Referral Rate"
 msgstr "Referans Oranı"
 
 #: includes/admin/affiliates/edit.php:179 includes/admin/affiliates/new.php:80
-#, fuzzy
 msgid ""
 "The affiliate&#8217;s referral rate, such as 20 for 20%. If left blank, the "
 "site default will be used."
@@ -1050,7 +992,6 @@ msgid "Account Email"
 msgstr "Hesap E-Posta"
 
 #: includes/admin/affiliates/edit.php:192
-#, fuzzy
 msgid ""
 "The affiliate&#8217;s account email. Updating this will change the email "
 "address shown on the user&#8217;s profile page."
@@ -1069,7 +1010,6 @@ msgid "Payment Email"
 msgstr "Ödeme İçin E-Posta"
 
 #: includes/admin/affiliates/edit.php:205 includes/admin/affiliates/new.php:93
-#, fuzzy
 msgid ""
 "Affiliate&#8217;s payment email for systems such as PayPal, Moneybookers, or "
 "others. Leave blank to use the affiliate&#8217;s user email."
@@ -1079,17 +1019,14 @@ msgstr ""
 "kullanmak için boş bırakınız"
 
 #: includes/admin/affiliates/edit.php:213
-#, fuzzy
 msgid "Promotion Methods"
 msgstr "Tanıtım Metodu"
 
 #: includes/admin/affiliates/edit.php:218
-#, fuzzy
 msgid "Promotion methods entered by the affiliate during registration."
 msgstr "Satış ortağının kullandığı tanıtım metodu"
 
 #: includes/admin/affiliates/edit.php:226 includes/admin/affiliates/new.php:101
-#, fuzzy
 msgid "Affiliate Notes"
 msgstr "Satış Ortaklığı Oranları : "
 
@@ -1112,7 +1049,6 @@ msgid "New Affiliate"
 msgstr "Yeni Satış Ortağı"
 
 #: includes/admin/affiliates/new.php:18
-#, fuzzy
 msgid ""
 "Use this form to register a new affiliate. Each affiliate is tied directly "
 "to a user account, so if the user account for the affiliate does not yet "
@@ -1134,12 +1070,10 @@ msgstr ""
 "Satış ortağının bağlı olduğu kullanıcı hesabını incelemek için ismini giriniz"
 
 #: includes/admin/affiliates/new.php:49
-#, fuzzy
 msgid "The status assigned to the affiliate&#8217;s account."
 msgstr "Sitede satış ortağına ait kullanıcı adı"
 
 #: includes/admin/affiliates/new.php:114
-#, fuzzy
 msgid "Welcome Email"
 msgstr "Hangi E-Postadan"
 
@@ -1171,7 +1105,6 @@ msgid "Website URL"
 msgstr "Website Linkiniz"
 
 #: includes/admin/affiliates/review.php:70
-#, fuzzy
 msgid "Affiliate&#8217;s Website URL"
 msgstr "Satış Ortağının Websitesi"
 
@@ -1226,12 +1159,10 @@ msgid "Total visits"
 msgstr "Toplam Ziyaretler"
 
 #: includes/admin/affiliates/view.php:30
-#, fuzzy
 msgid "Conversion rate"
 msgstr "Dönüşüm Oranı"
 
 #: includes/admin/affiliates/view.php:86
-#, fuzzy
 msgid "Recent Payouts"
 msgstr "En Son Referanslar"
 
@@ -1333,14 +1264,12 @@ msgid "Settings updated."
 msgstr "Ayarlar güncellendi"
 
 #: includes/admin/class-notices.php:82
-#, fuzzy
 msgid "%d affiliate was added successfully."
 msgid_plural "%d affiliates were added successfully"
 msgstr[0] "Satış ortağı başarı ile güncellendi"
 msgstr[1] "Satış ortağı başarı ile güncellendi"
 
 #: includes/admin/class-notices.php:95
-#, fuzzy
 msgid "Affiliate wasn&#8217;t added, please try again."
 msgstr "Satış ortağı eklenmedi , lütfen tekrar deneyiniz"
 
@@ -1381,14 +1310,12 @@ msgid "Affiliate request was rejected"
 msgstr "Satış ortağı isteği reddedildi"
 
 #: includes/admin/class-notices.php:162
-#, fuzzy
 msgid "%d affiliate from WP Affiliate was added successfully."
 msgid_plural "%d affiliates from WP Affiliate were added successfully"
 msgstr[0] "Satış ortağı başarı ile güncellendi"
 msgstr[1] "Satış ortağı başarı ile güncellendi"
 
 #: includes/admin/class-notices.php:183
-#, fuzzy
 msgid "%d affiliate from Affiliates Pro was added successfully."
 msgid_plural "%d affiliates from Affiliates Pro were added successfully"
 msgstr[0] "Satış ortağı başarı ile güncellendi"
@@ -1419,7 +1346,6 @@ msgid "Referral deletion failed, please try again"
 msgstr "Referans silmede problem oluştu , lütfen tekrar deneyiniz"
 
 #: includes/admin/class-notices.php:234
-#, fuzzy
 msgid "A payout has been created."
 msgstr "Yeni Referans E-Posta Konusu"
 
@@ -1452,7 +1378,6 @@ msgid "Settings successfully imported"
 msgstr "Ayarlar başarı ile girildi"
 
 #: includes/admin/class-notices.php:282
-#, fuzzy
 msgid ""
 "Your license key expired on %s. Please <a href=\"%s\" target=\"_blank"
 "\">renew your license key</a>."
@@ -1601,7 +1526,6 @@ msgid "Description"
 msgstr "Açıklama"
 
 #: includes/admin/creatives/edit.php:41 includes/admin/creatives/new.php:39
-#, fuzzy
 msgid ""
 "An optional description for this creative. This is visible to affiliates and "
 "is displayed below the creative."
@@ -1610,7 +1534,6 @@ msgstr ""
 "altında görüntülenecek"
 
 #: includes/admin/creatives/edit.php:54 includes/admin/creatives/new.php:52
-#, fuzzy
 msgid ""
 "The URL this creative should link to. Based on your Referral Settings, the "
 "affiliate&#8217;s ID or username will be automatically appended."
@@ -1686,7 +1609,6 @@ msgstr "En Son Referans Ziyaretleri"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:81
 #: templates/dashboard-tab-visits.php:49
-#, fuzzy
 msgid "Visit converted: %s"
 msgstr "Dönüşen"
 
@@ -1751,7 +1673,6 @@ msgstr "Satış Ortağı"
 #: includes/admin/payouts/class-list-table.php:152
 #: includes/admin/payouts/view.php:72
 #: includes/admin/tools/export/class-batch-export-payouts.php:148
-#, fuzzy
 msgid "Generated By"
 msgstr "Link Oluştur"
 
@@ -1759,7 +1680,6 @@ msgstr "Link Oluştur"
 #: includes/admin/payouts/view.php:103
 #: includes/admin/tools/export/class-batch-export-payouts.php:149
 #: templates/dashboard-tab-payouts.php:36
-#, fuzzy
 msgid "Payout Method"
 msgstr "Tanıtım Metodu"
 
@@ -1769,7 +1689,6 @@ msgid "(none)"
 msgstr ""
 
 #: includes/admin/payouts/class-list-table.php:422
-#, fuzzy
 msgid "View"
 msgstr "Görüntüle %s"
 
@@ -1779,18 +1698,15 @@ msgid "Retry Payment"
 msgstr ""
 
 #: includes/admin/payouts/class-list-table.php:513
-#, fuzzy
 msgid "No payouts found."
 msgstr "Ziyaret bulunamadı"
 
 #: includes/admin/payouts/payouts.php:39
 #: includes/admin/reports/class-reports-admin.php:58
-#, fuzzy
 msgid "Manage Referrals"
 msgstr "Ödenmemiş Referanslar"
 
 #: includes/admin/payouts/screen-options.php:32
-#, fuzzy
 msgid "Number of payouts per page:"
 msgstr "Henüz referans kaydı yok"
 
@@ -1817,7 +1733,6 @@ msgid "Payout Date"
 msgstr ""
 
 #: includes/admin/payouts/view.php:167
-#, fuzzy
 msgid "Referrals Paid"
 msgstr "Referanslar"
 
@@ -1928,7 +1843,6 @@ msgstr ""
 "<a href=\"%s\">GitHub</a> üzerinden <a href=\"%s\">Bir sorun bildir</a>"
 
 #: includes/admin/referrals/contextual-help.php:39
-#, fuzzy
 msgid "This screen provides access to your site&#8217;s referral history."
 msgstr "Bu ekran sitenin referans geçmişine erişim hakkı verir"
 
@@ -1981,23 +1895,19 @@ msgid "Referrals can be searched in several different ways:"
 msgstr "Referanslar birden fazla yolla aranabilir :"
 
 #: includes/admin/referrals/contextual-help.php:56
-#, fuzzy
 msgid "You can enter the referral&#8217;s ID number"
 msgstr "Referansın numarasını girebilirsin"
 
 #: includes/admin/referrals/contextual-help.php:57
-#, fuzzy
 msgid "You can enter the referral reference prefixed by &#8220;ref:&#8221;"
 msgstr "Referansa ait referansı 'ref:' ön eki ile girebilirsin"
 
 #: includes/admin/referrals/contextual-help.php:58
-#, fuzzy
 msgid "You can enter the referral context prefixed by &#8220;context:&#8221;"
 msgstr "Referansa ait bağlamı 'context:' ön eki ile arayabilirsin"
 
 #: includes/admin/referrals/contextual-help.php:59
 #: includes/admin/visits/contextual-help.php:60
-#, fuzzy
 msgid ""
 "You can enter the affiliate&#8217;s ID number prefixed by &#8220;affiliate:"
 "&#8221;"
@@ -2005,7 +1915,6 @@ msgstr "Satış ortağına ait numarayı  'affiliate:' ön eki ile arayabilirsin
 
 #: includes/admin/referrals/contextual-help.php:60
 #: includes/admin/visits/contextual-help.php:61
-#, fuzzy
 msgid "You can enter a URL campaign prefixed by &#8220;campaign:&#8221;"
 msgstr "Referansa ait bağlamı 'context:' ön eki ile arayabilirsin"
 
@@ -2014,7 +1923,6 @@ msgid "Exporting Referrals"
 msgstr "Referansları Dışa Aktarma"
 
 #: includes/admin/referrals/contextual-help.php:68
-#, fuzzy
 msgid ""
 "Referrals can be exported directly to a CSV file in order to make it easier "
 "for your own accounting needs and for you to payout your affiliates&#8217;s "
@@ -2024,7 +1932,6 @@ msgstr ""
 "aktarılabilir ve satış ortaklarının ödemesini yapabilirsiniz"
 
 #: includes/admin/referrals/contextual-help.php:69
-#, fuzzy
 msgid ""
 "The CSV file generated is structured properly for PayPal&#8217;s Mass "
 "Payment system so you can easily payout all of your affiliates at once via "
@@ -2043,7 +1950,6 @@ msgid "Referral ID"
 msgstr "Referans Numarası"
 
 #: includes/admin/referrals/edit.php:36
-#, fuzzy
 msgid "The referral ID. This cannot be changed."
 msgstr "Satış Ortağının Numaraı . Değiştirilemez"
 
@@ -2054,7 +1960,6 @@ msgid "%1$s (ID: #%2$s)"
 msgstr ""
 
 #: includes/admin/referrals/edit.php:67
-#, fuzzy
 msgid ""
 "The name and ID of the affiliate who generated this referral. This "
 "association cannot be changed."
@@ -2062,13 +1967,11 @@ msgstr ""
 "Bu referansın ait olduğu satış ortağının numarası . Bu değer değiştirilemez"
 
 #: includes/admin/referrals/edit.php:75
-#, fuzzy
 msgid "Payout"
 msgstr "En Son Referanslar"
 
 #. translators: 1: Payout total amount with view link
 #: includes/admin/referrals/edit.php:84
-#, fuzzy
 msgid "Total: %1$s"
 msgstr "Toplamlar"
 
@@ -2096,7 +1999,6 @@ msgid "The amount of the referral, such as 15."
 msgstr "Referans sayısı , örneğin 15"
 
 #: includes/admin/referrals/edit.php:159
-#, fuzzy
 msgid "Visit"
 msgstr "Ziyaretler"
 
@@ -2125,7 +2027,6 @@ msgid "Context"
 msgstr "Bağlam"
 
 #: includes/admin/referrals/edit.php:234
-#, fuzzy
 msgid ""
 "Context for this referral (optional). Usually this is used to identify the "
 "payment system or integration that was used for the transaction."
@@ -2211,7 +2112,6 @@ msgstr ""
 "ziyaret ediniz"
 
 #: includes/admin/referrals/referrals.php:72
-#, fuzzy
 msgid ""
 "To generate a payout for a specific affiliate, enter the affiliate&#8217;s "
 "login name, first name, or last name. Leave blank to generate a payout for "
@@ -2226,7 +2126,6 @@ msgid "Generate CSV File"
 msgstr "CSV Dosyası Oluştur"
 
 #: includes/admin/referrals/screen-options.php:24
-#, fuzzy
 msgid "Number of referrals per page:"
 msgstr "Henüz referans kaydı yok"
 
@@ -2235,22 +2134,18 @@ msgid "Affiliate Registrations"
 msgstr "Satış Ortağı Kayıtları"
 
 #: includes/admin/reports/class-reports-admin.php:65
-#, fuzzy
 msgid "Manage Affiliates"
 msgstr "Satış Ortakları Eklemek"
 
 #: includes/admin/reports/class-reports-admin.php:70
-#, fuzzy
 msgid "View Payouts"
 msgstr "En Son Referanslar"
 
 #: includes/admin/reports/class-reports-admin.php:77
-#, fuzzy
 msgid "Manage Visits"
 msgstr "Ziyaretleri Arama"
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:38
-#, fuzzy
 msgid "Total Affiliates"
 msgstr "Satış Ortaklarını Dışa Aktar"
 
@@ -2262,23 +2157,19 @@ msgstr ""
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:71
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:135
-#, fuzzy
 msgid "Affiliate #%d"
 msgstr "Satış Ortağı : #%d %s"
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:75
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:84
-#, fuzzy
 msgid "Top Earning Affiliate"
 msgstr "Satış Ortağını Düzenle"
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:99
-#, fuzzy
 msgid "New Affiliates"
 msgstr "Yeni Satış Ortağı"
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:139
-#, fuzzy
 msgid "%d referral"
 msgid_plural "%d referrals"
 msgstr[0] "Referans Ekle"
@@ -2289,7 +2180,6 @@ msgid "Highest Converting Affiliate"
 msgstr ""
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:178
-#, fuzzy
 msgid "Average Payout"
 msgstr "Referans Oranı"
 
@@ -2333,13 +2223,11 @@ msgid "Most Active Campaign (%s)"
 msgstr ""
 
 #: includes/admin/reports/tabs/class-referrals-reports-tab.php:81
-#, fuzzy
 msgid "Average Referral Amount"
 msgstr "Referans Oranı"
 
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:38
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:45
-#, fuzzy
 msgid "Total Visits"
 msgstr "Toplam Ziyaretler"
 
@@ -2360,7 +2248,6 @@ msgid "Top Referrer"
 msgstr ""
 
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:113
-#, fuzzy
 msgid "Direct Traffic"
 msgstr "Direkt Trafik"
 
@@ -2439,7 +2326,6 @@ msgid "Pretty Affiliate URLs"
 msgstr "Güzel Satış Ortaklığı Linkleri"
 
 #: includes/admin/settings/class-settings.php:495
-#, fuzzy
 msgid ""
 "Show pretty affiliate referral URLs to affiliates. For example: <strong>%s "
 "or %s</strong>"
@@ -2448,7 +2334,6 @@ msgstr ""
 "<strong>%s veya %s</strong>"
 
 #: includes/admin/settings/class-settings.php:499
-#, fuzzy
 msgid "Credit Last Referrer"
 msgstr "Referansı Düzenle"
 
@@ -2457,7 +2342,6 @@ msgid "Credit the last affiliate who referred the customer."
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:505
-#, fuzzy
 msgid ""
 "Choose a referral rate type. Referrals can be based on either a percentage "
 "or a flat rate amount."
@@ -2466,7 +2350,6 @@ msgstr ""
 "tanımlanmalı ?"
 
 #: includes/admin/settings/class-settings.php:511
-#, fuzzy
 msgid ""
 "The default referral rate. A percentage if the Referral Rate Type is set to "
 "Percentage, a flat amount otherwise. Referral rates can also be set for each "
@@ -2481,7 +2364,6 @@ msgid "Exclude Shipping"
 msgstr "Kargolama Hariç"
 
 #: includes/admin/settings/class-settings.php:519
-#, fuzzy
 msgid "Exclude shipping costs from referral calculations."
 msgstr "Referans komisyonlarından kargolama masrafları düşülsün mü ?"
 
@@ -2490,7 +2372,6 @@ msgid "Exclude Tax"
 msgstr "Vergi Hariç"
 
 #: includes/admin/settings/class-settings.php:524
-#, fuzzy
 msgid "Exclude taxes from referral calculations."
 msgstr "Vergiler referans komisyonlarından hariç tutulsun mu ?"
 
@@ -2499,7 +2380,6 @@ msgid "Cookie Expiration"
 msgstr "Çerez Süresi"
 
 #: includes/admin/settings/class-settings.php:529
-#, fuzzy
 msgid "Enter how many days the referral tracking cookie should be valid for."
 msgstr "Referans takibi için çerezin kaç gün geçerli olacağını belirler"
 
@@ -2528,12 +2408,10 @@ msgstr ""
 "birimlerine sınırlama getirmiştir."
 
 #: includes/admin/settings/class-settings.php:546
-#, fuzzy
 msgid "Currency Symbol Position"
 msgstr "Para Birimi Pozisyonu"
 
 #: includes/admin/settings/class-settings.php:547
-#, fuzzy
 msgid "Choose the location of the currency symbol."
 msgstr "Para birimine ait simgenin pozisyonunu seçin"
 
@@ -2562,12 +2440,10 @@ msgid "The symbol (usually , or .) to separate decimal points"
 msgstr "Ondalık kısmı ayıran işaret ( genellikle , veya . olur )"
 
 #: includes/admin/settings/class-settings.php:569
-#, fuzzy
 msgid "Affiliate Form Settings"
 msgstr "AffiliateWP Ayarlarına Git"
 
 #: includes/admin/settings/class-settings.php:573
-#, fuzzy
 msgid "Affiliate Area Forms"
 msgstr "Satış Ortaklığı Alanı"
 
@@ -2579,17 +2455,14 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:577
-#, fuzzy
 msgid "Affiliate Registration Form and Affiliate Login Form"
 msgstr "Satış Ortağı Kayıtları"
 
 #: includes/admin/settings/class-settings.php:578
-#, fuzzy
 msgid "Affiliate Registration Form Only"
 msgstr "Satış Ortağı Kayıt"
 
 #: includes/admin/settings/class-settings.php:579
-#, fuzzy
 msgid "Affiliate Login Form Only"
 msgstr "Satış Ortaklığı Kuponu ?"
 
@@ -2599,7 +2472,6 @@ msgid "Integrations"
 msgstr "Entegrasyonlar"
 
 #: includes/admin/settings/class-settings.php:597
-#, fuzzy
 msgid ""
 "Choose the integrations to enable. If you are not using any of these, you "
 "may use the <strong>[affiliate_conversion_script]</strong> shortcode to "
@@ -2612,12 +2484,10 @@ msgstr ""
 "a> adresinden detaylı bilgi edinebilirsiniz"
 
 #: includes/admin/settings/class-settings.php:613
-#, fuzzy
 msgid "Disable All Emails"
 msgstr "Referansları Devre Dışı Bırak"
 
 #: includes/admin/settings/class-settings.php:614
-#, fuzzy
 msgid "Disable all email notifications."
 msgstr "Yeni referans bildirimlerini aktifleştir"
 
@@ -2643,7 +2513,6 @@ msgid "From Name"
 msgstr "Hangi İsimden"
 
 #: includes/admin/settings/class-settings.php:630
-#, fuzzy
 msgid "The name that emails come from. This is usually your site name."
 msgstr "E-Postaların geldiği isim . Muhtemelen site adınız olmalı"
 
@@ -2652,7 +2521,6 @@ msgid "From Email"
 msgstr "Hangi E-Postadan"
 
 #: includes/admin/settings/class-settings.php:636
-#, fuzzy
 msgid ""
 "The email address to send emails from. This will act as the \"from\" and "
 "\"reply-to\" address."
@@ -2661,12 +2529,10 @@ msgstr ""
 "adresleri seçilebilir"
 
 #: includes/admin/settings/class-settings.php:641
-#, fuzzy
 msgid "Notify Admin"
 msgstr "Yöneticileri Bilgilendir"
 
 #: includes/admin/settings/class-settings.php:642
-#, fuzzy
 msgid "Notify site admin of new affiliate registrations."
 msgstr "Yeni satış ortaklığı kayıtlarında yönetim bilgilendirilsin mi ?"
 
@@ -2737,7 +2603,6 @@ msgstr ""
 
 #: includes/admin/settings/class-settings.php:667
 #: includes/admin/settings/class-settings.php:679
-#, fuzzy
 msgid "Congratulations {name}!"
 msgstr "Tebrikler %s!"
 
@@ -2796,22 +2661,18 @@ msgstr ""
 "bildirimleri kapatın :"
 
 #: includes/admin/settings/class-settings.php:693
-#, fuzzy
 msgid "Allow Affiliate Registration"
 msgstr "Satış ortaklığı kaydına izin ver"
 
 #: includes/admin/settings/class-settings.php:694
-#, fuzzy
 msgid "Allow users to register affiliate accounts for themselves."
 msgstr "Satış ortakları kendilerine hesap oluşturmak zorunda olsunlar mı ?"
 
 #: includes/admin/settings/class-settings.php:698
-#, fuzzy
 msgid "Require Approval"
 msgstr "Onay Gereksin"
 
 #: includes/admin/settings/class-settings.php:699
-#, fuzzy
 msgid ""
 "Require that Pending affiliate accounts must be approved before they can "
 "begin earning referrals."
@@ -2824,7 +2685,6 @@ msgid "Auto Register New Users"
 msgstr "Yeni Kullanıcıları Otomatik Kaydet"
 
 #: includes/admin/settings/class-settings.php:704
-#, fuzzy
 msgid "Automatically register new users as affiliates."
 msgstr "Otomatik olarak yeni kullanıcılar satış ortağı yapılsın mı ?"
 
@@ -2837,7 +2697,6 @@ msgid "Add a logout link to the Affiliate Area."
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:713
-#, fuzzy
 msgid "Default Referral URL"
 msgstr "Varsayılan Referans Formatı"
 
@@ -2875,12 +2734,10 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:733
-#, fuzzy
 msgid "Reject Unpaid Referrals on Refund"
 msgstr "Geri ödeme durumunda ödenmemiş referanslar reddedilsin mi ?"
 
 #: includes/admin/settings/class-settings.php:734
-#, fuzzy
 msgid ""
 "Automatically reject Unpaid referrals when the originating purchase is "
 "refunded or revoked."
@@ -2889,12 +2746,10 @@ msgstr ""
 "referanslar otomatik olarak reddedilsin mi ?"
 
 #: includes/admin/settings/class-settings.php:738
-#, fuzzy
 msgid "Use Fallback Referral Tracking Method"
 msgstr "Geriçekilme Referans Takip Metodu Kullanılsın mı ?"
 
 #: includes/admin/settings/class-settings.php:739
-#, fuzzy
 msgid ""
 "The method used to track referral links can fail on sites that have jQuery "
 "errors. Enable Fallback Tracking if referrals are not being tracked properly."
@@ -2903,12 +2758,10 @@ msgstr ""
 "yapar . Bunu sadece referanslarınız düzgün takip edilmiyorsa işaretleyin"
 
 #: includes/admin/settings/class-settings.php:743
-#, fuzzy
 msgid "Ignore Referrals with Zero Amount"
 msgstr "Referans Oranı"
 
 #: includes/admin/settings/class-settings.php:744
-#, fuzzy
 msgid ""
 "Ignore referrals with a zero amount. This can be useful for multi-price "
 "products that start at zero, or if a discount was used which resulted in a "
@@ -2933,7 +2786,6 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:753
-#, fuzzy
 msgid "Referral URL Blacklist"
 msgstr "Referans Linki Ziyaretleri"
 
@@ -2955,7 +2807,6 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:764
-#, fuzzy
 msgid "Remove Data on Uninstall"
 msgstr "Kaldırma durumunda veriler de silinsin mi ?"
 
@@ -2964,7 +2815,6 @@ msgid "Remove all saved data for AffiliateWP when the plugin is deleted."
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:795
-#, fuzzy
 msgid "Required Registration Fields"
 msgstr "Kayıtları Yönet"
 
@@ -2980,12 +2830,10 @@ msgid "How will you promote us?"
 msgstr "Bizi Nasıl Tanıtmayı Düşünüyorsunuz ?"
 
 #: includes/admin/settings/class-settings.php:830
-#, fuzzy
 msgid "Application Pending Email Subject"
 msgstr "Başvuru Kabul Edildi E-Posta Konusu"
 
 #: includes/admin/settings/class-settings.php:831
-#, fuzzy
 msgid "Enter the subject line for pending affiliate application emails."
 msgstr ""
 "Satış ortakları bir referans kazandığında gönderilen yeni referans "
@@ -2993,17 +2841,14 @@ msgstr ""
 
 #: includes/admin/settings/class-settings.php:833
 #: includes/emails/actions.php:165
-#, fuzzy
 msgid "Your Affiliate Application Is Being Reviewed"
 msgstr "%s üzerindeki satış ortaklığı başvurunuz kabul edildi !"
 
 #: includes/admin/settings/class-settings.php:836
-#, fuzzy
 msgid "Application Pending Email Content"
 msgstr "Başvuru Kabul Edildi E-Postasının İçeriği"
 
 #: includes/admin/settings/class-settings.php:837
-#, fuzzy
 msgid ""
 "Enter the email to send when an application is pending. HTML is accepted. "
 "Available template tags:"
@@ -3028,12 +2873,10 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:842
-#, fuzzy
 msgid "Application Rejection Email Subject"
 msgstr "Başvuru Kabul Edildi E-Posta Konusu"
 
 #: includes/admin/settings/class-settings.php:843
-#, fuzzy
 msgid "Enter the subject line for rejected affiliate application emails."
 msgstr ""
 "Satış ortakları bir referans kazandığında gönderilen yeni referans "
@@ -3041,17 +2884,14 @@ msgstr ""
 
 #: includes/admin/settings/class-settings.php:845
 #: includes/emails/actions.php:204
-#, fuzzy
 msgid "Your Affiliate Application Has Been Rejected"
 msgstr "%s üzerindeki satış ortaklığı başvurunuz kabul edildi !"
 
 #: includes/admin/settings/class-settings.php:848
-#, fuzzy
 msgid "Application Rejection Email Content"
 msgstr "Başvuru Kabul Edildi E-Postasının İçeriği"
 
 #: includes/admin/settings/class-settings.php:849
-#, fuzzy
 msgid ""
 "Enter the email to send when an application is rejected. HTML is accepted. "
 "Available template tags:"
@@ -3071,7 +2911,6 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:1021
-#, fuzzy
 msgid ""
 "Your license key is globally defined via <code>AFFILIATEWP_LICENSE_KEY</"
 "code> set in <code>wp-config.php</code>.<br />It cannot be modified from "
@@ -3118,7 +2957,6 @@ msgid "Upload File"
 msgstr "Dosya Gönder"
 
 #: includes/admin/settings/class-settings.php:1233
-#, fuzzy
 msgid ""
 "Your license key is globally defined via <code>AFFILIATEWP_LICENSE_KEY</"
 "code> set in <code>wp-config.php</code>.<br />It cannot be modified from "
@@ -3147,7 +2985,6 @@ msgid "Misc"
 msgstr "Çeşitli"
 
 #: includes/admin/tools/class-batch-recount-affiliate-stats.php:156
-#, fuzzy
 msgid "%s affiliate&#8217;s was successfully processed."
 msgid_plural "%s affiliates&#8217; were successfully processed."
 msgstr[0] "Satış ortağı başarı ile güncellendi"
@@ -3163,7 +3000,6 @@ msgid "API Keys"
 msgstr ""
 
 #: includes/admin/tools/class-rest-consumers-table.php:61
-#, fuzzy
 msgid "No API consumers found."
 msgstr "Kullanıcılar bulunamadı"
 
@@ -3188,7 +3024,6 @@ msgid "Secret Key"
 msgstr ""
 
 #: includes/admin/tools/class-rest-consumers-table.php:228
-#, fuzzy
 msgid "Enter username"
 msgstr "Geçersiz Kullanıcı Adı"
 
@@ -3216,12 +3051,10 @@ msgid "Date Registered"
 msgstr "Kayıt Tarihi"
 
 #: includes/admin/tools/export/class-batch-export-affiliates.php:117
-#, fuzzy
 msgid "No valid affiliate status was selected for export."
 msgstr "Silmek için herhangi bir satış ortağı numarası girilmemiş"
 
 #: includes/admin/tools/export/class-batch-export-affiliates.php:187
-#, fuzzy
 msgid "%s affiliate was successfully exported."
 msgid_plural "%s affiliates were successfully exported."
 msgstr[0] "Satış ortağı başarı ile güncellendi"
@@ -3232,7 +3065,6 @@ msgid "No valid payout status was selected for export."
 msgstr ""
 
 #: includes/admin/tools/export/class-batch-export-payouts.php:274
-#, fuzzy
 msgid "%s payout log was successfully exported."
 msgid_plural "%s payout logs were successfully exported."
 msgstr[0] "Reklam başarı ile eklendi"
@@ -3249,7 +3081,6 @@ msgid "No valid referral status was selected for export."
 msgstr ""
 
 #: includes/admin/tools/export/class-batch-export-referrals.php:247
-#, fuzzy
 msgid "%s referral was successfully exported."
 msgid_plural "%s referrals were successfully exported."
 msgstr[0] "Referans başarı ile eklendi"
@@ -3266,7 +3097,6 @@ msgid "No unpaid referrals were found matching your criteria."
 msgstr ""
 
 #: includes/admin/tools/export/class-batch-generate-payouts.php:299
-#, fuzzy
 msgid "A payout log for %s affiliate was successfully generated."
 msgid_plural "A payout log for %s affiliates was successfully generated."
 msgstr[0] "Satış ortağı başarı ile güncellendi"
@@ -3310,7 +3140,6 @@ msgid "System Info"
 msgstr ""
 
 #: includes/admin/tools/tools.php:96
-#, fuzzy
 msgid "Debug Assistant"
 msgstr "Geçiş Asistanı"
 
@@ -3324,7 +3153,6 @@ msgstr ""
 "Bu aracı satış ortaklığı istatistiklerini yeniden saymak için kullanınız"
 
 #: includes/admin/tools/tools.php:157
-#, fuzzy
 msgid ""
 "Enter the name of the affiliate or begin typing to perform a search based on "
 "the affiliate&#8217;s name."
@@ -3349,7 +3177,6 @@ msgid "User Accounts"
 msgstr "Kullanıcı Hesapları"
 
 #: includes/admin/tools/tools.php:208
-#, fuzzy
 msgid ""
 "Use this tool to create affiliate accounts for each of your existing "
 "WordPress user accounts that belong to the selected roles below."
@@ -3364,12 +3191,10 @@ msgid ""
 msgstr ""
 
 #: includes/admin/tools/tools.php:211
-#, fuzzy
 msgid "Select User Roles"
 msgstr "Alan Seç"
 
 #: includes/admin/tools/tools.php:221
-#, fuzzy
 msgid "Create Affiliate Accounts for Users"
 msgstr "Satış Ortaklığı Hesapları Oluştur"
 
@@ -3387,7 +3212,6 @@ msgid ""
 msgstr ""
 
 #: includes/admin/tools/tools.php:237
-#, fuzzy
 msgid ""
 "Use this tool to migrate existing affiliate / referral data from Affiliates "
 "Pro to AffiliateWP."
@@ -3396,7 +3220,6 @@ msgstr ""
 "AffiliateWP ye geçirmek için kullanınız"
 
 #: includes/admin/tools/tools.php:238
-#, fuzzy
 msgid ""
 "<strong>NOTE:</strong> This tool should only ever be used on a fresh "
 "install. If you have already collected affiliate or referral data, do not "
@@ -3411,7 +3234,6 @@ msgid "Migrate Data from Affiliates Pro"
 msgstr "Affiliates Pro dan Geçiş"
 
 #: includes/admin/tools/tools.php:253
-#, fuzzy
 msgid ""
 "Use this tool to migrate existing affiliate accounts from WP Affiliate to "
 "AffiliateWP."
@@ -3449,7 +3271,6 @@ msgid "Export referrals to a CSV file."
 msgstr "Referansları bir CSV dosyası ile dışa aktar"
 
 #: includes/admin/tools/tools.php:317 includes/admin/tools/tools.php:341
-#, fuzzy
 msgid ""
 "To search for an affiliate, enter the affiliate&#8217;s login name, first "
 "name, or last name. Leave blank to export referrals for all affiliates."
@@ -3459,12 +3280,10 @@ msgstr ""
 "aktarmak istiyorsanız boş bırakın"
 
 #: includes/admin/tools/tools.php:327
-#, fuzzy
 msgid "Export Payouts"
 msgstr "Toplam Ziyaretler"
 
 #: includes/admin/tools/tools.php:329
-#, fuzzy
 msgid "Export payouts to a CSV file."
 msgstr "Satış ortaklarını bir CSV dosyasına kaydet"
 
@@ -3507,7 +3326,6 @@ msgid "Debug Log"
 msgstr ""
 
 #: includes/admin/tools/tools.php:457
-#, fuzzy
 msgid "Use this tool to help debug various operations in AffiliateWP."
 msgstr ""
 "Bu aracı WP Affiliate te bulunan satış ortaklarını AffiliateWP ye geçirmek "
@@ -3518,7 +3336,6 @@ msgid "Clear Debug Log"
 msgstr ""
 
 #: includes/admin/tools/tools.php:531
-#, fuzzy
 msgid "Invalid batch ID."
 msgstr "Geçersiz e-posta"
 
@@ -3527,7 +3344,6 @@ msgid "Invalid batch export class."
 msgstr ""
 
 #: includes/admin/tools/upgrades/class-batch-upgrade-recount-affiliate-stats.php:38
-#, fuzzy
 msgid "Your database has been successfully upgraded. %s"
 msgstr "Referans başarı ile eklendi"
 
@@ -3536,17 +3352,14 @@ msgid "Dismiss Notice"
 msgstr ""
 
 #: includes/admin/user-profile.php:22
-#, fuzzy
 msgid "Affiliate Registration Status"
 msgstr "Satış Ortağı Kayıtları"
 
 #: includes/admin/user-profile.php:40
-#, fuzzy
 msgid "Not Registered"
 msgstr "Kayıt Tarihi"
 
 #: includes/admin/user-profile.php:46
-#, fuzzy
 msgid "Affiliate Actions"
 msgstr "AffiliateWP Ayarlarına Git"
 
@@ -3555,7 +3368,6 @@ msgid "Register"
 msgstr "Kayıt"
 
 #: includes/admin/user-profile.php:80 includes/class-register.php:506
-#, fuzzy
 msgid "Disable Affiliate Email"
 msgstr "Referansları Devre Dışı Bırak"
 
@@ -3568,14 +3380,12 @@ msgid "No user roles were selected for migration."
 msgstr ""
 
 #: includes/admin/utilities/class-batch-migrate-users.php:167
-#, fuzzy
 msgid "%s affiliate was added successfully."
 msgid_plural "%s affiliates were added successfully."
 msgstr[0] "Satış ortağı başarı ile güncellendi"
 msgstr[1] "Satış ortağı başarı ile güncellendi"
 
 #: includes/admin/utilities/class-batch-migrate-wp-affiliate.php:209
-#, fuzzy
 msgid "%s affiliate was successfully converted."
 msgid_plural "%s affiliates were successfully converted."
 msgstr[0] "Satış ortağı başarı ile güncellendi"
@@ -3594,7 +3404,6 @@ msgid "An invalid batch class handler file has been supplied."
 msgstr ""
 
 #: includes/admin/utilities/class-batch-process.php:143
-#, fuzzy
 msgid "%s item was successfully processed."
 msgid_plural "%s items were successfully processed."
 msgstr[0] "Ayarlar başarı ile girildi"
@@ -3629,7 +3438,6 @@ msgid "No visits found."
 msgstr "Ziyaret bulunamadı"
 
 #: includes/admin/visits/contextual-help.php:39
-#, fuzzy
 msgid "This screen provides access to your site&#8217;s visit history."
 msgstr "Bu ekran sitenizin ziyaretçi geçmişine göz atmak için erişim sunar"
 
@@ -3666,7 +3474,6 @@ msgstr ""
 "olunarak oluşturulan referansa ait numara"
 
 #: includes/admin/visits/contextual-help.php:44
-#, fuzzy
 msgid ""
 "<strong>Context</strong>: this is the context of how the visit was "
 "generated, if set."
@@ -3717,14 +3524,12 @@ msgstr ""
 "arama yapılabilir"
 
 #: includes/admin/visits/contextual-help.php:58
-#, fuzzy
 msgid ""
 "You can enter the referral&#8217;s ID number prefixed by &#8220;referral:"
 "&#8221;"
 msgstr "Referansa ait numarayı  'referral:' ön eki ile arayabilirsiniz"
 
 #: includes/admin/visits/contextual-help.php:59
-#, fuzzy
 msgid "You can enter a visit context prefixed by &#8220;context:&#8221;"
 msgstr "Referansa ait bağlamı 'context:' ön eki ile arayabilirsin"
 
@@ -3737,7 +3542,6 @@ msgid "Filter by status"
 msgstr ""
 
 #: includes/admin/visits/visits.php:65
-#, fuzzy
 msgid "Unconverted"
 msgstr "Dönüşen"
 
@@ -3782,7 +3586,6 @@ msgid "Paid Referral Earnings"
 msgstr "Ödenmiş Referans Kazancı"
 
 #: includes/class-register.php:77
-#, fuzzy
 msgid "Please enter a valid website URL"
 msgstr "Lütfen bir website adresi giriniz"
 
@@ -3807,7 +3610,6 @@ msgid "Email address already taken"
 msgstr "E-posta adresi zaten alınmış"
 
 #: includes/class-register.php:107
-#, fuzzy
 msgid "Invalid account email"
 msgstr "Geçersiz ödeme e-posta adresi"
 
@@ -3828,7 +3630,6 @@ msgid "Please verify that you are not a robot"
 msgstr ""
 
 #: includes/class-register.php:146
-#, fuzzy
 msgid "Nice try honey bear, don&#8217;t touch our honey"
 msgstr "Güzel deneme , bu şekilde devam etmeyiniz"
 
@@ -3845,7 +3646,6 @@ msgid "Please enter a website URL"
 msgstr "Lütfen bir website adresi giriniz"
 
 #: includes/class-register.php:272
-#, fuzzy
 msgid "Please enter your payment email"
 msgstr "Lütfen isminizi giriniz"
 
@@ -3854,12 +3654,10 @@ msgid "Please tell us how you will promote us"
 msgstr ""
 
 #: includes/class-register.php:499
-#, fuzzy
 msgid "Add as Affiliate"
 msgstr "Satış Ortağı Ekle"
 
 #: includes/class-register.php:501
-#, fuzzy
 msgid "Add the user as an affiliate."
 msgstr "Zaten satış ortağı olarak kayıt olmuşsunuz"
 
@@ -3886,12 +3684,10 @@ msgid "An affiliate already exists for this user account."
 msgstr ""
 
 #: includes/cli/class-affiliate-sub-commands.php:167
-#, fuzzy
 msgid "An affiliate with the username \"%s\" has been created."
 msgstr "%s üzerindeki satış ortaklığı başvurunuz kabul edildi !"
 
 #: includes/cli/class-affiliate-sub-commands.php:169
-#, fuzzy
 msgid "The affiliate account could not be added."
 msgstr "Satış ortaklığı hesabınız aktif değil"
 
@@ -3905,29 +3701,24 @@ msgid "A valid affiliate username or ID is required to proceed."
 msgstr ""
 
 #: includes/cli/class-affiliate-sub-commands.php:231
-#, fuzzy
 msgid "The affiliate was updated successfully."
 msgstr "Satış ortağı başarı ile güncellendi"
 
 #: includes/cli/class-affiliate-sub-commands.php:233
-#, fuzzy
 msgid "The affiliate account could not be updated."
 msgstr "Satış ortaklığı hesabınız aktif değil"
 
 #: includes/cli/class-affiliate-sub-commands.php:288
-#, fuzzy
 msgid ""
 "Are you sure you want to delete this affiliate, all its data and its "
 "associated user account?"
 msgstr "Bu reklamı silmek için emin misiniz ?"
 
 #: includes/cli/class-affiliate-sub-commands.php:290
-#, fuzzy
 msgid "Are you sure you want to delete this affiliate and all its data?"
 msgstr "Bu reklamı silmek için emin misiniz ?"
 
 #: includes/cli/class-affiliate-sub-commands.php:293
-#, fuzzy
 msgid "Are you sure you want to delete this affiliate?"
 msgstr "Bu reklamı silmek için emin misiniz ?"
 
@@ -3937,22 +3728,18 @@ msgid ""
 msgstr ""
 
 #: includes/cli/class-affiliate-sub-commands.php:313
-#, fuzzy
 msgid "The affiliate account has been successfully deleted."
 msgstr "Satış ortağı / ortakları başarı ile silindi"
 
 #: includes/cli/class-affiliate-sub-commands.php:316
-#, fuzzy
 msgid "The affiliate account could not be deleted."
 msgstr "Satış ortaklığı için hesap talebiniz reddedildi"
 
 #: includes/cli/class-affiliate-sub-commands.php:393
-#, fuzzy
 msgid "Number of affiliates: %d"
 msgstr "Satış ortağı bulunamadı"
 
 #: includes/cli/class-command.php:24
-#, fuzzy
 msgid "AffiliateWP is not installed"
 msgstr "AffiliateWP Geçiş"
 
@@ -3961,7 +3748,6 @@ msgid "You are running AffiliateWP version: %s"
 msgstr ""
 
 #: includes/cli/class-command.php:41
-#, fuzzy
 msgid "License status is: %s"
 msgstr "Lisans Ayarları"
 
@@ -3970,7 +3756,6 @@ msgid "Debug mode is: %s"
 msgstr ""
 
 #: includes/cli/class-command.php:59
-#, fuzzy
 msgid "Affiliates require approval: %s"
 msgstr "Onay Gereksin"
 
@@ -3979,27 +3764,22 @@ msgid "Email notifications are: %s"
 msgstr ""
 
 #: includes/cli/class-command.php:85
-#, fuzzy
 msgid "Integrations: %s"
 msgstr "Entegrasyonlar"
 
 #: includes/cli/class-command.php:92
-#, fuzzy
 msgid "Global referral rate: %s"
 msgstr "Satış ortağının referans oranı tipi"
 
 #: includes/cli/class-command.php:95
-#, fuzzy
 msgid "Global referral rate type: %s"
 msgstr "Satış ortağının referans oranı tipi"
 
 #: includes/cli/class-command.php:98
-#, fuzzy
 msgid "Currency: %s"
 msgstr "Para Birimi"
 
 #: includes/cli/class-command.php:105
-#, fuzzy
 msgid "Referral variable: %s"
 msgstr "Referans değişkeni"
 
@@ -4008,22 +3788,18 @@ msgid "Show pretty referral URLs: %s"
 msgstr ""
 
 #: includes/cli/class-command.php:126
-#, fuzzy
 msgid "Referral URL (ID): %s"
 msgstr "Referans Linki"
 
 #: includes/cli/class-command.php:129
-#, fuzzy
 msgid "Referral URL (Username): %s"
 msgstr "Referans Link Oluşturucu"
 
 #: includes/cli/class-command.php:134
-#, fuzzy
 msgid "Affiliate Area URL: %s"
 msgstr "Satış Ortaklığı Alanı"
 
 #: includes/cli/class-command.php:139
-#, fuzzy
 msgid "Terms of Use URL: %s"
 msgstr "Kullanım Koşulları"
 
@@ -4032,32 +3808,26 @@ msgid "Found %s sites. Retrieving stats ..."
 msgstr ""
 
 #: includes/cli/class-command.php:190
-#, fuzzy
 msgid "Total Affiliates: %s"
 msgstr "Satış Ortaklarını Dışa Aktar"
 
 #: includes/cli/class-command.php:193
-#, fuzzy
 msgid "Total Creatives: %s"
 msgstr "Satış Ortaklarını Dışa Aktar"
 
 #: includes/cli/class-command.php:196
-#, fuzzy
 msgid "Total Payouts: %s"
 msgstr "Toplam Ziyaretler"
 
 #: includes/cli/class-command.php:199
-#, fuzzy
 msgid "Total Referrals: %s"
 msgstr "Toplam Ödenen Referanslar"
 
 #: includes/cli/class-command.php:202
-#, fuzzy
 msgid "Total Visits: %s"
 msgstr "Toplam Ziyaretler"
 
 #: includes/cli/class-command.php:220
-#, fuzzy
 msgid "Are you sure you want to clear the debug log?"
 msgstr "Bu reklamı silmek için emin misiniz ?"
 
@@ -4074,7 +3844,6 @@ msgid "A creative with the ID %d has been successfully created."
 msgstr ""
 
 #: includes/cli/class-creative-sub-commands.php:135
-#, fuzzy
 msgid "The creative could not be created."
 msgstr "Yeni Referans E-Posta Konusu"
 
@@ -4086,7 +3855,6 @@ msgid "A valid creative ID is required to proceed."
 msgstr ""
 
 #: includes/cli/class-creative-sub-commands.php:199
-#, fuzzy
 msgid "The creative was successfully updated."
 msgstr "Reklam başarı ile eklendi"
 
@@ -4095,7 +3863,6 @@ msgid "The creative could not be updated."
 msgstr ""
 
 #: includes/cli/class-creative-sub-commands.php:236
-#, fuzzy
 msgid "The creative was successfully deleted."
 msgstr "Reklam başarı ile eklendi"
 
@@ -4104,7 +3871,6 @@ msgid "The creative could not be deleted."
 msgstr ""
 
 #: includes/cli/class-creative-sub-commands.php:314
-#, fuzzy
 msgid "Number of creatives: %d"
 msgstr "Reklam bulunamadı"
 
@@ -4141,7 +3907,6 @@ msgid "Referral #%d is not valid and has been skipped."
 msgstr ""
 
 #: includes/cli/class-payout-sub-commands.php:298
-#, fuzzy
 msgid "Are you sure you want to overwrite this payout's referrals?"
 msgstr "Bu reklamı silmek için emin misiniz ?"
 
@@ -4150,13 +3915,11 @@ msgid "All values passed via the --referrals argument are invalid."
 msgstr ""
 
 #: includes/cli/class-payout-sub-commands.php:312
-#, fuzzy
 msgid ""
 "Are you sure you want to overwrite the affiliate associated with this payout?"
 msgstr "Bu reklamı silmek için emin misiniz ?"
 
 #: includes/cli/class-payout-sub-commands.php:316
-#, fuzzy
 msgid "The supplied affiliate ID or username is invalid and has been ignored."
 msgstr "Satış ortağının kullanıcı numarası . Bu değiştirilemez"
 
@@ -4167,7 +3930,6 @@ msgid ""
 msgstr ""
 
 #: includes/cli/class-payout-sub-commands.php:327
-#, fuzzy
 msgid "Payout #%d has been updated successfully."
 msgstr "Reklam başarı ile güncellendi"
 
@@ -4181,7 +3943,6 @@ msgid "A valid payout ID is required to proceed."
 msgstr ""
 
 #: includes/cli/class-payout-sub-commands.php:361
-#, fuzzy
 msgid "Are you sure you want to delete this payout?"
 msgstr "Bu reklamı silmek için emin misiniz ?"
 
@@ -4211,12 +3972,10 @@ msgid ""
 msgstr ""
 
 #: includes/cli/class-referral-sub-commands.php:144
-#, fuzzy
 msgid "A referral with the ID \"%d\" has been created."
 msgstr "Yeni Referans E-Posta Konusu"
 
 #: includes/cli/class-referral-sub-commands.php:146
-#, fuzzy
 msgid "The referral could not be added."
 msgstr "Yeni Referans E-Posta Konusu"
 
@@ -4228,32 +3987,26 @@ msgid "A valid referral ID is required to proceed."
 msgstr ""
 
 #: includes/cli/class-referral-sub-commands.php:219
-#, fuzzy
 msgid "The referral was updated successfully."
 msgstr "Referans başarı ile güncellendi"
 
 #: includes/cli/class-referral-sub-commands.php:221
-#, fuzzy
 msgid "The referral could not be updated"
 msgstr "Yeni Referans E-Posta Konusu"
 
 #: includes/cli/class-referral-sub-commands.php:254 includes/scripts.php:109
-#, fuzzy
 msgid "Are you sure you want to delete this referral?"
 msgstr "Bu reklamı silmek için emin misiniz ?"
 
 #: includes/cli/class-referral-sub-commands.php:259
-#, fuzzy
 msgid "The referral has been successfully deleted."
 msgstr "Referans başarı ile eklendi"
 
 #: includes/cli/class-referral-sub-commands.php:261
-#, fuzzy
 msgid "The referral could not be deleted."
 msgstr "Yeni Referans E-Posta Konusu"
 
 #: includes/cli/class-referral-sub-commands.php:338
-#, fuzzy
 msgid "Number of referrals: %d"
 msgstr "Henüz referans kaydı yok"
 
@@ -4270,12 +4023,10 @@ msgid "A valid date string must be supplied. Using the current time."
 msgstr ""
 
 #: includes/cli/class-visit-sub-commands.php:179
-#, fuzzy
 msgid "The visit was successfully created."
 msgstr "Ayarlar başarı ile girildi"
 
 #: includes/cli/class-visit-sub-commands.php:181
-#, fuzzy
 msgid "The visit could not be created."
 msgstr "Yeni Referans E-Posta Konusu"
 
@@ -4291,7 +4042,6 @@ msgid "A valid new date string must be supplied. Using the original date."
 msgstr ""
 
 #: includes/cli/class-visit-sub-commands.php:277
-#, fuzzy
 msgid "The visit was updated successfully."
 msgstr "Satış ortağı başarı ile güncellendi"
 
@@ -4300,7 +4050,6 @@ msgid "The visit could not be updated."
 msgstr ""
 
 #: includes/cli/class-visit-sub-commands.php:311
-#, fuzzy
 msgid "Are you sure you want to delete this visit?"
 msgstr "Bu reklamı silmek için emin misiniz ?"
 
@@ -4313,7 +4062,6 @@ msgid "The visit could not be deleted."
 msgstr ""
 
 #: includes/cli/class-visit-sub-commands.php:396
-#, fuzzy
 msgid "Number of visits: %d"
 msgstr "Ziyaret bulunamadı"
 
@@ -4350,7 +4098,6 @@ msgid "Log into your affiliate area at %s"
 msgstr "Satış ortaklığı paneline şurdan giriş yap %s"
 
 #: includes/emails/actions.php:169
-#, fuzzy
 msgid "Hi %s!"
 msgstr "%s! üzerinde"
 
@@ -4407,7 +4154,6 @@ msgid "The promo method used by the affiliate"
 msgstr "Satış ortağının kullandığı tanıtım metodu"
 
 #: includes/emails/class-affwp-emails.php:447
-#, fuzzy
 msgid "The reason an affiliate area was rejected"
 msgstr "Satış ortağı isteği reddedildi"
 
@@ -4424,17 +4170,14 @@ msgid "Your site name"
 msgstr "Site adınız"
 
 #: includes/emails/class-affwp-emails.php:467
-#, fuzzy
 msgid "The affiliate&#8217;s referral URL"
 msgstr "Satış ortağının referans oranı tipi"
 
 #: includes/emails/class-affwp-emails.php:472
-#, fuzzy
 msgid "The affiliate&#8217;s ID"
 msgstr "Satış Ortağı Numarası"
 
 #: includes/emails/class-affwp-emails.php:477
-#, fuzzy
 msgid "The affiliate&#8217;s referral rate"
 msgstr "Satış ortağının referans oranı tipi"
 
@@ -4451,7 +4194,6 @@ msgid "The name of the campaign associated with the referral (if any)."
 msgstr ""
 
 #: includes/emails/functions.php:121
-#, fuzzy
 msgid "No reason provided"
 msgstr "Henüz referans kaydı yok"
 
@@ -4460,7 +4202,6 @@ msgid "(no campaign)"
 msgstr ""
 
 #: includes/integrations/class-caldera-forms.php:74
-#, fuzzy
 msgid "Total"
 msgstr "Toplamlar"
 
@@ -4474,13 +4215,11 @@ msgstr ""
 #: includes/integrations/class-caldera-forms.php:247
 #: includes/integrations/class-give.php:247
 #: includes/integrations/class-ninja-forms.php:196
-#, fuzzy
 msgid "Allow Referrals"
 msgstr "Referanslar"
 
 #: includes/integrations/class-caldera-forms.php:252
 #: includes/integrations/class-gravityforms.php:286
-#, fuzzy
 msgid "Enable affiliate referral creation for this form"
 msgstr "Satış ortağının referans oranı tipi"
 
@@ -4489,7 +4228,6 @@ msgid "Contact Form 7"
 msgstr ""
 
 #: includes/integrations/class-contactform7.php:114
-#, fuzzy
 msgid "Enable referrals on all Contact Form 7 forms"
 msgstr "Satış ortağının referans oranı tipi"
 
@@ -4502,7 +4240,6 @@ msgid ""
 msgstr ""
 
 #: includes/integrations/class-contactform7.php:130
-#, fuzzy
 msgid "Enable referrals for specific Contact Form 7 forms"
 msgstr "Satış ortağının referans oranı tipi"
 
@@ -4571,12 +4308,10 @@ msgstr ""
 "güncellemelerinden  referans komisyonlarının kayıtlarını hariç tutmalı mı ?"
 
 #: includes/integrations/class-edd.php:620
-#, fuzzy
 msgid "Disable Referrals on Upgrades"
 msgstr "Bu ürün için referansları devre dışı bırak"
 
 #: includes/integrations/class-edd.php:621
-#, fuzzy
 msgid ""
 "Should AffiliateWP prevent referral commissions from being recorded on "
 "license upgrade purchases with EDD Software Licensing?"
@@ -4597,7 +4332,6 @@ msgstr "Burdan gelen referansları devre dışı bırak %s"
 #: includes/integrations/class-edd.php:659
 #: includes/integrations/class-memberpress.php:190
 #: includes/integrations/class-zippycourses.php:87
-#, fuzzy
 msgid ""
 "These settings will be used to calculate affiliate earnings per-sale. Leave "
 "blank to use the site default referral rate."
@@ -4643,12 +4377,10 @@ msgid "AffiliateWP: Referral #%d for %s for %s rejected"
 msgstr "AffiliateWP: Referans #%d için %s için %s reddedildi"
 
 #: includes/integrations/class-give.php:127
-#, fuzzy
 msgid "Custom Amount"
 msgstr "Satın Alma Miktarı"
 
 #: includes/integrations/class-give.php:248
-#, fuzzy
 msgid "Enable affiliate referral creation for this donation form"
 msgstr "Satış ortağının referans oranı tipi"
 
@@ -4661,7 +4393,6 @@ msgid "Affiliate Rate"
 msgstr "Satış ortaklığı oranı"
 
 #: includes/integrations/class-give.php:254
-#, fuzzy
 msgid ""
 "This setting will be used to calculate affiliate earnings per-donation. "
 "Leave blank to use default affiliate rates."
@@ -4676,12 +4407,10 @@ msgstr "Referans #%d için %s için %s reddedildi"
 
 #: includes/integrations/class-gravityforms.php:290
 #: includes/integrations/class-wpforms.php:37
-#, fuzzy
 msgid "Allow referrals"
 msgstr "Referansları Devre Dışı Bırak"
 
 #: includes/integrations/class-gravityforms.php:321
-#, fuzzy
 msgid "Affiliate Coupon"
 msgstr "Satış Ortaklığı Kuponu ?"
 
@@ -4693,12 +4422,10 @@ msgid ""
 msgstr ""
 
 #: includes/integrations/class-jigoshop.php:153
-#, fuzzy
 msgid "Affiliate Data"
 msgstr "Satış ortaklığı oranı"
 
 #: includes/integrations/class-lifterlms.php:115
-#, fuzzy
 msgid "Referral #%d completed"
 msgstr "Referans başarı ile güncellendi"
 
@@ -4708,7 +4435,6 @@ msgstr ""
 
 #: includes/integrations/class-lifterlms.php:183
 #: includes/integrations/class-lifterlms.php:318
-#, fuzzy
 msgid "Referral not created because affiliate's own account was used."
 msgstr "Satış ortağının kullanıcı hesabını da silinsin mi ?"
 
@@ -4718,32 +4444,26 @@ msgid "Referral not created due to 0.00 amount."
 msgstr ""
 
 #: includes/integrations/class-lifterlms.php:230
-#, fuzzy
 msgid "LifterLMS Referral #%d updated successfully."
 msgstr "Referans başarı ile güncellendi"
 
 #: includes/integrations/class-lifterlms.php:257
-#, fuzzy
 msgid "Referral #%d created successfully."
 msgstr "Referans başarı ile güncellendi"
 
 #: includes/integrations/class-lifterlms.php:263
-#, fuzzy
 msgid "Referral failed to be created."
 msgstr "Yeni Referans E-Posta Konusu"
 
 #: includes/integrations/class-lifterlms.php:354
-#, fuzzy
 msgid "Referral #%d updated successfully."
 msgstr "Referans başarı ile güncellendi"
 
 #: includes/integrations/class-lifterlms.php:378
-#, fuzzy
 msgid "Pending referral #%d created successfully."
 msgstr "Referans başarı ile güncellendi"
 
 #: includes/integrations/class-lifterlms.php:389
-#, fuzzy
 msgid "LifterLMS Referral failed to be created."
 msgstr "Yeni Referans E-Posta Konusu"
 
@@ -4752,7 +4472,6 @@ msgid "Search for an affiliate by username or email."
 msgstr ""
 
 #: includes/integrations/class-lifterlms.php:444
-#, fuzzy
 msgid "Affiliate Discount"
 msgstr "Satış Ortaklığı İndirim ?"
 
@@ -4762,19 +4481,16 @@ msgstr ""
 
 #: includes/integrations/class-lifterlms.php:664
 #: includes/integrations/class-lifterlms.php:690
-#, fuzzy
 msgid "Referral Details"
 msgstr "Referans Ayarları"
 
 #: includes/integrations/class-lifterlms.php:744
 #: includes/integrations/class-pmp.php:362
 #: includes/integrations/class-rcp.php:386
-#, fuzzy
 msgid "Disable Referrals"
 msgstr "Referansları Devre Dışı Bırak"
 
 #: includes/integrations/class-lifterlms.php:745
-#, fuzzy
 msgid ""
 "Check this box to prevent orders for this %s from generating referral "
 "commissions for affiliates."
@@ -4783,7 +4499,6 @@ msgstr ""
 "ürünün satışı engellenecek"
 
 #: includes/integrations/class-lifterlms.php:753
-#, fuzzy
 msgid "Enable %s Referral Rate"
 msgstr "Referans Oranı"
 
@@ -4792,43 +4507,35 @@ msgid "Check this box to enable %s referral rate overrides"
 msgstr ""
 
 #: includes/integrations/class-lifterlms.php:762
-#, fuzzy
 msgid "%s Referral Rate"
 msgstr "Referans Oranı"
 
 #: includes/integrations/class-lifterlms.php:763
-#, fuzzy
 msgid "Enter a referral rate for this %s"
 msgstr "Satış ortağının referans oranı tipi"
 
 #: includes/integrations/class-lifterlms.php:870
-#, fuzzy
 msgid "Referral #%d rejected"
 msgstr "Referans #%d için %s için %s reddedildi"
 
 #: includes/integrations/class-memberpress.php:186
-#, fuzzy
 msgid "Disable referrals on this membership"
 msgstr "Burdan gelen referansları devre dışı bırak %s"
 
 #: includes/integrations/class-ninja-forms.php:197
-#, fuzzy
 msgid "Enable affiliate referral creation for this form?"
 msgstr "Satış ortağının referans oranı tipi"
 
 #: includes/integrations/class-paypal.php:90
-#, fuzzy
 msgid "Pending PayPal referral"
 msgstr "Toplam Bekleyen Referanslar"
 
 #: includes/integrations/class-pmp.php:348
 #: includes/integrations/class-zippycourses.php:55
-#, fuzzy
 msgid "Affiliate Settings"
 msgstr "AffiliateWP Ayarlarına Git"
 
 #: includes/integrations/class-pmp.php:357
-#, fuzzy
 msgid ""
 "The membership-level referral rate, such as 20 for 20%%. Affiliate-level "
 "referral rates will override this value. If left blank, the site default "
@@ -4842,7 +4549,6 @@ msgid "Check to disable per-membership referrals."
 msgstr ""
 
 #: includes/integrations/class-pms.php:51
-#, fuzzy
 msgid ""
 "This rate will be used to calculate affiliate earnings when members register "
 "their account with this subscription. Leave blank to use the site default "
@@ -4853,7 +4559,6 @@ msgstr ""
 
 #: includes/integrations/class-rcp.php:349
 #: includes/integrations/class-rcp.php:380
-#, fuzzy
 msgid ""
 "This rate will be used to calculate affiliate earnings when members "
 "subscribe to this level. Leave blank to use the site default referral rate."
@@ -4862,7 +4567,6 @@ msgstr ""
 "kullanılacak . Varsayılan satış ortaklığı oranları için boş bırakınız"
 
 #: includes/integrations/class-rcp.php:391
-#, fuzzy
 msgid "Disable referrals on this subscription level."
 msgstr "Bu ürün için referansları devre dışı bırak"
 
@@ -4872,7 +4576,6 @@ msgid "(Variation ID %d)"
 msgstr ""
 
 #: includes/integrations/class-woocommerce.php:494
-#, fuzzy
 msgid "Configure affiliate rates for this product"
 msgstr "Bu ürün için referansları devre dışı bırak"
 
@@ -4902,12 +4605,10 @@ msgid "Configure affiliate rates for this product variation"
 msgstr ""
 
 #: includes/integrations/class-woocommerce.php:534
-#, fuzzy
 msgid "Referral rate (optional)"
 msgstr "Referans açıklaması"
 
 #: includes/integrations/class-woocommerce.php:536
-#, fuzzy
 msgid "Disable referrals for this product variation"
 msgstr "Bu ürün için referansları devre dışı bırak"
 
@@ -4920,12 +4621,10 @@ msgid "Manage per-product affiliate rates."
 msgstr "Ürün başına satış ortaklığı oranlarını yönet"
 
 #: includes/integrations/extras/class-ninja-forms-action-add-referral.php:47
-#, fuzzy
 msgid "Total Field"
 msgstr "Toplam Ziyaretler"
 
 #: includes/integrations/extras/class-ninja-forms-action-add-referral.php:63
-#, fuzzy
 msgid "Customer Email"
 msgstr "Hangi E-Postadan"
 
@@ -4942,7 +4641,6 @@ msgid "Euros"
 msgstr "Euro"
 
 #: includes/misc-functions.php:28
-#, fuzzy
 msgid "Argentine Peso"
 msgstr "Meksika Pezosu"
 
@@ -4979,7 +4677,6 @@ msgid "Colombian Peso"
 msgstr "Kolombiya Pezosu"
 
 #: includes/misc-functions.php:37
-#, fuzzy
 msgid "Croatia Kuna"
 msgstr "Hırvatistan Kunası"
 
@@ -5008,7 +4705,6 @@ msgid "Hungarian Forint"
 msgstr "Macaristan Forinti"
 
 #: includes/misc-functions.php:44
-#, fuzzy
 msgid "Icelandic Krona"
 msgstr "İzlanda Kronu"
 
@@ -5025,7 +4721,6 @@ msgid "Israeli Shekel"
 msgstr "İsrail Şikeli"
 
 #: includes/misc-functions.php:48
-#, fuzzy
 msgid "Iranian Rial"
 msgstr "Brezilya Reali"
 
@@ -5066,7 +4761,6 @@ msgid "New Zealand Dollar"
 msgstr "Yeni Zelanda Doları"
 
 #: includes/misc-functions.php:58
-#, fuzzy
 msgid "Pakistani Rupee"
 msgstr "Hindistan Rupisi"
 
@@ -5103,7 +4797,6 @@ msgid "Singapore Dollar"
 msgstr "Singapur Doları"
 
 #: includes/misc-functions.php:67
-#, fuzzy
 msgid "South African Rand"
 msgstr "Güney Afrika Randı"
 
@@ -5148,7 +4841,6 @@ msgid "Vietnamese Dong"
 msgstr "Vietnam Dongu"
 
 #: includes/scripts.php:139
-#, fuzzy
 msgid "Please enter a valid URL for this site"
 msgstr "Lütfen bir website adresi giriniz"
 
@@ -5165,7 +4857,6 @@ msgid "Referral Graphs"
 msgstr "Referans Grafikleri"
 
 #: templates/dashboard-tab-payouts.php:3
-#, fuzzy
 msgid "Referral Payouts"
 msgstr "Referans Oranı"
 
@@ -5301,7 +4992,6 @@ msgid "Log out"
 msgstr ""
 
 #: templates/login.php:15
-#, fuzzy
 msgid "Log into your account"
 msgstr "Hesabınıza Giriş Yapın"
 
@@ -5318,7 +5008,6 @@ msgid "Log In"
 msgstr ""
 
 #: templates/login.php:48
-#, fuzzy
 msgid "Lost your password?"
 msgstr "Şifrenizi mi Unuttunuz ?"
 
@@ -5333,7 +5022,6 @@ msgid "The affiliate area is available only for registered affiliates."
 msgstr "Satış ortaklığı paneli sadece kayıtlı satış ortaklarına görünebilir"
 
 #: templates/register.php:54
-#, fuzzy
 msgid "Register a new affiliate account"
 msgstr "Yeni Satış Ortaklığı Hesabı Kaydet"
 
@@ -5355,7 +5043,6 @@ msgid "Affiliate Plugin for WordPress"
 msgstr ""
 
 #: includes/admin/affiliates/affiliates.php:58
-#, fuzzy
 msgctxt "affiliates"
 msgid "Reports"
 msgstr "Raporlar"
@@ -5384,148 +5071,124 @@ msgstr "Reklam Numarası #%d: %s"
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:66
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:69
 #: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:67
-#, fuzzy
 msgctxt "Affiliate column table header"
 msgid "Affiliate"
 msgstr "Satış Ortağı"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-most-valuable.php:75
-#, fuzzy
 msgctxt "Earnings column table header"
 msgid "Earnings"
 msgstr "Kazançlar"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-most-valuable.php:76
-#, fuzzy
 msgctxt "Referrals column table header"
 msgid "Referrals"
 msgstr "Referanslar"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-most-valuable.php:77
-#, fuzzy
 msgctxt "Visits column table header"
 msgid "Visits"
 msgstr "Ziyaretler"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:67
-#, fuzzy
 msgctxt "URL column table header"
 msgid "URL"
 msgstr "Adres"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:68
-#, fuzzy
 msgctxt "Converted column table header"
 msgid "Converted"
 msgstr "Dönüşen"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:70
-#, fuzzy
 msgctxt "Amount column table header"
 msgid "Amount"
 msgstr "Miktar"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:71
-#, fuzzy
 msgctxt "Description column table header"
 msgid "Description"
 msgstr "Açıklama"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:68
-#, fuzzy
 msgctxt "Status column table header"
 msgid "Status"
 msgstr "Durum"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:69
-#, fuzzy
 msgctxt "Actions column table header"
 msgid "Actions"
 msgstr "İşlemler"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:54
-#, fuzzy
 msgctxt "Paid earnings column table header"
 msgid "Paid earnings"
 msgstr "Ödenmiş Kazançlar"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:55
-#, fuzzy
 msgctxt "Paid earnings this month column table header"
 msgid "Paid earnings this month"
 msgstr "Bu Ay Ödenen Kazançlar"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:56
-#, fuzzy
 msgctxt "Paid earnings today column table header"
 msgid "Paid earnings today"
 msgstr "Bu Gün Ödenen Kazançlar"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:80
-#, fuzzy
 msgctxt "Unpaid referrals column table header"
 msgid "Unpaid referrals"
 msgstr "Ödenmemiş Referanslar"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:81
-#, fuzzy
 msgctxt "Unpaid referrals this month column table header"
 msgid "Unpaid referrals this month"
 msgstr "Bu Ayki Ödenmemiş Referanslar"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:82
-#, fuzzy
 msgctxt "Unpaid referrals today column table header"
 msgid "Unpaid referrals today"
 msgstr "Bugünkü Ödenmemiş Referanslar"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:105
-#, fuzzy
 msgctxt "Unpaid earnings column table header"
 msgid "Unpaid earnings"
 msgstr "Ödenmemiş Kazançlar"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:106
-#, fuzzy
 msgctxt "Unpaid earnings this month"
 msgid "Unpaid earnings this month"
 msgstr "Bu Ayki Ödenmemiş Kazançlar"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:107
-#, fuzzy
 msgctxt "Unpaid earnings today column table header"
 msgid "Unpaid earnings today"
 msgstr "Bugünkü Ödenmemiş Kazançlar"
 
 #: includes/admin/payouts/class-list-table.php:129
-#, fuzzy
 msgctxt "payouts"
 msgid "All"
 msgstr "Tümü"
 
 #: includes/admin/payouts/class-list-table.php:149
 #: includes/admin/tools/export/class-batch-export-payouts.php:147
-#, fuzzy
 msgctxt "payout"
 msgid "Amount"
 msgstr "Miktar"
 
 #: includes/admin/payouts/class-list-table.php:154
 #: includes/admin/tools/export/class-batch-export-payouts.php:150
-#, fuzzy
 msgctxt "payout"
 msgid "Status"
 msgstr "Durum"
 
 #: includes/admin/payouts/class-list-table.php:155
 #: includes/admin/tools/export/class-batch-export-payouts.php:151
-#, fuzzy
 msgctxt "payout"
 msgid "Date"
 msgstr "Tarih"
 
 #: includes/payout-functions.php:133 includes/payout-functions.php:137
-#, fuzzy
 msgctxt "payout"
 msgid "Paid"
 msgstr "Ödenmiş"
@@ -5538,7 +5201,6 @@ msgstr ""
 
 #: includes/admin/payouts/class-list-table.php:335
 #: includes/admin/payouts/view.php:86
-#, fuzzy
 msgctxt "payout owner ID"
 msgid "(User ID: %d)"
 msgstr "Kullanıcı Numarası"
@@ -5555,7 +5217,6 @@ msgid "None"
 msgstr ""
 
 #: includes/admin/referrals/referrals.php:39
-#, fuzzy
 msgctxt "referrals"
 msgid "Reports"
 msgstr "Raporlar"
@@ -5566,19 +5227,16 @@ msgid "None"
 msgstr ""
 
 #: includes/admin/visits/visits.php:42
-#, fuzzy
 msgctxt "visits"
 msgid "Reports"
 msgstr "Raporlar"
 
 #: includes/class-graph.php:419
-#, fuzzy
 msgctxt "date filter"
 msgid "From"
 msgstr "Burdan"
 
 #: includes/class-graph.php:421
-#, fuzzy
 msgctxt "date filter"
 msgid "To"
 msgstr "Buraya"
@@ -5589,7 +5247,6 @@ msgid "Valid"
 msgstr ""
 
 #: includes/cli/class-command.php:38
-#, fuzzy
 msgctxt "license status"
 msgid "Invalid"
 msgstr "Geçersiz e-posta"
@@ -5640,7 +5297,6 @@ msgid "Disabled"
 msgstr ""
 
 #: includes/cli/class-visit-sub-commands.php:437
-#, fuzzy
 msgctxt "direct traffic"
 msgid "Direct"
 msgstr "Direkt Trafik"

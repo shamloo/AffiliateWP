@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: AffiliateWP\n"
 "Report-Msgid-Bugs-To: https://affiliatewp.com/support/\n"
 "POT-Creation-Date: 2017-02-17 03:04:25+00:00\n"
-"PO-Revision-Date: 2015-04-09 10:01-0600\n"
+"PO-Revision-Date: 2017-06-01 00:41-0600\n"
 "Last-Translator: Chris Christoff <chriscct7@gmail.com>\n"
 "Language-Team: Micahel Uno <michael@michaeluno.jp>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.3\n"
+"X-Generator: Poedit 2.0.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
@@ -61,13 +61,11 @@ msgid "Error"
 msgstr "エラー"
 
 #: includes/REST/class-rest.php:68
-#, fuzzy
 msgid "User ID Required"
 msgstr "ユーザーID"
 
 #. translators: 1: Generate, regenerate, or revoke
 #: includes/REST/class-rest.php:81 includes/REST/class-rest.php:84
-#, fuzzy
 msgid "You do not have permission to %s API keys for this user."
 msgstr "データをエクスポートする権限がありません。"
 
@@ -106,7 +104,6 @@ msgid "Affiliates table column to order by."
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:263
-#, fuzzy
 msgid "The date array or string to query affiliate registrations within."
 msgstr "新規アフィリエイト会員が登録されたらサイト管理者に通知しますか？"
 
@@ -115,7 +112,6 @@ msgid "Use any get_affiliates() arguments to modify the response."
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:297
-#, fuzzy
 msgid "The unique affiliate ID."
 msgstr "アフィリエイト会員ID"
 
@@ -124,7 +120,6 @@ msgid "ID for the user account associated with the affiliate."
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:305
-#, fuzzy
 msgid "The affiliate rate."
 msgstr "アフィリエイト会員のレート"
 
@@ -133,12 +128,10 @@ msgid "The affiliate rate, as it exists in the database"
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:313
-#, fuzzy
 msgid "The affiliate rate, as inherited from global settings."
 msgstr "アフィリエイト会員の紹介率のタイプ。"
 
 #: includes/REST/v1/class-affiliates-endpoints.php:319
-#, fuzzy
 msgid "The affiliate rate type"
 msgstr "アフィリエイト会員の紹介率のタイプ。"
 
@@ -147,19 +140,16 @@ msgid "The affiliate rate type, as it exists in the database"
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:327
-#, fuzzy
 msgid "The affiliate rate type, as inherited from global settings."
 msgstr "アフィリエイト会員の紹介率のタイプ。"
 
 #: includes/REST/v1/class-affiliates-endpoints.php:333
-#, fuzzy
 msgid "The affiliate account email. Synced with the associated user account."
 msgstr ""
 "関連付けられたユーザーアカウントの検索を行うために、アフィリエイト会員の名前"
 "を入力します。"
 
 #: includes/REST/v1/class-affiliates-endpoints.php:338
-#, fuzzy
 msgid "The affiliate payment email address."
 msgstr "あなたのアフィリエイト会員アカウントは無効です"
 
@@ -174,17 +164,14 @@ msgid ""
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:352
-#, fuzzy
 msgid "The affiliate status."
 msgstr "アフィリエイト会員のレート"
 
 #: includes/REST/v1/class-affiliates-endpoints.php:356
-#, fuzzy
 msgid "Unpaid affiliate earnings."
 msgstr "AffiliateWP の設定へ移動"
 
 #: includes/REST/v1/class-affiliates-endpoints.php:360
-#, fuzzy
 msgid "Affiliate earnings."
 msgstr "AffiliateWP の設定へ移動"
 
@@ -193,12 +180,10 @@ msgid "The number of paid referrals associated with the affiliate."
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:368
-#, fuzzy
 msgid "The number of visits associated with the affiliate."
 msgstr "登録されたアフィリエイト会員はありません"
 
 #: includes/REST/v1/class-affiliates-endpoints.php:372
-#, fuzzy
 msgid "The date the affiliate was registered."
 msgstr "アフィリエイト会員のリクエストは拒否されました"
 
@@ -219,17 +204,14 @@ msgid "Use any get_creatives() arguments to modify the response."
 msgstr ""
 
 #: includes/REST/v1/class-creatives-endpoints.php:215
-#, fuzzy
 msgid "The unique creative ID."
 msgstr "この制作品用のテキスト"
 
 #: includes/REST/v1/class-creatives-endpoints.php:219
-#, fuzzy
 msgid "Name of the creative."
 msgstr "この制作品用のテキスト"
 
 #: includes/REST/v1/class-creatives-endpoints.php:223
-#, fuzzy
 msgid "Description for the creative."
 msgstr "この制作品用のテキスト"
 
@@ -238,7 +220,6 @@ msgid "URL the creative points to."
 msgstr ""
 
 #: includes/REST/v1/class-creatives-endpoints.php:231
-#, fuzzy
 msgid "Text for the creative."
 msgstr "この制作品用のテキスト"
 
@@ -247,12 +228,10 @@ msgid "ID of the media library image associated with the creative"
 msgstr ""
 
 #: includes/REST/v1/class-creatives-endpoints.php:239
-#, fuzzy
 msgid "The creative status."
 msgstr "新しい紹介"
 
 #: includes/REST/v1/class-creatives-endpoints.php:243
-#, fuzzy
 msgid "The date the creative was created."
 msgstr "制作品は無事追加されました"
 
@@ -303,7 +282,6 @@ msgid "The unique payout ID."
 msgstr ""
 
 #: includes/REST/v1/class-payouts-endpoints.php:274
-#, fuzzy
 msgid "The affiliate ID associated with the payout."
 msgstr "本当にこの制作品を削除しますか？"
 
@@ -316,7 +294,6 @@ msgid "The number of referrals associated with the affiliate."
 msgstr ""
 
 #: includes/REST/v1/class-payouts-endpoints.php:289
-#, fuzzy
 msgid "Total referrals amount for the payout."
 msgstr "%s には紹介を無効にする"
 
@@ -370,42 +347,34 @@ msgid "Use any get_referrals() arguments to modify the response."
 msgstr ""
 
 #: includes/REST/v1/class-referrals-endpoints.php:270
-#, fuzzy
 msgid "The unique referral ID."
 msgstr "15等、紹介料の額"
 
 #: includes/REST/v1/class-referrals-endpoints.php:274
-#, fuzzy
 msgid "ID for the affiliate account associated with the referral."
 msgstr "あなたのアフィリエイト会員アカウントのリクエストは拒否されました"
 
 #: includes/REST/v1/class-referrals-endpoints.php:278
-#, fuzzy
 msgid "ID for the visit associated with the referral."
 msgstr "紹介の状態を選択します。"
 
 #: includes/REST/v1/class-referrals-endpoints.php:282
-#, fuzzy
 msgid "Referral description."
 msgstr "紹介設定"
 
 #: includes/REST/v1/class-referrals-endpoints.php:286
-#, fuzzy
 msgid "The referral status."
 msgstr "紹介の状態:"
 
 #: includes/REST/v1/class-referrals-endpoints.php:290
-#, fuzzy
 msgid "Referral amount."
 msgstr "紹介率"
 
 #: includes/REST/v1/class-referrals-endpoints.php:294
-#, fuzzy
 msgid "Currency for the referral amount."
 msgstr "紹介率"
 
 #: includes/REST/v1/class-referrals-endpoints.php:298
-#, fuzzy
 msgid "Custom referral data."
 msgstr "紹介が見つかりませんでした。"
 
@@ -427,7 +396,6 @@ msgid "Products associated with the referral."
 msgstr ""
 
 #: includes/REST/v1/class-referrals-endpoints.php:318
-#, fuzzy
 msgid "The date the referral was generated."
 msgstr "15等、紹介料の額"
 
@@ -473,7 +441,6 @@ msgid "The referral status or array of statuses to retrieve visits for."
 msgstr ""
 
 #: includes/REST/v1/class-visits-endpoints.php:207
-#, fuzzy
 msgid "The context under which the visit was created."
 msgstr "設定はインポートされました。"
 
@@ -490,7 +457,6 @@ msgid "The unique visit ID."
 msgstr ""
 
 #: includes/REST/v1/class-visits-endpoints.php:263
-#, fuzzy
 msgid "ID for the affiliate account associated with the visit."
 msgstr "あなたのアフィリエイト会員アカウントは無効です"
 
@@ -499,12 +465,10 @@ msgid "ID for the referral associated with the visit."
 msgstr ""
 
 #: includes/REST/v1/class-visits-endpoints.php:271
-#, fuzzy
 msgid "The visit URL."
 msgstr "ウェブサイトURL"
 
 #: includes/REST/v1/class-visits-endpoints.php:275
-#, fuzzy
 msgid "Visit referrer."
 msgstr "紹介を追加"
 
@@ -513,7 +477,6 @@ msgid "Campaign associated with the visit."
 msgstr ""
 
 #: includes/REST/v1/class-visits-endpoints.php:283
-#, fuzzy
 msgid "Context under which the visit was generated."
 msgstr "設定はインポートされました。"
 
@@ -522,12 +485,10 @@ msgid "Visitor IP address."
 msgstr ""
 
 #: includes/REST/v1/class-visits-endpoints.php:291
-#, fuzzy
 msgid "The date the visit was generated."
 msgstr "設定はインポートされました。"
 
 #: includes/abstracts/class-affwp-reports-tab.php:115
-#, fuzzy
 msgid "Date Filters"
 msgstr "フィルタ"
 
@@ -599,7 +560,6 @@ msgid "%1$s to %2$s"
 msgstr ""
 
 #: includes/admin/AFFWP_Plugin_Updater.php:201
-#, fuzzy
 msgid ""
 "There is a new version of %1$s available. %2$sView version %3$s details%4$s."
 msgstr ""
@@ -607,7 +567,6 @@ msgstr ""
 "の詳細を読む</a>。"
 
 #: includes/admin/AFFWP_Plugin_Updater.php:209
-#, fuzzy
 msgid ""
 "There is a new version of %1$s available. %2$sView version %3$s details%4$s "
 "or %5$supdate now%6$s."
@@ -622,7 +581,6 @@ msgid "You do not have permission to install plugin updates"
 msgstr "プラグインをアップデートをインストールする権限がありません"
 
 #: includes/admin/add-ons.php:33
-#, fuzzy
 msgid "Add-ons for AffiliateWP"
 msgstr "アフィリエイト会員を追加"
 
@@ -849,7 +807,6 @@ msgid "Reports"
 msgstr "レポート"
 
 #: includes/admin/affiliates/class-list-table.php:288
-#, fuzzy
 msgid "Edit User"
 msgstr "紹介を追加"
 
@@ -901,13 +858,11 @@ msgid "Delete Affiliates"
 msgstr "アフィリエイト会員の消去"
 
 #: includes/admin/affiliates/delete.php:43
-#, fuzzy
 msgid "You have specified the following affiliate for deletion:"
 msgid_plural "You have specified the following affiliates for deletion:"
 msgstr[0] "これらのアフィリエイト会員を削除しようとしています:"
 
 #: includes/admin/affiliates/delete.php:62
-#, fuzzy
 msgid "Deleting this affiliate will also delete their referral and visit data."
 msgid_plural ""
 "Deleting these affiliates will also delete their referral and visit data."
@@ -927,7 +882,6 @@ msgid "Edit Affiliate"
 msgstr "アフィリエイト会員情報を編集"
 
 #: includes/admin/affiliates/edit.php:34
-#, fuzzy
 msgid "Affiliate Name"
 msgstr "アフィリエイト会員名"
 
@@ -943,17 +897,14 @@ msgid "A link to the user edit screen for this user."
 msgstr ""
 
 #: includes/admin/affiliates/edit.php:57
-#, fuzzy
 msgid "The affiliate&#8217;s ID. This cannot be changed."
 msgstr "アフィリエイト会員ID。これは変更できません。"
 
 #: includes/admin/affiliates/edit.php:65
-#, fuzzy
 msgid "Affiliate URL"
 msgstr "アフィリエイトURL"
 
 #: includes/admin/affiliates/edit.php:70
-#, fuzzy
 msgid "The affiliate&#8217;s referral URL. This is based on global settings."
 msgstr "アフィリエイト会員の紹介率のタイプ。"
 
@@ -962,27 +913,22 @@ msgid "User ID"
 msgstr "ユーザーID"
 
 #: includes/admin/affiliates/edit.php:83
-#, fuzzy
 msgid "The affiliate&#8217;s user ID. This cannot be changed."
 msgstr "アフィリエイト会員のユーザーID。これは変更できません。"
 
 #: includes/admin/affiliates/edit.php:96
-#, fuzzy
 msgid "The affiliate&#8217;s username. This cannot be changed."
 msgstr "アフィリエイト会員のユーザーID。これは変更できません。"
 
 #: includes/admin/affiliates/edit.php:104
-#, fuzzy
 msgid "Registration Date"
 msgstr "アフィリエイト登録グラフ"
 
 #: includes/admin/affiliates/edit.php:109
-#, fuzzy
 msgid "The affiliate&#8217;s registration date. This cannot be changed."
 msgstr "アフィリエイト会員のユーザーID。これは変更できません。"
 
 #: includes/admin/affiliates/edit.php:117 includes/admin/affiliates/new.php:40
-#, fuzzy
 msgid "Affiliate Status"
 msgstr "アフィリエイト会員のレート"
 
@@ -993,7 +939,6 @@ msgid ""
 msgstr ""
 
 #: includes/admin/affiliates/edit.php:139
-#, fuzzy
 msgid "Website"
 msgstr "ウェブサイトURL"
 
@@ -1014,7 +959,6 @@ msgid "Site Default"
 msgstr "サイト初期値"
 
 #: includes/admin/affiliates/edit.php:166 includes/admin/affiliates/new.php:67
-#, fuzzy
 msgid "The affiliate&#8217;s referral rate type."
 msgstr "アフィリエイト会員の紹介率のタイプ。"
 
@@ -1031,7 +975,6 @@ msgid "Referral Rate"
 msgstr "紹介率"
 
 #: includes/admin/affiliates/edit.php:179 includes/admin/affiliates/new.php:80
-#, fuzzy
 msgid ""
 "The affiliate&#8217;s referral rate, such as 20 for 20%. If left blank, the "
 "site default will be used."
@@ -1044,7 +987,6 @@ msgid "Account Email"
 msgstr "アカウント用メールアドレス"
 
 #: includes/admin/affiliates/edit.php:192
-#, fuzzy
 msgid ""
 "The affiliate&#8217;s account email. Updating this will change the email "
 "address shown on the user&#8217;s profile page."
@@ -1063,7 +1005,6 @@ msgid "Payment Email"
 msgstr "支払い用メールアドレス"
 
 #: includes/admin/affiliates/edit.php:205 includes/admin/affiliates/new.php:93
-#, fuzzy
 msgid ""
 "Affiliate&#8217;s payment email for systems such as PayPal, Moneybookers, or "
 "others. Leave blank to use the affiliate&#8217;s user email."
@@ -1073,17 +1014,14 @@ msgstr ""
 "ドレスを使用する場合は空白にします。"
 
 #: includes/admin/affiliates/edit.php:213
-#, fuzzy
 msgid "Promotion Methods"
 msgstr "プロモーション方法"
 
 #: includes/admin/affiliates/edit.php:218
-#, fuzzy
 msgid "Promotion methods entered by the affiliate during registration."
 msgstr "新規アフィリエイト会員が登録されたらサイト管理者に通知しますか？"
 
 #: includes/admin/affiliates/edit.php:226 includes/admin/affiliates/new.php:101
-#, fuzzy
 msgid "Affiliate Notes"
 msgstr "アフィリエイト会員のレート"
 
@@ -1106,7 +1044,6 @@ msgid "New Affiliate"
 msgstr "新規アフィリエイト会員"
 
 #: includes/admin/affiliates/new.php:18
-#, fuzzy
 msgid ""
 "Use this form to register a new affiliate. Each affiliate is tied directly "
 "to a user account, so if the user account for the affiliate does not yet "
@@ -1130,12 +1067,10 @@ msgstr ""
 "を入力します。"
 
 #: includes/admin/affiliates/new.php:49
-#, fuzzy
 msgid "The status assigned to the affiliate&#8217;s account."
 msgstr "アフィリエイト会員のアカウントを削除する権限がありません。"
 
 #: includes/admin/affiliates/new.php:114
-#, fuzzy
 msgid "Welcome Email"
 msgstr "メールアドレス"
 
@@ -1167,7 +1102,6 @@ msgid "Website URL"
 msgstr "ウェブサイトURL"
 
 #: includes/admin/affiliates/review.php:70
-#, fuzzy
 msgid "Affiliate&#8217;s Website URL"
 msgstr "アフィリエイト会員ウェブサイトURL"
 
@@ -1222,12 +1156,10 @@ msgid "Total visits"
 msgstr "総訪問数"
 
 #: includes/admin/affiliates/view.php:30
-#, fuzzy
 msgid "Conversion rate"
 msgstr "コンバージョン率"
 
 #: includes/admin/affiliates/view.php:86
-#, fuzzy
 msgid "Recent Payouts"
 msgstr "最近の紹介"
 
@@ -1329,13 +1261,11 @@ msgid "Settings updated."
 msgstr "設定は更新されました。"
 
 #: includes/admin/class-notices.php:82
-#, fuzzy
 msgid "%d affiliate was added successfully."
 msgid_plural "%d affiliates were added successfully"
 msgstr[0] "アフィリエイト会員は無事更新されました"
 
 #: includes/admin/class-notices.php:95
-#, fuzzy
 msgid "Affiliate wasn&#8217;t added, please try again."
 msgstr "アフィリエイト会員は追加されませんでした。もう一度お試しください。"
 
@@ -1376,13 +1306,11 @@ msgid "Affiliate request was rejected"
 msgstr "アフィリエイト会員のリクエストは拒否されました"
 
 #: includes/admin/class-notices.php:162
-#, fuzzy
 msgid "%d affiliate from WP Affiliate was added successfully."
 msgid_plural "%d affiliates from WP Affiliate were added successfully"
 msgstr[0] "アフィリエイト会員は無事更新されました"
 
 #: includes/admin/class-notices.php:183
-#, fuzzy
 msgid "%d affiliate from Affiliates Pro was added successfully."
 msgid_plural "%d affiliates from Affiliates Pro were added successfully"
 msgstr[0] "アフィリエイト会員は無事更新されました"
@@ -1412,7 +1340,6 @@ msgid "Referral deletion failed, please try again"
 msgstr "紹介の消去に失敗しました。もう一度お試し下さい"
 
 #: includes/admin/class-notices.php:234
-#, fuzzy
 msgid "A payout has been created."
 msgstr "新しい紹介"
 
@@ -1445,7 +1372,6 @@ msgid "Settings successfully imported"
 msgstr "設定はインポートされました。"
 
 #: includes/admin/class-notices.php:282
-#, fuzzy
 msgid ""
 "Your license key expired on %s. Please <a href=\"%s\" target=\"_blank"
 "\">renew your license key</a>."
@@ -1593,7 +1519,6 @@ msgid "Description"
 msgstr "詳細"
 
 #: includes/admin/creatives/edit.php:41 includes/admin/creatives/new.php:39
-#, fuzzy
 msgid ""
 "An optional description for this creative. This is visible to affiliates and "
 "is displayed below the creative."
@@ -1602,7 +1527,6 @@ msgstr ""
 "示されます。"
 
 #: includes/admin/creatives/edit.php:54 includes/admin/creatives/new.php:52
-#, fuzzy
 msgid ""
 "The URL this creative should link to. Based on your Referral Settings, the "
 "affiliate&#8217;s ID or username will be automatically appended."
@@ -1677,7 +1601,6 @@ msgstr "最近の紹介の訪問"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:81
 #: templates/dashboard-tab-visits.php:49
-#, fuzzy
 msgid "Visit converted: %s"
 msgstr "コンバート済"
 
@@ -1742,7 +1665,6 @@ msgstr "アフィリエイト会員"
 #: includes/admin/payouts/class-list-table.php:152
 #: includes/admin/payouts/view.php:72
 #: includes/admin/tools/export/class-batch-export-payouts.php:148
-#, fuzzy
 msgid "Generated By"
 msgstr "URLを生成する"
 
@@ -1750,7 +1672,6 @@ msgstr "URLを生成する"
 #: includes/admin/payouts/view.php:103
 #: includes/admin/tools/export/class-batch-export-payouts.php:149
 #: templates/dashboard-tab-payouts.php:36
-#, fuzzy
 msgid "Payout Method"
 msgstr "プロモーション方法"
 
@@ -1760,7 +1681,6 @@ msgid "(none)"
 msgstr ""
 
 #: includes/admin/payouts/class-list-table.php:422
-#, fuzzy
 msgid "View"
 msgstr "%s を閲覧"
 
@@ -1770,18 +1690,15 @@ msgid "Retry Payment"
 msgstr ""
 
 #: includes/admin/payouts/class-list-table.php:513
-#, fuzzy
 msgid "No payouts found."
 msgstr "訪問は見つかりませんでした。"
 
 #: includes/admin/payouts/payouts.php:39
 #: includes/admin/reports/class-reports-admin.php:58
-#, fuzzy
 msgid "Manage Referrals"
 msgstr "未払の紹介"
 
 #: includes/admin/payouts/screen-options.php:32
-#, fuzzy
 msgid "Number of payouts per page:"
 msgstr "紹介の記録はまだありません"
 
@@ -1808,7 +1725,6 @@ msgid "Payout Date"
 msgstr ""
 
 #: includes/admin/payouts/view.php:167
-#, fuzzy
 msgid "Referrals Paid"
 msgstr "紹介"
 
@@ -1917,7 +1833,6 @@ msgid "<a href=\"%s\">Post an issue</a> on <a href=\"%s\">GitHub</a>."
 msgstr "<a href=\"%s\">イシュー</a>の投稿を<a href=\"%s\">GitHub</a>で行う。"
 
 #: includes/admin/referrals/contextual-help.php:39
-#, fuzzy
 msgid "This screen provides access to your site&#8217;s referral history."
 msgstr "この画面からあなたのサイトの紹介履歴にアクセスすることができます。"
 
@@ -1969,23 +1884,19 @@ msgid "Referrals can be searched in several different ways:"
 msgstr "紹介を検索するにはいくつかの方法があります。"
 
 #: includes/admin/referrals/contextual-help.php:56
-#, fuzzy
 msgid "You can enter the referral&#8217;s ID number"
 msgstr "紹介のID番号を入力できます。"
 
 #: includes/admin/referrals/contextual-help.php:57
-#, fuzzy
 msgid "You can enter the referral reference prefixed by &#8220;ref:&#8221;"
 msgstr "紹介参照キーワードを接頭語 'ref:' をつけて入力できます"
 
 #: includes/admin/referrals/contextual-help.php:58
-#, fuzzy
 msgid "You can enter the referral context prefixed by &#8220;context:&#8221;"
 msgstr "紹介文脈キーワードを接頭語 'context:' をつけて入力できます"
 
 #: includes/admin/referrals/contextual-help.php:59
 #: includes/admin/visits/contextual-help.php:60
-#, fuzzy
 msgid ""
 "You can enter the affiliate&#8217;s ID number prefixed by &#8220;affiliate:"
 "&#8221;"
@@ -1993,7 +1904,6 @@ msgstr "アフィリエイト会員のID番号を接頭語 'affiliate:' をつ�
 
 #: includes/admin/referrals/contextual-help.php:60
 #: includes/admin/visits/contextual-help.php:61
-#, fuzzy
 msgid "You can enter a URL campaign prefixed by &#8220;campaign:&#8221;"
 msgstr "紹介文脈キーワードを接頭語 'context:' をつけて入力できます"
 
@@ -2002,7 +1912,6 @@ msgid "Exporting Referrals"
 msgstr "紹介をエクスポート中"
 
 #: includes/admin/referrals/contextual-help.php:68
-#, fuzzy
 msgid ""
 "Referrals can be exported directly to a CSV file in order to make it easier "
 "for your own accounting needs and for you to payout your affiliates&#8217;s "
@@ -2012,7 +1921,6 @@ msgstr ""
 "紹介データはCSVファイルでエクスポートできます。"
 
 #: includes/admin/referrals/contextual-help.php:69
-#, fuzzy
 msgid ""
 "The CSV file generated is structured properly for PayPal&#8217;s Mass "
 "Payment system so you can easily payout all of your affiliates at once via "
@@ -2023,7 +1931,6 @@ msgstr ""
 "ができます。"
 
 #: includes/admin/referrals/edit.php:12
-#, fuzzy
 msgid "Edit Referral"
 msgstr "紹介を追加"
 
@@ -2033,7 +1940,6 @@ msgid "Referral ID"
 msgstr "紹介ID"
 
 #: includes/admin/referrals/edit.php:36
-#, fuzzy
 msgid "The referral ID. This cannot be changed."
 msgstr "アフィリエイト会員ID。これは変更できません。"
 
@@ -2044,20 +1950,17 @@ msgid "%1$s (ID: #%2$s)"
 msgstr ""
 
 #: includes/admin/referrals/edit.php:67
-#, fuzzy
 msgid ""
 "The name and ID of the affiliate who generated this referral. This "
 "association cannot be changed."
 msgstr "アフィリエイト会員のユーザーID。これは変更できません。"
 
 #: includes/admin/referrals/edit.php:75
-#, fuzzy
 msgid "Payout"
 msgstr "最近の紹介"
 
 #. translators: 1: Payout total amount with view link
 #: includes/admin/referrals/edit.php:84
-#, fuzzy
 msgid "Total: %1$s"
 msgstr "合計"
 
@@ -2085,7 +1988,6 @@ msgid "The amount of the referral, such as 15."
 msgstr "15等、紹介料の額"
 
 #: includes/admin/referrals/edit.php:159
-#, fuzzy
 msgid "Visit"
 msgstr "訪問"
 
@@ -2114,7 +2016,6 @@ msgid "Context"
 msgstr "文脈"
 
 #: includes/admin/referrals/edit.php:234
-#, fuzzy
 msgid ""
 "Context for this referral (optional). Usually this is used to identify the "
 "payment system or integration that was used for the transaction."
@@ -2132,7 +2033,6 @@ msgid "Select the status of the referral."
 msgstr "紹介の状態を選択します。"
 
 #: includes/admin/referrals/edit.php:276
-#, fuzzy
 msgid "Update Referral"
 msgstr "未払の紹介"
 
@@ -2197,7 +2097,6 @@ msgstr ""
 "&rarr; エクスポート</a> ページへ行ってください。"
 
 #: includes/admin/referrals/referrals.php:72
-#, fuzzy
 msgid ""
 "To generate a payout for a specific affiliate, enter the affiliate&#8217;s "
 "login name, first name, or last name. Leave blank to generate a payout for "
@@ -2212,7 +2111,6 @@ msgid "Generate CSV File"
 msgstr "CSVファイルを生成する"
 
 #: includes/admin/referrals/screen-options.php:24
-#, fuzzy
 msgid "Number of referrals per page:"
 msgstr "紹介の記録はまだありません"
 
@@ -2221,22 +2119,18 @@ msgid "Affiliate Registrations"
 msgstr "アフィリエイト会員登録"
 
 #: includes/admin/reports/class-reports-admin.php:65
-#, fuzzy
 msgid "Manage Affiliates"
 msgstr "アフィリエイト会員の追加"
 
 #: includes/admin/reports/class-reports-admin.php:70
-#, fuzzy
 msgid "View Payouts"
 msgstr "最近の紹介"
 
 #: includes/admin/reports/class-reports-admin.php:77
-#, fuzzy
 msgid "Manage Visits"
 msgstr "訪問の検索"
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:38
-#, fuzzy
 msgid "Total Affiliates"
 msgstr "アフィリエイト会員をエクスポート"
 
@@ -2248,23 +2142,19 @@ msgstr ""
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:71
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:135
-#, fuzzy
 msgid "Affiliate #%d"
 msgstr "アフィリエイト会員: #%d %s"
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:75
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:84
-#, fuzzy
 msgid "Top Earning Affiliate"
 msgstr "アフィリエイト会員情報を編集"
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:99
-#, fuzzy
 msgid "New Affiliates"
 msgstr "新規アフィリエイト会員"
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:139
-#, fuzzy
 msgid "%d referral"
 msgid_plural "%d referrals"
 msgstr[0] "紹介を追加"
@@ -2274,7 +2164,6 @@ msgid "Highest Converting Affiliate"
 msgstr ""
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:178
-#, fuzzy
 msgid "Average Payout"
 msgstr "紹介率"
 
@@ -2318,13 +2207,11 @@ msgid "Most Active Campaign (%s)"
 msgstr ""
 
 #: includes/admin/reports/tabs/class-referrals-reports-tab.php:81
-#, fuzzy
 msgid "Average Referral Amount"
 msgstr "紹介率"
 
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:38
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:45
-#, fuzzy
 msgid "Total Visits"
 msgstr "総訪問数"
 
@@ -2345,7 +2232,6 @@ msgid "Top Referrer"
 msgstr ""
 
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:113
-#, fuzzy
 msgid "Direct Traffic"
 msgstr "直接のやりとり"
 
@@ -2398,7 +2284,6 @@ msgid "The URL variable for referral URLs. For example: <strong>%s</strong>."
 msgstr "紹介用URLに使用されるURL内変数。例: <strong>%s</strong>。"
 
 #: includes/admin/settings/class-settings.php:477
-#, fuzzy
 msgid "Default Referral Format"
 msgstr "商品毎の紹介料レート"
 
@@ -2414,19 +2299,16 @@ msgid "ID"
 msgstr "ID"
 
 #: includes/admin/settings/class-settings.php:494
-#, fuzzy
 msgid "Pretty Affiliate URLs"
 msgstr "アフィリエイトURL"
 
 #: includes/admin/settings/class-settings.php:495
-#, fuzzy
 msgid ""
 "Show pretty affiliate referral URLs to affiliates. For example: <strong>%s "
 "or %s</strong>"
 msgstr "紹介用URLに使用されるURL内変数。例: <strong>%s</strong>。"
 
 #: includes/admin/settings/class-settings.php:499
-#, fuzzy
 msgid "Credit Last Referrer"
 msgstr "紹介を追加"
 
@@ -2435,14 +2317,12 @@ msgid "Credit the last affiliate who referred the customer."
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:505
-#, fuzzy
 msgid ""
 "Choose a referral rate type. Referrals can be based on either a percentage "
 "or a flat rate amount."
 msgstr "紹介料はパーセンテージもしくは定額どちらを基準にしますか？"
 
 #: includes/admin/settings/class-settings.php:511
-#, fuzzy
 msgid ""
 "The default referral rate. A percentage if the Referral Rate Type is set to "
 "Percentage, a flat amount otherwise. Referral rates can also be set for each "
@@ -2456,7 +2336,6 @@ msgid "Exclude Shipping"
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:519
-#, fuzzy
 msgid "Exclude shipping costs from referral calculations."
 msgstr "紹介料の計算から税は抜きますか？"
 
@@ -2465,7 +2344,6 @@ msgid "Exclude Tax"
 msgstr "税抜き"
 
 #: includes/admin/settings/class-settings.php:524
-#, fuzzy
 msgid "Exclude taxes from referral calculations."
 msgstr "紹介料の計算から税は抜きますか？"
 
@@ -2474,7 +2352,6 @@ msgid "Cookie Expiration"
 msgstr "クッキーの保存時間"
 
 #: includes/admin/settings/class-settings.php:529
-#, fuzzy
 msgid "Enter how many days the referral tracking cookie should be valid for."
 msgstr "何日間紹介用追跡クッキーは有効にしますか？"
 
@@ -2503,12 +2380,10 @@ msgstr ""
 "ります。"
 
 #: includes/admin/settings/class-settings.php:546
-#, fuzzy
 msgid "Currency Symbol Position"
 msgstr "通貨記号の位置"
 
 #: includes/admin/settings/class-settings.php:547
-#, fuzzy
 msgid "Choose the location of the currency symbol."
 msgstr "通貨記号の位置を選択します。"
 
@@ -2537,12 +2412,10 @@ msgid "The symbol (usually , or .) to separate decimal points"
 msgstr "小数点区切り記号（通常は「,」か「.」）"
 
 #: includes/admin/settings/class-settings.php:569
-#, fuzzy
 msgid "Affiliate Form Settings"
 msgstr "AffiliateWP の設定へ移動"
 
 #: includes/admin/settings/class-settings.php:573
-#, fuzzy
 msgid "Affiliate Area Forms"
 msgstr "アフィリエイト会員エリア"
 
@@ -2554,17 +2427,14 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:577
-#, fuzzy
 msgid "Affiliate Registration Form and Affiliate Login Form"
 msgstr "登録フォームでのエラー時の入力値の保持"
 
 #: includes/admin/settings/class-settings.php:578
-#, fuzzy
 msgid "Affiliate Registration Form Only"
 msgstr "アフィリエイト会員登録"
 
 #: includes/admin/settings/class-settings.php:579
-#, fuzzy
 msgid "Affiliate Login Form Only"
 msgstr "アフィリエイト用クーポン？"
 
@@ -2574,7 +2444,6 @@ msgid "Integrations"
 msgstr "統合"
 
 #: includes/admin/settings/class-settings.php:597
-#, fuzzy
 msgid ""
 "Choose the integrations to enable. If you are not using any of these, you "
 "may use the <strong>[affiliate_conversion_script]</strong> shortcode to "
@@ -2587,12 +2456,10 @@ msgstr ""
 "ついては、<a href=\"%s\" target=\"_blank\">マニュアル</a> を御覧ください。"
 
 #: includes/admin/settings/class-settings.php:613
-#, fuzzy
 msgid "Disable All Emails"
 msgstr "紹介を無効にする"
 
 #: includes/admin/settings/class-settings.php:614
-#, fuzzy
 msgid "Disable all email notifications."
 msgstr "新しい紹介通知を有効にする"
 
@@ -2613,7 +2480,6 @@ msgid "Choose a template to use for email messages."
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:629
-#, fuzzy
 msgid "From Name"
 msgstr "あなたの名前"
 
@@ -2622,7 +2488,6 @@ msgid "The name that emails come from. This is usually your site name."
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:635
-#, fuzzy
 msgid "From Email"
 msgstr "メールアドレス"
 
@@ -2633,12 +2498,10 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:641
-#, fuzzy
 msgid "Notify Admin"
 msgstr "管理人に通知"
 
 #: includes/admin/settings/class-settings.php:642
-#, fuzzy
 msgid "Notify site admin of new affiliate registrations."
 msgstr "新規アフィリエイト会員が登録されたらサイト管理者に通知しますか？"
 
@@ -2672,12 +2535,10 @@ msgid "A new affiliate has registered on your site, %s"
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:655
-#, fuzzy
 msgid "Name: "
 msgstr "名前:%s"
 
 #: includes/admin/settings/class-settings.php:658
-#, fuzzy
 msgid "Application Accepted Email Subject"
 msgstr "アフィリエイト会員の申請は承認されました"
 
@@ -2693,7 +2554,6 @@ msgid "Affiliate Application Accepted"
 msgstr "アフィリエイト会員の申請は承認されました"
 
 #: includes/admin/settings/class-settings.php:664
-#, fuzzy
 msgid "Application Accepted Email Content"
 msgstr "アフィリエイト会員の申請は承認されました"
 
@@ -2705,29 +2565,19 @@ msgstr ""
 
 #: includes/admin/settings/class-settings.php:667
 #: includes/admin/settings/class-settings.php:679
-#, fuzzy
 msgid "Congratulations {name}!"
-msgstr ""
-"おめでとう御座います %s!\n"
-"\n"
+msgstr "おめでとう御座います %s!"
 
 #: includes/admin/settings/class-settings.php:667
 #: includes/emails/actions.php:119
-#, fuzzy
 msgid "Your affiliate application on %s has been accepted!"
-msgstr ""
-"%s に対するあなたのアフィリエイト会員申請は承認されました！\n"
-"\n"
+msgstr "%s に対するあなたのアフィリエイト会員申請は承認されました！"
 
 #: includes/admin/settings/class-settings.php:667
-#, fuzzy
 msgid "Log into your affiliate area at"
-msgstr ""
-"%s であなたのアフィリエイトエリアにログインして下さい\n"
-"\n"
+msgstr "%s であなたのアフィリエイトエリアにログインして下さい"
 
 #: includes/admin/settings/class-settings.php:670
-#, fuzzy
 msgid "New Referral Email Subject"
 msgstr "新しい紹介"
 
@@ -2743,7 +2593,6 @@ msgid "Referral Awarded!"
 msgstr "紹介が授与されました！"
 
 #: includes/admin/settings/class-settings.php:676
-#, fuzzy
 msgid "New Referral Email Content"
 msgstr "新しい紹介"
 
@@ -2754,44 +2603,34 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:679
-#, fuzzy
 msgid "You have been awarded a new referral of"
-msgstr ""
-"%s の新規紹介料が授与されました(%s)！\n"
-"\n"
+msgstr "%s の新規紹介料が授与されました(%s)！"
 
 #: includes/admin/settings/class-settings.php:679
-#, fuzzy
 msgid "on %s!"
 msgstr "バージョン %s"
 
 #: includes/admin/settings/class-settings.php:679
-#, fuzzy
 msgid ""
 "Log into your affiliate area to view your earnings or disable these "
 "notifications:"
 msgstr ""
 "収益を閲覧するには、あなたのアフィリエイト会員エリアにログインして下さい。も"
-"しくはこれらの通知を無効にします:%s\n"
-"\n"
+"しくはこれらの通知を無効にします:%s"
 
 #: includes/admin/settings/class-settings.php:693
-#, fuzzy
 msgid "Allow Affiliate Registration"
 msgstr "アフィリエイト会員の登録を許可する"
 
 #: includes/admin/settings/class-settings.php:694
-#, fuzzy
 msgid "Allow users to register affiliate accounts for themselves."
 msgstr "アフィリエイター自らアカウントを登録できるようにしますか？"
 
 #: includes/admin/settings/class-settings.php:698
-#, fuzzy
 msgid "Require Approval"
 msgstr "承認を必要にする"
 
 #: includes/admin/settings/class-settings.php:699
-#, fuzzy
 msgid ""
 "Require that Pending affiliate accounts must be approved before they can "
 "begin earning referrals."
@@ -2804,7 +2643,6 @@ msgid "Auto Register New Users"
 msgstr "自動新規ユーザー登録"
 
 #: includes/admin/settings/class-settings.php:704
-#, fuzzy
 msgid "Automatically register new users as affiliates."
 msgstr "自動的に新規ユーザーをアフィリエイト会員に登録しますか？"
 
@@ -2817,7 +2655,6 @@ msgid "Add a logout link to the Affiliate Area."
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:713
-#, fuzzy
 msgid "Default Referral URL"
 msgstr "商品毎の紹介料レート"
 
@@ -2855,12 +2692,10 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:733
-#, fuzzy
 msgid "Reject Unpaid Referrals on Refund"
 msgstr "商品返済の際、未払いの紹介は拒否しますか？"
 
 #: includes/admin/settings/class-settings.php:734
-#, fuzzy
 msgid ""
 "Automatically reject Unpaid referrals when the originating purchase is "
 "refunded or revoked."
@@ -2869,12 +2704,10 @@ msgstr ""
 "紹介料未払いの紹介事案は自動的に拒否しますか？"
 
 #: includes/admin/settings/class-settings.php:738
-#, fuzzy
 msgid "Use Fallback Referral Tracking Method"
 msgstr "フォールバック紹介トラッキングメソッドを使用しますか？"
 
 #: includes/admin/settings/class-settings.php:739
-#, fuzzy
 msgid ""
 "The method used to track referral links can fail on sites that have jQuery "
 "errors. Enable Fallback Tracking if referrals are not being tracked properly."
@@ -2883,12 +2716,10 @@ msgstr ""
 "んと記録されていない場合、この項目をチェックします。"
 
 #: includes/admin/settings/class-settings.php:743
-#, fuzzy
 msgid "Ignore Referrals with Zero Amount"
 msgstr "紹介率"
 
 #: includes/admin/settings/class-settings.php:744
-#, fuzzy
 msgid ""
 "Ignore referrals with a zero amount. This can be useful for multi-price "
 "products that start at zero, or if a discount was used which resulted in a "
@@ -2912,7 +2743,6 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:753
-#, fuzzy
 msgid "Referral URL Blacklist"
 msgstr "紹介URLの訪問"
 
@@ -2934,7 +2764,6 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:764
-#, fuzzy
 msgid "Remove Data on Uninstall"
 msgstr "アンインストール時にデータを消去しますか？"
 
@@ -2943,7 +2772,6 @@ msgid "Remove all saved data for AffiliateWP when the plugin is deleted."
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:795
-#, fuzzy
 msgid "Required Registration Fields"
 msgstr "登録を調停する"
 
@@ -2959,7 +2787,6 @@ msgid "How will you promote us?"
 msgstr "どのようにして私達をプロモーションしますか？"
 
 #: includes/admin/settings/class-settings.php:830
-#, fuzzy
 msgid "Application Pending Email Subject"
 msgstr "アフィリエイト会員の申請は承認されました"
 
@@ -2969,14 +2796,10 @@ msgstr ""
 
 #: includes/admin/settings/class-settings.php:833
 #: includes/emails/actions.php:165
-#, fuzzy
 msgid "Your Affiliate Application Is Being Reviewed"
-msgstr ""
-"%s に対するあなたのアフィリエイト会員申請は承認されました！\n"
-"\n"
+msgstr "%s に対するあなたのアフィリエイト会員申請は承認されました！"
 
 #: includes/admin/settings/class-settings.php:836
-#, fuzzy
 msgid "Application Pending Email Content"
 msgstr "アフィリエイト会員の申請は承認されました"
 
@@ -3003,7 +2826,6 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:842
-#, fuzzy
 msgid "Application Rejection Email Subject"
 msgstr "アフィリエイト会員の申請は承認されました"
 
@@ -3013,14 +2835,10 @@ msgstr ""
 
 #: includes/admin/settings/class-settings.php:845
 #: includes/emails/actions.php:204
-#, fuzzy
 msgid "Your Affiliate Application Has Been Rejected"
-msgstr ""
-"%s に対するあなたのアフィリエイト会員申請は承認されました！\n"
-"\n"
+msgstr "%s に対するあなたのアフィリエイト会員申請は承認されました！"
 
 #: includes/admin/settings/class-settings.php:848
-#, fuzzy
 msgid "Application Rejection Email Content"
 msgstr "アフィリエイト会員の申請は承認されました"
 
@@ -3042,7 +2860,6 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:1021
-#, fuzzy
 msgid ""
 "Your license key is globally defined via <code>AFFILIATEWP_LICENSE_KEY</"
 "code> set in <code>wp-config.php</code>.<br />It cannot be modified from "
@@ -3089,7 +2906,6 @@ msgid "Upload File"
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:1233
-#, fuzzy
 msgid ""
 "Your license key is globally defined via <code>AFFILIATEWP_LICENSE_KEY</"
 "code> set in <code>wp-config.php</code>.<br />It cannot be modified from "
@@ -3110,7 +2926,6 @@ msgid "General"
 msgstr "一般"
 
 #: includes/admin/settings/display-settings.php:62
-#, fuzzy
 msgid "Emails"
 msgstr "メールアドレス"
 
@@ -3119,7 +2934,6 @@ msgid "Misc"
 msgstr "その他"
 
 #: includes/admin/tools/class-batch-recount-affiliate-stats.php:156
-#, fuzzy
 msgid "%s affiliate&#8217;s was successfully processed."
 msgid_plural "%s affiliates&#8217; were successfully processed."
 msgstr[0] "アフィリエイト会員は無事更新されました"
@@ -3134,7 +2948,6 @@ msgid "API Keys"
 msgstr ""
 
 #: includes/admin/tools/class-rest-consumers-table.php:61
-#, fuzzy
 msgid "No API consumers found."
 msgstr "お探しのユーザーは見つかりませんでした。"
 
@@ -3159,7 +2972,6 @@ msgid "Secret Key"
 msgstr ""
 
 #: includes/admin/tools/class-rest-consumers-table.php:228
-#, fuzzy
 msgid "Enter username"
 msgstr "無効なユーザー名"
 
@@ -3187,12 +2999,10 @@ msgid "Date Registered"
 msgstr "登録日"
 
 #: includes/admin/tools/export/class-batch-export-affiliates.php:117
-#, fuzzy
 msgid "No valid affiliate status was selected for export."
 msgstr "消去するためのアフィリエイトIDが指定されていません"
 
 #: includes/admin/tools/export/class-batch-export-affiliates.php:187
-#, fuzzy
 msgid "%s affiliate was successfully exported."
 msgid_plural "%s affiliates were successfully exported."
 msgstr[0] "アフィリエイト会員は無事更新されました"
@@ -3202,7 +3012,6 @@ msgid "No valid payout status was selected for export."
 msgstr ""
 
 #: includes/admin/tools/export/class-batch-export-payouts.php:274
-#, fuzzy
 msgid "%s payout log was successfully exported."
 msgid_plural "%s payout logs were successfully exported."
 msgstr[0] "制作品は無事追加されました"
@@ -3218,7 +3027,6 @@ msgid "No valid referral status was selected for export."
 msgstr ""
 
 #: includes/admin/tools/export/class-batch-export-referrals.php:247
-#, fuzzy
 msgid "%s referral was successfully exported."
 msgid_plural "%s referrals were successfully exported."
 msgstr[0] "紹介は無事追加されました"
@@ -3234,7 +3042,6 @@ msgid "No unpaid referrals were found matching your criteria."
 msgstr ""
 
 #: includes/admin/tools/export/class-batch-generate-payouts.php:299
-#, fuzzy
 msgid "A payout log for %s affiliate was successfully generated."
 msgid_plural "A payout log for %s affiliates was successfully generated."
 msgstr[0] "アフィリエイト会員は無事更新されました"
@@ -3277,7 +3084,6 @@ msgid "System Info"
 msgstr ""
 
 #: includes/admin/tools/tools.php:96
-#, fuzzy
 msgid "Debug Assistant"
 msgstr "移行アシスタント"
 
@@ -3292,7 +3098,6 @@ msgstr ""
 "す。"
 
 #: includes/admin/tools/tools.php:157
-#, fuzzy
 msgid ""
 "Enter the name of the affiliate or begin typing to perform a search based on "
 "the affiliate&#8217;s name."
@@ -3315,7 +3120,6 @@ msgid "User Accounts"
 msgstr "ユーザーアカウント"
 
 #: includes/admin/tools/tools.php:208
-#, fuzzy
 msgid ""
 "Use this tool to create affiliate accounts for each of your existing "
 "WordPress user accounts that belong to the selected roles below."
@@ -3334,7 +3138,6 @@ msgid "Select User Roles"
 msgstr ""
 
 #: includes/admin/tools/tools.php:221
-#, fuzzy
 msgid "Create Affiliate Accounts for Users"
 msgstr "アフィリエイト会員のアカウントを作成"
 
@@ -3352,7 +3155,6 @@ msgid ""
 msgstr ""
 
 #: includes/admin/tools/tools.php:237
-#, fuzzy
 msgid ""
 "Use this tool to migrate existing affiliate / referral data from Affiliates "
 "Pro to AffiliateWP."
@@ -3361,7 +3163,6 @@ msgstr ""
 "タを移行させるにはこのツールを使用します。"
 
 #: includes/admin/tools/tools.php:238
-#, fuzzy
 msgid ""
 "<strong>NOTE:</strong> This tool should only ever be used on a fresh "
 "install. If you have already collected affiliate or referral data, do not "
@@ -3376,7 +3177,6 @@ msgid "Migrate Data from Affiliates Pro"
 msgstr "Affiliates Pro からデータを移行する"
 
 #: includes/admin/tools/tools.php:253
-#, fuzzy
 msgid ""
 "Use this tool to migrate existing affiliate accounts from WP Affiliate to "
 "AffiliateWP."
@@ -3414,7 +3214,6 @@ msgid "Export referrals to a CSV file."
 msgstr "紹介の記録をCSVファイルにエクスポートする。"
 
 #: includes/admin/tools/tools.php:317 includes/admin/tools/tools.php:341
-#, fuzzy
 msgid ""
 "To search for an affiliate, enter the affiliate&#8217;s login name, first "
 "name, or last name. Leave blank to export referrals for all affiliates."
@@ -3424,12 +3223,10 @@ msgstr ""
 "白にします。"
 
 #: includes/admin/tools/tools.php:327
-#, fuzzy
 msgid "Export Payouts"
 msgstr "総訪問数"
 
 #: includes/admin/tools/tools.php:329
-#, fuzzy
 msgid "Export payouts to a CSV file."
 msgstr "アフィリエイト会員のデータをCSVファイルでエクスポートする。"
 
@@ -3472,7 +3269,6 @@ msgid "Debug Log"
 msgstr ""
 
 #: includes/admin/tools/tools.php:457
-#, fuzzy
 msgid "Use this tool to help debug various operations in AffiliateWP."
 msgstr ""
 "WP Affiliates から AffiliateWP に既存のアフィリエイト会員アカウントを移行させ"
@@ -3483,7 +3279,6 @@ msgid "Clear Debug Log"
 msgstr ""
 
 #: includes/admin/tools/tools.php:531
-#, fuzzy
 msgid "Invalid batch ID."
 msgstr "無効なメールアドレス"
 
@@ -3492,7 +3287,6 @@ msgid "Invalid batch export class."
 msgstr ""
 
 #: includes/admin/tools/upgrades/class-batch-upgrade-recount-affiliate-stats.php:38
-#, fuzzy
 msgid "Your database has been successfully upgraded. %s"
 msgstr "紹介は無事追加されました"
 
@@ -3501,17 +3295,14 @@ msgid "Dismiss Notice"
 msgstr ""
 
 #: includes/admin/user-profile.php:22
-#, fuzzy
 msgid "Affiliate Registration Status"
 msgstr "アフィリエイト会員登録"
 
 #: includes/admin/user-profile.php:40
-#, fuzzy
 msgid "Not Registered"
 msgstr "登録日"
 
 #: includes/admin/user-profile.php:46
-#, fuzzy
 msgid "Affiliate Actions"
 msgstr "AffiliateWP の設定へ移動"
 
@@ -3520,7 +3311,6 @@ msgid "Register"
 msgstr "登録"
 
 #: includes/admin/user-profile.php:80 includes/class-register.php:506
-#, fuzzy
 msgid "Disable Affiliate Email"
 msgstr "紹介を無効にする"
 
@@ -3533,13 +3323,11 @@ msgid "No user roles were selected for migration."
 msgstr ""
 
 #: includes/admin/utilities/class-batch-migrate-users.php:167
-#, fuzzy
 msgid "%s affiliate was added successfully."
 msgid_plural "%s affiliates were added successfully."
 msgstr[0] "アフィリエイト会員は無事更新されました"
 
 #: includes/admin/utilities/class-batch-migrate-wp-affiliate.php:209
-#, fuzzy
 msgid "%s affiliate was successfully converted."
 msgid_plural "%s affiliates were successfully converted."
 msgstr[0] "アフィリエイト会員は無事更新されました"
@@ -3557,7 +3345,6 @@ msgid "An invalid batch class handler file has been supplied."
 msgstr ""
 
 #: includes/admin/utilities/class-batch-process.php:143
-#, fuzzy
 msgid "%s item was successfully processed."
 msgid_plural "%s items were successfully processed."
 msgstr[0] "設定はインポートされました。"
@@ -3591,7 +3378,6 @@ msgid "No visits found."
 msgstr "訪問は見つかりませんでした。"
 
 #: includes/admin/visits/contextual-help.php:39
-#, fuzzy
 msgid "This screen provides access to your site&#8217;s visit history."
 msgstr "この画面からあなたのサイトの訪問履歴にアクセスすることができます。"
 
@@ -3626,7 +3412,6 @@ msgid ""
 msgstr "<strong>紹介ID</strong>: この訪問(もしある場合)から発生した紹介のID"
 
 #: includes/admin/visits/contextual-help.php:44
-#, fuzzy
 msgid ""
 "<strong>Context</strong>: this is the context of how the visit was "
 "generated, if set."
@@ -3671,14 +3456,12 @@ msgid ""
 msgstr "特定のURLからの訪問を探すための部分的なURLを入力することができます"
 
 #: includes/admin/visits/contextual-help.php:58
-#, fuzzy
 msgid ""
 "You can enter the referral&#8217;s ID number prefixed by &#8220;referral:"
 "&#8221;"
 msgstr "紹介のID番号を接頭語 'referal:' をつけて入力できます"
 
 #: includes/admin/visits/contextual-help.php:59
-#, fuzzy
 msgid "You can enter a visit context prefixed by &#8220;context:&#8221;"
 msgstr "紹介文脈キーワードを接頭語 'context:' をつけて入力できます"
 
@@ -3691,7 +3474,6 @@ msgid "Filter by status"
 msgstr ""
 
 #: includes/admin/visits/visits.php:65
-#, fuzzy
 msgid "Unconverted"
 msgstr "コンバート済"
 
@@ -3716,7 +3498,6 @@ msgid "Please enter a password"
 msgstr "パスワードを入力して下さい"
 
 #: includes/class-login.php:80
-#, fuzzy
 msgid "Incorrect username or password"
 msgstr "間違ったパスワード"
 
@@ -3737,7 +3518,6 @@ msgid "Paid Referral Earnings"
 msgstr "支払い済みの紹介料"
 
 #: includes/class-register.php:77
-#, fuzzy
 msgid "Please enter a valid website URL"
 msgstr "ウェブサイトのURLを入力してください"
 
@@ -3762,7 +3542,6 @@ msgid "Email address already taken"
 msgstr "このメールアドレスはすでに使われています"
 
 #: includes/class-register.php:107
-#, fuzzy
 msgid "Invalid account email"
 msgstr "無効な支払い用メールアドレス"
 
@@ -3783,7 +3562,6 @@ msgid "Please verify that you are not a robot"
 msgstr ""
 
 #: includes/class-register.php:146
-#, fuzzy
 msgid "Nice try honey bear, don&#8217;t touch our honey"
 msgstr "惜しいね、くまのプーさん。私達の蜂蜜には触らないでね。"
 
@@ -3800,7 +3578,6 @@ msgid "Please enter a website URL"
 msgstr "ウェブサイトのURLを入力してください"
 
 #: includes/class-register.php:272
-#, fuzzy
 msgid "Please enter your payment email"
 msgstr "名前を入力してください"
 
@@ -3809,12 +3586,10 @@ msgid "Please tell us how you will promote us"
 msgstr ""
 
 #: includes/class-register.php:499
-#, fuzzy
 msgid "Add as Affiliate"
 msgstr "アフィリエイト会員を追加"
 
 #: includes/class-register.php:501
-#, fuzzy
 msgid "Add the user as an affiliate."
 msgstr "自動でユーザーをアフィリエイト会員として登録"
 
@@ -3841,14 +3616,10 @@ msgid "An affiliate already exists for this user account."
 msgstr ""
 
 #: includes/cli/class-affiliate-sub-commands.php:167
-#, fuzzy
 msgid "An affiliate with the username \"%s\" has been created."
-msgstr ""
-"%s に対するあなたのアフィリエイト会員申請は承認されました！\n"
-"\n"
+msgstr "%s に対するあなたのアフィリエイト会員申請は承認されました！"
 
 #: includes/cli/class-affiliate-sub-commands.php:169
-#, fuzzy
 msgid "The affiliate account could not be added."
 msgstr "あなたのアフィリエイト会員アカウントは無効です"
 
@@ -3862,29 +3633,24 @@ msgid "A valid affiliate username or ID is required to proceed."
 msgstr ""
 
 #: includes/cli/class-affiliate-sub-commands.php:231
-#, fuzzy
 msgid "The affiliate was updated successfully."
 msgstr "アフィリエイト会員は無事更新されました"
 
 #: includes/cli/class-affiliate-sub-commands.php:233
-#, fuzzy
 msgid "The affiliate account could not be updated."
 msgstr "あなたのアフィリエイト会員アカウントは無効です"
 
 #: includes/cli/class-affiliate-sub-commands.php:288
-#, fuzzy
 msgid ""
 "Are you sure you want to delete this affiliate, all its data and its "
 "associated user account?"
 msgstr "本当にこの制作品を削除しますか？"
 
 #: includes/cli/class-affiliate-sub-commands.php:290
-#, fuzzy
 msgid "Are you sure you want to delete this affiliate and all its data?"
 msgstr "本当にこの制作品を削除しますか？"
 
 #: includes/cli/class-affiliate-sub-commands.php:293
-#, fuzzy
 msgid "Are you sure you want to delete this affiliate?"
 msgstr "本当にこの制作品を削除しますか？"
 
@@ -3894,22 +3660,18 @@ msgid ""
 msgstr ""
 
 #: includes/cli/class-affiliate-sub-commands.php:313
-#, fuzzy
 msgid "The affiliate account has been successfully deleted."
 msgstr "新規アフィリエイト会員アカウントを登録する"
 
 #: includes/cli/class-affiliate-sub-commands.php:316
-#, fuzzy
 msgid "The affiliate account could not be deleted."
 msgstr "あなたのアフィリエイト会員アカウントのリクエストは拒否されました"
 
 #: includes/cli/class-affiliate-sub-commands.php:393
-#, fuzzy
 msgid "Number of affiliates: %d"
 msgstr "アフィリエイト会員は見つかりませんでした。"
 
 #: includes/cli/class-command.php:24
-#, fuzzy
 msgid "AffiliateWP is not installed"
 msgstr "AffiliateWP 移転"
 
@@ -3918,7 +3680,6 @@ msgid "You are running AffiliateWP version: %s"
 msgstr ""
 
 #: includes/cli/class-command.php:41
-#, fuzzy
 msgid "License status is: %s"
 msgstr "ライセンス設定"
 
@@ -3927,7 +3688,6 @@ msgid "Debug mode is: %s"
 msgstr ""
 
 #: includes/cli/class-command.php:59
-#, fuzzy
 msgid "Affiliates require approval: %s"
 msgstr "承認を必要にする"
 
@@ -3936,27 +3696,22 @@ msgid "Email notifications are: %s"
 msgstr ""
 
 #: includes/cli/class-command.php:85
-#, fuzzy
 msgid "Integrations: %s"
 msgstr "統合"
 
 #: includes/cli/class-command.php:92
-#, fuzzy
 msgid "Global referral rate: %s"
 msgstr "アフィリエイト会員の紹介率のタイプ。"
 
 #: includes/cli/class-command.php:95
-#, fuzzy
 msgid "Global referral rate type: %s"
 msgstr "アフィリエイト会員の紹介率のタイプ。"
 
 #: includes/cli/class-command.php:98
-#, fuzzy
 msgid "Currency: %s"
 msgstr "通貨"
 
 #: includes/cli/class-command.php:105
-#, fuzzy
 msgid "Referral variable: %s"
 msgstr "紹介用変数"
 
@@ -3965,22 +3720,18 @@ msgid "Show pretty referral URLs: %s"
 msgstr ""
 
 #: includes/cli/class-command.php:126
-#, fuzzy
 msgid "Referral URL (ID): %s"
 msgstr "紹介URL"
 
 #: includes/cli/class-command.php:129
-#, fuzzy
 msgid "Referral URL (Username): %s"
 msgstr "紹介URLジェネレータ"
 
 #: includes/cli/class-command.php:134
-#, fuzzy
 msgid "Affiliate Area URL: %s"
 msgstr "アフィリエイト会員エリア"
 
 #: includes/cli/class-command.php:139
-#, fuzzy
 msgid "Terms of Use URL: %s"
 msgstr "利用規約"
 
@@ -3989,32 +3740,26 @@ msgid "Found %s sites. Retrieving stats ..."
 msgstr ""
 
 #: includes/cli/class-command.php:190
-#, fuzzy
 msgid "Total Affiliates: %s"
 msgstr "アフィリエイト会員をエクスポート"
 
 #: includes/cli/class-command.php:193
-#, fuzzy
 msgid "Total Creatives: %s"
 msgstr "アフィリエイト会員をエクスポート"
 
 #: includes/cli/class-command.php:196
-#, fuzzy
 msgid "Total Payouts: %s"
 msgstr "総訪問数"
 
 #: includes/cli/class-command.php:199
-#, fuzzy
 msgid "Total Referrals: %s"
 msgstr "支払い済み紹介料の総額"
 
 #: includes/cli/class-command.php:202
-#, fuzzy
 msgid "Total Visits: %s"
 msgstr "総訪問数"
 
 #: includes/cli/class-command.php:220
-#, fuzzy
 msgid "Are you sure you want to clear the debug log?"
 msgstr "本当にこの制作品を削除しますか？"
 
@@ -4031,7 +3776,6 @@ msgid "A creative with the ID %d has been successfully created."
 msgstr ""
 
 #: includes/cli/class-creative-sub-commands.php:135
-#, fuzzy
 msgid "The creative could not be created."
 msgstr "新しい紹介"
 
@@ -4043,7 +3787,6 @@ msgid "A valid creative ID is required to proceed."
 msgstr ""
 
 #: includes/cli/class-creative-sub-commands.php:199
-#, fuzzy
 msgid "The creative was successfully updated."
 msgstr "制作品は無事追加されました"
 
@@ -4052,7 +3795,6 @@ msgid "The creative could not be updated."
 msgstr ""
 
 #: includes/cli/class-creative-sub-commands.php:236
-#, fuzzy
 msgid "The creative was successfully deleted."
 msgstr "制作品は無事追加されました"
 
@@ -4061,7 +3803,6 @@ msgid "The creative could not be deleted."
 msgstr ""
 
 #: includes/cli/class-creative-sub-commands.php:314
-#, fuzzy
 msgid "Number of creatives: %d"
 msgstr "制作品が見つかりません"
 
@@ -4098,7 +3839,6 @@ msgid "Referral #%d is not valid and has been skipped."
 msgstr ""
 
 #: includes/cli/class-payout-sub-commands.php:298
-#, fuzzy
 msgid "Are you sure you want to overwrite this payout's referrals?"
 msgstr "本当にこの制作品を削除しますか？"
 
@@ -4107,13 +3847,11 @@ msgid "All values passed via the --referrals argument are invalid."
 msgstr ""
 
 #: includes/cli/class-payout-sub-commands.php:312
-#, fuzzy
 msgid ""
 "Are you sure you want to overwrite the affiliate associated with this payout?"
 msgstr "本当にこの制作品を削除しますか？"
 
 #: includes/cli/class-payout-sub-commands.php:316
-#, fuzzy
 msgid "The supplied affiliate ID or username is invalid and has been ignored."
 msgstr "アフィリエイト会員のユーザーID。これは変更できません。"
 
@@ -4124,7 +3862,6 @@ msgid ""
 msgstr ""
 
 #: includes/cli/class-payout-sub-commands.php:327
-#, fuzzy
 msgid "Payout #%d has been updated successfully."
 msgstr "制作品の更新に成功しました。"
 
@@ -4138,7 +3875,6 @@ msgid "A valid payout ID is required to proceed."
 msgstr ""
 
 #: includes/cli/class-payout-sub-commands.php:361
-#, fuzzy
 msgid "Are you sure you want to delete this payout?"
 msgstr "本当にこの制作品を削除しますか？"
 
@@ -4168,12 +3904,10 @@ msgid ""
 msgstr ""
 
 #: includes/cli/class-referral-sub-commands.php:144
-#, fuzzy
 msgid "A referral with the ID \"%d\" has been created."
 msgstr "新しい紹介"
 
 #: includes/cli/class-referral-sub-commands.php:146
-#, fuzzy
 msgid "The referral could not be added."
 msgstr "新しい紹介"
 
@@ -4185,32 +3919,26 @@ msgid "A valid referral ID is required to proceed."
 msgstr ""
 
 #: includes/cli/class-referral-sub-commands.php:219
-#, fuzzy
 msgid "The referral was updated successfully."
 msgstr "紹介は無事更新されました"
 
 #: includes/cli/class-referral-sub-commands.php:221
-#, fuzzy
 msgid "The referral could not be updated"
 msgstr "新しい紹介"
 
 #: includes/cli/class-referral-sub-commands.php:254 includes/scripts.php:109
-#, fuzzy
 msgid "Are you sure you want to delete this referral?"
 msgstr "本当にこの制作品を削除しますか？"
 
 #: includes/cli/class-referral-sub-commands.php:259
-#, fuzzy
 msgid "The referral has been successfully deleted."
 msgstr "紹介は無事追加されました"
 
 #: includes/cli/class-referral-sub-commands.php:261
-#, fuzzy
 msgid "The referral could not be deleted."
 msgstr "新しい紹介"
 
 #: includes/cli/class-referral-sub-commands.php:338
-#, fuzzy
 msgid "Number of referrals: %d"
 msgstr "紹介の記録はまだありません"
 
@@ -4227,12 +3955,10 @@ msgid "A valid date string must be supplied. Using the current time."
 msgstr ""
 
 #: includes/cli/class-visit-sub-commands.php:179
-#, fuzzy
 msgid "The visit was successfully created."
 msgstr "設定はインポートされました。"
 
 #: includes/cli/class-visit-sub-commands.php:181
-#, fuzzy
 msgid "The visit could not be created."
 msgstr "新しい紹介"
 
@@ -4248,7 +3974,6 @@ msgid "A valid new date string must be supplied. Using the original date."
 msgstr ""
 
 #: includes/cli/class-visit-sub-commands.php:277
-#, fuzzy
 msgid "The visit was updated successfully."
 msgstr "アフィリエイト会員は無事更新されました"
 
@@ -4257,7 +3982,6 @@ msgid "The visit could not be updated."
 msgstr ""
 
 #: includes/cli/class-visit-sub-commands.php:311
-#, fuzzy
 msgid "Are you sure you want to delete this visit?"
 msgstr "本当にこの制作品を削除しますか？"
 
@@ -4270,7 +3994,6 @@ msgid "The visit could not be deleted."
 msgstr ""
 
 #: includes/cli/class-visit-sub-commands.php:396
-#, fuzzy
 msgid "Number of visits: %d"
 msgstr "訪問は見つかりませんでした。"
 
@@ -4279,7 +4002,6 @@ msgid "Creative"
 msgstr "制作品"
 
 #: includes/emails/actions.php:46
-#, fuzzy
 msgid "A new affiliate has registered on your site, "
 msgstr "まだアフィリエイト会員の登録がありません"
 
@@ -4288,12 +4010,10 @@ msgid "Name: %s"
 msgstr "名前:%s"
 
 #: includes/emails/actions.php:50
-#, fuzzy
 msgid "Website URL: %s"
 msgstr "ウェブサイトURL:"
 
 #: includes/emails/actions.php:54
-#, fuzzy
 msgid "Promotion method: %s"
 msgstr "プロモーション方法:"
 
@@ -4302,21 +4022,14 @@ msgid "Review pending applications: %s"
 msgstr ""
 
 #: includes/emails/actions.php:118 includes/emails/actions.php:252
-#, fuzzy
 msgid "Congratulations %s!"
-msgstr ""
-"おめでとう御座います %s!\n"
-"\n"
+msgstr "おめでとう御座います %s!"
 
 #: includes/emails/actions.php:120
-#, fuzzy
 msgid "Log into your affiliate area at %s"
-msgstr ""
-"%s であなたのアフィリエイトエリアにログインして下さい\n"
-"\n"
+msgstr "%s であなたのアフィリエイトエリアにログインして下さい"
 
 #: includes/emails/actions.php:169
-#, fuzzy
 msgid "Hi %s!"
 msgstr "バージョン %s"
 
@@ -4325,21 +4038,16 @@ msgid "Hi %s,"
 msgstr ""
 
 #: includes/emails/actions.php:253
-#, fuzzy
 msgid "You have been awarded a new referral of %s on %s!"
-msgstr ""
-"%s の新規紹介料が授与されました(%s)！\n"
-"\n"
+msgstr "%s の新規紹介料が授与されました(%s)！"
 
 #: includes/emails/actions.php:254
-#, fuzzy
 msgid ""
 "log into your affiliate area to view your earnings or disable these "
 "notifications: %s"
 msgstr ""
 "収益を閲覧するには、あなたのアフィリエイト会員エリアにログインして下さい。も"
-"しくはこれらの通知を無効にします:%s\n"
-"\n"
+"しくはこれらの通知を無効にします:%s"
 
 #: includes/emails/class-affwp-emails.php:198
 msgid "Default Template"
@@ -4368,7 +4076,6 @@ msgid "The email address of the affiliate"
 msgstr ""
 
 #: includes/emails/class-affwp-emails.php:437
-#, fuzzy
 msgid "The website of the affiliate"
 msgstr "登録されたアフィリエイト会員はありません"
 
@@ -4377,7 +4084,6 @@ msgid "The promo method used by the affiliate"
 msgstr ""
 
 #: includes/emails/class-affwp-emails.php:447
-#, fuzzy
 msgid "The reason an affiliate area was rejected"
 msgstr "アフィリエイト会員のリクエストは拒否されました"
 
@@ -4386,27 +4092,22 @@ msgid "The affiliate login URL to your website"
 msgstr ""
 
 #: includes/emails/class-affwp-emails.php:457
-#, fuzzy
 msgid "The amount of a given referral"
 msgstr "15等、紹介料の額"
 
 #: includes/emails/class-affwp-emails.php:462
-#, fuzzy
 msgid "Your site name"
 msgstr "あなたの名前"
 
 #: includes/emails/class-affwp-emails.php:467
-#, fuzzy
 msgid "The affiliate&#8217;s referral URL"
 msgstr "アフィリエイト会員の紹介率のタイプ。"
 
 #: includes/emails/class-affwp-emails.php:472
-#, fuzzy
 msgid "The affiliate&#8217;s ID"
 msgstr "アフィリエイト会員ID"
 
 #: includes/emails/class-affwp-emails.php:477
-#, fuzzy
 msgid "The affiliate&#8217;s referral rate"
 msgstr "アフィリエイト会員の紹介率のタイプ。"
 
@@ -4423,7 +4124,6 @@ msgid "The name of the campaign associated with the referral (if any)."
 msgstr ""
 
 #: includes/emails/functions.php:121
-#, fuzzy
 msgid "No reason provided"
 msgstr "紹介の記録はまだありません"
 
@@ -4432,7 +4132,6 @@ msgid "(no campaign)"
 msgstr ""
 
 #: includes/integrations/class-caldera-forms.php:74
-#, fuzzy
 msgid "Total"
 msgstr "合計"
 
@@ -4446,13 +4145,11 @@ msgstr ""
 #: includes/integrations/class-caldera-forms.php:247
 #: includes/integrations/class-give.php:247
 #: includes/integrations/class-ninja-forms.php:196
-#, fuzzy
 msgid "Allow Referrals"
 msgstr "紹介"
 
 #: includes/integrations/class-caldera-forms.php:252
 #: includes/integrations/class-gravityforms.php:286
-#, fuzzy
 msgid "Enable affiliate referral creation for this form"
 msgstr "アフィリエイト会員の紹介率のタイプ。"
 
@@ -4461,7 +4158,6 @@ msgid "Contact Form 7"
 msgstr ""
 
 #: includes/integrations/class-contactform7.php:114
-#, fuzzy
 msgid "Enable referrals on all Contact Form 7 forms"
 msgstr "アフィリエイト会員の紹介率のタイプ。"
 
@@ -4474,7 +4170,6 @@ msgid ""
 msgstr ""
 
 #: includes/integrations/class-contactform7.php:130
-#, fuzzy
 msgid "Enable referrals for specific Contact Form 7 forms"
 msgstr "アフィリエイト会員の紹介率のタイプ。"
 
@@ -4531,7 +4226,6 @@ msgstr ""
 "料を差し引きます。"
 
 #: includes/integrations/class-edd.php:614
-#, fuzzy
 msgid "Disable Renewal Referrals"
 msgstr "紹介を無効にする"
 
@@ -4542,7 +4236,6 @@ msgid ""
 msgstr ""
 
 #: includes/integrations/class-edd.php:620
-#, fuzzy
 msgid "Disable Referrals on Upgrades"
 msgstr "%s には紹介を無効にする"
 
@@ -4565,7 +4258,6 @@ msgstr "%s には紹介を無効にする"
 #: includes/integrations/class-edd.php:659
 #: includes/integrations/class-memberpress.php:190
 #: includes/integrations/class-zippycourses.php:87
-#, fuzzy
 msgid ""
 "These settings will be used to calculate affiliate earnings per-sale. Leave "
 "blank to use the site default referral rate."
@@ -4586,12 +4278,10 @@ msgstr ""
 "名前を入力します。"
 
 #: includes/integrations/class-formidablepro.php:71
-#, fuzzy
 msgid " AffiliateWP"
 msgstr "アフィリエイト会員"
 
 #: includes/integrations/class-formidablepro.php:76
-#, fuzzy
 msgid "Referral description"
 msgstr "紹介設定"
 
@@ -4605,22 +4295,18 @@ msgid "Purchase Amount"
 msgstr ""
 
 #: includes/integrations/class-formidablepro.php:200
-#, fuzzy
 msgid "AffiliateWP: Referral #%d for %s recorded for %s"
 msgstr "紹介 #%d　%s に対し %s に対する記録"
 
 #: includes/integrations/class-formidablepro.php:225
-#, fuzzy
 msgid "AffiliateWP: Referral #%d for %s for %s rejected"
 msgstr "紹介 #%d (%s) 拒否: %s"
 
 #: includes/integrations/class-give.php:127
-#, fuzzy
 msgid "Custom Amount"
 msgstr "合計金額"
 
 #: includes/integrations/class-give.php:248
-#, fuzzy
 msgid "Enable affiliate referral creation for this donation form"
 msgstr "アフィリエイト会員の紹介率のタイプ。"
 
@@ -4633,7 +4319,6 @@ msgid "Affiliate Rate"
 msgstr "アフィリエイト会員のレート"
 
 #: includes/integrations/class-give.php:254
-#, fuzzy
 msgid ""
 "This setting will be used to calculate affiliate earnings per-donation. "
 "Leave blank to use default affiliate rates."
@@ -4648,12 +4333,10 @@ msgstr "紹介 #%d (%s) 拒否: %s"
 
 #: includes/integrations/class-gravityforms.php:290
 #: includes/integrations/class-wpforms.php:37
-#, fuzzy
 msgid "Allow referrals"
 msgstr "紹介を無効にする"
 
 #: includes/integrations/class-gravityforms.php:321
-#, fuzzy
 msgid "Affiliate Coupon"
 msgstr "アフィリエイト用クーポン？"
 
@@ -4665,12 +4348,10 @@ msgid ""
 msgstr ""
 
 #: includes/integrations/class-jigoshop.php:153
-#, fuzzy
 msgid "Affiliate Data"
 msgstr "アフィリエイト会員のレート"
 
 #: includes/integrations/class-lifterlms.php:115
-#, fuzzy
 msgid "Referral #%d completed"
 msgstr "紹介は無事更新されました"
 
@@ -4680,7 +4361,6 @@ msgstr ""
 
 #: includes/integrations/class-lifterlms.php:183
 #: includes/integrations/class-lifterlms.php:318
-#, fuzzy
 msgid "Referral not created because affiliate's own account was used."
 msgstr "アフィリエイト会員のユーザーアカウントも消去しますか？"
 
@@ -4690,32 +4370,26 @@ msgid "Referral not created due to 0.00 amount."
 msgstr ""
 
 #: includes/integrations/class-lifterlms.php:230
-#, fuzzy
 msgid "LifterLMS Referral #%d updated successfully."
 msgstr "紹介は無事更新されました"
 
 #: includes/integrations/class-lifterlms.php:257
-#, fuzzy
 msgid "Referral #%d created successfully."
 msgstr "紹介は無事更新されました"
 
 #: includes/integrations/class-lifterlms.php:263
-#, fuzzy
 msgid "Referral failed to be created."
 msgstr "新しい紹介"
 
 #: includes/integrations/class-lifterlms.php:354
-#, fuzzy
 msgid "Referral #%d updated successfully."
 msgstr "紹介は無事更新されました"
 
 #: includes/integrations/class-lifterlms.php:378
-#, fuzzy
 msgid "Pending referral #%d created successfully."
 msgstr "紹介は無事更新されました"
 
 #: includes/integrations/class-lifterlms.php:389
-#, fuzzy
 msgid "LifterLMS Referral failed to be created."
 msgstr "新しい紹介"
 
@@ -4724,7 +4398,6 @@ msgid "Search for an affiliate by username or email."
 msgstr ""
 
 #: includes/integrations/class-lifterlms.php:444
-#, fuzzy
 msgid "Affiliate Discount"
 msgstr "アフィリエイト会員ディスカウント？"
 
@@ -4734,19 +4407,16 @@ msgstr ""
 
 #: includes/integrations/class-lifterlms.php:664
 #: includes/integrations/class-lifterlms.php:690
-#, fuzzy
 msgid "Referral Details"
 msgstr "紹介設定"
 
 #: includes/integrations/class-lifterlms.php:744
 #: includes/integrations/class-pmp.php:362
 #: includes/integrations/class-rcp.php:386
-#, fuzzy
 msgid "Disable Referrals"
 msgstr "紹介を無効にする"
 
 #: includes/integrations/class-lifterlms.php:745
-#, fuzzy
 msgid ""
 "Check this box to prevent orders for this %s from generating referral "
 "commissions for affiliates."
@@ -4755,7 +4425,6 @@ msgstr ""
 "ぎます。"
 
 #: includes/integrations/class-lifterlms.php:753
-#, fuzzy
 msgid "Enable %s Referral Rate"
 msgstr "紹介率"
 
@@ -4764,43 +4433,35 @@ msgid "Check this box to enable %s referral rate overrides"
 msgstr ""
 
 #: includes/integrations/class-lifterlms.php:762
-#, fuzzy
 msgid "%s Referral Rate"
 msgstr "紹介率"
 
 #: includes/integrations/class-lifterlms.php:763
-#, fuzzy
 msgid "Enter a referral rate for this %s"
 msgstr "アフィリエイト会員の紹介率のタイプ。"
 
 #: includes/integrations/class-lifterlms.php:870
-#, fuzzy
 msgid "Referral #%d rejected"
 msgstr "紹介 #%d (%s) 拒否: %s"
 
 #: includes/integrations/class-memberpress.php:186
-#, fuzzy
 msgid "Disable referrals on this membership"
 msgstr "%s には紹介を無効にする"
 
 #: includes/integrations/class-ninja-forms.php:197
-#, fuzzy
 msgid "Enable affiliate referral creation for this form?"
 msgstr "アフィリエイト会員の紹介率のタイプ。"
 
 #: includes/integrations/class-paypal.php:90
-#, fuzzy
 msgid "Pending PayPal referral"
 msgstr "保留されている紹介の合計"
 
 #: includes/integrations/class-pmp.php:348
 #: includes/integrations/class-zippycourses.php:55
-#, fuzzy
 msgid "Affiliate Settings"
 msgstr "AffiliateWP の設定へ移動"
 
 #: includes/integrations/class-pmp.php:357
-#, fuzzy
 msgid ""
 "The membership-level referral rate, such as 20 for 20%%. Affiliate-level "
 "referral rates will override this value. If left blank, the site default "
@@ -4814,7 +4475,6 @@ msgid "Check to disable per-membership referrals."
 msgstr ""
 
 #: includes/integrations/class-pms.php:51
-#, fuzzy
 msgid ""
 "This rate will be used to calculate affiliate earnings when members register "
 "their account with this subscription. Leave blank to use the site default "
@@ -4825,7 +4485,6 @@ msgstr ""
 
 #: includes/integrations/class-rcp.php:349
 #: includes/integrations/class-rcp.php:380
-#, fuzzy
 msgid ""
 "This rate will be used to calculate affiliate earnings when members "
 "subscribe to this level. Leave blank to use the site default referral rate."
@@ -4834,7 +4493,6 @@ msgstr ""
 "値のアフィリエイト会員のレートを使用するには空白にします。"
 
 #: includes/integrations/class-rcp.php:391
-#, fuzzy
 msgid "Disable referrals on this subscription level."
 msgstr "%s には紹介を無効にする"
 
@@ -4844,7 +4502,6 @@ msgid "(Variation ID %d)"
 msgstr ""
 
 #: includes/integrations/class-woocommerce.php:494
-#, fuzzy
 msgid "Configure affiliate rates for this product"
 msgstr "%s には紹介を無効にする"
 
@@ -4874,17 +4531,14 @@ msgid "Configure affiliate rates for this product variation"
 msgstr ""
 
 #: includes/integrations/class-woocommerce.php:534
-#, fuzzy
 msgid "Referral rate (optional)"
 msgstr "紹介設定"
 
 #: includes/integrations/class-woocommerce.php:536
-#, fuzzy
 msgid "Disable referrals for this product variation"
 msgstr "%s には紹介を無効にする"
 
 #: includes/integrations/extras/class-exchange-feature.php:39
-#, fuzzy
 msgid "Disable referrals on this product"
 msgstr "%s には紹介を無効にする"
 
@@ -4893,12 +4547,10 @@ msgid "Manage per-product affiliate rates."
 msgstr ""
 
 #: includes/integrations/extras/class-ninja-forms-action-add-referral.php:47
-#, fuzzy
 msgid "Total Field"
 msgstr "総訪問数"
 
 #: includes/integrations/extras/class-ninja-forms-action-add-referral.php:63
-#, fuzzy
 msgid "Customer Email"
 msgstr "メールアドレス"
 
@@ -4915,7 +4567,6 @@ msgid "Euros"
 msgstr "ユーロ"
 
 #: includes/misc-functions.php:28
-#, fuzzy
 msgid "Argentine Peso"
 msgstr "メキシコ ペソ"
 
@@ -4952,7 +4603,6 @@ msgid "Colombian Peso"
 msgstr "コロンビア ペソ"
 
 #: includes/misc-functions.php:37
-#, fuzzy
 msgid "Croatia Kuna"
 msgstr "クロアチア クーナ"
 
@@ -4981,7 +4631,6 @@ msgid "Hungarian Forint"
 msgstr "ハンガリー フォリント"
 
 #: includes/misc-functions.php:44
-#, fuzzy
 msgid "Icelandic Krona"
 msgstr "アイスランド クローナ"
 
@@ -4998,7 +4647,6 @@ msgid "Israeli Shekel"
 msgstr "イスラエル シェケル"
 
 #: includes/misc-functions.php:48
-#, fuzzy
 msgid "Iranian Rial"
 msgstr "ブラジル レアル"
 
@@ -5039,7 +4687,6 @@ msgid "New Zealand Dollar"
 msgstr "ニュージーランド ドル"
 
 #: includes/misc-functions.php:58
-#, fuzzy
 msgid "Pakistani Rupee"
 msgstr "インド ルピー"
 
@@ -5076,7 +4723,6 @@ msgid "Singapore Dollar"
 msgstr "シンガポール ドル"
 
 #: includes/misc-functions.php:67
-#, fuzzy
 msgid "South African Rand"
 msgstr "南アフリカ ランド"
 
@@ -5121,7 +4767,6 @@ msgid "Vietnamese Dong"
 msgstr "ベトナム ドン"
 
 #: includes/scripts.php:139
-#, fuzzy
 msgid "Please enter a valid URL for this site"
 msgstr "ウェブサイトのURLを入力してください"
 
@@ -5138,7 +4783,6 @@ msgid "Referral Graphs"
 msgstr "紹介のグラフ"
 
 #: templates/dashboard-tab-payouts.php:3
-#, fuzzy
 msgid "Referral Payouts"
 msgstr "紹介率"
 
@@ -5147,7 +4791,6 @@ msgid "None of your referrals have been paid out yet."
 msgstr ""
 
 #: templates/dashboard-tab-referrals.php:70
-#, fuzzy
 msgid "You have not made any referrals yet."
 msgstr "まだ訪問がありません。"
 
@@ -5192,12 +4835,10 @@ msgid "Referral URL Generator"
 msgstr "紹介URLジェネレータ"
 
 #: templates/dashboard-tab-urls.php:17
-#, fuzzy
 msgid "Your affiliate ID is: <strong>%s</strong>"
 msgstr "あなたのアフィリエイトIDは： <strong>%d</strong>"
 
 #: templates/dashboard-tab-urls.php:19
-#, fuzzy
 msgid "Your affiliate username is: <strong>%s</strong>"
 msgstr "あなたのアフィリエイトIDは： <strong>%d</strong>"
 
@@ -5277,7 +4918,6 @@ msgid "Log out"
 msgstr ""
 
 #: templates/login.php:15
-#, fuzzy
 msgid "Log into your account"
 msgstr "アカウントにログインする"
 
@@ -5294,7 +4934,6 @@ msgid "Log In"
 msgstr ""
 
 #: templates/login.php:48
-#, fuzzy
 msgid "Lost your password?"
 msgstr "パスワードを紛失しましたか？"
 
@@ -5309,7 +4948,6 @@ msgid "The affiliate area is available only for registered affiliates."
 msgstr "アフィリエイトエリアは登録されたアフィリエイト会員のみ利用できます。"
 
 #: templates/register.php:54
-#, fuzzy
 msgid "Register a new affiliate account"
 msgstr "新規アフィリエイト会員用アカウントを登録する"
 
@@ -5330,7 +4968,6 @@ msgid "Affiliate Plugin for WordPress"
 msgstr ""
 
 #: includes/admin/affiliates/affiliates.php:58
-#, fuzzy
 msgctxt "affiliates"
 msgid "Reports"
 msgstr "レポート"
@@ -5359,148 +4996,124 @@ msgstr "制作品ID #%d: %s"
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:66
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:69
 #: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:67
-#, fuzzy
 msgctxt "Affiliate column table header"
 msgid "Affiliate"
 msgstr "アフィリエイト会員"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-most-valuable.php:75
-#, fuzzy
 msgctxt "Earnings column table header"
 msgid "Earnings"
 msgstr "収益"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-most-valuable.php:76
-#, fuzzy
 msgctxt "Referrals column table header"
 msgid "Referrals"
 msgstr "紹介"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-most-valuable.php:77
-#, fuzzy
 msgctxt "Visits column table header"
 msgid "Visits"
 msgstr "訪問"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:67
-#, fuzzy
 msgctxt "URL column table header"
 msgid "URL"
 msgstr "URL"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:68
-#, fuzzy
 msgctxt "Converted column table header"
 msgid "Converted"
 msgstr "コンバート済"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:70
-#, fuzzy
 msgctxt "Amount column table header"
 msgid "Amount"
 msgstr "合計金額"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:71
-#, fuzzy
 msgctxt "Description column table header"
 msgid "Description"
 msgstr "詳細"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:68
-#, fuzzy
 msgctxt "Status column table header"
 msgid "Status"
 msgstr "状態"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:69
-#, fuzzy
 msgctxt "Actions column table header"
 msgid "Actions"
 msgstr "操作"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:54
-#, fuzzy
 msgctxt "Paid earnings column table header"
 msgid "Paid earnings"
 msgstr "支払い済み収益"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:55
-#, fuzzy
 msgctxt "Paid earnings this month column table header"
 msgid "Paid earnings this month"
 msgstr "今月の支払い済み収益"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:56
-#, fuzzy
 msgctxt "Paid earnings today column table header"
 msgid "Paid earnings today"
 msgstr "本日の支払い済収益"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:80
-#, fuzzy
 msgctxt "Unpaid referrals column table header"
 msgid "Unpaid referrals"
 msgstr "未払の紹介"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:81
-#, fuzzy
 msgctxt "Unpaid referrals this month column table header"
 msgid "Unpaid referrals this month"
 msgstr "今月の未払い紹介"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:82
-#, fuzzy
 msgctxt "Unpaid referrals today column table header"
 msgid "Unpaid referrals today"
 msgstr "本日の未払い紹介"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:105
-#, fuzzy
 msgctxt "Unpaid earnings column table header"
 msgid "Unpaid earnings"
 msgstr "未払い収益"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:106
-#, fuzzy
 msgctxt "Unpaid earnings this month"
 msgid "Unpaid earnings this month"
 msgstr "今月の未払い収益"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:107
-#, fuzzy
 msgctxt "Unpaid earnings today column table header"
 msgid "Unpaid earnings today"
 msgstr "本日の未払い収益"
 
 #: includes/admin/payouts/class-list-table.php:129
-#, fuzzy
 msgctxt "payouts"
 msgid "All"
 msgstr "全て"
 
 #: includes/admin/payouts/class-list-table.php:149
 #: includes/admin/tools/export/class-batch-export-payouts.php:147
-#, fuzzy
 msgctxt "payout"
 msgid "Amount"
 msgstr "合計金額"
 
 #: includes/admin/payouts/class-list-table.php:154
 #: includes/admin/tools/export/class-batch-export-payouts.php:150
-#, fuzzy
 msgctxt "payout"
 msgid "Status"
 msgstr "状態"
 
 #: includes/admin/payouts/class-list-table.php:155
 #: includes/admin/tools/export/class-batch-export-payouts.php:151
-#, fuzzy
 msgctxt "payout"
 msgid "Date"
 msgstr "日付"
 
 #: includes/payout-functions.php:133 includes/payout-functions.php:137
-#, fuzzy
 msgctxt "payout"
 msgid "Paid"
 msgstr "支払い済"
@@ -5513,7 +5126,6 @@ msgstr ""
 
 #: includes/admin/payouts/class-list-table.php:335
 #: includes/admin/payouts/view.php:86
-#, fuzzy
 msgctxt "payout owner ID"
 msgid "(User ID: %d)"
 msgstr "ユーザーID"
@@ -5530,7 +5142,6 @@ msgid "None"
 msgstr ""
 
 #: includes/admin/referrals/referrals.php:39
-#, fuzzy
 msgctxt "referrals"
 msgid "Reports"
 msgstr "レポート"
@@ -5541,19 +5152,16 @@ msgid "None"
 msgstr ""
 
 #: includes/admin/visits/visits.php:42
-#, fuzzy
 msgctxt "visits"
 msgid "Reports"
 msgstr "レポート"
 
 #: includes/class-graph.php:419
-#, fuzzy
 msgctxt "date filter"
 msgid "From"
 msgstr "差出人"
 
 #: includes/class-graph.php:421
-#, fuzzy
 msgctxt "date filter"
 msgid "To"
 msgstr "宛先"
@@ -5564,7 +5172,6 @@ msgid "Valid"
 msgstr ""
 
 #: includes/cli/class-command.php:38
-#, fuzzy
 msgctxt "license status"
 msgid "Invalid"
 msgstr "無効なメールアドレス"
@@ -5615,7 +5222,6 @@ msgid "Disabled"
 msgstr ""
 
 #: includes/cli/class-visit-sub-commands.php:437
-#, fuzzy
 msgctxt "direct traffic"
 msgid "Direct"
 msgstr "直接のやりとり"

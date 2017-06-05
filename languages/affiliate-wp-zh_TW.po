@@ -5,14 +5,14 @@ msgstr ""
 "Project-Id-Version: AffiliateWP\n"
 "Report-Msgid-Bugs-To: https://affiliatewp.com/support/\n"
 "POT-Creation-Date: 2017-02-17 03:04:25+00:00\n"
-"PO-Revision-Date: 2016-07-02 16:32-0500\n"
+"PO-Revision-Date: 2017-06-01 00:48-0600\n"
 "Last-Translator: \n"
 "Language-Team: AffiliateWP <support@affiliatewp.com>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 2.0.1\n"
 "X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
 "_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
 "esc_html_x:1,2c\n"
@@ -66,13 +66,11 @@ msgid "Error"
 msgstr "錯誤"
 
 #: includes/REST/class-rest.php:68
-#, fuzzy
 msgid "User ID Required"
 msgstr "用戶ID"
 
 #. translators: 1: Generate, regenerate, or revoke
 #: includes/REST/class-rest.php:81 includes/REST/class-rest.php:84
-#, fuzzy
 msgid "You do not have permission to %s API keys for this user."
 msgstr "你沒有權限匯出數據"
 
@@ -81,7 +79,6 @@ msgid "Whether to include a modified user object in the response."
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:67
-#, fuzzy
 msgid "Whether to include the affiliate meta in the response."
 msgstr "聯盟夥伴在網站中的使用者名稱"
 
@@ -108,12 +105,10 @@ msgid ""
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:256
-#, fuzzy
 msgid "Affiliates table column to order by."
 msgstr "WordPress 聯盟夥伴外掛"
 
 #: includes/REST/v1/class-affiliates-endpoints.php:263
-#, fuzzy
 msgid "The date array or string to query affiliate registrations within."
 msgstr "感謝你登記成為 {site_name} 的聯盟夥伴。"
 
@@ -122,7 +117,6 @@ msgid "Use any get_affiliates() arguments to modify the response."
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:297
-#, fuzzy
 msgid "The unique affiliate ID."
 msgstr "聯盟夥伴ID"
 
@@ -131,7 +125,6 @@ msgid "ID for the user account associated with the affiliate."
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:305
-#, fuzzy
 msgid "The affiliate rate."
 msgstr "聯盟夥伴分潤率"
 
@@ -140,12 +133,10 @@ msgid "The affiliate rate, as it exists in the database"
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:313
-#, fuzzy
 msgid "The affiliate rate, as inherited from global settings."
 msgstr "聯盟夥伴的推廣連結"
 
 #: includes/REST/v1/class-affiliates-endpoints.php:319
-#, fuzzy
 msgid "The affiliate rate type"
 msgstr "選擇聯盟夥伴的推薦分潤類型。"
 
@@ -154,17 +145,14 @@ msgid "The affiliate rate type, as it exists in the database"
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:327
-#, fuzzy
 msgid "The affiliate rate type, as inherited from global settings."
 msgstr "聯盟夥伴的推廣連結"
 
 #: includes/REST/v1/class-affiliates-endpoints.php:333
-#, fuzzy
 msgid "The affiliate account email. Synced with the associated user account."
 msgstr "開始輸入聯盟夥伴的名字來執行搜尋與他們相關聯的使用者帳號。"
 
 #: includes/REST/v1/class-affiliates-endpoints.php:338
-#, fuzzy
 msgid "The affiliate payment email address."
 msgstr "你的聯盟夥伴帳戶尚未被啟用"
 
@@ -179,17 +167,14 @@ msgid ""
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:352
-#, fuzzy
 msgid "The affiliate status."
 msgstr "聯盟夥伴狀態"
 
 #: includes/REST/v1/class-affiliates-endpoints.php:356
-#, fuzzy
 msgid "Unpaid affiliate earnings."
 msgstr "聯盟夥伴設定"
 
 #: includes/REST/v1/class-affiliates-endpoints.php:360
-#, fuzzy
 msgid "Affiliate earnings."
 msgstr "聯盟夥伴設定"
 
@@ -198,12 +183,10 @@ msgid "The number of paid referrals associated with the affiliate."
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:368
-#, fuzzy
 msgid "The number of visits associated with the affiliate."
 msgstr "聯盟夥伴的網址"
 
 #: includes/REST/v1/class-affiliates-endpoints.php:372
-#, fuzzy
 msgid "The date the affiliate was registered."
 msgstr "聯盟夥伴申請被拒絕的原因"
 
@@ -224,17 +207,14 @@ msgid "Use any get_creatives() arguments to modify the response."
 msgstr ""
 
 #: includes/REST/v1/class-creatives-endpoints.php:215
-#, fuzzy
 msgid "The unique creative ID."
 msgstr "廣告文案"
 
 #: includes/REST/v1/class-creatives-endpoints.php:219
-#, fuzzy
 msgid "Name of the creative."
 msgstr "廣告文案"
 
 #: includes/REST/v1/class-creatives-endpoints.php:223
-#, fuzzy
 msgid "Description for the creative."
 msgstr "廣告文案"
 
@@ -243,7 +223,6 @@ msgid "URL the creative points to."
 msgstr ""
 
 #: includes/REST/v1/class-creatives-endpoints.php:231
-#, fuzzy
 msgid "Text for the creative."
 msgstr "廣告文案"
 
@@ -252,12 +231,10 @@ msgid "ID of the media library image associated with the creative"
 msgstr ""
 
 #: includes/REST/v1/class-creatives-endpoints.php:239
-#, fuzzy
 msgid "The creative status."
 msgstr "(這位用戶不會被刪除)"
 
 #: includes/REST/v1/class-creatives-endpoints.php:243
-#, fuzzy
 msgid "The date the creative was created."
 msgstr "新增推廣素材成功"
 
@@ -308,7 +285,6 @@ msgid "The unique payout ID."
 msgstr ""
 
 #: includes/REST/v1/class-payouts-endpoints.php:274
-#, fuzzy
 msgid "The affiliate ID associated with the payout."
 msgstr "你確定你要刪除這個廣告素材嗎？"
 
@@ -321,7 +297,6 @@ msgid "The number of referrals associated with the affiliate."
 msgstr ""
 
 #: includes/REST/v1/class-payouts-endpoints.php:289
-#, fuzzy
 msgid "Total referrals amount for the payout."
 msgstr "停用這個產品的推廣獎勵"
 
@@ -375,42 +350,34 @@ msgid "Use any get_referrals() arguments to modify the response."
 msgstr ""
 
 #: includes/REST/v1/class-referrals-endpoints.php:270
-#, fuzzy
 msgid "The unique referral ID."
 msgstr "固定的推廣金額"
 
 #: includes/REST/v1/class-referrals-endpoints.php:274
-#, fuzzy
 msgid "ID for the affiliate account associated with the referral."
 msgstr "你的聯盟夥伴帳戶已經被拒絕"
 
 #: includes/REST/v1/class-referrals-endpoints.php:278
-#, fuzzy
 msgid "ID for the visit associated with the referral."
 msgstr "選擇推薦狀態"
 
 #: includes/REST/v1/class-referrals-endpoints.php:282
-#, fuzzy
 msgid "Referral description."
 msgstr "推廣說明"
 
 #: includes/REST/v1/class-referrals-endpoints.php:286
-#, fuzzy
 msgid "The referral status."
 msgstr "推廣狀態："
 
 #: includes/REST/v1/class-referrals-endpoints.php:290
-#, fuzzy
 msgid "Referral amount."
 msgstr "推薦分潤率"
 
 #: includes/REST/v1/class-referrals-endpoints.php:294
-#, fuzzy
 msgid "Currency for the referral amount."
 msgstr "推薦分潤率"
 
 #: includes/REST/v1/class-referrals-endpoints.php:298
-#, fuzzy
 msgid "Custom referral data."
 msgstr "沒有推廣的經銷商"
 
@@ -432,7 +399,6 @@ msgid "Products associated with the referral."
 msgstr ""
 
 #: includes/REST/v1/class-referrals-endpoints.php:318
-#, fuzzy
 msgid "The date the referral was generated."
 msgstr "輸入推廣獎勵金額，例如：15。"
 
@@ -478,7 +444,6 @@ msgid "The referral status or array of statuses to retrieve visits for."
 msgstr ""
 
 #: includes/REST/v1/class-visits-endpoints.php:207
-#, fuzzy
 msgid "The context under which the visit was created."
 msgstr "設定成功匯入"
 
@@ -495,7 +460,6 @@ msgid "The unique visit ID."
 msgstr ""
 
 #: includes/REST/v1/class-visits-endpoints.php:263
-#, fuzzy
 msgid "ID for the affiliate account associated with the visit."
 msgstr "你的聯盟夥伴帳戶尚未被啟用"
 
@@ -504,12 +468,10 @@ msgid "ID for the referral associated with the visit."
 msgstr ""
 
 #: includes/REST/v1/class-visits-endpoints.php:271
-#, fuzzy
 msgid "The visit URL."
 msgstr "網站地址"
 
 #: includes/REST/v1/class-visits-endpoints.php:275
-#, fuzzy
 msgid "Visit referrer."
 msgstr "最終的推薦人"
 
@@ -518,7 +480,6 @@ msgid "Campaign associated with the visit."
 msgstr ""
 
 #: includes/REST/v1/class-visits-endpoints.php:283
-#, fuzzy
 msgid "Context under which the visit was generated."
 msgstr "設定成功匯入"
 
@@ -527,12 +488,10 @@ msgid "Visitor IP address."
 msgstr ""
 
 #: includes/REST/v1/class-visits-endpoints.php:291
-#, fuzzy
 msgid "The date the visit was generated."
 msgstr "設定成功匯入"
 
 #: includes/abstracts/class-affwp-reports-tab.php:115
-#, fuzzy
 msgid "Date Filters"
 msgstr "篩選"
 
@@ -854,7 +813,6 @@ msgid "Reports"
 msgstr "報表"
 
 #: includes/admin/affiliates/class-list-table.php:288
-#, fuzzy
 msgid "Edit User"
 msgstr "編輯推廣內容"
 
@@ -933,7 +891,6 @@ msgid "Affiliate Name"
 msgstr "聯盟夥伴名稱"
 
 #: includes/admin/affiliates/edit.php:40
-#, fuzzy
 msgid ""
 "The affiliate&#8217;s first and/or last name. Will be empty if no name is "
 "specified. This can be changed on the <a href=\"%1$s\" alt=\"%2$s\">user "
@@ -947,17 +904,14 @@ msgid "A link to the user edit screen for this user."
 msgstr "給這位使用者的一個連結到使用者編輯屏幕"
 
 #: includes/admin/affiliates/edit.php:57
-#, fuzzy
 msgid "The affiliate&#8217;s ID. This cannot be changed."
 msgstr "聯盟夥伴 ID。 這是不能被修改的。"
 
 #: includes/admin/affiliates/edit.php:65
-#, fuzzy
 msgid "Affiliate URL"
 msgstr "聯盟夥伴網址"
 
 #: includes/admin/affiliates/edit.php:70
-#, fuzzy
 msgid "The affiliate&#8217;s referral URL. This is based on global settings."
 msgstr "聯盟夥伴的推廣連結"
 
@@ -966,12 +920,10 @@ msgid "User ID"
 msgstr "用戶ID"
 
 #: includes/admin/affiliates/edit.php:83
-#, fuzzy
 msgid "The affiliate&#8217;s user ID. This cannot be changed."
 msgstr "聯盟夥伴的用戶ID。這是不能被修改的。"
 
 #: includes/admin/affiliates/edit.php:96
-#, fuzzy
 msgid "The affiliate&#8217;s username. This cannot be changed."
 msgstr "聯盟夥伴的用戶名稱。這是不能被修改的。"
 
@@ -980,7 +932,6 @@ msgid "Registration Date"
 msgstr "註冊日期"
 
 #: includes/admin/affiliates/edit.php:109
-#, fuzzy
 msgid "The affiliate&#8217;s registration date. This cannot be changed."
 msgstr "聯盟夥伴的註冊日期。這是不能被修改的。"
 
@@ -995,12 +946,10 @@ msgid ""
 msgstr ""
 
 #: includes/admin/affiliates/edit.php:139
-#, fuzzy
 msgid "Website"
 msgstr "網站地址"
 
 #: includes/admin/affiliates/edit.php:145
-#, fuzzy
 msgid ""
 "The affiliate&#8217;s website. Will be empty if no website is specified. "
 "This can be changed on the <a href=\"%1$s\" alt=\"%2$s\">user edit screen</"
@@ -1019,7 +968,6 @@ msgid "Site Default"
 msgstr "網站預設"
 
 #: includes/admin/affiliates/edit.php:166 includes/admin/affiliates/new.php:67
-#, fuzzy
 msgid "The affiliate&#8217;s referral rate type."
 msgstr "選擇聯盟夥伴的推薦分潤類型。"
 
@@ -1036,7 +984,6 @@ msgid "Referral Rate"
 msgstr "推薦分潤率"
 
 #: includes/admin/affiliates/edit.php:179 includes/admin/affiliates/new.php:80
-#, fuzzy
 msgid ""
 "The affiliate&#8217;s referral rate, such as 20 for 20%. If left blank, the "
 "site default will be used."
@@ -1048,7 +995,6 @@ msgid "Account Email"
 msgstr "帳號電子郵件"
 
 #: includes/admin/affiliates/edit.php:192
-#, fuzzy
 msgid ""
 "The affiliate&#8217;s account email. Updating this will change the email "
 "address shown on the user&#8217;s profile page."
@@ -1067,7 +1013,6 @@ msgid "Payment Email"
 msgstr "收款電子郵件"
 
 #: includes/admin/affiliates/edit.php:205 includes/admin/affiliates/new.php:93
-#, fuzzy
 msgid ""
 "Affiliate&#8217;s payment email for systems such as PayPal, Moneybookers, or "
 "others. Leave blank to use the affiliate&#8217;s user email."
@@ -1076,17 +1021,14 @@ msgstr ""
 "則會使用聯盟夥伴的用戶電子郵件地址。 "
 
 #: includes/admin/affiliates/edit.php:213
-#, fuzzy
 msgid "Promotion Methods"
 msgstr "推銷方式"
 
 #: includes/admin/affiliates/edit.php:218
-#, fuzzy
 msgid "Promotion methods entered by the affiliate during registration."
 msgstr "聯盟夥伴所使用的推廣方式"
 
 #: includes/admin/affiliates/edit.php:226 includes/admin/affiliates/new.php:101
-#, fuzzy
 msgid "Affiliate Notes"
 msgstr "聯盟夥伴分潤率："
 
@@ -1109,7 +1051,6 @@ msgid "New Affiliate"
 msgstr "新增聯盟夥伴"
 
 #: includes/admin/affiliates/new.php:18
-#, fuzzy
 msgid ""
 "Use this form to register a new affiliate. Each affiliate is tied directly "
 "to a user account, so if the user account for the affiliate does not yet "
@@ -1129,7 +1070,6 @@ msgid ""
 msgstr "開始輸入聯盟夥伴的名字來執行搜尋與他們相關聯的使用者帳號。"
 
 #: includes/admin/affiliates/new.php:49
-#, fuzzy
 msgid "The status assigned to the affiliate&#8217;s account."
 msgstr "狀態已更新至聯盟夥伴帳戶。"
 
@@ -1165,7 +1105,6 @@ msgid "Website URL"
 msgstr "網站地址"
 
 #: includes/admin/affiliates/review.php:70
-#, fuzzy
 msgid "Affiliate&#8217;s Website URL"
 msgstr "聯盟夥伴網站地址"
 
@@ -1174,7 +1113,6 @@ msgid "Promotion Method"
 msgstr "推銷方式"
 
 #: includes/admin/affiliates/review.php:98
-#, fuzzy
 msgid "Leave blank if approving this affiliate."
 msgstr "如果核准這個聯盟夥伴請留空白"
 
@@ -1221,12 +1159,10 @@ msgid "Total visits"
 msgstr "總訪問數"
 
 #: includes/admin/affiliates/view.php:30
-#, fuzzy
 msgid "Conversion rate"
 msgstr "轉換獎金比例"
 
 #: includes/admin/affiliates/view.php:86
-#, fuzzy
 msgid "Recent Payouts"
 msgstr "最近的推廣"
 
@@ -1329,13 +1265,11 @@ msgid "Settings updated."
 msgstr "設定已更新。"
 
 #: includes/admin/class-notices.php:82
-#, fuzzy
 msgid "%d affiliate was added successfully."
 msgid_plural "%d affiliates were added successfully"
 msgstr[0] "聯盟夥伴更新成功"
 
 #: includes/admin/class-notices.php:95
-#, fuzzy
 msgid "Affiliate wasn&#8217;t added, please try again."
 msgstr "聯盟夥伴並未新增成功，請重試一次。"
 
@@ -1376,13 +1310,11 @@ msgid "Affiliate request was rejected"
 msgstr "聯盟夥伴請求已被拒絕"
 
 #: includes/admin/class-notices.php:162
-#, fuzzy
 msgid "%d affiliate from WP Affiliate was added successfully."
 msgid_plural "%d affiliates from WP Affiliate were added successfully"
 msgstr[0] "聯盟夥伴更新成功"
 
 #: includes/admin/class-notices.php:183
-#, fuzzy
 msgid "%d affiliate from Affiliates Pro was added successfully."
 msgid_plural "%d affiliates from Affiliates Pro were added successfully"
 msgstr[0] "聯盟夥伴更新成功"
@@ -1412,7 +1344,6 @@ msgid "Referral deletion failed, please try again"
 msgstr "刪除引薦失敗, 請再試一次"
 
 #: includes/admin/class-notices.php:234
-#, fuzzy
 msgid "A payout has been created."
 msgstr "得到新的推廣獎勵電子郵件主題"
 
@@ -1445,7 +1376,6 @@ msgid "Settings successfully imported"
 msgstr "設定成功匯入"
 
 #: includes/admin/class-notices.php:282
-#, fuzzy
 msgid ""
 "Your license key expired on %s. Please <a href=\"%s\" target=\"_blank"
 "\">renew your license key</a>."
@@ -1596,14 +1526,12 @@ msgid "Description"
 msgstr "說明"
 
 #: includes/admin/creatives/edit.php:41 includes/admin/creatives/new.php:39
-#, fuzzy
 msgid ""
 "An optional description for this creative. This is visible to affiliates and "
 "is displayed below the creative."
 msgstr "為廣告素材寫上一段描述，讓你的聯盟夥伴更了解廣告素材的內容。"
 
 #: includes/admin/creatives/edit.php:54 includes/admin/creatives/new.php:52
-#, fuzzy
 msgid ""
 "The URL this creative should link to. Based on your Referral Settings, the "
 "affiliate&#8217;s ID or username will be automatically appended."
@@ -1738,7 +1666,6 @@ msgstr "聯盟夥伴"
 #: includes/admin/payouts/class-list-table.php:152
 #: includes/admin/payouts/view.php:72
 #: includes/admin/tools/export/class-batch-export-payouts.php:148
-#, fuzzy
 msgid "Generated By"
 msgstr "產生推廣連結"
 
@@ -1746,7 +1673,6 @@ msgstr "產生推廣連結"
 #: includes/admin/payouts/view.php:103
 #: includes/admin/tools/export/class-batch-export-payouts.php:149
 #: templates/dashboard-tab-payouts.php:36
-#, fuzzy
 msgid "Payout Method"
 msgstr "推銷方式"
 
@@ -1756,7 +1682,6 @@ msgid "(none)"
 msgstr ""
 
 #: includes/admin/payouts/class-list-table.php:422
-#, fuzzy
 msgid "View"
 msgstr "查看%s"
 
@@ -1766,18 +1691,15 @@ msgid "Retry Payment"
 msgstr ""
 
 #: includes/admin/payouts/class-list-table.php:513
-#, fuzzy
 msgid "No payouts found."
 msgstr "沒有找到任何造訪資料"
 
 #: includes/admin/payouts/payouts.php:39
 #: includes/admin/reports/class-reports-admin.php:58
-#, fuzzy
 msgid "Manage Referrals"
 msgstr "未支付的訂購引薦獎金"
 
 #: includes/admin/payouts/screen-options.php:32
-#, fuzzy
 msgid "Number of payouts per page:"
 msgstr "每個頁面呈現的訪問次數:"
 
@@ -1804,7 +1726,6 @@ msgid "Payout Date"
 msgstr ""
 
 #: includes/admin/payouts/view.php:167
-#, fuzzy
 msgid "Referrals Paid"
 msgstr "推廣引薦"
 
@@ -1913,7 +1834,6 @@ msgid "<a href=\"%s\">Post an issue</a> on <a href=\"%s\">GitHub</a>."
 msgstr "在<a href=“%s”>GitHub</a>上<a href=“%s”>問一個問題</a>"
 
 #: includes/admin/referrals/contextual-help.php:39
-#, fuzzy
 msgid "This screen provides access to your site&#8217;s referral history."
 msgstr "該界面可以訪問你網站的推廣記錄。"
 
@@ -1959,23 +1879,19 @@ msgid "Referrals can be searched in several different ways:"
 msgstr "推廣記錄可以被以下幾種不同的方式搜尋到："
 
 #: includes/admin/referrals/contextual-help.php:56
-#, fuzzy
 msgid "You can enter the referral&#8217;s ID number"
 msgstr "你可以輸入推廣ID"
 
 #: includes/admin/referrals/contextual-help.php:57
-#, fuzzy
 msgid "You can enter the referral reference prefixed by &#8220;ref:&#8221;"
 msgstr "你可以輸入前綴的推廣參數’ref:’"
 
 #: includes/admin/referrals/contextual-help.php:58
-#, fuzzy
 msgid "You can enter the referral context prefixed by &#8220;context:&#8221;"
 msgstr "你可以輸入推薦內容的前綴'context:'"
 
 #: includes/admin/referrals/contextual-help.php:59
 #: includes/admin/visits/contextual-help.php:60
-#, fuzzy
 msgid ""
 "You can enter the affiliate&#8217;s ID number prefixed by &#8220;affiliate:"
 "&#8221;"
@@ -1983,7 +1899,6 @@ msgstr "你可以輸入聯盟夥伴ID前綴'affiliate:'"
 
 #: includes/admin/referrals/contextual-help.php:60
 #: includes/admin/visits/contextual-help.php:61
-#, fuzzy
 msgid "You can enter a URL campaign prefixed by &#8220;campaign:&#8221;"
 msgstr "你可以輸入推廣連結前綴'campaign:'"
 
@@ -1992,7 +1907,6 @@ msgid "Exporting Referrals"
 msgstr "匯出推廣記錄"
 
 #: includes/admin/referrals/contextual-help.php:68
-#, fuzzy
 msgid ""
 "Referrals can be exported directly to a CSV file in order to make it easier "
 "for your own accounting needs and for you to payout your affiliates&#8217;s "
@@ -2001,7 +1915,6 @@ msgstr ""
 "推廣資訊可以很容易的匯出為CSV檔案，當你要計算每個聯盟夥伴的分潤金額時。"
 
 #: includes/admin/referrals/contextual-help.php:69
-#, fuzzy
 msgid ""
 "The CSV file generated is structured properly for PayPal&#8217;s Mass "
 "Payment system so you can easily payout all of your affiliates at once via "
@@ -2020,7 +1933,6 @@ msgid "Referral ID"
 msgstr "推廣ID"
 
 #: includes/admin/referrals/edit.php:36
-#, fuzzy
 msgid "The referral ID. This cannot be changed."
 msgstr "聯盟夥伴 ID。 這是不能被修改的。"
 
@@ -2031,26 +1943,22 @@ msgid "%1$s (ID: #%2$s)"
 msgstr ""
 
 #: includes/admin/referrals/edit.php:67
-#, fuzzy
 msgid ""
 "The name and ID of the affiliate who generated this referral. This "
 "association cannot be changed."
 msgstr "這筆推廣與聯盟夥伴ID綁定。你無法更改。"
 
 #: includes/admin/referrals/edit.php:75
-#, fuzzy
 msgid "Payout"
 msgstr "最近的推廣"
 
 #. translators: 1: Payout total amount with view link
 #: includes/admin/referrals/edit.php:84
-#, fuzzy
 msgid "Total: %1$s"
 msgstr "總計"
 
 #. translators: 1: Pay Out action link
 #: includes/admin/referrals/edit.php:106
-#, fuzzy
 msgid "None | %1$s"
 msgstr "未設定"
 
@@ -2060,7 +1968,6 @@ msgstr ""
 
 #: includes/admin/referrals/edit.php:116 includes/admin/referrals/edit.php:168
 #: includes/admin/settings/class-settings.php:580
-#, fuzzy
 msgid "None"
 msgstr "未設定"
 
@@ -2074,7 +1981,6 @@ msgid "The amount of the referral, such as 15."
 msgstr "輸入推廣獎勵金額，例如：15。"
 
 #: includes/admin/referrals/edit.php:159
-#, fuzzy
 msgid "Visit"
 msgstr "訪問次數"
 
@@ -2102,7 +2008,6 @@ msgid "Context"
 msgstr "文本"
 
 #: includes/admin/referrals/edit.php:234
-#, fuzzy
 msgid ""
 "Context for this referral (optional). Usually this is used to identify the "
 "payment system or integration that was used for the transaction."
@@ -2180,7 +2085,6 @@ msgstr ""
 "<a href=“%s”>前往匯出頁面</a>。"
 
 #: includes/admin/referrals/referrals.php:72
-#, fuzzy
 msgid ""
 "To generate a payout for a specific affiliate, enter the affiliate&#8217;s "
 "login name, first name, or last name. Leave blank to generate a payout for "
@@ -2201,22 +2105,18 @@ msgid "Affiliate Registrations"
 msgstr "註冊聯盟夥伴"
 
 #: includes/admin/reports/class-reports-admin.php:65
-#, fuzzy
 msgid "Manage Affiliates"
 msgstr "新增聯盟夥伴"
 
 #: includes/admin/reports/class-reports-admin.php:70
-#, fuzzy
 msgid "View Payouts"
 msgstr "最近的推廣"
 
 #: includes/admin/reports/class-reports-admin.php:77
-#, fuzzy
 msgid "Manage Visits"
 msgstr "搜尋造訪次數"
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:38
-#, fuzzy
 msgid "Total Affiliates"
 msgstr "匯出聯盟夥伴"
 
@@ -2228,23 +2128,19 @@ msgstr ""
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:71
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:135
-#, fuzzy
 msgid "Affiliate #%d"
 msgstr "聯盟夥伴: #%d %s"
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:75
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:84
-#, fuzzy
 msgid "Top Earning Affiliate"
 msgstr "編輯聯盟夥伴"
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:99
-#, fuzzy
 msgid "New Affiliates"
 msgstr "新增聯盟夥伴"
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:139
-#, fuzzy
 msgid "%d referral"
 msgid_plural "%d referrals"
 msgstr[0] "新增推廣"
@@ -2254,12 +2150,10 @@ msgid "Highest Converting Affiliate"
 msgstr ""
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:178
-#, fuzzy
 msgid "Average Payout"
 msgstr "推薦分潤率"
 
 #: includes/admin/reports/tabs/class-campaigns-reports-tab.php:23
-#, fuzzy
 msgid "Campaigns"
 msgstr "廣告宣傳活動"
 
@@ -2299,13 +2193,11 @@ msgid "Most Active Campaign (%s)"
 msgstr ""
 
 #: includes/admin/reports/tabs/class-referrals-reports-tab.php:81
-#, fuzzy
 msgid "Average Referral Amount"
 msgstr "推薦分潤率"
 
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:38
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:45
-#, fuzzy
 msgid "Total Visits"
 msgstr "總訪問數"
 
@@ -2326,7 +2218,6 @@ msgid "Top Referrer"
 msgstr ""
 
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:113
-#, fuzzy
 msgid "Direct Traffic"
 msgstr "直接流量"
 
@@ -2400,7 +2291,6 @@ msgid "Pretty Affiliate URLs"
 msgstr "簡潔的推廣連結"
 
 #: includes/admin/settings/class-settings.php:495
-#, fuzzy
 msgid ""
 "Show pretty affiliate referral URLs to affiliates. For example: <strong>%s "
 "or %s</strong>"
@@ -2415,14 +2305,12 @@ msgid "Credit the last affiliate who referred the customer."
 msgstr "記錄最後一個成功推廣客戶的聯盟夥伴"
 
 #: includes/admin/settings/class-settings.php:505
-#, fuzzy
 msgid ""
 "Choose a referral rate type. Referrals can be based on either a percentage "
 "or a flat rate amount."
 msgstr "推廣分潤應該基於一個百分比或固定金額？"
 
 #: includes/admin/settings/class-settings.php:511
-#, fuzzy
 msgid ""
 "The default referral rate. A percentage if the Referral Rate Type is set to "
 "Percentage, a flat amount otherwise. Referral rates can also be set for each "
@@ -2436,7 +2324,6 @@ msgid "Exclude Shipping"
 msgstr "不含運費"
 
 #: includes/admin/settings/class-settings.php:519
-#, fuzzy
 msgid "Exclude shipping costs from referral calculations."
 msgstr "推廣獎勵總計金額應從成交金額中排除運費嗎？"
 
@@ -2445,7 +2332,6 @@ msgid "Exclude Tax"
 msgstr "不含稅"
 
 #: includes/admin/settings/class-settings.php:524
-#, fuzzy
 msgid "Exclude taxes from referral calculations."
 msgstr "稅金部分被排除在推廣獎勵的計算中嗎?"
 
@@ -2454,7 +2340,6 @@ msgid "Cookie Expiration"
 msgstr "Cookie 過期"
 
 #: includes/admin/settings/class-settings.php:529
-#, fuzzy
 msgid "Enter how many days the referral tracking cookie should be valid for."
 msgstr "推廣獎勵追蹤的Cookie有效期是多少天？"
 
@@ -2481,12 +2366,10 @@ msgid ""
 msgstr "選擇合適的幣別，注意特定支付方式有幣別的限制。"
 
 #: includes/admin/settings/class-settings.php:546
-#, fuzzy
 msgid "Currency Symbol Position"
 msgstr "貨幣符號位置"
 
 #: includes/admin/settings/class-settings.php:547
-#, fuzzy
 msgid "Choose the location of the currency symbol."
 msgstr "選擇一個貨幣符號的顯示位置"
 
@@ -2515,12 +2398,10 @@ msgid "The symbol (usually , or .) to separate decimal points"
 msgstr "符號通常用 , 或 . 來分隔小數點"
 
 #: includes/admin/settings/class-settings.php:569
-#, fuzzy
 msgid "Affiliate Form Settings"
 msgstr "聯盟夥伴設定"
 
 #: includes/admin/settings/class-settings.php:573
-#, fuzzy
 msgid "Affiliate Area Forms"
 msgstr "聯盟夥伴頁面"
 
@@ -2532,17 +2413,14 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:577
-#, fuzzy
 msgid "Affiliate Registration Form and Affiliate Login Form"
 msgstr "聯盟夥伴註冊狀態"
 
 #: includes/admin/settings/class-settings.php:578
-#, fuzzy
 msgid "Affiliate Registration Form Only"
 msgstr "允許聯盟夥伴註冊"
 
 #: includes/admin/settings/class-settings.php:579
-#, fuzzy
 msgid "Affiliate Login Form Only"
 msgstr "使用聯盟夥伴優惠券嗎?"
 
@@ -2567,7 +2445,6 @@ msgid "Disable All Emails"
 msgstr "關閉所有的電子郵件"
 
 #: includes/admin/settings/class-settings.php:614
-#, fuzzy
 msgid "Disable all email notifications."
 msgstr "啟用新推廣通知"
 
@@ -2592,7 +2469,6 @@ msgid "From Name"
 msgstr "寄件者姓名"
 
 #: includes/admin/settings/class-settings.php:630
-#, fuzzy
 msgid "The name that emails come from. This is usually your site name."
 msgstr "標明來源電子郵件。建議使用你的網站名稱。"
 
@@ -2601,19 +2477,16 @@ msgid "From Email"
 msgstr "寄件人郵箱"
 
 #: includes/admin/settings/class-settings.php:636
-#, fuzzy
 msgid ""
 "The email address to send emails from. This will act as the \"from\" and "
 "\"reply-to\" address."
 msgstr "這將作為「寄件者」和「回復至」的電子郵件地址。"
 
 #: includes/admin/settings/class-settings.php:641
-#, fuzzy
 msgid "Notify Admin"
 msgstr "通知管理員"
 
 #: includes/admin/settings/class-settings.php:642
-#, fuzzy
 msgid "Notify site admin of new affiliate registrations."
 msgstr "如有新用戶註冊為聯盟夥伴時，使用郵件通知網站管理員嗎？"
 
@@ -2730,22 +2603,18 @@ msgid ""
 msgstr "登入你的聯盟夥伴頁面，查看你的收益或是關閉這些通知："
 
 #: includes/admin/settings/class-settings.php:693
-#, fuzzy
 msgid "Allow Affiliate Registration"
 msgstr "允許聯盟夥伴註冊"
 
 #: includes/admin/settings/class-settings.php:694
-#, fuzzy
 msgid "Allow users to register affiliate accounts for themselves."
 msgstr "允許用戶自己註冊為聯盟夥伴？"
 
 #: includes/admin/settings/class-settings.php:698
-#, fuzzy
 msgid "Require Approval"
 msgstr "需要審核"
 
 #: includes/admin/settings/class-settings.php:699
-#, fuzzy
 msgid ""
 "Require that Pending affiliate accounts must be approved before they can "
 "begin earning referrals."
@@ -2756,7 +2625,6 @@ msgid "Auto Register New Users"
 msgstr "自動註冊成為新用戶"
 
 #: includes/admin/settings/class-settings.php:704
-#, fuzzy
 msgid "Automatically register new users as affiliates."
 msgstr "新的註冊用戶是否自動申請成為聯盟夥伴"
 
@@ -2773,7 +2641,6 @@ msgid "Default Referral URL"
 msgstr "預設推廣URL"
 
 #: includes/admin/settings/class-settings.php:714
-#, fuzzy
 msgid ""
 "The default referral URL shown in the Affiliate Area. Also changes the URL "
 "shown in the Referral URL Generator and the {referral_url} email tag."
@@ -2786,7 +2653,6 @@ msgid "Enable reCAPTCHA"
 msgstr "啟用 reCAPTCHA 驗證碼"
 
 #: includes/admin/settings/class-settings.php:719
-#, fuzzy
 msgid ""
 "Prevent bots from registering affiliate accounts using Google reCAPTCHA."
 msgstr "你想使用 Google reCAPTCHA 機制來防止機器人註冊的聯盟夥伴帳戶嗎?"
@@ -2810,24 +2676,20 @@ msgid ""
 msgstr "這是用來溝通你的網站與 Google reCAPTCHA，請確保不要外流。"
 
 #: includes/admin/settings/class-settings.php:733
-#, fuzzy
 msgid "Reject Unpaid Referrals on Refund"
 msgstr "拒絕未付款或退費的佣金？"
 
 #: includes/admin/settings/class-settings.php:734
-#, fuzzy
 msgid ""
 "Automatically reject Unpaid referrals when the originating purchase is "
 "refunded or revoked."
 msgstr "如果推廣的交易未付款或已退款給客戶，是否自動拒絕佣金支付？"
 
 #: includes/admin/settings/class-settings.php:738
-#, fuzzy
 msgid "Use Fallback Referral Tracking Method"
 msgstr "使用後備推廣追踪方法?"
 
 #: includes/admin/settings/class-settings.php:739
-#, fuzzy
 msgid ""
 "The method used to track referral links can fail on sites that have jQuery "
 "errors. Enable Fallback Tracking if referrals are not being tracked properly."
@@ -2836,12 +2698,10 @@ msgstr ""
 "後備追踪方式。"
 
 #: includes/admin/settings/class-settings.php:743
-#, fuzzy
 msgid "Ignore Referrals with Zero Amount"
 msgstr "推薦分潤率"
 
 #: includes/admin/settings/class-settings.php:744
-#, fuzzy
 msgid ""
 "Ignore referrals with a zero amount. This can be useful for multi-price "
 "products that start at zero, or if a discount was used which resulted in a "
@@ -2852,19 +2712,16 @@ msgstr ""
 "此推廣將忽略並且不計佣金！"
 
 #: includes/admin/settings/class-settings.php:748
-#, fuzzy
 msgid "Enable Debug Mode"
 msgstr "啟用除錯模式"
 
 #: includes/admin/settings/class-settings.php:749
-#, fuzzy
 msgid ""
 "Enable debug mode. This will turn on error logging for the referral process "
 "to help identify issues."
 msgstr "選中此框以啟用偵錯模式。這將打開日誌記錄轉診過程來説明識別問題的錯誤。"
 
 #: includes/admin/settings/class-settings.php:753
-#, fuzzy
 msgid "Referral URL Blacklist"
 msgstr "推廣連結的造訪資訊"
 
@@ -2886,7 +2743,6 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:764
-#, fuzzy
 msgid "Remove Data on Uninstall"
 msgstr "移除插件並清除數據"
 
@@ -2895,7 +2751,6 @@ msgid "Remove all saved data for AffiliateWP when the plugin is deleted."
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:795
-#, fuzzy
 msgid "Required Registration Fields"
 msgstr "管理員註冊"
 
@@ -2945,7 +2800,6 @@ msgstr "感謝你登記成為 {site_name} 的聯盟夥伴。"
 
 #: includes/admin/settings/class-settings.php:839
 #: includes/emails/actions.php:171
-#, fuzzy
 msgid ""
 "We&#8217;re currently reviewing your affiliate application and will be in "
 "touch soon!"
@@ -2988,7 +2842,6 @@ msgstr ""
 "我們很遺憾地通知你，你最近在 {site_name} 所登錄的聯盟夥伴申請被拒絕了。"
 
 #: includes/admin/settings/class-settings.php:1021
-#, fuzzy
 msgid ""
 "Your license key is globally defined via <code>AFFILIATEWP_LICENSE_KEY</"
 "code> set in <code>wp-config.php</code>.<br />It cannot be modified from "
@@ -3033,7 +2886,6 @@ msgid "Upload File"
 msgstr "上傳檔案"
 
 #: includes/admin/settings/class-settings.php:1233
-#, fuzzy
 msgid ""
 "Your license key is globally defined via <code>AFFILIATEWP_LICENSE_KEY</"
 "code> set in <code>wp-config.php</code>.<br />It cannot be modified from "
@@ -3062,7 +2914,6 @@ msgid "Misc"
 msgstr "其他項目"
 
 #: includes/admin/tools/class-batch-recount-affiliate-stats.php:156
-#, fuzzy
 msgid "%s affiliate&#8217;s was successfully processed."
 msgid_plural "%s affiliates&#8217; were successfully processed."
 msgstr[0] "聯盟夥伴更新成功"
@@ -3077,7 +2928,6 @@ msgid "API Keys"
 msgstr ""
 
 #: includes/admin/tools/class-rest-consumers-table.php:61
-#, fuzzy
 msgid "No API consumers found."
 msgstr "沒有發現任何廣告素材"
 
@@ -3098,12 +2948,10 @@ msgid "Token"
 msgstr ""
 
 #: includes/admin/tools/class-rest-consumers-table.php:203
-#, fuzzy
 msgid "Secret Key"
 msgstr "reCAPTCHA Secret Key"
 
 #: includes/admin/tools/class-rest-consumers-table.php:228
-#, fuzzy
 msgid "Enter username"
 msgstr "無效的帳號名稱"
 
@@ -3131,12 +2979,10 @@ msgid "Date Registered"
 msgstr "登記日期"
 
 #: includes/admin/tools/export/class-batch-export-affiliates.php:117
-#, fuzzy
 msgid "No valid affiliate status was selected for export."
 msgstr "沒有指定要刪除的聯盟 IDs"
 
 #: includes/admin/tools/export/class-batch-export-affiliates.php:187
-#, fuzzy
 msgid "%s affiliate was successfully exported."
 msgid_plural "%s affiliates were successfully exported."
 msgstr[0] "聯盟夥伴更新成功"
@@ -3146,7 +2992,6 @@ msgid "No valid payout status was selected for export."
 msgstr ""
 
 #: includes/admin/tools/export/class-batch-export-payouts.php:274
-#, fuzzy
 msgid "%s payout log was successfully exported."
 msgid_plural "%s payout logs were successfully exported."
 msgstr[0] "新增推廣素材成功"
@@ -3162,7 +3007,6 @@ msgid "No valid referral status was selected for export."
 msgstr ""
 
 #: includes/admin/tools/export/class-batch-export-referrals.php:247
-#, fuzzy
 msgid "%s referral was successfully exported."
 msgid_plural "%s referrals were successfully exported."
 msgstr[0] "新增引薦成功"
@@ -3178,7 +3022,6 @@ msgid "No unpaid referrals were found matching your criteria."
 msgstr ""
 
 #: includes/admin/tools/export/class-batch-generate-payouts.php:299
-#, fuzzy
 msgid "A payout log for %s affiliate was successfully generated."
 msgid_plural "A payout log for %s affiliates was successfully generated."
 msgstr[0] "聯盟夥伴更新成功"
@@ -3232,7 +3075,6 @@ msgid "Use this tool to recount affiliate statistics."
 msgstr "使用此工具來重新計算聯盟夥伴的統計資料。"
 
 #: includes/admin/tools/tools.php:157
-#, fuzzy
 msgid ""
 "Enter the name of the affiliate or begin typing to perform a search based on "
 "the affiliate&#8217;s name."
@@ -3299,7 +3141,6 @@ msgid ""
 msgstr "使用這個工具將經銷商/推廣數據從 Affiliates Pro 遷移到 AffiliateWP。"
 
 #: includes/admin/tools/tools.php:238
-#, fuzzy
 msgid ""
 "<strong>NOTE:</strong> This tool should only ever be used on a fresh "
 "install. If you have already collected affiliate or referral data, do not "
@@ -3348,7 +3189,6 @@ msgid "Export referrals to a CSV file."
 msgstr "匯出推廣到一個CSV檔案"
 
 #: includes/admin/tools/tools.php:317 includes/admin/tools/tools.php:341
-#, fuzzy
 msgid ""
 "To search for an affiliate, enter the affiliate&#8217;s login name, first "
 "name, or last name. Leave blank to export referrals for all affiliates."
@@ -3356,12 +3196,10 @@ msgstr ""
 "搜尋你的經銷商，請輸入經銷商的登入名稱、姓或名；保留空白用以匯出所有經銷商。"
 
 #: includes/admin/tools/tools.php:327
-#, fuzzy
 msgid "Export Payouts"
 msgstr "總訪問數"
 
 #: includes/admin/tools/tools.php:329
-#, fuzzy
 msgid "Export payouts to a CSV file."
 msgstr "匯出聯盟夥伴CSV檔案"
 
@@ -3402,7 +3240,6 @@ msgid "Debug Log"
 msgstr "除錯記錄"
 
 #: includes/admin/tools/tools.php:457
-#, fuzzy
 msgid "Use this tool to help debug various operations in AffiliateWP."
 msgstr "使用此工來幫助除錯推廣追蹤"
 
@@ -3411,7 +3248,6 @@ msgid "Clear Debug Log"
 msgstr "清除除錯記錄檔"
 
 #: includes/admin/tools/tools.php:531
-#, fuzzy
 msgid "Invalid batch ID."
 msgstr "無效的電郵地址"
 
@@ -3420,12 +3256,10 @@ msgid "Invalid batch export class."
 msgstr ""
 
 #: includes/admin/tools/upgrades/class-batch-upgrade-recount-affiliate-stats.php:38
-#, fuzzy
 msgid "Your database has been successfully upgraded. %s"
 msgstr "新增引薦成功"
 
 #: includes/admin/tools/upgrades/class-batch-upgrade-recount-affiliate-stats.php:39
-#, fuzzy
 msgid "Dismiss Notice"
 msgstr "撤銷通知"
 
@@ -3458,13 +3292,11 @@ msgid "No user roles were selected for migration."
 msgstr ""
 
 #: includes/admin/utilities/class-batch-migrate-users.php:167
-#, fuzzy
 msgid "%s affiliate was added successfully."
 msgid_plural "%s affiliates were added successfully."
 msgstr[0] "聯盟夥伴更新成功"
 
 #: includes/admin/utilities/class-batch-migrate-wp-affiliate.php:209
-#, fuzzy
 msgid "%s affiliate was successfully converted."
 msgid_plural "%s affiliates were successfully converted."
 msgstr[0] "聯盟夥伴更新成功"
@@ -3482,7 +3314,6 @@ msgid "An invalid batch class handler file has been supplied."
 msgstr ""
 
 #: includes/admin/utilities/class-batch-process.php:143
-#, fuzzy
 msgid "%s item was successfully processed."
 msgid_plural "%s items were successfully processed."
 msgstr[0] "設定成功匯入"
@@ -3516,7 +3347,6 @@ msgid "No visits found."
 msgstr "沒有找到任何造訪資料"
 
 #: includes/admin/visits/contextual-help.php:39
-#, fuzzy
 msgid "This screen provides access to your site&#8217;s visit history."
 msgstr "這個讓你讓你瀏覽頁面訪客記錄。"
 
@@ -3549,7 +3379,6 @@ msgid ""
 msgstr "<strong>推廣ID</strong>：這是推廣ID為你帶來了網站訪客。"
 
 #: includes/admin/visits/contextual-help.php:44
-#, fuzzy
 msgid ""
 "<strong>Context</strong>: this is the context of how the visit was "
 "generated, if set."
@@ -3591,14 +3420,12 @@ msgid ""
 msgstr "您可以輸入一個不完整的網址，來找到造訪該網址的訪問記錄。"
 
 #: includes/admin/visits/contextual-help.php:58
-#, fuzzy
 msgid ""
 "You can enter the referral&#8217;s ID number prefixed by &#8220;referral:"
 "&#8221;"
 msgstr "你可以輸入推廣ID的前綴 ‘ref:’"
 
 #: includes/admin/visits/contextual-help.php:59
-#, fuzzy
 msgid "You can enter a visit context prefixed by &#8220;context:&#8221;"
 msgstr "你可以輸入推薦內容的前綴'context:'"
 
@@ -3655,7 +3482,6 @@ msgid "Paid Referral Earnings"
 msgstr "已付款的推廣收益"
 
 #: includes/class-register.php:77
-#, fuzzy
 msgid "Please enter a valid website URL"
 msgstr "請輸入你的網站網址"
 
@@ -3680,7 +3506,6 @@ msgid "Email address already taken"
 msgstr "這個電子郵件已經被使用"
 
 #: includes/class-register.php:107
-#, fuzzy
 msgid "Invalid account email"
 msgstr "無效的收款電子郵件"
 
@@ -3701,7 +3526,6 @@ msgid "Please verify that you are not a robot"
 msgstr "你該不會是個機器人吧！請再次確認"
 
 #: includes/class-register.php:146
-#, fuzzy
 msgid "Nice try honey bear, don&#8217;t touch our honey"
 msgstr ""
 "Mmmm，都不放棄呀！好棒棒！別再試著破解我們的網站了，不然跟網站管理員聯絡吧！"
@@ -3719,7 +3543,6 @@ msgid "Please enter a website URL"
 msgstr "請輸入你的網站網址"
 
 #: includes/class-register.php:272
-#, fuzzy
 msgid "Please enter your payment email"
 msgstr "請輸入您的姓名"
 
@@ -3758,12 +3581,10 @@ msgid "An affiliate already exists for this user account."
 msgstr ""
 
 #: includes/cli/class-affiliate-sub-commands.php:167
-#, fuzzy
 msgid "An affiliate with the username \"%s\" has been created."
 msgstr "你在 %s 的聯盟夥伴申請已經被接受了！"
 
 #: includes/cli/class-affiliate-sub-commands.php:169
-#, fuzzy
 msgid "The affiliate account could not be added."
 msgstr "你的聯盟夥伴帳戶尚未被啟用"
 
@@ -3777,29 +3598,24 @@ msgid "A valid affiliate username or ID is required to proceed."
 msgstr ""
 
 #: includes/cli/class-affiliate-sub-commands.php:231
-#, fuzzy
 msgid "The affiliate was updated successfully."
 msgstr "聯盟夥伴更新成功"
 
 #: includes/cli/class-affiliate-sub-commands.php:233
-#, fuzzy
 msgid "The affiliate account could not be updated."
 msgstr "你的聯盟夥伴帳戶尚未被啟用"
 
 #: includes/cli/class-affiliate-sub-commands.php:288
-#, fuzzy
 msgid ""
 "Are you sure you want to delete this affiliate, all its data and its "
 "associated user account?"
 msgstr "你確定你要刪除這個廣告素材嗎？"
 
 #: includes/cli/class-affiliate-sub-commands.php:290
-#, fuzzy
 msgid "Are you sure you want to delete this affiliate and all its data?"
 msgstr "你確定你要刪除這個推廣獎勵記錄嗎？"
 
 #: includes/cli/class-affiliate-sub-commands.php:293
-#, fuzzy
 msgid "Are you sure you want to delete this affiliate?"
 msgstr "你確定你要刪除這個廣告素材嗎？"
 
@@ -3809,22 +3625,18 @@ msgid ""
 msgstr ""
 
 #: includes/cli/class-affiliate-sub-commands.php:313
-#, fuzzy
 msgid "The affiliate account has been successfully deleted."
 msgstr "聯盟夥伴帳號刪除成功"
 
 #: includes/cli/class-affiliate-sub-commands.php:316
-#, fuzzy
 msgid "The affiliate account could not be deleted."
 msgstr "你的聯盟夥伴帳戶已經被拒絕"
 
 #: includes/cli/class-affiliate-sub-commands.php:393
-#, fuzzy
 msgid "Number of affiliates: %d"
 msgstr "每頁聯盟夥伴的個數:"
 
 #: includes/cli/class-command.php:24
-#, fuzzy
 msgid "AffiliateWP is not installed"
 msgstr "AffiliateWP 升級"
 
@@ -3833,7 +3645,6 @@ msgid "You are running AffiliateWP version: %s"
 msgstr ""
 
 #: includes/cli/class-command.php:41
-#, fuzzy
 msgid "License status is: %s"
 msgstr "許可設定"
 
@@ -3842,37 +3653,30 @@ msgid "Debug mode is: %s"
 msgstr ""
 
 #: includes/cli/class-command.php:59
-#, fuzzy
 msgid "Affiliates require approval: %s"
 msgstr "需要審核"
 
 #: includes/cli/class-command.php:72
-#, fuzzy
 msgid "Email notifications are: %s"
 msgstr "是否關閉所有的電子郵件通知？"
 
 #: includes/cli/class-command.php:85
-#, fuzzy
 msgid "Integrations: %s"
 msgstr "整合"
 
 #: includes/cli/class-command.php:92
-#, fuzzy
 msgid "Global referral rate: %s"
 msgstr "啟用這個表單的聯盟推廣"
 
 #: includes/cli/class-command.php:95
-#, fuzzy
 msgid "Global referral rate type: %s"
 msgstr "選擇聯盟夥伴的推薦分潤類型。"
 
 #: includes/cli/class-command.php:98
-#, fuzzy
 msgid "Currency: %s"
 msgstr "貨幣"
 
 #: includes/cli/class-command.php:105
-#, fuzzy
 msgid "Referral variable: %s"
 msgstr "推廣變數"
 
@@ -3881,22 +3685,18 @@ msgid "Show pretty referral URLs: %s"
 msgstr ""
 
 #: includes/cli/class-command.php:126
-#, fuzzy
 msgid "Referral URL (ID): %s"
 msgstr "推廣連結"
 
 #: includes/cli/class-command.php:129
-#, fuzzy
 msgid "Referral URL (Username): %s"
 msgstr "生成推廣連結"
 
 #: includes/cli/class-command.php:134
-#, fuzzy
 msgid "Affiliate Area URL: %s"
 msgstr "聯盟夥伴頁面"
 
 #: includes/cli/class-command.php:139
-#, fuzzy
 msgid "Terms of Use URL: %s"
 msgstr "使用條款"
 
@@ -3905,32 +3705,26 @@ msgid "Found %s sites. Retrieving stats ..."
 msgstr ""
 
 #: includes/cli/class-command.php:190
-#, fuzzy
 msgid "Total Affiliates: %s"
 msgstr "匯出聯盟夥伴"
 
 #: includes/cli/class-command.php:193
-#, fuzzy
 msgid "Total Creatives: %s"
 msgstr "匯出聯盟夥伴"
 
 #: includes/cli/class-command.php:196
-#, fuzzy
 msgid "Total Payouts: %s"
 msgstr "總訪問數"
 
 #: includes/cli/class-command.php:199
-#, fuzzy
 msgid "Total Referrals: %s"
 msgstr "支付引薦獎金總計"
 
 #: includes/cli/class-command.php:202
-#, fuzzy
 msgid "Total Visits: %s"
 msgstr "總訪問數"
 
 #: includes/cli/class-command.php:220
-#, fuzzy
 msgid "Are you sure you want to clear the debug log?"
 msgstr "你確定你要刪除這個推廣獎勵記錄嗎？"
 
@@ -3947,7 +3741,6 @@ msgid "A creative with the ID %d has been successfully created."
 msgstr ""
 
 #: includes/cli/class-creative-sub-commands.php:135
-#, fuzzy
 msgid "The creative could not be created."
 msgstr "(這位用戶不會被刪除)"
 
@@ -3959,27 +3752,22 @@ msgid "A valid creative ID is required to proceed."
 msgstr ""
 
 #: includes/cli/class-creative-sub-commands.php:199
-#, fuzzy
 msgid "The creative was successfully updated."
 msgstr "新增推廣素材成功"
 
 #: includes/cli/class-creative-sub-commands.php:201
-#, fuzzy
 msgid "The creative could not be updated."
 msgstr "(這位用戶不會被刪除)"
 
 #: includes/cli/class-creative-sub-commands.php:236
-#, fuzzy
 msgid "The creative was successfully deleted."
 msgstr "新增推廣素材成功"
 
 #: includes/cli/class-creative-sub-commands.php:238
-#, fuzzy
 msgid "The creative could not be deleted."
 msgstr "(這位用戶不會被刪除)"
 
 #: includes/cli/class-creative-sub-commands.php:314
-#, fuzzy
 msgid "Number of creatives: %d"
 msgstr "每頁顯示廣告素材的數量"
 
@@ -4016,7 +3804,6 @@ msgid "Referral #%d is not valid and has been skipped."
 msgstr ""
 
 #: includes/cli/class-payout-sub-commands.php:298
-#, fuzzy
 msgid "Are you sure you want to overwrite this payout's referrals?"
 msgstr "你確定你要刪除這個推廣獎勵記錄嗎？"
 
@@ -4025,13 +3812,11 @@ msgid "All values passed via the --referrals argument are invalid."
 msgstr ""
 
 #: includes/cli/class-payout-sub-commands.php:312
-#, fuzzy
 msgid ""
 "Are you sure you want to overwrite the affiliate associated with this payout?"
 msgstr "你確定你要刪除這個廣告素材嗎？"
 
 #: includes/cli/class-payout-sub-commands.php:316
-#, fuzzy
 msgid "The supplied affiliate ID or username is invalid and has been ignored."
 msgstr "聯盟夥伴的用戶名稱。這是不能被修改的。"
 
@@ -4042,7 +3827,6 @@ msgid ""
 msgstr ""
 
 #: includes/cli/class-payout-sub-commands.php:327
-#, fuzzy
 msgid "Payout #%d has been updated successfully."
 msgstr "更新推廣素材成功"
 
@@ -4056,7 +3840,6 @@ msgid "A valid payout ID is required to proceed."
 msgstr ""
 
 #: includes/cli/class-payout-sub-commands.php:361
-#, fuzzy
 msgid "Are you sure you want to delete this payout?"
 msgstr "你確定你要刪除這個廣告素材嗎？"
 
@@ -4065,7 +3848,6 @@ msgid "The payout has been successfully deleted."
 msgstr ""
 
 #: includes/cli/class-payout-sub-commands.php:368
-#, fuzzy
 msgid "The payout could not be deleted."
 msgstr "(這位用戶不會被刪除)"
 
@@ -4087,12 +3869,10 @@ msgid ""
 msgstr ""
 
 #: includes/cli/class-referral-sub-commands.php:144
-#, fuzzy
 msgid "A referral with the ID \"%d\" has been created."
 msgstr "得到新的推廣獎勵電子郵件主題"
 
 #: includes/cli/class-referral-sub-commands.php:146
-#, fuzzy
 msgid "The referral could not be added."
 msgstr "得到新的推廣獎勵電子郵件主題"
 
@@ -4104,12 +3884,10 @@ msgid "A valid referral ID is required to proceed."
 msgstr ""
 
 #: includes/cli/class-referral-sub-commands.php:219
-#, fuzzy
 msgid "The referral was updated successfully."
 msgstr "更新引薦成功"
 
 #: includes/cli/class-referral-sub-commands.php:221
-#, fuzzy
 msgid "The referral could not be updated"
 msgstr "得到新的推廣獎勵電子郵件主題"
 
@@ -4118,17 +3896,14 @@ msgid "Are you sure you want to delete this referral?"
 msgstr "你確定你要刪除這個推廣獎勵記錄嗎？"
 
 #: includes/cli/class-referral-sub-commands.php:259
-#, fuzzy
 msgid "The referral has been successfully deleted."
 msgstr "新增引薦成功"
 
 #: includes/cli/class-referral-sub-commands.php:261
-#, fuzzy
 msgid "The referral could not be deleted."
 msgstr "(這位用戶不會被刪除)"
 
 #: includes/cli/class-referral-sub-commands.php:338
-#, fuzzy
 msgid "Number of referrals: %d"
 msgstr "每一頁呈現的推廣數量："
 
@@ -4145,12 +3920,10 @@ msgid "A valid date string must be supplied. Using the current time."
 msgstr ""
 
 #: includes/cli/class-visit-sub-commands.php:179
-#, fuzzy
 msgid "The visit was successfully created."
 msgstr "設定成功匯入"
 
 #: includes/cli/class-visit-sub-commands.php:181
-#, fuzzy
 msgid "The visit could not be created."
 msgstr "得到新的推廣獎勵電子郵件主題"
 
@@ -4166,7 +3939,6 @@ msgid "A valid new date string must be supplied. Using the original date."
 msgstr ""
 
 #: includes/cli/class-visit-sub-commands.php:277
-#, fuzzy
 msgid "The visit was updated successfully."
 msgstr "聯盟夥伴更新成功"
 
@@ -4175,7 +3947,6 @@ msgid "The visit could not be updated."
 msgstr ""
 
 #: includes/cli/class-visit-sub-commands.php:311
-#, fuzzy
 msgid "Are you sure you want to delete this visit?"
 msgstr "你確定你要刪除這個廣告素材嗎？"
 
@@ -4184,12 +3955,10 @@ msgid "The visit has been successfully deleted."
 msgstr ""
 
 #: includes/cli/class-visit-sub-commands.php:318
-#, fuzzy
 msgid "The visit could not be deleted."
 msgstr "(這位用戶不會被刪除)"
 
 #: includes/cli/class-visit-sub-commands.php:396
-#, fuzzy
 msgid "Number of visits: %d"
 msgstr "每個頁面呈現的訪問次數:"
 
@@ -4294,17 +4063,14 @@ msgid "Your site name"
 msgstr "你的網站名稱"
 
 #: includes/emails/class-affwp-emails.php:467
-#, fuzzy
 msgid "The affiliate&#8217;s referral URL"
 msgstr "聯盟夥伴的推廣連結"
 
 #: includes/emails/class-affwp-emails.php:472
-#, fuzzy
 msgid "The affiliate&#8217;s ID"
 msgstr "聯盟夥伴ID"
 
 #: includes/emails/class-affwp-emails.php:477
-#, fuzzy
 msgid "The affiliate&#8217;s referral rate"
 msgstr "選擇聯盟夥伴的推薦分潤類型。"
 
@@ -4325,12 +4091,10 @@ msgid "No reason provided"
 msgstr "並沒有提供理由"
 
 #: includes/emails/functions.php:221
-#, fuzzy
 msgid "(no campaign)"
 msgstr "廣告宣傳活動"
 
 #: includes/integrations/class-caldera-forms.php:74
-#, fuzzy
 msgid "Total"
 msgstr "總計"
 
@@ -4357,7 +4121,6 @@ msgid "Contact Form 7"
 msgstr ""
 
 #: includes/integrations/class-contactform7.php:114
-#, fuzzy
 msgid "Enable referrals on all Contact Form 7 forms"
 msgstr "啟用這個表單的聯盟推廣"
 
@@ -4370,7 +4133,6 @@ msgid ""
 msgstr ""
 
 #: includes/integrations/class-contactform7.php:130
-#, fuzzy
 msgid "Enable referrals for specific Contact Form 7 forms"
 msgstr "啟用這個表單的聯盟推廣"
 
@@ -4434,12 +4196,10 @@ msgid ""
 msgstr "在重新使用EDD軟體授權購買食, AffiliateWP 應該防止推薦佣金被記錄嗎?"
 
 #: includes/integrations/class-edd.php:620
-#, fuzzy
 msgid "Disable Referrals on Upgrades"
 msgstr "停用這個產品的推廣獎勵"
 
 #: includes/integrations/class-edd.php:621
-#, fuzzy
 msgid ""
 "Should AffiliateWP prevent referral commissions from being recorded on "
 "license upgrade purchases with EDD Software Licensing?"
@@ -4499,12 +4259,10 @@ msgid "AffiliateWP: Referral #%d for %s for %s rejected"
 msgstr "AffiliateWP: 推廣 # %d%s %s 被拒絕"
 
 #: includes/integrations/class-give.php:127
-#, fuzzy
 msgid "Custom Amount"
 msgstr "購買金額"
 
 #: includes/integrations/class-give.php:248
-#, fuzzy
 msgid "Enable affiliate referral creation for this donation form"
 msgstr "啟用這個表單的聯盟推廣"
 
@@ -4517,7 +4275,6 @@ msgid "Affiliate Rate"
 msgstr "聯盟夥伴分潤率"
 
 #: includes/integrations/class-give.php:254
-#, fuzzy
 msgid ""
 "This setting will be used to calculate affiliate earnings per-donation. "
 "Leave blank to use default affiliate rates."
@@ -4534,7 +4291,6 @@ msgid "Allow referrals"
 msgstr "允許推廣"
 
 #: includes/integrations/class-gravityforms.php:321
-#, fuzzy
 msgid "Affiliate Coupon"
 msgstr "使用聯盟夥伴優惠券嗎?"
 
@@ -4550,7 +4306,6 @@ msgid "Affiliate Data"
 msgstr "聯盟夥伴資料"
 
 #: includes/integrations/class-lifterlms.php:115
-#, fuzzy
 msgid "Referral #%d completed"
 msgstr "更新引薦成功"
 
@@ -4569,32 +4324,26 @@ msgid "Referral not created due to 0.00 amount."
 msgstr ""
 
 #: includes/integrations/class-lifterlms.php:230
-#, fuzzy
 msgid "LifterLMS Referral #%d updated successfully."
 msgstr "更新引薦成功"
 
 #: includes/integrations/class-lifterlms.php:257
-#, fuzzy
 msgid "Referral #%d created successfully."
 msgstr "更新引薦成功"
 
 #: includes/integrations/class-lifterlms.php:263
-#, fuzzy
 msgid "Referral failed to be created."
 msgstr "得到新的推廣獎勵電子郵件主題"
 
 #: includes/integrations/class-lifterlms.php:354
-#, fuzzy
 msgid "Referral #%d updated successfully."
 msgstr "更新引薦成功"
 
 #: includes/integrations/class-lifterlms.php:378
-#, fuzzy
 msgid "Pending referral #%d created successfully."
 msgstr "更新引薦成功"
 
 #: includes/integrations/class-lifterlms.php:389
-#, fuzzy
 msgid "LifterLMS Referral failed to be created."
 msgstr "得到新的推廣獎勵電子郵件主題"
 
@@ -4603,7 +4352,6 @@ msgid "Search for an affiliate by username or email."
 msgstr ""
 
 #: includes/integrations/class-lifterlms.php:444
-#, fuzzy
 msgid "Affiliate Discount"
 msgstr "聯盟夥伴折扣？"
 
@@ -4613,7 +4361,6 @@ msgstr ""
 
 #: includes/integrations/class-lifterlms.php:664
 #: includes/integrations/class-lifterlms.php:690
-#, fuzzy
 msgid "Referral Details"
 msgstr "推廣設定"
 
@@ -4624,14 +4371,12 @@ msgid "Disable Referrals"
 msgstr "關閉推廣"
 
 #: includes/integrations/class-lifterlms.php:745
-#, fuzzy
 msgid ""
 "Check this box to prevent orders for this %s from generating referral "
 "commissions for affiliates."
 msgstr "這將防止這種產品從聯盟夥伴產生推廣佣金。"
 
 #: includes/integrations/class-lifterlms.php:753
-#, fuzzy
 msgid "Enable %s Referral Rate"
 msgstr "推薦分潤率"
 
@@ -4640,17 +4385,14 @@ msgid "Check this box to enable %s referral rate overrides"
 msgstr ""
 
 #: includes/integrations/class-lifterlms.php:762
-#, fuzzy
 msgid "%s Referral Rate"
 msgstr "推薦分潤率"
 
 #: includes/integrations/class-lifterlms.php:763
-#, fuzzy
 msgid "Enter a referral rate for this %s"
 msgstr "啟用這個表單的聯盟推廣"
 
 #: includes/integrations/class-lifterlms.php:870
-#, fuzzy
 msgid "Referral #%d rejected"
 msgstr "已被拒絕：推廣 #%d for %s for %s "
 
@@ -4663,7 +4405,6 @@ msgid "Enable affiliate referral creation for this form?"
 msgstr "啟用這個表單的聯盟夥伴推廣？"
 
 #: includes/integrations/class-paypal.php:90
-#, fuzzy
 msgid "Pending PayPal referral"
 msgstr "待確認引薦獎金總計"
 
@@ -4686,7 +4427,6 @@ msgid "Check to disable per-membership referrals."
 msgstr "檢查關閉個別成員推薦。"
 
 #: includes/integrations/class-pms.php:51
-#, fuzzy
 msgid ""
 "This rate will be used to calculate affiliate earnings when members register "
 "their account with this subscription. Leave blank to use the site default "
@@ -4701,7 +4441,6 @@ msgid ""
 msgstr "此選項用來計算聯盟夥伴的佣金。保留空白則表示使用預設分潤率。"
 
 #: includes/integrations/class-rcp.php:391
-#, fuzzy
 msgid "Disable referrals on this subscription level."
 msgstr "停用這個產品的推廣獎勵"
 
@@ -4711,7 +4450,6 @@ msgid "(Variation ID %d)"
 msgstr ""
 
 #: includes/integrations/class-woocommerce.php:494
-#, fuzzy
 msgid "Configure affiliate rates for this product"
 msgstr "停用這個產品的推廣獎勵"
 
@@ -4737,12 +4475,10 @@ msgid "Configure affiliate rates for this product variation"
 msgstr ""
 
 #: includes/integrations/class-woocommerce.php:534
-#, fuzzy
 msgid "Referral rate (optional)"
 msgstr "推廣說明"
 
 #: includes/integrations/class-woocommerce.php:536
-#, fuzzy
 msgid "Disable referrals for this product variation"
 msgstr "停用這個產品的推廣獎勵"
 
@@ -4755,12 +4491,10 @@ msgid "Manage per-product affiliate rates."
 msgstr "管理各產品的聯盟夥伴分潤率"
 
 #: includes/integrations/extras/class-ninja-forms-action-add-referral.php:47
-#, fuzzy
 msgid "Total Field"
 msgstr "總訪問數"
 
 #: includes/integrations/extras/class-ninja-forms-action-add-referral.php:63
-#, fuzzy
 msgid "Customer Email"
 msgstr "發送歡迎電子郵件"
 
@@ -4777,7 +4511,6 @@ msgid "Euros"
 msgstr "歐元"
 
 #: includes/misc-functions.php:28
-#, fuzzy
 msgid "Argentine Peso"
 msgstr "墨西哥披索"
 
@@ -4858,7 +4591,6 @@ msgid "Israeli Shekel"
 msgstr "以色列新謝克爾"
 
 #: includes/misc-functions.php:48
-#, fuzzy
 msgid "Iranian Rial"
 msgstr "巴西雷亞爾"
 
@@ -4899,7 +4631,6 @@ msgid "New Zealand Dollar"
 msgstr "紐西蘭元"
 
 #: includes/misc-functions.php:58
-#, fuzzy
 msgid "Pakistani Rupee"
 msgstr "印度盧比"
 
@@ -4980,7 +4711,6 @@ msgid "Vietnamese Dong"
 msgstr "越南盾"
 
 #: includes/scripts.php:139
-#, fuzzy
 msgid "Please enter a valid URL for this site"
 msgstr "請輸入你的網站網址"
 
@@ -4997,7 +4727,6 @@ msgid "Referral Graphs"
 msgstr "推廣圖表"
 
 #: templates/dashboard-tab-payouts.php:3
-#, fuzzy
 msgid "Referral Payouts"
 msgstr "推薦分潤率"
 
@@ -5133,7 +4862,6 @@ msgid "Log out"
 msgstr ""
 
 #: templates/login.php:15
-#, fuzzy
 msgid "Log into your account"
 msgstr "登入你的聯盟帳號"
 
@@ -5150,7 +4878,6 @@ msgid "Log In"
 msgstr ""
 
 #: templates/login.php:48
-#, fuzzy
 msgid "Lost your password?"
 msgstr "遺失密碼?"
 
@@ -5165,7 +4892,6 @@ msgid "The affiliate area is available only for registered affiliates."
 msgstr "聯盟夥伴專區僅開放於通過申請的聯盟夥伴查看"
 
 #: templates/register.php:54
-#, fuzzy
 msgid "Register a new affiliate account"
 msgstr "申請一個全新的聯盟夥伴帳號"
 
@@ -5186,7 +4912,6 @@ msgid "Affiliate Plugin for WordPress"
 msgstr "WordPress 聯盟夥伴外掛"
 
 #: includes/admin/affiliates/affiliates.php:58
-#, fuzzy
 msgctxt "affiliates"
 msgid "Reports"
 msgstr "報表"
@@ -5215,148 +4940,124 @@ msgstr "廣告素材ID #%d: %s"
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:66
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:69
 #: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:67
-#, fuzzy
 msgctxt "Affiliate column table header"
 msgid "Affiliate"
 msgstr "聯盟夥伴"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-most-valuable.php:75
-#, fuzzy
 msgctxt "Earnings column table header"
 msgid "Earnings"
 msgstr "收益"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-most-valuable.php:76
-#, fuzzy
 msgctxt "Referrals column table header"
 msgid "Referrals"
 msgstr "推廣引薦"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-most-valuable.php:77
-#, fuzzy
 msgctxt "Visits column table header"
 msgid "Visits"
 msgstr "訪問次數"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:67
-#, fuzzy
 msgctxt "URL column table header"
 msgid "URL"
 msgstr "網址"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:68
-#, fuzzy
 msgctxt "Converted column table header"
 msgid "Converted"
 msgstr "轉換"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:70
-#, fuzzy
 msgctxt "Amount column table header"
 msgid "Amount"
 msgstr "總計"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:71
-#, fuzzy
 msgctxt "Description column table header"
 msgid "Description"
 msgstr "說明"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:68
-#, fuzzy
 msgctxt "Status column table header"
 msgid "Status"
 msgstr "狀態"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:69
-#, fuzzy
 msgctxt "Actions column table header"
 msgid "Actions"
 msgstr "操作"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:54
-#, fuzzy
 msgctxt "Paid earnings column table header"
 msgid "Paid earnings"
 msgstr "已付款的收益"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:55
-#, fuzzy
 msgctxt "Paid earnings this month column table header"
 msgid "Paid earnings this month"
 msgstr "本月已付款的收益"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:56
-#, fuzzy
 msgctxt "Paid earnings today column table header"
 msgid "Paid earnings today"
 msgstr "今日已付款的收益"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:80
-#, fuzzy
 msgctxt "Unpaid referrals column table header"
 msgid "Unpaid referrals"
 msgstr "未支付的訂購引薦獎金"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:81
-#, fuzzy
 msgctxt "Unpaid referrals this month column table header"
 msgid "Unpaid referrals this month"
 msgstr "本月未付款的佣金"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:82
-#, fuzzy
 msgctxt "Unpaid referrals today column table header"
 msgid "Unpaid referrals today"
 msgstr "今日未付款的佣金"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:105
-#, fuzzy
 msgctxt "Unpaid earnings column table header"
 msgid "Unpaid earnings"
 msgstr "未付款的收益"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:106
-#, fuzzy
 msgctxt "Unpaid earnings this month"
 msgid "Unpaid earnings this month"
 msgstr "本月未付款的收益"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:107
-#, fuzzy
 msgctxt "Unpaid earnings today column table header"
 msgid "Unpaid earnings today"
 msgstr "今日未付款的收益"
 
 #: includes/admin/payouts/class-list-table.php:129
-#, fuzzy
 msgctxt "payouts"
 msgid "All"
 msgstr "全部"
 
 #: includes/admin/payouts/class-list-table.php:149
 #: includes/admin/tools/export/class-batch-export-payouts.php:147
-#, fuzzy
 msgctxt "payout"
 msgid "Amount"
 msgstr "總計"
 
 #: includes/admin/payouts/class-list-table.php:154
 #: includes/admin/tools/export/class-batch-export-payouts.php:150
-#, fuzzy
 msgctxt "payout"
 msgid "Status"
 msgstr "狀態"
 
 #: includes/admin/payouts/class-list-table.php:155
 #: includes/admin/tools/export/class-batch-export-payouts.php:151
-#, fuzzy
 msgctxt "payout"
 msgid "Date"
 msgstr "日期"
 
 #: includes/payout-functions.php:133 includes/payout-functions.php:137
-#, fuzzy
 msgctxt "payout"
 msgid "Paid"
 msgstr "已支付"
@@ -5369,7 +5070,6 @@ msgstr ""
 
 #: includes/admin/payouts/class-list-table.php:335
 #: includes/admin/payouts/view.php:86
-#, fuzzy
 msgctxt "payout owner ID"
 msgid "(User ID: %d)"
 msgstr "用戶ID"
@@ -5381,37 +5081,31 @@ msgid "Date: %1$s (%2$s)"
 msgstr ""
 
 #: includes/admin/referrals/edit.php:193
-#, fuzzy
 msgctxt "visit"
 msgid "None"
 msgstr "未設定"
 
 #: includes/admin/referrals/referrals.php:39
-#, fuzzy
 msgctxt "referrals"
 msgid "Reports"
 msgstr "報表"
 
 #: includes/admin/visits/class-list-table.php:234
-#, fuzzy
 msgctxt "visit context"
 msgid "None"
 msgstr "未設定"
 
 #: includes/admin/visits/visits.php:42
-#, fuzzy
 msgctxt "visits"
 msgid "Reports"
 msgstr "報表"
 
 #: includes/class-graph.php:419
-#, fuzzy
 msgctxt "date filter"
 msgid "From"
 msgstr "寄件人"
 
 #: includes/class-graph.php:421
-#, fuzzy
 msgctxt "date filter"
 msgid "To"
 msgstr "給"
@@ -5422,7 +5116,6 @@ msgid "Valid"
 msgstr ""
 
 #: includes/cli/class-command.php:38
-#, fuzzy
 msgctxt "license status"
 msgid "Invalid"
 msgstr "無效的電郵地址"
@@ -5458,7 +5151,6 @@ msgid "Disabled"
 msgstr ""
 
 #: includes/cli/class-command.php:80
-#, fuzzy
 msgctxt "integrations"
 msgid "None"
 msgstr "未設定"
@@ -5474,7 +5166,6 @@ msgid "Disabled"
 msgstr ""
 
 #: includes/cli/class-visit-sub-commands.php:437
-#, fuzzy
 msgctxt "direct traffic"
 msgid "Direct"
 msgstr "直接流量"
