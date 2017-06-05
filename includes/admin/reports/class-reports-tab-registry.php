@@ -28,7 +28,8 @@ class Registry extends Utils\Registry {
 	 * @access public
 	 * @since  2.1
 	 *
-	 * @param int    $tile_id   Tile ID.
+	 * @param string $collection Collection (tab) ID.
+	 * @param string $tile_id    Tile ID.
 	 * @param array  $attributes {
 	 *     Tile attributes.
 	 *
@@ -54,7 +55,8 @@ class Registry extends Utils\Registry {
 	 * @access public
 	 * @since  2.1
 	 *
-	 * @param string $tile_id Tile ID.
+	 * @param string $collection Collection (tab) ID.
+	 * @param string $tile_id    Tile ID.
 	 */
 	public function remove_tile( $collection, $tile_id ) {
 		parent::remove_item( "{$collection}:{$tile_id}" );
