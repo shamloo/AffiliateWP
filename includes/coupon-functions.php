@@ -317,15 +317,21 @@ function affwp_get_coupon_templates() {
 }
 
 /**
- * Gets the coupon creation admin url for the specified integration.
+ * Gets the coupon-creation admin url for the specified integration.
+ * Can output wither a raw admin url, or a formatted html anchor containing the link.
+ *
+ * The affiliate ID is used optionally in cases where data may be passed to the integration.
  *
  * @since  2.1
  *
- * @param  string  $integration The integration.
+ * @param  string  $integration   The integration.
+ * @param  int     $affiliate_id  Affiliate ID.
+ * @param  bool    $html          Whether or not to provide an html anchor tag in the return.
+ *                                Specify true to output an anchor tag. Default is false.
  *
  * @return string|false         The coupon creation admin url, otherwise false.
  */
-function affwp_get_coupon_create_url( $integration ) {
+function affwp_get_coupon_create_url( $integration, $affiliate_id = 0, $html = false ) {
 
 	$url = false;
 
@@ -351,6 +357,9 @@ function affwp_get_coupon_create_url( $integration ) {
 		return false;
 	}
 
+	if ( $html ) {
+		return '<a class="affwp-inline-link" href="' . $url . '">Create Coupon</a>';
+	}
 
 	return $url;
 }
