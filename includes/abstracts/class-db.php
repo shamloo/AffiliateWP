@@ -438,4 +438,36 @@ abstract class Affiliate_WP_DB {
 
 		return $_object;
 	}
+
+	/**
+	 * Parses a string of one or more valid object fields into a SQL-friendly format.
+	 *
+	 * @access public
+	 * @since  2.1
+	 *
+	 * @param string|array $fields Object fields.
+	 * @return string SQL-ready fields list.
+	 */
+	public function parse_fields( $fields ) {
+
+		$fields_sql = '';
+
+		if ( ! is_array( $fields ) ) {
+			$fields = array( $fields );
+		}
+
+		$count     = count( $fields );
+		$whitelist = array_keys( $this->get_columns() );
+
+		foreach ( $fields as $index => $field ) {
+			if ( ! in_array( $field, $whitelist, true ) ) {
+				unset( $fields[ $index ] );
+			}
+		}
+
+		$fields_sql = implode( ', ', $fields );
+
+		return $fields_sql;
+	}
+
 }
