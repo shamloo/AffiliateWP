@@ -95,6 +95,15 @@ final class Affiliate_WP {
 	public $campaigns;
 
 	/**
+	 * The coupons instance variable.
+	 *
+	 * @access public
+	 * @since  2.1
+	 * @var    Affiliate_WP_Coupons_DB
+	 */
+	public $coupons;
+
+	/**
 	 * The visits DB instance variable
 	 *
 	 * @access public
