@@ -234,14 +234,32 @@ $coupons          = affwp_get_affiliate_coupons( $affiliate->affiliate_id );
 
 			</tr>
 
-			<tr class="form-row">
+			<tr class="form-row coupons-row">
 
 				<th scope="row">
 					<label for="coupons"><?php _e( 'Coupons', 'affiliate-wp' ); ?></label>
 				</th>
 
 				<td id="coupons">
+
+					<p>
+						<strong>
+							<?php echo __( 'Create affiliate coupons:', 'affiliate-wp' ); ?>
+						</strong>
+					</p>
+
+					<?php affwp_display_create_coupon_form(); ?>
+
+					<hr />
+
+					<p>
+						<strong>
+							<?php echo __( 'Coupons for this affiliate:', 'affiliate-wp' ); ?>
+						</strong>
+					</p>
+
 					<?php
+
 					// Affiliate Coupons.
 					$coupons_table = new AffWP_Coupons_Table( array(
 						'query_args' => array(
@@ -255,9 +273,14 @@ $coupons          = affwp_get_affiliate_coupons( $affiliate->affiliate_id );
 					) );
 
 					$coupons_table->prepare_items();
-					$coupons_table->views();
-					$coupons_table->display();
+					// $coupons_table->views();
+					$coupons_table->display(); ?>
 
+					<p class="description">
+						<?php echo __( 'The current coupons for this affiliate. Click Create Coupon above to create a coupon for any supported integrations without an existing coupon associated with this affiliate.', 'affiliate-wp' ); ?>
+					</p>
+
+					<?php
 					/**
 					 * Fires at the bottom of coupons list table views.
 					 *
@@ -266,9 +289,9 @@ $coupons          = affwp_get_affiliate_coupons( $affiliate->affiliate_id );
 					do_action( 'affwp_view_affiliate_coupons_list_table' );
 					?>
 				<td>
-
 			</tr>
 
+			<!-- #TODO - The below iteration of coupons is left for reference and will be removed. -->
 			<tr class="form-row">
 
 				<th scope="row">
@@ -313,9 +336,6 @@ $coupons          = affwp_get_affiliate_coupons( $affiliate->affiliate_id );
 							echo $output;
 						?>
 					</ul>
-					<p class="description">
-						<?php echo __( 'The current coupons for this affiliate. Click Create Coupon above to create a coupon for any supported integrations without an existing coupon associated with this affiliate.', 'affiliate-wp' ); ?>
-					</p>
 				</td>
 			</tr>
 
