@@ -215,7 +215,9 @@ abstract class Coupon extends \AffWP\Base_Object {
 
 	/**
 	 * Creates an AffiliateWP coupon object when a coupon is created in the integration.
-	 * Requires an EDD discount post ID.
+	 *
+	 * This method is required in extensions of this class,
+	 * and should be hooked onto the action which fires in the integration at the time of coupon creation.
 	 *
 	 * @param  array  $args  An array of coupon arguments.
 	 * @return bool          Returns true if a coupon object was created, otherwise false.
