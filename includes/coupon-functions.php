@@ -116,7 +116,7 @@ function affwp_get_affiliate_coupons( $affiliate_id = 0 ) {
 		'affiliate_id' => $affiliate_id
 		);
 
-	return affiliate_wp()->coupons->get_coupons( $args );
+	return affiliate_wp()->affiliates->coupons->get_coupons( $args );
 }
 
 /**
