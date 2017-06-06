@@ -176,13 +176,26 @@ abstract class Affiliate_WP_DB {
 
 		} elseif ( '*' !== $clauses['fields'] ) {
 
-			$results = $wpdb->get_col(
-				$wpdb->prepare(
-					"SELECT {$clauses['fields']} FROM {$this->table_name} {$clauses['join']} {$clauses['where']} ORDER BY {$clauses['orderby']} {$clauses['order']} LIMIT %d, %d;",
-					absint( $args['offset'] ),
-					absint( $args['number'] )
-				)
-			);
+			$fields = $clauses['fields'];
+
+			// Build the query.
+			$query = "SELECT {$fields} FROM {$this->table_name} {$clauses['join']} {$clauses['where']} ORDER BY {$clauses['orderby']} {$clauses['order']} LIMIT %d, %d;";
+
+			if ( false !== strpos( $fields, ',' ) ) {
+
+				// Multiple fields.
+				$results = $wpdb->get_results(
+					$wpdb->prepare( $query, absint( $args['offset'] ), absint( $args['number'] ) )
+				);
+
+			} else {
+
+				// Single field.
+				$results = $wpdb->get_col(
+					$wpdb->prepare( $query, absint( $args['offset'] ), absint( $args['number'] ) )
+				);
+
+			}
 
 			if ( 'ids' === $args['fields'] ) {
 				$results = array_map( 'intval', $results );
