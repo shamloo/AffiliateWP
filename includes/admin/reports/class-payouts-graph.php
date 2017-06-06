@@ -174,7 +174,6 @@ class Affiliate_WP_Payouts_Graph extends \Affiliate_WP_Graph {
 			__( 'Earnings Paid', 'affiliate-wp' )      => $this->get_payouts_data()
 		);
 
-		log_it( $data );
 		return $data;
 
 	}
