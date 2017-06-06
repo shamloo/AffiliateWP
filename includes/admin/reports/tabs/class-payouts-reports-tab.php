@@ -22,7 +22,7 @@ class Tab extends Reports\Tab {
 		$this->tab_id   = 'payouts';
 		$this->label    = __( 'Payouts', 'affiliate-wp' );
 		$this->priority = 5;
-		$this->graph    = new \Affiliate_WP_Registrations_Graph;
+		$this->graph    = new \Affiliate_WP_Payouts_Graph;
 
 		parent::__construct();
 	}
