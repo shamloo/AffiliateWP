@@ -214,6 +214,25 @@ abstract class Coupon extends \AffWP\Base_Object {
 	abstract public function get_integration_coupons();
 
 	/**
+	 * Creates an AffiliateWP coupon object when a coupon is created in the integration.
+	 * Requires an EDD discount post ID.
+	 *
+	 * @param  array  $args  An array of coupon arguments.
+	 * @return bool          Returns true if a coupon object was created, otherwise false.
+	 * @since  2.1
+	 */
+	public function create_affwp_coupon( $details ) {
+
+		if ( ! $details ) {
+			return false;
+		}
+
+		$discount_id = $details->id;
+
+		return affiliate_wp()->affiliates->coupons->add( $details );
+	}
+
+	/**
 	 * Sets the coupon template used as a template when generating all automatic affiliate coupons.
 	 *
 	 * For auto-generated coupons, there can be only one AffiliateWP coupon template per integration.
