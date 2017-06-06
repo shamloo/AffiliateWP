@@ -446,7 +446,7 @@ abstract class Affiliate_WP_DB {
 	 * @since  2.1
 	 *
 	 * @param string|array $fields Object fields.
-	 * @return string SQL-ready fields list.
+	 * @return string SQL-ready fields list. If empty, default is '*'.
 	 */
 	public function parse_fields( $fields ) {
 
@@ -466,6 +466,10 @@ abstract class Affiliate_WP_DB {
 		}
 
 		$fields_sql = implode( ', ', $fields );
+
+		if ( empty ( $fields_sql ) ) {
+			$fields_sql = '*';
+		}
 
 		return $fields_sql;
 	}
