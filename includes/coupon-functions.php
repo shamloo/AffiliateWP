@@ -162,13 +162,18 @@ function affwp_get_coupon_status_label( $coupon ) {
  * Returns an array of coupon IDs based on the specified AffiliateWP integration.
  *
  * @since  2.1
- * @param  array              $integration  The AffiliateWP integration for which coupons should be retrieved.
- * @return mixed  bool|array  $coupons      Array of coupons based on the specified AffiliateWP integration.
+ * @param  array              $args     Arguments.
+ * @return mixed  bool|array  $coupons  Array of coupons based on the specified AffiliateWP integration.
  */
-function affwp_get_coupons_by_integration( $integration = '' ) {
+function affwp_get_coupons_by_integration( $args ) {
 
-	if ( ! isset( $integration ) ) {
-		affiliate_wp()->utils->log( 'Unable to determine integration when querying coupons.' );
+	if ( ! isset( $args[ 'integration' ] ) ) {
+		affiliate_wp()->utils->log( 'affwp_get_coupons_by_integration: Unable to determine integration when querying coupons.' );
+		return false;
+	}
+
+	if ( ! isset( $args[ 'affiliate_id' ] ) ) {
+		affiliate_wp()->utils->log( 'affwp_get_coupons_by_integration: Unable to determine affiliate ID when querying coupons.' );
 		return false;
 	}
 
@@ -178,13 +183,16 @@ function affwp_get_coupons_by_integration( $integration = '' ) {
 
 	// Todo - cycle through active integrations, show variable UI depending on the integrations enabled,
 	// to allow all supported concurrently-active integrations to auto-generate coupons.
-	switch ( $integration ) {
+	switch ( $args[ 'integration' ] ) {
 		case 'edd':
 			// Only retrieve active EDD discounts.
 			$args = array(
-				'post_status' => 'active'
+				'post_status'              => 'active',
+				'affwp_discount_affiliate' => $args[ 'affiliate_id' ]
 			);
+
 			$coupons = edd_get_discounts( $args );
+
 			break;
 
 		default:
@@ -194,10 +202,12 @@ function affwp_get_coupons_by_integration( $integration = '' ) {
 	}
 
 	if ( $coupons ) {
+
 		$coupon_ids = array();
 
 		foreach ( $coupons as $coupon ) {
-			$coupon_id = ( isset( $coupon->ID ) && is_int( $coupon->ID ) ) ? $coupon_id : false;
+			$coupon_id = $coupon->ID;
+
 			if ( $coupon_id ) {
 				$coupon_ids[] = $coupon_id;
 			}
@@ -264,14 +274,14 @@ function affwp_get_coupon_template_id( $integration ) {
 /**
  * Gets the coupon template url.
  *
- * @param  int $template_id        The template ID.
+ * @param  int $coupon_id          The coupon ID.
  * @param  string $integration_id  The integration ID.
  * @since  2.1
  *
  * @return string|false            Returns the coupon template ID if set. If not, returns false.
  */
-function affwp_get_coupon_edit_url( $template_id, $integration_id ) {
-	return affiliate_wp()->affiliates->coupons->get_coupon_edit_url( $template_id, $integration_id );
+function affwp_get_coupon_edit_url( $coupon_id, $integration_id ) {
+	return affiliate_wp()->affiliates->coupons->get_coupon_edit_url( $coupon_id, $integration_id );
 }
 
 /**

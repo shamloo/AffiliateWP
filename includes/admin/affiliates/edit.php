@@ -246,33 +246,32 @@ $coupons          = affwp_get_affiliate_coupons( $affiliate->affiliate_id );
 
 							$output = '';
 
-							if ( affwp_get_affiliate_coupons( $affiliate_id ) ) {
-
-								$coupons = affwp_get_affiliate_coupons( $affiliate_id );
-
-								foreach ( $coupons as $coupon ) {
-
-									// Ensure that this coupon is associated with the affiliate.
-									if ( $affiliate_id === $coupon[ 'affiliate_id' ] ) {
-
-										$output .= '<li>' . $coupon[ 'integration' ] . ': <a href="">' . affwp_get_coupon_edit_url( $coupon[ 'coupon_id' ], $coupon[ 'integration' ] ) . '</li>';
-									} elseif ( affwp_has_coupon_support( $coupon[ 'integration' ] ) ) {
-											$output .= '<li>None. <a class="affwp-inline-link" href="' . $thing . '">Create coupon</a>';
-									} else {
-										$output .= __( 'No currently-active integrations support coupons at this time.', 'affiliate-wp' );
-									}
-
-								}
-
-							}
-
 							$integrations = affiliate_wp()->integrations->get_enabled_integrations();
 
 							foreach ( $integrations as $integration_id => $integration_term ) {
 
 								if ( affwp_has_coupon_support( $integration_id ) ) {
 
-									$output .= '<li>' . $integration_term . ': ' . affwp_get_coupon_create_url( $integration_id, $affiliate_id, true ) . '</li>';
+									$args = array(
+										'affiliate_id' => $affiliate_id,
+										'integration'  => $integration_id
+									);
+
+									$affiliate_coupons = affwp_get_coupons_by_integration( $args );
+
+									if ( $affiliate_coupons ) {
+
+										foreach ( $affiliate_coupons as $coupon_id ) {
+											$output .= '<li>(' . $integration_term . ') <a href="' . affwp_get_coupon_edit_url( $coupon_id, $integration_id, true ) . '">Edit coupon</a></li>';
+										}
+
+									}
+
+								} elseif ( affwp_has_coupon_support( $args[ 'integration' ] ) ) {
+									$output .= '<li>' . $integration_term . ' <a class="affwp-inline-link" href="' . affwp_get_coupon_create_url( $integration_id ) . '">' . __( 'Create coupon', 'affiliate-wp' ) . '</a>';
+								} else {
+									// Otherwise, coupon support should not be available.
+									$output .= __( 'No currently-active AffiliateWP integrations support coupons at this time.', 'affiliate-wp' );
 								}
 							}
 

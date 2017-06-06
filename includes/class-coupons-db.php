@@ -471,20 +471,20 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 	 *
 	 * @since  2.1
 	 *
-	 * @param  int                $template_id  The ID of the coupon template in use.
+	 * @param  int                $coupon_id    The ID of the integrations coupon being queried.
 	 * @param  string             $integration  The integration.
 	 *
 	 * @return mixed  string|bool $url          Returns the edit screen url of the coupon template if set,
 	 *                                          otherwise returns false.
 	 */
-	public function get_coupon_edit_url( $template_id, $integration ) {
+	public function get_coupon_edit_url( $coupon_id, $integration ) {
 
 		$url = false;
 
-		if ( ! $template_id || ! isset($template_id ) ) {
-			$template_id = $this->get_coupon_template_id( $integration );
+		if ( ! $coupon_id || ! isset( $coupon_id ) ) {
+			$coupon_id = $this->get_coupon_template_id( $integration );
 
-			if ( ! is_int( $template_id ) ) {
+			if ( ! is_int( $coupon_id ) ) {
 				return false;
 			}
 		}
@@ -495,7 +495,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 
 		switch ( $integration ) {
 			case 'edd':
-				$url = admin_url( 'edit.php?post_type=download&page=edd-discounts&edd-action=edit_discount&discount=' ) . $template_id;
+				$url = admin_url( 'edit.php?post_type=download&page=edd-discounts&edd-action=edit_discount&discount=' ) . $coupon_id;
 				break;
 
 			default:
@@ -506,11 +506,10 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 		/**
 		 * Returns the coupon template URL for the given integration.
 		 *
-		 * @param string $url         The coupon template url.
-		 * @param string $integration The integration.
+		 * @param string $url  The coupon template url.
 		 * @since 2.1
 		 */
-		return apply_filters( 'affwp_coupon_template_url', $url, $integration );
+		return apply_filters( 'affwp_coupon_edit_url', $url );
 	}
 
 	/**
