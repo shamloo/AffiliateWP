@@ -240,8 +240,43 @@ $coupons          = affwp_get_affiliate_coupons( $affiliate->affiliate_id );
 					<label for="coupons"><?php _e( 'Coupons', 'affiliate-wp' ); ?></label>
 				</th>
 
+				<td id="coupons">
+					<?php
+					// Affiliate Coupons.
+					$coupons_table = new AffWP_Coupons_Table( array(
+						'query_args' => array(
+							'affiliate_id' => $affiliate_id
+						),
+						'display_args' => array(
+							'hide_bulk_options'    => true,
+							'columns_to_hide'      => array( 'status' ),
+							'hide_column_controls' => true,
+						),
+					) );
+
+					$coupons_table->prepare_items();
+					$coupons_table->views();
+					$coupons_table->display();
+
+					/**
+					 * Fires at the bottom of coupons list table views.
+					 *
+					 * @since 2.1
+					 */
+					do_action( 'affwp_view_affiliate_coupons_list_table' );
+					?>
 				<td>
-					<ul id="coupons">
+
+			</tr>
+
+			<tr class="form-row">
+
+				<th scope="row">
+					<label for="coupons-old"><?php _e( 'Coupons (Old iteration):', 'affiliate-wp' ); ?></label>
+				</th>
+
+				<td>
+					<ul id="coupons-old">
 						<?php
 
 							$output = '';
