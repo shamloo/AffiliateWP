@@ -190,12 +190,6 @@ class Affiliate_WP_Graph {
 
 		if ( function_exists( 'wp_add_inline_script' ) ) {
 			wp_add_inline_script( 'jquery-flot', $this->graph_js() );
-		} else {
-			// Back-compat for < WP 4.5.0.
-			wp_scripts()->add_data( 'jquery-flot', 'after', array(
-				wp_scripts()->get_data( 'jquery-flot', 'after' ),
-				$this->graph_js()
-			) );
 		}
 
 		if ( false !== $this->get( 'show_controls' ) ) {
