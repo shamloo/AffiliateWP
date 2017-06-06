@@ -37,16 +37,7 @@ class EDD_Coupon extends \AffWP\Affiliate\Coupon {
 
 
 		// Create an affiliate coupon when an EDD coupon is generated
-		add_action( 'edd_post_insert_discount', 'set_coupon_template', 10, 2 );
-
-		// Discount code tracking actions and filters
-		add_action( 'edd_meta_box_settings_fields', array( $this, 'discount_edit' ) );
-
-		add_action( 'edd_add_discount_form_bottom', array( $this, 'discount_edit' ) );
-		add_action( 'edd_edit_discount_form_bottom', array( $this, 'discount_edit' ) );
-		add_action( 'edd_post_update_discount', array( $this, 'store_discount_affiliate' ), 10, 2 );
-		add_action( 'edd_post_insert_discount', array( $this, 'store_discount_affiliate' ), 10, 2 );
-
+		add_action( 'edd_post_insert_discount', array( $this, 'set_coupon_template' ), 10, 2 );
 		add_action( 'affwp_add_edd_discount', array( $this, 'create_affwp_coupon' ) );
 	}
 
@@ -200,63 +191,30 @@ class EDD_Coupon extends \AffWP\Affiliate\Coupon {
 			return false;
 		}
 
-		$discount = edd_get_discount(
+		$discounts = edd_get_discounts(
 			array(
-				'meta_key'       => 'affwp_is_coupon_template',
-				'meta_value'     => 1,
-				'post_status'    => 'active'
+				'meta_key'    => 'affwp_is_coupon_template',
+				'meta_value'  => 1,
+				'post_status' => 'active'
 			)
 		);
 
+		if ( $discounts ) {
 
-		return $discount->id;
-	}
+			if ( array_count_values( $discounts ) > 1 ) {
+				affiliate_wp()->utils->log( 'Only one AffiliateWP coupon template may be specified for an integration.' );
+			}
 
-		/**
-	 * Shows the affiliate drop down on the discount edit / add screens
-	 *
-	 * @access  public
-	 * @since   1.1
-	*/
-	public function discount_edit( $discount_id = 0 ) {
-
-		add_filter( 'affwp_is_admin_page', '__return_true' );
-		affwp_admin_scripts();
-
-		$user_name    = '';
-		$user_id      = 0;
-		$affiliate_id = get_post_meta( $discount_id, 'affwp_is_coupon_template', true );
-
-		if( $affiliate_id ) {
-			$user_id      = affwp_get_affiliate_user_id( $affiliate_id );
-			$user         = get_userdata( $user_id );
-			$user_name    = $user ? $user->user_login : '';
+			foreach ( $discounts as $discount ) {
+				return array_search( $discount->id );
+			}
 		}
-?>
-		<table class="form-table">
-			<tbody>
-				<tr class="form-field">
-					<th scope="row" valign="top">
-						<label for="affwp_is_coupon_template"><?php _e( 'Use this discount as the Affiliate Coupon Template?', 'affiliate-wp' ); ?>
-						</label>
-					</th>
-					<td>
-						<input type="checkbox" name="_affwp_is_coupon_template" id="affwp_is_coupon_template" value="1"<?php checked( $disabled, true ); ?> />
 
-						<p class="description"><?php _e( 'Check this option if you would like to use this discount as the template from which all EDD affiliate coupons are generated.', 'affiliate-wp' ); ?></p>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-<?php
-	}
-
-	public function store_discount_affiliate() {
-
+		return false;
 	}
 
 	/**
-	 * Gets the EDD coupon template used as a basis for generating all automatic affiliate coupons.
+	 * Sets the EDD coupon template.
 	 * Searches for post meta of `affwp_is_coupon_template`.
 	 *
 	 * @see AffWP\Affiliate\Coupon::set_coupon_template()
@@ -270,13 +228,11 @@ class EDD_Coupon extends \AffWP\Affiliate\Coupon {
 			return false;
 		}
 
-		update_post_meta( $discount_id, 'affwp_is_coupon_template', true );
-
-		$discount = edd_get_discount(
-			array(
-				'meta_key'       => 'affwp_is_coupon_template',
-				'meta_value'     => true
-			)
-		);
+		if ( edd_get_discount( $discount_id ) ) {
+			update_post_meta( $discount_id, 'affwp_is_coupon_template', true );
+		} else {
+			affiliate_wp()->utils->log( 'Could not locate EDD discount by $discount_id when attempting to set it as the AffiliateWP coupon template.' );
+			return false;
+		}
 	}
 }
