@@ -471,17 +471,11 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 		$user_name    = '';
 		$user_id      = 0;
 		$affiliate_id = get_post_meta( $discount_id, 'affwp_discount_affiliate', true );
-		if( $affiliate_id ) {
-			$user_id = affwp_get_affiliate_user_id( $affiliate_id );
-			$user    = get_userdata( $user_id );
 
-			if ( $_GET[ 'user_name' ] ) {
-				$user_name = $_GET[ 'user_name' ];
-			} elseif ( $user ) {
-				$user_name = $user ? $user->user_login : '';
-			} else {
-				$user_name = '';
-			}
+		if ( $affiliate_id ) {
+			$user_id      = affwp_get_affiliate_user_id( $affiliate_id );
+			$user         = get_userdata( $user_id );
+			$user_name    = $user ? $user->user_login : '';
 		}
 
 		$disabled = get_post_meta( $discount_id, 'affwp_is_coupon_template', true );
