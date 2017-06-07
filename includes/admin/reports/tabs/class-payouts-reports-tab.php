@@ -24,6 +24,8 @@ class Tab extends Reports\Tab {
 		$this->priority = 5;
 		$this->graph    = new \Affiliate_WP_Payouts_Graph;
 
+		$this->set_up_additional_filters();
+
 		parent::__construct();
 	}
 
