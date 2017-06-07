@@ -569,9 +569,11 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 		if ( ! empty( $args['fields'] ) ) {
 			if ( 'ids' === $args['fields'] ) {
 				$fields = "$this->primary_key";
-			} elseif ( array_key_exists( $args['fields'], $this->get_columns() ) ) {
+			} else {
 				$fields = $args['fields'];
 			}
+
+			$fields = $this->parse_fields( $fields );
 		}
 
 		$key = ( true === $count ) ? md5( 'affwp_payouts_count' . serialize( $args ) ) : md5( 'affwp_payouts_' . serialize( $args ) );
