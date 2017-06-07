@@ -62,11 +62,18 @@ class Affiliate_WP_Payouts_Graph extends \Affiliate_WP_Graph {
 			'orderby'      => 'date',
 			'order'        => 'ASC',
 			'date'         => $date,
-//			'status'       => array( 'paid', 'unpaid', 'pending' ),
+			'status'       => array( 'paid', 'unpaid', 'pending' ),
 			'number'       => -1,
 			'affiliate_id' => $this->get( 'affiliate_id' ),
 			'fields'       => array( 'date', 'amount' ),
 		) );
+
+		$dates_primer = array(
+			(object) array( 'date' => $start, 'amount' => 0 ),
+			(object) array( 'date' => $end, 'amount' => 0 )
+		);
+
+		$referrals = array_merge( $dates_primer, $referrals );
 
 		if ( $referrals ) {
 
@@ -130,6 +137,13 @@ class Affiliate_WP_Payouts_Graph extends \Affiliate_WP_Graph {
 			'fields'       => array( 'date', 'amount' ),
 		) );
 
+		$dates_primer = array(
+			(object) array( 'date' => $start, 'amount' => 0 ),
+			(object) array( 'date' => $end, 'amount' => 0 )
+		);
+
+		$payouts = array_merge( $dates_primer, $payouts );
+
 		if ( $payouts ) {
 
 			$difference = ( strtotime( $date['end'] ) - strtotime( $date['start'] ) );
@@ -177,5 +191,4 @@ class Affiliate_WP_Payouts_Graph extends \Affiliate_WP_Graph {
 		return $data;
 
 	}
-
 }
