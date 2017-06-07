@@ -180,11 +180,13 @@ class Database extends \Affiliate_WP_DB {
 		$fields = "*";
 
 		if ( ! empty( $args['fields'] ) ) {
-			switch ( $args['fields'] ) {
-				case 'ids':
-					$fields = "$this->primary_key";
-					break;
+			if ( 'ids' === $args['fields'] ) {
+				$fields = "$this->primary_key";
+			} else {
+				$fields = $args['fields'];
 			}
+
+			$fields = $this->parse_fields( $fields );
 		}
 
 		$key = ( true === $count ) ? md5( 'affwp_consumers_count' . serialize( $args ) ) : md5( 'affwp_consumers_' . serialize( $args ) );
