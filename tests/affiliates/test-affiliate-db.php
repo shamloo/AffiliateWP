@@ -721,13 +721,11 @@ class Tests extends UnitTestCase {
 	 * @group database-fields
 	 */
 	public function test_get_affiliates_fields_array_with_only_one_valid_field_should_return_an_array_of_those_values() {
-		$expected = array( '5', '4', '3', '2' );
-
 		$result = affiliate_wp()->affiliates->get_affiliates( array(
 			'fields' => array( 'user_id', 'foo' )
 		) );
 
-		$this->assertEqualSets( $expected, $result );
+		$this->assertEqualSets( self::$users, $result );
 	}
 
 	/**
