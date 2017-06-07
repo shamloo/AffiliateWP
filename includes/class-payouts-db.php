@@ -326,7 +326,8 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 	 *                                        Default 'DESC'.
 	 *     @type string       $orderby        Payouts table column to order results by. Accepts any AffWP\Affiliate\Payout
 	 *                                        field. Default 'payout_id'.
-	 *     @type string       $fields         Fields to limit the selection for. Accepts 'ids'. Default '*' for all.
+	 *     @type string|array $fields         Specific fields to retrieve. Accepts 'ids', a single payout field, or an
+	 *                                        array of fields. Default '*' (all).
 	 * }
 	 * @param bool  $count Optional. Whether to return only the total number of results found. Default false.
 	 * @return array Array of payout objects (if found).
