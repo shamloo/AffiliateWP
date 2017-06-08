@@ -64,7 +64,7 @@ class Affiliate_WP_Stripe extends Affiliate_WP_Base {
 
 					$stripe_amount = $object->amount;
 					$currency      = $object->currency;
-					$description   = $object->description;
+					$description   = ! empty( $object->description ) ? $object->description : '';
 					$mode          = $object->livemode;
 
 					break;
