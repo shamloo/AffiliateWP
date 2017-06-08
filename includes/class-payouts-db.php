@@ -565,16 +565,18 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 		$args['orderby'] = $orderby;
 		$args['order']   = $order;
 
-		$fields = "*";
+		// Fields.
+		$callback = '';
 
-		if ( ! empty( $args['fields'] ) ) {
-			if ( 'ids' === $args['fields'] ) {
-				$fields = "$this->primary_key";
-			} else {
-				$fields = $args['fields'];
+		if ( 'ids' === $args['fields'] ) {
+			$fields   = "$this->primary_key";
+			$callback = 'intval';
+		} else {
+			$fields = $this->parse_fields( $args['fields'] );
+
+			if ( '*' === $fields ) {
+				$callback = 'affwp_get_payout';
 			}
-
-			$fields = $this->parse_fields( $fields );
 		}
 
 		$key = ( true === $count ) ? md5( 'affwp_payouts_count' . serialize( $args ) ) : md5( 'affwp_payouts_' . serialize( $args ) );
@@ -593,7 +595,7 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 
 			$clauses = compact( 'fields', 'join', 'where', 'orderby', 'order', 'count' );
 
-			$results = $this->get_results( $clauses, $args, 'affwp_get_payout' );
+			$results = $this->get_results( $clauses, $args, $callback );
 		}
 
 		wp_cache_add( $cache_key, $results, $this->cache_group, HOUR_IN_SECONDS );
