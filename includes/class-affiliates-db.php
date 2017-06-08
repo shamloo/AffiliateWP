@@ -123,18 +123,19 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	 * @param array $args {
 	 *     Optional. Arguments for querying affiliates. Default empty array.
 	 *
-	 *     @type int       $number       Number of affiliates to query for. Default 20.
-	 *     @type int       $offset       Number of affiliates to offset the query for. Default 0.
-	 *     @type int|array $exclude      Affiliate ID or array of IDs to explicitly exclude.
-	 *     @type int|array $user_id      User ID or array of user IDs that correspond to the affiliate user.
-	 *     @type int|array $affiliate_id Affiliate ID or array of affiliate IDs to retrieve.
-	 *     @type string    $status       Affiliate status. Default empty.
-	 *     @type string    $order        How to order returned affiliate results. Accepts 'ASC' or 'DESC'.
-	 *                                   Default 'DESC'.
-	 *     @type string    $orderby      Affiliates table column to order results by. Also accepts 'paid',
-	 *                                   'unpaid', 'rejected', or 'pending' referral statuses, 'name'
-	 *                                   (user display_name), or 'username' (user user_login). Default 'affiliate_id'.
-	 *     @type string    $fields       Specific fields to retrieve. Accepts 'ids' or '*' (all). Default '*'.
+	 *     @type int          $number       Number of affiliates to query for. Default 20.
+	 *     @type int          $offset       Number of affiliates to offset the query for. Default 0.
+	 *     @type int|array    $exclude      Affiliate ID or array of IDs to explicitly exclude.
+	 *     @type int|array    $user_id      User ID or array of user IDs that correspond to the affiliate user.
+	 *     @type int|array    $affiliate_id Affiliate ID or array of affiliate IDs to retrieve.
+	 *     @type string       $status       Affiliate status. Default empty.
+	 *     @type string       $order        How to order returned affiliate results. Accepts 'ASC' or 'DESC'.
+	 *                                      Default 'DESC'.
+	 *     @type string       $orderby      Affiliates table column to order results by. Also accepts 'paid',
+	 *                                      'unpaid', 'rejected', or 'pending' referral statuses, 'name'
+	 *                                      (user display_name), or 'username' (user user_login). Default 'affiliate_id'.
+	 *     @type string|array $fields       Specific fields to retrieve. Accepts 'ids', a single affiliate field, or an
+	 *                                      array of fields. Default '*' (all).
 	 * }
 	 * @param bool  $count Optional. Whether to return only the total number of results found. Default false.
 	 * @return array|int Array of affiliate objects (if found), int if `$count` is true.

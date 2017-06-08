@@ -120,7 +120,8 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 	 *                                          Default 'referral_id'.
 	 *     @type string       $order            How to order results. Accepts 'ASC' (ascending) or 'DESC' (descending).
 	 *                                          Default 'DESC'.
-	 *     @type string       $fields           Fields to query for. Accepts 'ids' or '*' (all). Default '*'.
+	 *     @type string|array $fields           Specific fields to retrieve. Accepts 'ids', a single visit field, or an
+	 *                                          array of fields. Default '*' (all).
 	 * }
 	 * @param   bool  $count  Return only the total number of results found (optional)
 	*/

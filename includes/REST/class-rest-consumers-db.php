@@ -96,17 +96,18 @@ class Database extends \Affiliate_WP_DB {
 	 * @param array $args {
 	 *     Optional. Arguments for querying consumers. Default empty array.
 	 *
-	 *     @type int       $number      Maximum number of consumers to query for. Default 20.
-	 *     @type int       $offset      Number of consumers to offset the query for. Default 0.
-	 *     @type int|array $consumer_id Specific consumer ID or array of IDs to query for. Default 0 (ignored).
-	 *     @type int|array $user_id     User ID or array of IDs to query consumers for. Default 0 (ignored).
-	 *     @type string    $token       Token to retrieve a specific consumer for.
-	 *     @type string    $public_key  Public key to retrieve a specific consumer for.
-	 *     @type string    $secret_key  Secret key to retrieve a specific consumer for.
-	 *     @type string    $order       How to order returned consumer results. Accepts 'ASC' or 'DESC'.
-	 *                                  Default 'DESC'.
-	 *     @type string    $orderby     Consumers table column to order results by. Default 'consumer_id'.
-	 *     @type string    $fields      Fields to return results for. Accepts 'ids' or empty (all). Default empty.
+	 *     @type int          $number      Maximum number of consumers to query for. Default 20.
+	 *     @type int          $offset      Number of consumers to offset the query for. Default 0.
+	 *     @type int|array    $consumer_id Specific consumer ID or array of IDs to query for. Default 0 (ignored).
+	 *     @type int|array    $user_id     User ID or array of IDs to query consumers for. Default 0 (ignored).
+	 *     @type string       $token       Token to retrieve a specific consumer for.
+	 *     @type string       $public_key  Public key to retrieve a specific consumer for.
+	 *     @type string       $secret_key  Secret key to retrieve a specific consumer for.
+	 *     @type string       $order       How to order returned consumer results. Accepts 'ASC' or 'DESC'.
+	 *                                     Default 'DESC'.
+	 *     @type string       $orderby     Consumers table column to order results by. Default 'consumer_id'.
+	 *     @type string|array $fields      Specific fields to retrieve. Accepts 'ids', a single consumer field, or an
+	 *                                     array of fields. Default '*' (all).
 	 * }
 	 * @param bool  $count Optional. Whether to return only the total number of results found. Default false.
 	 * @return array|int Array of consumer objects (if found) or integer if `$count` is true.
