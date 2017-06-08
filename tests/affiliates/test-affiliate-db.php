@@ -737,10 +737,10 @@ class Tests extends UnitTestCase {
 			'fields' => array( 'user_id', 'date_registered' )
 		) );
 
+		$expected    = array( 'user_id', 'date_registered' );
 		$object_vars = get_object_vars( $result[0] );
 
-		$this->assertArrayHasKey( 'user_id', $object_vars );
-		$this->assertArrayHasKey( 'date_registered', $object_vars );
+		$this->assertEqualSets( $expected, array_keys( $object_vars ) );
 	}
 
 	/**
