@@ -251,12 +251,6 @@ $coupons          = affwp_get_affiliate_coupons( $affiliate->affiliate_id );
 
 					?>
 
-					<hr />
-
-					<p class="description">
-						<?php echo __( 'The current coupons for this affiliate. Click Create Coupon above to create a coupon for any supported integrations without an existing coupon associated with this affiliate.', 'affiliate-wp' ); ?>
-					</p>
-
 				<td>
 			</tr>
 

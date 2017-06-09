@@ -33,6 +33,7 @@ class AffWP_Coupons_Admin {
 	 *                    the list table. Default empty array.
 	 */
 	public function __construct( $args = array() ) {
+
 		// add_action( 'affwp_affiliate_coupons_table_top',    array( $this, 'coupons_table'       ) );
 		// add_action( 'affwp_affiliate_coupons_table_bottom', array( $this, 'create_coupons'      ) );
 	}
@@ -49,6 +50,10 @@ class AffWP_Coupons_Admin {
 	public function coupons_table( $affiliate_id = 0 ) {
 
 		if ( ! $affiliate_id ) {
+
+			if ( ! isset( $affiliate ) ) {
+				$affiliate  = affwp_get_affiliate( absint( $_GET['affiliate_id'] ) );
+			}
 
 			$affiliate_id = $affiliate->affiliate_id;
 
@@ -107,10 +112,9 @@ class AffWP_Coupons_Admin {
 				}
 			</style>
 			<strong>
-				<?php echo __( 'Coupons for this affiliate:', 'affiliate-wp' ); ?>
+				<?php _e( 'Coupons for this affiliate:', 'affiliate-wp' ); ?>
 			</strong>
 		</p>
-
 
 		<table id="affiliatewp-coupons" class="form-table wp-list-table widefat fixed posts">
 			<thead>
@@ -126,22 +130,6 @@ class AffWP_Coupons_Admin {
 			<tbody>
 				<?php
 
-'number'          => 20,
-'offset'          => 0,
-'affwp_coupon_id' => 0,
-'coupon_id'       => 0,
-'coupon_code'     => 0,
-'affiliate_id'    => 0,
-'referrals'       => 0,
-'integration'     => '',
-'owner'           => '',
-'status'          => '',
-'expiration_date' => '',
-'order'           => 'DESC',
-'orderby'         => 'coupon_id',
-'fields'          => '',
-'search'          => false,
-
 				$coupons = affwp_get_affiliate_coupons( $affiliate_id );
 
 				if ( $coupons ) {
@@ -153,38 +141,37 @@ class AffWP_Coupons_Admin {
 								<?php echo $coupon->integration; ?>
 							</td>
 							<td>
-								<?php echo $coupon->affwp_coupon_id; ?>
+								<?php echo $coupon->coupon_code; ?>
 							</td>
 							<td>
 								<?php echo $coupon->affwp_coupon_id; ?>
 							</td>
 							<td>
-								<?php echo $coupon->affwp_coupon_id; ?>
+								<?php echo $coupon->referrals; ?>
 							</td>
 							<td>
-								<?php echo $coupon->affwp_coupon_id; ?>
+								<?php echo affwp_get_coupon_edit_url( $coupon->coupon_id, $coupon->integration ); ?>
 							</td>
 						</tr>
-				<?php } ?>
+<?php			}
+			} else {
+
+?>
 
 					<tr>
-						<td colspan="3"><?php _e( 'No coupons created yet for this affiliate.', 'affiliate-wp' ); ?></td>
-					</tr>
-
-					<tr>
-						<td>
-						</td>
-						<td>
-							<input name="affwp_settings[rates][<?php echo $count; ?>][threshold]" type="text" value=""/>
-						</td>
-						<td>
-							<input name="affwp_settings[rates][<?php echo $count; ?>][rate]" type="text" value=""/>
+						<td colspan="3">
+							<?php _e( 'No coupons have been created yet for this affiliate.', 'affiliate-wp' ); ?>
 						</td>
 					</tr>
+<?php   		} ?>
 			</tbody>
 			<tfoot>
 			</tfoot>
 		</table>
+
+		<p class="description">
+			<?php echo __( 'The current coupons for this affiliate. Click Create Coupon above to create a coupon for any supported integrations without an existing coupon associated with this affiliate.', 'affiliate-wp' ); ?>
+		</p>
 
 	<?php
 
@@ -240,8 +227,10 @@ class AffWP_Coupons_Admin {
 
 	submit_button( $submit_text, 'button', false, false, array( 'ID' => 'search-submit' ) ); ?>
 
-	<p class="description"><?php _e( 'AffiliateWP integrations which are active and currently have coupon support will be shown in the dropdown select above. To create a coupon for a specific integration for this affiliate, select the desired integration and click Create Coupon. You can also optionally set the desired coupon code, or create coupons for this affiliate for every integration listed at once, by selecting "Create a coupon for all integrations listed" in the dropdown select above.', 'affiliate-wp' ); ?></p>
+	<p class="description">
+		<?php _e( 'AffiliateWP integrations which are active and currently have coupon support will be shown in the dropdown select above. To create a coupon for a specific integration for this affiliate, select the desired integration and click Create Coupon. You can also optionally set the desired coupon code, or create coupons for this affiliate for every integration listed at once, by selecting "Create a coupon for all integrations listed" in the dropdown select above.', 'affiliate-wp' ); ?>
+	</p>
 <?php
-}
+	}
 
 }
