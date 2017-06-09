@@ -533,7 +533,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 	 */
 	public function get_coupon_template_id( $integration ) {
 
-		if ( ! isset( $integration ) || ! affiliate_wp()->settings->get( 'auto_generate_coupons_enabled' ) ) {
+		if ( ! isset( $integration ) ) {
 			return false;
 		}
 
