@@ -550,21 +550,6 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 		switch ( $integration ) {
 			case 'edd':
 
-					$discount = edd_get_discount(
-						array(
-							'meta_key'       => 'affwp_is_coupon_template',
-							'meta_value'     => 1,
-							'post_status'    => 'active'
-						)
-					);
-
-					if ( ! $discount ) {
-						affiliate_wp()->utils->log( 'get_coupon_template_id method: Unable to determine discount ID.' );
-						break;
-					}
-
-					$template_id = $discount->id;
-
 					$args = array(
 						'post_type'  => 'edd_discount',
 						'meta_key'   => 'affwp_is_coupon_template',
@@ -580,11 +565,12 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 					$discount = new WP_Query( $args );
 
 					if ( $discount->have_posts() ) {
-						while ( $discount->have_posts() ) {
 
+						while ( $discount->have_posts() ) {
 							$template_id = $discount->id;
 						}
 					} else {
+						affiliate_wp()->utils->log( 'get_coupon_template_id method: Unable to determine discount ID.' );
 						return;
 					}
 
