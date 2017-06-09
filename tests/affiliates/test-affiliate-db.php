@@ -693,6 +693,40 @@ class Tests extends UnitTestCase {
 	 * @covers Affiliate_WP_DB_Affiliates::get_affiliates()
 	 * @group database-fields
 	 */
+	public function test_get_affiliates_fields_ids_should_return_an_array_of_integer_ids() {
+		$results = affiliate_wp()->affiliates->get_affiliates( array(
+			'fields' => 'ids'
+		) );
+
+		$this->assertArrayInstanceOf( 'integer', $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_DB_Affiliates::get_affiliates()
+	 * @group database-fields
+	 */
+	public function test_get_affiliates_with_no_fields_should_return_an_array_of_affiliate_objects() {
+		$results = affiliate_wp()->affiliates->get_affiliates();
+
+		$this->assertArrayInstanceOf( 'AffWP\Affiliate', $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_DB_Affiliates::get_affiliates()
+	 * @group database-fields
+	 */
+	public function test_get_affiliates_with_multiple_valid_fields_should_return_an_array_of_arrays() {
+		$results = affiliate_wp()->affiliates->get_affiliates( array(
+			'fields' => array( 'affiliate_id', 'rate' )
+		) );
+
+		$this->assertArrayInstanceOf( 'array', $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_DB_Affiliates::get_affiliates()
+	 * @group database-fields
+	 */
 	public function test_get_affiliates_fields_valid_field_should_return_array_of_that_field_only() {
 		$results = affiliate_wp()->affiliates->get_affiliates( array(
 			'fields' => 'affiliate_id'
