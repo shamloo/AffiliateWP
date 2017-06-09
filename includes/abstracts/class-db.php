@@ -198,7 +198,7 @@ abstract class Affiliate_WP_DB {
 			}
 
 			// Run the results through the fields-dictated callback.
-			if ( ! empty( $callback && is_callable( $callback ) ) ) {
+			if ( ! empty( $callback ) && is_callable( $callback ) ) {
 				$results = array_map( $callback, $results );
 			}
 
