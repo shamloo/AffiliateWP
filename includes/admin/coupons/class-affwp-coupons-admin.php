@@ -33,8 +33,8 @@ class AffWP_Coupons_Admin {
 	 *                    the list table. Default empty array.
 	 */
 	public function __construct( $args = array() ) {
-		add_action( 'affwp_affiliate_coupons_table_top',    array( $this, 'coupons_table'       ) );
-		add_action( 'affwp_affiliate_coupons_table_bottom', array( $this, 'create_coupons'      ) );
+		// add_action( 'affwp_affiliate_coupons_table_top',    array( $this, 'coupons_table'       ) );
+		// add_action( 'affwp_affiliate_coupons_table_bottom', array( $this, 'create_coupons'      ) );
 	}
 
 	/**
@@ -78,69 +78,72 @@ class AffWP_Coupons_Admin {
 			}
 		}
 
-		echo $output;
-
-
-
-
+		/**
+		 * Fires at the top of coupons admin table views.
+		 *
+		 * @since 2.1
+		 */
+		do_action( 'affwp_affiliate_coupons_table_top' );
 
 		?>
 
-		<table id="affiliatewp-rates" class="form-table wp-list-table widefat fixed posts">
+		<hr />
+
+		<p>
+			<style type="text/css">
+				#affiliatewp-coupons th {
+					padding-left: 10px;
+				}
+			</style>
+			<strong>
+				<?php echo __( 'Coupons for this affiliate:', 'affiliate-wp' ); ?>
+			</strong>
+		</p>
+
+
+		<table id="affiliatewp-coupons" class="form-table wp-list-table widefat fixed posts">
 			<thead>
 				<tr>
 					<th><?php _e( 'Integration', 'affiliate-wp' ); ?></th>
 					<th><?php _e( 'Coupon Code', 'affiliate-wp' ); ?></th>
-					<th><?php _e( 'Referrals', 'affiliate-wp' ); ?></th>
-					<th><?php _e( 'View', 'affiliate-wp' ); ?></th>
+					<th><?php _e( 'ID',          'affiliate-wp' ); ?></th>
+					<th><?php _e( 'Referrals',   'affiliate-wp' ); ?></th>
+					<th><?php _e( 'View',        'affiliate-wp' ); ?></th>
 					<th style="width:5%;"></th>
 				</tr>
 			</thead>
 			<tbody>
-				<?php if( $coupons ) : ?>
-					<?php foreach( $coupons as $key => $rate ) :
-						$type = ! empty( $rate['type'] ) ? $rate['type'] : 'referrals';
-						$disabled = isset( $rate['disabled'] );
+				<?php
 
-						if ( $disabled ) :
-							$aria_label = __( 'This rate tier is disabled', 'affiliate-wp' );
-						else :
-							$aria_label = __( 'This rate tier is enabled', 'affiliate-wp' );
-						endif;
-						?>
+				$coupons = affwp_get_affiliate_coupons( $affiliate_id );
+
+				if ( $coupons ) {
+
+					foreach ($coupons as $coupon ) {
+
+					}
+				?>
 						<tr>
 							<td>
-								<select name="affwp_settings[rates][<?php echo $key; ?>][type]">
-									<option value="referrals"<?php selected( 'referrals', $type ); ?>><?php _e( 'Number of Referrals', 'affiliate-wp' ); ?></option>
-									<option value="earnings"<?php selected( 'earnings', $type ); ?>><?php _e( 'Total Earnings', 'affiliate-wp' ); ?></option>
-								</select>
+								one
 							</td>
 							<td>
-								<input name="affwp_settings[rates][<?php echo $key; ?>][threshold]" type="text" value="<?php echo esc_attr( $rate['threshold'] ); ?>"/>
+								two
 							</td>
 							<td>
-								<input name="affwp_settings[rates][<?php echo $key; ?>][rate]" type="text" value="<?php echo esc_attr( $rate['rate'] ); ?>"/>
+								three
 							</td>
 							<td>
-								<input name="affwp_settings[rates][<?php echo $key; ?>][disabled]" id="affwp_settings[disabled]" type="checkbox" <?php checked( $disabled, true ); ?> aria-label="<?php echo esc_attr( $aria_label ); ?>"/>
-							</td>
-							<td>
-								<a href="#" class="affwp_remove_rate" style="background: url(<?php echo admin_url('/images/xit.gif'); ?>) no-repeat;">&times;</a>
+								four
 							</td>
 						</tr>
-					<?php endforeach; ?>
-				<?php else : ?>
+
 					<tr>
-						<td colspan="3"><?php _e( 'No tiered rates created yet', 'affiliate-wp' ); ?></td>
+						<td colspan="3"><?php _e( 'No coupons created yet for this affiliate.', 'affiliate-wp' ); ?></td>
 					</tr>
-				<?php endif; ?>
-                			<?php if( empty( $coupons ) ) : ?>
+
 					<tr>
 						<td>
-							<select name="affwp_settings[rates][<?php echo $count; ?>][type]">
-								<option value="referrals"><?php _e( 'Number of Referrals', 'affiliate-wp' ); ?></option>
-								<option value="earnings"><?php _e( 'Total Earnings', 'affiliate-wp' ); ?></option>
-							</select>
 						</td>
 						<td>
 							<input name="affwp_settings[rates][<?php echo $count; ?>][threshold]" type="text" value=""/>
@@ -148,25 +151,21 @@ class AffWP_Coupons_Admin {
 						<td>
 							<input name="affwp_settings[rates][<?php echo $count; ?>][rate]" type="text" value=""/>
 						</td>
-						<td>
-							<a href="#" class="affwp_remove_rate" style="background: url(<?php echo admin_url('/images/xit.gif'); ?>) no-repeat;">&times;</a>
-						</td>
 					</tr>
-                			<?php endif; ?>
 			</tbody>
 			<tfoot>
-				<tr>
-					<th colspan="1">
-						<button id="affwp_new_rate" name="affwp_new_rate" class="button"><?php _e( 'Add New Rate', 'affiliate-wp' ); ?></button>
-					</th>
-					<th colspan="3">
-						<?php _e( 'Add rates from low to high', 'affiliate-wp' ); ?>
-					</th>
-				</tr>
 			</tfoot>
 		</table>
 
-	<?php }
+	<?php
+
+		/**
+		 * Fires at the bottom of coupons admin table views.
+		 *
+		 * @since 2.1
+		 */
+		do_action( 'affwp_affiliate_coupons_table_bottom' );
+	}
 
 	/**
 	 * Interface to create coupons on affiliate edit and new screens.

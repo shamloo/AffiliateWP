@@ -244,31 +244,14 @@ $coupons          = affwp_get_affiliate_coupons( $affiliate->affiliate_id );
 
 					<?php
 
-					/**
-					 * Fires at the top of coupons table views.
-					 *
-					 * @since 2.1
-					 */
-					do_action( 'affwp_affiliate_coupons_table_top' );
+					$coupons_admin = new AffWP_Coupons_Admin;
+
+					$coupons_admin->create_coupons();
+					$coupons_admin->coupons_table();
 
 					?>
 
 					<hr />
-
-					<p>
-						<strong>
-							<?php echo __( 'Coupons for this affiliate:', 'affiliate-wp' ); ?>
-						</strong>
-					</p>
-
-					<?php
-					/**
-					 * Fires at the bottom of coupons table views.
-					 *
-					 * @since 2.1
-					 */
-					do_action( 'affwp_affiliate_coupons_table_bottom' );
-					?>
 
 					<p class="description">
 						<?php echo __( 'The current coupons for this affiliate. Click Create Coupon above to create a coupon for any supported integrations without an existing coupon associated with this affiliate.', 'affiliate-wp' ); ?>
