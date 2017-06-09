@@ -138,8 +138,7 @@ class Tests extends UnitTestCase {
 	public function test_get_affiliates_should_return_array_of_Affiliate_objects_if_not_count_query() {
 		$results = affiliate_wp()->affiliates->get_affiliates();
 
-		// Check a random affiliate.
-		$this->assertInstanceOf( 'AffWP\Affiliate', $results[0] );
+		$this->assertArrayInstanceOf( 'AffWP\Affiliate', $results );
 	}
 
 	/**
