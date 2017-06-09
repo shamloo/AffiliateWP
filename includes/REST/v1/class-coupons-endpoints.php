@@ -4,9 +4,9 @@ namespace AffWP\Affiliate\Coupon\REST\v1;
 use AffWP\REST\v1\Controller;
 
 /**
- * Implements REST routes and endpoints for Payouts.
+ * Implements REST routes and endpoints for Coupons.
  *
- * @since 1.9
+ * @since 2.1
  *
  * @see AffWP\REST\Controller
  */
@@ -15,9 +15,9 @@ class Endpoints extends Controller {
 	/**
 	 * Object type.
 	 *
-	 * @since 1.9.5
 	 * @access public
-	 * @var string
+	 * @since  2.1
+	 * @var    string
 	 */
 	public $object_type = 'affwp_coupon';
 
@@ -25,16 +25,16 @@ class Endpoints extends Controller {
 	 * Route base for coupons.
 	 *
 	 * @access public
-	 * @since  1.9
+	 * @since  2.1
 	 * @var    string
 	 */
 	public $rest_base = 'coupons';
 
 	/**
-	 * Registers Affiliate routes.
+	 * Registers Coupon routes.
 	 *
 	 * @access public
-	 * @since  1.9
+	 * @since  2.1
 	 */
 	public function register_routes() {
 
@@ -74,7 +74,7 @@ class Endpoints extends Controller {
 	 * Base endpoint to retrieve all coupons.
 	 *
 	 * @access public
-	 * @since  1.9
+	 * @since  2.1
 	 *
 	 * @param \WP_REST_Request $request Request arguments.
 	 * @return \WP_REST_Response|\WP_Error Payouts response object or \WP_Error object if not found.
@@ -107,7 +107,7 @@ class Endpoints extends Controller {
 		/**
 		 * Filters the query arguments used to retrieve coupons in a REST request.
 		 *
-		 * @since 1.9
+		 * @since 2.1
 		 *
 		 * @param array            $args    Arguments.
 		 * @param \WP_REST_Request $request Request.
@@ -137,7 +137,7 @@ class Endpoints extends Controller {
 	 * Endpoint to retrieve a coupon by ID.
 	 *
 	 * @access public
-	 * @since  1.9
+	 * @since  2.1
 	 *
 	 * @param \WP_REST_Request $request Request arguments.
 	 * @return \WP_REST_Response|\WP_Error Payout object response or \WP_Error object if not found.
@@ -161,7 +161,7 @@ class Endpoints extends Controller {
 	 * Retrieves the collection parameters for coupons.
 	 *
 	 * @access public
-	 * @since  1.9
+	 * @since  2.1
 	 *
 	 * @return array Collection parameters.
 	 */
@@ -254,7 +254,7 @@ class Endpoints extends Controller {
 	 * Retrieves the schema for a single coupon, conforming to JSON Schema.
 	 *
 	 * @access public
-	 * @since  2.0
+	 * @since  2.1
 	 *
 	 * @return array Item schema data.
 	 */
