@@ -33,9 +33,6 @@ class AffWP_Coupons_Admin {
 	 *                    the list table. Default empty array.
 	 */
 	public function __construct( $args = array() ) {
-
-		// add_action( 'affwp_affiliate_coupons_table_top',    array( $this, 'coupons_table'       ) );
-		// add_action( 'affwp_affiliate_coupons_table_bottom', array( $this, 'create_coupons'      ) );
 	}
 
 	/**
