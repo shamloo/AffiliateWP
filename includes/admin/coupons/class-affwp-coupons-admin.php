@@ -78,16 +78,16 @@ class AffWP_Coupons_Admin {
 				if ( $affiliate_coupons ) {
 
 					foreach ( $affiliate_coupons as $coupon_id ) {
-						$list_items[] = '<li>(' . $integration_term . ') <a href="' . affwp_get_coupon_edit_url( $coupon_id, $integration_id, true ) . '">' . __( 'Edit coupon', 'affiliate-wp' ) . '</a></li>';
+						$list_items[] = '<th>(' . $integration_term . ') <a href="' . affwp_get_coupon_edit_url( $coupon_id, $integration_id, true ) . '">' . __( 'Edit coupon', 'affiliate-wp' ) . '</a></th>';
 					}
 
 				}
 
 			} elseif ( affwp_has_coupon_support( $args[ 'integration' ] ) ) {
-				$list_items[] = '<li>' . $integration_term . ' <a class="affwp-inline-link" href="' . affwp_get_coupon_create_url( $integration_id ) . '">' . __( 'Create coupon', 'affiliate-wp' ) . '</a>';
+				$list_items[] = '<th>' . $integration_term . ' <a class="affwp-inline-link" href="' . affwp_get_coupon_create_url( $integration_id ) . '">' . __( 'Create coupon', 'affiliate-wp' ) . '</a></th>';
 			} else {
 				// Otherwise, coupon support should not be available.
-				$list_items[] = __( 'No currently-active AffiliateWP integrations support coupons at this time.', 'affiliate-wp' );
+				$list_items[] =  '<th>' . __( 'No currently-active AffiliateWP integrations support coupons at this time.', 'affiliate-wp' ) . '</th>';
 			}
 		}
 
@@ -127,8 +127,6 @@ class AffWP_Coupons_Admin {
 			<tbody>
 				<?php
 
-				$coupons = affwp_get_affiliate_coupons( $affiliate_id );
-
 				if ( $coupons ) {
 
 					foreach ($coupons as $coupon ) {
@@ -150,17 +148,11 @@ class AffWP_Coupons_Admin {
 								<?php echo affwp_get_coupon_edit_url( $coupon->coupon_id, $coupon->integration ); ?>
 							</td>
 						</tr>
-<?php			}
-			} else {
-
+<?php
+					}
+				}
 ?>
 
-					<tr>
-						<td colspan="3">
-							<?php _e( 'No coupons have been created yet for this affiliate.', 'affiliate-wp' ); ?>
-						</td>
-					</tr>
-<?php   		} ?>
 			</tbody>
 			<tfoot>
 			</tfoot>

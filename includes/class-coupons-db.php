@@ -307,7 +307,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 			'status'          => '',
 			'expiration_date' => '',
 			'order'           => 'DESC',
-			'orderby'         => 'coupon_id',
+			'orderby'         => 'affwp_coupon_id',
 			'fields'          => '',
 			'search'          => false,
 		);

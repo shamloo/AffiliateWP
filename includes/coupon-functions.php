@@ -188,20 +188,18 @@ function affwp_get_coupons_by_integration( $args ) {
 	}
 
 	$coupons    = false;
-	$coupon_ids = false;
-
 
 	// Todo - cycle through active integrations, show variable UI depending on the integrations enabled,
 	// to allow all supported concurrently-active integrations to auto-generate coupons.
 	switch ( $args[ 'integration' ] ) {
 		case 'edd':
 			// Only retrieve active EDD discounts.
-			$args = array(
+			$discount_args = array(
 				'post_status'              => 'active',
 				'affwp_discount_affiliate' => $args[ 'affiliate_id' ]
 			);
 
-			$coupons = edd_get_discounts( $args );
+			$coupons = edd_get_discounts( $discount_args );
 
 			break;
 
@@ -212,21 +210,11 @@ function affwp_get_coupons_by_integration( $args ) {
 	}
 
 	if ( $coupons ) {
-
-		$coupon_ids = array();
-
-		foreach ( $coupons as $coupon ) {
-			$coupon_id = $coupon->ID;
-
-			if ( $coupon_id ) {
-				$coupon_ids[] = $coupon_id;
-			}
-		}
+		return $coupons;
 	} else {
 		affiliate_wp()->utils->log( 'Unable to locate coupons for this integration.' );
+		return false;
 	}
-
-	return $coupon_ids;
 }
 
 /**
