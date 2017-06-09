@@ -80,7 +80,6 @@ class Affiliate_WP_Stripe extends Affiliate_WP_Base {
 			if( is_object( $object->customer ) && ! empty( $object->customer->email ) ) {
 				$email = $object->customer->email;
 			} else {
-
 				if ( isset( $_POST['stripeEmail'] ) ) {
 
 					// WP Simple Pay < 3.0
@@ -89,8 +88,6 @@ class Affiliate_WP_Stripe extends Affiliate_WP_Base {
 
 					// WP Simple Pay >= 3.0
 					$email = sanitize_text_field( $_POST['simpay_stripe_email'] );
-				} else {
-					// Something else went wrong...
 				}
 			}
 
