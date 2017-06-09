@@ -70,7 +70,7 @@ class Tests extends UnitTestCase {
 		$results = affiliate_wp()->visits->get_visits();
 
 		// Check a random visit.
-		$this->assertInstanceOf( 'AffWP\Visit', $results[0] );
+		$this->assertContainsOnlyType( 'AffWP\Visit', $results );
 	}
 
 	/**

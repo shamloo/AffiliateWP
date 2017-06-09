@@ -135,7 +135,7 @@ class Tests extends UnitTestCase {
 		$results = affiliate_wp()->creatives->get_creatives();
 
 		// Check a random creative.
-		$this->assertInstanceOf( 'AffWP\Creative', $results[0] );
+		$this->assertContainsOnlyType( 'AffWP\Creative', $results );
 	}
 
 	/**

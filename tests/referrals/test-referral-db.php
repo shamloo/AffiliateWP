@@ -41,7 +41,7 @@ class Referrals_DB_Tests extends UnitTestCase {
 		$results = affiliate_wp()->referrals->get_referrals();
 
 		// Check a random referral.
-		$this->assertInstanceOf( 'AffWP\Referral', $results[0] );
+		$this->assertContainsOnlyType( 'AffWP\Referral', $results );
 	}
 
 	/**
