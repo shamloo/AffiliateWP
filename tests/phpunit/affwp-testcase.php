@@ -117,19 +117,21 @@ class UnitTestCase extends \WP_UnitTestCase {
 	 * @param array  $actual   Actual array.
 	 * @return bool True only if all items in the $actual array match the given type, otherwise false.
 	 */
-	public function assertArrayInstanceOf( $type, $actual ) {
-		$errors = array();
+	public function assertContainsOnlyType( $type, $actual ) {
+		$standard_types = array(
+			'numeric', 'integer', 'int', 'float', 'string', 'boolean', 'bool',
+			'null', 'array', 'object', 'resource', 'scalar'
+		);
 
-		foreach ( $actual as $value ) {
-			if ( $type !== gettype( $value ) ) {
-				$errors[] = $value;
-			}
+
+		if ( in_array( $type, $standard_types, true ) ) {
+			$constraint = new \PHPUnit_Framework_Constraint_IsType( $type );
+		} else {
+			$constraint = new \PHPUnit_Framework_Constraint_IsInstanceOf( $type );
 		}
 
-		if ( empty( $errors ) ) {
-			return true;
+		foreach ( $actual as $item ) {
+			\PHPUnit_Framework_Assert::assertThat( $item, $constraint );
 		}
-
-		return false;
 	}
 }
