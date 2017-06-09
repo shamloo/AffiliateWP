@@ -643,6 +643,10 @@ class Affiliate_WP_Upgrades {
 		flush_rewrite_rules();
 		$this->log( 'Upgrade: Rewrite rules flushed following the 2.1 upgrade.' );
 
+		// Add manage_coupons primitive cap and edit|delete|view_coupon meta caps.
+		@affiliate_wp()->capabilities->add_caps();
+		@affiliate_wp()->utils->log( 'Upgrade: Core capabilities have been upgraded for coupons.' );
+
 		$this->upgraded = true;
 	}
 

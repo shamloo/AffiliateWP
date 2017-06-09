@@ -54,6 +54,7 @@ class Affiliate_WP_Capabilities {
 			$wp_roles->add_cap( 'administrator', 'manage_affiliates' );
 			$wp_roles->add_cap( 'administrator', 'manage_referrals' );
 			$wp_roles->add_cap( 'administrator', 'manage_visits' );
+			$wp_roles->add_cap( 'administrator', 'manage_coupons' );
 			$wp_roles->add_cap( 'administrator', 'manage_creatives' );
 			$wp_roles->add_cap( 'administrator', 'manage_payouts' );
 			$wp_roles->add_cap( 'administrator', 'manage_consumers' );
@@ -88,6 +89,7 @@ class Affiliate_WP_Capabilities {
 			$wp_roles->remove_cap( 'administrator', 'manage_referrals' );
 			$wp_roles->remove_cap( 'administrator', 'manage_visits' );
 			$wp_roles->remove_cap( 'administrator', 'manage_creatives' );
+			$wp_roles->remove_cap( 'administrator', 'manage_coupons' );
 			$wp_roles->remove_cap( 'administrator', 'manage_payouts' );
 			$wp_roles->remove_cap( 'administrator', 'manage_consumers' );
 
@@ -118,6 +120,18 @@ class Affiliate_WP_Capabilities {
 				$affiliate = affwp_get_affiliate( $args[0] );
 
 				$caps[] = $affiliate ? 'manage_affiliates' : 'do_not_allow';
+				break;
+
+			case 'add_coupon':
+				$caps[] = 'manage_coupons';
+				break;
+
+			case 'edit_coupon':
+			case 'delete_coupon':
+			case 'view_coupon':
+				$coupon = affwp_get_coupon( $args[0] );
+
+				$caps[] = $coupon ? 'manage_coupons' : 'do_not_allow';
 				break;
 
 			case 'add_creative':
