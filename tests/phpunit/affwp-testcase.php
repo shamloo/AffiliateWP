@@ -115,7 +115,6 @@ class UnitTestCase extends \WP_UnitTestCase {
 	 *
 	 * @param string $type     Type to check against.
 	 * @param array  $actual   Actual array.
-	 * @return bool True only if all items in the $actual array match the given type, otherwise false.
 	 */
 	public function assertContainsOnlyType( $type, $actual ) {
 		$standard_types = array(
