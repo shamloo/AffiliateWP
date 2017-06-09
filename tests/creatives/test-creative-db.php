@@ -221,6 +221,23 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers Affiliate_WP_Creatives_DB::get_creatives()
+	 * @group database-fields
+	 */
+	public function test_get_creatives_fields_array_with_multiple_valid_fields_should_return_objects_with_those_fields_only() {
+		$fields = array( 'creative_id', 'name' );
+
+		$result = affiliate_wp()->creatives->get_creatives( array(
+			'fields' => $fields
+		) );
+
+		$object_vars = get_object_vars( $result[0] );
+
+		$this->assertEqualSets( $fields, array_keys( $object_vars ) );
+
+	}
+
+	/**
+	 * @covers Affiliate_WP_Creatives_DB::get_creatives()
 	 */
 	public function test_get_creatives_single_creative_id_should_return_only_that_creative() {
 		$results = affiliate_wp()->creatives->get_creatives( array(

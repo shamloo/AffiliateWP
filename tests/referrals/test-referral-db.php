@@ -115,6 +115,23 @@ class Referrals_DB_Tests extends UnitTestCase {
 
 	/**
 	 * @covers Affiliate_WP_Referrals_DB::get_referrals()
+	 * @group database-fields
+	 */
+	public function test_get_referrals_fields_array_with_multiple_valid_fields_should_return_objects_with_those_fields_only() {
+		$fields = array( 'referral_id', 'affiliate_id' );
+
+		$result = affiliate_wp()->referrals->get_referrals( array(
+			'fields' => $fields
+		) );
+
+		$object_vars = get_object_vars( $result[0] );
+
+		$this->assertEqualSets( $fields, array_keys( $object_vars ) );
+
+	}
+
+	/**
+	 * @covers Affiliate_WP_Referrals_DB::get_referrals()
 	 */
 	public function test_get_referrals_with_single_payout_id_should_return_referrals_matching_that_payout() {
 		$payout = $this->factory->payout->create( array(
