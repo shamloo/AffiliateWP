@@ -781,11 +781,11 @@ class Tests extends UnitTestCase {
 	 * @group database-fields
 	 */
 	public function test_get_affiliates_fields_array_with_multiple_valid_fields_should_return_array_of_stdClass_objects() {
-		$result = affiliate_wp()->affiliates->get_affiliates( array(
+		$results = affiliate_wp()->affiliates->get_affiliates( array(
 			'fields' => array( 'user_id', 'rate' )
 		) );
 
-		$this->assertTrue( is_a( $result[0], 'stdClass' ) );
+		$this->assertArrayInstanceOf( 'stdClass', $results );
 	}
 
 	/**
