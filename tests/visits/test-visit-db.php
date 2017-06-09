@@ -70,7 +70,7 @@ class Tests extends UnitTestCase {
 		$results = affiliate_wp()->visits->get_visits();
 
 		// Check a random visit.
-		$this->assertInstanceOf( 'AffWP\Visit', $results[0] );
+		$this->assertContainsOnlyType( 'AffWP\Visit', $results );
 	}
 
 	/**
@@ -84,6 +84,7 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers Affiliate_WP_Visits_DB::get_visits()
+	 * @group database-fields
 	 */
 	public function test_get_visits_fields_ids_should_return_an_array_of_ids_only() {
 		$results = affiliate_wp()->visits->get_visits( array(
@@ -95,6 +96,7 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers Affiliate_WP_Visits_DB::get_visits()
+	 * @group database-fields
 	 */
 	public function test_get_visits_invalid_fields_arg_should_return_regular_Visit_object_results() {
 		$visits = array_map( 'affwp_get_visit', self::$visits );
@@ -105,6 +107,40 @@ class Tests extends UnitTestCase {
 
 		$this->assertEqualSets( $visits, $results );
 
+	}
+
+	/**
+	 * @covers Affiliate_WP_Visits_DB::get_visits()
+	 * @group database-fields
+	 */
+	public function test_get_visits_fields_ids_should_return_an_array_of_integer_ids() {
+		$results = affiliate_wp()->visits->get_visits( array(
+			'fields' => 'ids'
+		) );
+
+		$this->assertContainsOnlyType( 'integer', $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_Visits_DB::get_visits()
+	 * @group database-fields
+	 */
+	public function test_get_visits_with_no_fields_should_return_an_array_of_affiliate_objects() {
+		$results = affiliate_wp()->visits->get_visits();
+
+		$this->assertContainsOnlyType( 'AffWP\Visit', $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_Visits_DB::get_visits()
+	 * @group database-fields
+	 */
+	public function test_get_visits_with_multiple_valid_fields_should_return_an_array_of_stdClass_objects() {
+		$results = affiliate_wp()->visits->get_visits( array(
+			'fields' => array( 'visit_id', 'affiliate_id' )
+		) );
+
+		$this->assertContainsOnlyType( 'stdClass', $results );
 	}
 
 	/**

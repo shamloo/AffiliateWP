@@ -174,46 +174,34 @@ abstract class Affiliate_WP_DB {
 
 			$results = absint( $results );
 
-		} elseif ( '*' !== $clauses['fields'] ) {
+		} else {
 
 			$fields = $clauses['fields'];
 
-			// Build the query.
-			$query = "SELECT {$fields} FROM {$this->table_name} {$clauses['join']} {$clauses['where']} ORDER BY {$clauses['orderby']} {$clauses['order']} LIMIT %d, %d;";
-
-			if ( false !== strpos( $fields, ',' ) ) {
-
-				// Multiple fields.
-				$results = $wpdb->get_results(
-					$wpdb->prepare( $query, absint( $args['offset'] ), absint( $args['number'] ) )
-				);
-
-			} else {
-
-				// Single field.
-				$results = $wpdb->get_col(
-					$wpdb->prepare( $query, absint( $args['offset'] ), absint( $args['number'] ) )
-				);
-
-			}
-
-			if ( 'ids' === $args['fields'] ) {
-				$results = array_map( 'intval', $results );
-			}
-
- 		} else {
-
+			// Run the query.
 			$results = $wpdb->get_results(
 				$wpdb->prepare(
-					"SELECT * FROM {$this->table_name} {$clauses['join']} {$clauses['where']} ORDER BY {$clauses['orderby']} {$clauses['order']} LIMIT %d, %d;",
+					"SELECT {$fields} FROM {$this->table_name} {$clauses['join']} {$clauses['where']} ORDER BY {$clauses['orderby']} {$clauses['order']} LIMIT %d, %d;",
 					absint( $args['offset'] ),
 					absint( $args['number'] )
 				)
 			);
 
+			/*
+			 * If the query is for a single field, pluck the field into an array.
+			 *
+			 * Note that only the single field was selected in the query, but get_results()
+			 * returns an array of objects, thus the pluck.
+			 */
+			if ( '*' !== $fields && false === strpos( $fields, ',' ) ) {
+				$results = wp_list_pluck( $results, $fields );
+			}
+
+			// Run the results through the fields-dictated callback.
 			if ( ! empty( $callback ) && is_callable( $callback ) ) {
 				$results = array_map( $callback, $results );
 			}
+
 		}
 
 		return $results;

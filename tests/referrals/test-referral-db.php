@@ -41,7 +41,7 @@ class Referrals_DB_Tests extends UnitTestCase {
 		$results = affiliate_wp()->referrals->get_referrals();
 
 		// Check a random referral.
-		$this->assertInstanceOf( 'AffWP\Referral', $results[0] );
+		$this->assertContainsOnlyType( 'AffWP\Referral', $results );
 	}
 
 	/**
@@ -55,6 +55,7 @@ class Referrals_DB_Tests extends UnitTestCase {
 
 	/**
 	 * @covers Affiliate_WP_Referrals_DB::get_referrals()
+	 * @group database-fields
 	 */
 	public function test_get_referrals_fields_ids_should_return_an_array_of_ids_only() {
 		$results = affiliate_wp()->referrals->get_referrals( array(
@@ -66,6 +67,7 @@ class Referrals_DB_Tests extends UnitTestCase {
 
 	/**
 	 * @covers Affiliate_WP_Referrals_DB::get_referrals()
+	 * @group database-fields
 	 */
 	public function test_get_referrals_invalid_fields_arg_should_return_regular_Referral_object_results() {
 		$referrals = array_map( 'affwp_get_referral', self::$referrals );
@@ -75,6 +77,40 @@ class Referrals_DB_Tests extends UnitTestCase {
 		) );
 
 		$this->assertEqualSets( $referrals, $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_Referrals_DB::get_referrals()
+	 * @group database-fields
+	 */
+	public function test_get_referrals_fields_ids_should_return_an_array_of_integer_ids() {
+		$results = affiliate_wp()->referrals->get_referrals( array(
+			'fields' => 'ids'
+		) );
+
+		$this->assertContainsOnlyType( 'integer', $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_Referrals_DB::get_referrals()
+	 * @group database-fields
+	 */
+	public function test_get_referrals_with_no_fields_should_return_an_array_of_affiliate_objects() {
+		$results = affiliate_wp()->referrals->get_referrals();
+
+		$this->assertContainsOnlyType( 'AffWP\Referral', $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_Referrals_DB::get_referrals()
+	 * @group database-fields
+	 */
+	public function test_get_referrals_with_multiple_valid_fields_should_return_an_array_of_stdClass_objects() {
+		$results = affiliate_wp()->referrals->get_referrals( array(
+			'fields' => array( 'referral_id', 'context' )
+		) );
+
+		$this->assertContainsOnlyType( 'stdClass', $results );
 	}
 
 	/**
