@@ -108,4 +108,28 @@ class UnitTestCase extends \WP_UnitTestCase {
 		return $date_registered;
 	}
 
+	/**
+	 * Checks if all items in the array are of the given type.
+	 *
+	 * @since 2.1
+	 *
+	 * @param string $type     Type to check against.
+	 * @param array  $actual   Actual array.
+	 * @return bool True only if all items in the $actual array match the given type, otherwise false.
+	 */
+	public function assertArrayInstanceOf( $type, $actual ) {
+		$errors = array();
+
+		foreach ( $actual as $value ) {
+			if ( $type !== gettype( $value ) ) {
+				$errors[] = $value;
+			}
+		}
+
+		if ( empty( $errors ) ) {
+			return true;
+		}
+
+		return false;
+	}
 }
