@@ -278,7 +278,7 @@ function affwp_has_coupon_support( $integration ) {
  * @return int|false Returns the coupon template ID if set. If not, returns false.
  */
 function affwp_get_coupon_template_id( $integration ) {
-	return affiliate_wp()->affiliates->coupons->get_coupon_template_id( $integration_id );
+	return affiliate_wp()->affiliates->coupons->get_coupon_template_id( $integration );
 }
 
 /**
