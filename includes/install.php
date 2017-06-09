@@ -21,7 +21,6 @@ function affiliate_wp_install() {
 	$affiliate_wp_install->referrals      = new Affiliate_WP_Referrals_DB;
 	$affiliate_wp_install->visits         = new Affiliate_WP_Visits_DB;
 	$affiliate_wp_install->campaigns      = new Affiliate_WP_Campaigns_DB;
-	$affiliate_wp_install->coupons        = new Affiliate_WP_Coupons_DB;
 	$affiliate_wp_install->creatives      = new Affiliate_WP_Creatives_DB;
 	$affiliate_wp_install->settings       = new Affiliate_WP_Settings;
 	$affiliate_wp_install->rewrites       = new Affiliate_WP_Rewrites;
@@ -32,7 +31,7 @@ function affiliate_wp_install() {
 	$affiliate_wp_install->referrals->create_table();
 	$affiliate_wp_install->visits->create_table();
 	$affiliate_wp_install->campaigns->create_view();
-	$affiliate_wp_install->coupons->create_table();
+	$affiliate_wp_install->affiliates->coupons->create_table();
 	$affiliate_wp_install->creatives->create_table();
 	$affiliate_wp_install->affiliates->payouts->create_table();
 	$affiliate_wp_install->REST->consumers->create_table();
