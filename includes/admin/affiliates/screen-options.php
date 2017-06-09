@@ -4,7 +4,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/affiliates/class-list-table.php';
-require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/coupons/class-list-table.php';
+require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/coupons/class-affwp-coupons-admin.php';
 
 /**
  * Add per page screen option to the Affiliates list table

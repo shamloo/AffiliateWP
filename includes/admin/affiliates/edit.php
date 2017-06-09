@@ -242,13 +242,16 @@ $coupons          = affwp_get_affiliate_coupons( $affiliate->affiliate_id );
 
 				<td id="coupons">
 
-					<p>
-						<strong>
-							<?php echo __( 'Create affiliate coupons:', 'affiliate-wp' ); ?>
-						</strong>
-					</p>
+					<?php
 
-					<?php affwp_display_create_coupon_form(); ?>
+					/**
+					 * Fires at the top of coupons table views.
+					 *
+					 * @since 2.1
+					 */
+					do_action( 'affwp_affiliate_coupons_table_top' );
+
+					?>
 
 					<hr />
 
@@ -259,84 +262,19 @@ $coupons          = affwp_get_affiliate_coupons( $affiliate->affiliate_id );
 					</p>
 
 					<?php
-
-					// Affiliate Coupons.
-					$coupons_table = new AffWP_Coupons_Table( array(
-						'query_args' => array(
-							'affiliate_id' => $affiliate_id
-						),
-						'display_args' => array(
-							'hide_bulk_options'    => true,
-							'columns_to_hide'      => array( 'status' ),
-							'hide_column_controls' => true,
-						),
-					) );
-
-					$coupons_table->prepare_items();
-					// $coupons_table->views();
-					$coupons_table->display(); ?>
+					/**
+					 * Fires at the bottom of coupons table views.
+					 *
+					 * @since 2.1
+					 */
+					do_action( 'affwp_affiliate_coupons_table_bottom' );
+					?>
 
 					<p class="description">
 						<?php echo __( 'The current coupons for this affiliate. Click Create Coupon above to create a coupon for any supported integrations without an existing coupon associated with this affiliate.', 'affiliate-wp' ); ?>
 					</p>
 
-					<?php
-					/**
-					 * Fires at the bottom of coupons list table views.
-					 *
-					 * @since 2.1
-					 */
-					do_action( 'affwp_view_affiliate_coupons_list_table' );
-					?>
 				<td>
-			</tr>
-
-			<!-- #TODO - The below iteration of coupons is left for reference and will be removed. -->
-			<tr class="form-row">
-
-				<th scope="row">
-					<label for="coupons-old"><?php _e( 'Coupons (Old iteration):', 'affiliate-wp' ); ?></label>
-				</th>
-
-				<td>
-					<ul id="coupons-old">
-						<?php
-
-							$output = '';
-
-							$integrations = affiliate_wp()->integrations->get_enabled_integrations();
-
-							foreach ( $integrations as $integration_id => $integration_term ) {
-
-								if ( affwp_has_coupon_support( $integration_id ) ) {
-
-									$args = array(
-										'affiliate_id' => $affiliate_id,
-										'integration'  => $integration_id
-									);
-
-									$affiliate_coupons = affwp_get_coupons_by_integration( $args );
-
-									if ( $affiliate_coupons ) {
-
-										foreach ( $affiliate_coupons as $coupon_id ) {
-											$output .= '<li>(' . $integration_term . ') <a href="' . affwp_get_coupon_edit_url( $coupon_id, $integration_id, true ) . '">Edit coupon</a></li>';
-										}
-
-									}
-
-								} elseif ( affwp_has_coupon_support( $args[ 'integration' ] ) ) {
-									$output .= '<li>' . $integration_term . ' <a class="affwp-inline-link" href="' . affwp_get_coupon_create_url( $integration_id ) . '">' . __( 'Create coupon', 'affiliate-wp' ) . '</a>';
-								} else {
-									// Otherwise, coupon support should not be available.
-									$output .= __( 'No currently-active AffiliateWP integrations support coupons at this time.', 'affiliate-wp' );
-								}
-							}
-
-							echo $output;
-						?>
-					</ul>
-				</td>
 			</tr>
 
 			<?php if( 'rejected' == $affiliate->status && ! empty( $reason ) ) : ?>
