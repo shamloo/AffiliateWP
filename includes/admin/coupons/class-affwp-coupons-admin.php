@@ -48,7 +48,18 @@ class AffWP_Coupons_Admin {
 	 */
 	public function coupons_table( $affiliate_id = 0 ) {
 
-		$coupons      = array();
+		if ( ! $affiliate_id ) {
+
+			$affiliate_id = $affiliate->affiliate_id;
+
+			if ( ! $affiliate_id ) {
+				affiliate_wp()->utils->log( 'Unable to determine affiliate ID in coupons_table method.' );
+				return false;
+			}
+
+		}
+
+		$list_items  = array();
 		$integrations = affiliate_wp()->integrations->get_enabled_integrations();
 
 		foreach ( $integrations as $integration_id => $integration_term ) {
@@ -65,16 +76,16 @@ class AffWP_Coupons_Admin {
 				if ( $affiliate_coupons ) {
 
 					foreach ( $affiliate_coupons as $coupon_id ) {
-						$output .= '<li>(' . $integration_term . ') <a href="' . affwp_get_coupon_edit_url( $coupon_id, $integration_id, true ) . '">' . __( 'Edit coupon', 'affiliate-wp' ) . '</a></li>';
+						$list_items[] = '<li>(' . $integration_term . ') <a href="' . affwp_get_coupon_edit_url( $coupon_id, $integration_id, true ) . '">' . __( 'Edit coupon', 'affiliate-wp' ) . '</a></li>';
 					}
 
 				}
 
 			} elseif ( affwp_has_coupon_support( $args[ 'integration' ] ) ) {
-				$output .= '<li>' . $integration_term . ' <a class="affwp-inline-link" href="' . affwp_get_coupon_create_url( $integration_id ) . '">' . __( 'Create coupon', 'affiliate-wp' ) . '</a>';
+				$list_items[] = '<li>' . $integration_term . ' <a class="affwp-inline-link" href="' . affwp_get_coupon_create_url( $integration_id ) . '">' . __( 'Create coupon', 'affiliate-wp' ) . '</a>';
 			} else {
 				// Otherwise, coupon support should not be available.
-				$output .= __( 'No currently-active AffiliateWP integrations support coupons at this time.', 'affiliate-wp' );
+				$list_items[] = __( 'No currently-active AffiliateWP integrations support coupons at this time.', 'affiliate-wp' );
 			}
 		}
 
@@ -115,28 +126,46 @@ class AffWP_Coupons_Admin {
 			<tbody>
 				<?php
 
+'number'          => 20,
+'offset'          => 0,
+'affwp_coupon_id' => 0,
+'coupon_id'       => 0,
+'coupon_code'     => 0,
+'affiliate_id'    => 0,
+'referrals'       => 0,
+'integration'     => '',
+'owner'           => '',
+'status'          => '',
+'expiration_date' => '',
+'order'           => 'DESC',
+'orderby'         => 'coupon_id',
+'fields'          => '',
+'search'          => false,
+
 				$coupons = affwp_get_affiliate_coupons( $affiliate_id );
 
 				if ( $coupons ) {
 
 					foreach ($coupons as $coupon ) {
-
-					}
 				?>
 						<tr>
 							<td>
-								one
+								<?php echo $coupon->integration; ?>
 							</td>
 							<td>
-								two
+								<?php echo $coupon->affwp_coupon_id; ?>
 							</td>
 							<td>
-								three
+								<?php echo $coupon->affwp_coupon_id; ?>
 							</td>
 							<td>
-								four
+								<?php echo $coupon->affwp_coupon_id; ?>
+							</td>
+							<td>
+								<?php echo $coupon->affwp_coupon_id; ?>
 							</td>
 						</tr>
+				<?php } ?>
 
 					<tr>
 						<td colspan="3"><?php _e( 'No coupons created yet for this affiliate.', 'affiliate-wp' ); ?></td>

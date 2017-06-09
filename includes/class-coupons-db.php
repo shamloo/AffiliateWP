@@ -46,7 +46,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 		} else {
 			$this->table_name  = $wpdb->prefix . 'affiliate_wp_coupons';
 		}
-		$this->primary_key = 'coupon_id';
+		$this->primary_key = 'affwp_coupon_id';
 		$this->version     = '1.0';
 
 		// REST endpoints.
@@ -79,6 +79,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 	public function get_columns() {
 		return array(
 			'coupon_id'       => '%d',
+			'coupon_code'     => '%d',
 			'affwp_coupon_id' => '%d',
 			'affiliate_id'    => '%d',
 			'referrals'       => '%s',
@@ -129,6 +130,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 
 		$args = wp_parse_args( $args, array(
 			'affiliate_id'  => 0,
+			'coupon_code'   => 0,
 			'coupon_id'     => 0,
 			'referrals'     => array(),
 			'integration'   => '',
@@ -144,6 +146,10 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 
 		if ( ! empty( $args['status'] ) ) {
 			$args['status'] = sanitize_key( $args['status'] );
+		}
+
+		if ( ! empty( $args['coupon_code'] ) ) {
+			$args['coupon_code'] = sanitize_key( $args['coupon_code'] );
 		}
 
 		if ( is_array( $args['referrals'] ) ) {
@@ -293,6 +299,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 			'offset'          => 0,
 			'affwp_coupon_id' => 0,
 			'coupon_id'       => 0,
+			'coupon_code'     => 0,
 			'affiliate_id'    => 0,
 			'referrals'       => 0,
 			'integration'     => '',
@@ -526,7 +533,6 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 	 */
 	public function get_coupon_template_id( $integration ) {
 
-
 		if ( ! isset( $integration ) || ! affiliate_wp()->settings->get( 'auto_generate_coupons_enabled' ) ) {
 			return false;
 		}
@@ -630,6 +636,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 			integration mediumtext NOT NULL,
 			owner bigint(20) NOT NULL,
 			status tinytext NOT NULL,
+			coupon_code tinytext NOT NULL,
 			expiration_date datetime NOT NULL,
 			PRIMARY KEY  (affwp_coupon_id),
 			KEY affwp_coupon_id (affwp_coupon_id)
