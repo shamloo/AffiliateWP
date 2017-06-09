@@ -194,7 +194,7 @@ class Tests extends UnitTestCase {
 			'fields' => 'ids'
 		) );
 
-		$this->assertArrayInstanceOf( 'integer', $results );
+		$this->assertContainsOnlyType( 'integer', $results );
 	}
 
 	/**
@@ -204,19 +204,19 @@ class Tests extends UnitTestCase {
 	public function test_get_creatives_with_no_fields_should_return_an_array_of_affiliate_objects() {
 		$results = affiliate_wp()->creatives->get_creatives();
 
-		$this->assertArrayInstanceOf( 'AffWP\Creative', $results );
+		$this->assertContainsOnlyType( 'AffWP\Creative', $results );
 	}
 
 	/**
 	 * @covers Affiliate_WP_Creatives_DB::get_creatives()
 	 * @group database-fields
 	 */
-	public function test_get_creatives_with_multiple_valid_fields_should_return_an_array_of_arrays() {
+	public function test_get_creatives_with_multiple_valid_fields_should_return_an_array_of_stdClass_objects() {
 		$results = affiliate_wp()->creatives->get_creatives( array(
 			'fields' => array( 'creative_id', 'name' )
 		) );
 
-		$this->assertArrayInstanceOf( 'array', $results );
+		$this->assertContainsOnlyType( 'stdClass', $results );
 	}
 
 	/**

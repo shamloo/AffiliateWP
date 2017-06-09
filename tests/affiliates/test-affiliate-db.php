@@ -138,7 +138,7 @@ class Tests extends UnitTestCase {
 	public function test_get_affiliates_should_return_array_of_Affiliate_objects_if_not_count_query() {
 		$results = affiliate_wp()->affiliates->get_affiliates();
 
-		$this->assertArrayInstanceOf( 'AffWP\Affiliate', $results );
+		$this->assertContainsOnlyType( 'AffWP\Affiliate', $results );
 	}
 
 	/**
@@ -698,7 +698,7 @@ class Tests extends UnitTestCase {
 			'fields' => 'ids'
 		) );
 
-		$this->assertArrayInstanceOf( 'integer', $results );
+		$this->assertContainsOnlyType( 'integer', $results );
 	}
 
 	/**
@@ -708,19 +708,19 @@ class Tests extends UnitTestCase {
 	public function test_get_affiliates_with_no_fields_should_return_an_array_of_affiliate_objects() {
 		$results = affiliate_wp()->affiliates->get_affiliates();
 
-		$this->assertArrayInstanceOf( 'AffWP\Affiliate', $results );
+		$this->assertContainsOnlyType( 'AffWP\Affiliate', $results );
 	}
 
 	/**
 	 * @covers Affiliate_WP_DB_Affiliates::get_affiliates()
 	 * @group database-fields
 	 */
-	public function test_get_affiliates_with_multiple_valid_fields_should_return_an_array_of_arrays() {
+	public function test_get_affiliates_with_multiple_valid_fields_should_return_an_array_of_stdClass_objects() {
 		$results = affiliate_wp()->affiliates->get_affiliates( array(
 			'fields' => array( 'affiliate_id', 'rate' )
 		) );
 
-		$this->assertArrayInstanceOf( 'array', $results );
+		$this->assertContainsOnlyType( 'stdClass', $results );
 	}
 
 	/**
@@ -785,7 +785,7 @@ class Tests extends UnitTestCase {
 			'fields' => array( 'user_id', 'rate' )
 		) );
 
-		$this->assertArrayInstanceOf( 'stdClass', $results );
+		$this->assertContainsOnlyType( 'stdClass', $results );
 	}
 
 	/**
