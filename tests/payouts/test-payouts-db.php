@@ -657,6 +657,16 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers Affiliate_WP_Payouts_DB::get_payouts()
+	 */
+	public function test_get_payouts_should_return_array_of_Payout_objects_if_not_count_query() {
+		$results = affiliate_wp()->affiliates->payouts->get_payouts();
+
+		// Check a random referral.
+		$this->assertContainsOnlyType( 'AffWP\Affiliate\Payout', $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_Payouts_DB::get_payouts()
 	 * @group database-fields
 	 */
 	public function test_get_payouts_fields_ids_should_return_an_array_of_ids_only() {
