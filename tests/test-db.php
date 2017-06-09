@@ -102,6 +102,7 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers Affiliate_WP_DB::parse_fields()
+	 * @group database-fields
 	 */
 	public function test_parse_fields_with_empty_array_should_return_wildcard() {
 		$db = $this->getMockForAbstractClass( 'Affiliate_WP_DB' );
@@ -111,6 +112,7 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers Affiliate_WP_DB::parse_fields()
+	 * @group database-fields
 	 */
 	public function test_parse_fields_with_empty_string_should_return_wildcard() {
 		$db = $this->getMockForAbstractClass( 'Affiliate_WP_DB' );
@@ -120,6 +122,7 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers Affiliate_WP_DB::parse_fields()
+	 * @group database-fields
 	 */
 	public function test_parse_fields_with_invalid_string_field_should_return_wildcard() {
 		$result = affiliate_wp()->affiliates->parse_fields( 'foo' );
@@ -129,6 +132,7 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers Affiliate_WP_DB::parse_fields()
+	 * @group database-fields
 	 */
 	public function test_parse_fields_with_valid_string_field_should_return_that_field() {
 		$result = affiliate_wp()->affiliates->parse_fields( 'rate' );
@@ -137,6 +141,7 @@ class Tests extends UnitTestCase {
 	}
 	/**
 	 * @covers Affiliate_WP_DB::parse_fields()
+	 * @group database-fields
 	 */
 	public function test_parse_fields_with_both_valid_and_invalid_fields_should_return_only_valid_fields() {
 		$result = affiliate_wp()->affiliates->parse_fields( array( 'foo', 'user_id' ) );
@@ -146,6 +151,7 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers Affiliate_WP_DB::parse_fields()
+	 * @group database-fields
 	 */
 	public function test_parse_fields_with_multiple_valid_fields_should_return_comma_separated_list() {
 		$result = affiliate_wp()->affiliates->parse_fields( array( 'user_id', 'rate' ) );
