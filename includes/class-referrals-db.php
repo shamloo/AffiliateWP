@@ -309,7 +309,8 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	 *     @type string       $order          How to order results. Accepts 'ASC' (ascending) or 'DESC' (descending).
 	 *                                        Default 'DESC'.
 	 *     @type bool         $search         Whether a search query is being performed. Default false.
-	 *     @type string       $fields         Fields to query for. Accepts 'ids' or '*' (all). Default '*'.
+	 *     @type string|array $fields         Specific fields to retrieve. Accepts 'ids', a single referral field, or an
+	 *                                        array of fields. Default '*' (all).
 	 * }
 	 * @param   bool  $count  Optional. Whether to return only the total number of results found. Default false.
 	 * @return \AffWP\Referral[]|int|false
@@ -570,13 +571,17 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 		$args['orderby'] = $orderby;
 		$args['order']   = $order;
 
-		$fields = "*";
+		// Fields.
+		$callback = '';
 
-		if ( ! empty( $args['fields'] ) ) {
-			if ( 'ids' === $args['fields'] ) {
-				$fields = "$this->primary_key";
-			} elseif ( array_key_exists( $args['fields'], $this->get_columns() ) ) {
-				$fields = $args['fields'];
+		if ( 'ids' === $args['fields'] ) {
+			$fields   = "$this->primary_key";
+			$callback = 'intval';
+		} else {
+			$fields = $this->parse_fields( $args['fields'] );
+
+			if ( '*' === $fields ) {
+				$callback = 'affwp_get_referral';
 			}
 		}
 
@@ -596,7 +601,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 			$clauses = compact( 'fields', 'join', 'where', 'orderby', 'order', 'count' );
 
-			$results = $this->get_results( $clauses, $args, 'affwp_get_referral' );
+			$results = $this->get_results( $clauses, $args, $callback );
 		}
 
 		wp_cache_add( $cache_key, $results, $this->cache_group, HOUR_IN_SECONDS );

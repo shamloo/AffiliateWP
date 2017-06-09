@@ -108,4 +108,29 @@ class UnitTestCase extends \WP_UnitTestCase {
 		return $date_registered;
 	}
 
+	/**
+	 * Checks if all items in the array are of the given type.
+	 *
+	 * @since 2.1
+	 *
+	 * @param string $type     Type to check against.
+	 * @param array  $actual   Actual array.
+	 */
+	public function assertContainsOnlyType( $type, $actual ) {
+		$standard_types = array(
+			'numeric', 'integer', 'int', 'float', 'string', 'boolean', 'bool',
+			'null', 'array', 'object', 'resource', 'scalar'
+		);
+
+
+		if ( in_array( $type, $standard_types, true ) ) {
+			$constraint = new \PHPUnit_Framework_Constraint_IsType( $type );
+		} else {
+			$constraint = new \PHPUnit_Framework_Constraint_IsInstanceOf( $type );
+		}
+
+		foreach ( $actual as $item ) {
+			\PHPUnit_Framework_Assert::assertThat( $item, $constraint );
+		}
+	}
 }

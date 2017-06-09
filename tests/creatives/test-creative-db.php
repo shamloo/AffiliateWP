@@ -135,7 +135,7 @@ class Tests extends UnitTestCase {
 		$results = affiliate_wp()->creatives->get_creatives();
 
 		// Check a random creative.
-		$this->assertInstanceOf( 'AffWP\Creative', $results[0] );
+		$this->assertContainsOnlyType( 'AffWP\Creative', $results );
 	}
 
 	/**
@@ -149,6 +149,7 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers Affiliate_WP_Creatives_DB::get_creatives()
+	 * @group database-fields
 	 */
 	public function test_get_creatives_fields_ids_should_return_an_array_of_ids_only() {
 		$results = affiliate_wp()->creatives->get_creatives( array(
@@ -160,6 +161,7 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers \Affiliate_WP_Creatives_DB::get_creatives()
+	 * @group database-fields
 	 */
 	public function test_get_creatives_fields_with_valid_field_should_return_array_of_that_field() {
 		$results = affiliate_wp()->creatives->get_creatives( array(
@@ -171,6 +173,7 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers Affiliate_WP_Creatives_DB::get_creatives()
+	 * @group database-fields
 	 */
 	public function test_get_creatives_invalid_fields_arg_should_return_regular_Creative_object_results() {
 		$creatives = array_map( 'affwp_get_creative', self::$creatives );
@@ -180,6 +183,40 @@ class Tests extends UnitTestCase {
 		) );
 
 		$this->assertEqualSets( $creatives, $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_Creatives_DB::get_creatives()
+	 * @group database-fields
+	 */
+	public function test_get_creatives_fields_ids_should_return_an_array_of_integer_ids() {
+		$results = affiliate_wp()->creatives->get_creatives( array(
+			'fields' => 'ids'
+		) );
+
+		$this->assertContainsOnlyType( 'integer', $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_Creatives_DB::get_creatives()
+	 * @group database-fields
+	 */
+	public function test_get_creatives_with_no_fields_should_return_an_array_of_affiliate_objects() {
+		$results = affiliate_wp()->creatives->get_creatives();
+
+		$this->assertContainsOnlyType( 'AffWP\Creative', $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_Creatives_DB::get_creatives()
+	 * @group database-fields
+	 */
+	public function test_get_creatives_with_multiple_valid_fields_should_return_an_array_of_stdClass_objects() {
+		$results = affiliate_wp()->creatives->get_creatives( array(
+			'fields' => array( 'creative_id', 'name' )
+		) );
+
+		$this->assertContainsOnlyType( 'stdClass', $results );
 	}
 
 	/**
