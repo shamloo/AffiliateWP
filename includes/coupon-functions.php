@@ -187,7 +187,7 @@ function affwp_get_coupons_by_integration( $args ) {
 		return false;
 	}
 
-	$coupons    = false;
+	$coupons = false;
 
 	// Todo - cycle through active integrations, show variable UI depending on the integrations enabled,
 	// to allow all supported concurrently-active integrations to auto-generate coupons.
