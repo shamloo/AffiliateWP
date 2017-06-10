@@ -215,6 +215,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 			} elseif( 'paid' === $new_status && 'paid' === $referral->status ) {
 
+				// If the 'paid' status is unchanged, but the amount is, make earnings adjustments.
 				if( $referral->amount > $args['amount'] ) {
 
 					$change = $referral->amount - $args['amount'];
@@ -229,6 +230,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 			} elseif( 'unpaid' === $new_status && 'unpaid' === $referral->status ) {
 
+				// If the 'unpaid' status is unchanged, but the amount is, make earnings adjustments.
 				if ( $referral->amount > $args['amount'] ) {
 
 					affwp_decrease_affiliate_unpaid_earnings( $referral->affiliate_id, $referral->amount - $args['amount'] );
