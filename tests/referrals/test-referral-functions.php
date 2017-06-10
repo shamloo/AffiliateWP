@@ -348,16 +348,16 @@ class Tests extends UnitTestCase {
 		// Start with 'paid' (default 'pending').
 		affwp_set_referral_status( self::$_referral_id, 'paid' );
 
-		$referral = affwp_get_referral( self::$_referral_id );
-		$old_earnings = affwp_get_affiliate_earnings( self::$_affiliate_id );
+		$referral_amount = affwp_get_referral( self::$_referral_id )->amount;
+		$old_earnings    = affwp_get_affiliate_earnings( self::$_affiliate_id );
 
 		// Switch to 'unpaid'.
-		affwp_set_referral_status( $referral, 'unpaid' );
+		affwp_set_referral_status( self::$_referral_id, 'unpaid' );
 
 		$new_earnings = affwp_get_affiliate_earnings( self::$_affiliate_id );
 
 		// New earnings = $old_earnings minus the deducted referral amount.
-		$this->assertEquals( $old_earnings - $referral->amount, $new_earnings );
+		$this->assertEquals( $old_earnings - $referral_amount, $new_earnings );
 	}
 
 	/**
