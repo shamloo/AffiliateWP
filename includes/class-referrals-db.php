@@ -202,7 +202,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 		$args['campaign']      = ! empty( $data['campaign'] )      ? sanitize_text_field( $data['campaign'] )    : '';
 		$args['reference']     = ! empty( $data['reference'] )     ? sanitize_text_field( $data['reference'] )   : '';
 
-		// Deliberately defer updating the status – it will occur instead in affwp_set_referral_status().
+		// Deliberately defer updating the status – it will occur instead in affwp_set_referral_status() if changed.
 		$new_status = ! empty( $data['status'] ) ? sanitize_key( $data['status'] ) : $referral->status;
 
 		$update = $this->update( $referral->ID, $args, '', 'referral' );
