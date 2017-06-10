@@ -77,8 +77,8 @@ class AffWP_Coupons_Admin {
 
 				if ( $affiliate_coupons ) {
 
-					foreach ( $affiliate_coupons as $coupon_id ) {
-						$list_items[] = '<th>(' . $integration_term . ') <a href="' . affwp_get_coupon_edit_url( $coupon_id, $integration_id, true ) . '">' . __( 'Edit coupon', 'affiliate-wp' ) . '</a></th>';
+					foreach ( $affiliate_coupons as $coupon ) {
+						$list_items[] = '<th>(' . $integration_term . ') <a href="' . affwp_get_coupon_edit_url( $coupon->coupon_id, $integration_id, true ) . '">' . __( 'Edit coupon', 'affiliate-wp' ) . '</a></th>';
 					}
 
 				}
@@ -127,9 +127,9 @@ class AffWP_Coupons_Admin {
 			<tbody>
 				<?php
 
-				if ( $coupons ) {
+				if ( $affiliate_coupons ) {
 
-					foreach ($coupons as $coupon ) {
+					foreach ( $affiliate_coupons as $coupon ) {
 				?>
 						<tr>
 							<td>
