@@ -160,41 +160,6 @@ class EDD_Coupon extends \AffWP\Affiliate\Coupon {
 	}
 
 	/**
-	 * Gets the EDD coupon template used as a basis for generating all automatic affiliate coupons.
-	 * Searches for post meta of `affwp_is_coupon_template`.
-	 *
-	 * @return mixed int|bool Returns an EDD discount ID if a coupon template is located in EDD, otherwise returns false.
-	 * @since  2.1
-	 */
-	public function get_coupon_template_id() {
-
-		if ( ! affiliate_wp()->settings->get( 'auto_generate_coupons_enabled' ) ) {
-			return false;
-		}
-
-		$discounts = edd_get_discounts(
-			array(
-				'meta_key'    => 'affwp_is_coupon_template',
-				'meta_value'  => 1,
-				'post_status' => 'active'
-			)
-		);
-
-		if ( $discounts ) {
-
-			if ( array_count_values( $discounts ) > 1 ) {
-				affiliate_wp()->utils->log( 'Only one AffiliateWP coupon template may be specified for an integration.' );
-			}
-
-			foreach ( $discounts as $discount ) {
-				return array_search( $discount->id );
-			}
-		}
-
-		return false;
-	}
-
-	/**
 	 * Sets the EDD coupon template.
 	 * Searches for post meta of `affwp_is_coupon_template`.
 	 *
