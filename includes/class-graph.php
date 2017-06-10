@@ -188,9 +188,7 @@ class Affiliate_WP_Graph {
 
 		ob_start();
 
-		if ( function_exists( 'wp_add_inline_script' ) ) {
-			wp_add_inline_script( 'jquery-flot', $this->graph_js() );
-		}
+		wp_add_inline_script( 'jquery-flot', $this->graph_js() );
 
 		if ( false !== $this->get( 'show_controls' ) ) {
 			echo $this->graph_controls();
