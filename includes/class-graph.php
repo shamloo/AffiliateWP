@@ -350,9 +350,13 @@ class Affiliate_WP_Graph {
 	/**
 	 * Displays the report graph date filters.
 	 *
-	 * @since 1.0
+	 * @internal Note that this method is also used on the front-end. Any changes here
+	 *           should be equally tested in the Affiliate Area..
+	 *
+	 * @access public
+	 * @since  1.0
 	*/
-	function graph_controls() {
+	public function graph_controls() {
 		$date_options = apply_filters( 'affwp_report_date_options', array(
 			'today' 	    => __( 'Today', 'affiliate-wp' ),
 			'yesterday'     => __( 'Yesterday', 'affiliate-wp' ),
