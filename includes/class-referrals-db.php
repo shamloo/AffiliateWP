@@ -208,7 +208,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 		 *
 		 * Prior to 2.1, the status was updated in the first update() call, which
 		 * resulted in the affwp_set_referral_status() failing to trigger earnings
-		 * adjustments. Now the status is only updated once as needed.
+		 * adjustments. Now the status is only updated once as needed. See #2257.
 		 */
 		$new_status = ! empty( $data['status'] ) ? sanitize_key( $data['status'] ) : $referral->status;
 
