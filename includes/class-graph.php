@@ -420,8 +420,8 @@ class Affiliate_WP_Graph {
 		</div>
 		<?php
 		if ( $this->get( 'form_wrapper' ) ) {
-			submit_button( __( 'Filter', 'affiliate-wp' ), 'secondary', 'submit', false );
 			?>
+			<input name="submit" id="submit" class="button" value="<?php esc_attr_e( 'Filter', 'affiliate-wp' ); ?>" type="submit">
 			</div><!-- .tablenav .top -->
 			</form><!-- .affwp-graphs-filter -->
 			<?php
