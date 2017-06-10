@@ -11,7 +11,7 @@
 		do_action( 'affwp_new_creative_top' );
 		?>
 
-		<p><?php printf( __( 'Use this screen to add a new creative, such as a text link or image banner.', 'affiliate-wp' ), admin_url( 'user-new.php' ) ); ?></p>
+		<p><?php printf( __( 'Use this screen to add a new creative, such as a text link or image banner. To create a text-only link, simply do not add an image below.', 'affiliate-wp' ), admin_url( 'user-new.php' ) ); ?></p>
 
 		<table class="form-table">
 
