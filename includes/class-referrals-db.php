@@ -209,11 +209,11 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 		if( $update ) {
 
-			if( ! empty( $args['status'] ) && $referral->status !== $args['status'] ) {
+			if( ! empty( $new_status ) && $referral->status !== $new_status ) {
 
-				affwp_set_referral_status( $referral->ID, $args['status'] );
+				affwp_set_referral_status( $referral->ID, $new_status );
 
-			} elseif( 'paid' === $referral->status ) {
+			} elseif( 'paid' === $new_status && 'paid' === $referral->status ) {
 
 				if( $referral->amount > $args['amount'] ) {
 
@@ -227,7 +227,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 				}
 
-			} elseif( 'unpaid' === $referral->status ) {
+			} elseif( 'unpaid' === $new_status && 'unpaid' === $referral->status ) {
 
 				if ( $referral->amount > $args['amount'] ) {
 
