@@ -61,13 +61,15 @@ class Tab extends Reports\Tab {
 	 */
 	public function total_paid_all_time_tile() {
 
-		if ( $this->affiliate_id ) {
+		$affiliate_id = $this->affiliate_id ? $this->affiliate_id : 0;
 
-			$payouts = affiliate_wp()->affiliates->payouts->get_payouts( array(
-				'number'       => -1,
-				'fields'       => 'amount',
-				'affiliate_id' => $this->affiliate_id
-			) );
+		$payouts = affiliate_wp()->affiliates->payouts->get_payouts( array(
+			'number'       => -1,
+			'fields'       => 'amount',
+			'affiliate_id' => $affiliate_id
+		) );
+
+		if ( $this->affiliate_id ) {
 
 			$this->register_tile( 'affiliate_total_paid_all_time', array(
 				'label'           => __( 'Total Earnings Paid (All Time)', 'affiliate-wp' ),
@@ -81,10 +83,6 @@ class Tab extends Reports\Tab {
 			) );
 
 		} else {
-			$payouts = affiliate_wp()->affiliates->payouts->get_payouts( array(
-				'number' => -1,
-				'fields' => 'amount',
-			) );
 
 			$this->register_tile( 'total_paid_all_time', array(
 				'label'           => __( 'Total Earnings Paid', 'affiliate-wp' ),
@@ -106,14 +104,16 @@ class Tab extends Reports\Tab {
 	 */
 	public function total_earnings_paid_tile() {
 
-		if ( $this->affiliate_id ) {
+		$affiliate_id = $this->affiliate_id ? $this->affiliate_id : 0;
 
-			$payouts = affiliate_wp()->affiliates->payouts->get_payouts( array(
-				'number'       => -1,
-				'fields'       => 'amount',
-				'date'         => $this->date_query,
-				'affiliate_id' => $this->affiliate_id,
-			) );
+		$payouts = affiliate_wp()->affiliates->payouts->get_payouts( array(
+			'number'       => -1,
+			'fields'       => 'amount',
+			'date'         => $this->date_query,
+			'affiliate_id' => $affiliate_id,
+		) );
+
+		if ( $this->affiliate_id ) {
 
 			$this->register_tile( 'affiliate_total_earnings_paid', array(
 				'label'           => __( 'Total Earnings Paid', 'affiliate-wp' ),
@@ -128,12 +128,6 @@ class Tab extends Reports\Tab {
 			) );
 
 		} else {
-
-			$payouts = affiliate_wp()->affiliates->payouts->get_payouts( array(
-				'number' => -1,
-				'fields' => 'amount',
-				'date'   => $this->date_query,
-			) );
 
 			$this->register_tile( 'total_earnings_paid', array(
 				'label' => __( 'Total Earnings Paid', 'affiliate-wp' ),
@@ -190,18 +184,20 @@ class Tab extends Reports\Tab {
 	 */
 	public function average_payout_tile() {
 
+		$affiliate_id = $this->affiliate_id ? $this->affiliate_id : 0;
+
+		$payouts = affiliate_wp()->affiliates->payouts->get_payouts( array(
+			'number'       => -1,
+			'fields'       => 'amount',
+			'date'         => $this->date_query,
+			'affiliate_id' => $affiliate_id
+		) );
+
+		if ( ! $payouts ) {
+			$payouts = array( 0 );
+		}
+
 		if ( $this->affiliate_id ) {
-
-			$payouts = affiliate_wp()->affiliates->payouts->get_payouts( array(
-				'number'       => -1,
-				'fields'       => 'amount',
-				'date'         => $this->date_query,
-				'affiliate_id' => $this->affiliate_id
-			) );
-
-			if ( ! $payouts ) {
-				$payouts = array( 0 );
-			}
 
 			$this->register_tile( 'affiliate_average_payout_amount', array(
 				'label'           => __( 'Average Payout', 'affiliate-wp' ),
@@ -217,16 +213,6 @@ class Tab extends Reports\Tab {
 
 
 		} else {
-
-			$payouts = affiliate_wp()->affiliates->payouts->get_payouts( array(
-				'number' => -1,
-				'fields' => 'amount',
-				'date'   => $this->date_query,
-			) );
-
-			if ( ! $payouts ) {
-				$payouts = array( 0 );
-			}
 
 			$this->register_tile( 'average_payout_amount', array(
 				'label'           => __( 'Average Payout', 'affiliate-wp' ),
@@ -249,19 +235,21 @@ class Tab extends Reports\Tab {
 	 */
 	public function average_referrals_per_payout_tile() {
 
+		$affiliate_id = $this->affiliate_id ? $this->affiliate_id : 0;
+
+		$payout_referrals = affiliate_wp()->affiliates->payouts->get_payouts( array(
+			'number'       => -1,
+			'fields'       => 'referrals',
+			'affiliate_id' => $affiliate_id
+		) );
+
+		$counts = array();
+
+		foreach ( $payout_referrals as $referrals ) {
+			$counts[] = count( explode( ',', $referrals ) );
+		}
+
 		if ( $this->affiliate_id ) {
-
-			$payout_referrals = affiliate_wp()->affiliates->payouts->get_payouts( array(
-				'number'       => -1,
-				'fields'       => 'referrals',
-				'affiliate_id' => $this->affiliate_id
-			) );
-
-			$counts = array();
-
-			foreach ( $payout_referrals as $referrals ) {
-				$counts[] = count( explode( ',', $referrals ) );
-			}
 
 			$this->register_tile( 'affiliate_average_referrals_per_payout', array(
 				'label'           => __( 'Average Referrals Per Payout (All Time)', 'affiliate-wp' ),
@@ -275,17 +263,6 @@ class Tab extends Reports\Tab {
 			) );
 
 		} else {
-
-			$payout_referrals = affiliate_wp()->affiliates->payouts->get_payouts( array(
-				'number' => -1,
-				'fields' => 'referrals'
-			) );
-
-			$counts = array();
-
-			foreach ( $payout_referrals as $referrals ) {
-				$counts[] = count( explode( ',', $referrals ) );
-			}
 
 			$this->register_tile( 'average_referrals_per_payout', array(
 				'label'           => __( 'Average Referrals Per Payout', 'affiliate-wp' ),
