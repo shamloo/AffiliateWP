@@ -128,7 +128,7 @@ class AffWP_Coupons_Admin {
 				if ( $affiliate_coupons ) {
 
 					foreach ( $affiliate_coupons as $coupon ) {
-						$list_items[] = '<th>(' . $integration_term . ') <a href="' . affwp_get_coupon_edit_url( $coupon->coupon_id, $integration_id, true ) . '">' . __( 'Edit coupon', 'affiliate-wp' ) . '</a></th>';
+						$list_items[] = '<th>(' . $integration_term . ') <a href="' . affwp_get_coupon_edit_url( $coupon->coupon_id, $integration_id ) . '">' . __( 'Edit coupon', 'affiliate-wp' ) . '</a></th>';
 					}
 
 				}
@@ -195,7 +195,15 @@ class AffWP_Coupons_Admin {
 								<?php echo $coupon->referrals; ?>
 							</td>
 							<td>
-								<?php echo affwp_get_coupon_edit_url( $coupon->coupon_id, $coupon->integration ); ?>
+								<?php
+								$coupon_edit_url = affwp_get_coupon_edit_url( $coupon->coupon_id, $coupon->integration );
+								if ( $coupon_edit_url ) {
+									echo '<a href="' . $coupon_edit_url . '">' . __( 'Edit', 'affiliate-wp' ) . '</a>';
+								} else {
+									affiliate_wp()->utils->log( 'Unable to get coupon edit url.' );
+								}
+
+								?>
 							</td>
 						</tr>
 <?php
