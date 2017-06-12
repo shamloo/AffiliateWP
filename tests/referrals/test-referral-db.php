@@ -170,6 +170,101 @@ class Referrals_DB_Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers Affiliate_WP_Referrals_DB::get_referrals()
+	 */
+	public function test_get_referrals_with_description_should_get_only_referrals_with_verbatim_description_match() {
+		$referral_ids_A = $this->factory->referral->create_many( 2, array(
+			'affiliate_id' => self::$affiliate_id,
+			'description'  => 'foo'
+		) );
+
+		$referral_ids_B = $this->factory->referral->create_many( 2, array(
+			'affiliate_id' => self::$affiliate_id,
+			'description'  => 'bar'
+		) );
+
+		$results = affiliate_wp()->referrals->get_referrals( array(
+			'description' => 'foo',
+			'fields'      => 'ids',
+		) );
+
+		$this->assertEqualSets( $referral_ids_A, $results );
+
+		// Clean up.
+		$referral_ids = array_merge( $referral_ids_A, $referral_ids_B );
+
+		foreach ( $referral_ids as $referral_id ) {
+			affwp_delete_referral( $referral_id );
+		}
+	}
+
+	/**
+	 * @covers Affiliate_WP_Referrals_DB::get_referrals()
+	 */
+	public function test_get_referrals_with_description_and_search_should_allow_verbatim_and_fuzzy_matching() {
+		$referral_A = $this->factory->referral->create( array(
+			'affiliate_id' => self::$affiliate_id,
+			'description'  => 'foo'
+		) );
+
+		$referral_B = $this->factory->referral->create( array(
+			'affiliate_id' => self::$affiliate_id,
+			'description'  => 'bar'
+		) );
+
+		$referral_C = $this->factory->referral->create( array(
+			'affiliate_id' => self::$affiliate_id,
+			'description'  => 'foobar'
+		) );
+
+		$results = affiliate_wp()->referrals->get_referrals( array(
+			'description' => 'foo',
+			'fields'      => 'ids',
+			'search'      => true,
+		) );
+
+		$this->assertEqualSets( array( $referral_A, $referral_C ), $results );
+
+		// Clean up.
+		foreach ( array( $referral_A, $referral_B, $referral_C ) as $referral_id ) {
+			affwp_delete_referral( $referral_id );
+		}
+	}
+
+	/**
+	 * @covers Affiliate_WP_Referrals_DB::get_referrals()
+	 */
+	public function test_get_referrals_with_any_case_description_and_search_should_allow_verbatim_and_fuzzy_matching() {
+		$referral_A = $this->factory->referral->create( array(
+			'affiliate_id' => self::$affiliate_id,
+			'description'  => 'foo'
+		) );
+
+		$referral_B = $this->factory->referral->create( array(
+			'affiliate_id' => self::$affiliate_id,
+			'description'  => 'bar'
+		) );
+
+		$referral_C = $this->factory->referral->create( array(
+			'affiliate_id' => self::$affiliate_id,
+			'description'  => 'FOObar'
+		) );
+
+		$results = affiliate_wp()->referrals->get_referrals( array(
+			'description' => 'foo',
+			'fields'      => 'ids',
+			'search'      => true,
+		) );
+
+		$this->assertEqualSets( array( $referral_A, $referral_C ), $results );
+
+		// Clean up.
+		foreach ( array( $referral_A, $referral_B, $referral_C ) as $referral_id ) {
+			affwp_delete_referral( $referral_id );
+		}
+	}
+
+	/**
 	 * @covers Affiliate_WP_Referrals_DB::count_by_status()
 	 */
 	public function test_count_by_status_should_return_0_if_status_is_invalid() {

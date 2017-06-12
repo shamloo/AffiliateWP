@@ -313,6 +313,8 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	 *                                        Default empty.
 	 *     @type string       $context        Specific context to query referrals for. Default empty.
 	 *     @type string       $campaign       Specific campaign to query referrals for. Default empty.
+	 *     @type string       $description    Description to search referrals for. Fuzzy matching is permitted when
+	 *                                        `$search` is true.
 	 *     @type string|array $status         Referral status or array of statuses to query referrals for.
 	 *                                        Default empty (all).
 	 *     @type string       $orderby        Column to order results by. Accepts any valid referrals table column.
@@ -331,21 +333,22 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 		global $wpdb;
 
 		$defaults = array(
-			'number'       => 20,
-			'offset'       => 0,
-			'referral_id'  => 0,
-			'payout_id'    => 0,
-			'affiliate_id' => 0,
-			'amount'       => 0,
+			'number'         => 20,
+			'offset'         => 0,
+			'referral_id'    => 0,
+			'payout_id'      => 0,
+			'affiliate_id'   => 0,
+			'amount'         => 0,
 			'amount_compare' => '=',
-			'reference'    => '',
-			'context'      => '',
-			'campaign'     => '',
-			'status'       => '',
-			'orderby'      => 'referral_id',
-			'order'        => 'DESC',
-			'search'       => false,
-			'fields'       => '',
+			'description'    => '',
+			'reference'      => '',
+			'context'        => '',
+			'campaign'       => '',
+			'status'         => '',
+			'orderby'        => 'referral_id',
+			'order'          => 'DESC',
+			'search'         => false,
+			'fields'         => '',
 		);
 
 		$args  = wp_parse_args( $args, $defaults );
@@ -562,6 +565,24 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 				}
 			}
 
+		}
+
+		// Description.
+		if( ! empty( $args['description'] ) ) {
+
+			if( empty( $where ) ) {
+				$where .= " WHERE";
+			} else {
+				$where .= " AND";
+			}
+
+			$description = esc_sql( $args['description'] );
+
+			if( ! empty( $args['search'] ) ) {
+				$where .= " LOWER(`description`) LIKE LOWER('%%" . $description . "%%') ";
+			} else {
+				$where .= " `description` = '" . $description . "' ";
+			}
 		}
 
 		$orderby = array_key_exists( $args['orderby'], $this->get_columns() ) ? $args['orderby'] : $this->primary_key;
