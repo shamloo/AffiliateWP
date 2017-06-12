@@ -210,6 +210,7 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers ::affwp_set_referral_status()
+	 * @group referrals-status
 	 */
 	public function test_get_referral_status_with_no_referral_should_return_false() {
 		$this->assertFalse( affwp_get_referral_status( null ) );
@@ -217,6 +218,7 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers ::affwp_set_referral_status()
+	 * @group referrals-status
 	 */
 	public function test_set_referral_status_with_invalid_referral_id_should_return_false() {
 		$this->assertFalse( affwp_set_referral_status( 0 ) );
@@ -224,6 +226,7 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers ::affwp_set_referral_status()
+	 * @group referrals-status
 	 */
 	public function test_set_referral_status_with_valid_referral_id_and_valid_status_should_return_true() {
 		$this->assertTrue( affwp_set_referral_status( self::$_referral_id , 'unpaid' ) );
@@ -231,6 +234,7 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers ::affwp_set_referral_status()
+	 * @group referrals-status
 	 */
 	public function test_set_referral_status_with_invalid_referral_object_should_return_false() {
 		$this->assertFalse( affwp_set_referral_status( affwp_get_referral() ) );
@@ -238,6 +242,7 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers ::affwp_set_referral_status()
+	 * @group referrals-status
 	 */
 	public function test_set_referral_status_with_valid_referral_object_and_valid_status_should_return_true() {
 		$referral = affwp_get_referral( self::$_referral_id );
@@ -247,6 +252,7 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers ::affwp_get_referral_status()
+	 * @group referrals-status
 	 */
 	public function test_set_referral_status_should_update_status() {
 		$this->assertEquals( 'pending', affwp_get_referral_status( self::$_referral_id ) );
@@ -260,6 +266,7 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers ::affwp_set_referral_status()
+	 * @group referrals-status
 	 */
 	public function test_set_referral_status_with_new_status_paid_should_increase_earnings() {
 		$referral     = affwp_get_referral( self::$_referral_id );
@@ -274,6 +281,7 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers ::affwp_set_referral_status()
+	 * @group referrals-status
 	 */
 	public function test_set_referral_status_with_new_status_paid_should_increase_referral_count() {
 		$referral     = affwp_get_referral( self::$_referral_id );
@@ -288,6 +296,7 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers ::affwp_set_referral_status()
+	 * @group referrals-status
 	 */
 	public function test_set_referral_status_with_new_status_unpaid_should_increase_unpaid_earnings() {
 		$referral            = affwp_get_referral( self::$_referral_id );
@@ -308,6 +317,7 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers ::affwp_set_referral_status()
+	 * @group referrals-status
 	 */
 	public function test_set_referral_status_with_new_status_not_unpaid_old_status_unpaid_should_decrease_unpaid_earnings() {
 		// Start off with an unpaid referral.
@@ -321,6 +331,7 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers ::affwp_set_referral_status()
+	 * @group referrals-status
 	 */
 	public function test_set_referral_status_with_new_status_unpaid_old_status_pending_should_be_marked_accepted() {
 		affiliate_wp()->referrals->update( self::$_referral_id, array(
@@ -340,6 +351,7 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers ::affwp_set_referral_status()
+	 * @group referrals-status
 	 */
 	public function test_set_referral_status_with_new_status_not_paid_old_status_paid_should_decrease_earnings() {
 		// Inflate earnings.
@@ -348,20 +360,21 @@ class Tests extends UnitTestCase {
 		// Start with 'paid' (default 'pending').
 		affwp_set_referral_status( self::$_referral_id, 'paid' );
 
-		$referral = affwp_get_referral( self::$_referral_id );
-		$old_earnings = affwp_get_affiliate_earnings( self::$_affiliate_id );
+		$referral_amount = affwp_get_referral( self::$_referral_id )->amount;
+		$old_earnings    = affwp_get_affiliate_earnings( self::$_affiliate_id );
 
 		// Switch to 'unpaid'.
-		affwp_set_referral_status( $referral, 'unpaid' );
+		affwp_set_referral_status( self::$_referral_id, 'unpaid' );
 
 		$new_earnings = affwp_get_affiliate_earnings( self::$_affiliate_id );
 
 		// New earnings = $old_earnings minus the deducted referral amount.
-		$this->assertEquals( $old_earnings - $referral->amount, $new_earnings );
+		$this->assertEquals( $old_earnings - $referral_amount, $new_earnings );
 	}
 
 	/**
 	 * @covers ::affwp_set_referral_status()
+	 * @group referrals-status
 	 */
 	public function test_set_referral_status_with_new_status_not_paid_old_status_paid_should_decrease_referral_count() {
 		// Inflate referral count.
