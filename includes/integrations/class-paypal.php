@@ -28,7 +28,13 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 	 * @since   1.9
 	*/
 	public function scripts() {
-?>
+		if ( defined( 'AFFILIATEWP_PAYPAL_IPN' ) && AFFILIATEWP_PAYPAL_IPN ) {
+			$ipn_url = AFFILIATEWP_PAYPAL_IPN;
+		} else {
+			$ipn_url = home_url( 'index.php?affwp-listener=paypal' );
+		}
+		?>
+
 		<script type="text/javascript">
 		jQuery(document).ready(function($) {
 
@@ -43,7 +49,7 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 				e.preventDefault();
 
 				var $form = $(this);
-				var ipn_url = "<?php echo home_url( 'index.php?affwp-listener=paypal' ); ?>";
+				var ipn_url = "<?php echo esc_js( $ipn_url ); ?>";
 
 				$.ajax({
 					type: "POST",
