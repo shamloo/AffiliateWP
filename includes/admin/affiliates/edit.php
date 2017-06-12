@@ -10,7 +10,6 @@ $email            = ! empty( $affiliate->payment_email ) ? $affiliate->payment_e
 $reason           = affwp_get_affiliate_meta( $affiliate->affiliate_id, '_rejection_reason', true );
 $promotion_method = get_user_meta( $affiliate->user_id, 'affwp_promotion_method', true );
 $notes            = affwp_get_affiliate_meta( $affiliate->affiliate_id, 'notes', true );
-$coupons          = affwp_get_affiliate_coupons( $affiliate->affiliate_id );
 ?>
 <div class="wrap">
 
@@ -246,8 +245,8 @@ $coupons          = affwp_get_affiliate_coupons( $affiliate->affiliate_id );
 
 					$coupons_admin = new AffWP_Coupons_Admin;
 
-					$coupons_admin->create_coupons();
-					$coupons_admin->coupons_table();
+					$coupons_admin->create_coupons( $affiliate->affiliate_id );
+					$coupons_admin->coupons_table( $affiliate->affiliate_id );
 
 					?>
 
