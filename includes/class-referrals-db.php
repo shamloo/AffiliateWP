@@ -314,7 +314,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	 *     @type string       $context        Specific context to query referrals for. Default empty.
 	 *     @type string       $campaign       Specific campaign to query referrals for. Default empty.
 	 *     @type string       $description    Description to search referrals for. Fuzzy matching is permitted when
-	 *                                        `$search` is true
+	 *                                        `$search` is true.
 	 *     @type string|array $status         Referral status or array of statuses to query referrals for.
 	 *                                        Default empty (all).
 	 *     @type string       $orderby        Column to order results by. Accepts any valid referrals table column.
