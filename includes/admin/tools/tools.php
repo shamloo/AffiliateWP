@@ -350,6 +350,31 @@ function affwp_export_import_tab() {
 			</div><!-- .postbox -->
 
 			<div class="postbox">
+				<h3><span><?php esc_html_e( 'Export Visits', 'affiliate-wp' ); ?></span></h3>
+				<div class="inside">
+					<p><?php esc_html_e( 'Export visits to a CSV file.', 'affiliate-wp' ); ?></p>
+					<form method="post" enctype="multipart/form-data" class="affwp-batch-form" data-batch_id="export-visits" data-nonce="<?php echo esc_attr( wp_create_nonce( 'export-visits_step_nonce' ) ); ?>">
+						<p>
+							<span class="affwp-ajax-search-wrap">
+								<input type="text" name="user_name" id="user_name" class="affwp-user-search" autocomplete="off" placeholder="<?php esc_html_e( 'Affiliate name', 'affiliate-wp' ); ?>" />
+							</span>
+							<input type="text" class="affwp-datepicker" autocomplete="off" name="start_date" placeholder="<?php esc_html_e( 'From - mm/dd/yyyy', 'affiliate-wp' ); ?>"/>
+							<input type="text" class="affwp-datepicker" autocomplete="off" name="end_date" placeholder="<?php esc_html_e( 'To - mm/dd/yyyy', 'affiliate-wp' ); ?>"/>
+							<select name="referral_status" id="referral_status">
+								<option value=""><?php esc_html_e( 'All', 'affiliate-wp' ); ?></option>
+								<option value="converted"><?php esc_html_e( 'Converted', 'affiliate-wp' ); ?></option>
+								<option value="unconverted"><?php esc_html_e( 'Unconverted', 'affiliate-wp' ); ?></option>
+							</select>
+							<div class="description"><?php esc_html_e( 'To search for an affiliate, enter the affiliate&#8217;s login name, first name, or last name. Leave blank to export referrals for all affiliates.', 'affiliate-wp' ); ?></div>
+						</p>
+						<p>
+							<?php submit_button( __( 'Export', 'affiliate-wp' ), 'secondary', 'export-visits-submit', false ); ?>
+						</p>
+					</form>
+				</div><!-- .inside -->
+			</div><!-- .postbox -->
+
+			<div class="postbox">
 				<h3><span><?php esc_html_e( 'Export Settings', 'affiliate-wp' ); ?></span></h3>
 				<div class="inside">
 					<p><?php esc_html_e( 'Export the AffiliateWP settings for this site as a .json file. This allows you to easily import the configuration into another site.', 'affiliate-wp' ); ?></p>
