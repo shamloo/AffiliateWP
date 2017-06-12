@@ -128,7 +128,7 @@ class AffWP_Coupons_Admin {
 				if ( $affiliate_coupons ) {
 
 					foreach ( $affiliate_coupons as $coupon ) {
-						$list_items[] = '<th>(' . $integration_term . ') <a href="' . affwp_get_coupon_edit_url( $coupon->coupon_id, $integration_id ) . '">' . __( 'Edit coupon', 'affiliate-wp' ) . '</a></th>';
+						$list_items[] = '<th>(' . $integration_term . ') <a href="' . affwp_get_coupon_edit_url( $coupon->integration_coupon_id, $integration_id ) . '">' . __( 'Edit coupon', 'affiliate-wp' ) . '</a></th>';
 					}
 
 				}
@@ -170,7 +170,7 @@ class AffWP_Coupons_Admin {
 					<th><?php _e( 'Coupon Code', 'affiliate-wp' ); ?></th>
 					<th><?php _e( 'ID',          'affiliate-wp' ); ?></th>
 					<th><?php _e( 'Referrals',   'affiliate-wp' ); ?></th>
-					<th><?php _e( 'View',        'affiliate-wp' ); ?></th>
+					<th><?php _e( 'View/Edit',        'affiliate-wp' ); ?></th>
 					<th style="width:5%;"></th>
 				</tr>
 			</thead>
@@ -189,16 +189,16 @@ class AffWP_Coupons_Admin {
 								<?php echo $coupon->coupon_code; ?>
 							</td>
 							<td>
-								<?php echo $coupon->affwp_coupon_id; ?>
+								<?php echo $coupon->integration_coupon_id; ?>
 							</td>
 							<td>
 								<?php echo $coupon->referrals; ?>
 							</td>
 							<td>
 								<?php
-								$coupon_edit_url = affwp_get_coupon_edit_url( $coupon->coupon_id, $coupon->integration );
+								$coupon_edit_url = affwp_get_coupon_edit_url( $coupon->integration_coupon_id, $coupon->integration );
 								if ( $coupon_edit_url ) {
-									echo '<a href="' . $coupon_edit_url . '">' . __( 'Edit', 'affiliate-wp' ) . '</a>';
+									echo '<a href="' . $coupon_edit_url . '">' . __( 'View/Edit', 'affiliate-wp' ) . '</a>';
 								} else {
 									affiliate_wp()->utils->log( 'Unable to get coupon edit url.' );
 								}

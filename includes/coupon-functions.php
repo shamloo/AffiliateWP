@@ -15,12 +15,12 @@
  */
 function affwp_get_coupon( $coupon = 0 ) {
 
-	if ( is_object( $coupon ) && isset( $coupon->affwp_coupon_id ) ) {
-		$by = $coupon->affwp_coupon_id;
+	if ( is_object( $coupon ) && isset( $coupon->coupon_id ) ) {
+		$by = $coupon->coupon_id;
 	} elseif ( is_numeric( $coupon ) ) {
 		$by = absint( $coupon );
-	} elseif ( isset( $coupon->coupon_id ) ) {
-		$by = $coupon->coupon_id;
+	} elseif ( isset( $coupon->integration_coupon_id ) ) {
+		$by = $coupon->integration_coupon_id;
 	} else {
 		return false;
 	}
@@ -46,7 +46,7 @@ function affwp_get_coupon( $coupon = 0 ) {
  */
 function affwp_add_coupon( $args = array() ) {
 
-	if ( empty( $args['integration'] ) || empty( $args['affiliate_id'] ) || empty( $args['coupon_id'] ) ) {
+	if ( empty( $args['integration'] ) || empty( $args['affiliate_id'] ) || empty( $args['integration_coupon_id'] ) ) {
 		affiliate_wp()->utils->log( 'Unable to add new coupon object. Please ensure that the integration name, the affiliate ID, and the coupon ID from the integration are specified.' );
 		return false;
 	}
@@ -57,10 +57,10 @@ function affwp_add_coupon( $args = array() ) {
 		 *
 		 * @since 2.1
 		 *
-		 * @param int    $affwp_coupon_id  AffiliateWP coupon ID.
+		 * @param int    $coupon_id  AffiliateWP coupon ID.
 		 * @param object $coupon           AffiliateWP coupon object.
 		 */
-		do_action( 'affwp_add_coupon', $coupon->affwp_coupon_id, $coupon );
+		do_action( 'affwp_add_coupon', $coupon->coupon_id, $coupon );
 		return $coupon;
 	}
 
@@ -70,7 +70,7 @@ function affwp_add_coupon( $args = array() ) {
 /**
  * Deletes a coupon.
  *
- * @param  int|\AffWP\Affiliate\Coupon $affwp_coupon_id  AffiliateWP coupon ID or object.
+ * @param  int|\AffWP\Affiliate\Coupon $coupon_id  AffiliateWP coupon ID or object.
  * @return bool True if the coupon was successfully deleted, otherwise false.
  * @since  2.1
  */
@@ -79,16 +79,16 @@ function affwp_delete_coupon( $coupon ) {
 		return false;
 	}
 
-	if ( affiliate_wp()->affiliates->coupons->delete( $coupon->affwp_coupon_id, 'coupon' ) ) {
+	if ( affiliate_wp()->affiliates->coupons->delete( $coupon->coupon_id, 'coupon' ) ) {
 		/**
 		 * Fires immediately after a coupon has been deleted.
 		 *
 		 * @since 2.1
 		 *
-		 * @param int    $affwp_coupon_id  AffiliateWP coupon ID.
+		 * @param int    $coupon_id  AffiliateWP coupon ID.
 	     * @param object $coupon           AffiliateWP coupon object.
 		 */
-		do_action( 'affwp_delete_coupon', $coupon->affwp_coupon_id, $coupon );
+		do_action( 'affwp_delete_coupon', $coupon->coupon_id, $coupon );
 
 		return true;
 	}
@@ -278,8 +278,8 @@ function affwp_get_coupon_template_id( $integration ) {
  *
  * @return string|false            Returns the coupon template ID if set. If not, returns false.
  */
-function affwp_get_coupon_edit_url( $coupon_id, $integration_id ) {
-	return affiliate_wp()->affiliates->coupons->get_coupon_edit_url( $coupon_id, $integration_id );
+function affwp_get_coupon_edit_url( $integration_coupon_id, $integration_id ) {
+	return affiliate_wp()->affiliates->coupons->get_coupon_edit_url( $integration_coupon_id, $integration_id );
 }
 
 /**
@@ -320,7 +320,7 @@ function affwp_get_coupon_templates() {
 
 		$output .= '</ul>';
 
-		echo $has_template ? $output : __( 'No coupon templates have been selected for any active AffiliateWP integrations.', 'affiliate-wp' );
+		return $has_template ? $output : __( 'No coupon templates have been selected for any active AffiliateWP integrations.', 'affiliate-wp' );
 	}
 }
 

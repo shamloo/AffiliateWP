@@ -43,19 +43,19 @@ class EDD_Coupon extends \AffWP\Affiliate\Coupon {
 	/**
 	 * Gets coupon data from the active integration in which it was generated.
 	 *
-	 * Specify either the AffiliateWP `affwp_coupon_id`, or the coupon ID from the integration, `coupon_id`.
+	 * Specify either the AffiliateWP `coupon_id`, or the coupon ID from the integration, `integration_coupon_id`.
 	 *
 	 * @param  $coupon_id int  The coupon ID provided by the integration.
 	 * @return mixed bool|array  $data Coupon data. Returns false if the integration is not set.
 	 * @since  2.1
 	 */
-	public function data( $coupon_id = 0 ) {
+	public function data( $integration_coupon_id = 0 ) {
 
 		if ( ! affwp_has_coupon_support( $this->integration ) ) {
 			return false;
 		}
 
-		$this->coupon_id = $coupon_id;
+		$this->integration_coupon_id = $integration_coupon_id;
 
 		// Bail if coupon ID is not set.
 		if ( ! $coupon_id ) {
@@ -65,11 +65,11 @@ class EDD_Coupon extends \AffWP\Affiliate\Coupon {
 		$data = array();
 
 		// Get EDD discount meta
-		$discount                  = edd_get_discount( $coupon_id );
+		$discount                  = edd_get_discount( $integration_coupon_id );
 		$data[ 'type' ]            = $discount->type;
 		$data[ 'code' ]            = $discount->code;
 		$data[ 'uses' ]            = $discount->uses;
-		$data[ 'status' ]          = edd_is_discount_expired( $coupon_id ) ? 'inactive' : 'active';
+		$data[ 'status' ]          = edd_is_discount_expired( $integration_coupon_id ) ? 'inactive' : 'active';
 		$data[ 'expiration_date' ] = $discount->expires;
 		$data[ 'integration' ]     = $this->integration;
 		$data[ 'affiliate_id' ]    = $this->affiliate_id;
@@ -95,7 +95,7 @@ class EDD_Coupon extends \AffWP\Affiliate\Coupon {
 			$suffix = false;
 
 			if ( edd_get_discount( $args->id ) ) {
-				$suffix = ' from coupon template' . $args->id . '.';
+				$suffix = __( 'from coupon template', 'affiliate-wp' ) . $args->id . '.';
 			}
 
 			$suffix = $suffix ? $suffix : '.';

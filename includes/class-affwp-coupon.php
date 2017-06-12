@@ -28,7 +28,7 @@ abstract class Coupon extends \AffWP\Base_Object {
 	 * @since  2.1
 	 * @var    int
 	 */
-	public $affwp_coupon_id = 0;
+	public $coupon_id = 0;
 
 	/**
 	 * The coupon ID as it exists within the integration. Stored as an internal coupon ID.
@@ -36,7 +36,7 @@ abstract class Coupon extends \AffWP\Base_Object {
 	 * @since  2.1
 	 * @var    int
 	 */
-	public $coupon_id = 0;
+	public $integration_coupon_id = 0;
 
 	/**
 	 * Affiliate ID.
@@ -143,10 +143,10 @@ abstract class Coupon extends \AffWP\Base_Object {
 	 * @return bool $data       Returns false in the base class.
 	 *                          Returns an aray in each integration coupon class, otherwise returns false.
 	 */
-	public function data( $coupon_id ) {
+	public function data( $integration_coupon_id ) {
 
-		$affwp_coupon_id = $this->affwp_coupon_id;
-		$coupon_id       = $this->coupon_id;
+		$coupon_id             = $this->coupon_id;
+		$integration_coupon_id = $this->integration_coupon_id;
 
 		if ( ! isset( $coupon_id ) || false === $coupon_id ) {
 
@@ -223,9 +223,9 @@ abstract class Coupon extends \AffWP\Base_Object {
 	 * @return bool          Returns true if a coupon object was created, otherwise false.
 	 * @since  2.1
 	 */
-	public function create_affwp_coupon( $details ) {
+	public function create_affwp_coupon( $args ) {
 
-		if ( ! $details ) {
+		if ( ! $args ) {
 			return false;
 		}
 
@@ -265,7 +265,6 @@ abstract class Coupon extends \AffWP\Base_Object {
 	/**
 	 * Sanitizes an affiliate object field.
 	 *
-	 *
 	 * @param  string $field  Object field.
 	 * @param  mixed  $value  Field value.
 	 * @return mixed          Sanitized field value.
@@ -273,7 +272,7 @@ abstract class Coupon extends \AffWP\Base_Object {
 	 * @static
 	 */
 	public static function sanitize_field( $field, $value ) {
-		if ( in_array( $field, array( 'coupon_id', 'affiliate_id', 'ID', 'owner' ) ) ) {
+		if ( in_array( $field, array( 'integration_coupon_id', 'coupon_id', 'affiliate_id', 'ID', 'owner' ) ) ) {
 			$value = (int) $value;
 		}
 
