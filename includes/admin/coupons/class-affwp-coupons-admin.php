@@ -111,36 +111,6 @@ class AffWP_Coupons_Admin {
 
 		}
 
-		$list_items  = array();
-		$integrations = affiliate_wp()->integrations->get_enabled_integrations();
-
-		foreach ( $integrations as $integration_id => $integration_term ) {
-
-			if ( affwp_has_coupon_support( $integration_id ) ) {
-
-				$args = array(
-					'affiliate_id' => $affiliate_id,
-					'integration'  => $integration_id
-				);
-
-				$coupons = affwp_get_coupons_by_integration( $args );
-
-				if ( $coupons ) {
-
-					foreach ( $coupons as $coupon ) {
-						$list_items[] = '<th>(' . $integration_term . ') <a href="' . affwp_get_coupon_edit_url( $coupon->integration_coupon_id, $integration_id ) . '">' . __( 'Edit coupon', 'affiliate-wp' ) . '</a></th>';
-					}
-
-				}
-
-			} elseif ( affwp_has_coupon_support( $args[ 'integration' ] ) ) {
-				$list_items[] = '<th>' . $integration_term . ' <a class="affwp-inline-link" href="' . affwp_get_coupon_create_url( $integration_id ) . '">' . __( 'Create coupon', 'affiliate-wp' ) . '</a></th>';
-			} else {
-				// Otherwise, coupon support should not be available.
-				$list_items[] =  '<th>' . __( 'No currently-active AffiliateWP integrations support coupons at this time.', 'affiliate-wp' ) . '</th>';
-			}
-		}
-
 		/**
 		 * Fires at the top of coupons admin table views.
 		 *
@@ -177,37 +147,51 @@ class AffWP_Coupons_Admin {
 			<tbody>
 				<?php
 
+				$integrations = affiliate_wp()->integrations->get_enabled_integrations();
 
-				if ( $coupons ) {
+				foreach ( $integrations as $integration_id => $integration_term ) {
 
-					foreach ( $coupons as $coupon ) {
-				?>
-						<tr>
-							<td>
-								<?php echo $coupon->integration; ?>
-							</td>
-							<td>
-								<?php echo $coupon->coupon_code; ?>
-							</td>
-							<td>
-								<?php echo $coupon->integration_coupon_id; ?>
-							</td>
-							<td>
-								<?php echo $coupon->referrals; ?>
-							</td>
-							<td>
-								<?php
-								$coupon_edit_url = affwp_get_coupon_edit_url( $coupon->integration_coupon_id, $coupon->integration );
-								if ( $coupon_edit_url ) {
-									echo '<a href="' . $coupon_edit_url . '">' . __( 'View/Edit', 'affiliate-wp' ) . '</a>';
-								} else {
-									affiliate_wp()->utils->log( 'Unable to get coupon edit url.' );
-								}
+					if ( affwp_has_coupon_support( $integration_id ) ) {
 
-								?>
-							</td>
-						</tr>
-<?php
+						$args = array(
+							'affiliate_id' => $affiliate_id,
+							'integration'  => $integration_id
+						);
+
+						// This should be replaced by a call to affwp coupons, instead of directly
+						// querying the integrations.
+						$coupons = affwp_get_coupons_by_integration( $args );
+
+						if ( $coupons ) {
+							error_log( 'Coupons objects: '. print_r( $coupons, true ) );
+							foreach ( $coupons as $coupon ) { ?>
+								<tr>
+									<td>
+										<?php echo $coupon['integration']; ?>
+									</td>
+									<td>
+										<?php echo $coupon['coupon_code']; ?>
+									</td>
+									<td>
+										<?php echo $coupon['integration_coupon_id']; ?>
+									</td>
+									<td>
+										<?php echo $coupon['referrals']; ?>
+									</td>
+									<td>
+										<?php
+										$coupon_edit_url = affwp_get_coupon_edit_url( $coupon['integration_coupon_id'], $coupon['integration'] );
+										if ( $coupon_edit_url ) {
+											echo '<a href="' . $coupon_edit_url . '">' . __( 'View/Edit', 'affiliate-wp' ) . '</a>';
+										} else {
+											affiliate_wp()->utils->log( 'Unable to get coupon edit url.' );
+										} ?>
+
+									</td>
+								</tr>
+					<?php   }
+
+						}
 					}
 				}
 ?>

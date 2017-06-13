@@ -129,23 +129,6 @@ function affwp_get_affiliate_coupons( $affiliate_id = 0 ) {
 	return apply_filters( 'affwp_get_affiliate_coupons', $coupons, $affiliate_id );
 }
 
-/**
- * Retrieves the referrals associated with a coupon.
- *
- * @param  int|AffWP\Affiliate\Coupon $coupon Coupon ID or object.
- * @return array|false                        List of referral objects associated with the coupon,
- *                                            otherwise false.
- * @since  2.1
- */
-function affwp_get_coupon_referrals( $coupon = 0 ) {
-	if ( ! $coupon = affwp_get_coupon( $coupon ) ) {
-		return false;
-	}
-
-	$referrals = affiliate_wp()->affiliates->coupons->get_referral_ids( $coupon );
-
-	return array_map( 'affwp_get_referral', $referrals );
-}
 
 /**
  * Retrieves the status label for a coupon.
@@ -169,11 +152,30 @@ function affwp_get_coupon_status_label( $coupon ) {
 }
 
 /**
+ * Retrieves the referrals associated with a coupon.
+ *
+ * @param  int         $integration_coupon_id  Integration coupon ID.
+ * @return array|false                         List of referral objects associated with the coupon,
+ *                                             otherwise false.
+ * @since  2.1
+ */
+function affwp_get_coupon_referrals( $integration_coupon_id = 0, $integration = '' ) {
+
+	if ( empty( $integration ) || ! is_int( $integration_coupon_id ) ) {
+		return false;
+	}
+
+	$referrals = affiliate_wp()->affiliates->coupons->get_referral_ids( $coupon );
+
+	return array_map( 'affwp_get_referral', $referrals );
+}
+
+/**
  * Returns an array of coupon IDs based on the specified AffiliateWP integration.
  *
- * @since  2.1
  * @param  array              $args     Arguments.
  * @return mixed  bool|array  $coupons  Array of coupons based on the specified AffiliateWP integration.
+ * @since  2.1
  */
 function affwp_get_coupons_by_integration( $args ) {
 
@@ -189,8 +191,7 @@ function affwp_get_coupons_by_integration( $args ) {
 
 	$coupons = false;
 
-	// Todo - cycle through active integrations, show variable UI depending on the integrations enabled,
-	// to allow all supported concurrently-active integrations to auto-generate coupons.
+	// Cycles through active integrations, and gets all coupons for the given affiliate ID.
 	switch ( $args[ 'integration' ] ) {
 		case 'edd':
 			// Only retrieve active EDD discounts.
@@ -199,7 +200,18 @@ function affwp_get_coupons_by_integration( $args ) {
 				'affwp_discount_affiliate' => $args[ 'affiliate_id' ]
 			);
 
-			$coupons = edd_get_discounts( $discount_args );
+			// Returns an array of WP Post objects.
+			$discounts = edd_get_discounts( $discount_args );
+
+			foreach ($discounts as $discount) {
+				$coupons[ $discount->ID ] = array(
+					'integration_coupon_id' => $discount->ID,
+					'integration'           => 'edd',
+					'coupon_code'           => get_post_meta( $discount->ID, '_edd_discount_code', true ),
+					'referrals'             => affwp_get_coupon_referrals( $discount->ID, 'edd' )
+
+				);
+			}
 
 			break;
 
