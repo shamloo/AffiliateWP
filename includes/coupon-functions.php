@@ -322,7 +322,7 @@ function affwp_get_coupon_templates() {
 
 					$output .= '<li>' . $integration_id . ': ' . $integration_term . ' : <a href="' . $template_url . '">(' . $template_id . ')</a></li>';
 				} else {
-					return false;
+					$has_template = false;
 				}
 			}
 		}
