@@ -56,10 +56,10 @@ function affwp_add_coupon( $args = array() ) {
 		 *
 		 * @since 2.1
 		 *
-		 * @param int    $coupon_id  AffiliateWP coupon ID.
-		 * @param object $coupon           AffiliateWP coupon object.
+		 * @param int $coupon ID of the newly-added coupon.
 		 */
-		do_action( 'affwp_add_coupon', $coupon->coupon_id, $coupon );
+		do_action( 'affwp_add_coupon', $coupon );
+
 		return $coupon;
 	}
 
