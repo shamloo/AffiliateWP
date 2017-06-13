@@ -554,7 +554,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 				break;
 
 			default:
-				affiliate_wp()->utils->log( sprintf( 'get_coupon_template_id: Unable to determine discount ID from %s integration.', $integration );
+				affiliate_wp()->utils->log( sprintf( 'get_coupon_template_id: Unable to determine discount ID from %s integration.', $integration ) );
 				break;
 		}
 
