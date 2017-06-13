@@ -9,23 +9,22 @@
 /**
  * Retrieves a coupon object.
  *
- * @param  int|AffWP\Affiliate\Coupon $coupon Coupon ID or object.
+ * @since 2.1
+ *
+ * @param int|AffWP\Affiliate\Coupon $coupon Coupon ID or object.
  * @return AffWP\Affiliate\Coupon|false Coupon object if found, otherwise false.
- * @since  2.1
  */
 function affwp_get_coupon( $coupon = 0 ) {
 
 	if ( is_object( $coupon ) && isset( $coupon->coupon_id ) ) {
-		$by = $coupon->coupon_id;
+		$coupon_id = $coupon->coupon_id;
 	} elseif ( is_numeric( $coupon ) ) {
-		$by = absint( $coupon );
-	} elseif ( isset( $coupon->integration_coupon_id ) ) {
-		$by = $coupon->integration_coupon_id;
+		$coupon_id = absint( $coupon );
 	} else {
 		return false;
 	}
 
-	return affiliate_wp()->affiliates->coupons->get_object( $by );
+	return affiliate_wp()->affiliates->coupons->get_object( $coupon_id );
 }
 
 /**
