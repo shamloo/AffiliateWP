@@ -115,10 +115,10 @@ function affwp_get_affiliate_coupons( $affiliate_id ) {
 	/**
 	 * Returns coupon objects filtered by a provided affiliate ID.
 	 *
-	 * @param int    $affiliate_id  Affiliate ID.
-	 * @param object $coupons       Coupon objects
-	 *
 	 * @since 2.1
+	 *
+	 * @param array $coupons      Affiliate coupons.
+	 * @param int   $affiliate_id Affiliate ID.
 	 */
 	return apply_filters( 'affwp_get_affiliate_coupons', $coupons, $affiliate_id );
 }
