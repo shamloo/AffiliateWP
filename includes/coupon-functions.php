@@ -303,9 +303,9 @@ function affwp_get_coupon_templates() {
 	$has_template = false;
 	$integrations = affiliate_wp()->integrations->get_enabled_integrations();
 
-	if ( ! empty( $integrations ) ) {
+	$integration_output = array();
 
-		$output = '<ul class="affwp-coupon-template-list">';
+	if ( ! empty( $integrations ) ) {
 
 		foreach ( $integrations as $integration_id => $integration_term ) {
 
@@ -313,23 +313,36 @@ function affwp_get_coupon_templates() {
 			// and a coupon template has also been selected.
 			if ( affwp_has_coupon_support( $integration_id ) ) {
 
-				$template_id  = affiliate_wp()->affiliates->coupons->get_coupon_template_id( $integration_id );
+				$template_id = affiliate_wp()->affiliates->coupons->get_coupon_template_id( $integration_id );
 
-				if ( $template_id ) {
-
-					$has_template = true;
+				if ( ! $template_id ) {
+					continue;
+				} else {
 					$template_url = affiliate_wp()->affiliates->coupons->get_coupon_edit_url( $template_id, $integration_id );
 
-					$output .= '<li>' . $integration_id . ': ' . $integration_term . ' : <a href="' . $template_url . '">(' . $template_id . ')</a></li>';
-				} else {
-					$has_template = false;
+					$integration_output[] = sprintf( '<li>%1$s: %2$s: %3$s</li>',
+						esc_html( $integration_id ),
+						esc_html( $integration_term ),
+						sprintf( '<a href="%1$s">(%2$s)',
+							esc_url( $template_url ),
+							esc_html( $template_id )
+						)
+					);
 				}
 			}
 		}
 
-		$output .= '</ul>';
+		if ( ! empty( $integration_output ) ) {
+			$output = '<ul class="affwp-coupon-template-list">';
 
-		return $has_template ? $output : __( 'No coupon templates have been selected for any active AffiliateWP integrations.', 'affiliate-wp' );
+			foreach ( $integration_output as $integration_output ) {
+				$output .= $integration_output;
+			}
+
+			$output .= '</ul>';
+		}
+
+		return $output ? $output : __( 'No coupon templates have been selected for any active AffiliateWP integrations.', 'affiliate-wp' );
 	}
 }
 
