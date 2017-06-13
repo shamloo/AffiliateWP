@@ -290,7 +290,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 	 *     @type string       $fields         Fields to limit the selection for. Accepts 'ids'. Default '*' for all.
 	 * }
 	 * @param bool  $count Optional. Whether to return only the total number of results found. Default false.
-	 * @return array Array of coupon objects (if found).
+	 * @return array|int Array of coupon objects (if found), or integer if `$count` is true.
 	 */
 	public function get_coupons( $args = array(), $count = false ) {
 		global $wpdb;
@@ -451,6 +451,8 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 	 *
 	 * @access public
 	 * @since  2.1
+	 *
+	 * @see Affiliate_WP_Coupons_DB::get_coupons()
 	 *
 	 * @param array $args Arguments to pass to get_coupons().
 	 * @return int Number of coupons.
