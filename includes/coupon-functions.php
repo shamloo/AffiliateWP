@@ -266,12 +266,12 @@ function affwp_has_coupon_support( $integration ) {
 }
 
 /**
- * Get coupon template ID
+ * Retrieves the coupon template ID.
  *
  * @param  string $integration The integration.
  * @since  2.1
  *
- * @return int|false Returns the coupon template ID if set. If not, returns false.
+ * @return int The coupon template ID if set, otherwise 0.
  */
 function affwp_get_coupon_template_id( $integration ) {
 	return affiliate_wp()->affiliates->coupons->get_coupon_template_id( $integration );
