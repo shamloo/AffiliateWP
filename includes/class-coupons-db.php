@@ -532,20 +532,16 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 			case 'edd':
 
 					$args = array(
-				        'post_type'  => 'edd_discount',
-				        'meta_key'   => 'affwp_is_coupon_template',
-				        'orderby'    => 'meta_value_num',
-				        'meta_query' => array(
-				            array(
-				                'key'     => 'affwp_is_coupon_template',
-				                'value'   => 1
-				            ),
-				        ),
-				        'fields' => 'ids',
-				        'number' => 1,
+				        'post_type'      => 'edd_discount',
+				        'meta_key'       => 'affwp_is_coupon_template',
+				        'meta_value'     => 1,
+				        'orderby'        => 'meta_value_num',
+				        'fields'         => 'ids',
+				        'posts_per_page' => 1,
 				    );
 
-				    $discount = get_posts( $args );
+					$query = new \WP_Query;
+					$discount = $query->query( $args );
 
 				    if ( ! empty( $discount[0] ) ) {
 				        $template_id = absint( $discount[0] );
