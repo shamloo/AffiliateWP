@@ -568,14 +568,15 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 	/**
 	 * Retrieves an array of referral IDs stored for the coupon.
 	 *
-	 * @param  AffWP\Affiliate\Coupon|int $coupon        Coupon object or ID.
-	 * @return mixed array|false          $referral_ids  List of referral IDs if available,
-	 *                                                   otherwise returns false.
+	 * @access public
 	 * @since  2.1
+	 *
+	 * @param  AffWP\Affiliate\Coupon|int $coupon        Coupon object or ID.
+	 * @return array List of referral IDs if available, otherwise an empty array.
 	 */
 	public function get_referral_ids( $coupon ) {
 		if ( ! $coupon = affwp_get_coupon( $coupon ) ) {
-			$referral_ids = false;
+			$referral_ids = array();
 		} else {
 			$referral_ids = array_map( 'intval', explode( ',', $coupon->referrals ) );
 		}

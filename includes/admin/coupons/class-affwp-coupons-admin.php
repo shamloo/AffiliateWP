@@ -180,7 +180,7 @@ class AffWP_Coupons_Admin {
 										<?php echo $coupon['integration_coupon_id']; ?>
 									</td>
 									<td>
-										<?php echo $coupon['referrals']; ?>
+										<?php //echo $coupon['referrals']; TODO: Output the array of referrals? ?>
 									</td>
 									<td>
 										<?php
