@@ -108,6 +108,26 @@ $default_rate = affwp_abs_number_round( $default_rate );
 
 			</tr>
 
+			<tr class="form-row coupons-row">
+
+				<th scope="row">
+					<label for="coupons"><?php _e( 'Coupons', 'affiliate-wp' ); ?></label>
+				</th>
+
+				<td id="coupons">
+
+					<?php
+
+					$coupons_admin = new AffWP_Coupons_Admin;
+
+					$coupons_admin->create_coupons( $affiliate->affiliate_id );
+					$coupons_admin->coupons_table( $affiliate->affiliate_id );
+
+					?>
+
+				<td>
+			</tr>
+
 			<tr class="form-row" id="affwp-welcome-email-row">
 
 				<th scope="row">
