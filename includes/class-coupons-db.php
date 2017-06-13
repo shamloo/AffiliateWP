@@ -481,75 +481,52 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 	}
 
 	/**
-	 * Get the ID of the coupon template url in use for the integration.
+	 * Retrieves the edit URL for the given integration coupon ID.
 	 *
+	 * @access public
 	 * @since  2.1
 	 *
-	 * @param  int                $integration_coupon_id  The ID of the integrations coupon being queried.
-	 * @param  string             $integration            The integration.
-	 *
-	 * @return mixed  string|bool $url                    Returns the edit screen url of the coupon
-	 *                                                    template if set, otherwise returns false.
+	 * @param int    $integration_coupon_id Integration coupon ID to retrieve the edit URL for.
+	 * @param string $integration           The integration.
+	 * @return string The edit screen url of the coupon template if set, otherwise an empty string.
 	 */
 	public function get_coupon_edit_url( $integration_coupon_id, $integration ) {
 
-		$url = false;
+		$integration_coupon_id = $this->get_coupon_template_id( $integration );
 
-		if ( ! $integration_coupon_id || ! isset( $integration_coupon_id ) ) {
-			$integration_coupon_id = $this->get_coupon_template_id( $integration );
-
-			if ( ! is_int( $integration_coupon_id ) ) {
-				return false;
-			}
-		}
-
-		if ( ! isset( $integration ) ) {
-			return false;
-		}
+		$url = '';
 
 		switch ( $integration ) {
 			case 'edd':
 				$url = admin_url( 'edit.php?post_type=download&page=edd-discounts&edd-action=edit_discount&discount=' ) . $integration_coupon_id;
 				break;
 
-			default:
-				return false;
-				break;
+			default : break;
 		}
 
 		/**
-		 * Returns the coupon template URL for the given integration.
+		 * Filters the coupon template URL for the given integration.
 		 *
-		 * @param string $url  The coupon template url.
 		 * @since 2.1
+		 *
+		 * @param string $url         The coupon template URL if one exists, otherwise an empty string.
+		 * @param string $integration Integration.
 		 */
-		return apply_filters( 'affwp_coupon_edit_url', $url );
+		return apply_filters( 'affwp_coupon_edit_url', $url, $integration );
 	}
 
 	/**
 	 * Gets the coupon template used as a basis for generating all automatic affiliate coupons.
 	 *
-	 * @param  string $integration  The integration.
-	 * @return mixed int|bool       Returns a coupon ID if a coupon template is located
-	 *                              for the specified integration, otherwise returns false.
+	 * @access public
 	 * @since  2.1
+	 *
+	 * @param string $integration The integration to retrieve the template ID for.
+	 * @return int A coupon ID if a coupon template is located for the specified integration, otherwise 0.
 	 */
 	public function get_coupon_template_id( $integration ) {
 
-		// Coupon templates are only used when auto-generating coupons.
-		if ( ! isset( $integration ) ) {
-			affiliate_wp()->utils->log( 'get_coupon_template_id: The integration must be specified.' );
-			return false;
-		}
-
-		/**
-		 *
-		 * Loops through the coupons for the integration,
-		 * and searches for a post meta key of `affwp_is_coupon_template`.
-		 *
-		 * @var boolean
-		 */
-		$template_id = false;
+		$template_id = 0;
 
 		switch ( $integration ) {
 			case 'edd':
@@ -582,12 +559,12 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 		}
 
 		/**
-		 * Returns the coupon template ID.
-		 * Specify the coupon template ID, as well as the integration.
+		 * Filters the coupon template ID.
 		 *
-		 * @param mixed bool|int $template_id  Returns the coupon template ID if set, otherwise false.
-		 * @param string         $integration  The integration to query. Required.
 		 * @since 2.1
+		 *
+		 * @param int    $template_id The coupon template ID if set, otherwise 0.
+		 * @param string $integration The integration to query. Required.
 		 */
 		return apply_filters( 'affwp_get_coupon_template_id', $template_id, $integration );
 	}
