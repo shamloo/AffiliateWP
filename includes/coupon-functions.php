@@ -200,11 +200,14 @@ function affwp_get_coupons_by_integration( $args ) {
 			$discounts = edd_get_discounts( $discount_args );
 
 			foreach ($discounts as $discount) {
+				$referrals = affwp_get_coupon_referrals( $discount->ID, 'edd' );
+				$referrals = implode( ', ', wp_list_pluck( $referrals, 'referral_id' ) );
+
 				$coupons[ $discount->ID ] = array(
 					'integration_coupon_id' => $discount->ID,
 					'integration'           => 'edd',
 					'coupon_code'           => get_post_meta( $discount->ID, '_edd_discount_code', true ),
-					'referrals'             => affwp_get_coupon_referrals( $discount->ID, 'edd' )
+					'referrals'             => $referrals
 
 				);
 			}
