@@ -437,6 +437,8 @@ class Affiliate_WP_Settings {
 			$referral_pretty_urls_desc .= '<p>' . __( 'Note: Pretty affiliate URLs may not always work as expected when using AffiliateWP in combination with WooCommerce and Polylang.', 'affiliate-wp' ) . '</p>';
 		}
 
+		$coupon_templates = affwp_get_coupon_templates();
+
 		$settings = array(
 			/**
 			 * Filters the default "General" settings.
@@ -709,8 +711,8 @@ class Affiliate_WP_Settings {
 					'auto_generate_coupons_templates' => array(
 						'name' => __( 'Coupon templates', 'affiliate-wp' ),
 						'desc' => __( 'Create a coupon in your desired integration, and it will show here. Each integration can have one coupon template.', 'affiliate-wp' ),
-						'type' => 'textarea',
-						'callback' => 'affwp_get_coupon_templates',
+						'type' => 'display',
+						'std' => $coupon_templates,
 						'sanitize_callback' => 'sanitize_text_field'
 					),
 				)
@@ -1251,6 +1253,24 @@ class Affiliate_WP_Settings {
 		$html .= '<p class="description"> '  . $args['desc'] . '</p>';
 
 		echo $html;
+	}
+
+	/**
+	 * Display-only setting callback.
+	 *
+	 * @access public
+	 * @since  2.1
+	 *
+	 * @param array $args Arguments passed by the setting.
+	 */
+	public function display_callback( $args ) {
+		if ( isset( $this->options[ $args['id'] ] ) ) {
+			$value = $this->options[ $args['id'] ];
+		} else {
+			$value = isset( $args['std'] ) ? $args['std'] : '';
+		}
+
+		echo $value;
 	}
 
 	/**
