@@ -299,10 +299,7 @@ function affwp_get_coupon_edit_url( $integration_coupon_id, $integration_id ) {
  */
 function affwp_get_coupon_templates() {
 
-	$templates    = array();
-	$has_template = false;
-	$integrations = affiliate_wp()->integrations->get_enabled_integrations();
-
+	$integrations       = affiliate_wp()->integrations->get_enabled_integrations();
 	$integration_output = array();
 
 	if ( ! empty( $integrations ) ) {
@@ -331,19 +328,20 @@ function affwp_get_coupon_templates() {
 				}
 			}
 		}
+	}
 
-		if ( ! empty( $integration_output ) ) {
-			$output = '<ul class="affwp-coupon-template-list">';
+	if ( ! empty( $integration_output ) ) {
+		$output = '<ul class="affwp-coupon-template-list">';
 
-			foreach ( $integration_output as $integration_output ) {
-				$output .= $integration_output;
-			}
-
-			$output .= '</ul>';
+		foreach ( $integration_output as $item_output ) {
+			$output .= $item_output;
 		}
 
-		return $output ? $output : __( 'No coupon templates have been selected for any active AffiliateWP integrations.', 'affiliate-wp' );
+		$output .= '</ul>';
 	}
+
+	return $output ? $output : __( 'No coupon templates have been selected for any active AffiliateWP integrations.', 'affiliate-wp' );
+
 }
 
 /**
