@@ -38,6 +38,7 @@ class EDD_Coupon extends \AffWP\Affiliate\Coupon {
 		// Create an affiliate coupon when an EDD coupon is generated
 		add_action( 'affwp_add_edd_discount', array( $this, 'create_affwp_coupon' ) );
 		add_action( 'edd_post_insert_discount', array( $this, 'set_coupon_template' ), 10, 2 );
+		add_action( 'edd_post_update_discount', array( $this, 'set_coupon_template' ), 10, 2 );
 	}
 
 	/**
