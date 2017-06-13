@@ -186,7 +186,7 @@ class AffWP_Coupons_Admin {
 										<?php
 										$coupon_edit_url = affwp_get_coupon_edit_url( $coupon['integration_coupon_id'], $coupon['integration'] );
 										if ( $coupon_edit_url ) {
-											echo '<a href="' . $coupon_edit_url . '">' . __( 'View/Edit', 'affiliate-wp' ) . '</a>';
+											echo '<a href="' . esc_url( $coupon_edit_url ) . '">' . __( 'View/Edit', 'affiliate-wp' ) . '</a>';
 										} else {
 											affiliate_wp()->utils->log( 'Unable to get coupon edit url.' );
 										} ?>
