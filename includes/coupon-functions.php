@@ -301,6 +301,7 @@ function affwp_get_coupon_templates() {
 
 	$integrations       = affiliate_wp()->integrations->get_enabled_integrations();
 	$integration_output = array();
+	$output             = '';
 
 	if ( ! empty( $integrations ) ) {
 
