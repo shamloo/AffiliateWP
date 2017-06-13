@@ -103,16 +103,12 @@ function affwp_delete_coupon( $coupon ) {
  * @param int $affiliate_id Affiliate ID.
  * @return array An array of coupon objects associated with the affiliate.
  */
-function affwp_get_affiliate_coupons( $affiliate_id = 0 ) {
-
-	if ( 0 === $affiliate_id ) {
-		affiliate_wp()->utils->log( 'affwp_get_affiliate_coupons: No valid affiliate ID specified.' );
-		return false;
-	}
+function affwp_get_affiliate_coupons( $affiliate_id ) {
 
 	$args = array(
-		'affiliate_id' => $affiliate_id
-		);
+		'affiliate_id' => $affiliate_id,
+		'number'       => -1
+	);
 
 	$coupons = affiliate_wp()->affiliates->coupons->get_coupons( $args );
 
