@@ -33,7 +33,7 @@ function affwp_get_coupon( $coupon = 0 ) {
  * @since 2.1
  *
  * @param array $args {
- *     Optional. Arguments for adding a new coupon record. Default empty array.
+ *     Arguments for adding a new coupon record. Default empty array.
  *
  *     @type int          $affiliate_id    Affiliate ID.
  *     @type int|array    $referrals       Referral ID or array of IDs.
