@@ -328,19 +328,19 @@ function affwp_get_coupon_templates() {
 				}
 			}
 		}
-	}
 
-	if ( ! empty( $integration_output ) ) {
-		$output = '<ul class="affwp-coupon-template-list">';
+		if ( ! empty( $integration_output ) ) {
+			$output = '<ul class="affwp-coupon-template-list">';
 
-		foreach ( $integration_output as $item_output ) {
-			$output .= $item_output;
+			foreach ( $integration_output as $item_output ) {
+				$output .= $item_output;
+			}
+
+			$output .= '</ul>';
 		}
 
-		$output .= '</ul>';
+		return $output ? $output : __( 'No coupon templates have been selected for any active AffiliateWP integrations.', 'affiliate-wp' );
 	}
-
-	return $output ? $output : __( 'No coupon templates have been selected for any active AffiliateWP integrations.', 'affiliate-wp' );
 
 }
 
