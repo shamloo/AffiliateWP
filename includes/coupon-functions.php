@@ -98,11 +98,10 @@ function affwp_delete_coupon( $coupon ) {
 /**
  * Retrieves all coupons associated with a specified affiliate.
  *
- * @since  2.1
+ * @since 2.1
  *
- * @param  integer $affiliate_id Affiliate ID.
- *
- * @return array   $coupons      An array of coupon objects associated with the affiliate.
+ * @param int $affiliate_id Affiliate ID.
+ * @return array An array of coupon objects associated with the affiliate.
  */
 function affwp_get_affiliate_coupons( $affiliate_id = 0 ) {
 
