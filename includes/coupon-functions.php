@@ -161,11 +161,13 @@ function affwp_get_coupon_status_label( $coupon ) {
  */
 function affwp_get_coupon_referrals( $integration_coupon_id = 0, $integration = '' ) {
 
+	$referrals = array();
+
 	if ( empty( $integration ) || ! is_int( $integration_coupon_id ) ) {
 		return false;
 	}
 
-	$referrals = affiliate_wp()->affiliates->coupons->get_referral_ids( $coupon );
+	$referrals = affiliate_wp()->affiliates->coupons->get_referral_ids( $integration_coupon_id );
 
 	return array_map( 'affwp_get_referral', $referrals );
 }
