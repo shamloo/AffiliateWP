@@ -291,10 +291,11 @@ function affwp_get_coupon_edit_url( $integration_coupon_id, $integration_id ) {
 }
 
 /**
- * Returns a list of active integrations with both coupon support and a selected coupon template.
+ * Retrieves a list of active integrations with both coupon support and a selected coupon template.
  *
- * @return string $output  List of integration coupon templates.
  * @since  2.1
+ *
+ * @return string $output Formatted list of integration coupon templates, otherwise an error message.
  */
 function affwp_get_coupon_templates() {
 
