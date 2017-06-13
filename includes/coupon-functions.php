@@ -278,13 +278,13 @@ function affwp_get_coupon_template_id( $integration ) {
 }
 
 /**
- * Gets the coupon template url.
+ * Retrieves the coupon template URL for the given integration coupon ID and integration.
  *
- * @param  int $coupon_id          The coupon ID.
- * @param  string $integration_id  The integration ID.
- * @since  2.1
+ * @since 2.1
  *
- * @return string|false            Returns the coupon template ID if set. If not, returns false.
+ * @param int    $integration_coupon_id The integration coupon ID.
+ * @param string $integration           Integration.
+ * @return string The template edit URL for the integration coupon ID, otherwise empty string.
  */
 function affwp_get_coupon_edit_url( $integration_coupon_id, $integration_id ) {
 	return affiliate_wp()->affiliates->coupons->get_coupon_edit_url( $integration_coupon_id, $integration_id );
