@@ -123,11 +123,11 @@ class AffWP_Coupons_Admin {
 					'integration'  => $integration_id
 				);
 
-				$affiliate_coupons = affwp_get_coupons_by_integration( $args );
+				$coupons = affwp_get_coupons_by_integration( $args );
 
-				if ( $affiliate_coupons ) {
+				if ( $coupons ) {
 
-					foreach ( $affiliate_coupons as $coupon ) {
+					foreach ( $coupons as $coupon ) {
 						$list_items[] = '<th>(' . $integration_term . ') <a href="' . affwp_get_coupon_edit_url( $coupon->integration_coupon_id, $integration_id ) . '">' . __( 'Edit coupon', 'affiliate-wp' ) . '</a></th>';
 					}
 
@@ -177,9 +177,10 @@ class AffWP_Coupons_Admin {
 			<tbody>
 				<?php
 
-				if ( $affiliate_coupons ) {
 
-					foreach ( $affiliate_coupons as $coupon ) {
+				if ( $coupons ) {
+
+					foreach ( $coupons as $coupon ) {
 				?>
 						<tr>
 							<td>

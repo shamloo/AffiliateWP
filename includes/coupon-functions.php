@@ -210,7 +210,7 @@ function affwp_get_coupons_by_integration( $args ) {
 	}
 
 	if ( $coupons ) {
-		return $coupons;
+		return (array) $coupons;
 	} else {
 		affiliate_wp()->utils->log( 'Unable to locate coupons for this integration.' );
 		return false;
