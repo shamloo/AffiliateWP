@@ -181,9 +181,10 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 			 *
 			 * @since 2.1
 			 *
-			 * @param int $add New coupon ID.
+			 * @param int   $add  New coupon ID.
+			 * @param array $args Parsed arguments used to create the new coupon.
 			 */
-			do_action( 'affwp_insert_coupon', $add );
+			do_action( 'affwp_insert_coupon', $add, $args );
 
 			return $add;
 		}
