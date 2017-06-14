@@ -167,11 +167,12 @@ function affwp_get_coupon_referrals( $integration_coupon_id = 0, $integration = 
 }
 
 /**
- * Returns an array of coupon IDs based on the specified AffiliateWP integration.
+ * Retrieves an array of coupon IDs based on the specified AffiliateWP integration.
  *
- * @param  array              $args     Arguments.
- * @return mixed  bool|array  $coupons  Array of coupons based on the specified AffiliateWP integration.
- * @since  2.1
+ * @since 2.1
+ *
+ * @param array $args Arguments. TODO: Document args.
+ * @return bool|array  $coupons  Array of coupons based on the specified AffiliateWP integration.
  */
 function affwp_get_coupons_by_integration( $args ) {
 
