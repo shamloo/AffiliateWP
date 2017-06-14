@@ -167,8 +167,21 @@ class AffWP_Coupons_Admin {
 						$coupons = affwp_get_coupons_by_integration( $args );
 
 						if ( ! empty( $coupons ) ) {
-							error_log( 'Coupons objects: '. print_r( $coupons, true ) );
-							foreach ( $coupons as $coupon ) { ?>
+
+							foreach ( $coupons as $coupon ) {
+
+								$coupon_referrals = affiliate_wp()->referrals->get_referrals( array(
+										'number'       => -1,
+										'affiliate_id' => $affiliate_id,
+										'coupon_id'    => $coupon['coupon_id']
+
+									)
+								);
+
+								$referrals_url = affwp_admin_url( 'referrals' );
+								$referrals_url = $coupon['coupon_id'] ? add_query_arg( 'coupon_id', $coupon['coupon_id'], $referrals_url ) : $referrals_url;
+
+								?>
 								<tr>
 									<td>
 										<?php echo $coupon['integration']; ?>
@@ -180,7 +193,7 @@ class AffWP_Coupons_Admin {
 										<?php echo $coupon['integration_coupon_id']; ?>
 									</td>
 									<td>
-										<?php echo $coupon['referrals']; ?>
+										<?php echo $referrals_url; ?>
 									</td>
 									<td>
 										<?php
