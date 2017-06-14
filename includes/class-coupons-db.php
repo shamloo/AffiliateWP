@@ -99,7 +99,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 	public function get_column_defaults() {
 		return array(
 			'integration_coupon_id' => 0,
-			'coupon_id'       => 0,
+			'coupon_id'             => 0,
 			'owner'                 => 0,
 			'status'                => 'active',
 			'expiration_date'       => date( 'Y-m-d H:i:s' )
@@ -132,7 +132,6 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 			'affiliate_id'          => 0,
 			'coupon_code'           => 0,
 			'integration_coupon_id' => 0,
-			'coupon_id'             => 0,
 			'referrals'             => array(),
 			'integration'           => '',
 			'owner'                 => get_current_user_id(),

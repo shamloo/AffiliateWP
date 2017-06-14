@@ -91,11 +91,11 @@ class Coupon extends \AffWP\Base_Object implements Coupon\Base_Coupon {
 	 *
 	 * @access public
 	 * @since  2.1
+	 *
+	 * @param mixed $object Object to populate members for.
 	 */
-	public function __construct() {
-		// foreach ( get_object_vars( $object ) as $key => $value ) {
-		// 	$this->$key = $value;
-		// }
+	public function __construct( $_object = null ) {
+		parent::__construct( $_object );
 
 		// Load coupon-specific classes for each active integration.
 		$integrations = affiliate_wp()->integrations->get_enabled_integrations();
