@@ -35,6 +35,84 @@ class Referrals_DB_Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers \Affiliate_WP_Referrals_DB::$cache_group
+	 */
+	public function test_cache_group_should_be_referrals() {
+		$this->assertSame( 'referrals', affiliate_wp()->referrals->cache_group );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::$query_object_type
+	 */
+	public function test_query_object_type_should_be_AffWP_Referral() {
+		$this->assertSame( 'AffWP\Referral', affiliate_wp()->referrals->query_object_type );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::$primary_key
+	 */
+	public function test_primary_key_should_be_referral_id() {
+		$this->assertSame( 'referral_id', affiliate_wp()->referrals->primary_key );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::$REST
+	 */
+	public function test_REST_should_be_AffWP_Referral_REST_v1_Endpoints() {
+		$this->assertSame( 'AffWP\Referral\REST\v1\Endpoints', get_class( affiliate_wp()->referrals->REST ) );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::get_object()
+	 */
+	public function test_get_object_should_return_valid_object_when_passed_a_valid_referral_id() {
+		$object = affiliate_wp()->referrals->get_object( self::$referrals[0] );
+		$this->assertEquals( 'AffWP\Referral', get_class( $object ) );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::get_object()
+	 */
+	public function test_get_object_should_Return_false_when_passed_an_invalid_referral_id() {
+		$this->assertFalse( affiliate_wp()->referrals->get_object( 0 ) );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::get_object()
+	 */
+	public function test_get_object_should_return_valid_object_when_passed_a_valid_referral_object() {
+		$object = affiliate_wp()->referrals->get_object( affwp_get_referral( self::$referrals[0] ) );
+
+		$this->assertSame( 'AffWP\Referral', get_class( $object ) );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::get_columns()
+	 */
+	public function test_get_columns_should_return_all_columns() {
+		$columns = affiliate_wp()->referrals->get_columns();
+
+		$expected = array(
+			'referral_id' => '%d',
+			'affiliate_id'=> '%d',
+			'visit_id'    => '%d',
+			'description' => '%s',
+			'status'      => '%s',
+			'amount'      => '%s',
+			'currency'    => '%s',
+			'custom'      => '%s',
+			'context'     => '%s',
+			'campaign'    => '%s',
+			'reference'   => '%s',
+			'products'    => '%s',
+			'payout_id'   => '%d',
+			'date'        => '%s',
+		);
+
+		$this->assertEqualSets( $expected, $columns );
+	}
+
+	/**
 	 * @covers Affiliate_WP_Referrals_DB::get_referrals()
 	 */
 	public function test_get_referrals_should_return_array_of_Referral_objects_if_not_count_query() {
