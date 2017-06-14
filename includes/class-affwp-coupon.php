@@ -91,8 +91,6 @@ abstract class Coupon extends \AffWP\Base_Object {
 	 *
 	 * @access public
 	 * @since  2.1
-	 *
-	 * @param mixed $object Object for which to populate members.
 	 */
 	public function __construct() {
 		// foreach ( get_object_vars( $object ) as $key => $value ) {
