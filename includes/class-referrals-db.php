@@ -197,24 +197,34 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 		$args['visit_id']      = ! empty( $data['visit_id' ] )     ? absint( $data['visit_id'] ) : $referral->visit_id;
 		$args['coupon_id']     = ! empty( $data['coupon_id' ] )    ? absint( $data['coupon_id'] ) : $referral->coupon_id;
 		$args['description']   = ! empty( $data['description' ] )  ? sanitize_text_field( $data['description'] ) : '';
-		$args['status']        = ! empty( $data['status'] )        ? sanitize_key( $data['status'] )             : $referral->status;
-		$args['amount']        = ! empty( $data['amount'] )        ? affwp_sanitize_amount( $data['amount'] )    : '';
+		$args['amount']        = ! empty( $data['amount'] )        ? affwp_sanitize_amount( $data['amount'] )    : $referral->amount;
 		$args['currency']      = ! empty( $data['currency'] )      ? sanitize_text_field( $data['currency'] )    : '';
 		$args['custom']        = ! empty( $data['custom'] )        ? sanitize_text_field( $data['custom'] )      : '';
 		$args['context']       = ! empty( $data['context'] )       ? sanitize_text_field( $data['context'] )     : '';
 		$args['campaign']      = ! empty( $data['campaign'] )      ? sanitize_text_field( $data['campaign'] )    : '';
 		$args['reference']     = ! empty( $data['reference'] )     ? sanitize_text_field( $data['reference'] )   : '';
 
+		/*
+		 * Deliberately defer updating the status – it will be updated instead
+		 * in affwp_set_referral_status() if changed.
+		 *
+		 * Prior to 2.1, the status was updated in the first update() call, which
+		 * resulted in affwp_set_referral_status() failing to trigger the earnings
+		 * adjustments. Now the status is only updated once as needed. See #2257.
+		 */
+		$new_status = ! empty( $data['status'] ) ? sanitize_key( $data['status'] ) : $referral->status;
+
 		$update = $this->update( $referral->ID, $args, '', 'referral' );
 
 		if( $update ) {
 
-			if( ! empty( $args['status'] ) && $referral->status !== $args['status'] ) {
+			if( ! empty( $new_status ) && $referral->status !== $new_status ) {
 
-				affwp_set_referral_status( $referral->ID, $args['status'] );
+				affwp_set_referral_status( $referral->ID, $new_status );
 
-			} elseif( 'paid' === $referral->status ) {
+			} elseif( 'paid' === $new_status && 'paid' === $referral->status ) {
 
+				// If the 'paid' status is unchanged, but the amount is, make earnings adjustments.
 				if( $referral->amount > $args['amount'] ) {
 
 					$change = $referral->amount - $args['amount'];
@@ -227,8 +237,9 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 				}
 
-			} elseif( 'unpaid' === $referral->status ) {
+			} elseif( 'unpaid' === $new_status && 'unpaid' === $referral->status ) {
 
+				// If the 'unpaid' status is unchanged, but the amount is, make earnings adjustments.
 				if ( $referral->amount > $args['amount'] ) {
 
 					affwp_decrease_affiliate_unpaid_earnings( $referral->affiliate_id, $referral->amount - $args['amount'] );
@@ -306,6 +317,8 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	 *                                        Default empty.
 	 *     @type string       $context        Specific context to query referrals for. Default empty.
 	 *     @type string       $campaign       Specific campaign to query referrals for. Default empty.
+	 *     @type string       $description    Description to search referrals for. Fuzzy matching is permitted when
+	 *                                        `$search` is true.
 	 *     @type string|array $status         Referral status or array of statuses to query referrals for.
 	 *                                        Default empty (all).
 	 *     @type string       $orderby        Column to order results by. Accepts any valid referrals table column.
@@ -324,22 +337,23 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 		global $wpdb;
 
 		$defaults = array(
-			'number'       => 20,
-			'offset'       => 0,
-			'referral_id'  => 0,
-			'payout_id'    => 0,
-			'coupon_id'    => 0,
-			'affiliate_id' => 0,
-			'amount'       => 0,
+			'number'         => 20,
+			'offset'         => 0,
+			'referral_id'    => 0,
+			'payout_id'      => 0,
+			'coupon_id'      => 0,
+			'affiliate_id'   => 0,
+			'amount'         => 0,
 			'amount_compare' => '=',
-			'reference'    => '',
-			'context'      => '',
-			'campaign'     => '',
-			'status'       => '',
-			'orderby'      => 'referral_id',
-			'order'        => 'DESC',
-			'search'       => false,
-			'fields'       => '',
+			'description'    => '',
+			'reference'      => '',
+			'context'        => '',
+			'campaign'       => '',
+			'status'         => '',
+			'orderby'        => 'referral_id',
+			'order'          => 'DESC',
+			'search'         => false,
+			'fields'         => '',
 		);
 
 		$args  = wp_parse_args( $args, $defaults );
@@ -569,6 +583,24 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 				}
 			}
 
+		}
+
+		// Description.
+		if( ! empty( $args['description'] ) ) {
+
+			if( empty( $where ) ) {
+				$where .= " WHERE";
+			} else {
+				$where .= " AND";
+			}
+
+			$description = esc_sql( $args['description'] );
+
+			if( ! empty( $args['search'] ) ) {
+				$where .= " LOWER(`description`) LIKE LOWER('%%" . $description . "%%') ";
+			} else {
+				$where .= " `description` = '" . $description . "' ";
+			}
 		}
 
 		$orderby = array_key_exists( $args['orderby'], $this->get_columns() ) ? $args['orderby'] : $this->primary_key;

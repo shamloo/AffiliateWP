@@ -58,7 +58,7 @@ class Affiliate_WP_Stripe extends Affiliate_WP_Base {
 
 					$stripe_amount = $object->amount;
 					$currency      = $object->currency;
-					$description   = $object->description;
+					$description   = ! empty( $object->description ) ? $object->description : '';
 					$mode          = $object->livemode;
 
 					break;
@@ -74,7 +74,15 @@ class Affiliate_WP_Stripe extends Affiliate_WP_Base {
 			if( is_object( $object->customer ) && ! empty( $object->customer->email ) ) {
 				$email = $object->customer->email;
 			} else {
-				$email = sanitize_text_field( $_POST['stripeEmail'] );
+				if ( isset( $_POST['stripeEmail'] ) ) {
+
+					// WP Simple Pay < 3.0
+					$email = sanitize_text_field( $_POST['stripeEmail'] );
+				} elseif ( isset( $_POST['simpay_stripe_email'] ) ) {
+
+					// WP Simple Pay >= 3.0
+					$email = sanitize_text_field( $_POST['simpay_stripe_email'] );
+				}
 			}
 
 			if( $this->is_affiliate_email( $email, $this->affiliate_id ) ) {

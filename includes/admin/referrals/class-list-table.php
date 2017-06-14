@@ -748,6 +748,8 @@ class AffWP_Referrals_Table extends List_Table {
 		$referral  = '';
 		$is_search = false;
 
+		$amount = isset( $_GET['amount'] ) ? sanitize_text_field( $_GET['amount'] ) : 0;
+
 		if ( $affiliate && $affiliate = affwp_get_affiliate( $affiliate ) ) {
 			$affiliate = $affiliate->ID;
 		} else {
@@ -780,6 +782,10 @@ class AffWP_Referrals_Table extends List_Table {
 				$affiliate = absint( trim( str_replace( 'affiliate:', '', $search ) ) );
 			} elseif ( strpos( $search, 'campaign:' ) !== false ) {
 				$campaign = trim( str_replace( 'campaign:', '', $search ) );
+			} elseif ( strpos( $search, 'amount:' ) !== false ) {
+				$amount = trim( str_replace( 'amount:', '', $search ) );
+			} elseif ( strpos( $search, 'desc:' ) !== false ) {
+				$description = trim( str_replace( 'desc:', '', $search ) );
 			}
 
 		}
@@ -795,6 +801,8 @@ class AffWP_Referrals_Table extends List_Table {
 			'reference'    => $reference,
 			'context'      => $context,
 			'campaign'     => $campaign,
+			'amount'       => $amount,
+			'description'  => $description,
 			'date'         => $date,
 			'search'       => $is_search,
 			'orderby'      => sanitize_text_field( $orderby ),

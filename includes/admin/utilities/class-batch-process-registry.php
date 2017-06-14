@@ -113,6 +113,12 @@ class Registry extends Utils\Registry {
 			'file'  => AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-batch-export-payouts.php',
 		) );
 
+		// Export Visits.
+		$this->register_process( 'export-visits', array(
+			'class' => 'AffWP\Utils\Batch_Process\Export_Visits',
+			'file'  => AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-batch-export-visits.php',
+		) );
+
 		//
 		// Importers
 		//

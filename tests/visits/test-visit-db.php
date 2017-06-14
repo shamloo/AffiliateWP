@@ -145,6 +145,23 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers Affiliate_WP_Visits_DB::get_visits()
+	 * @group database-fields
+	 */
+	public function test_get_visits_fields_array_with_multiple_valid_fields_should_return_objects_with_those_fields_only() {
+		$fields = array( 'visit_id', 'affiliate_id' );
+
+		$result = affiliate_wp()->visits->get_visits( array(
+			'fields' => $fields
+		) );
+
+		$object_vars = get_object_vars( $result[0] );
+
+		$this->assertEqualSets( $fields, array_keys( $object_vars ) );
+
+	}
+
+	/**
+	 * @covers Affiliate_WP_Visits_DB::get_visits()
 	 */
 	public function test_get_visits_with_singular_visit_id_should_return_that_visit() {
 		$results = affiliate_wp()->visits->get_visits( array(

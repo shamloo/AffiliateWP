@@ -727,6 +727,23 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers Affiliate_WP_Payouts_DB::get_payouts()
+	 * @group database-fields
+	 */
+	public function test_get_payouts_fields_array_with_multiple_valid_fields_should_return_objects_with_those_fields_only() {
+		$fields = array( 'payout_id', 'referrals' );
+
+		$result = affiliate_wp()->affiliates->payouts->get_payouts( array(
+			'fields' => $fields
+		) );
+
+		$object_vars = get_object_vars( $result[0] );
+
+		$this->assertEqualSets( $fields, array_keys( $object_vars ) );
+
+	}
+
+	/**
 	 * @covers Affiliate_WP_Payouts_DB::get_affiliate_ids_by_referrals()
 	 */
 	public function test_get_affiliate_ids_by_referrals_should_reject_invalid_referrals() {

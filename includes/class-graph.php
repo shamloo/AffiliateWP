@@ -188,9 +188,7 @@ class Affiliate_WP_Graph {
 
 		ob_start();
 
-		if ( function_exists( 'wp_add_inline_script' ) ) {
-			wp_add_inline_script( 'jquery-flot', $this->graph_js() );
-		}
+		wp_add_inline_script( 'jquery-flot', $this->graph_js() );
 
 		if ( false !== $this->get( 'show_controls' ) ) {
 			echo $this->graph_controls();
@@ -352,9 +350,13 @@ class Affiliate_WP_Graph {
 	/**
 	 * Displays the report graph date filters.
 	 *
-	 * @since 1.0
+	 * @internal Note that this method is also used on the front-end. Any changes here
+	 *           should be equally tested in the Affiliate Area..
+	 *
+	 * @access public
+	 * @since  1.0
 	*/
-	function graph_controls() {
+	public function graph_controls() {
 		$date_options = apply_filters( 'affwp_report_date_options', array(
 			'today' 	    => __( 'Today', 'affiliate-wp' ),
 			'yesterday'     => __( 'Yesterday', 'affiliate-wp' ),
@@ -422,8 +424,8 @@ class Affiliate_WP_Graph {
 		</div>
 		<?php
 		if ( $this->get( 'form_wrapper' ) ) {
-			submit_button( __( 'Filter', 'affiliate-wp' ), 'secondary', 'submit', false );
 			?>
+			<input name="submit" id="submit" class="button" value="<?php esc_attr_e( 'Filter', 'affiliate-wp' ); ?>" type="submit">
 			</div><!-- .tablenav .top -->
 			</form><!-- .affwp-graphs-filter -->
 			<?php
