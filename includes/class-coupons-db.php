@@ -169,20 +169,13 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 			}
 		}
 
+		$args['referrals'] = implode( ',', wp_list_pluck( $referrals, 'referral_id' ) );
+
 		if ( ! empty( $args['integration'] ) ) {
-			$args['integration'] = $integration;
+			$args['integration'] = sanitize_key( $args['integration'] );
 		}
 
-
-		if ( empty( $referrals ) ) {
-			$add = false;
-		} else {
-			$args['referrals'] = implode( ',', wp_list_pluck( $referrals, 'referral_id' ) );
-
-			$add = $this->insert( $args, 'coupon' );
-		}
-
-		if ( $add ) {
+		if ( $add = $this->insert( $args, 'coupon' ) ) {
 			/**
 			 * Fires immediately after a coupon has been successfully inserted.
 			 *
