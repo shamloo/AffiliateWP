@@ -174,7 +174,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 			}
 		}
 
-		$args['referrals'] = implode( ',', wp_list_pluck( $referrals, 'referral_id' ) );
+		$args['referrals'] = implode( ',', $referrals );
 
 		if ( ! empty( $args['integration'] ) ) {
 			$args['integration'] = sanitize_key( $args['integration'] );
