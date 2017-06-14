@@ -131,7 +131,7 @@ class UnitTestCase extends \WP_UnitTestCase {
 		}
 
 		foreach ( $actual as $item ) {
-			\PHPUnit_Framework_Assert::assertThat( $item, $constraint );
+			$this->assertThat( $item, $constraint );
 		}
 	}
 }
