@@ -364,7 +364,7 @@ function affwp_get_coupon_create_url( $integration, $affiliate_id = 0, $html = f
 
 	$url = false;
 
-	if ( empty( $integration ) || ! $integration ) {
+	if ( empty( $integration ) ) {
 		return false;
 	}
 
@@ -387,7 +387,7 @@ function affwp_get_coupon_create_url( $integration, $affiliate_id = 0, $html = f
 	}
 
 	if ( $html ) {
-		return '<a class="affwp-inline-link" href="' . $url . '">Create Coupon</a>';
+		return '<a class="affwp-inline-link" href="' . esc_url( $url ) . '">' . esc_html__( 'Create Coupon', 'affiliate-wp' ) . '</a>';
 	}
 
 	return $url;
