@@ -143,6 +143,16 @@ function affwp_get_coupon_status_label( $coupon ) {
 	);
 
 	$label = array_key_exists( $coupon->status, $statuses ) ? $statuses[ $coupon->status ] : _x( 'Active', 'coupon', 'affiliate-wp' );
+
+	/**
+	 * Filters the coupon status label.
+	 *
+	 * @since 2.1
+	 *
+	 * @param string                 $label  A localized version of the coupon status label.
+	 * @param AffWP\Affiliate\Coupon $coupon Coupon object.
+	 */
+	return apply_filters( 'affwp_coupon_status_label', $label, $coupon );
 }
 
 /**
