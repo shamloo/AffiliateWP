@@ -63,14 +63,19 @@ class Coupon implements Integration\Base_Coupon {
 		$data = array();
 
 		// Get EDD discount meta
-		$discount                  = edd_get_discount( $integration_coupon_id );
-		$data[ 'type' ]            = $discount->type;
-		$data[ 'code' ]            = $discount->code;
-		$data[ 'uses' ]            = $discount->uses;
-		$data[ 'status' ]          = edd_is_discount_expired( $integration_coupon_id ) ? 'inactive' : 'active';
-		$data[ 'expiration_date' ] = $discount->expires;
-		$data[ 'integration' ]     = $this->integration;
-		$data[ 'affiliate_id' ]    = $this->affiliate_id;
+		$discount = edd_get_discount( $integration_coupon_id );
+
+		if ( $discount ) {
+			$data = array(
+				'type'            => $discount->type,
+				'code'            => $discount->code,
+				'uses'            => $discount->uses,
+				'status'          => edd_is_discount_expired( $integration_coupon_id ) ? 'inactive' : 'active',
+				'expiration_date' => $discount->expires,
+				'integration'     => $this->integration,
+				'affiliate_id'    => $this->affiliate_id
+			);
+		}
 
 		return $data;
 	}
