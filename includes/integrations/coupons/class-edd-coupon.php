@@ -9,30 +9,27 @@
  *
  * @since 2.1
  */
+namespace AffWP\Integration\EDD;
 
-namespace AffWP\Affiliate;
+use AffWP\Integration;
 
 /**
- * Implements a coupon object.
+ * Implements logic for a managing EDD coupons.
  *
- * @see   AffWP\Base_Object
- * @see   affwp_get_coupons()
  * @since 2.1
  *
- * @property-read int $ID Alias for `$coupon_id`.
+ * @see affwp_get_coupons()
+ * @see \AffWP\Integrations
  */
-class EDD_Coupon extends Coupon implements Coupon\Base_Coupon {
+class Coupon implements Integration\Base_Coupon {
 
 	/**
-	 * Defines the integration.
+	 * Sets up the business logic of the coupon integration.
 	 *
+	 * @access public
 	 * @since  2.1
-	 *
-	 * @return string Integration string.
 	 */
-	public function init() {
-		$this->integration = 'edd';
-
+	public function __construct() {
 		add_action( 'affwp_edd_coupon_store_discount_affiliate', array( $this, 'create_affwp_coupon' ), 10, 2 );
 
 		// Create an affiliate coupon when an EDD coupon is generated

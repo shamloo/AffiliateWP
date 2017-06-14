@@ -1,5 +1,5 @@
 <?php
-namespace AffWP\Affiliate\Coupon;
+namespace AffWP\Integration;
 
 /**
  * Base coupon interface.
@@ -12,23 +12,25 @@ namespace AffWP\Affiliate\Coupon;
 interface Base_Coupon {
 
 	/**
-	 * Defines the integration property of this class, such as `edd` or `woocommerce`.
+	 * Retrieves all coupons for the relevant integration.
+	 *
+	 * The desired return format is specified below.
 	 *
 	 * @access public
 	 * @since  2.1
 	 *
-	 * @return string Integration string.
-	 */
-	public function init();
-
-	/**
-	 * Get all coupons for the relevant integration.
-	 * The desired return format is specified below.
-	 *
-	 * @since  2.1
-	 *
-	 * @return array|bool An array of coupon objects, otherwise false.
+	 * @return array|false An array of coupon objects, otherwise false.
 	 */
 	public function get_integration_coupons();
+
+	/**
+	 * Sets the coupon template for the integration.
+	 *
+	 * @access public
+	 * @since  2.1
+	 *
+	 * @return int|false A discount ID if a coupon template is located for the integration, otherwise false.
+	 */
+	public function set_coupon_template( $meta, $discount_id );
 
 }

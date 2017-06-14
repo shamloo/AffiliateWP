@@ -3,6 +3,15 @@
 class Affiliate_WP_EDD extends Affiliate_WP_Base {
 
 	/**
+	 * EDD coupon class.
+	 *
+	 * @access public
+	 * @since  2.1
+	 * @var    \AffWP\Integration\EDD\Coupon
+	 */
+	public $coupon;
+
+	/**
 	 * Get things started
 	 *
 	 * @access  public
@@ -10,6 +19,11 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 	*/
 	public function init() {
 
+		if ( ! class_exists( '\AffWP\Integrations\EDD\Coupon' ) ) {
+			require_once( AFFILIATEWP_PLUGIN_DIR . 'includes/integrations/coupons/class-edd-coupon.php' );
+		}
+
+		$this->coupon  = new \AffWP\Integration\EDD\Coupon;
 		$this->context = 'edd';
 
 		add_action( 'edd_insert_payment', array( $this, 'add_pending_referral' ), 99999, 2 );
