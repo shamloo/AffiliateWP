@@ -766,14 +766,15 @@ class Tests extends UnitTestCase {
 	 * @group database-fields
 	 */
 	public function test_get_affiliates_fields_array_with_multiple_valid_fields_should_return_objects_with_those_fields_only() {
+		$fields = array( 'user_id', 'date_registered' );
+
 		$result = affiliate_wp()->affiliates->get_affiliates( array(
-			'fields' => array( 'user_id', 'date_registered' )
+			'fields' => $fields
 		) );
 
 		$object_vars = get_object_vars( $result[0] );
 
-		$this->assertArrayHasKey( 'user_id', $object_vars );
-		$this->assertArrayHasKey( 'date_registered', $object_vars );
+		$this->assertEqualSets( $fields, array_keys( $object_vars ) );
 	}
 
 	/**

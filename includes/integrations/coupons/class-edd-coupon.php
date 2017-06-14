@@ -63,14 +63,19 @@ class Coupon implements Integration\Base_Coupon {
 		$data = array();
 
 		// Get EDD discount meta
-		$discount                  = edd_get_discount( $integration_coupon_id );
-		$data[ 'type' ]            = $discount->type;
-		$data[ 'code' ]            = $discount->code;
-		$data[ 'uses' ]            = $discount->uses;
-		$data[ 'status' ]          = edd_is_discount_expired( $integration_coupon_id ) ? 'inactive' : 'active';
-		$data[ 'expiration_date' ] = $discount->expires;
-		$data[ 'integration' ]     = $this->integration;
-		$data[ 'affiliate_id' ]    = $this->affiliate_id;
+		$discount = edd_get_discount( $integration_coupon_id );
+
+		if ( $discount ) {
+			$data = array(
+				'type'            => $discount->type,
+				'code'            => $discount->code,
+				'uses'            => $discount->uses,
+				'status'          => edd_is_discount_expired( $integration_coupon_id ) ? 'inactive' : 'active',
+				'expiration_date' => $discount->expires,
+				'integration'     => $this->integration,
+				'affiliate_id'    => $this->affiliate_id
+			);
+		}
 
 		return $data;
 	}
@@ -107,21 +112,21 @@ class Coupon implements Integration\Base_Coupon {
 		$args = $this->get_coupon_template();
 
 		$details = array(
-			'code'              => $args[ 'code' ] . '-' . date( 'U' ) . '-' . $affiliate_id,
-			'name'              => $args[ 'name' ],
-			'status'            => $args[ 'status' ],
-			'uses'              => $args[ 'uses' ],
-			'max_uses'          => $args[ 'max_uses' ],
-			'amount'            => $args[ 'amount' ],
-			'start'             => $args[ 'start' ],
-			'expiration'        => $args[ 'expiration' ],
-			'type'              => $args[ 'type' ],
-			'min_price'         => $args[ 'min_price' ],
-			'product_reqs'      => $args[ 'product_reqs' ],
-			'product_condition' => $args[ 'product_condition' ],
-			'excluded_products' => $args[ 'excluded_products' ],
-			'is_not_global'     => $args[ 'is_not_global' ],
-			'is_single_use'     => $args[ 'is_single_use' ]
+			'code'              => $args['code'] . '-' . date( 'U' ) . '-' . $affiliate_id,
+			'name'              => $args['name'],
+			'status'            => $args['status'],
+			'uses'              => $args['uses'],
+			'max_uses'          => $args['max_uses'],
+			'amount'            => $args['amount'],
+			'start'             => $args['start'],
+			'expiration'        => $args['expiration'],
+			'type'              => $args['type'],
+			'min_price'         => $args['min_price'],
+			'product_reqs'      => $args['product_reqs'],
+			'product_condition' => $args['product_condition'],
+			'excluded_products' => $args['excluded_products'],
+			'is_not_global'     => $args['is_not_global'],
+			'is_single_use'     => $args['is_single_use']
 		);
 
 		if ( edd_store_discount( $details ) ) {
@@ -168,14 +173,14 @@ class Coupon implements Integration\Base_Coupon {
 	public function set_coupon_template( $meta, $discount_id ) {
 
 		if ( ! $discount_id || ! affiliate_wp()->settings->get( 'auto_generate_coupons_enabled' ) ) {
-			affiliate_wp()->utils->log( 'Unable to set coupon template for discount.' );
+			affiliate_wp()->utils->log( sprintf( 'Unable to set coupon template for discount %s.', $discount_id ) );
 			return false;
 		}
 
 		if ( edd_get_discount( $discount_id ) ) {
 			update_post_meta( $discount_id, 'affwp_is_coupon_template', true );
 		} else {
-			affiliate_wp()->utils->log( 'Could not locate EDD discount by $discount_id when attempting to set it as the AffiliateWP coupon template.' );
+			affiliate_wp()->utils->log( sprintf( 'Could not locate EDD discount %s by $discount_id when attempting to set it as the AffiliateWP coupon template.', $discount_id ) );
 			return false;
 		}
 	}

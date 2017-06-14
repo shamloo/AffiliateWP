@@ -35,6 +35,85 @@ class Referrals_DB_Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers \Affiliate_WP_Referrals_DB::$cache_group
+	 */
+	public function test_cache_group_should_be_referrals() {
+		$this->assertSame( 'referrals', affiliate_wp()->referrals->cache_group );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::$query_object_type
+	 */
+	public function test_query_object_type_should_be_AffWP_Referral() {
+		$this->assertSame( 'AffWP\Referral', affiliate_wp()->referrals->query_object_type );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::$primary_key
+	 */
+	public function test_primary_key_should_be_referral_id() {
+		$this->assertSame( 'referral_id', affiliate_wp()->referrals->primary_key );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::$REST
+	 */
+	public function test_REST_should_be_AffWP_Referral_REST_v1_Endpoints() {
+		$this->assertSame( 'AffWP\Referral\REST\v1\Endpoints', get_class( affiliate_wp()->referrals->REST ) );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::get_object()
+	 */
+	public function test_get_object_should_return_valid_object_when_passed_a_valid_referral_id() {
+		$object = affiliate_wp()->referrals->get_object( self::$referrals[0] );
+		$this->assertEquals( 'AffWP\Referral', get_class( $object ) );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::get_object()
+	 */
+	public function test_get_object_should_Return_false_when_passed_an_invalid_referral_id() {
+		$this->assertFalse( affiliate_wp()->referrals->get_object( 0 ) );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::get_object()
+	 */
+	public function test_get_object_should_return_valid_object_when_passed_a_valid_referral_object() {
+		$object = affiliate_wp()->referrals->get_object( affwp_get_referral( self::$referrals[0] ) );
+
+		$this->assertSame( 'AffWP\Referral', get_class( $object ) );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::get_columns()
+	 */
+	public function test_get_columns_should_return_all_columns() {
+		$columns = affiliate_wp()->referrals->get_columns();
+
+		$expected = array(
+			'referral_id' => '%d',
+			'affiliate_id'=> '%d',
+			'visit_id'    => '%d',
+			'description' => '%s',
+			'status'      => '%s',
+			'amount'      => '%s',
+			'currency'    => '%s',
+			'custom'      => '%s',
+			'context'     => '%s',
+			'campaign'    => '%s',
+			'reference'   => '%s',
+			'products'    => '%s',
+			'payout_id'   => '%d',
+			'coupon_id'   => '%d',
+			'date'        => '%s',
+		);
+
+		$this->assertEqualSets( $expected, $columns );
+	}
+
+	/**
 	 * @covers Affiliate_WP_Referrals_DB::get_referrals()
 	 */
 	public function test_get_referrals_should_return_array_of_Referral_objects_if_not_count_query() {
@@ -115,6 +194,23 @@ class Referrals_DB_Tests extends UnitTestCase {
 
 	/**
 	 * @covers Affiliate_WP_Referrals_DB::get_referrals()
+	 * @group database-fields
+	 */
+	public function test_get_referrals_fields_array_with_multiple_valid_fields_should_return_objects_with_those_fields_only() {
+		$fields = array( 'referral_id', 'affiliate_id' );
+
+		$result = affiliate_wp()->referrals->get_referrals( array(
+			'fields' => $fields
+		) );
+
+		$object_vars = get_object_vars( $result[0] );
+
+		$this->assertEqualSets( $fields, array_keys( $object_vars ) );
+
+	}
+
+	/**
+	 * @covers Affiliate_WP_Referrals_DB::get_referrals()
 	 */
 	public function test_get_referrals_with_single_payout_id_should_return_referrals_matching_that_payout() {
 		$payout = $this->factory->payout->create( array(
@@ -150,6 +246,101 @@ class Referrals_DB_Tests extends UnitTestCase {
 		) );
 
 		$this->assertEqualSets( self::$referrals, $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_Referrals_DB::get_referrals()
+	 */
+	public function test_get_referrals_with_description_should_get_only_referrals_with_verbatim_description_match() {
+		$referral_ids_A = $this->factory->referral->create_many( 2, array(
+			'affiliate_id' => self::$affiliate_id,
+			'description'  => 'foo'
+		) );
+
+		$referral_ids_B = $this->factory->referral->create_many( 2, array(
+			'affiliate_id' => self::$affiliate_id,
+			'description'  => 'bar'
+		) );
+
+		$results = affiliate_wp()->referrals->get_referrals( array(
+			'description' => 'foo',
+			'fields'      => 'ids',
+		) );
+
+		$this->assertEqualSets( $referral_ids_A, $results );
+
+		// Clean up.
+		$referral_ids = array_merge( $referral_ids_A, $referral_ids_B );
+
+		foreach ( $referral_ids as $referral_id ) {
+			affwp_delete_referral( $referral_id );
+		}
+	}
+
+	/**
+	 * @covers Affiliate_WP_Referrals_DB::get_referrals()
+	 */
+	public function test_get_referrals_with_description_and_search_should_allow_verbatim_and_fuzzy_matching() {
+		$referral_A = $this->factory->referral->create( array(
+			'affiliate_id' => self::$affiliate_id,
+			'description'  => 'foo'
+		) );
+
+		$referral_B = $this->factory->referral->create( array(
+			'affiliate_id' => self::$affiliate_id,
+			'description'  => 'bar'
+		) );
+
+		$referral_C = $this->factory->referral->create( array(
+			'affiliate_id' => self::$affiliate_id,
+			'description'  => 'foobar'
+		) );
+
+		$results = affiliate_wp()->referrals->get_referrals( array(
+			'description' => 'foo',
+			'fields'      => 'ids',
+			'search'      => true,
+		) );
+
+		$this->assertEqualSets( array( $referral_A, $referral_C ), $results );
+
+		// Clean up.
+		foreach ( array( $referral_A, $referral_B, $referral_C ) as $referral_id ) {
+			affwp_delete_referral( $referral_id );
+		}
+	}
+
+	/**
+	 * @covers Affiliate_WP_Referrals_DB::get_referrals()
+	 */
+	public function test_get_referrals_with_any_case_description_and_search_should_allow_verbatim_and_fuzzy_matching() {
+		$referral_A = $this->factory->referral->create( array(
+			'affiliate_id' => self::$affiliate_id,
+			'description'  => 'foo'
+		) );
+
+		$referral_B = $this->factory->referral->create( array(
+			'affiliate_id' => self::$affiliate_id,
+			'description'  => 'bar'
+		) );
+
+		$referral_C = $this->factory->referral->create( array(
+			'affiliate_id' => self::$affiliate_id,
+			'description'  => 'FOObar'
+		) );
+
+		$results = affiliate_wp()->referrals->get_referrals( array(
+			'description' => 'foo',
+			'fields'      => 'ids',
+			'search'      => true,
+		) );
+
+		$this->assertEqualSets( array( $referral_A, $referral_C ), $results );
+
+		// Clean up.
+		foreach ( array( $referral_A, $referral_B, $referral_C ) as $referral_id ) {
+			affwp_delete_referral( $referral_id );
+		}
 	}
 
 	/**
@@ -274,6 +465,188 @@ class Referrals_DB_Tests extends UnitTestCase {
 			'visit_id' => self::$visits[0]
 		) );
 		affwp_delete_visit( $visit_id );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::update_referral()
+	 * @group referrals-status
+	 */
+	public function test_update_referral_with_new_status_paid_old_status_unpaid_should_increase_earnings() {
+		// Start with an unpaid referral.
+		$referral_id = $this->factory->referral->create( array(
+			'affiliate_id' => self::$affiliate_id,
+			'amount'       => '30',
+			'status'       => 'unpaid'
+		) );
+
+		$referral_amount = affwp_get_referral( $referral_id )->amount;
+		$old_earnings    = affwp_get_affiliate_earnings( self::$affiliate_id );
+
+		// Update the referral status to 'paid'.
+		affiliate_wp()->referrals->update_referral( $referral_id, array(
+			'status' => 'paid'
+		) );
+
+		$new_earnings = affwp_get_affiliate_earnings( self::$affiliate_id );
+
+		// New earnings = $old_earnings plus the increased referral amount.
+		$this->assertEquals( $old_earnings + $referral_amount, $new_earnings );
+
+		// Clean up.
+		affwp_delete_referral( $referral_id );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::update_referral()
+	 * @group referrals-status
+	 */
+	public function test_update_referral_with_new_status_paid_old_status_pending_should_increase_earnings() {
+		// Start with a pending referral (default status).
+		$referral_id = $this->factory->referral->create( array(
+			'affiliate_id' => self::$affiliate_id,
+			'amount'       => '30',
+		) );
+
+		$referral_amount = affwp_get_referral( $referral_id )->amount;
+		$old_earnings    = affwp_get_affiliate_earnings( self::$affiliate_id );
+
+		// Update the referral status to 'paid'.
+		affiliate_wp()->referrals->update_referral( $referral_id, array(
+			'status' => 'paid'
+		) );
+
+		$new_earnings = affwp_get_affiliate_earnings( self::$affiliate_id );
+
+		// New earnings = $old_earnings plus the increased referral amount.
+		$this->assertEquals( $old_earnings + $referral_amount, $new_earnings );
+
+		// Clean up.
+		affwp_delete_referral( $referral_id );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::update_referral()
+	 * @group referrals-status
+	 */
+	public function test_update_referral_with_new_status_paid_old_status_rejected_should_increase_earnings() {
+		// Start with a rejected referral.
+		$referral_id = $this->factory->referral->create( array(
+			'affiliate_id' => self::$affiliate_id,
+			'amount'       => '30',
+			'status'       => 'rejected',
+		) );
+
+		$referral_amount = affwp_get_referral( $referral_id )->amount;
+		$old_earnings    = affwp_get_affiliate_earnings( self::$affiliate_id );
+
+		// Update the referral status to 'paid'.
+		affiliate_wp()->referrals->update_referral( $referral_id, array(
+			'status' => 'paid'
+		) );
+
+		$new_earnings = affwp_get_affiliate_earnings( self::$affiliate_id );
+
+		// New earnings = $old_earnings plus the increased referral amount.
+		$this->assertEquals( $old_earnings + $referral_amount, $new_earnings );
+
+		// Clean up.
+		affwp_delete_referral( $referral_id );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::update_referral()
+	 * @group referrals-status
+	 */
+	public function test_update_referral_with_new_status_unpaid_old_status_paid_should_decrease_earnings() {
+		// Inflate affiliate earnings because referrals->add() with 'paid' doesn't affect earnings.
+		affwp_increase_affiliate_earnings( self::$affiliate_id, '30' );
+
+		// Start with a 'paid' referral.
+		$referral_id = $this->factory->referral->create( array(
+			'affiliate_id' => self::$affiliate_id,
+			'amount'       => '30',
+			'status'       => 'paid'
+		) );
+
+		$referral_amount = affwp_get_referral( $referral_id )->amount;
+		$old_earnings    = affwp_get_affiliate_earnings( self::$affiliate_id );
+
+		// Update the status to 'unpaid'.
+		affiliate_wp()->referrals->update_referral( $referral_id, array(
+			'status' => 'unpaid'
+		) );
+
+		$new_earnings = affwp_get_affiliate_earnings( self::$affiliate_id );
+
+		// New earnings = $old_earnings minus the increased referral amount.
+		$this->assertEquals( $old_earnings - $referral_amount, $new_earnings );
+
+		// Clean up.
+		affwp_delete_referral( $referral_id );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::update_referral()
+	 * @group referrals-status
+	 */
+	public function test_update_referral_with_new_status_pending_old_status_paid_should_decrease_earnings() {
+		// Inflate affiliate earnings because referrals->add() with 'paid' doesn't affect earnings.
+		affwp_increase_affiliate_earnings( self::$affiliate_id, '30' );
+
+		// Start with a 'paid' referral.
+		$referral_id = $this->factory->referral->create( array(
+			'affiliate_id' => self::$affiliate_id,
+			'amount'       => '30',
+			'status'       => 'paid'
+		) );
+
+		$referral_amount = affwp_get_referral( $referral_id )->amount;
+		$old_earnings    = affwp_get_affiliate_earnings( self::$affiliate_id );
+
+		// Update the status to 'unpaid'.
+		affiliate_wp()->referrals->update_referral( $referral_id, array(
+			'status' => 'pending'
+		) );
+
+		$new_earnings = affwp_get_affiliate_earnings( self::$affiliate_id );
+
+		// New earnings = $old_earnings minus the increased referral amount.
+		$this->assertEquals( $old_earnings - $referral_amount, $new_earnings );
+
+		// Clean up.
+		affwp_delete_referral( $referral_id );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::update_referral()
+	 * @group referrals-status
+	 */
+	public function test_update_referral_with_new_status_rejected_old_status_paid_should_decrease_earnings() {
+		// Inflate affiliate earnings because referrals->add() with 'paid' doesn't affect earnings.
+		affwp_increase_affiliate_earnings( self::$affiliate_id, '30' );
+
+		// Start with a 'paid' referral.
+		$referral_id = $this->factory->referral->create( array(
+			'affiliate_id' => self::$affiliate_id,
+			'amount'       => '30',
+			'status'       => 'paid'
+		) );
+
+		$referral_amount = affwp_get_referral( $referral_id )->amount;
+		$old_earnings    = affwp_get_affiliate_earnings( self::$affiliate_id );
+
+		// Update the status to 'unpaid'.
+		affiliate_wp()->referrals->update_referral( $referral_id, array(
+			'status' => 'rejected'
+		) );
+
+		$new_earnings = affwp_get_affiliate_earnings( self::$affiliate_id );
+
+		// New earnings = $old_earnings minus the increased referral amount.
+		$this->assertEquals( $old_earnings - $referral_amount, $new_earnings );
+
+		// Clean up.
+		affwp_delete_referral( $referral_id );
 	}
 
 	/**

@@ -124,6 +124,7 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 	 *                                          array of fields. Default '*' (all).
 	 * }
 	 * @param   bool  $count  Return only the total number of results found (optional)
+	 * @return \AffWP\Visit[]|int|stdClass[]
 	*/
 	public function get_visits( $args = array(), $count = false ) {
 		global $wpdb;

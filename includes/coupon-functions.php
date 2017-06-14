@@ -373,7 +373,7 @@ function affwp_get_coupon_create_url( $integration, $affiliate_id = 0, $html = f
 
 	$url = false;
 
-	if ( empty( $integration ) || ! $integration ) {
+	if ( empty( $integration ) ) {
 		return false;
 	}
 
@@ -391,12 +391,12 @@ function affwp_get_coupon_create_url( $integration, $affiliate_id = 0, $html = f
 		}
 
 	} else {
-		affiliate_wp()->utils->log( 'affwp_get_coupon_create_url: This integration does not presently have AffiliateWP coupon support.' );
+		affiliate_wp()->utils->log( sprintf( 'affwp_get_coupon_create_url: The %s integration does not presently have AffiliateWP coupon support.', $integration ) );
 		return false;
 	}
 
 	if ( $html ) {
-		return '<a class="affwp-inline-link" href="' . $url . '">Create Coupon</a>';
+		return '<a class="affwp-inline-link" href="' . esc_url( $url ) . '">' . esc_html__( 'Create Coupon', 'affiliate-wp' ) . '</a>';
 	}
 
 	return $url;

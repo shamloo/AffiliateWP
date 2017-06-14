@@ -647,6 +647,14 @@ class Affiliate_WP_Upgrades {
 		@affiliate_wp()->capabilities->add_caps();
 		@affiliate_wp()->utils->log( 'Upgrade: Core capabilities have been upgraded for coupons.' );
 
+		// Add the coupon_id column to the referrals table.
+		@affiliate_wp()->referrals->create_table();
+		@affiliate_wp()->utils->log( 'Upgrade: The coupon_id column has been added to the referrals table.' );
+
+		// Create the coupons table.
+		@affiliate_wp()->affiliates->coupons->create_table();
+		@affiliate_wp()->utils->log( 'Upgrade: The coupons table has been created.' );
+
 		$this->upgraded = true;
 	}
 
