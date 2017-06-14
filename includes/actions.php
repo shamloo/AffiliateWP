@@ -45,6 +45,7 @@ function affwp_remove_query_args( $query_args ) {
 			|| isset( $_GET['referral_id'] )
 			|| isset( $_GET['visit_id'] )
 			|| isset( $_GET['payout_id'] )
+			|| isset( $_GET['coupon_id'] )
 	     )
 	) {
 		$query_args[] = '_wpnonce';

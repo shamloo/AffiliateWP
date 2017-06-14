@@ -735,20 +735,19 @@ class AffWP_Referrals_Table extends List_Table {
 	 */
 	public function referrals_data() {
 
-		$page      = isset( $_GET['paged'] )        ? absint( $_GET['paged'] ) : 1;
-		$status    = isset( $_GET['status'] )       ? $_GET['status']          : '';
-		$affiliate = isset( $_GET['affiliate_id'] ) ? $_GET['affiliate_id']    : '';
-		$reference = isset( $_GET['reference'] )    ? $_GET['reference']       : '';
-		$context   = isset( $_GET['context'] )      ? $_GET['context']         : '';
-		$campaign  = isset( $_GET['campaign'] )     ? $_GET['campaign']        : '';
-		$from      = isset( $_GET['filter_from'] )  ? $_GET['filter_from']     : '';
-		$to        = isset( $_GET['filter_to'] )    ? $_GET['filter_to']       : '';
-		$order     = isset( $_GET['order'] )        ? $_GET['order']           : 'DESC';
-		$orderby   = isset( $_GET['orderby'] )      ? $_GET['orderby']         : 'referral_id';
-		$referral  = '';
-		$is_search = false;
-
-		$amount = isset( $_GET['amount'] ) ? sanitize_text_field( $_GET['amount'] ) : 0;
+		$page       = isset( $_GET['paged'] )        ? absint( $_GET['paged'] ) : 1;
+		$status     = isset( $_GET['status'] )       ? $_GET['status']          : '';
+		$affiliate  = isset( $_GET['affiliate_id'] ) ? $_GET['affiliate_id']    : '';
+		$reference  = isset( $_GET['reference'] )    ? $_GET['reference']       : '';
+		$context    = isset( $_GET['context'] )      ? $_GET['context']         : '';
+		$campaign   = isset( $_GET['campaign'] )     ? $_GET['campaign']        : '';
+		$coupon_id  = isset( $_GET['coupon_id'] )    ? $_GET['coupon_id']       : '';
+		$from       = isset( $_GET['filter_from'] )  ? $_GET['filter_from']     : '';
+		$to         = isset( $_GET['filter_to'] )    ? $_GET['filter_to']       : '';
+		$order      = isset( $_GET['order'] )        ? $_GET['order']           : 'DESC';
+		$orderby    = isset( $_GET['orderby'] )      ? $_GET['orderby']         : 'referral_id';
+		$referral   = '';
+		$is_search  = false;
 
 		if ( $affiliate && $affiliate = affwp_get_affiliate( $affiliate ) ) {
 			$affiliate = $affiliate->ID;
@@ -782,10 +781,6 @@ class AffWP_Referrals_Table extends List_Table {
 				$affiliate = absint( trim( str_replace( 'affiliate:', '', $search ) ) );
 			} elseif ( strpos( $search, 'campaign:' ) !== false ) {
 				$campaign = trim( str_replace( 'campaign:', '', $search ) );
-			} elseif ( strpos( $search, 'amount:' ) !== false ) {
-				$amount = trim( str_replace( 'amount:', '', $search ) );
-			} elseif ( strpos( $search, 'desc:' ) !== false ) {
-				$description = trim( str_replace( 'desc:', '', $search ) );
 			}
 
 		}
@@ -801,8 +796,7 @@ class AffWP_Referrals_Table extends List_Table {
 			'reference'    => $reference,
 			'context'      => $context,
 			'campaign'     => $campaign,
-			'amount'       => $amount,
-			'description'  => $description,
+			'coupon_id'    => $coupon_id,
 			'date'         => $date,
 			'search'       => $is_search,
 			'orderby'      => sanitize_text_field( $orderby ),
