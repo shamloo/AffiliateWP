@@ -181,7 +181,15 @@ function affwp_get_coupon_referrals( $integration_coupon_id = 0, $integration = 
  */
 function affwp_get_coupons_by_integration( $args ) {
 
-	$coupons = array();
+	$coupons   = array();
+	$coupon_id = 0;
+
+	if ( isset( $args[ 'coupon_id' ] ) ) {
+
+		if ( affwp_get_coupon( $args[ 'coupon_id' ] ) ) {
+			$coupon_id = is_int( $args[ 'coupon_id' ] ) ? absint( $args[ 'coupon_id' ] ) : 0;
+		}
+	}
 
 	if ( ! isset( $args[ 'integration' ] ) ) {
 		affiliate_wp()->utils->log( 'affwp_get_coupons_by_integration: Unable to determine integration when querying coupons.' );
@@ -212,6 +220,7 @@ function affwp_get_coupons_by_integration( $args ) {
 
 					$coupons[ $discount->ID ] = array(
 						'integration_coupon_id' => $discount->ID,
+						'coupon_id'             => $coupon_id,
 						'integration'           => 'edd',
 						'coupon_code'           => get_post_meta( $discount->ID, '_edd_discount_code', true ),
 						'referrals'             => $referrals
