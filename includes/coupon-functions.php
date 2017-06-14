@@ -171,22 +171,27 @@ function affwp_get_coupon_referrals( $integration_coupon_id = 0, $integration = 
  *
  * @since 2.1
  *
- * @param array $args Arguments. TODO: Document args.
- * @return bool|array  $coupons  Array of coupons based on the specified AffiliateWP integration.
+ * @param array $args {
+ *     Arguments for retrieving coupons by integration.
+ *
+ *     @type int    $affiliate_id Affiliate ID
+ *     @type string $integration  Integration.
+ * }
+ * @return array Array of coupons based on the specified AffiliateWP integration, otherwise empty array.
  */
 function affwp_get_coupons_by_integration( $args ) {
 
+	$coupons = array();
+
 	if ( ! isset( $args[ 'integration' ] ) ) {
 		affiliate_wp()->utils->log( 'affwp_get_coupons_by_integration: Unable to determine integration when querying coupons.' );
-		return false;
+		return $coupons;
 	}
 
 	if ( ! isset( $args[ 'affiliate_id' ] ) ) {
 		affiliate_wp()->utils->log( 'affwp_get_coupons_by_integration: Unable to determine affiliate ID when querying coupons.' );
-		return false;
+		return $coupons;
 	}
-
-	$coupons = false;
 
 	// Cycles through active integrations, and gets all coupons for the given affiliate ID.
 	switch ( $args[ 'integration' ] ) {
@@ -217,16 +222,14 @@ function affwp_get_coupons_by_integration( $args ) {
 
 		default:
 			affiliate_wp()->utils->log( 'Unable to determine integration when querying coupons in affwp_get_coupons_by_integration.' );
-			return false;
 			break;
 	}
 
-	if ( $coupons ) {
-		return (array) $coupons;
-	} else {
+	if ( ! $coupons ) {
 		affiliate_wp()->utils->log( 'Unable to locate coupons for this integration.' );
-		return false;
 	}
+
+	return $coupons;
 }
 
 /**
