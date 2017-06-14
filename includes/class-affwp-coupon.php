@@ -261,13 +261,15 @@ abstract class Coupon extends \AffWP\Base_Object {
 	}
 
 	/**
-	 * Sanitizes an affiliate object field.
+	 * Sanitizes a coupon object field.
 	 *
-	 * @param  string $field  Object field.
-	 * @param  mixed  $value  Field value.
-	 * @return mixed          Sanitized field value.
+	 * @access public
 	 * @since  2.1
 	 * @static
+	 *
+	 * @param string $field  Object field.
+	 * @param mixed  $value  Field value.
+	 * @return mixed Sanitized field value.
 	 */
 	public static function sanitize_field( $field, $value ) {
 		if ( in_array( $field, array( 'integration_coupon_id', 'coupon_id', 'affiliate_id', 'ID', 'owner' ) ) ) {
