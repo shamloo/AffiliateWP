@@ -281,7 +281,8 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 	 *                                        Default 'DESC'.
 	 *     @type string       $orderby        Coupons table column to order results by. Accepts any AffWP\Affiliate\Coupon
 	 *                                        field. Default 'integration_coupon_id'.
-	 *     @type string       $fields         Fields to limit the selection for. Accepts 'ids'. Default '*' for all.
+	 *     @type string|array $fields         Specific fields to retrieve. Accepts 'ids', a single coupon field, or an
+	 *                                        array of fields. Default '*' (all).
 	 * }
 	 * @param bool  $count Optional. Whether to return only the total number of results found. Default false.
 	 * @return array|int Array of coupon objects (if found), or integer if `$count` is true.
