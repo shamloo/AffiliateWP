@@ -140,6 +140,15 @@ final class Referral extends Base_Object {
 	public $date;
 
 	/**
+	 * Coupon ID, if a coupon was used in the transaction.
+	 *
+	 * @since 2.1
+	 * @access public
+	 * @var int
+	 */
+	public $coupon_id;
+
+	/**
 	 * Token to use for generating cache keys.
 	 *
 	 * @since 1.9
