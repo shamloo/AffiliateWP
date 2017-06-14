@@ -207,7 +207,7 @@ abstract class Coupon extends \AffWP\Base_Object {
 	 *
 	 * @since  2.1
 	 *
-	 * @return mixed array|bool An array of coupon objects, otherwise false.
+	 * @return array|bool An array of coupon objects, otherwise false.
 	 */
 	abstract public function get_integration_coupons();
 
@@ -248,7 +248,7 @@ abstract class Coupon extends \AffWP\Base_Object {
 	 *
 	 * @since  2.1
 	 *
-	 * @return mixed int|bool Returns a coupon ID if a coupon template is located, otherwise returns false.
+	 * @return int|bool Returns a coupon ID if a coupon template is located, otherwise returns false.
 	 */
 	public function __set_coupon_template() {
 
