@@ -166,7 +166,7 @@ class AffWP_Coupons_Admin {
 						// querying the integrations.
 						$coupons = affwp_get_coupons_by_integration( $args );
 
-						if ( $coupons ) {
+						if ( ! empty( $coupons ) ) {
 							error_log( 'Coupons objects: '. print_r( $coupons, true ) );
 							foreach ( $coupons as $coupon ) { ?>
 								<tr>
