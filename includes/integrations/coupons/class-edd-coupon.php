@@ -112,21 +112,21 @@ class Coupon implements Integration\Base_Coupon {
 		$args = $this->get_coupon_template();
 
 		$details = array(
-			'code'              => $args[ 'code' ] . '-' . date( 'U' ) . '-' . $affiliate_id,
-			'name'              => $args[ 'name' ],
-			'status'            => $args[ 'status' ],
-			'uses'              => $args[ 'uses' ],
-			'max_uses'          => $args[ 'max_uses' ],
-			'amount'            => $args[ 'amount' ],
-			'start'             => $args[ 'start' ],
-			'expiration'        => $args[ 'expiration' ],
-			'type'              => $args[ 'type' ],
-			'min_price'         => $args[ 'min_price' ],
-			'product_reqs'      => $args[ 'product_reqs' ],
-			'product_condition' => $args[ 'product_condition' ],
-			'excluded_products' => $args[ 'excluded_products' ],
-			'is_not_global'     => $args[ 'is_not_global' ],
-			'is_single_use'     => $args[ 'is_single_use' ]
+			'code'              => $args['code'] . '-' . date( 'U' ) . '-' . $affiliate_id,
+			'name'              => $args['name'],
+			'status'            => $args['status'],
+			'uses'              => $args['uses'],
+			'max_uses'          => $args['max_uses'],
+			'amount'            => $args['amount'],
+			'start'             => $args['start'],
+			'expiration'        => $args['expiration'],
+			'type'              => $args['type'],
+			'min_price'         => $args['min_price'],
+			'product_reqs'      => $args['product_reqs'],
+			'product_condition' => $args['product_condition'],
+			'excluded_products' => $args['excluded_products'],
+			'is_not_global'     => $args['is_not_global'],
+			'is_single_use'     => $args['is_single_use']
 		);
 
 		if ( edd_store_discount( $details ) ) {
