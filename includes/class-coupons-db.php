@@ -399,6 +399,64 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 			$where .= "`status` = '" . $status . "' ";
 		}
 
+		// Date.
+		if( ! empty( $args['expiration_date'] ) ) {
+
+			if( is_array( $args['expiration_date'] ) ) {
+
+				if( ! empty( $args['expiration_date']['start'] ) ) {
+
+					if( false !== strpos( $args['expiration_date']['start'], ':' ) ) {
+						$format = 'Y-m-d H:i:s';
+					} else {
+						$format = 'Y-m-d 00:00:00';
+					}
+
+					$start = esc_sql( date( $format, strtotime( $args['expiration_date']['start'] ) ) );
+
+					if ( ! empty( $where ) ) {
+						$where .= " AND `expiration_date` >= '{$start}'";
+					} else {
+						$where .= " WHERE `expiration_date` >= '{$start}'";
+					}
+
+				}
+
+				if ( ! empty( $args['expiration_date']['end'] ) ) {
+
+					if ( false !== strpos( $args['expiration_date']['end'], ':' ) ) {
+						$format = 'Y-m-d H:i:s';
+					} else {
+						$format = 'Y-m-d 23:59:59';
+					}
+
+					$end = esc_sql( date( $format, strtotime( $args['expiration_date']['end'] ) ) );
+
+					if( ! empty( $where ) ) {
+						$where .= " AND `expiration_date` <= '{$end}'";
+					} else {
+						$where .= " WHERE `expiration_date` <= '{$end}'";
+					}
+
+				}
+
+			} else {
+
+				$year  = date( 'Y', strtotime( $args['expiration_date'] ) );
+				$month = date( 'm', strtotime( $args['expiration_date'] ) );
+				$day   = date( 'd', strtotime( $args['expiration_date'] ) );
+
+				if( empty( $where ) ) {
+					$where .= " WHERE";
+				} else {
+					$where .= " AND";
+				}
+
+				$where .= " $year = YEAR ( expiration_date ) AND $month = MONTH ( expiration_date ) AND $day = DAY ( expiration_date )";
+			}
+
+		}
+
 		$orderby = array_key_exists( $args['orderby'], $this->get_columns() ) ? $args['orderby'] : $this->primary_key;
 
 		// There can be only two orders.
