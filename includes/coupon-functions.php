@@ -193,39 +193,41 @@ function affwp_get_coupons_by_integration( $args ) {
 		return $coupons;
 	}
 
-	// Cycles through active integrations, and gets all coupons for the given affiliate ID.
-	switch ( $args[ 'integration' ] ) {
-		case 'edd':
-			// Only retrieve active EDD discounts.
-			$discount_args = array(
-				'post_status'              => 'active',
-				'affwp_discount_affiliate' => $args[ 'affiliate_id' ]
-			);
-
-			// Returns an array of WP Post objects.
-			$discounts = edd_get_discounts( $discount_args );
-
-			foreach ($discounts as $discount) {
-				$referrals = affwp_get_coupon_referrals( $discount->ID, 'edd' );
-				$referrals = implode( ', ', wp_list_pluck( $referrals, 'referral_id' ) );
-
-				$coupons[ $discount->ID ] = array(
-					'integration_coupon_id' => $discount->ID,
-					'integration'           => 'edd',
-					'coupon_code'           => get_post_meta( $discount->ID, '_edd_discount_code', true ),
-					'referrals'             => $referrals
-
+	if ( affwp_has_coupon_support( $args['integration'] ) ) {
+		// Cycle through active integrations, and gets all coupons for the given affiliate ID.
+		switch ( $args[ 'integration' ] ) {
+			case 'edd':
+				// Only retrieve active EDD discounts.
+				$discount_args = array(
+					'post_status'              => 'active',
+					'affwp_discount_affiliate' => $args[ 'affiliate_id' ]
 				);
-			}
 
-			break;
+				// Returns an array of WP Post objects.
+				$discounts = edd_get_discounts( $discount_args );
 
-		default:
-			affiliate_wp()->utils->log( 'Unable to determine integration when querying coupons in affwp_get_coupons_by_integration.' );
-			break;
+				foreach ($discounts as $discount) {
+					$referrals = affwp_get_coupon_referrals( $discount->ID, 'edd' );
+					$referrals = implode( ', ', wp_list_pluck( $referrals, 'referral_id' ) );
+
+					$coupons[ $discount->ID ] = array(
+						'integration_coupon_id' => $discount->ID,
+						'integration'           => 'edd',
+						'coupon_code'           => get_post_meta( $discount->ID, '_edd_discount_code', true ),
+						'referrals'             => $referrals
+
+					);
+				}
+
+				break;
+
+			default:
+				affiliate_wp()->utils->log( 'Unable to determine integration when querying coupons in affwp_get_coupons_by_integration.' );
+				break;
+		}
 	}
 
-	if ( ! $coupons ) {
+	if ( empty( $coupons ) ) {
 		affiliate_wp()->utils->log( 'Unable to locate coupons for this integration.' );
 	}
 
