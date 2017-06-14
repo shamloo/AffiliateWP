@@ -173,14 +173,14 @@ class Coupon implements Integration\Base_Coupon {
 	public function set_coupon_template( $meta, $discount_id ) {
 
 		if ( ! $discount_id || ! affiliate_wp()->settings->get( 'auto_generate_coupons_enabled' ) ) {
-			affiliate_wp()->utils->log( 'Unable to set coupon template for discount.' );
+			affiliate_wp()->utils->log( sprintf( 'Unable to set coupon template for discount %s.', $discount_id ) );
 			return false;
 		}
 
 		if ( edd_get_discount( $discount_id ) ) {
 			update_post_meta( $discount_id, 'affwp_is_coupon_template', true );
 		} else {
-			affiliate_wp()->utils->log( 'Could not locate EDD discount by $discount_id when attempting to set it as the AffiliateWP coupon template.' );
+			affiliate_wp()->utils->log( sprintf( 'Could not locate EDD discount %s by $discount_id when attempting to set it as the AffiliateWP coupon template.', $discount_id ) );
 			return false;
 		}
 	}
