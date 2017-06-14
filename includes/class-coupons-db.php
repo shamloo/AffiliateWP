@@ -366,6 +366,22 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 			$where .= "`integration` = '" . $integration . "' ";
 		}
 
+		// Specific integration coupon(s).
+		if ( ! empty( $args['integration_coupon_id'] ) ) {
+
+			$where .= empty( $where ) ? "WHERE " : "AND ";
+
+			if ( is_array( $args['integration_coupon_id'] ) ) {
+				$integration_coupon_ids = implode( ',', array_map( 'intval', $args['integration_coupon_id'] ) );
+			} else {
+				$integration_coupon_ids = intval( $args['integration_coupon_id'] );
+			}
+
+			$integration_coupon_ids = esc_sql( $integration_coupon_ids );
+
+			$where .= "`integration_coupon_id` IN( {$integration_coupon_ids} ) ";
+		}
+
 		// Owners.
 		if ( ! empty( $args['owner'] ) ) {
 			$where .= empty( $where ) ? "WHERE " : "AND ";
