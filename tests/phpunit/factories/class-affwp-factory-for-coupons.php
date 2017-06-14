@@ -16,7 +16,7 @@ class Coupon extends \WP_UnitTest_Factory_For_Thing {
 		}
 
 		if ( empty( $args['integration_coupon_id'] ) ) {
-			$args['integration_coupon_id'] = 1;
+			$args['integration_coupon_id'] = rand( 1, 1000 );
 		}
 
 		if ( empty( $args['integration'] ) ) {
