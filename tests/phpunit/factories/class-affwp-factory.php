@@ -14,6 +14,11 @@ class Factory extends \WP_UnitTest_Factory {
 	public $affiliate;
 
 	/**
+	 * @var \AffWP\Tests\Factory\Coupon
+	 */
+	public $coupon;
+
+	/**
 	 * @var \AffWP\Tests\Factory\Creative
 	 */
 	public $creative;
@@ -37,6 +42,7 @@ class Factory extends \WP_UnitTest_Factory {
 		parent::__construct();
 
 		$this->affiliate = new Factory\Affiliate( $this );
+		$this->coupon    = new Factory\Coupon( $this );
 		$this->creative  = new Factory\Creative( $this );
 		$this->payout    = new Factory\Payout( $this );
 		$this->referral  = new Factory\Referral( $this );
