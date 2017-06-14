@@ -80,7 +80,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 		return array(
 			'integration_coupon_id' => '%d',
 			'coupon_code'           => '%d',
-			'coupon_id'       => '%d',
+			'coupon_id'             => '%d',
 			'affiliate_id'          => '%d',
 			'referrals'             => '%s',
 			'integration'           => '%s',
@@ -139,6 +139,11 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 		) );
 
 		$args['affiliate_id'] = absint( $args['affiliate_id'] );
+
+		if ( empty( $args['integration'] ) || empty( $args['affiliate_id'] ) || empty( $args['integration_coupon_id'] ) ) {
+			affiliate_wp()->utils->log( 'Unable to add new coupon object. Please ensure that the integration name, the affiliate ID, and the coupon ID from the integration are specified.' );
+			return false;
+		}
 
 		if ( ! affiliate_wp()->affiliates->affiliate_exists( $args['affiliate_id'] ) ) {
 			return false;
