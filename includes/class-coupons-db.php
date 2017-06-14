@@ -275,7 +275,8 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 	 *         @type string $end   End date to retrieve coupons for.
 	 *     }
 	 *     @type int|array    $owner          ID or array of IDs for users who generated coupons. Default empty.
-	 *     @type string       $status         Coupon status. Default is 'paid' unless there's a problem.
+	 *     @type string       $status         Coupon status. Accepts 'active' or 'inactive'. Default is 'active' unless
+	 *                                        there's a problem.
 	 *     @type string       $order          How to order returned coupon results. Accepts 'ASC' or 'DESC'.
 	 *                                        Default 'DESC'.
 	 *     @type string       $orderby        Coupons table column to order results by. Accepts any AffWP\Affiliate\Coupon
