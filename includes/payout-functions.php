@@ -144,5 +144,5 @@ function affwp_get_payout_status_label( $payout ) {
 	 * @param string                 $label  A localized version of the payout status label.
 	 * @param AffWP\Affiliate\Payout $payout Payout object.
 	 */
-	return apply_filters( 'affwp_referral_status_label', $label, $payout );
+	return apply_filters( 'affwp_payout_status_label', $label, $payout );
 }
