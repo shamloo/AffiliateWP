@@ -339,6 +339,7 @@ final class Affiliate_WP {
 	private function includes() {
 
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/abstracts/class-affwp-object.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/interfaces/interface-base-coupon.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affwp-affiliate.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affwp-creative.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affwp-payout.php';
