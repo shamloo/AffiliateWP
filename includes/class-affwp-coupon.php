@@ -19,7 +19,7 @@ namespace AffWP\Affiliate;
  *
  * @property-read int $ID Alias for `$coupon_id`.
  */
-abstract class Coupon extends \AffWP\Base_Object {
+class Coupon extends \AffWP\Base_Object implements Coupon\Base_Coupon {
 
 	/**
 	 * Coupon ID. This is the primary key for this object.
@@ -122,7 +122,7 @@ abstract class Coupon extends \AffWP\Base_Object {
 	 *
 	 * @return string Integration string.
 	 */
-	abstract public function init();
+	public function init() {}
 
 	/**
 	 * Gets coupon data from the active integration in which it was generated.
@@ -209,7 +209,7 @@ abstract class Coupon extends \AffWP\Base_Object {
 	 *
 	 * @return array|bool An array of coupon objects, otherwise false.
 	 */
-	abstract public function get_integration_coupons();
+	public function get_integration_coupons() {}
 
 	/**
 	 * Creates an AffiliateWP coupon object when a coupon is created in the integration.

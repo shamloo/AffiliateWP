@@ -21,7 +21,7 @@ namespace AffWP\Affiliate;
  *
  * @property-read int $ID Alias for `$coupon_id`.
  */
-class EDD_Coupon extends \AffWP\Affiliate\Coupon {
+class EDD_Coupon extends Coupon implements Coupon\Base_Coupon {
 
 	/**
 	 * Defines the integration.
