@@ -382,7 +382,7 @@ function affwp_get_coupon_create_url( $integration, $affiliate_id = 0, $html = f
 		}
 
 	} else {
-		affiliate_wp()->utils->log( 'affwp_get_coupon_create_url: This integration does not presently have AffiliateWP coupon support.' );
+		affiliate_wp()->utils->log( sprintf( 'affwp_get_coupon_create_url: The %s integration does not presently have AffiliateWP coupon support.', $integration ) );
 		return false;
 	}
 
