@@ -256,12 +256,13 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 	 * @param array $args {
 	 *     Optional. Arguments for querying affiliates. Default empty array.
 	 *
-	 *     @type int          $number         Number of coupons to query for. Default 20.
-	 *     @type int          $offset         Number of coupons to offset the query for. Default 0.
-	 *     @type int|array    $integration_coupon_id      Coupon ID or array of coupon IDs to explicitly retrieve. Default 0.
-	 *     @type int|array    $affiliate_id   Affiliate ID or array of affiliate IDs to retrieve coupons for. Default 0.
-	 *     @type int|array    $referrals      Referral ID or array of referral IDs to retrieve coupons for.
-	 *                                        Default empty array.
+	 *     @type int          $number                Number of coupons to query for. Default 20.
+	 *     @type int          $offset                Number of coupons to offset the query for. Default 0.
+	 *     @type int|array    $integration_coupon_id Coupon ID or array of coupon IDs to explicitly retrieve. Default 0.
+	 *     @type int|array    $affiliate_id          Affiliate ID or array of affiliate IDs to retrieve coupons for.
+	 *                                               Default 0.
+	 *     @type int|array    $referrals             Referral ID or array of referral IDs to retrieve coupons for.
+	 *                                               Default empty array.
 	 *     @type float|array  $amount {
 	 *         Coupon amount to retrieve coupons for or min/max range to retrieve coupons for.
 	 *         Default 0.
@@ -269,25 +270,25 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 	 *         @type float $min Minimum coupon amount.
 	 *         @type float $max Maximum coupon amount. Use -1 for no limit.
 	 *     }
-	 *     @type string       $amount_compare Comparison operator to use in coordination with with $amount when passed
-	 *                                        as a float or string. Accepts '>', '<', '>=', '<=', '=', or '!='.
-	 *                                        Default '='.
-	 *     @type string       $coupon_method  Coupon method to retrieve coupons for. Default empty (all).
+	 *     @type string       $amount_compare        Comparison operator to use in coordination with with $amount when
+	 *                                               passed as a float or string. Accepts '>', '<', '>=', '<=', '=',
+	 *                                               or '!='. Default '='.
+	 *     @type string       $coupon_method         Coupon method to retrieve coupons for. Default empty (all).
 	 *     @type string|array $date {
 	 *         Date string or start/end range to retrieve coupons for.
 	 *
 	 *         @type string $start Start date to retrieve coupons for.
 	 *         @type string $end   End date to retrieve coupons for.
 	 *     }
-	 *     @type int|array    $owner          ID or array of IDs for users who generated coupons. Default empty.
-	 *     @type string       $status         Coupon status. Accepts 'active' or 'inactive'. Default is 'active' unless
-	 *                                        there's a problem.
-	 *     @type string       $order          How to order returned coupon results. Accepts 'ASC' or 'DESC'.
-	 *                                        Default 'DESC'.
-	 *     @type string       $orderby        Coupons table column to order results by. Accepts any AffWP\Affiliate\Coupon
-	 *                                        field. Default 'integration_coupon_id'.
-	 *     @type string|array $fields         Specific fields to retrieve. Accepts 'ids', a single coupon field, or an
-	 *                                        array of fields. Default '*' (all).
+	 *     @type int|array    $owner                 ID or array of IDs for users who generated coupons. Default empty.
+	 *     @type string       $status                Coupon status. Accepts 'active' or 'inactive'. Default is 'active'
+	 *                                               unless there's a problem.
+	 *     @type string       $order                 How to order returned coupon results. Accepts 'ASC' or 'DESC'.
+	 *                                               Default 'DESC'.
+	 *     @type string       $orderby               Coupons table column to order results by. Accepts any
+	 *                                               AffWP\Affiliate\Coupon field. Default 'integration_coupon_id'.
+	 *     @type string|array $fields                Specific fields to retrieve. Accepts 'ids', a single coupon field,
+	 *                                               or an array of fields. Default '*' (all).
 	 * }
 	 * @param bool  $count Optional. Whether to return only the total number of results found. Default false.
 	 * @return array|int Array of coupon objects (if found), or integer if `$count` is true.
