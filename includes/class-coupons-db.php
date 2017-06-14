@@ -293,7 +293,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 		$defaults = array(
 			'number'                => 20,
 			'offset'                => 0,
-			'coupon_id'       => 0,
+			'coupon_id'             => 0,
 			'integration_coupon_id' => 0,
 			'coupon_code'           => 0,
 			'affiliate_id'          => 0,
