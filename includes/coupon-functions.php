@@ -241,35 +241,26 @@ function affwp_get_coupons_by_integration( $args ) {
  */
 function affwp_has_coupon_support( $integration ) {
 
-	// $integrations = affiliate_wp()->integrations->get_enabled_integrations();
-	// $is_enabled   = in_array( $integration, $integrations );
-
 	if ( empty( $integration ) ) {
 		affiliate_wp()->utils->log( 'An integration must be provided when querying via affwp_has_coupon_support.' );
 		return false;
 	}
 
+	$integrations = affiliate_wp()->integrations->get_enabled_integrations();
+	$supported    = array( 'woocommerce', 'edd' );
+
+	$has_support = in_array( $integration, $supported, true ) && array_key_exists( $integration, $integrations );
+
 	/**
-	 * Integrations with AffiliateWP coupon support.
+	 * Filters whether the given coupon integration is supported.
 	 *
 	 * @since 2.1
 	 *
-	 * @var array $supported
+	 * @param bool   $has_support True if the given integration has support, otherwise false.
+	 * @param string $integration Integration being checked.
+	 * @param array  $supported   Supported integrations.
 	 */
-	$supported = array(
-		'woocommerce',
-		'edd',
-		'exchange',
-		'rcp',
-		'pmp',
-		'pms',
-		'memberpress',
-		'jigoshop',
-		'lifterlms',
-		'gravityforms'
-	);
-
-	return in_array( $integration, $supported );
+	return apply_filters( 'affwp_has_coupon_support', $has_support, $integration, $supported );
 }
 
 /**
