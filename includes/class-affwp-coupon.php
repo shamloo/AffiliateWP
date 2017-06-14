@@ -98,18 +98,17 @@ class Coupon extends \AffWP\Base_Object implements Coupon\Base_Coupon {
 		parent::__construct( $_object );
 
 		// Load coupon-specific classes for each active integration.
-		$integrations = affiliate_wp()->integrations->get_enabled_integrations();
-
-		if ( ! empty( $integrations ) ) {
-
-			foreach ( $integrations as $key => $value ) {
-
-				$path = AFFILIATEWP_PLUGIN_DIR . 'includes/integrations/coupons/class-' . $key . '-coupon.php';
-				if ( affwp_has_coupon_support( $key ) && file_exists( $path ) ) {
-					include $path;
-				}
-			}
-		}
+//		$integrations = affiliate_wp()->integrations->get_enabled_integrations();
+//		if ( ! empty( $integrations ) ) {
+//
+//			foreach ( $integrations as $key => $value ) {
+//
+//				$path = AFFILIATEWP_PLUGIN_DIR . 'includes/integrations/coupons/class-' . $key . '-coupon.php';
+//				if ( affwp_has_coupon_support( $key ) && file_exists( $path ) ) {
+//					include $path;
+//				}
+//			}
+//		}
 
 		$this->init();
 	}
