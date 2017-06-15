@@ -123,6 +123,7 @@ class Generate_Coupons extends Batch\Export\CSV implements Batch\With_PreFetch {
 			$args = array(
 				'coupon_id'             => 0,
 				'integration_coupon_id' => 0,
+				'coupon_code'           => '',
 				'integration'           => '',
 				'affiliate_id'          => $this->affiliate_id,
 			);
