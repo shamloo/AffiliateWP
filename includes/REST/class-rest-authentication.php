@@ -31,8 +31,6 @@ final class Authentication {
 	 */
 	public function authenticate( $user_id ) {
 
-		//print_r( $_SERVER ); exit;
-
 		if ( ! empty( $user_id ) || empty( $_SERVER['PHP_AUTH_USER'] ) ) {
 			return $user_id;
 		}
