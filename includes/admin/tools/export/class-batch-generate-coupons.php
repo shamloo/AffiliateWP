@@ -38,7 +38,7 @@ class Generate_Coupons extends Batch\Export\CSV implements Batch\With_PreFetch {
 	 * @since  2.0
 	 * @var    string
 	 */
-	public $capability = 'manage_affiliates';
+	public $capability = 'manage_coupons';
 
 	/**
 	 * The number of affiliates to process coupons for in each step.
