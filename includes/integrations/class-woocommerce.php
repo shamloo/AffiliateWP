@@ -707,19 +707,13 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 	 */
 	public function wc_300__product_base_rewrites() {
 
-		if ( function_exists( 'wc_get_permalink_structure' ) ) {
+		if ( $shop_page_id = wc_get_page_id( 'shop' ) ) {
 
-			$permalinks = wc_get_permalink_structure();
+			$uri = get_page_uri( $shop_page_id );
+			$ref = affiliate_wp()->tracking->get_referral_var();
 
-			if ( $permalinks['use_verbose_page_rules'] && ( $shop_page_id = wc_get_page_id( 'shop' ) ) ) {
-
-				$uri = get_page_uri( $shop_page_id );
-				$ref = affiliate_wp()->tracking->get_referral_var();
-
-				add_rewrite_rule( $uri . '/' . $ref . '(/(.*))?/?$', 'index.php?post_type=product&' . $ref . '=$matches[2]', 'top' );
-			}
+			add_rewrite_rule( $uri . '/' . $ref . '(/(.*))?/?$', 'index.php?post_type=product&' . $ref . '=$matches[2]', 'top' );
 		}
-
 	}
 
 	/**
