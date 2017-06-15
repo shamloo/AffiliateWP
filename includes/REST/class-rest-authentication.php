@@ -30,6 +30,9 @@ final class Authentication {
 	 * @return int API consumer user ID if authenticated.
 	 */
 	public function authenticate( $user_id ) {
+
+		//print_r( $_SERVER ); exit;
+
 		if ( ! empty( $user_id ) || empty( $_SERVER['PHP_AUTH_USER'] ) ) {
 			return $user_id;
 		}
