@@ -45,6 +45,15 @@ class Affiliate_WP_Utilities {
 	public $logs;
 
 	/**
+	 * Date utilities instance.
+	 *
+	 * @access public
+	 * @since  2.2
+	 * @var    \AffWP\Date
+	 */
+	public $date;
+
+	/**
 	 * Signifies whether debug mode is enabled.
 	 *
 	 * @access protected
@@ -71,6 +80,7 @@ class Affiliate_WP_Utilities {
 	 * @since  2.0
 	 */
 	public function includes() {
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affwp-date.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-logging.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-upgrade-registry.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-batch-process-registry.php';
@@ -88,6 +98,7 @@ class Affiliate_WP_Utilities {
 		// Set the debug flag.
 		$this->debug_enabled = affiliate_wp()->settings->get( 'debug_mode', false );
 
+		$this->date     = new \AffWP\Date;
 		$this->logs     = new Affiliate_WP_Logging;
 		$this->batch    = new Utils\Batch_Process\Registry;
 		$this->upgrades = new Affiliate_WP_Upgrades( $this );
