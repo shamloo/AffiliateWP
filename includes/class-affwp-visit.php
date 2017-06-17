@@ -162,13 +162,18 @@ final class Visit extends Base_Object {
 	 * @access public
 	 * @since  2.2
 	 *
-	 * @param bool|string $format Optional. How to format the visit date. Accepts 'date', 'time',
-	 *                            or 'datetime'. If true, 'datetime' will be used. Default false.
+	 * @param bool|string $date_format Optional. How to format the visit date. Accepts 'date', 'time',
+	 *                                 'datetime', 'utc', or 'timestamp'. If true, 'datetime' will be
+	 *                                 used. Default false.
 	 * @return string Visit date. If `$format` is not false, it will be formatted.
 	 */
 	public function date( $format = false ) {
 
 		if ( false !== $format ) {
+			if ( 'timestamp' === $format ) {
+				return affiliate_wp()->utils->date( $this->date )->timestamp;
+			}
+
 			// Allow date( true ) shorthand for 'datetime' formatting.
 			if ( true === $format ) {
 				$format = 'datetime';
