@@ -1,5 +1,6 @@
 <?php
 use AffWP\Utils;
+use \Carbon\Carbon;
 
 /**
  * Utilities class for AffiliateWP.
@@ -80,6 +81,7 @@ class Affiliate_WP_Utilities {
 	 * @since  2.0
 	 */
 	public function includes() {
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/libraries/Carbon/Carbon.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affwp-date.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-logging.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-upgrade-registry.php';
@@ -154,5 +156,23 @@ class Affiliate_WP_Utilities {
 		}
 		return $data;
 	}
+
+	/**
+	 * Retrieves a Carbon date instance for the WP timezone based on the given date string.
+	 *
+	 * @access public
+	 * @since  2.2
+	 *
+	 * @param string $date_string Date string.
+	 * @param string $timezone    Optional. Timezone to generate the Carbon instance for.
+	 *                            Default is the timezone set in WordPress settings.
+	 * @return Carbon Carbon instance.
+	 */
+	public function date( $date_string, $timezone = '' ) {
+		$timezone = empty( $timezone ) ? $this->date->timezone : $timezone;
+
+		return new Carbon( $date_string, $timezone );
+	}
+
 
 }

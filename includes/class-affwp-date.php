@@ -48,18 +48,6 @@ final class Date {
 		$this->timezone    = get_option( 'timezone_string' );
 		$this->date_format = get_option( 'date_format' );
 		$this->time_format = get_option( 'time_format' );
-
-		$this->includes();
-	}
-
-	/**
-	 * Includes needed files.
-	 *
-	 * @access public
-	 * @since  2.2
-	 */
-	private function includes() {
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/libraries/Carbon/Carbon.php';
 	}
 
 	/**
@@ -75,7 +63,7 @@ final class Date {
 	 */
 	public function format( $date_string, $type = 'datetime' ) {
 		$timezone = 'utc' === $type ? 'UTC' : $this->timezone;
-		$date     = Carbon::parse( $date_string, $timezone );
+		$date     = affiliate_wp()->utils->date( $date_string, $timezone );
 
 		if ( empty( $type ) || 'utc' === $type ) {
 			$type = 'datetime';
