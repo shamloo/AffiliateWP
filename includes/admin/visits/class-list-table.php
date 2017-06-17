@@ -306,7 +306,7 @@ class AffWP_Visits_Table extends List_Table {
 		 * @param string       $date  Visit date, formatted for display.
 		 * @param \AffWP\Visit $visit The current visit object.
 		 */
-		return apply_filters( 'affwp_visit_table_date', $visit->date( 'datetime' ), $visit );
+		return apply_filters( 'affwp_visit_table_date', $visit->date( true ), $visit );
 	}
 
 	/**
