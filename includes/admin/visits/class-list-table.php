@@ -289,6 +289,27 @@ class AffWP_Visits_Table extends List_Table {
 	}
 
 	/**
+	 * Renders the date column in the visits list table.
+	 *
+	 * @access public
+	 * @since  2.2
+	 *
+	 * @param \AffWP\Visit $visit The current visit object.
+	 * @return Formatted visit date.
+	 */
+	public function column_date( $visit ) {
+		/**
+		 * Filters the Date column of the visits list table.
+		 *
+		 * @since 2.2
+		 *
+		 * @param string       $date  Visit date, formatted for display.
+		 * @param \AffWP\Visit $visit The current visit object.
+		 */
+		return apply_filters( 'affwp_visit_table_date', $visit->date( 'datetime' ), $visit );
+	}
+
+	/**
 	 * Renders the message to be displayed when there are no visits.
 	 *
 	 * @access public

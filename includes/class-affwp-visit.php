@@ -156,4 +156,33 @@ final class Visit extends Base_Object {
 		return $value;
 	}
 
+	/**
+	 * Retrieves the (maybe formatted) date for the current visit.
+	 *
+	 * @access public
+	 * @since  2.2
+	 *
+	 * @param bool|string $format Optional. How to format the visit date. Accepts 'date', 'time',
+	 *                            or 'datetime'. If true, 'datetime' will be used. Default false.
+	 * @return string Visit date. If `$format` is not false, it will be formatted.
+	 */
+	public function date( $format = false ) {
+
+		if ( false !== $format ) {
+			// Allow date( true ) shorthand for 'datetime' formatting.
+			if ( true === $format ) {
+				$format = 'datetime';
+			}
+
+			$date = affiliate_wp()->utils->date->format( $this->date, $format );
+
+		} else {
+
+			$date = $this->date;
+
+		}
+
+		return $date;
+	}
+
 }
