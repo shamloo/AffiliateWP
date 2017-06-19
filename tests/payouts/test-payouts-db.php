@@ -119,15 +119,6 @@ class Tests extends UnitTestCase {
 	/**
 	 * @covers Affiliate_WP_Payouts_DB::payout_exists()
 	 */
-	public function test_column_defaults_should_return_zero_for_payout_id() {
-		$defaults = affiliate_wp()->affiliates->payouts->get_column_defaults();
-
-		$this->assertSame( 0, $defaults['payout_id'] );
-	}
-
-	/**
-	 * @covers Affiliate_WP_Payouts_DB::payout_exists()
-	 */
 	public function test_column_defaults_should_return_paid_status() {
 		$defaults = affiliate_wp()->affiliates->payouts->get_column_defaults();
 
@@ -161,6 +152,29 @@ class Tests extends UnitTestCase {
 		);
 
 		$this->assertEqualSets( $expected, $columns );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Payouts_DB::get_column_defaults()
+	 */
+	public function test_get_column_defaults_should_return_defaults() {
+		$expected = array(
+			'affiliate_id' => 0,
+			'owner'        => 0,
+			'status'       => 'paid',
+			'date'         => date( 'Y-m-d H:i:s' ),
+		);
+
+		$this->assertEqualSets( $expected, affiliate_wp()->affiliates->payouts->get_column_defaults() );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Payouts_DB::get_column_defaults()
+	 */
+	public function test_get_column_defaults_should_not_set_a_default_for_the_primary_key() {
+		$defaults = affiliate_wp()->affiliates->payouts->get_column_defaults();
+
+		$this->assertArrayNotHasKey( affiliate_wp()->affiliates->payouts->primary_key, $defaults );
 	}
 
 	/**
