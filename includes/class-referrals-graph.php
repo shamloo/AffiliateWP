@@ -50,7 +50,7 @@ class Affiliate_WP_Referrals_Graph extends Affiliate_WP_Graph {
 
 		$dates      = affwp_get_filter_dates();
 		$date_range = affwp_get_filter_date_range();
-		$difference = ( strtotime( $date['end'] ) - strtotime( $date['start'] ) );
+		$difference = ( strtotime( $dates['end'] ) - strtotime( $dates['start'] ) );
 
 		$referrals = affiliate_wp()->referrals->get_referrals( array(
 			'orderby'      => 'date',
