@@ -97,10 +97,10 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 	 */
 	public function get_column_defaults() {
 		return array(
-			'payout_id' => 0,
-			'owner'     => 0,
-			'status'    => 'paid',
-			'date'      => date( 'Y-m-d H:i:s' ),
+			'affiliate_id' => 0,
+			'owner'        => 0,
+			'status'       => 'paid',
+			'date'         => date( 'Y-m-d H:i:s' ),
 		);
 	}
 
