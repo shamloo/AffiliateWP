@@ -1,5 +1,5 @@
 <?php
-namespace AffWP;
+namespace AffWP\Utils;
 
 use \Carbon\Carbon;
 

@@ -50,7 +50,7 @@ class Affiliate_WP_Utilities {
 	 *
 	 * @access public
 	 * @since  2.2
-	 * @var    \AffWP\Date
+	 * @var    \AffWP\Utils\Date
 	 */
 	public $date;
 
@@ -82,7 +82,7 @@ class Affiliate_WP_Utilities {
 	 */
 	public function includes() {
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/libraries/Carbon/Carbon.php';
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affwp-date.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-affwp-date.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-logging.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-upgrade-registry.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-batch-process-registry.php';
@@ -100,7 +100,7 @@ class Affiliate_WP_Utilities {
 		// Set the debug flag.
 		$this->debug_enabled = affiliate_wp()->settings->get( 'debug_mode', false );
 
-		$this->date     = new \AffWP\Date;
+		$this->date     = new \AffWP\Utils\Date;
 		$this->logs     = new Affiliate_WP_Logging;
 		$this->batch    = new Utils\Batch_Process\Registry;
 		$this->upgrades = new Affiliate_WP_Upgrades( $this );

@@ -49,7 +49,7 @@ class Affiliate_WP_Visits_Graph extends Affiliate_WP_Graph {
 		$unconverted = array();
 
 		$dates      = affwp_get_filter_dates();
-		$difference = ( strtotime( $date['end'] ) - strtotime( $date['start'] ) );
+		$difference = ( strtotime( $dates['end'] ) - strtotime( $dates['start'] ) );
 
 		$args = wp_parse_args( $this->get( 'query_args' ), array(
 			'orderby'      => 'date',
