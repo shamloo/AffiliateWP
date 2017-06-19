@@ -72,9 +72,9 @@ class Affiliate_WP_Visits_Graph extends Affiliate_WP_Graph {
 				if ( in_array( affwp_get_filter_date_range(), array( 'this_year', 'last_year' ), true )
 					|| $difference >= YEAR_IN_SECONDS
 				) {
-					$date = $visit->date( 'object' )->format( 'Y-m' );
+					$date = $visit->date( 'Y-m' );
 				} else {
-					$date = $visit->date( 'object' )->format( 'Y-m-d' );
+					$date = $visit->date( 'Y-m-d' );
 				}
 
 				$this->total += 1;
