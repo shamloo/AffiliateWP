@@ -147,4 +147,32 @@ final class Creative extends Base_Object {
 		return $value;
 	}
 
+	/**
+	 * Retrieves the (maybe formatted) date for the current creative.
+	 *
+	 * @access public
+	 * @since  2.2
+	 *
+	 * @see \AffWP\Utils\Date::format()
+	 *
+	 * @param true|string $date_format Optional. How to format the creative date. Default empty string.
+	 * @return string|\Carbon\Carbon Creative date. if `$format` is empty, the un-formatted `date` value
+	 *                               will be returned. If `$format` is 'object', a Carbon object will
+	 *                               be retrieved for further manipulation.
+	 */
+	public function date( $format = '' ) {
+
+		if ( empty( $format ) ) {
+
+			$date = $this->date;
+
+		} else {
+
+			$date = affiliate_wp()->utils->date->format( $this->date, $format );
+
+		}
+
+		return $date;
+	}
+
 }

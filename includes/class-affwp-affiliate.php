@@ -297,4 +297,34 @@ final class Affiliate extends Base_Object {
 	public function has_custom_rate() {
 		return empty( $this->rate ) ? false : true;
 	}
+
+	/**
+	 * Retrieves the (maybe formatted) date for the current affiliate.
+	 *
+	 * @access public
+	 * @since  2.2
+	 *
+	 * @see \AffWP\Utils\Date::format()
+	 *
+	 * @param true|string $date_format Optional. How to format the affiliate registration date.
+	 *                                 Default empty string.
+	 * @return string|\Carbon\Carbon Affiliate registration date. if `$format` is empty, the un-formatted
+	 *                               `date_registered` value will be returned. If `$format` is 'object',
+	 *                               a Carbon object will be retrieved for further manipulation.
+	 */
+	public function date_registered( $format = '' ) {
+
+		if ( empty( $format ) ) {
+
+			$date = $this->date_registered;
+
+		} else {
+
+			$date = affiliate_wp()->utils->date->format( $this->date_registered, $format );
+
+		}
+
+		return $date;
+	}
+
 }
