@@ -66,6 +66,15 @@ abstract class Tab {
 	public $dates = array();
 
 	/**
+	 * Reports date filter range.
+	 *
+	 * @access public
+	 * @since  2.2
+	 * @var    string
+	 */
+	public $date_range = '';
+
+	/**
 	 * Date query start and end values for filtering data.
 	 *
 	 * @access public
@@ -108,10 +117,11 @@ abstract class Tab {
 			return $tabs;
 		} );
 
-		$this->dates      = affwp_get_report_dates();
+		$this->dates      = affwp_get_filter_dates( 'objects' );
+		$this->date_range = affwp_get_filter_date_range();
 		$this->date_query = array(
-			'start' => $this->dates['year'] . '-' . $this->dates['m_start'] . '-' . $this->dates['day'] . ' 00:00:00',
-			'end'   => $this->dates['year_end'] . '-' . $this->dates['m_end'] . '-' . $this->dates['day_end'] . ' 23:59:59',
+			'start' => $this->dates['start']->toDateTimeString(),
+			'end'   => $this->dates['end']->toDateTimeString(),
 		);
 
 		add_action( "affwp_reports_{$this->tab_id}_nav",        array( $this->graph, 'graph_controls' ), 0 );
@@ -442,16 +452,16 @@ abstract class Tab {
 			'last_year'    => __( 'Last Year', 'affiliate-wp' ),
 		);
 
-		if ( array_key_exists( $this->dates['range'], $string_ranges ) ) {
-			$label = $string_ranges[ $this->dates['range'] ];
-		} elseif ( 'other' === $this->dates['range'] ) {
+		if ( array_key_exists( $this->date_range, $string_ranges ) ) {
+			$label = $string_ranges[ $this->date_range ];
+		} elseif ( 'other' === $this->date_range ) {
 			if ( false !== $override ) {
 				$label = (string) $override;
 			} else {
 				/* translators: 1: Starting date, 2: Ending date */
 				$label = sprintf( __( '%1$s to %2$s', 'affiliate-wp' ),
-					$this->dates['date_from'],
-					$this->dates['date_to']
+					$this->dates['start']->format( 'n/j/Y' ),
+					$this->dates['end']->format( 'n/j/Y' )
 				);
 			}
 		}
