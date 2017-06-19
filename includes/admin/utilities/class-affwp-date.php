@@ -68,7 +68,7 @@ final class Date {
 		$timezone = 'utc' === $type ? 'UTC' : $this->timezone;
 		$date     = affiliate_wp()->utils->date( $date_string, $timezone );
 
-		if ( empty( $type ) || 'utc' === $type || true === $type ) {
+		if ( empty( $type ) || true === $type ) {
 			$type = 'datetime';
 		}
 
@@ -82,6 +82,7 @@ final class Date {
 				break;
 
 			case 'datetime':
+			case 'utc':
 				$formatted = $date->format( $this->date_format . ' ' . $this->time_format );
 				break;
 
