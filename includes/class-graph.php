@@ -71,11 +71,32 @@ class Affiliate_WP_Graph {
 	public $options = array();
 
 	/**
+	 * Graph filter dates.
+	 *
+	 * @access public
+	 * @since  2.2
+	 * @var    array
+	 */
+	public $dates = array();
+
+	/**
+	 * Graph filter date range.
+	 *
+	 * @access public
+	 * @since  2.2
+	 * @var    string
+	 */
+	public $date_range = '';
+
+	/**
 	 * Get things started
 	 *
 	 * @since 1.0
 	 */
 	public function __construct( $_data = array() ) {
+
+		$this->dates      = affwp_get_filter_dates();
+		$this->date_range = affwp_get_filter_date_range();
 
 		$this->data = $_data;
 

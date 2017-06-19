@@ -9,6 +9,9 @@ class Affiliate_WP_Referrals_Graph extends Affiliate_WP_Graph {
 	 */
 	public function __construct( $_data = array() ) {
 
+		$this->dates      = affwp_get_filter_dates();
+		$this->date_range = affwp_get_filter_date_range();
+
 		// Generate unique ID
 		$this->id = md5( rand() );
 
@@ -48,14 +51,10 @@ class Affiliate_WP_Referrals_Graph extends Affiliate_WP_Graph {
 		$rejected = array();
 		$pending  = array();
 
-		$dates      = affwp_get_filter_dates();
-		$date_range = affwp_get_filter_date_range();
-		$difference = ( strtotime( $dates['end'] ) - strtotime( $dates['start'] ) );
-
 		$referrals = affiliate_wp()->referrals->get_referrals( array(
 			'orderby'      => 'date',
 			'order'        => 'ASC',
-			'date'         => $dates,
+			'date'         => $this->dates,
 			'number'       => -1,
 			'affiliate_id' => $this->get( 'affiliate_id' )
 		) );
@@ -64,6 +63,8 @@ class Affiliate_WP_Referrals_Graph extends Affiliate_WP_Graph {
 		$pending[] = array( strtotime( $end ) * 1000 );
 
 		if( $referrals ) {
+
+			$difference = ( strtotime( $this->dates['end'] ) - strtotime( $this->dates['start'] ) );
 
 			$referrals_by_status = array(
 				'paid'     => wp_list_filter( $referrals, array( 'status' => 'paid' ) ),
@@ -80,7 +81,7 @@ class Affiliate_WP_Referrals_Graph extends Affiliate_WP_Graph {
 						$totals[ $status ] = array();
 					}
 
-					if ( in_array( $date_range, array( 'this_year', 'last_year' ), true )
+					if ( in_array( $this->date_range, array( 'this_year', 'last_year' ), true )
 					     || $difference >= YEAR_IN_SECONDS
 					) {
 						$date = $referral->date( 'Y-m' );

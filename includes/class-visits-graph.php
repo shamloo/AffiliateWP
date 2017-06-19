@@ -12,6 +12,9 @@ class Affiliate_WP_Visits_Graph extends Affiliate_WP_Graph {
 	 */
 	public function __construct( $_data = array() ) {
 
+		$this->dates      = affwp_get_filter_dates();
+		$this->date_range = affwp_get_filter_date_range();
+
 		// Generate unique ID
 		$this->id = md5( rand() );
 
@@ -48,13 +51,10 @@ class Affiliate_WP_Visits_Graph extends Affiliate_WP_Graph {
 		$converted   = array();
 		$unconverted = array();
 
-		$dates      = affwp_get_filter_dates();
-		$difference = ( strtotime( $dates['end'] ) - strtotime( $dates['start'] ) );
-
 		$args = wp_parse_args( $this->get( 'query_args' ), array(
 			'orderby'      => 'date',
 			'order'        => 'ASC',
-			'date'         => $dates,
+			'date'         => $this->dates,
 			'number'       => -1,
 			'affiliate_id' => $this->get( 'affiliate_id' )
 		) );
@@ -65,6 +65,8 @@ class Affiliate_WP_Visits_Graph extends Affiliate_WP_Graph {
 		$unconverted_data = array();
 
 		if( $visits ) {
+
+			$difference = ( strtotime( $this->dates['end'] ) - strtotime( $this->dates['start'] ) );
 
 			// Loop through each visit and find how many there are per day
 			foreach( $visits as $visit ) {
@@ -110,8 +112,8 @@ class Affiliate_WP_Visits_Graph extends Affiliate_WP_Graph {
 		}
 
 		$unconverted_visits = array();
-		$unconverted_visits[] = array( strtotime( $dates['start'] ) * 1000 );
-		$unconverted_visits[] = array( strtotime( $dates['end'] ) * 1000 );
+		$unconverted_visits[] = array( strtotime( $this->dates['start'] ) * 1000 );
+		$unconverted_visits[] = array( strtotime( $this->dates['end'] ) * 1000 );
 		foreach( $unconverted_data as $date => $count ) {
 
 			$unconverted_visits[] = array( strtotime( $date ) * 1000, $count );

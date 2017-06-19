@@ -18,6 +18,9 @@ class Affiliate_WP_Payouts_Graph extends \Affiliate_WP_Graph {
 	 */
 	public function __construct( $_data = array() ) {
 
+		$this->dates      = affwp_get_filter_dates();
+		$this->date_range = affwp_get_filter_date_range();
+
 		// Generate unique ID
 		$this->id = md5( rand() );
 
@@ -48,14 +51,10 @@ class Affiliate_WP_Payouts_Graph extends \Affiliate_WP_Graph {
 	public function get_earnings_data() {
 		$earnings = $totals = array();
 
-		$dates      = affwp_get_filter_dates();
-		$date_range = affwp_get_filter_date_range();
-		$difference = ( strtotime( $date['end'] ) - strtotime( $date['start'] ) );
-
 		$referrals = affiliate_wp()->referrals->get_referrals( array(
 			'orderby'      => 'date',
 			'order'        => 'ASC',
-			'date'         => $dates,
+			'date'         => $this->dates,
 			'status'       => array( 'paid', 'unpaid', 'pending' ),
 			'number'       => -1,
 			'affiliate_id' => $this->get( 'affiliate_id' ),
@@ -63,17 +62,19 @@ class Affiliate_WP_Payouts_Graph extends \Affiliate_WP_Graph {
 		) );
 
 		$dates_primer = array(
-			(object) array( 'date' => $dates['start'], 'amount' => 0 ),
-			(object) array( 'date' => $dates['end'], 'amount' => 0 )
+			(object) array( 'date' => $this->dates['start'], 'amount' => 0 ),
+			(object) array( 'date' => $this->dates['end'], 'amount' => 0 )
 		);
 
 		$referrals = array_merge( $dates_primer, $referrals );
 
 		if ( $referrals ) {
 
+			$difference = ( strtotime( $date['end'] ) - strtotime( $date['start'] ) );
+
 			foreach ( $referrals as $referral ) {
 				// Can't use Referral->date() here because $referrals aren't full Referral objects.
-				if ( in_array( $date_range, array( 'this_year', 'last_year' ), true )
+				if ( in_array( $this->date_range, array( 'this_year', 'last_year' ), true )
 				     || $difference >= YEAR_IN_SECONDS
 				) {
 					$date = date( 'Y-m', strtotime( $referral->date ) );
@@ -111,32 +112,29 @@ class Affiliate_WP_Payouts_Graph extends \Affiliate_WP_Graph {
 	public function get_payouts_data() {
 		$paid = $totals = array();
 
-		$dates      = affwp_get_filter_dates();
-		$date_range = affwp_get_filter_date_range();
-		$difference = ( strtotime( $dates['end'] ) - strtotime( $dates['start'] ) );
-
-
 		$payouts = affiliate_wp()->affiliates->payouts->get_payouts( array(
 			'orderby'      => 'date',
 			'order'        => 'ASC',
-			'date'         => $dates,
+			'date'         => $this->dates,
 			'number'       => -1,
 			'affiliate_id' => $this->get( 'affiliate_id' ),
 			'fields'       => array( 'date', 'amount' ),
 		) );
 
 		$dates_primer = array(
-			(object) array( 'date' => $dates['start'], 'amount' => 0 ),
-			(object) array( 'date' => $dates['end'], 'amount' => 0 )
+			(object) array( 'date' => $this->dates['start'], 'amount' => 0 ),
+			(object) array( 'date' => $this->dates['end'], 'amount' => 0 )
 		);
 
 		$payouts = array_merge( $dates_primer, $payouts );
 
 		if ( $payouts ) {
 
+			$difference = ( strtotime( $this->dates['end'] ) - strtotime( $this->dates['start'] ) );
+
 			foreach ( $payouts as $payout ) {
 				// Can't use Payout->date() here because $referrals aren't full Payout objects.
-				if ( in_array( $date_range, array( 'this_year', 'last_year' ), true )
+				if ( in_array( $this->date_range, array( 'this_year', 'last_year' ), true )
 				     || $difference >= YEAR_IN_SECONDS
 				) {
 					$date = date( 'Y-m', strtotime( $payout->date ) );

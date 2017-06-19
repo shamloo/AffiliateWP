@@ -23,26 +23,23 @@ class Affiliate_WP_Registrations_Graph extends Affiliate_WP_Graph {
 	 */
 	public function get_data() {
 
-		$dates      = affwp_get_filter_dates();
-		$date_range = affwp_get_filter_date_range();
-
 		$affiliates = affiliate_wp()->affiliates->get_affiliates( array(
 			'orderby'  => 'date_registered',
 			'order'    => 'ASC',
 			'number'   => -1,
-			'date'     => $dates,
+			'date'     => $this->dates,
 			'fields'   => 'date_registered',
 		) );
 
 		$affiliate_data = array();
-		$affiliate_data[] = strtotime( $dates['start'] ) * 1000;
-		$affiliate_data[] = strtotime( $dates['end'] ) * 1000;
+		$affiliate_data[] = strtotime( $this->dates['start'] ) * 1000;
+		$affiliate_data[] = strtotime( $this->dates['end'] ) * 1000;
 
 		if( $affiliates ) {
 
 			foreach( $affiliates as $affiliate_date_registered ) {
 
-				if( 'today' == $date_range || 'yesterday' == $date_range ) {
+				if( 'today' == $this->date_range || 'yesterday' == $this->date_range ) {
 
 					$point = strtotime( $affiliate_date_registered ) * 1000;
 
