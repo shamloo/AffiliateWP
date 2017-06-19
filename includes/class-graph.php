@@ -439,192 +439,34 @@ class Affiliate_WP_Graph {
  * selected date-range (if any)
  *
  * @since 1.0
- * @return array
+ * @deprecated 2.2 Use affwp_get_filter_dates() instead
+ * @see affwp_get_filter_dates()
+ *
+ * @return array Array of report filter dates.
 */
 function affwp_get_report_dates() {
-	$dates = array();
 
-	$current_time = current_time( 'timestamp' );
+	_deprecated_function( __FUNCTION__, '2.2', 'affwp_get_filter_dates' );
 
-	$dates['date_from']  = ! empty( $_REQUEST['filter_from'] ) ? $_REQUEST['filter_from'] : date( 'j/n/Y', $current_time );
-	$dates['date_to']    = ! empty( $_REQUEST['filter_to'] )   ? $_REQUEST['filter_to']   : date( 'j/n/Y', $current_time );
+	/** @var \Carbon\Carbon[] $filter_dates */
+	$filter_dates = affwp_get_filter_dates( 'objects' );
 
-	$variable_from_time  = ! empty( $_REQUEST['filter_from'] ) ? strtotime( $dates['date_from'] ) : $current_time;
-	$variable_to_time    = ! empty( $_REQUEST['filter_to'] )   ? strtotime( $dates['date_to'] )   : $current_time;
+	$dates = array(
+		'range'    => affwp_get_filter_date_range(),
+		'day'      => $filter_dates['start']->format( 'd' ),
+		'day_end'  => $filter_dates['end']->format( 'd' ),
+		'm_start'  => $filter_dates['start']->month,
+		'm_end'    => $filter_dates['end']->month,
+		'year'     => $filter_dates['start']->year,
+		'year_end' => $filter_dates['end']->year,
+	);
 
-	$dates['range']      = isset( $_GET['range'] )      ? $_GET['range']      : 'this_month';
-	$dates['year']       = isset( $_GET['year_start'] ) ? $_GET['year_start'] : date( 'Y', $variable_from_time );
-	$dates['year_end']   = isset( $_GET['year_end'] )   ? $_GET['year_end']   : date( 'Y', $variable_to_time );
-	$dates['m_start']    = isset( $_GET['m_start'] )    ? $_GET['m_start']    : date( 'n', $variable_from_time );
-	$dates['m_end']      = isset( $_GET['m_end'] )      ? $_GET['m_end']      : date( 'n', $variable_to_time );
-	$dates['day']        = isset( $_GET['day'] )        ? $_GET['day']        : date( 'd', $variable_from_time );
-	$dates['day_end']    = isset( $_GET['day_end'] )    ? $_GET['day_end']    : date( 'd', $variable_to_time );
-
-	// Modify dates based on predefined ranges
-	switch ( $dates['range'] ) :
-
-		case 'this_month' :
-			$dates['day']       = 1;
-			$dates['m_start']   = date( 'n', $current_time );
-			$dates['m_end']	    = date( 'n', $current_time );
-			$dates['day_end']   = cal_days_in_month( CAL_GREGORIAN, $dates['m_start'], date( 'Y', $current_time ) );
-			$dates['year']      = date( 'Y', $current_time );
-		break;
-
-		case 'last_month' :
-			if( date( 'n' ) == 1 ) {
-				$dates['day']     = 1;
-				$dates['day_end'] = cal_days_in_month( CAL_GREGORIAN, 12, date( 'Y', $current_time ) );
-				$dates['m_start'] = 12;
-				$dates['m_end']	  = 12;
-				$dates['year']    = date( 'Y', $current_time ) - 1;
-				$dates['year_end']= date( 'Y', $current_time ) - 1;
-			} else {
-				$dates['day']     = 1;
-				$dates['day_end'] = cal_days_in_month( CAL_GREGORIAN, date( 'n' ) - 1, date( 'Y', $current_time ) );
-				$dates['m_start'] = date( 'n' ) - 1;
-				$dates['m_end']	  = date( 'n' ) - 1;
-				$dates['year_end']= $dates['year'];
-			}
-		break;
-
-		case 'today' :
-			$dates['day']       = date( 'd', $current_time );
-			$dates['day_end']   = date( 'd', $current_time );
-			$dates['m_start'] 	= date( 'n', $current_time );
-			$dates['m_end']		= date( 'n', $current_time );
-			$dates['year']		= date( 'Y', $current_time );
-		break;
-
-		case 'yesterday' :
-			$month              = date( 'n', $current_time ) == 1 && date( 'd', $current_time ) == 1 ? 12 : date( 'n', $current_time );
-			$days_in_month      = cal_days_in_month( CAL_GREGORIAN, $month, date( 'Y', $current_time ) );
-			$yesterday          = date( 'd', $current_time ) == 1 ? $days_in_month : date( 'd', $current_time ) - 1;
-			$dates['day']		= $yesterday;
-			$dates['day_end']   = $yesterday;
-			$dates['m_start'] 	= $month;
-			$dates['m_end'] 	= $month;
-			$dates['year']		= $month == 1 && date( 'd', $current_time ) == 1 ? date( 'Y', $current_time ) - 1 : date( 'Y', $current_time );
-		break;
-
-		case 'this_week' :
-			$dates['day']       = date( 'd', $current_time - ( date( 'w', $current_time ) - 1 ) *60*60*24 ) - 1;
-			$dates['day']      += get_option( 'start_of_week' );
-			$dates['day_end']   = $dates['day'] + 6;
-			$dates['m_start'] 	= date( 'n', $current_time );
-			$dates['m_end']		= date( 'n', $current_time );
-			$dates['year']		= date( 'Y', $current_time );
-		break;
-
-		case 'last_week' :
-			$dates['day']       = date( 'd', $current_time - ( date( 'w' ) - 1 ) *60*60*24 ) - 8;
-			$dates['day']      += get_option( 'start_of_week' );
-			$dates['day_end']   = $dates['day'] + 6;
-			$dates['year']		= date( 'Y', $current_time );
-
-			if( date( 'j', $current_time ) <= 7 ) {
-				$dates['m_start'] 	= date( 'n', $current_time ) - 1;
-				$dates['m_end']		= date( 'n', $current_time ) - 1;
-				if( $dates['m_start'] <= 1 ) {
-					$dates['year'] = date( 'Y', $current_time ) - 1;
-					$dates['year_end'] = date( 'Y', $current_time ) - 1;
-				}
-			} else {
-				$dates['m_start'] 	= date( 'n', $current_time );
-				$dates['m_end']		= date( 'n', $current_time );
-			}
-		break;
-
-		case 'this_quarter' :
-			$month_now = date( 'n', $current_time );
-			$dates['day'] = 1;
-
-			if ( $month_now <= 3 ) {
-
-				$dates['day_end']   = cal_days_in_month( CAL_GREGORIAN, 4, date( 'Y', $current_time ) );
-				$dates['m_start'] 	= 1;
-				$dates['m_end']		= 4;
-				$dates['year']		= date( 'Y', $current_time );
-
-			} else if ( $month_now <= 6 ) {
-
-				$dates['day_end']   = cal_days_in_month( CAL_GREGORIAN, 7, date( 'Y', $current_time ) );
-				$dates['m_start'] 	= 4;
-				$dates['m_end']		= 7;
-				$dates['year']		= date( 'Y', $current_time );
-
-			} else if ( $month_now <= 9 ) {
-
-				$dates['day_end']   = cal_days_in_month( CAL_GREGORIAN, 10, date( 'Y', $current_time ) );
-				$dates['m_start'] 	= 7;
-				$dates['m_end']		= 10;
-				$dates['year']		= date( 'Y', $current_time );
-
-			} else {
-
-				$dates['day_end']   = cal_days_in_month( CAL_GREGORIAN, 1, date( 'Y', $current_time ) + 1 );
-				$dates['m_start'] 	= 10;
-				$dates['m_end']		= 1;
-				$dates['year']		= date( 'Y', $current_time );
-				$dates['year_end']  = date( 'Y', $current_time ) + 1;
-
-			}
-		break;
-
-		case 'last_quarter' :
-			$month_now = date( 'n' );
-			$dates['day'] = 1;
-
-			if ( $month_now <= 3 ) {
-
-				$dates['day_end']   = cal_days_in_month( CAL_GREGORIAN, 9, date( 'Y', $current_time ) - 1 );
-				$dates['m_start']   = 10;
-				$dates['m_end']     = 12;
-				$dates['year']      = date( 'Y', $current_time ) - 1; // Previous year
-
-			} else if ( $month_now <= 6 ) {
-
-				$dates['day_end']   = cal_days_in_month( CAL_GREGORIAN, 3, date( 'Y', $current_time ) );
-				$dates['m_start'] 	= 1;
-				$dates['m_end']		= 3;
-				$dates['year']		= date( 'Y', $current_time );
-
-			} else if ( $month_now <= 9 ) {
-
-				$dates['day_end']   = cal_days_in_month( CAL_GREGORIAN, 6, date( 'Y', $current_time ) );
-				$dates['m_start'] 	= 4;
-				$dates['m_end']		= 6;
-				$dates['year']		= date( 'Y', $current_time );
-
-			} else {
-
-				$dates['day_end']   = cal_days_in_month( CAL_GREGORIAN, 9, date( 'Y', $current_time ) );
-				$dates['m_start'] 	= 7;
-				$dates['m_end']		= 9;
-				$dates['year']		= date( 'Y', $current_time );
-
-			}
-		break;
-
-		case 'this_year' :
-			$dates['day']       = 1;
-			$dates['day_end']   = cal_days_in_month( CAL_GREGORIAN, 12, date( 'Y', $current_time ) );
-			$dates['m_start'] 	= 1;
-			$dates['m_end']		= 12;
-			$dates['year']		= date( 'Y', $current_time );
-			$dates['year_end']  = date( 'Y', $current_time );
-		break;
-
-		case 'last_year' :
-			$dates['day']       = 1;
-			$dates['day_end']   = cal_days_in_month( CAL_GREGORIAN, 12, date( 'Y', $current_time ) - 1 );
-			$dates['m_start'] 	= 1;
-			$dates['m_end']		= 12;
-			$dates['year']		= date( 'Y', $current_time ) - 1;
-			$dates['year_end']  = date( 'Y', $current_time ) - 1;
-		break;
-
-	endswitch;
-
+	/**
+	 * Filters the report dates array.
+	 *
+	 * @since 1.0
+	 *
+	 * @param array $dates Array of graph filter dates.
+	 */
 	return apply_filters( 'affwp_report_dates', $dates );
 }

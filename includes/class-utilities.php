@@ -163,12 +163,12 @@ class Affiliate_WP_Utilities {
 	 * @access public
 	 * @since  2.2
 	 *
-	 * @param string $date_string Date string.
+	 * @param string $date_string Optional. Date string. Default 'now'.
 	 * @param string $timezone    Optional. Timezone to generate the Carbon instance for.
 	 *                            Default is the timezone set in WordPress settings.
 	 * @return Carbon Carbon instance.
 	 */
-	public function date( $date_string, $timezone = '' ) {
+	public function date( $date_string = 'now', $timezone = '' ) {
 		$timezone = empty( $timezone ) ? $this->date->timezone : $timezone;
 
 		return new Carbon( $date_string, $timezone );
