@@ -14,9 +14,10 @@
  *
  * @since 2.2
  *
- * @param string $values Optional. What format to retrieve dates in the resulting array in.
- *                       Accepts 'strings' or 'objects'. Default 'strings'.
- *
+ * @param string $values   Optional. What format to retrieve dates in the resulting array in.
+ *                         Accepts 'strings' or 'objects'. Default 'strings'.
+ * @param string $timezone Optional. Timezone to force for filter dates. Primarily used for
+ *                         legacy testing purposes.
  * @return array {
  *     Query date range for the current graph filter request.
  *
@@ -27,9 +28,9 @@
  *                                        is 'objects', a Carbon object, otherwise a date time string.
  * }
  */
-function affwp_get_filter_dates( $values = 'strings' ) {
+function affwp_get_filter_dates( $values = 'strings', $timezone = '' ) {
 
-	$date       = affiliate_wp()->utils->date();
+	$date       = affiliate_wp()->utils->date( 'now', $timezone );
 	$date_range = affwp_get_filter_date_range();
 
 	/** @var \Carbon\Carbon[] $dates */

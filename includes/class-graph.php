@@ -442,14 +442,16 @@ class Affiliate_WP_Graph {
  * @deprecated 2.2 Use affwp_get_filter_dates() instead
  * @see affwp_get_filter_dates()
  *
+ * @param string $timezone Optional. Timezone to force for report filter dates calculations.
+ *                         Default empty.
  * @return array Array of report filter dates.
 */
-function affwp_get_report_dates() {
+function affwp_get_report_dates( $timezone = '' ) {
 
 	_deprecated_function( __FUNCTION__, '2.2', 'affwp_get_filter_dates' );
 
 	/** @var \Carbon\Carbon[] $filter_dates */
-	$filter_dates = affwp_get_filter_dates( 'objects' );
+	$filter_dates = affwp_get_filter_dates( 'objects', $timezone );
 
 	$dates = array(
 		'range'    => affwp_get_filter_date_range(),

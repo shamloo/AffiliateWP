@@ -13,12 +13,11 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers ::affwp_get_report_dates()
+	 * @expectedDeprecated affwp_get_report_dates
 	 */
 	public function test_get_report_dates_correct_this_month_at_the_end_of_the_month_utc() {
 
-		date_default_timezone_set( 'UTC' );
-
-		$dates = affwp_get_report_dates();
+		$dates = affwp_get_report_dates( 'UTC' );
 
 		$this->assertEquals( $dates['day'], 1 );
 		$this->assertEquals( $dates['m_start'], date( 'n' ) );
@@ -31,12 +30,11 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers ::affwp_get_report_dates()
+	 * @expectedDeprecated affwp_get_report_dates
 	 */
 	public function test_get_report_dates_correct_this_month_at_the_end_of_the_month_nz() {
 
-		date_default_timezone_set( 'Pacific/Auckland' );
-
-		$dates = affwp_get_report_dates();
+		$dates = affwp_get_report_dates( 'Pacific/Auckland' );
 
 		$this->assertEquals( $dates['day'], 1 );
 		$this->assertEquals( $dates['m_start'], date( 'n' ) );
@@ -48,12 +46,11 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers ::affwp_get_report_dates()
+	 * @expectedDeprecated affwp_get_report_dates
 	 */
 	public function test_get_report_dates_correct_this_month_at_the_beginning_of_the_month_utc() {
 
-		date_default_timezone_set( 'UTC' );
-
-		$dates = affwp_get_report_dates();
+		$dates = affwp_get_report_dates( 'UTC' );
 
 		$this->assertEquals( $dates['day'], 1 );
 		$this->assertEquals( $dates['m_start'], date( 'n' ) );
@@ -65,12 +62,11 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers ::affwp_get_report_dates()
+	 * @expectedDeprecated affwp_get_report_dates
 	 */
 	public function test_get_report_dates_correct_this_month_at_the_beginning_of_the_month_pdt() {
 
-		date_default_timezone_set( 'America/Los_Angeles' );
-
-		$dates = affwp_get_report_dates();
+		$dates = affwp_get_report_dates( 'America/Los_Angeles' );
 
 		$this->assertEquals( $dates['day'], 1 );
 		$this->assertEquals( $dates['m_start'], date( 'n' ) );
@@ -82,13 +78,13 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers ::affwp_get_report_dates()
+	 * @expectedDeprecated affwp_get_report_dates
 	 */
 	public function test_get_report_dates_correct_this_moment_utc() {
 
-		date_default_timezone_set( 'UTC' );
-
 		$current_time = current_time( 'timestamp' );
-		$dates = affwp_get_report_dates();
+
+		$dates = affwp_get_report_dates( 'UTC' );
 
 		$this->assertEquals( $dates['day'], 1 );
 		$this->assertEquals( $dates['m_start'], date( 'n', $current_time ) );
