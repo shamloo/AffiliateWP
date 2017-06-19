@@ -454,13 +454,15 @@ function affwp_get_report_dates( $timezone = '' ) {
 	$filter_dates = affwp_get_filter_dates( 'objects', $timezone );
 
 	$dates = array(
-		'range'    => affwp_get_filter_date_range(),
-		'day'      => $filter_dates['start']->format( 'd' ),
-		'day_end'  => $filter_dates['end']->format( 'd' ),
-		'm_start'  => $filter_dates['start']->month,
-		'm_end'    => $filter_dates['end']->month,
-		'year'     => $filter_dates['start']->year,
-		'year_end' => $filter_dates['end']->year,
+		'range'     => affwp_get_filter_date_range(),
+		'date_from' => $filter_dates['start']->format( 'j/n/Y' ),
+		'date_to'   => $filter_dates['end']->format( 'j/n/Y' ),
+		'day'       => $filter_dates['start']->format( 'd' ),
+		'day_end'   => $filter_dates['end']->format( 'd' ),
+		'm_start'   => $filter_dates['start']->month,
+		'm_end'     => $filter_dates['end']->month,
+		'year'      => $filter_dates['start']->year,
+		'year_end'  => $filter_dates['end']->year,
 	);
 
 	/**
