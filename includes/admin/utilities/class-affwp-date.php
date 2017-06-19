@@ -56,18 +56,19 @@ final class Date {
 	 * @access public
 	 * @since  2.2
 	 *
-	 * @param string $date_string Date string to format.
-	 * @param string $type        Optional. Type of formatting or actual date format string.
-	 *                            Accepts shorthand formats 'date', 'time', 'datetime', or
-	 *                            'utc'. Also accepts any valid date_format() format string.
-	 *                            Default 'datetime'.
-	 * @return string Formatted date string.
+	 * @param string      $date_string Date string to format.
+	 * @param string|true $type        Optional. How to format the date string.  Accepts 'date',
+	 *                                 'time', 'datetime', 'utc', 'timestamp', 'object', or any
+	 *                                 valid date_format() string. If true, 'datetime' will be
+	 *                                 used. Default 'datetime'.
+	 * @return string|int|\Carbon\Carbon Formatted date string, timestamp if `$type` is timestamp,
+	 *                                   or a Carbon object if `$type` is 'object'.
 	 */
 	public function format( $date_string, $type = 'datetime' ) {
 		$timezone = 'utc' === $type ? 'UTC' : $this->timezone;
 		$date     = affiliate_wp()->utils->date( $date_string, $timezone );
 
-		if ( empty( $type ) || 'utc' === $type ) {
+		if ( empty( $type ) || 'utc' === $type || true === $type ) {
 			$type = 'datetime';
 		}
 
@@ -82,6 +83,14 @@ final class Date {
 
 			case 'datetime':
 				$formatted = $date->format( $this->date_format . ' ' . $this->time_format );
+				break;
+
+			case 'object':
+				$formatted = $date;
+				break;
+
+			case 'timestamp':
+				$formatted = $date->timestamp;
 				break;
 
 			default:

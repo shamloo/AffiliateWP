@@ -162,12 +162,9 @@ final class Visit extends Base_Object {
 	 * @access public
 	 * @since  2.2
 	 *
-	 * @see \Carbon\Carbon::format()
+	 * @see \AffWP\Utils\Date::format()
 	 *
-	 * @param true|string $date_format Optional. How to format the visit date. Accepts 'date',
-	 *                                 'time', 'datetime', 'utc', 'timestamp', 'object', or any
-	 *                                 valid date_format() string. If true, 'datetime' will be
-	 *                                 used. Default empty string.
+	 * @param true|string $date_format Optional. How to format the visit date. Default empty string.
 	 * @return string|\Carbon\Carbon Visit date. if `$format` is empty, the un-formatted `date` value
 	 *                               will be returned. If `$format` is 'object', a Carbon object will
 	 *                               be retrieved for further manipulation.
@@ -178,19 +175,7 @@ final class Visit extends Base_Object {
 
 			$date = $this->date;
 
-		} elseif ( 'object' === $format ) {
-
-			$date = affiliate_wp()->utils->date( $this->date );
-
 		} else {
-			if ( 'timestamp' === $format ) {
-				return affiliate_wp()->utils->date( $this->date )->timestamp;
-			}
-
-			// Allow date( true ) shorthand for 'datetime' formatting.
-			if ( true === $format ) {
-				$format = 'datetime';
-			}
 
 			$date = affiliate_wp()->utils->date->format( $this->date, $format );
 
