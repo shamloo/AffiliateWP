@@ -49,6 +49,7 @@ class Affiliate_WP_Referrals_Graph extends Affiliate_WP_Graph {
 		$pending  = array();
 
 		$dates      = affwp_get_filter_dates();
+		$date_range = affwp_get_filter_date_range();
 		$difference = ( strtotime( $date['end'] ) - strtotime( $date['start'] ) );
 
 		$referrals = affiliate_wp()->referrals->get_referrals( array(
@@ -79,12 +80,12 @@ class Affiliate_WP_Referrals_Graph extends Affiliate_WP_Graph {
 						$totals[ $status ] = array();
 					}
 
-					if ( in_array( $dates['range'], array( 'this_year', 'last_year' ), true )
+					if ( in_array( $date_range, array( 'this_year', 'last_year' ), true )
 					     || $difference >= YEAR_IN_SECONDS
 					) {
-						$date = date( 'Y-m', strtotime( $referral->date ) );
+						$date = $referral->date( 'Y-m' );
 					} else {
-						$date = date( 'Y-m-d', strtotime( $referral->date ) );
+						$date = $referral->date( 'Y-m-d' );
 					}
 
 					if ( empty( $totals[ $status ][ $date ] ) ) {
