@@ -17,7 +17,7 @@
  * @param string $values   Optional. What format to retrieve dates in the resulting array in.
  *                         Accepts 'strings' or 'objects'. Default 'strings'.
  * @param string $timezone Optional. Timezone to force for filter dates. Primarily used for
- *                         legacy testing purposes.
+ *                         legacy testing purposes. Default empty.
  * @return array {
  *     Query date range for the current graph filter request.
  *
