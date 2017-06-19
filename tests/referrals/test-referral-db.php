@@ -241,6 +241,188 @@ class Referrals_DB_Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers \Affiliate_WP_Referrals_DB::update_referral()
+	 * @group referrals-status
+	 */
+	public function test_update_referral_with_new_status_paid_old_status_unpaid_should_increase_earnings() {
+		// Start with an unpaid referral.
+		$referral_id = $this->factory->referral->create( array(
+			'affiliate_id' => self::$affiliate_id,
+			'amount'       => '30',
+			'status'       => 'unpaid'
+		) );
+
+		$referral_amount = affwp_get_referral( $referral_id )->amount;
+		$old_earnings    = affwp_get_affiliate_earnings( self::$affiliate_id );
+
+		// Update the referral status to 'paid'.
+		affiliate_wp()->referrals->update_referral( $referral_id, array(
+			'status' => 'paid'
+		) );
+
+		$new_earnings = affwp_get_affiliate_earnings( self::$affiliate_id );
+
+		// New earnings = $old_earnings plus the increased referral amount.
+		$this->assertEquals( $old_earnings + $referral_amount, $new_earnings );
+
+		// Clean up.
+		affwp_delete_referral( $referral_id );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::update_referral()
+	 * @group referrals-status
+	 */
+	public function test_update_referral_with_new_status_paid_old_status_pending_should_increase_earnings() {
+		// Start with a pending referral (default status).
+		$referral_id = $this->factory->referral->create( array(
+			'affiliate_id' => self::$affiliate_id,
+			'amount'       => '30',
+		) );
+
+		$referral_amount = affwp_get_referral( $referral_id )->amount;
+		$old_earnings    = affwp_get_affiliate_earnings( self::$affiliate_id );
+
+		// Update the referral status to 'paid'.
+		affiliate_wp()->referrals->update_referral( $referral_id, array(
+			'status' => 'paid'
+		) );
+
+		$new_earnings = affwp_get_affiliate_earnings( self::$affiliate_id );
+
+		// New earnings = $old_earnings plus the increased referral amount.
+		$this->assertEquals( $old_earnings + $referral_amount, $new_earnings );
+
+		// Clean up.
+		affwp_delete_referral( $referral_id );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::update_referral()
+	 * @group referrals-status
+	 */
+	public function test_update_referral_with_new_status_paid_old_status_rejected_should_increase_earnings() {
+		// Start with a rejected referral.
+		$referral_id = $this->factory->referral->create( array(
+			'affiliate_id' => self::$affiliate_id,
+			'amount'       => '30',
+			'status'       => 'rejected',
+		) );
+
+		$referral_amount = affwp_get_referral( $referral_id )->amount;
+		$old_earnings    = affwp_get_affiliate_earnings( self::$affiliate_id );
+
+		// Update the referral status to 'paid'.
+		affiliate_wp()->referrals->update_referral( $referral_id, array(
+			'status' => 'paid'
+		) );
+
+		$new_earnings = affwp_get_affiliate_earnings( self::$affiliate_id );
+
+		// New earnings = $old_earnings plus the increased referral amount.
+		$this->assertEquals( $old_earnings + $referral_amount, $new_earnings );
+
+		// Clean up.
+		affwp_delete_referral( $referral_id );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::update_referral()
+	 * @group referrals-status
+	 */
+	public function test_update_referral_with_new_status_unpaid_old_status_paid_should_decrease_earnings() {
+		// Inflate affiliate earnings because referrals->add() with 'paid' doesn't affect earnings.
+		affwp_increase_affiliate_earnings( self::$affiliate_id, '30' );
+
+		// Start with a 'paid' referral.
+		$referral_id = $this->factory->referral->create( array(
+			'affiliate_id' => self::$affiliate_id,
+			'amount'       => '30',
+			'status'       => 'paid'
+		) );
+
+		$referral_amount = affwp_get_referral( $referral_id )->amount;
+		$old_earnings    = affwp_get_affiliate_earnings( self::$affiliate_id );
+
+		// Update the status to 'unpaid'.
+		affiliate_wp()->referrals->update_referral( $referral_id, array(
+			'status' => 'unpaid'
+		) );
+
+		$new_earnings = affwp_get_affiliate_earnings( self::$affiliate_id );
+
+		// New earnings = $old_earnings minus the increased referral amount.
+		$this->assertEquals( $old_earnings - $referral_amount, $new_earnings );
+
+		// Clean up.
+		affwp_delete_referral( $referral_id );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::update_referral()
+	 * @group referrals-status
+	 */
+	public function test_update_referral_with_new_status_pending_old_status_paid_should_decrease_earnings() {
+		// Inflate affiliate earnings because referrals->add() with 'paid' doesn't affect earnings.
+		affwp_increase_affiliate_earnings( self::$affiliate_id, '30' );
+
+		// Start with a 'paid' referral.
+		$referral_id = $this->factory->referral->create( array(
+			'affiliate_id' => self::$affiliate_id,
+			'amount'       => '30',
+			'status'       => 'paid'
+		) );
+
+		$referral_amount = affwp_get_referral( $referral_id )->amount;
+		$old_earnings    = affwp_get_affiliate_earnings( self::$affiliate_id );
+
+		// Update the status to 'unpaid'.
+		affiliate_wp()->referrals->update_referral( $referral_id, array(
+			'status' => 'pending'
+		) );
+
+		$new_earnings = affwp_get_affiliate_earnings( self::$affiliate_id );
+
+		// New earnings = $old_earnings minus the increased referral amount.
+		$this->assertEquals( $old_earnings - $referral_amount, $new_earnings );
+
+		// Clean up.
+		affwp_delete_referral( $referral_id );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Referrals_DB::update_referral()
+	 * @group referrals-status
+	 */
+	public function test_update_referral_with_new_status_rejected_old_status_paid_should_decrease_earnings() {
+		// Inflate affiliate earnings because referrals->add() with 'paid' doesn't affect earnings.
+		affwp_increase_affiliate_earnings( self::$affiliate_id, '30' );
+
+		// Start with a 'paid' referral.
+		$referral_id = $this->factory->referral->create( array(
+			'affiliate_id' => self::$affiliate_id,
+			'amount'       => '30',
+			'status'       => 'paid'
+		) );
+
+		$referral_amount = affwp_get_referral( $referral_id )->amount;
+		$old_earnings    = affwp_get_affiliate_earnings( self::$affiliate_id );
+
+		// Update the status to 'unpaid'.
+		affiliate_wp()->referrals->update_referral( $referral_id, array(
+			'status' => 'rejected'
+		) );
+
+		$new_earnings = affwp_get_affiliate_earnings( self::$affiliate_id );
+
+		// New earnings = $old_earnings minus the increased referral amount.
+		$this->assertEquals( $old_earnings - $referral_amount, $new_earnings );
+
+		// Clean up.
+		affwp_delete_referral( $referral_id );
+	}
+
+	/**
 	 * @covers \Affiliate_WP_Referrals_DB::get_by()
 	 */
 	public function test_get_by_with_empty_column_should_return_false() {
