@@ -69,7 +69,7 @@ class Affiliate_WP_Visits_Graph extends Affiliate_WP_Graph {
 			// Loop through each visit and find how many there are per day
 			foreach( $visits as $visit ) {
 
-				if ( in_array( $dates['range'], array( 'this_year', 'last_year' ), true )
+				if ( in_array( affwp_get_filter_date_range(), array( 'this_year', 'last_year' ), true )
 					|| $difference >= YEAR_IN_SECONDS
 				) {
 					$date = $visit->date( 'object' )->format( 'Y-m' );

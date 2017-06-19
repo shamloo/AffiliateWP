@@ -162,17 +162,27 @@ final class Visit extends Base_Object {
 	 * @access public
 	 * @since  2.2
 	 *
-	 * @param bool|string $date_format Optional. How to format the visit date. Accepts 'date',
-	 *                                 'time', 'datetime', 'utc', or 'timestamp', 'object', or
-	 *                                 any valid date_format() string. If true, 'datetime' will
-	 *                                 be used. Default false.
-	 * @return string|\Carbon\Carbon Visit date. If `$format` is not false, it will be formatted.
-	 *                               If `$format` is 'object', a Carbon object will be returned
-	 *                               for further manipulation.
+	 * @see \Carbon\Carbon::format()
+	 *
+	 * @param true|string $date_format Optional. How to format the visit date. Accepts 'date',
+	 *                                 'time', 'datetime', 'utc', 'timestamp', 'object', or any
+	 *                                 valid date_format() string. If true, 'datetime' will be
+	 *                                 used. Default empty string.
+	 * @return string|\Carbon\Carbon Visit date. if `$format` is empty, the un-formatted `date` value
+	 *                               will be returned. If `$format` is 'object', a Carbon object will
+	 *                               be retrieved for further manipulation.
 	 */
-	public function date( $format = false ) {
+	public function date( $format = '' ) {
 
-		if ( false !== $format ) {
+		if ( empty( $format ) ) {
+
+			$date = $this->date;
+
+		} elseif ( 'object' === $format ) {
+
+			$date = affiliate_wp()->utils->date( $this->date );
+
+		} else {
 			if ( 'timestamp' === $format ) {
 				return affiliate_wp()->utils->date( $this->date )->timestamp;
 			}
@@ -183,10 +193,6 @@ final class Visit extends Base_Object {
 			}
 
 			$date = affiliate_wp()->utils->date->format( $this->date, $format );
-
-		} else {
-
-			$date = $this->date;
 
 		}
 

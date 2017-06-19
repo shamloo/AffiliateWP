@@ -84,10 +84,6 @@ final class Date {
 				$formatted = $date->format( $this->date_format . ' ' . $this->time_format );
 				break;
 
-			case 'object':
-				$formatted = $date;
-				break;
-
 			default:
 				$formatted = $date->format( $type );
 				break;
