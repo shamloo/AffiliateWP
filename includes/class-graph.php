@@ -455,8 +455,8 @@ function affwp_get_report_dates( $timezone = '' ) {
 
 	$dates = array(
 		'range'     => affwp_get_filter_date_range(),
-		'date_from' => $filter_dates['start']->format( 'j/n/Y' ),
-		'date_to'   => $filter_dates['end']->format( 'j/n/Y' ),
+		'date_from' => $filter_dates['start']->format( 'n/j/Y' ),
+		'date_to'   => $filter_dates['end']->format( 'n/j/Y' ),
 		'day'       => $filter_dates['start']->format( 'd' ),
 		'day_end'   => $filter_dates['end']->format( 'd' ),
 		'm_start'   => $filter_dates['start']->month,
