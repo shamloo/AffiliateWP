@@ -45,7 +45,7 @@ final class Date {
 	 * @since  2.2
 	 */
 	public function __construct() {
-		$this->timezone    = get_option( 'timezone_string', 'utc' );
+		$this->timezone    = get_option( 'timezone_string' );
 		$this->date_format = get_option( 'date_format' );
 		$this->time_format = get_option( 'time_format' );
 	}
