@@ -68,11 +68,42 @@ class Affiliate_WP_Tracking {
 	}
 
 	/**
-	 * Output header scripts
+	 * Attempts to enqueue header scripts alongside jQuery.
 	 *
-	 * @since 1.0
+	 * If the 'jquery' handle is not set for enqueue as of {@see 'wp_head'} at priority 10,
+	 * then set header scripts to print via {@see 'wp_footer'}.
+	 *
+	 * @access public
+	 * @since  1.0
+	 * @since  2.0.10 Converted to a wrapper for a new protected print_header_script() helper.
 	 */
 	public function header_scripts() {
+		// Back-compat for direct calls.
+		if ( 'wp_head' !== current_action() ) {
+			$this->print_header_script();
+
+			return;
+		}
+
+		if ( wp_script_is( 'jquery', 'enqueued' )
+		     || wp_script_is( 'jquery', 'to_do' )
+		     || wp_script_is( 'jquery', 'done' )
+		) {
+			$this->print_header_script();
+		} else {
+			add_action( 'wp_footer', 'header_scripts' );
+		}
+	}
+
+	/**
+	 * Outputs header scripts.
+	 *
+	 * @access protected
+	 * @since  2.0.10
+	 *
+	 * @see header_scripts()
+	 */
+	protected function print_header_script() {
 		$referral_credit_last = affiliate_wp()->settings->get( 'referral_credit_last', 0 );
 ?>
 		<script type="text/javascript">
