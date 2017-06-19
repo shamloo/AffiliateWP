@@ -371,11 +371,9 @@ class Affiliate_WP_Graph {
 			'other'			=> __( 'Custom', 'affiliate-wp' )
 		) );
 
-		$dates = affwp_get_report_dates();
+		$date_range = affwp_get_filter_date_range();
 
-		$display = $dates['range'] == 'other' ? 'style="display:inline-block;"' : 'style="display:none;"';
-
-		$current_time = current_time( 'timestamp' );
+		$display = $date_range == 'other' ? 'style="display:inline-block;"' : 'style="display:none;"';
 
 		if ( $this->get( 'form_wrapper' ) ) {
 			?>
@@ -403,7 +401,7 @@ class Affiliate_WP_Graph {
 		<select id="affwp-graphs-date-options" class="affwp-graphs-date-options" name="range">
 		<?php
 			foreach ( $date_options as $key => $option ) {
-				echo '<option value="' . esc_attr( $key ) . '" ' . selected( $key, $dates['range'] ) . '>' . esc_html( $option ) . '</option>';
+				echo '<option value="' . esc_attr( $key ) . '" ' . selected( $key, $date_range ) . '>' . esc_html( $option ) . '</option>';
 			}
 		?>
 		</select>

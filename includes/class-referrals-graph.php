@@ -48,15 +48,7 @@ class Affiliate_WP_Referrals_Graph extends Affiliate_WP_Graph {
 		$rejected = array();
 		$pending  = array();
 
-		$dates = affwp_get_report_dates();
-
-		$start = $dates['year'] . '-' . $dates['m_start'] . '-' . $dates['day'] . ' 00:00:00';
-		$end   = $dates['year_end'] . '-' . $dates['m_end'] . '-' . $dates['day_end'] . ' 23:59:59';
-
-		$date  = array(
-			'start' => $start,
-			'end'   => $end
-		);
+		$dates = affwp_get_filter_dates();
 
 		$difference = ( strtotime( $date['end'] ) - strtotime( $date['start'] ) );
 
@@ -65,7 +57,7 @@ class Affiliate_WP_Referrals_Graph extends Affiliate_WP_Graph {
 		$referrals = affiliate_wp()->referrals->get_referrals( array(
 			'orderby'      => 'date',
 			'order'        => 'ASC',
-			'date'         => $date,
+			'date'         => $dates,
 			'number'       => -1,
 			'affiliate_id' => $this->get( 'affiliate_id' )
 		) );
