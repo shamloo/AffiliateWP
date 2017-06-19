@@ -57,8 +57,10 @@ final class Date {
 	 * @since  2.2
 	 *
 	 * @param string $date_string Date string to format.
-	 * @param string $type        Optional. Type of formatting. Accepts 'date', 'time',
-	 *                            'datetime', or 'utc'. Default 'datetime'.
+	 * @param string $type        Optional. Type of formatting or actual date format string.
+	 *                            Accepts shorthand formats 'date', 'time', 'datetime', or
+	 *                            'utc'. Also accepts any valid date_format() format string.
+	 *                            Default 'datetime'.
 	 * @return string Formatted date string.
 	 */
 	public function format( $date_string, $type = 'datetime' ) {
@@ -79,10 +81,16 @@ final class Date {
 				break;
 
 			case 'datetime':
-			default:
 				$formatted = $date->format( $this->date_format . ' ' . $this->time_format );
 				break;
 
+			case 'object':
+				$formatted = $date;
+				break;
+
+			default:
+				$formatted = $date->format( $type );
+				break;
 		}
 
 		return $formatted;

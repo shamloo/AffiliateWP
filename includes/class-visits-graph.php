@@ -48,22 +48,13 @@ class Affiliate_WP_Visits_Graph extends Affiliate_WP_Graph {
 		$converted   = array();
 		$unconverted = array();
 
-		$dates = affwp_get_report_dates();
-
-		$start = $dates['year'] . '-' . $dates['m_start'] . '-' . $dates['day'] . ' 00:00:00';
-		$end   = $dates['year_end'] . '-' . $dates['m_end'] . '-' . $dates['day_end'] . ' 23:59:59';
-
-		$date  = array(
-			'start' => $start,
-			'end'   => $end
-		);
-
+		$dates      = affwp_get_filter_dates();
 		$difference = ( strtotime( $date['end'] ) - strtotime( $date['start'] ) );
 
 		$args = wp_parse_args( $this->get( 'query_args' ), array(
 			'orderby'      => 'date',
 			'order'        => 'ASC',
-			'date'         => $date,
+			'date'         => $dates,
 			'number'       => -1,
 			'affiliate_id' => $this->get( 'affiliate_id' )
 		) );
@@ -81,9 +72,9 @@ class Affiliate_WP_Visits_Graph extends Affiliate_WP_Graph {
 				if ( in_array( $dates['range'], array( 'this_year', 'last_year' ), true )
 					|| $difference >= YEAR_IN_SECONDS
 				) {
-					$date = date( 'Y-m', strtotime( $visit->date ) );
+					$date = $visit->date( 'object' )->format( 'Y-m' );
 				} else {
-					$date = date( 'Y-m-d', strtotime( $visit->date ) );
+					$date = $visit->date( 'object' )->format( 'Y-m-d' );
 				}
 
 				$this->total += 1;
@@ -119,8 +110,8 @@ class Affiliate_WP_Visits_Graph extends Affiliate_WP_Graph {
 		}
 
 		$unconverted_visits = array();
-		$unconverted_visits[] = array( strtotime( $start ) * 1000 );
-		$unconverted_visits[] = array( strtotime( $end ) * 1000 );
+		$unconverted_visits[] = array( strtotime( $dates['start'] ) * 1000 );
+		$unconverted_visits[] = array( strtotime( $dates['end'] ) * 1000 );
 		foreach( $unconverted_data as $date => $count ) {
 
 			$unconverted_visits[] = array( strtotime( $date ) * 1000, $count );

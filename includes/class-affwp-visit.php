@@ -162,10 +162,13 @@ final class Visit extends Base_Object {
 	 * @access public
 	 * @since  2.2
 	 *
-	 * @param bool|string $date_format Optional. How to format the visit date. Accepts 'date', 'time',
-	 *                                 'datetime', 'utc', or 'timestamp'. If true, 'datetime' will be
-	 *                                 used. Default false.
-	 * @return string Visit date. If `$format` is not false, it will be formatted.
+	 * @param bool|string $date_format Optional. How to format the visit date. Accepts 'date',
+	 *                                 'time', 'datetime', 'utc', or 'timestamp', 'object', or
+	 *                                 any valid date_format() string. If true, 'datetime' will
+	 *                                 be used. Default false.
+	 * @return string|\Carbon\Carbon Visit date. If `$format` is not false, it will be formatted.
+	 *                               If `$format` is 'object', a Carbon object will be returned
+	 *                               for further manipulation.
 	 */
 	public function date( $format = false ) {
 
