@@ -405,3 +405,119 @@ function affwp_get_coupon_create_url( $integration, $affiliate_id = 0, $html = f
 
 	return $url;
 }
+
+/**
+ * Integration-specific coupon functions.
+ *
+ * @since 2.1
+ */
+
+/**
+ * Generates a unique coupon code string, used when generating an integration coupon.
+ *
+ * @param  integer            $affiliate_id  Affiliate ID.
+ * @param  string             $integration  Integration.
+ * @param  bool               $auto         Whether or not this is an auto-generated process.
+ *                                          Default is false.
+ *
+ * @return mixed array|false  $coupon       Coupon code string if successful, otherwise returns false.
+ * @since  2.1
+ */
+function affwp_generate_coupon_code( $affiliate_id = 0, $integration = '', $auto = false ) {
+
+	$coupon_code = false;
+
+	if ( ! $affiliate_id || empty( $integration ) ) {
+		affiliate_wp()->utils->log( 'affwp_generate_coupon_code: Both the integration and the Affiliate ID  must be provided.' );
+		return false;
+	}
+
+	$template_id = affwp_get_coupon_template_id( $integration );
+	$user_login  = affwp_get_affiliate_login( $affiliate_id ) ? affwp_get_affiliate_login( $affiliate_id ) : '';
+
+	/**
+	 * Uses the following data to build a coupon code:
+	 * - `affiliate_id`
+	 * - `user_login`
+	 * - Integration name, eg `edd` or `woocommerce`
+	 * - The integration coupon template ID
+	 */
+	if ( $template_id && $user_login ) {
+		// Given the following data:
+		// affiliate_id = 1
+		// user_login = `alf`
+		// integration = woocommerce
+		// template ID = 123
+		//
+		// The generated coupon code would be:
+		//
+		// 1-893f53c159eab9178ab181bad8da4262-woocommerce-123
+		$coupon_code = $affiliate_id . '-' . md5( $user_login ) . '-' . $integration . '-' . $template_id;
+	} elseif ( $template_id ) {
+		// Get the affiliate user name, since the user_login is not available.
+		$name = affwp_get_affiliate_name( $affiliate_id );
+		$coupon_code = $affiliate_id . '-' . md5( $name ) . '-' . $integration . '-' . $template_id;
+	} else {
+		// Bail, since the coupon template is not available for this integration.
+		affiliate_wp()->utils->log( 'affwp_generate_coupon_code: Unable to determine coupon template ID when generating coupon code for ' . $integration . '. Make sure to set the coupon template for this integration.' );
+	}
+
+	/**
+	 * Sets the coupon code when generating a coupon for a supported integration.
+	 *
+	 * Specify a string to use for the coupon code,
+	 * ensuring that the strings formatting is supported by the integration's coupon code sanitization.
+	 *
+	 * @param mixed string|false $coupon_code The generated coupon code string, otherwise returns false.
+	 * @since 2.1
+	 */
+	return apply_filters( 'affwp_generate_coupon_code', $coupon_code );
+}
+
+/**
+ * Generates an EDD coupon.
+ *
+ * @param  array              $args    Coupon arguments.
+ * @param  bool               $auto    Whether or not this is an auto-generated process.
+ *                                     Default is false.
+ *
+ * @return mixed array|false  $coupon  Coupon object if successful, otherwise returns false.
+ * @since  2.1
+ */
+function affwp_generate_edd_coupon( $args = array(), $auto = false ) {
+
+	$coupon = array();
+
+	// Bail if no affiliate ID is provided.
+	if ( empty( $args[ 'affiliate_id' ] ) ) {
+		affiliate_wp()->utils->log( 'No coupon arguments were provided. The affiliate ID must be set when generating a coupon for an integration.' );
+		return false;
+	}
+
+	// Set the coupon code, if provided.
+	if ( ! empty( $args[ 'coupon_code' ] ) ) {
+		$discount_args[ 'coupon_code' ] = $args[ 'coupon_code' ];
+	}
+
+	/**
+	 * If a coupon code is provided, use it.
+	 * Otherwise, generate the coupon code string by using the following data:
+	 * - Affiliate ID
+	 * - Coupon template data
+	 * - The date
+	 */
+	$coupon_code = isset( $args[ 'coupon_code' ] ) && ! empty( $args[ 'coupon_code' ] ) ? $args[ 'coupon_code' ] : affwp_generate_coupon_code( $affiliate_id, 'edd' );
+	// Required edd discount data:
+	//
+	// empty( $data['name'] )
+	// empty( $data['code'] )
+	// empty( $data['type'] )
+	// empty( $data['amount']
+
+	if ( edd_add_discount( $discount_args ) ) {
+		affwp_add_coupon( $discount_args );
+	} else {
+		affiliate_wp()->utils->log( 'affwp_generate_edd_coupon: Unable to generate EDD discount.' );
+		return false;
+	}
+}
