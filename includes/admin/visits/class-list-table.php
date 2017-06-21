@@ -386,7 +386,7 @@ class AffWP_Visits_Table extends List_Table {
 			'offset'          => $this->per_page * ( $page - 1 ),
 			'affiliate_id'    => $affiliate_id,
 			'referral_id'     => $referral_id,
-			'date'            => affwp_get_filter_dates(),
+			'date'            => affwp_get_filter_date_values(),
 			'campaign'        => $campaign,
 			'context'         => $context,
 			'orderby'         => $orderby,

@@ -430,14 +430,13 @@ class Affiliate_WP_Graph {
 		<div id="affwp-date-range-options" <?php echo $display; ?>>
 
 			<?php
-			$from = empty( $_REQUEST['filter_from'] ) ? '' : $_REQUEST['filter_from'];
-			$to   = empty( $_REQUEST['filter_to'] )   ? '' : $_REQUEST['filter_to'];
+			$filter_dates = affwp_get_filter_date_values();
 			?>
 			<span class="affwp-search-date">
 				<span><?php _ex( 'From', 'date filter', 'affiliate-wp' ); ?></span>
-				<input type="text" class="affwp-datepicker" autocomplete="off" name="filter_from" placeholder="<?php esc_attr_e( 'From - mm/dd/yyyy', 'affiliate-wp' ); ?>" aria-label="<?php esc_attr_e( 'From - mm/dd/yyyy', 'affiliate-wp' ); ?>" value="<?php echo esc_attr( $from ); ?>" />
+				<input type="text" class="affwp-datepicker" autocomplete="off" name="filter_from" placeholder="<?php esc_attr_e( 'From - mm/dd/yyyy', 'affiliate-wp' ); ?>" aria-label="<?php esc_attr_e( 'From - mm/dd/yyyy', 'affiliate-wp' ); ?>" value="<?php echo esc_attr( $filter_dates['start'] ); ?>" />
 				<span><?php _ex( 'To', 'date filter', 'affiliate-wp' ); ?></span>
-				<input type="text" class="affwp-datepicker" autocomplete="off" name="filter_to" placeholder="<?php esc_attr_e( 'To - mm/dd/yyyy', 'affiliate-wp' ); ?>" aria-label="<?php esc_attr_e( 'To - mm/dd/yyyy', 'affiliate-wp' ); ?>" value="<?php echo esc_attr( $to ); ?>" />
+				<input type="text" class="affwp-datepicker" autocomplete="off" name="filter_to" placeholder="<?php esc_attr_e( 'To - mm/dd/yyyy', 'affiliate-wp' ); ?>" aria-label="<?php esc_attr_e( 'To - mm/dd/yyyy', 'affiliate-wp' ); ?>" value="<?php echo esc_attr( $filter_dates['end'] ); ?>" />
 			</span>
 
 		</div>

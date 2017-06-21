@@ -103,12 +103,11 @@ function affwp_get_filter_dates( $values = 'strings', $timezone = '' ) {
 
 		case 'other':
 		default:
-			$filter_from = empty( $_REQUEST['filter_from'] ) ? 'now' : $_REQUEST['filter_from'];
-			$filter_to   = empty( $_REQUEST['filter_to'] )   ? 'now' : $_REQUEST['filter_to'];
+			$filter_dates = affwp_get_filter_date_values( true );
 
 			$dates = array(
-				'start' => affiliate_wp()->utils->date( $filter_from )->startOfDay(),
-				'end'   => affiliate_wp()->utils->date( $filter_to )->endOfDay(),
+				'start' => affiliate_wp()->utils->date( $filter_dates['start'] )->startOfDay(),
+				'end'   => affiliate_wp()->utils->date( $filter_dates['end'] )->endOfDay(),
 			);
 			break;
 
@@ -125,6 +124,33 @@ function affwp_get_filter_dates( $values = 'strings', $timezone = '' ) {
 	}
 
 	return $dates;
+
+}
+
+/**
+ * Retrieves values of the filter_from and filter_to request variables.
+ *
+ * @since 2.2
+ *
+ * @param bool $now Optional. Whether to default to 'now' when retrieving empty values. Default false.
+ * @return array {
+ *     Query date range for the current date filter request.
+ *
+ *     @type string $start Start day and time string based on the WP timezone.
+ *     @type string $end   End day and time string based on the WP timezone.
+ * }
+ */
+function affwp_get_filter_date_values( $now = false ) {
+	if ( true === $now ) {
+		$default = 'now';
+	} else {
+		$default = '';
+	}
+
+	return array(
+		'start' => empty( $_REQUEST['filter_from'] ) ? $default : $_REQUEST['filter_from'],
+		'end'   => empty( $_REQUEST['filter_to'] )   ? $default : $_REQUEST['filter_to']
+	);
 
 }
 

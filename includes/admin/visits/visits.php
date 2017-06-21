@@ -22,10 +22,10 @@ function affwp_visits_admin() {
 
 	$visits_table = new AffWP_Visits_Table();
 	$visits_table->prepare_items();
+
 	$affiliate_name = ! empty( $_REQUEST['user_name'] ) ? $_REQUEST['user_name'] : '';
-	$from   = ! empty( $_REQUEST['filter_from'] )   ? $_REQUEST['filter_from']   : '';
-	$to     = ! empty( $_REQUEST['filter_to'] )     ? $_REQUEST['filter_to']     : '';
-	$status = ! empty( $_REQUEST['filter_status'] ) ? $_REQUEST['filter_status'] : '';
+	$status         = ! empty( $_REQUEST['filter_status'] ) ? $_REQUEST['filter_status'] : '';
+	$filter_dates   = affwp_get_filter_date_values();
 
 	if ( ! empty( $_REQUEST['affiliate'] ) ) {
 		$affiliate_id = absint( $_REQUEST['affiliate'] );
@@ -55,8 +55,8 @@ function affwp_visits_admin() {
 				<input type="text" name="user_name" id="user_name" class="affwp-user-search" value="<?php echo esc_attr( $affiliate_name ); ?>" data-affwp-status="any" autocomplete="off" placeholder="<?php _e( 'Affiliate name', 'affiliate-wp' ); ?>" />
 			</span>
 			<input type="hidden" name="page" value="affiliate-wp-visits" />
-			<input type="text" class="affwp-datepicker" autocomplete="off" name="filter_from" placeholder="<?php esc_attr_e( 'From - mm/dd/yyyy', 'affiliate-wp' ); ?>" value="<?php echo esc_attr( $from ); ?>"/>
-			<input type="text" class="affwp-datepicker" autocomplete="off" name="filter_to" placeholder="<?php esc_attr_e( 'To - mm/dd/yyyy', 'affiliate-wp' ); ?>" value="<?php echo esc_attr( $to ); ?>"/>
+			<input type="text" class="affwp-datepicker" autocomplete="off" name="filter_from" placeholder="<?php esc_attr_e( 'From - mm/dd/yyyy', 'affiliate-wp' ); ?>" value="<?php echo esc_attr( $filter_dates['start'] ); ?>"/>
+			<input type="text" class="affwp-datepicker" autocomplete="off" name="filter_to" placeholder="<?php esc_attr_e( 'To - mm/dd/yyyy', 'affiliate-wp' ); ?>" value="<?php echo esc_attr( $filter_dates['end'] ); ?>"/>
 
 			<label class="screen-reader-text" for="filter_status"><?php _e( 'Filter by status', 'affiliate-wp' ); ?></label>
 			<select id="filter_status" name="filter_status" class="postform" style="margin-top:-1px;">

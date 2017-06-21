@@ -589,11 +589,10 @@ class AffWP_Referrals_Table extends List_Table {
 				<input type="text" name="affiliate_id" id="user_name" class="affwp-user-search" value="<?php echo esc_attr( $affiliate_name ); ?>" data-affwp-status="any" autocomplete="off" placeholder="<?php _e( 'Affiliate name', 'affiliate-wp' ); ?>" />
 			</span>
 			<?php
-			$from = ! empty( $_REQUEST['filter_from'] ) ? $_REQUEST['filter_from'] : '';
-			$to   = ! empty( $_REQUEST['filter_to'] )   ? $_REQUEST['filter_to']   : '';
+			$filter_dates = affwp_get_filter_date_values();
 
-			echo "<input type='text' class='affwp-datepicker' autocomplete='off' name='filter_from' placeholder='" . __( 'From - mm/dd/yyyy', 'affiliate-wp' ) . "' value='" . esc_attr( $from ) . "'/>";
-			echo "<input type='text' class='affwp-datepicker' autocomplete='off' name='filter_to' placeholder='" . __( 'To - mm/dd/yyyy', 'affiliate-wp' ) . "' value='" . esc_attr( $to ) . "'/>&nbsp;";
+			echo "<input type='text' class='affwp-datepicker' autocomplete='off' name='filter_from' placeholder='" . __( 'From - mm/dd/yyyy', 'affiliate-wp' ) . "' value='" . esc_attr( $filter_dates['start'] ) . "'/>";
+			echo "<input type='text' class='affwp-datepicker' autocomplete='off' name='filter_to' placeholder='" . __( 'To - mm/dd/yyyy', 'affiliate-wp' ) . "' value='" . esc_attr( $filter_dates['end'] ) . "'/>&nbsp;";
 
 			/**
 			 * Fires in the admin referrals screen, inside the search filters form area, prior to the submit button.
@@ -814,7 +813,7 @@ class AffWP_Referrals_Table extends List_Table {
 			'campaign'     => $campaign,
 			'amount'       => $amount,
 			'description'  => $description,
-			'date'         => affwp_get_filter_dates(),
+			'date'         => affwp_get_filter_date_values(),
 			'search'       => $is_search,
 			'orderby'      => sanitize_text_field( $orderby ),
 			'order'        => sanitize_text_field( $order )
