@@ -53,7 +53,7 @@
 				<?php foreach ( $payouts as $payout ) : ?>
 					<tr>
 						<td>
-							<?php echo esc_html( date_i18n( get_option( 'date_format' ), strtotime( $payout->date ) ) ); ?>
+							<?php echo esc_html( affwp_date_i18n( $payout->date( 'timestamp' ) ) ); ?>
 						</td>
 						<td>
 							<?php echo affwp_currency_filter( affwp_format_amount( $payout->amount ) ); ?>

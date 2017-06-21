@@ -180,8 +180,6 @@ class Export_Visits extends Batch\Export\CSV implements Batch\With_PreFetch {
 
 		if ( $visits ) {
 
-			$date_format = get_option( 'date_format' );
-
 			foreach( $visits as $visit ) {
 
 				$affiliate = sprintf( '%s (#%d)', affwp_get_affiliate_name( $visit->affiliate_id ), $visit->affiliate_id );
@@ -220,7 +218,7 @@ class Export_Visits extends Batch\Export\CSV implements Batch\With_PreFetch {
 					'url'             => $visit->url,
 					'referrer'        => $visit->referrer,
 					'context'         => $visit->context,
-					'date'            => date_i18n( $date_format, strtotime( $visit->date ) ),
+					'date'            => affwp_date_i18n( $visit->date( 'timestamp' ) ),
 				), $visit );
 
 				// Add slashing.

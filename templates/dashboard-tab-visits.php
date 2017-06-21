@@ -49,7 +49,7 @@
 							</span>
 						</td>
 						<td>
-							<?php echo esc_html( date_i18n( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $visit->date( 'timestamp' ) ) ); ?>
+							<?php echo esc_html( affwp_date_i18n( $visit->date( 'timestamp' ), affiliate_wp()->utils->date->datetime_format ) ); ?>
 						</td>
 					</tr>
 				<?php endforeach; ?>

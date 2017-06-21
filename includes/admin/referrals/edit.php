@@ -182,8 +182,8 @@ $disabled = disabled( (bool) $payout, true, false );
 							<?php
 							/* translators: 1: Visit date */
 							printf( _x( 'Date: %1$s (%2$s)', 'visit', 'affiliate-wp' ),
-								date_i18n( get_option( 'date_format' ), strtotime( $visit->date ) ),
-								date_i18n( get_option( 'time_format' ), strtotime( $visit->date ) )
+								affwp_date_i18n( $visit->date( 'timestamp' ), affiliate_wp()->utils->date->date_format ),
+								affwp_date_i18n( $visit->date( 'timestamp' ), affiliate_wp()->utils->date->time_format )
 							);
 							?>
 						</p>

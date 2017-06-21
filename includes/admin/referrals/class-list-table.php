@@ -206,7 +206,7 @@ class AffWP_Referrals_Table extends List_Table {
 	 * @access public
 	 * @since 1.0
 	 *
-	 * @param array $item Contains all the data of the affiliate
+	 * @param \AffWP\Referral $referral Contains all the data of the affiliate
 	 * @param string $column_name The name of the column
 	 *
 	 * @return string Column Name
@@ -215,7 +215,7 @@ class AffWP_Referrals_Table extends List_Table {
 		switch( $column_name ) {
 
 			case 'date' :
-				$value = date_i18n( get_option( 'date_format' ), strtotime( $referral->date ) );
+				$value = affwp_date_i18n( $referral->date( 'timestamp' ) );
 				break;
 
 			case 'description' :
@@ -367,27 +367,6 @@ class AffWP_Referrals_Table extends List_Table {
 		 * @param \AffWP\Referral  $referral The referral data.
 		 */
 		return apply_filters( 'affwp_referral_table_reference', $value, $referral );
-	}
-
-	/**
-	 * Renders the 'Date' column in the referrals list table.
-	 *
-	 * @access public
-	 * @since  2.2
-	 *
-	 * @param \AffWP\Referral $referral Current referral object.
-	 * @return string The formatted date.
-	 */
-	public function column_date( $referral ) {
-		/**
-		 * Filters a row for the Date column in the referrals list table.
-		 *
-		 * @since 2.2
-		 *
-		 * @param string          $date     Referral date.
-		 * @param \AffWP\Referral $referral Current referral object.
-		 */
-		return apply_filters( 'affwp_referral_table_date', $referral->date( 'date' ), $referral );
 	}
 
 	/**

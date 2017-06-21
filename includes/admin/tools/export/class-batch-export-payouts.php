@@ -193,8 +193,6 @@ class Export_Payouts extends Batch\Export\CSV implements Batch\With_PreFetch {
 
 		if( $payouts ) {
 
-			$date_format = get_option( 'date_format' );
-
 			foreach( $payouts as $payout ) {
 
 				if ( $owner_user = get_user_by( 'id', $payout->owner ) ) {
@@ -238,7 +236,7 @@ class Export_Payouts extends Batch\Export\CSV implements Batch\With_PreFetch {
 					'owner'         => $owner,
 					'payout_method' => $payout->payout_method,
 					'status'        => $payout->status,
-					'date'          => date_i18n( $date_format, strtotime( $payout->date ) ),
+					'date'          => affwp_date_i18n( $payout->date( 'timestamp' ) ),
 				), $payout );
 
 				// Add slashing.

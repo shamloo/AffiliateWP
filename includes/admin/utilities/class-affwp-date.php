@@ -39,15 +39,25 @@ final class Date {
 	public $time_format;
 
 	/**
+	 * A shorthand combination of the WordPress date and time formats.
+	 *
+	 * @access public
+	 * @since  2.2
+	 * @var    string
+	 */
+	public $datetime_format;
+
+	/**
 	 * Sets up the class.
 	 *
 	 * @access public
 	 * @since  2.2
 	 */
 	public function __construct() {
-		$this->timezone    = get_option( 'timezone_string' );
-		$this->date_format = get_option( 'date_format' );
-		$this->time_format = get_option( 'time_format' );
+		$this->timezone        = get_option( 'timezone_string' );
+		$this->date_format     = get_option( 'date_format' );
+		$this->time_format     = get_option( 'time_format' );
+		$this->datetime_format = $this->date_format . ' ' . $this->time_format;
 	}
 
 	/**
