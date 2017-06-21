@@ -105,7 +105,7 @@ $notes            = affwp_get_affiliate_meta( $affiliate->affiliate_id, 'notes',
 				</th>
 
 				<td>
-					<input class="medium-text" type="text" name="date_registered" id="date_registered" value="<?php echo esc_attr( date_i18n( get_option( 'date_format' ), $affiliate->date_registered( 'timestamp' ) ) ); ?>" disabled="1" />
+					<input class="medium-text" type="text" name="date_registered" id="date_registered" value="<?php echo esc_attr( affwp_date_i18n( $affiliate->date_registered( 'timestamp' ) ) ); ?>" disabled="1" />
 					<p class="description"><?php _e( 'The affiliate&#8217;s registration date. This cannot be changed.', 'affiliate-wp' ); ?></p>
 				</td>
 

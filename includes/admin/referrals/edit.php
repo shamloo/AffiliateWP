@@ -148,7 +148,7 @@ $disabled = disabled( (bool) $payout, true, false );
 				</th>
 
 				<td>
-					<input type="text" name="date" id="date" value="<?php echo esc_attr( date_i18n( get_option( 'date_format' ), strtotime( $referral->date ) ) ); ?>" disabled="disabled" />
+					<input type="text" name="date" id="date" value="<?php echo esc_attr( affwp_date_i18n( $referral->date( 'timestamp' ) ) ); ?>" disabled="disabled" />
 				</td>
 
 			</tr>

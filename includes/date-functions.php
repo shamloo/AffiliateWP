@@ -170,3 +170,28 @@ function affwp_get_filter_date_range() {
 
 	return $range;
 }
+
+/**
+ * Retrieves a localized, formatted date based on the WP timezone rather than UTC.
+ *
+ * @since 2.2
+ *
+ * @see \AffWP\Utils\Date::$timezone
+ *
+ * @param int    $timestamp Timestamp. Can either be based on UTC or WP settings.
+ * @param string $format    Optional. Any valid date format string. Default is the value
+ *                          of `\AffWP\Utils\Date::$timezone`.
+ *
+ * @return string The formatted date, translated if locale specifies it.
+ */
+function affwp_date_i18n( $timestamp, $format = '' ) {
+
+	if ( empty( $format ) ) {
+		$format = affiliate_wp()->utils->date->date_format;
+	}
+
+	// Ensure timestamp based on WP timezone.
+	$date = \Carbon\Carbon::createFromTimestamp( $timestamp, affiliate_wp()->utils->date->timezone );
+
+	return date_i18n( $format, $date->timestamp, false );
+}
