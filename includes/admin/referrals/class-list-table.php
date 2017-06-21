@@ -762,8 +762,6 @@ class AffWP_Referrals_Table extends List_Table {
 		$reference = isset( $_GET['reference'] )    ? $_GET['reference']       : '';
 		$context   = isset( $_GET['context'] )      ? $_GET['context']         : '';
 		$campaign  = isset( $_GET['campaign'] )     ? $_GET['campaign']        : '';
-		$from      = isset( $_GET['filter_from'] )  ? $_GET['filter_from']     : '';
-		$to        = isset( $_GET['filter_to'] )    ? $_GET['filter_to']       : '';
 		$order     = isset( $_GET['order'] )        ? $_GET['order']           : 'DESC';
 		$orderby   = isset( $_GET['orderby'] )      ? $_GET['orderby']         : 'referral_id';
 		$referral  = '';
@@ -776,14 +774,6 @@ class AffWP_Referrals_Table extends List_Table {
 		} else {
 			// Switch back to empty for the benefit of get_referrals().
 			$affiliate = '';
-		}
-
-		$date = array();
-		if( ! empty( $from ) ) {
-			$date['start'] = $from;
-		}
-		if( ! empty( $to ) ) {
-			$date['end']   = $to . ' 23:59:59';;
 		}
 
 		if( ! empty( $_GET['s'] ) ) {
@@ -824,7 +814,7 @@ class AffWP_Referrals_Table extends List_Table {
 			'campaign'     => $campaign,
 			'amount'       => $amount,
 			'description'  => $description,
-			'date'         => $date,
+			'date'         => affwp_get_filter_dates(),
 			'search'       => $is_search,
 			'orderby'      => sanitize_text_field( $orderby ),
 			'order'        => sanitize_text_field( $order )
