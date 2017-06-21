@@ -270,9 +270,9 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 					}
 
 					if ( ! empty( $where ) ) {
-						$where .= " AND `date_registered` >= '{$start}'";
+						$where .= "AND `date_registered` >= '{$start}' ";
 					} else {
-						$where .= " WHERE `date_registered` >= '{$start}'";
+						$where .= "WHERE `date_registered` >= '{$start}' ";
 					}
 
 				}
@@ -288,9 +288,9 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 					}
 
 					if( ! empty( $where ) ) {
-						$where .= " AND `date_registered` <= '{$end}'";
+						$where .= "AND `date_registered` <= '{$end}' ";
 					} else {
-						$where .= " WHERE `date_registered` <= '{$end}'";
+						$where .= "WHERE `date_registered` <= '{$end}' ";
 					}
 
 				}
@@ -300,12 +300,12 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 				$date = affiliate_wp()->utils->date( $args['date'], 'UTC' );
 
 				if( empty( $where ) ) {
-					$where .= " WHERE";
+					$where .= "WHERE ";
 				} else {
-					$where .= " AND";
+					$where .= "AND ";
 				}
 
-				$where .= " $date->year = YEAR ( date_registered ) AND $date->month = MONTH ( date_registered ) AND $date->day = DAY ( date_registered )";
+				$where .= "$date->year = YEAR ( date_registered ) AND $date->month = MONTH ( date_registered ) AND $date->day = DAY ( date_registered ) ";
 			}
 
 		}
