@@ -755,16 +755,17 @@ class AffWP_Referrals_Table extends List_Table {
 	 */
 	public function referrals_data() {
 
-		$page      = isset( $_GET['paged'] )        ? absint( $_GET['paged'] ) : 1;
-		$status    = isset( $_GET['status'] )       ? $_GET['status']          : '';
-		$affiliate = isset( $_GET['affiliate_id'] ) ? $_GET['affiliate_id']    : '';
-		$reference = isset( $_GET['reference'] )    ? $_GET['reference']       : '';
-		$context   = isset( $_GET['context'] )      ? $_GET['context']         : '';
-		$campaign  = isset( $_GET['campaign'] )     ? $_GET['campaign']        : '';
-		$order     = isset( $_GET['order'] )        ? $_GET['order']           : 'DESC';
-		$orderby   = isset( $_GET['orderby'] )      ? $_GET['orderby']         : 'referral_id';
-		$referral  = '';
-		$is_search = false;
+		$page        = isset( $_GET['paged'] )        ? absint( $_GET['paged'] ) : 1;
+		$status      = isset( $_GET['status'] )       ? $_GET['status']          : '';
+		$affiliate   = isset( $_GET['affiliate_id'] ) ? $_GET['affiliate_id']    : '';
+		$reference   = isset( $_GET['reference'] )    ? $_GET['reference']       : '';
+		$context     = isset( $_GET['context'] )      ? $_GET['context']         : '';
+		$campaign    = isset( $_GET['campaign'] )     ? $_GET['campaign']        : '';
+		$order       = isset( $_GET['order'] )        ? $_GET['order']           : 'DESC';
+		$orderby     = isset( $_GET['orderby'] )      ? $_GET['orderby']         : 'referral_id';
+		$referral    = '';
+		$description = '';
+		$is_search   = false;
 
 		$amount = isset( $_GET['amount'] ) ? sanitize_text_field( $_GET['amount'] ) : 0;
 
