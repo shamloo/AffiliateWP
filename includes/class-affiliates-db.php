@@ -138,7 +138,9 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	 *                                      array of fields. Default '*' (all).
 	 * }
 	 * @param bool  $count Optional. Whether to return only the total number of results found. Default false.
-	 * @return array|int Array of affiliate objects (if found), int if `$count` is true.
+	 * @return array|int Array of affiliate objects (if found), int if `$count` is true. Note that affiliate
+	 *                   registration dates are stored with the UTC timezone in mind and will be retrieved
+	 *                   as such.
 	 */
 	public function get_affiliates( $args = array(), $count = false ) {
 		global $wpdb;
