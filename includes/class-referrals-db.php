@@ -189,7 +189,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 		}
 
 		if ( ! empty( $data['date'] ) ) {
-			$args['date'] = date_i18n( 'Y-m-d H:i:s', strtotime( $data['date'] ) );
+			$args['date'] = affiliate_wp()->utils->date( $data['date'], 'UTC' )->toDateTimeString();
 		}
 
 		$args['affiliate_id']  = ! empty( $data['affiliate_id' ] ) ? absint( $data['affiliate_id'] )             : $referral->affiliate_id;
@@ -450,13 +450,13 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 				if( ! empty( $args['date']['start'] ) ) {
 
-					if( false !== strpos( $args['date']['start'], ':' ) ) {
-						$format = 'Y-m-d H:i:s';
-					} else {
-						$format = 'Y-m-d 00:00:00';
-					}
+					$start_date = affiliate_wp()->utils->date( $args['date']['start'], 'UTC' );
 
-					$start = esc_sql( date( $format, strtotime( $args['date']['start'] ) ) );
+					if( false !== strpos( $args['date']['start'], ':' ) ) {
+						$start = esc_usql( $start_date->toDateTimeString() );
+					} else {
+						$start = esc_sql( $start_date->startOfDay()->toDateTimeString() );
+					}
 
 					if ( ! empty( $where ) ) {
 						$where .= " AND `date` >= '{$start}'";
@@ -468,13 +468,13 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 				if ( ! empty( $args['date']['end'] ) ) {
 
-					if ( false !== strpos( $args['date']['end'], ':' ) ) {
-						$format = 'Y-m-d H:i:s';
-					} else {
-						$format = 'Y-m-d 23:59:59';
-					}
+					$end_date = affiliate_wp()->utils->date( $args['date']['end'], 'UTC' );
 
-					$end = esc_sql( date( $format, strtotime( $args['date']['end'] ) ) );
+					if ( false !== strpos( $args['date']['end'], ':' ) ) {
+						$end = esc_sql( $end_date->toDateTimeString() );
+					} else {
+						$end = esc_sql( $end_date->endOfDay()->toDateTimeString() );
+					}
 
 					if( ! empty( $where ) ) {
 						$where .= " AND `date` <= '{$end}'";
@@ -486,9 +486,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 			} else {
 
-				$year  = date( 'Y', strtotime( $args['date'] ) );
-				$month = date( 'm', strtotime( $args['date'] ) );
-				$day   = date( 'd', strtotime( $args['date'] ) );
+				$date = affiliate_wp()->utils->date( $args['date'], 'UTC' );
 
 				if( empty( $where ) ) {
 					$where .= " WHERE";
@@ -496,7 +494,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 					$where .= " AND";
 				}
 
-				$where .= " $year = YEAR ( date ) AND $month = MONTH ( date ) AND $day = DAY ( date )";
+				$where .= " $date->year = YEAR ( date ) AND $date->month = MONTH ( date ) AND $date->day = DAY ( date )";
 			}
 
 		}
