@@ -301,7 +301,7 @@ class Affiliate_WP_Admin_Notices {
 					$class = 'expired';
 					$message = sprintf(
 						__( 'Your license key expired on %s. Please <a href="%s" target="_blank">renew your license key</a>.', 'affiliate-wp' ),
-						affwp_date_i18n( strtotime( $license->expires, current_time( 'timestamp' ) ),
+						affwp_date_i18n( strtotime( $license->expires, current_time( 'timestamp' ) ) ),
 						'https://affiliatewp.com/checkout/?edd_license_key=' . $value . '&utm_campaign=admin&utm_source=licenses&utm_medium=expired'
 					);
 
