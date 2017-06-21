@@ -259,16 +259,39 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 
 			if( is_array( $args['date'] ) ) {
 
-				$start = affiliate_wp()->utils->date( $args['date']['start'], 'UTC' )->toDateTimeString();
-				$end   = affiliate_wp()->utils->date( $args['date']['end'], 'UTC' )->toDateTimeString();
+				if( ! empty( $args['date']['start'] ) ) {
 
-				if( empty( $where ) ) {
+					$start_date = affiliate_wp()->utils->date( $args['date']['start'], 'UTC' );
 
-					$where .= " WHERE `date_registered` >= '{$start}' AND `date_registered` <= '{$end}'";
+					if( false !== strpos( $args['date']['start'], ':' ) ) {
+						$start = esc_usql( $start_date->toDateTimeString() );
+					} else {
+						$start = esc_sql( $start_date->startOfDay()->toDateTimeString() );
+					}
 
-				} else {
+					if ( ! empty( $where ) ) {
+						$where .= " AND `date_registered` >= '{$start}'";
+					} else {
+						$where .= " WHERE `date_registered` >= '{$start}'";
+					}
 
-					$where .= " AND `date_registered` >= '{$start}' AND `date_registered` <= '{$end}'";
+				}
+
+				if ( ! empty( $args['date']['end'] ) ) {
+
+					$end_date = affiliate_wp()->utils->date( $args['date']['end'], 'UTC' );
+
+					if ( false !== strpos( $args['date']['end'], ':' ) ) {
+						$end = esc_sql( $end_date->toDateTimeString() );
+					} else {
+						$end = esc_sql( $end_date->endOfDay()->toDateTimeString() );
+					}
+
+					if( ! empty( $where ) ) {
+						$where .= " AND `date_registered` <= '{$end}'";
+					} else {
+						$where .= " WHERE `date_registered` <= '{$end}'";
+					}
 
 				}
 
