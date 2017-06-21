@@ -370,6 +370,27 @@ class AffWP_Referrals_Table extends List_Table {
 	}
 
 	/**
+	 * Renders the 'Date' column in the referrals list table.
+	 *
+	 * @access public
+	 * @since  2.2
+	 *
+	 * @param \AffWP\Referral $referral Current referral object.
+	 * @return string The formatted date.
+	 */
+	public function column_date( $referral ) {
+		/**
+		 * Filters a row for the Date column in the referrals list table.
+		 *
+		 * @since 2.2
+		 *
+		 * @param string          $date     Referral date.
+		 * @param \AffWP\Referral $referral Current referral object.
+		 */
+		return apply_filters( 'affwp_referral_table_date', $referral->date( 'date' ), $referral );
+	}
+
+	/**
 	 * Render the actions column
 	 *
 	 * @access public
