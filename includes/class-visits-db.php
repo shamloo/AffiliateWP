@@ -309,31 +309,51 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 
 				if( ! empty( $args['date']['start'] ) ) {
 
-					$where .= empty( $where ) ? "WHERE " : "AND ";
+					$start_date = affiliate_wp()->utils->date( $args['date']['start'], 'UTC' );
 
-					$start = esc_sql( date( 'Y-m-d H:i:s', strtotime( $args['date']['start'] ) ) );
+					if( false !== strpos( $args['date']['start'], ':' ) ) {
+						$start = esc_usql( $start_date->toDateTimeString() );
+					} else {
+						$start = esc_sql( $start_date->startOfDay()->toDateTimeString() );
+					}
 
-					$where .= "`date` >= '{$start}' ";
+					if ( ! empty( $where ) ) {
+						$where .= "AND `date` >= '{$start}' ";
+					} else {
+						$where .= "WHERE `date` >= '{$start}' ";
+					}
+
 				}
 
-				if( ! empty( $args['date']['end'] ) ) {
+				if ( ! empty( $args['date']['end'] ) ) {
 
-					$where .= empty( $where ) ? "WHERE " : "AND ";
+					$end_date = affiliate_wp()->utils->date( $args['date']['end'], 'UTC' );
 
-					$end = esc_sql( date( 'Y-m-d H:i:s', strtotime( $args['date']['end'] ) ) );
+					if ( false !== strpos( $args['date']['end'], ':' ) ) {
+						$end = esc_sql( $end_date->toDateTimeString() );
+					} else {
+						$end = esc_sql( $end_date->endOfDay()->toDateTimeString() );
+					}
 
-					$where .= "`date` <= '{$end}' ";
+					if( ! empty( $where ) ) {
+						$where .= "AND `date` <= '{$end}' ";
+					} else {
+						$where .= "WHERE `date` <= '{$end}' ";
+					}
+
 				}
 
 			} else {
 
-				$year  = date( 'Y', strtotime( $args['date'] ) );
-				$month = date( 'm', strtotime( $args['date'] ) );
-				$day   = date( 'd', strtotime( $args['date'] ) );
+				$date = affiliate_wp()->utils->date( $args['date'], 'UTC' );
 
-				$where .= empty( $where ) ? "WHERE " : "AND ";
+				if( empty( $where ) ) {
+					$where .= "WHERE ";
+				} else {
+					$where .= "AND ";
+				}
 
-				$where .= "$year = YEAR ( date ) AND $month = MONTH ( date ) AND $day = DAY ( date ) ";
+				$where .= "$date->year = YEAR ( date ) AND $date->month = MONTH ( date ) AND $date->day = DAY ( date ) ";
 			}
 
 		}
