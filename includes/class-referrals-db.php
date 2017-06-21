@@ -453,7 +453,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 					$start_date = affiliate_wp()->utils->date( $args['date']['start'], 'UTC' );
 
 					if( false !== strpos( $args['date']['start'], ':' ) ) {
-						$start = esc_usql( $start_date->toDateTimeString() );
+						$start = esc_sql( $start_date->toDateTimeString() );
 					} else {
 						$start = esc_sql( $start_date->startOfDay()->toDateTimeString() );
 					}
