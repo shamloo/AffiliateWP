@@ -259,8 +259,8 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 
 			if( is_array( $args['date'] ) ) {
 
-				$start = date( 'Y-m-d H:i:s', strtotime( $args['date']['start'] ) );
-				$end   = date( 'Y-m-d H:i:s', strtotime( $args['date']['end'] ) );
+				$start = affiliate_wp()->utils->date( $args['date']['start'], 'UTC' )->toDateTimeString();
+				$end   = affiliate_wp()->utils->date( $args['date']['end'], 'UTC' )->toDateTimeString();
 
 				if( empty( $where ) ) {
 
@@ -274,9 +274,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 
 			} else {
 
-				$year  = date( 'Y', strtotime( $args['date'] ) );
-				$month = date( 'm', strtotime( $args['date'] ) );
-				$day   = date( 'd', strtotime( $args['date'] ) );
+				$date = affiliate_wp()->utils->date( $args['date'], 'UTC' );
 
 				if( empty( $where ) ) {
 					$where .= " WHERE";
@@ -284,7 +282,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 					$where .= " AND";
 				}
 
-				$where .= " $year = YEAR ( date_registered ) AND $month = MONTH ( date_registered ) AND $day = DAY ( date_registered )";
+				$where .= " $date->year = YEAR ( date_registered ) AND $date->month = MONTH ( date_registered ) AND $date->day = DAY ( date_registered )";
 			}
 
 		}
