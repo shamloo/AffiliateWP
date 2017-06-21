@@ -349,17 +349,7 @@ class AffWP_Visits_Table extends List_Table {
 		$user_id      = isset( $_GET['user_id'] )   ? absint( $_GET['user_id'] )               : false;
 		$affiliate_id = isset( $_GET['affiliate'] ) ? absint( $_GET['affiliate'] )             : false;
 
-		$from   = ! empty( $_REQUEST['filter_from'] )   ? $_REQUEST['filter_from']   : '';
-		$to     = ! empty( $_REQUEST['filter_to'] )     ? $_REQUEST['filter_to']     : '';
 		$status = ! empty( $_REQUEST['filter_status'] ) ? $_REQUEST['filter_status'] : '';
-
-		$date = array();
-		if( ! empty( $from ) ) {
-			$date['start'] = $from;
-		}
-		if( ! empty( $to ) ) {
-			$date['end']   = $to . ' 23:59:59';
-		}
 
 		if ( $user_id && ! $affiliate_id ) {
 
@@ -396,7 +386,7 @@ class AffWP_Visits_Table extends List_Table {
 			'offset'          => $this->per_page * ( $page - 1 ),
 			'affiliate_id'    => $affiliate_id,
 			'referral_id'     => $referral_id,
-			'date'            => $date,
+			'date'            => affwp_get_filter_dates(),
 			'campaign'        => $campaign,
 			'context'         => $context,
 			'orderby'         => $orderby,
