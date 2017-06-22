@@ -394,7 +394,7 @@ class AffWP_Payouts_Table extends List_Table {
 		 * @param string                  $value  Localized payout date.
 		 * @param \AffWP\Affiliate\Payout $payout Current payout object.
 		 */
-		return apply_filters( 'affwp_payout_table_date', affwp_date_i18n( $payout->date( 'timestamp' ), $payout );
+		return apply_filters( 'affwp_payout_table_date', affwp_date_i18n( $payout->date( 'timestamp' ) ), $payout );
 	}
 
 	/**
