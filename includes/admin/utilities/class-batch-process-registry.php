@@ -160,7 +160,7 @@ class Registry extends Utils\Registry {
 
 		// Reenerate Coupons.
 		$this->register_process( 'regenerate-coupons', array(
-			'class' => 'AffWP\Utils\Batch_Process\Reenerate_Coupons',
+			'class' => 'AffWP\Utils\Batch_Process\Regenerate_Coupons',
 			'file'  => AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/class-batch-regenerate-coupons.php',
 		) );
 
