@@ -151,7 +151,7 @@ class Registry extends Utils\Registry {
 		// Generate Coupons.
 		$this->register_process( 'generate-coupons', array(
 			'class' => 'AffWP\Utils\Batch_Process\Generate_Coupons',
-			'file'  => AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-batch-generate-coupons.php',
+			'file'  => AFFILIATEWP_PLUGIN_DIR . 'includes/admin/coupons/class-batch-generate-coupons.php',
 		) );
 	}
 
