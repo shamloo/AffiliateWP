@@ -42,6 +42,8 @@ class Regenerate_Coupons extends Generate_Coupons implements Batch\With_PreFetch
 	public function pre_fetch() {
 		$affiliates_to_process = affiliate_wp()->utils->data->get( "{$this->batch_id}_affiliate_ids" );
 
+		$to_process = 0;
+
 		if ( false === $affiliates_to_process ) {
 			$all_affilites = affiliate_wp()->affiliates->get_affiliates( array(
 				'status' => 'active',
@@ -57,14 +59,12 @@ class Regenerate_Coupons extends Generate_Coupons implements Batch\With_PreFetch
 			$outstanding = array_diff( $all_affilites, $affiliates_with_coupons );
 
 			affiliate_wp()->utils->data->write( "{$this->batch_id}_affiliate_ids", $outstanding );
+
+			$to_process = count( $outstanding );
 		}
 
 
-		$total_affiliates = affiliate_wp()->affiliates->count( array(
-			'status' => 'active'
-		) );
-
-		$this->set_total_count( $total_affiliates );
+		$this->set_total_count( $to_process );
 	}
 
 	/**
