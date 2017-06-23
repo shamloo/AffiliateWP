@@ -1,108 +1,86 @@
 <?php
 namespace AffWP\Utils\Batch_Process;
 
+use AffWP\Utils;
 use AffWP\Utils\Batch_Process as Batch;
 
 /**
  * Implements a batch processor for generating coupons logs and exporting them to a CSV file.
  *
- * @since 2.0
+ * @since 2.1
  *
- * @see \AffWP\Utils\Batch_Process\Export\CSV
+ * @see \AffWP\Utils\Batch_Process
  * @see \AffWP\Utils\Batch_Process\With_PreFetch
  */
-class Generate_Coupons extends Batch\Export\CSV implements Batch\With_PreFetch {
+class Generate_Coupons extends Utils\Batch_Process implements Batch\With_PreFetch {
 
 	/**
 	 * Batch process ID.
 	 *
 	 * @access public
-	 * @since  2.0
+	 * @since  2.1
 	 * @var    string
 	 */
 	public $batch_id = 'generate-coupons';
 
 	/**
-	 * Export type.
-	 *
-	 * @access public
-	 * @since  2.0
-	 * @var    string
-	 */
-	public $export_type = 'coupons';
-
-	/**
 	 * Capability needed to perform the current export.
 	 *
 	 * @access public
-	 * @since  2.0
+	 * @since  2.1
 	 * @var    string
 	 */
 	public $capability = 'manage_coupons';
 
 	/**
-	 * The number of affiliates to process coupons for in each step.
+	 * The number of coupons to generate in each step.
 	 *
 	 * @access public
-	 * @since  2.0
+	 * @since  2.1
 	 * @var    int
 	 */
-	public $per_step = 1;
+	public $per_step = 20;
 
 	/**
-	 * Array of referrals to export.
+	 * Integration the affiliate coupons will be generated for.
 	 *
 	 * @access public
-	 * @since  1.9
-	 * @var    \AffWP\Referral[]
-	 */
-	public $referrals = array();
-
-	/**
-	 * ID of affiliate to generate a payout for.
-	 *
-	 * @access public
-	 * @since  2.0
+	 * @since  2.1
 	 * @var    string
 	 */
-	public $affiliate_id = 0;
+	public $integration = '';
 
 	/**
-	 * Start and/or end dates to retrieve referrals for.
+	 * ID for the integration coupon template.
 	 *
 	 * @access public
-	 * @since  2.0
-	 * @var    array
+	 * @since  2.1
+	 * @var    int
 	 */
-	public $date = array();
-
-	/**
-	 * The optional coupon code to use when generating a coupon.
-	 *
-	 * @access public
-	 * @since  2.0
-	 * @var    string
-	 */
-	public $coupon_code = 0;
+	public $integration_coupon_id = 0;
 
 	/**
 	 * Initializes the batch process.
 	 *
-	 * This is the point where any relevant data should be initialized for use by the processor methods.
+	 * This is the point where any relevant data should be initialized for use by the processor methods,
+	 * and it only runs on the first step.
 	 *
 	 * @access public
-	 * @since  2.0
+	 * @since  2.1
+	 *
+	 * @param null|array $data Optional. Submitted form data to use for prefetching – and ultimately for
+	 *                         use by subsequent steps. Default null.
 	 */
 	public function init( $data = null ) {
 
 		if ( null !== $data ) {
 
-			if ( ! empty( $data['user_name'] ) && $affiliate = affwp_get_affiliate( $data['user_name'] ) ) {
-				$this->affiliate_id = $affiliate->ID;
+			if ( ! empty( $data['integration'] ) ) {
+				$this->integration = sanitize_key( $data['integration'] );
 			}
 
-			if ( ! empty( $data['coupon_code'] ) ) {
-				$this->coupon_code = sanitize_text_field( $data['coupon_code'] );
+			if ( ! empty( $data['integration_coupon_id'] ) ) {
+				$this->integration_coupon_id = absint( $data['integration_coupon_id'] );
 			}
 
 		}
@@ -113,167 +91,70 @@ class Generate_Coupons extends Batch\Export\CSV implements Batch\With_PreFetch {
 	 * Pre-fetches data to speed up processing.
 	 *
 	 * @access public
-	 * @since  2.0
+	 * @since  2.1
 	 */
 	public function pre_fetch() {
-		// Referrals to export.
-		$compiled_data = affiliate_wp()->utils->data->get( "{$this->batch_id}_compiled_data", array() );
-
-		if ( false === $compiled_data ) {
-			$args = array(
-				'coupon_id'             => 0,
-				'integration_coupon_id' => 0,
-				'coupon_code'           => '',
-				'integration'           => '',
-				'affiliate_id'          => $this->affiliate_id,
-			);
-
-			$coupons = affiliate_wp()->affiliates->coupons->get_coupons( $args );
-
-			$this->compile_potential_coupons( $coupons );
-		}
-	}
-
-	/**
-	 * Retrieves processed affiliate and referral data based on the minimum amount (if any).
-	 *
-	 * @access protected
-	 * @since  2.0
-	 *
-	 * @param \AffWP\Referral[] $referrals List of referrals to compile possible coupons for.
-	 * @return array Processed affiliate and referral data.
-	 */
-	protected function compile_potential_coupons( $referrals ) {
-		$data = $affiliates = array();
-
-		if ( $referrals ) {
-
-			$global_currency = affwp_get_currency();
-
-			foreach ( $referrals as $referral ) {
-
-				if ( array_key_exists( $referral->affiliate_id, $data ) ) {
-					// Add the amount to an affiliate that already has a referral in the export
-					$amount = $data[ $referral->affiliate_id ]['amount'] + $referral->amount;
-
-					$data[ $referral->affiliate_id ]['amount']      = $amount;
-					$data[ $referral->affiliate_id ]['referrals'][] = $referral->ID;
-
-				} else {
-
-					$data[ $referral->affiliate_id ] = array(
-						'amount'    => $referral->amount,
-						'currency'  => ! empty( $referral->currency ) ? $referral->currency : $global_currency,
-						'referrals' => array( $referral->ID )
-					);
-
-				}
-			}
-
-			// Now determine which affiliates are above the minimum payout amount.
-			if ( $this->min_amount > 0 ) {
-				foreach ( $data as $affiliate_id => $payout ) {
-
-					if ( $payout['amount'] < $this->min_amount ) {
-						unset( $data[ $affiliate_id ] );
-					}
-
-				}
-			}
-		}
-
-		affiliate_wp()->utils->data->write( "{$this->batch_id}_compiled_data", $data );
-
-		// Set the total count based on the number of affiliate ids (keys).
-		$this->set_total_count( count( $data ) );
-	}
-
-	/**
-	 * Retrieves the columns for the CSV export.
-	 *
-	 * @access public
-	 * @since  2.0
-	 *
-	 * @return array The list of CSV columns.
-	 */
-	public function csv_cols() {
-		/**
-		 * Filters the list of CSV columns used when generating payout logs.
-		 *
-		 * @since 2.0.2
-		 *
-		 * @param array $columns CSV columns. Default 'email', 'amount', and 'currency'.
-		 */
-		return apply_filters( 'affwp_batch_generate_coupons_csv_cols', array(
-			'email'    => __( 'Email', 'affiliate-wp' ),
-			'amount'   => __( 'Amount', 'affiliate-wp' ),
-			'currency' => __( 'Currency', 'affiliate-wp' ),
+		$total_affiliates = affiliate_wp()->affiliates->count( array(
+			'status' => 'active'
 		) );
+
+		$this->set_total_count( $total_affiliates );
 	}
 
 	/**
-	 * Retrieves the referral export data for a single step in the process.
+	 * Processes a single step for generating affiliate coupons.
 	 *
 	 * @access public
-	 * @since  2.0
-	 *
-	 * @return array Data for a single step of the export.
+	 * @since  2.1
 	 */
-	public function get_data() {
-		$offset = $this->get_offset();
-
-		$coupons       = affiliate_wp()->utils->data->get( "{$this->batch_id}_compiled_data", array() );
-		$affiliate_ids = array_keys( $coupons );
-
-		if ( isset( $affiliate_ids[ $offset ] ) ) {
-			$affiliate_id = $affiliate_ids[ $offset ];
-		} else {
-			$affiliate_id = 0;
+	public function process_step() {
+		if ( ! $this->integration || ! $this->integration_coupon_id ) {
+			return new \WP_Error(
+				'missing_integration_data',
+				__( 'The integration and coupon template must be defined to generate affiliate coupons.', 'affiliate-wp' )
+			);
 		}
 
-		// Grab the next affiliate in the list.
-		$data = array();
+		$current_count = $this->get_current_count();
 
-		if ( array_key_exists( $affiliate_id, $coupons ) ) {
-			$current_payout = $coupons[ $affiliate_id ];
+		$affiliate_ids = affiliate_wp()->affiliates->get_affiliates( array(
+			'fields' => 'ids',
+			'status' => 'active',
+			'number' => $this->per_step,
+			'offset' => $this->get_offset(),
+		) );
 
-			$data[] = array(
-				'email'    => affwp_get_affiliate_payment_email( $affiliate_id ),
-				'amount'   => $coupons[ $affiliate_id ]['amount'],
-				'currency' => $coupons[ $affiliate_id ]['currency'],
+		// If there are no more affiliates to generate coupons for, we're done.
+		if ( empty( $affiliate_ids ) ) {
+			return 'done';
+		}
+
+		$generated = array();
+
+		foreach ( $affiliate_ids as $affiliate_id ) {
+			$args = array(
+				'affiliate_id'          => $affiliate_id,
+				'integration'           => $this->integration,
+				'integration_coupon_id' => $this->integration_coupon_id
 			);
 
-			affwp_add_payout( array(
-				'affiliate_id'  => $affiliate_id,
-				'referrals'     => $coupons[ $affiliate_id ]['referrals'],
-				'payout_method' => 'manual',
-			) );
+			$added = affwp_add_coupon( $args );
+
+			if ( $added ) {
+				$generated[] = $added;
+			}
 		}
 
-		/**
-		 * Filters the data retrieved for a single generated payout during batch processing.
-		 *
-		 * @since 2.0.2
-		 *
-		 * @param array $data {
-		 *     Payout data.
-		 *
-		 *     @type string $email    Affiliate payment email.
-		 *     @type float  $amount   Payout amount.
-		 *     @type string $currency Payout currency.
-		 * }
-		 * @param int   $affiliate_id Current affiliate ID.
-		 * @param array $coupons      Compiled coupons and referrals data where the keys are affiliate
-		 *                            IDs and values arrays of referral data.
-		 */
-		return apply_filters( 'affwp_batch_generate_coupons_get_data', $data, $affiliate_id, $coupons );
+		$this->set_current_count( $current_count + count( $generated ) );
+
+		return ++$this->step;
 	}
 
 	/**
 	 * Retrieves a message for the given code.
 	 *
 	 * @access public
-	 * @since  2.0
+	 * @since  2.1
 	 *
 	 * @param string $code Message code.
 	 * @return string Message.
@@ -286,15 +167,15 @@ class Generate_Coupons extends Batch\Export\CSV implements Batch\With_PreFetch {
 				$final_count = $this->get_current_count();
 
 				if ( ! $final_count ) {
-					$message = __( 'No unpaid referrals were found matching your criteria.', 'affiliate-wp' );
+					$message = __( 'No affiliate coupons were generated.', 'affiliate-wp' );
 				} else {
 					$message = sprintf(
 						_n(
-							'A payout log for %s affiliate was successfully generated.',
-							'A payout log for %s affiliates was successfully generated.',
+							'%1$s affiliate coupon was successfully generated for the selected %2$s coupon template.',
+							'%1$s affiliate coupons were successfully generated for the selected %2$s coupon template.',
 							$final_count,
 							'affiliate-wp'
-						), number_format_i18n( $final_count )
+						), number_format_i18n( $final_count ), $this->integration
 					);
 				}
 				break;
@@ -305,19 +186,6 @@ class Generate_Coupons extends Batch\Export\CSV implements Batch\With_PreFetch {
 		}
 
 		return $message;
-	}
-
-	/**
-	 * Defines logic to execute once batch processing is complete.
-	 *
-	 * @access public
-	 * @since  2.0
-	 * @abstract
-	 */
-	public function finish() {
-		$this->delete_counts();
-
-		affiliate_wp()->utils->data->delete( "{$this->batch_id}_compiled_data" );
 	}
 
 }
