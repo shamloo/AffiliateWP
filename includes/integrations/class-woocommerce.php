@@ -843,4 +843,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 	}
 
 }
-new Affiliate_WP_WooCommerce;
+
+if ( class_exists( 'WooCommerce' ) ) {
+	new Affiliate_WP_WooCommerce;
+}
