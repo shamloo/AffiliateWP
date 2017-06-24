@@ -376,4 +376,6 @@ class Affiliate_WP_Gravity_Forms extends Affiliate_WP_Base {
 
 }
 
-new Affiliate_WP_Gravity_Forms;
+if ( class_exists( 'GFCommon' ) ) {
+	new Affiliate_WP_Gravity_Forms;
+}
