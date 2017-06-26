@@ -612,8 +612,28 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 
 				break;
 
+			case 'woocommerce':
+
+					$args = array(
+				        'post_type'      => 'shop_coupon',
+				        'meta_key'       => 'affwp_is_coupon_template',
+				        'meta_value'     => 1,
+				        'orderby'        => 'meta_value_num',
+				        'fields'         => 'ids',
+				        'posts_per_page' => 1,
+				    );
+
+					$query = new \WP_Query;
+					$discount = $query->query( $args );
+
+				    if ( ! empty( $discount[0] ) ) {
+				        $template_id = absint( $discount[0] );
+				    }
+
+				break;
+
 			default:
-				affiliate_wp()->utils->log( sprintf( 'get_coupon_template_id: Unable to determine discount ID from %s integration.', $integration ) );
+				affiliate_wp()->utils->log( sprintf( 'get_coupon_template_id: Unable to determine coupon ID from %s integration.', $integration ) );
 				break;
 		}
 
