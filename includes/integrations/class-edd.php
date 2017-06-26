@@ -474,11 +474,6 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 	*/
 	public function discount_edit( $discount_id = 0 ) {
 
-		$path = AFFILIATEWP_PLUGIN_DIR . 'includes/integrations/coupons/class-' . $this->context . '-coupon.php';
-		if ( affwp_has_coupon_support( $this->context ) && file_exists( $path ) ) {
-			include $path;
-		}
-
 		add_filter( 'affwp_is_admin_page', '__return_true' );
 		affwp_admin_scripts();
 
@@ -514,9 +509,9 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 						</label>
 					</th>
 					<td>
-						<input type="checkbox" name="affwp_is_coupon_template" id="affwp_is_coupon_template" value="1"<?php checked( $disabled, true ); ?> />
+						<input type="checkbox" name="affwp_is_coupon_template" id="affwp_is_coupon_template" value="<?php checked( $disabled, true ); ?>" />
 
-						<p class="description"><?php _e( 'Check this option if you would like to use this discount as the template from which all EDD affiliate discounts are generated.', 'affiliate-wp' ); ?>
+						<p class="description"><?php _e( 'Check this option if you would like to use this discount as the template from which all auto-generated EDD affiliate discounts are created.', 'affiliate-wp' ); ?>
 						</p>
 					</td>
 				</tr>
@@ -566,8 +561,6 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 		 * @param int  $affiliate_id  Affiliate ID.
 		 * @param bool $is_template   Returns true if this EDD discount is used
 		 *                            as the affiliate coupon template.
-		 *
-		 * @see   AffWP\Affiliate\EDD_Coupon::create_coupon()
 		 * @since 2.1
 		 */
 		do_action( 'affwp_edd_coupon_store_discount_affiliate', $discount_id, $affiliate_id, $is_template );
