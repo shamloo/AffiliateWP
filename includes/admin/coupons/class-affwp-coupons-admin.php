@@ -219,7 +219,7 @@ class AffWP_Coupons_Admin {
 		</table>
 
 		<p class="description">
-			<?php echo __( 'The current coupons for this affiliate. Click Create Coupon above to create a coupon for any supported integrations without an existing coupon associated with this affiliate.', 'affiliate-wp' ); ?>
+			<?php echo __( 'The current coupons for this affiliate.', 'affiliate-wp' ); ?>
 		</p>
 
 	<?php

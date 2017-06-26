@@ -710,7 +710,7 @@ class Affiliate_WP_Settings {
 					),
 					'auto_generate_coupons_templates' => array(
 						'name' => __( 'Coupon templates', 'affiliate-wp' ),
-						'desc' => __( 'Create a coupon in your desired integration, and it will show here. Each integration can have one coupon template.', 'affiliate-wp' ),
+						'desc' => __( 'Create a coupon template in your desired integration, and it will show here. Each integration can have one coupon template.', 'affiliate-wp' ),
 						'type' => 'display',
 						'std' => $coupon_templates,
 						'sanitize_callback' => 'sanitize_text_field'
