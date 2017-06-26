@@ -334,7 +334,7 @@ function affwp_get_coupon_templates() {
 				} else {
 					$template_url = affiliate_wp()->affiliates->coupons->get_coupon_edit_url( $template_id, $integration_id );
 
-					$integration_output[] = sprintf( '<li>%1$s: %2$s: %3$s</li>',
+					$integration_output[] = sprintf( '<li data-integration="%1$s">%2$s: %3$s</li>',
 						esc_html( $integration_id ),
 						esc_html( $integration_term ),
 						sprintf( '<a href="%1$s">(%2$s)</a>',
