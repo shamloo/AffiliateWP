@@ -337,7 +337,7 @@ function affwp_get_coupon_templates() {
 					$integration_output[] = sprintf( '<li data-integration="%1$s">%2$s: %3$s</li>',
 						esc_html( $integration_id ),
 						esc_html( $integration_term ),
-						sprintf( '<a href="%1$s">(%2$s)</a>',
+						sprintf( '<a href="%1$s">View coupon (ID %2$s)</a>',
 							esc_url( $template_url ),
 							esc_html( $template_id )
 						)
