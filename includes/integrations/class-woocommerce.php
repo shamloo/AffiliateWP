@@ -383,27 +383,24 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Stores the affiliate ID in the discounts meta if it is an affiliate's discount
+	 * Stores the affiliate ID in the coupon meta if it is an affiliate's coupon, or if used as a
+	 * coupon template.
 	 *
 	 * @access  public
 	 * @since   1.1
 	*/
 	public function store_discount_affiliate( $coupon_id = 0 ) {
 
-		if( empty( $_POST['user_name'] ) ) {
-
-			delete_post_meta( $coupon_id, 'affwp_discount_affiliate' );
+		if( empty( $_POST['user_name'] ) && empty( $_POST['user_id'] ) && empty( $_POST['affwp_is_coupon_template'] ) ) {
 			return;
-
 		}
 
-		if( empty( $_POST['user_id'] ) && empty( $_POST['user_name'] ) ) {
-			return;
+		if( empty( $_POST['user_id'] ) || empty( $_POST['user_name'] ) ) {
+			delete_post_meta( $coupon_id, 'affwp_discount_affiliate' );
 		}
 
 		if( empty( $_POST['affwp_is_coupon_template'] ) || 0 == $_POST['affwp_is_coupon_template'] ) {
 			delete_post_meta( $coupon_id, 'affwp_is_coupon_template' );
-			return;
 		}
 
 		$data = affiliate_wp()->utils->process_request_data( $_POST, 'user_name' );
@@ -429,7 +426,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 		 *                            as the affiliate coupon template.
 		 * @since 2.1
 		 */
-		do_action( 'affwp_edd_coupon_store_discount_affiliate', $coupon_id, $affiliate_id, $is_template );
+		do_action( 'affwp_woocommerce_coupon_store_discount_affiliate', $coupon_id, $affiliate_id, $is_template );
 	}
 
 	/**
