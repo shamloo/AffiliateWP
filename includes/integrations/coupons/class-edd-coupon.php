@@ -14,7 +14,7 @@ namespace AffWP\Integration\EDD;
 use AffWP\Integration;
 
 /**
- * Implements logic for a managing EDD coupons.
+ * Implements logic for managing EDD coupons.
  *
  * @since 2.1
  *
