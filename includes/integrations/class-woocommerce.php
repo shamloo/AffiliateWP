@@ -361,11 +361,6 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 		}
 
 		$is_template = get_post_meta( $post->ID, 'affwp_is_coupon_template', true );
-
-		error_log( 'Post object: '. print_r( $post, true ) );
-
-		error_log($is_template);
-
 ?>
 		<p class="form-field affwp-woo-coupon-field">
 			<label for="user_name"><?php _e( 'Affiliate Discount?', 'affiliate-wp' ); ?></label>
@@ -419,10 +414,6 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 		update_post_meta( $coupon_id, 'affwp_is_coupon_template', $is_template );
 		update_post_meta( $coupon_id, 'affwp_discount_affiliate', $affiliate_id );
-
-		error_log('Things:');
-
-		error_log(get_post_meta( $coupon_id, 'affwp_is_coupon_template', true ));
 
 		// Create an AffiliateWP coupon object.
 		if ( affwp_add_coupon( $data ) ) {
