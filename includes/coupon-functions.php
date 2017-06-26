@@ -171,7 +171,7 @@ function affwp_get_coupon_referrals( $integration_coupon_id = 0, $integration = 
 }
 
 /**
- * Retrieves an array of coupon IDs based on the specified AffiliateWP integration.
+ * Retrieves an array of coupon IDs based on the specified AffiliateWP integration and affiliate ID.
  *
  * @since 2.1
  *
