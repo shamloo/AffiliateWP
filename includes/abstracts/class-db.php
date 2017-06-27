@@ -123,7 +123,7 @@ abstract class Affiliate_WP_DB {
 		global $wpdb;
 
 		if ( ! array_key_exists( $column, $this->get_columns() ) || empty( $row_id ) ) {
-			return false;
+			return null;
 		}
 
 		return $wpdb->get_var( $wpdb->prepare( "SELECT $column FROM $this->table_name WHERE $this->primary_key = '%s' LIMIT 1;", $row_id ) );
