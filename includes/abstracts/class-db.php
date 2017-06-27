@@ -453,7 +453,7 @@ abstract class Affiliate_WP_DB {
 			}
 		}
 
-		$fields_sql = implode( ', ', $fields );
+		$fields_sql .= implode( ', ', $fields );
 
 		if ( empty ( $fields_sql ) ) {
 			$fields_sql = '*';
