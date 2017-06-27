@@ -217,7 +217,7 @@ jQuery(document).ready(function($) {
 				var row     = select.parent().parent();
 				var options = '';
 
-				var selectName, selectRegex;
+				var selectName;
 
 				var columns = response.data.columns.sort(function(a,b) {
 					if( a < b ) return -1;
