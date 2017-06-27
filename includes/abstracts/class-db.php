@@ -216,7 +216,7 @@ abstract class Affiliate_WP_DB {
 	 *
 	 * @param  array  $data Column data. See get_column_defaults().
 	 * @param  string $type Optional. Data type context, e.g. 'affiliate', 'creative', etc. Default empty.
-	 * @return int          ID for the newly inserted record.
+	 * @return int|false ID for the newly inserted record, otherwise false.
 	 */
 	public function insert( $data, $type = '' ) {
 		global $wpdb;
