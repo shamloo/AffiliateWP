@@ -145,7 +145,7 @@ abstract class Affiliate_WP_DB {
 		if ( empty( $column ) || empty( $column_where ) || empty( $column_value )
 			|| ! array_key_exists( $column, $this->get_columns() )
 		) {
-			return false;
+			return null;
 		}
 
 		return $wpdb->get_var( $wpdb->prepare( "SELECT $column FROM $this->table_name WHERE $column_where = %s LIMIT 1;", $column_value ) );
