@@ -26,55 +26,61 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class AffWP_Affiliates_Table extends List_Table {
 
 	/**
-	 * Default number of items to show per page
+	 * Default number of items to show per page.
 	 *
-	 * @var string
-	 * @since 1.0
+	 * @access public
+	 * @since  1.0
+	 * @var    int
 	 */
 	public $per_page = 30;
 
 	/**
-	 * Total number of affiliates found
+	 * Total number of affiliates found.
 	 *
-	 * @var int
-	 * @since 1.0
+	 * @access public
+	 * @since  1.0
+	 * @var    int
 	 */
 	public $total_count;
 
 	/**
-	 * Number of active affiliates found
+	 * Number of active affiliates found.
 	 *
-	 * @var string
-	 * @since 1.0
+	 * @access public
+	 * @since  1.0
+	 * @var    int
 	 */
 	public $active_count;
 
 	/**
-	 *  Number of inactive affiliates found
+	 * Number of inactive affiliates found.
 	 *
-	 * @var string
-	 * @since 1.0
+	 * @access public
+	 * @since  1.0
+	 * @var    int
 	 */
 	public $inactive_count;
 
 	/**
-	 * Number of pending affiliates found
+	 * Number of pending affiliates found.
 	 *
-	 * @var string
-	 * @since 1.0
+	 * @access public
+	 * @since  1.0
+	 * @var    int
 	 */
 	public $pending_count;
 
 	/**
-	 * Number of rejected affiliates found
+	 * Number of rejected affiliates found.
 	 *
-	 * @var string
-	 * @since 1.0
+	 * @access public
+	 * @since  1.0
+	 * @var    int
 	 */
 	public $rejected_count;
 
 	/**
-	 * Get things started
+	 * Get things started.
 	 *
 	 * @access public
 	 * @since  1.0
