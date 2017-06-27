@@ -1,4 +1,4 @@
-/* global affwp_vars, wp, ajaxurl */
+/* global affwp_vars, wp, ajaxurl, postboxes, pagenow */
 jQuery(document).ready(function($) {
     // Settings uploader
 	var file_frame;
