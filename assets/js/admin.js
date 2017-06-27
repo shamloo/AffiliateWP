@@ -1,4 +1,4 @@
-/* global affwp_vars */
+/* global affwp_vars, wp, ajaxurl */
 jQuery(document).ready(function($) {
     // Settings uploader
 	var file_frame;
