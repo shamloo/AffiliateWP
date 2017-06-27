@@ -497,7 +497,7 @@ final class Affiliate_WP {
 		$license_key = $this->settings->get( 'license_key' );
 
 		// setup the updater
-		$affwp_updater = new AFFWP_Plugin_Updater( 'https://affiliatewp.com', __FILE__, array(
+		new AFFWP_Plugin_Updater( 'https://affiliatewp.com', __FILE__, array(
 				'version'   => AFFILIATEWP_VERSION,
 				'license'   => $license_key,
 				'item_name' => 'AffiliateWP',
