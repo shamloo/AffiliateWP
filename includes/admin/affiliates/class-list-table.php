@@ -757,8 +757,6 @@ class AffWP_Affiliates_Table extends List_Table {
 
 		$columns = $this->get_columns();
 
-		$hidden = array();
-
 		$sortable = $this->get_sortable_columns();
 
 		$this->get_column_info();
