@@ -1,4 +1,4 @@
-/* global affwp_batch_vars */
+/* global affwp_batch_vars, ajaxurl */
 jQuery(document).ready(function($) {
 
 	var AffWP_Batch, AffWP_Batch_Import;
