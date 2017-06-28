@@ -432,4 +432,7 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 	}
 
 }
-new Affiliate_WP_RCP;
+
+if ( function_exists( 'rcp_options_install' ) ) {
+	new Affiliate_WP_RCP;
+}

@@ -242,4 +242,7 @@ class Affiliate_WP_OptimizeMember extends Affiliate_WP_Base {
 	}
 
 }
-new Affiliate_WP_OptimizeMember;
+
+if ( function_exists( 'load_opm_plugin_screen' ) ) {
+	new Affiliate_WP_OptimizeMember;
+}

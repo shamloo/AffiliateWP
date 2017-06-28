@@ -261,4 +261,6 @@ class Affiliate_WP_Ninja_Forms extends Affiliate_WP_Base {
 	}
 }
 
-new Affiliate_WP_Ninja_Forms;
+if ( class_exists( 'Ninja_Forms' ) ) {
+	new Affiliate_WP_Ninja_Forms;
+}

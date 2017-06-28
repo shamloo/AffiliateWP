@@ -180,4 +180,7 @@ class Affiliate_WP_Stripe extends Affiliate_WP_Base {
 	}
 
 }
-new Affiliate_WP_Stripe;
+
+if ( class_exists( 'Stripe_Checkout' ) || class_exists( 'Stripe_Checkout_Pro' ) ) {
+	new Affiliate_WP_Stripe;
+}
