@@ -369,4 +369,7 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 		}
 	}
 }
-new Affiliate_WP_Exchange;
+
+if ( class_exists( 'IT_Exchange' ) ) {
+	new Affiliate_WP_Exchange;
+}

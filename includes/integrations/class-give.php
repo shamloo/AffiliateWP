@@ -262,4 +262,7 @@ class Affiliate_WP_Give extends Affiliate_WP_Base {
 	}
 
 }
-new Affiliate_WP_Give;
+
+if ( class_exists( 'Give' ) ) {
+	new Affiliate_WP_Give;
+}

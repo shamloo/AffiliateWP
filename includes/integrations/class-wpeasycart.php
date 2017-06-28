@@ -155,4 +155,7 @@ class Affiliate_WP_EasyCart extends Affiliate_WP_Base {
 
 	}
 }
-new Affiliate_WP_EasyCart;
+
+if ( function_exists( 'wpeasycart_load_startup' ) ) {
+	new Affiliate_WP_EasyCart;
+}

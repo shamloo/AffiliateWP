@@ -119,4 +119,7 @@ class Affiliate_WP_Shopp extends Affiliate_WP_Base {
 		return '<a href="' . esc_url( $url ) . '">' . $reference . '</a>';
 	}	
 }
-new Affiliate_WP_Shopp;
+
+if ( function_exists( 'shopp_order' ) ) {
+	new Affiliate_WP_Shopp;
+}

@@ -650,4 +650,7 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 	}
 
 }
-new Affiliate_WP_EDD;
+
+if ( class_exists( 'Easy_Digital_Downloads' ) ) {
+	new Affiliate_WP_EDD;
+}

@@ -170,8 +170,8 @@ abstract class Affiliate_WP_Base {
 
 		affiliate_wp()->utils->log( 'Referral retrieved successfully during complete_referral()' );
 
-		if ( is_object( $referral ) && $referral->status != 'pending' ) {
-			// This referral has already been completed, rejected, or paid
+		if ( is_object( $referral ) && $referral->status != 'pending' && $referral->status != 'rejected' ) {
+			// This referral has already been completed, or paid
 			return false;
 		}
 
@@ -244,6 +244,13 @@ abstract class Affiliate_WP_Base {
 
 		if ( is_object( $referral ) && 'paid' == $referral->status ) {
 			// This referral has already been paid so it cannot be rejected
+			affiliate_wp()->utils->log( sprintf( 'Referral #%d not Rejected because it is already paid', $referral->referral_id ) );
+			return false;
+		}
+
+		if ( is_object( $referral ) && 'pending' == $referral->status ) {
+			// This referral is pending so it cannot be rejected
+			affiliate_wp()->utils->log( sprintf( 'Referral #%d not Rejected because it is pending', $referral->referral_id ) );
 			return false;
 		}
 

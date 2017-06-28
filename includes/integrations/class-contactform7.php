@@ -575,4 +575,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	}
 
 }
-new Affiliate_WP_Contact_Form_7;
+
+if ( class_exists( 'WPCF7_ContactForm' ) ) {
+	new Affiliate_WP_Contact_Form_7;
+}

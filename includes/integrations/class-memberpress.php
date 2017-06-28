@@ -372,4 +372,7 @@ class Affiliate_WP_MemberPress extends Affiliate_WP_Base {
 		return false;
 	}
 }
-new Affiliate_WP_MemberPress;
+
+if ( class_exists( 'MeprAppCtrl' ) ) {
+	new Affiliate_WP_MemberPress;
+}

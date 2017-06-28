@@ -118,4 +118,7 @@ class Affiliate_WP_WPEC extends Affiliate_WP_Base {
 	}
 
 }
-new Affiliate_WP_WPEC;
+
+if ( class_exists( 'WP_eCommerce' ) ) {
+	new Affiliate_WP_WPEC;
+}

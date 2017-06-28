@@ -328,4 +328,7 @@ class Affiliate_WP_PMS extends Affiliate_WP_Base {
     }
 
 }
-new Affiliate_WP_PMS;
+
+if ( function_exists( 'pms_get_discount_by_code' ) ) {
+	new Affiliate_WP_PMS;
+}
