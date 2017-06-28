@@ -438,6 +438,7 @@ class Affiliate_WP_Settings {
 		}
 
 		$coupon_templates = affwp_get_coupon_templates();
+		$coupon_admin     = new AffWP_Coupons_Admin;
 
 		$settings = array(
 			/**
@@ -715,6 +716,12 @@ class Affiliate_WP_Settings {
 						'std' => $coupon_templates,
 						'sanitize_callback' => 'sanitize_text_field'
 					),
+					'generate_coupons' => array(
+						'name' => __( 'Generate coupons', 'affiliate-wp' ),
+						'desc' => sprintf( __( 'Choose the integrations to enable for auto-generated coupons. For each integration enabled, a coupon will automatically be generated for all affiliates, when their affiliate account is both registered and approved. Refer to the <a href="%s" target="_blank">documentation</a> for help using this option.', 'affiliate-wp' ), 'http://docs.affiliatewp.com/article/TODO' ),
+						'type' => 'multicheck',
+						'options' => affiliate_wp()->affiliates->coupons->get_coupon_templates()
+					)
 				)
 			),
 			/** Misc Settings */

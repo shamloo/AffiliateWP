@@ -683,9 +683,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 			return false;
 		}
 
-		$discount_id = $details->id;
-
-		return affiliate_wp()->affiliates->coupons->add( $details );
+		return affiliate_wp()->affiliates->coupons->add( $args );
 	}
 
 	/**
@@ -714,6 +712,63 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 		}
 
 		return $this->set_coupon_template();
+	}
+
+	/**
+	 * Filters the `affwp_has_coupon_support_list` function by enabled integrations.
+	 * Gets an array of currently-enabled integrations which have coupon support.
+	 *
+	 * @return array $integrations  Array of currently-enabled integrations which support coupons.
+	 * @see Affiliate_WP_Coupons_DB::get_coupon_template_id()
+	 * @since  2.1
+	 */
+	public function get_supported_integrations() {
+
+		$available = array();
+		$enabled   = affiliate_wp()->integrations->get_enabled_integrations();
+		$supported = affwp_has_coupon_support_list();
+
+		foreach ( $enabled as $integration ) {
+			if ( in_array( $integration, $supported ) ) {
+				$available[] = $integration;
+			}
+		}
+
+		/**
+		 * Returns an array of currently-enabled integrations which have coupon support.
+		 *
+		 * @param array $available  Array of currently-enabled integrations which have coupon support.
+		 * @since 2.1
+		 */
+		return apply_filters( 'affwp_integrations', $available );
+
+	}
+
+	/**
+	 * Returns a list of integrations which are currently-enabled, have coupon support,
+	 * and have a coupon template presently set.
+	 *
+	 * Determination of integrations which are currently-enabled and have coupon support
+	 * is provided by the method `get_coupon_integrations`.
+	 *
+	 * @since  2.1
+	 * @return array $templates  An array of supported integrations which have coupon templates
+	 *                           presently set. If none are set, an empty array is returned.
+	 */
+	public function get_coupon_templates() {
+
+		$templates    = array();
+		$integrations = $this->get_supported_integrations();
+
+		// Ensure that each integration has a coupon template which is currently set.
+		foreach ( $integrations as $integration ) {
+
+			if ( 0 !== affwp_get_coupon_template_id( $integration ) ) {
+				$templates[] = $integration;
+			}
+		}
+
+		return $templates;
 	}
 
 	/**

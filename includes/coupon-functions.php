@@ -251,6 +251,36 @@ function affwp_get_coupons_by_integration( $args ) {
 }
 
 /**
+ * Returns an array of inegrations which support coupons.
+ *
+ * @since  2.1
+ *
+ * @return array Array of integrations.
+ */
+function affwp_has_coupon_support_list() {
+
+	/**
+	 * An array of integration which support coupons.
+	 *
+	 * @param array $list Array of integrations which support coupons.
+	 * @since 2.1
+	 */
+	return apply_filters( 'affwp_has_coupon_support_list', array(
+		'edd'            => 'Easy Digital Downloads',
+		'gravityforms'   => 'Gravity Forms',
+		'exchange'       => 'iThemes Exchange',
+		'jigoshop'       => 'Jigoshop',
+		'lifterlms'      => 'LifterLMS',
+		'memberpress'    => 'MemberPress',
+		'pmp'            => 'Paid Memberships Pro',
+		'pms'            => 'Paid Member Subscriptions',
+		'rcp'            => 'Restrict Content Pro',
+		'woocommerce'    => 'WooCommerce'
+		)
+	);
+}
+
+/**
  * Checks whether the specified integration has support for coupons in AffiliateWP.
  *
  * @param  string  $integration The integration to check.
@@ -265,7 +295,7 @@ function affwp_has_coupon_support( $integration ) {
 	}
 
 	$integrations = affiliate_wp()->integrations->get_enabled_integrations();
-	$supported    = array( 'woocommerce', 'edd' );
+	$supported    = affwp_has_coupon_support_list();
 
 	$has_support = in_array( $integration, $supported, true ) && array_key_exists( $integration, $integrations );
 
@@ -282,12 +312,11 @@ function affwp_has_coupon_support( $integration ) {
 }
 
 /**
- * Retrieves the coupon template ID.
+ * Retrieves the coupon template ID, if set.
  *
  * @param  string $integration The integration.
+ * @return int    The coupon template ID if set, otherwise returns 0.
  * @since  2.1
- *
- * @return int The coupon template ID if set, otherwise 0.
  */
 function affwp_get_coupon_template_id( $integration ) {
 	return affiliate_wp()->affiliates->coupons->get_coupon_template_id( $integration );
