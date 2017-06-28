@@ -140,6 +140,52 @@ class Tab extends Reports\Tab {
 	}
 
 	/**
+	 * Registers the 'Total Earnings Paid' date-based tile.
+	 *
+	 * @access public
+	 * @since  2.1
+	 *
+	 * @see register_tile()
+	 */
+	public function total_earnings_generated_tile() {
+
+		$affiliate_id = $this->affiliate_id ? $this->affiliate_id : 0;
+
+		$referrals = affiliate_wp()->referrals->get_referrals( array(
+			'number'       => -1,
+			'fields'       => 'amount',
+			'date'         => $this->date_query,
+			'status'       => array( 'paid', 'unpaid', 'pending' ),
+			'affiliate_id' => $affiliate_id,
+		) );
+
+		if ( $this->affiliate_id ) {
+
+			$this->register_tile( 'affiliate_total_earnings_generated', array(
+				'label'           => __( 'Total Earnings Generated', 'affiliate-wp' ),
+				'type'            => 'amount',
+				'context'         => 'secondary',
+				'data'            => array_sum( $referrals ),
+				'comparison_data' => sprintf( __( 'Affiliate: <a href="%1$s">%2$s</a> | %3$s', 'affiliate-wp' ),
+					esc_url( $this->affiliate_link ),
+					$this->affiliate_name,
+					$this->get_date_comparison_label()
+				),
+			) );
+
+		} else {
+
+			$this->register_tile( 'total_earnings_generated', array(
+				'label' => __( 'Total Earnings Generated', 'affiliate-wp' ),
+				'type'  => 'amount',
+				'context' => 'tertiary',
+				'data'    => array_sum( $referrals ),
+				'comparison_data' => $this->get_date_comparison_label(),
+			) );
+		}
+	}
+
+	/**
 	 * Registers the 'Total Payouts Count' (all time) tile.
 	 *
 	 * @access public
@@ -153,7 +199,6 @@ class Tab extends Reports\Tab {
 			$this->register_tile( 'affiliate_total_payouts_count', array(
 				'label'           => __( 'Total Payouts Count (All Time)', 'affiliate-wp' ),
 				'type'            => 'number',
-				'context'         => 'tertiary',
 				'data'            => affiliate_wp()->affiliates->payouts->count( array( 'affiliate_id' => $this->affiliate_id ) ),
 				'comparison_data' => sprintf( __( 'Affiliate: <a href="%1$s">%2$s</a>', 'affiliate-wp' ),
 					esc_url( $this->affiliate_link ),
@@ -217,7 +262,7 @@ class Tab extends Reports\Tab {
 			$this->register_tile( 'average_payout_amount', array(
 				'label'           => __( 'Average Payout', 'affiliate-wp' ),
 				'type'            => 'amount',
-				'context'         => 'primary',
+				'context'         => 'secondary',
 				'data'            => array_sum( $payouts ) / count( $payouts ),
 				'comparison_data' => $this->get_date_comparison_label(),
 			) );
@@ -267,7 +312,7 @@ class Tab extends Reports\Tab {
 			$this->register_tile( 'average_referrals_per_payout', array(
 				'label'           => __( 'Average Referrals Per Payout', 'affiliate-wp' ),
 				'type'            => 'number',
-				'context'         => 'secondary',
+				'context'         => 'tertiary',
 				'data'            => array_sum( $counts ) / count( $payout_referrals ),
 				'comparison_data' => __( 'All Time', 'affiliate-wp' ),
 			) );
@@ -296,6 +341,7 @@ class Tab extends Reports\Tab {
 
 		$this->total_paid_all_time_tile();
 		$this->total_earnings_paid_tile();
+		$this->total_earnings_generated_tile();
 		$this->total_payouts_count_tile();
 		$this->average_payout_tile();
 		$this->average_referrals_per_payout_tile();
