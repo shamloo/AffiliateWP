@@ -149,7 +149,7 @@ class Affiliate_WP_Payouts_Graph extends \Affiliate_WP_Graph {
 					$date = date( 'Y-m-d', strtotime( $payout->date ) );
 				}
 
-				if ( empty( $paid[ $date ] ) ) {
+				if ( empty( $totals[ $date ] ) ) {
 					$totals[ $date ] = $payout->amount;
 				} else {
 					$totals[ $date ] += $payout->amount;
