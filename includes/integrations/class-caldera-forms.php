@@ -257,4 +257,7 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 	}
 
 }
-new Affiliate_WP_Caldera_Forms;
+
+if ( class_exists( 'Caldera_Forms' ) ) {
+	new Affiliate_WP_Caldera_Forms;
+}

@@ -202,4 +202,7 @@ class Affiliate_WP_S2Member extends Affiliate_WP_Base {
     }
 
 }
-new Affiliate_WP_S2Member;
+
+if ( function_exists( 'ws_plugin__s2member_pro_classes' ) ) {
+	new Affiliate_WP_S2Member;
+}
