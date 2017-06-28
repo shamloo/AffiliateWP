@@ -140,7 +140,7 @@ class Tab extends Reports\Tab {
 	}
 
 	/**
-	 * Registers the 'Total Earnings Paid' date-based tile.
+	 * Registers the 'Total Earnings Generated' date-based tile.
 	 *
 	 * @access public
 	 * @since  2.1
