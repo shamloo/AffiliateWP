@@ -970,4 +970,7 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 	<?php }
 
 }
-new Affiliate_WP_LifterLMS;
+
+if ( function_exists( 'LLMS' ) ) {
+	new Affiliate_WP_LifterLMS;
+}

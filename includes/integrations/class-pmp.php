@@ -395,4 +395,7 @@ class Affiliate_WP_PMP extends Affiliate_WP_Base {
 	}
 
 }
-new Affiliate_WP_PMP;
+
+if ( class_exists( 'MemberOrder' ) ) {
+	new Affiliate_WP_PMP;
+}

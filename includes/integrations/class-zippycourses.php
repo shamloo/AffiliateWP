@@ -321,4 +321,6 @@ class Affiliate_WP_ZippyCourses extends Affiliate_WP_Base {
 
 }
 
-new Affiliate_WP_ZippyCourses;
+if ( class_exists( 'Zippy_Event' ) ) {
+	new Affiliate_WP_ZippyCourses;
+}
