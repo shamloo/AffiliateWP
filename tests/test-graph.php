@@ -14,6 +14,7 @@ class Tests extends UnitTestCase {
 	/**
 	 * @covers ::affwp_get_report_dates()
 	 * @expectedDeprecated affwp_get_report_dates
+	 * @group dates
 	 */
 	public function test_get_report_dates_correct_this_month_at_the_end_of_the_month_utc() {
 
@@ -31,6 +32,7 @@ class Tests extends UnitTestCase {
 	/**
 	 * @covers ::affwp_get_report_dates()
 	 * @expectedDeprecated affwp_get_report_dates
+	 * @group dates
 	 */
 	public function test_get_report_dates_correct_this_month_at_the_end_of_the_month_nz() {
 
@@ -47,6 +49,7 @@ class Tests extends UnitTestCase {
 	/**
 	 * @covers ::affwp_get_report_dates()
 	 * @expectedDeprecated affwp_get_report_dates
+	 * @group dates
 	 */
 	public function test_get_report_dates_correct_this_month_at_the_beginning_of_the_month_utc() {
 
@@ -63,6 +66,7 @@ class Tests extends UnitTestCase {
 	/**
 	 * @covers ::affwp_get_report_dates()
 	 * @expectedDeprecated affwp_get_report_dates
+	 * @group dates
 	 */
 	public function test_get_report_dates_correct_this_month_at_the_beginning_of_the_month_pdt() {
 
@@ -79,6 +83,7 @@ class Tests extends UnitTestCase {
 	/**
 	 * @covers ::affwp_get_report_dates()
 	 * @expectedDeprecated affwp_get_report_dates
+	 * @group dates
 	 */
 	public function test_get_report_dates_correct_this_moment_utc() {
 

@@ -99,4 +99,108 @@ class Tests extends UnitTestCase {
 
 		$this->assertSame( 'double', gettype( $earnings ) );
 	}
+
+	/**
+	 * @covers \AffWP\Affiliate::date_registered()
+	 * @group dates
+	 */
+	public function test_date_registered_default_format_empty_should_return_stored_date_registered() {
+		$affiliate = affwp_get_affiliate( self::$affiliate_id );
+
+		$this->assertSame( current_time( 'mysql' ), $affiliate->date_registered() );
+	}
+
+	/**
+	 * @covers \AffWP\Affiliate::date_registered()
+	 * @group dates
+	 */
+	public function test_date_registered_format_true_should_return_datetime_formatted_date_registered() {
+		$affiliate = affwp_get_affiliate( self::$affiliate_id );
+
+		$expected = date( affiliate_wp()->utils->date->datetime_format, strtotime( $affiliate->date_registered ) );
+
+		$this->assertSame( $expected, $affiliate->date_registered( true ) );
+	}
+
+	/**
+	 * @covers \AffWP\Affiliate::date_registered()
+	 * @group dates
+	 */
+	public function test_date_registered_format_date_should_return_date_formatted_date_registered() {
+		$affiliate = affwp_get_affiliate( self::$affiliate_id );
+
+		$expected = date( affiliate_wp()->utils->date->date_format, strtotime( $affiliate->date_registered ) );
+
+		$this->assertSame( $expected, $affiliate->date_registered( 'date' ) );
+	}
+
+	/**
+	 * @covers \AffWP\Affiliate::date_registered()
+	 * @group dates
+	 */
+	public function test_date_registered_format_time_should_return_time_formatted_date_registered() {
+		$affiliate = affwp_get_affiliate( self::$affiliate_id );
+
+		$expected = date( affiliate_wp()->utils->date->time_format, strtotime( $affiliate->date_registered ) );
+
+		$this->assertSame( $expected, $affiliate->date_registered( 'time' ) );
+	}
+
+	/**
+	 * @covers \AffWP\Affiliate::date_registered()
+	 * @group dates
+	 */
+	public function test_date_registered_format_datetime_should_return_datetime_formatted_date_registered() {
+		$affiliate = affwp_get_affiliate( self::$affiliate_id );
+
+		$expected = date( affiliate_wp()->utils->date->datetime_format, strtotime( $affiliate->date_registered ) );
+
+		$this->assertSame( $expected, $affiliate->date_registered( 'datetime' ) );
+	}
+
+	/**
+	 * @covers \AffWP\Affiliate::date_registered()
+	 * @group dates
+	 */
+	public function test_date_registered_format_utc_should_return_datetime_formatted_date_registered() {
+		$affiliate = affwp_get_affiliate( self::$affiliate_id );
+
+		$expected = date( affiliate_wp()->utils->date->datetime_format, strtotime( $affiliate->date_registered ) );
+
+		$this->assertSame( $expected, $affiliate->date_registered( 'utc' ) );
+	}
+
+	/**
+	 * @covers \AffWP\Affiliate::date_registered()
+	 * @group dates
+	 */
+	public function test_date_registered_format_object_should_return_Carbon_object() {
+		$affiliate = affwp_get_affiliate( self::$affiliate_id );
+
+		$this->assertInstanceOf( '\Carbon\Carbon', $affiliate->date_registered( 'object' ) );
+	}
+
+	/**
+	 * @covers \AffWP\Affiliate::date_registered()
+	 * @group dates
+	 */
+	public function test_date_registered_format_timestamp_should_return_timestamp() {
+		$affiliate = affwp_get_affiliate( self::$affiliate_id );
+
+		$this->assertSame( strtotime( $affiliate->date_registered ), $affiliate->date_registered( 'timestamp' ) );
+	}
+
+	/**
+	 * @covers \AffWP\Affiliate::date_registered()
+	 * @group dates
+	 */
+	public function test_date_registered_format_real_date_format_should_return_formatted_date_registered() {
+		$format = 'l jS \of F Y h:i:s A';
+
+		$affiliate = affwp_get_affiliate( self::$affiliate_id );
+
+		$expected = date( $format, strtotime( $affiliate->date_registered ) );
+
+		$this->assertSame( $expected, $affiliate->date_registered( $format ) );
+	}
 }
