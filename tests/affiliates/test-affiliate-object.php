@@ -34,13 +34,25 @@ class Tests extends UnitTestCase {
 	protected static $affiliate_id = 0;
 
 	/**
+	 * Registration date fixture.
+	 *
+	 * @access protected
+	 * @var    string
+	 * @static
+	 */
+	protected static $date_registered;
+
+	/**
 	 * Set up fixtures once.
 	 */
 	public static function wpSetUpBeforeClass() {
 		self::$user_id = parent::affwp()->user->create();
 
+		self::$date_registered = current_time( 'mysql' );
+
 		self::$affiliate_id = parent::affwp()->affiliate->create( array(
-			'user_id' => self::$user_id
+			'user_id'         => self::$user_id,
+			'date_registered' => self::$date_registered
 		) );
 	}
 
@@ -107,7 +119,7 @@ class Tests extends UnitTestCase {
 	public function test_date_registered_default_format_empty_should_return_stored_date_registered() {
 		$affiliate = affwp_get_affiliate( self::$affiliate_id );
 
-		$this->assertSame( current_time( 'mysql' ), $affiliate->date_registered() );
+		$this->assertSame( self::$date_registered, $affiliate->date_registered() );
 	}
 
 	/**
