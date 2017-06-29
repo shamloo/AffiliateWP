@@ -61,12 +61,8 @@ class Affiliate_WP_Payouts_Graph extends \Affiliate_WP_Graph {
 			'fields'       => array( 'date', 'amount' ),
 		) );
 
-		$dates_primer = array(
-			(object) array( 'date' => $this->dates['start'], 'amount' => 0 ),
-			(object) array( 'date' => $this->dates['end'], 'amount' => 0 )
-		);
-
-		$referrals = array_merge( $dates_primer, $referrals );
+		$earnings[] = array( strtotime( $this->dates['start'] ) * 1000 );
+		$earnings[] = array( strtotime( $this->dates['end'] ) * 1000 );
 
 		if ( $referrals ) {
 
@@ -121,12 +117,8 @@ class Affiliate_WP_Payouts_Graph extends \Affiliate_WP_Graph {
 			'fields'       => array( 'date', 'amount' ),
 		) );
 
-		$dates_primer = array(
-			(object) array( 'date' => $this->dates['start'], 'amount' => 0 ),
-			(object) array( 'date' => $this->dates['end'], 'amount' => 0 )
-		);
-
-		$payouts = array_merge( $dates_primer, $payouts );
+		$paid[] = array( strtotime( $this->dates['start'] ) * 1000 );
+		$paid[] = array( strtotime( $this->dates['end'] ) * 1000 );
 
 		if ( $payouts ) {
 
@@ -142,7 +134,7 @@ class Affiliate_WP_Payouts_Graph extends \Affiliate_WP_Graph {
 					$date = date( 'Y-m-d', strtotime( $payout->date ) );
 				}
 
-				if ( empty( $paid[ $date ] ) ) {
+				if ( empty( $totals[ $date ] ) ) {
 					$totals[ $date ] = $payout->amount;
 				} else {
 					$totals[ $date ] += $payout->amount;
