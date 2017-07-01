@@ -171,7 +171,7 @@ function affwp_get_coupon_referrals( $integration_coupon_id = 0, $integration = 
 }
 
 /**
- * Retrieves an array of coupon IDs based on the specified AffiliateWP integration.
+ * Retrieves an array of coupon IDs based on the specified AffiliateWP integration and affiliate ID.
  *
  * @since 2.1
  *
@@ -218,18 +218,21 @@ function affwp_get_coupons_by_integration( $args ) {
 				// Returns an array of WP Post objects.
 				$discounts = edd_get_discounts( $discount_args );
 
-				foreach ($discounts as $discount) {
-					$referrals = affwp_get_coupon_referrals( $discount->ID, 'edd' );
-					$referrals = implode( ', ', wp_list_pluck( $referrals, 'referral_id' ) );
+				if ( $discounts ) {
+					foreach ( $discounts as $discount ) {
 
-					$coupons[ $discount->ID ] = array(
-						'integration_coupon_id' => $discount->ID,
-						'coupon_id'             => $coupon_id,
-						'integration'           => 'edd',
-						'coupon_code'           => get_post_meta( $discount->ID, '_edd_discount_code', true ),
-						'referrals'             => $referrals
+						$referrals = affwp_get_coupon_referrals( $discount->ID, 'edd' );
+						$referrals = implode( ', ', wp_list_pluck( $referrals, 'referral_id' ) );
 
-					);
+						$coupons[ $discount->ID ] = array(
+							'integration_coupon_id' => $discount->ID,
+							'coupon_id'             => $coupon_id,
+							'integration'           => 'edd',
+							'coupon_code'           => get_post_meta( $discount->ID, '_edd_discount_code', true ),
+							'referrals'             => $referrals
+
+						);
+					}
 				}
 
 				break;
@@ -248,6 +251,36 @@ function affwp_get_coupons_by_integration( $args ) {
 }
 
 /**
+ * Returns an array of inegrations which support coupons.
+ *
+ * @since  2.1
+ *
+ * @return array Array of integrations.
+ */
+function affwp_has_coupon_support_list() {
+
+	/**
+	 * An array of integration which support coupons.
+	 *
+	 * @param array $list Array of integrations which support coupons.
+	 * @since 2.1
+	 */
+	return apply_filters( 'affwp_has_coupon_support_list', array(
+		'edd'            => 'Easy Digital Downloads',
+		'gravityforms'   => 'Gravity Forms',
+		'exchange'       => 'iThemes Exchange',
+		'jigoshop'       => 'Jigoshop',
+		'lifterlms'      => 'LifterLMS',
+		'memberpress'    => 'MemberPress',
+		'pmp'            => 'Paid Memberships Pro',
+		'pms'            => 'Paid Member Subscriptions',
+		'rcp'            => 'Restrict Content Pro',
+		'woocommerce'    => 'WooCommerce'
+		)
+	);
+}
+
+/**
  * Checks whether the specified integration has support for coupons in AffiliateWP.
  *
  * @param  string  $integration The integration to check.
@@ -262,7 +295,7 @@ function affwp_has_coupon_support( $integration ) {
 	}
 
 	$integrations = affiliate_wp()->integrations->get_enabled_integrations();
-	$supported    = array( 'woocommerce', 'edd' );
+	$supported    = affwp_has_coupon_support_list();
 
 	$has_support = in_array( $integration, $supported, true ) && array_key_exists( $integration, $integrations );
 
@@ -279,12 +312,11 @@ function affwp_has_coupon_support( $integration ) {
 }
 
 /**
- * Retrieves the coupon template ID.
+ * Retrieves the coupon template ID, if set.
  *
  * @param  string $integration The integration.
+ * @return int    The coupon template ID if set, otherwise returns 0.
  * @since  2.1
- *
- * @return int The coupon template ID if set, otherwise 0.
  */
 function affwp_get_coupon_template_id( $integration ) {
 	return affiliate_wp()->affiliates->coupons->get_coupon_template_id( $integration );
@@ -331,10 +363,10 @@ function affwp_get_coupon_templates() {
 				} else {
 					$template_url = affiliate_wp()->affiliates->coupons->get_coupon_edit_url( $template_id, $integration_id );
 
-					$integration_output[] = sprintf( '<li>%1$s: %2$s: %3$s</li>',
+					$integration_output[] = sprintf( '<li data-integration="%1$s">%2$s: %3$s</li>',
 						esc_html( $integration_id ),
 						esc_html( $integration_term ),
-						sprintf( '<a href="%1$s">(%2$s)</a>',
+						sprintf( '<a href="%1$s">View coupon (ID %2$s)</a>',
 							esc_url( $template_url ),
 							esc_html( $template_id )
 						)

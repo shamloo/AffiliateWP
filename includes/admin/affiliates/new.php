@@ -119,8 +119,6 @@ $default_rate = affwp_abs_number_round( $default_rate );
 					<?php
 
 					$coupons_admin = new AffWP_Coupons_Admin;
-
-					$coupons_admin->create_coupons( $affiliate->affiliate_id );
 					$coupons_admin->coupons_table( $affiliate->affiliate_id );
 
 					?>
