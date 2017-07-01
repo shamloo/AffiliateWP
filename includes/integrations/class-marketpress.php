@@ -223,4 +223,7 @@ class Affiliate_WP_MarketPress extends Affiliate_WP_Base {
 	}
 
 }
-new Affiliate_WP_MarketPress;
+
+if ( class_exists( 'Marketpress' ) ) {
+	new Affiliate_WP_MarketPress;
+}

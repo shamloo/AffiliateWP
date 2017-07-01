@@ -106,4 +106,7 @@ class Affiliate_WP_Membermouse extends Affiliate_WP_Base {
 	}
 
 }
-new Affiliate_WP_Membermouse;
+
+if ( class_exists( 'MM_MembershipLevel' ) ) {
+	new Affiliate_WP_Membermouse;
+}

@@ -135,6 +135,10 @@ class Affiliate_WP_Upgrades {
 			$this->v202_upgrade();
 		}
 
+		if ( version_compare( $this->version, '2.0.10', '<' ) ) {
+			$this->v210_upgrade();
+		}
+
 		if ( version_compare( $this->version, '2.1.', '<' ) ) {
 			$this->v21_upgrade();
 		}
@@ -628,6 +632,19 @@ class Affiliate_WP_Upgrades {
 
 		wp_cache_set( 'last_changed', microtime(), 'visits' );
 		$this->log( 'Upgrade: The Visits cache has been invalidated following the 2.0.2 upgrade.' );
+
+		$this->upgraded = true;
+	}
+
+	/**
+	 * Performs database upgrades for version 2.0.10.
+	 *
+	 * @since 2.0.10
+	 * @access private
+	 */
+	private function v210_upgrade() {
+		update_option( 'affwp_flush_rewrites', '1' );
+		@affiliate_wp()->utils->log( 'Upgrade: AffiliateWP rewrite rules have been flushed following the 2.0.10 upgrade.' );
 
 		$this->upgraded = true;
 	}
