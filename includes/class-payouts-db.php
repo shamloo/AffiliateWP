@@ -404,7 +404,7 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 
 			if ( is_array( $amount ) && ! empty( $amount['min'] ) && ! empty( $amount['max'] ) ) {
 
-				$sc->where( 'amount' )->between( array( $amount['min'], $amount['max'] ), 'absint' );
+				$sc->where( 'amount' )->between( array( $amount['min'], $amount['max'] ), 'float' );
 
 			} else {
 
@@ -415,7 +415,7 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 						$compare = '=';
 					}
 
-					$sc->where( 'amount', $compare, absint( $amount ) );
+					$sc->where( 'amount', $compare, $amount, 'float' );
 				}
 			}
 
