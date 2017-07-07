@@ -134,34 +134,20 @@ class Database extends \Affiliate_WP_DB {
 			$args['number'] = 999999999999;
 		}
 
-		$where = $join = '';
+		$join  = '';
+		$claws = claws();
 
 		// Specific consumers.
 		if ( ! empty( $args['consumer_id'] ) ) {
 
-			$where .= empty( $where ) ? "WHERE " : "AND ";
+			$claws->where( 'consumer_id' )->in( $args['consumer_id'], 'int' );
 
-			if ( is_array( $args['consumer_id'] ) ) {
-				$consumers = implode( ',', array_map( 'intval', $args['consumer_id'] ) );
-			} else {
-				$consumers = intval( $args['consumer_id'] );
-			}
-
-			$where .= "`consumer_id` IN ( {$consumers} ) ";
 		}
 
 		// Specific consumer user IDs.
 		if ( ! empty( $args['user_id'] ) ) {
 
-			$where .= empty( $where ) ? "WHERE " : "AND ";
-
-			if ( is_array( $args['user_id'] ) ) {
-				$user_ids = implode( ',', array_map( 'intval', $args['user_id'] ) );
-			} else {
-				$user_ids = intval( $args['user_id'] );
-			}
-
-			$where .= "`user_id` IN( {$user_ids} ) ";
+			$claws->where( 'user_id' )->in( $args['user_id'], 'int' );
 
 		}
 
@@ -191,6 +177,8 @@ class Database extends \Affiliate_WP_DB {
 				$callback = 'affwp_get_rest_consumer';
 			}
 		}
+
+		$where = $claws->get_sql( 'where' );
 
 		$key = ( true === $count ) ? md5( 'affwp_consumers_count' . serialize( $args ) ) : md5( 'affwp_consumers_' . serialize( $args ) );
 
