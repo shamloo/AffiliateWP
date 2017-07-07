@@ -359,40 +359,21 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 			$args['number'] = 999999999999;
 		}
 
-		$where = $join = '';
+		$join = '';
+		$sc   = sidecar();
 
 		// Specific payouts.
 		if( ! empty( $args['payout_id'] ) ) {
 
-			$where .= empty( $where ) ? "WHERE " : "AND ";
+			$sc->where( 'payout_id' )->in( $args['payout_id'], 'int' );
 
-			if( is_array( $args['payout_id'] ) ) {
-				$payout_ids = implode( ',', array_map( 'intval', $args['payout_id'] ) );
-			} else {
-				$payout_ids = intval( $args['payout_id'] );
-			}
-
-			$payout_ids = esc_sql( $payout_ids );
-
-			$where .= "`payout_id` IN( {$payout_ids} ) ";
-
-			unset( $payout_ids );
 		}
 
 		// Affiliate(s).
 		if ( ! empty( $args['affiliate_id'] ) ) {
 
-			$where .= empty( $where ) ? "WHERE " : "AND ";
+			$sc->where( 'affiliate_id' )->in( $args['affiliate_id'], 'int' );
 
-			if ( is_array( $args['affiliate_id'] ) ) {
-				$affiliates = implode( ',', array_map( 'intval', $args['affiliate_id'] ) );
-			} else {
-				$affiliates = intval( $args['affiliate_id'] );
-			}
-
-			$affiliates = esc_sql( $affiliates );
-
-			$where .= "`affiliate_id` IN( {$affiliates} ) ";
 		}
 
 		// Referral ID(s).
@@ -405,14 +386,11 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 			$payout_ids = $this->get_payout_ids_by_referrals( $args['referrals'] );
 
 			if ( ! empty( $payout_ids ) ) {
-				$where .= empty( $where ) ? "WHERE " : "AND ";
-
-				$payout_ids = esc_sql( implode( ',', $payout_ids ) );
 
 				if ( ! empty( $args['search'] ) ) {
-					$where .= "`payout_id` LIKE '%%" . $payout_ids . "%%' ";
+					$sc->where( 'payout_id' )->like( $payout_ids );
 				} else {
-					$where .= "`payout_id` IN( {$payout_ids} ) ";
+					$sc->where( 'payout_id' )->in( $payout_ids, 'int' );
 				}
 			}
 
@@ -424,18 +402,11 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 
 			$amount = $args['amount'];
 
-			$where .= empty( $where ) ? "WHERE " : "AND ";
-
 			if ( is_array( $amount ) && ! empty( $amount['min'] ) && ! empty( $amount['max'] ) ) {
 
-				$minimum = absint( $amount['min'] );
-				$maximum = absint( $amount['max'] );
+				$sc->where( 'amount' )->between( array( $amount['min'], $amount['max'] ), 'absint' );
 
-				$where .= "`amount` BETWEEN {$minimum} AND {$maximum} ";
 			} else {
-
-				$amount  = absint( $amount );
-				$compare = '=';
 
 				if ( ! empty( $args['amount_compare'] ) ) {
 					$compare = $args['amount_compare'];
@@ -443,9 +414,9 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 					if ( ! in_array( $compare, array( '>', '<', '>=', '<=', '=', '!=' ) ) ) {
 						$compare = '=';
 					}
-				}
 
-				$where .= "`amount` {$compare} {$amount} ";
+					$sc->where( 'amount', $compare, absint( $amount ) );
+				}
 			}
 
 		}
@@ -453,40 +424,26 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 		// Payout method.
 		if ( ! empty( $args['payout_method'] ) ) {
 
-			$where .= empty( $where ) ? "WHERE " : "AND ";
+			$sc->where( 'payout_method' )->equals( $payment_method );
 
-			$payment_method = esc_sql( $args['payout_method'] );
-
-			$where .= "`payout_method` = '" . $payout_method . "' ";
 		}
 
 		// Owners.
 		if ( ! empty( $args['owner'] ) ) {
-			$where .= empty( $where ) ? "WHERE " : "AND ";
 
-			if ( is_array( $args['owner'] ) ) {
-				$owners = implode( ',', array_map( 'intval', $args['owner'] ) );
-			} else {
-				$owners = intval( $args['owner'] );
-			}
+			$sc->where( 'owner' )->in( $args['owner'], 'int' );
 
-			$owners = esc_sql( $owners );
-
-			$where .= "`owner` IN( {$owners} ) ";
 		}
 
 		// Status.
 		if ( ! empty( $args['status'] ) ) {
 
-			$where .= empty( $where ) ? "WHERE " : "AND ";
-
 			if ( ! in_array( $args['status'], array( 'paid', 'failed' ), true ) ) {
 				$args['status'] = 'paid';
 			}
 
-			$status = esc_sql( $args['status'] );
+			$sc->where( 'status' )->equals( $args['status'] );
 
-			$where .= "`status` = '" . $status . "' ";
 		}
 
 		// Date.
@@ -502,13 +459,9 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 						$format = 'Y-m-d 00:00:00';
 					}
 
-					$start = esc_sql( date( $format, strtotime( $args['date']['start'] ) ) );
+					$start = date( $format, strtotime( $args['date']['start'] ) );
 
-					if ( ! empty( $where ) ) {
-						$where .= " AND `date` >= '{$start}'";
-					} else {
-						$where .= " WHERE `date` >= '{$start}'";
-					}
+					$sc->where( 'date' )->gte( $start );
 
 				}
 
@@ -520,13 +473,9 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 						$format = 'Y-m-d 23:59:59';
 					}
 
-					$end = esc_sql( date( $format, strtotime( $args['date']['end'] ) ) );
+					$end = date( $format, strtotime( $args['date']['end'] ) );
 
-					if( ! empty( $where ) ) {
-						$where .= " AND `date` <= '{$end}'";
-					} else {
-						$where .= " WHERE `date` <= '{$end}'";
-					}
+					$sc->where( 'date' )->lte( $end );
 
 				}
 
@@ -536,13 +485,7 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 				$month = date( 'm', strtotime( $args['date'] ) );
 				$day   = date( 'd', strtotime( $args['date'] ) );
 
-				if( empty( $where ) ) {
-					$where .= " WHERE";
-				} else {
-					$where .= " AND";
-				}
-
-				$where .= " $year = YEAR ( date ) AND $month = MONTH ( date ) AND $day = DAY ( date )";
+				$sc->raw_sql( "$year = YEAR ( date ) AND $month = MONTH ( date ) AND $day = DAY ( date )", 'where' );
 			}
 
 		}
@@ -578,6 +521,8 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 				$callback = 'affwp_get_payout';
 			}
 		}
+
+		$where = $sc->get_sql( 'where' );
 
 		$key = ( true === $count ) ? md5( 'affwp_payouts_count' . serialize( $args ) ) : md5( 'affwp_payouts_' . serialize( $args ) );
 
