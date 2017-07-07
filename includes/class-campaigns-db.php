@@ -100,20 +100,13 @@ class Affiliate_WP_Campaigns_DB extends Affiliate_WP_DB {
 			$args['number'] = 999999999999;
 		}
 
-		$where = $join = '';
+		$join  = '';
+		$claws = claws();
 
 		// Specific affiliate(s).
 		if( ! empty( $args['affiliate_id'] ) ) {
 
-			$where .= empty( $where ) ? "WHERE " : "AND ";
-
-			if( is_array( $args['affiliate_id'] ) ) {
-				$affiliate_ids = implode( ',', array_map( 'intval', $args['affiliate_id'] ) );
-			} else {
-				$affiliate_ids = intval( $args['affiliate_id'] );
-			}
-
-			$where .= "`affiliate_id` IN( {$affiliate_ids} ) ";
+			$claws->where( 'affiliate_id' )->in( $args['affiliate_id'] );
 
 		}
 
@@ -141,23 +134,18 @@ class Affiliate_WP_Campaigns_DB extends Affiliate_WP_DB {
 		    || ( empty( $args['campaign'] ) && '=' !== $campaign_compare )
 		) {
 
-			$where .= empty( $where ) ? "WHERE " : "AND ";
-
 			if( is_array( $args['campaign'] ) ) {
 
 				if ( '!=' === $campaign_compare ) {
-					$where .= "`campaign` NOT IN(" . implode( ',', array_map( 'esc_sql', $args['campaign'] ) ) . ") ";
+					$claws->where( 'campaign' )->not_in( $args['campaign'] );
 				} else {
-					$where .= "`campaign` IN(" . implode( ',', array_map( 'esc_sql', $args['campaign'] ) ) . ") ";
+					$claws->where( 'campaign' )->in( $args['campaign'] );
 				}
 
 			} else {
 
-				if ( empty( $args['campaign'] ) ) {
-					$where .= "`campaign` {$campaign_compare} '' ";
-				} else {
-					$where .= "`campaign` {$campaign_compare} '{$args['campaign']}' ";
-				}
+				$claws->where( 'campaign', $campaign_compare, $args['campaign'] );
+
 			}
 
 		}
@@ -167,18 +155,12 @@ class Affiliate_WP_Campaigns_DB extends Affiliate_WP_DB {
 
 			$rate = $args['conversion_rate'];
 
-			$where .= empty( $where ) ? "WHERE " : "AND ";
-
 			if ( is_array( $rate ) && ! empty( $rate['min'] ) && ! empty( $rate['max'] ) ) {
 
-				$minimum = absint( $rate['min'] );
-				$maximum = absint( $rate['max'] );
-
-				$where .= "`conversion_rate` BETWEEN {$minimum} AND {$maximum} ";
+				$claws->where( 'conversion_rate' )->between( array( $rate['min'], $rate['max'] ), 'int' );
 
 			} else {
 
-				$rate  = absint( $rate );
 				$compare = '=';
 
 				if ( ! empty( $args['rate_compare'] ) ) {
@@ -189,7 +171,7 @@ class Affiliate_WP_Campaigns_DB extends Affiliate_WP_DB {
 					}
 				}
 
-				$where .= " `conversion_rate` {$compare} {$rate}";
+				$claws->where( 'conversion_rate', $compare, $rate, 'int' );
 			}
 		}
 
@@ -236,6 +218,8 @@ class Affiliate_WP_Campaigns_DB extends Affiliate_WP_DB {
 		} else {
 			$fields = $this->parse_fields( $args['fields'] );
 		}
+
+		$where = $claws->get_sql( 'where' );
 
 		$key = ( true === $count ) ? md5( 'affwp_campaigns_count' . serialize( $args ) ) : md5( 'affwp_campaigns_' . serialize( $args ) );
 
