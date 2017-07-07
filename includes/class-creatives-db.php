@@ -140,34 +140,21 @@ class Affiliate_WP_Creatives_DB extends Affiliate_WP_DB {
 			$args['number'] = 999999999999;
 		}
 
-		$where = $join = '';
+		$join = '';
+		$sc   = sidecar();
 
 		// Specific creative ID or IDs.
 		if ( ! empty( $args['creative_id'] ) ) {
 
-			$where .= empty( $where ) ? "WHERE " : "AND ";
+			$sc->where( 'creative_id' )->in( $args['creative_id'] );
 
-			if( is_array( $args['creative_id'] ) ) {
-				$creatives = implode( ',', array_map( 'intval', $args['creative_id'] ) );
-			} else {
-				$creatives = intval( $args['creative_id'] );
-			}
-
-			$where .= "`creative_id` IN( {$creatives} ) ";
 		}
 
 		// Status.
 		if ( ! empty( $args['status'] ) ) {
 
-			$where .= empty( $where ) ? "WHERE " : "AND ";
+			$sc->where( 'status' )->equals( $args['status'] );
 
-			$status = esc_sql( $args['status'] );
-
-			if ( ! empty( $where ) ) {
-				$where .= "`status` = '" . $status . "' ";
-			} else {
-				$where .= "`status` = '" . $status . "' ";
-			}
 		}
 
 		// There can be only two orders.
@@ -196,6 +183,8 @@ class Affiliate_WP_Creatives_DB extends Affiliate_WP_DB {
 				$callback = 'affwp_get_creative';
 			}
 		}
+
+		$where = $sc->get_sql( 'where' );
 
 		$key = ( true === $count ) ? md5( 'affwp_creatives_count' . serialize( $args ) ) : md5( 'affwp_creatives_' . serialize( $args ) );
 
