@@ -140,20 +140,20 @@ class Affiliate_WP_Creatives_DB extends Affiliate_WP_DB {
 			$args['number'] = 999999999999;
 		}
 
-		$join = '';
-		$sc   = sidecar();
+		$join  = '';
+		$claws = claws();
 
 		// Specific creative ID or IDs.
 		if ( ! empty( $args['creative_id'] ) ) {
 
-			$sc->where( 'creative_id' )->in( $args['creative_id'] );
+			$claws->where( 'creative_id' )->in( $args['creative_id'] );
 
 		}
 
 		// Status.
 		if ( ! empty( $args['status'] ) ) {
 
-			$sc->where( 'status' )->equals( $args['status'] );
+			$claws->where( 'status' )->equals( $args['status'] );
 
 		}
 
@@ -184,7 +184,7 @@ class Affiliate_WP_Creatives_DB extends Affiliate_WP_DB {
 			}
 		}
 
-		$where = $sc->get_sql( 'where' );
+		$where = $claws->get_sql( 'where' );
 
 		$key = ( true === $count ) ? md5( 'affwp_creatives_count' . serialize( $args ) ) : md5( 'affwp_creatives_' . serialize( $args ) );
 

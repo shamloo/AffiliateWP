@@ -338,7 +338,7 @@ final class Affiliate_WP {
 	 */
 	private function includes() {
 
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/libraries/sidecar/sidecar.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/libraries/claws/claws.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/abstracts/class-affwp-object.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affwp-affiliate.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affwp-creative.php';

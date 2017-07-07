@@ -151,27 +151,27 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 			$args['number'] = 999999999999;
 		}
 
-		$join = '';
-		$sc   = sidecar();
+		$join  = '';
+		$claws = claws();
 
 		// Specific visits.
 		if( ! empty( $args['visit_id'] ) ) {
 
-			$sc->where( 'visit_id' )->in( $args['visit_id'], 'int' );
+			$claws->where( 'visit_id' )->in( $args['visit_id'], 'int' );
 
 		}
 
 		// visits for specific affiliates
 		if( ! empty( $args['affiliate_id'] ) ) {
 
-			$sc->where( 'affiliate_id' )->in( $args['affiliate_id'], 'int' );
+			$claws->where( 'affiliate_id' )->in( $args['affiliate_id'], 'int' );
 
 		}
 
 		// visits for specific referral
 		if( ! empty( $args['referral_id'] ) ) {
 
-			$sc->where( 'referral_id' )->in( $args['referral_id'], 'int' );
+			$claws->where( 'referral_id' )->in( $args['referral_id'], 'int' );
 
 		}
 
@@ -201,14 +201,14 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 			if( is_array( $args['campaign'] ) ) {
 
 				if ( '!=' === $campaign_compare ) {
-					$sc->where( 'campaign' )->not_in( $args['campaign'] );
+					$claws->where( 'campaign' )->not_in( $args['campaign'] );
 				} else {
-					$sc->where( 'campaign' )->in( $args['campaign'] );
+					$claws->where( 'campaign' )->in( $args['campaign'] );
 				}
 
 			} else {
 
-				$sc->where( 'campaign', $campaign_compare, $args['campaign'] );
+				$claws->where( 'campaign', $campaign_compare, $args['campaign'] );
 
 			}
 
@@ -242,14 +242,14 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 			if( is_array( $args['context'] ) ) {
 
 				if ( '!=' === $context_compare ) {
-					$sc->where( 'context' )->not_in( $args['context'] );
+					$claws->where( 'context' )->not_in( $args['context'] );
 				} else {
-					$sc->where( 'context' )->in( $args['context'] );
+					$claws->where( 'context' )->in( $args['context'] );
 				}
 
 			} else {
 
-				$sc->where( 'context', $context_compare, $args['context'] );
+				$claws->where( 'context', $context_compare, $args['context'] );
 
 			}
 
@@ -260,11 +260,11 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 
 			if ( 'converted' === $args['referral_status'] ) {
 
-				$sc->where( 'referral_id' )->gt( 0 );
+				$claws->where( 'referral_id' )->gt( 0 );
 
 			} elseif ( 'unconverted' === $args['referral_status'] ) {
 
-				$sc->where( 'referral_id' )->equals( 0 );
+				$claws->where( 'referral_id' )->equals( 0 );
 
 			}
 
@@ -279,14 +279,14 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 
 					$start = date( 'Y-m-d H:i:s', strtotime( $args['date']['start'] ) );
 
-					$sc->where( 'date' )->gte( $start );
+					$claws->where( 'date' )->gte( $start );
 				}
 
 				if( ! empty( $args['date']['end'] ) ) {
 
 					$end = date( 'Y-m-d H:i:s', strtotime( $args['date']['end'] ) );
 
-					$sc->where( 'date' )->lte( $end );
+					$claws->where( 'date' )->lte( $end );
 				}
 
 			} else {
@@ -295,7 +295,7 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 				$month = date( 'm', strtotime( $args['date'] ) );
 				$day   = date( 'd', strtotime( $args['date'] ) );
 
-				$sc->raw_sql( "$year = YEAR ( date ) AND $month = MONTH ( date ) AND $day = DAY ( date )", 'where' );
+				$claws->raw_sql( "$year = YEAR ( date ) AND $month = MONTH ( date ) AND $day = DAY ( date )", 'where' );
 			}
 
 		}
@@ -304,11 +304,11 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 		if( ! empty( $args['search'] ) ) {
 
 			if ( filter_var( $args['search'], FILTER_VALIDATE_IP ) ) {
-				$sc->where( 'ip' )->like( $args['search'] );
+				$claws->where( 'ip' )->like( $args['search'] );
 			} else {
 				$search_value = esc_sql( $args['search'] );
 
-				$sc->raw_sql( "( `referrer` LIKE '%%" . $search_value . "%%' OR `url` LIKE '%%" . $search_value . "%%' )", 'where' );
+				$claws->raw_sql( "( `referrer` LIKE '%%" . $search_value . "%%' OR `url` LIKE '%%" . $search_value . "%%' )", 'where' );
 			}
 		}
 
@@ -338,7 +338,7 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 			}
 		}
 
-		$where = $sc->get_sql( 'where' );
+		$where = $claws->get_sql( 'where' );
 
 		$key = ( true === $count ) ? md5( 'affwp_visits_count' . serialize( $args ) ) : md5( 'affwp_visits_' . serialize( $args ) );
 

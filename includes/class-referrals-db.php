@@ -357,27 +357,27 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 			$args['number'] = 999999999999;
 		}
 
-		$join = '';
-		$sc   = sidecar();
+		$join  = '';
+		$claws = claws();
 
 		// Specific referrals
 		if( ! empty( $args['referral_id'] ) ) {
 
-			$sc->where( 'referral_id' )->in( $args['referral_id'], 'int' );
+			$claws->where( 'referral_id' )->in( $args['referral_id'], 'int' );
 
 		}
 
 		// Referrals for specific affiliates
 		if( ! empty( $args['affiliate_id'] ) ) {
 
-			$sc->where( 'affiliate_id' )->in( $args['affiliate_id'], 'int' );
+			$claws->where( 'affiliate_id' )->in( $args['affiliate_id'], 'int' );
 
 		}
 
 		// Referrals for specific payouts
 		if( ! empty( $args['payout_id'] ) ) {
 
-			$sc->where( 'payout_id' )->in( $args['payout_id'], 'int' );
+			$claws->where( 'payout_id' )->in( $args['payout_id'], 'int' );
 
 		}
 
@@ -388,7 +388,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 			if ( is_array( $amount ) && ! empty( $amount['min'] ) && ! empty( $amount['max'] ) ) {
 
-				$sc->where( 'amount' )->between( array( $amount['min'], $amount['max'] ), 'absint' );
+				$claws->where( 'amount' )->between( array( $amount['min'], $amount['max'] ), 'absint' );
 
 			} else {
 
@@ -400,13 +400,13 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 					$compare = '=';
 				}
 
-				$sc->where( 'amount', $compare, $amount );
+				$claws->where( 'amount', $compare, $amount );
 			}
 		}
 
 		if( ! empty( $args['status'] ) ) {
 
-			$sc->where( 'status' )->in( $args['status'] );
+			$claws->where( 'status' )->in( $args['status'] );
 
 		}
 
@@ -424,7 +424,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 					$start = date( $format, strtotime( $args['date']['start'] ) );
 
-					$sc->where( 'date' )->gte( $start );
+					$claws->where( 'date' )->gte( $start );
 
 				}
 
@@ -438,7 +438,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 					$end = date( $format, strtotime( $args['date']['end'] ) );
 
-					$sc->where( 'date' )->lte( $end );
+					$claws->where( 'date' )->lte( $end );
 
 				}
 
@@ -448,7 +448,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 				$month = date( 'm', strtotime( $args['date'] ) );
 				$day   = date( 'd', strtotime( $args['date'] ) );
 
-				$sc->raw_sql( "$year = YEAR ( date ) AND $month = MONTH ( date ) AND $day = DAY ( date )", 'where' );
+				$claws->raw_sql( "$year = YEAR ( date ) AND $month = MONTH ( date ) AND $day = DAY ( date )", 'where' );
 			}
 
 		}
@@ -457,14 +457,14 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 			if( is_array( $args['reference'] ) ) {
 
-				$sc->where( 'reference' )->in( $args['reference'] );
+				$claws->where( 'reference' )->in( $args['reference'] );
 
 			} else {
 
 				if( ! empty( $args['search'] ) ) {
-					$sc->where( 'reference' )->like( $args['reference'] );
+					$claws->where( 'reference' )->like( $args['reference'] );
 				} else {
-					$sc->where( 'reference' )->equals( $args['reference'] );
+					$claws->where( 'reference' )->equals( $args['reference'] );
 				}
 
 			}
@@ -475,14 +475,14 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 			if( is_array( $args['context'] ) ) {
 
-				$sc->where( 'context' )->in( $args['context'] );
+				$claws->where( 'context' )->in( $args['context'] );
 
 			} else {
 
 				if ( ! empty( $args['search'] ) ) {
-					$sc->where( 'context' )->like( $args['context'] );
+					$claws->where( 'context' )->like( $args['context'] );
 				} else {
-					$sc->where( 'context' )->equals( $args['context'] );
+					$claws->where( 'context' )->equals( $args['context'] );
 				}
 			}
 
@@ -492,14 +492,14 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 			if( is_array( $args['campaign'] ) ) {
 
-				$sc->where( 'campaign' )->in( $args['campaign'] );
+				$claws->where( 'campaign' )->in( $args['campaign'] );
 
 			} else {
 
 				if ( ! empty( $args['search'] ) ) {
-					$sc->where( 'campaign' )->like( $args['campaign'] );
+					$claws->where( 'campaign' )->like( $args['campaign'] );
 				} else {
-					$sc->where( 'campaign' )->equals( $args['campaign'] );
+					$claws->where( 'campaign' )->equals( $args['campaign'] );
 				}
 
 			}
@@ -512,9 +512,9 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 			if( ! empty( $args['search'] ) ) {
 				$description = esc_sql( $args['description'] );
 
-				$sc->raw_sql( "LOWER(`description`) LIKE LOWER('%%" . $description . "%%') ", 'where' );
+				$claws->raw_sql( "LOWER(`description`) LIKE LOWER('%%" . $description . "%%') ", 'where' );
 			} else {
-				$sc->where( 'description' )->equals( $args['description'] );
+				$claws->where( 'description' )->equals( $args['description'] );
 			}
 		}
 
@@ -550,7 +550,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 			}
 		}
 
-		$where = $sc->get_sql( 'where' );
+		$where = $claws->get_sql( 'where' );
 
 		$key = ( true === $count ) ? md5( 'affwp_referrals_count' . serialize( $args ) ) : md5( 'affwp_referrals_' . serialize( $args ) );
 

@@ -166,30 +166,30 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 			$args['number'] = 999999999999;
 		}
 
-		$sc = sidecar();
+		$claws = claws();
 
 		if ( ! empty( $args['exclude'] ) ) {
 
-			$sc->where( 'affiliate_id' )->not_in( $args['exclude'], 'int' );
+			$claws->where( 'affiliate_id' )->not_in( $args['exclude'], 'int' );
 
 		}
 
 		// affiliates for specific users
 		if ( ! empty( $args['user_id'] ) ) {
 
-			$sc->where( 'user_id' )->in( $args['user_id'], 'int' );
+			$claws->where( 'user_id' )->in( $args['user_id'], 'int' );
 
 		}
 
 		// Specific affiliates.
 		if ( ! empty( $args['affiliate_id'] ) ) {
 
-			$sc->where( 'affiliate_id' )->in( $args['affiliate_id'], 'int' );
+			$claws->where( 'affiliate_id' )->in( $args['affiliate_id'], 'int' );
 
 		}
 
 		if ( ! empty( $args['status'] ) ) {
-			$sc->where( 'status' )->equals( $status );
+			$claws->where( 'status' )->equals( $status );
 		}
 
 		if ( ! empty( $args['search'] ) ) {
@@ -197,7 +197,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 
 			if ( is_numeric( $search_value ) ) {
 
-				$sc->where( 'affiliate_id' )->in( $search_value, 'int' );
+				$claws->where( 'affiliate_id' )->in( $search_value, 'int' );
 
 			} elseif ( is_string( $search_value ) ) {
 
@@ -207,14 +207,14 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 					$user    = get_user_by( 'email', $search_value );
 					$user_id = $user ? absint( $user->ID ) : 0;
 
-					$sc->raw_sql( "`user_id` = '" . $user_id . "' OR `payment_email` = '" . esc_sql( $search_value ) . "'", 'where' );
+					$claws->raw_sql( "`user_id` = '" . $user_id . "' OR `payment_email` = '" . esc_sql( $search_value ) . "'", 'where' );
 
 				} else {
 
 					$users = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM {$wpdb->users} WHERE display_name LIKE '%s' OR user_login LIKE '%s'", "%{$search_value}%", "%{$search_value}%" ) );
 					$users = ! empty( $users ) ? $users : 0;
 
-					$sc->where( 'user_id' )->in( $users, 'int' );
+					$claws->where( 'user_id' )->in( $users, 'int' );
 
 				}
 			}
@@ -229,7 +229,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 				$start = date( 'Y-m-d H:i:s', strtotime( $args['date']['start'] ) );
 				$end   = date( 'Y-m-d H:i:s', strtotime( $args['date']['end'] ) );
 
-				$sc->where( 'date_registered' )->between( array( $start, $end ) );
+				$claws->where( 'date_registered' )->between( array( $start, $end ) );
 
 			} else {
 
@@ -237,7 +237,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 				$month = date( 'm', strtotime( $args['date'] ) );
 				$day   = date( 'd', strtotime( $args['date'] ) );
 
-				$sc->raw_sql( "$year = YEAR ( date_registered ) AND $month = MONTH ( date_registered ) AND $day = DAY ( date_registered )", 'where' );
+				$claws->raw_sql( "$year = YEAR ( date_registered ) AND $month = MONTH ( date_registered ) AND $day = DAY ( date_registered )", 'where' );
 			}
 
 		}
@@ -320,7 +320,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 			}
 		}
 
-		$where = $sc->get_sql( 'where' );
+		$where = $claws->get_sql( 'where' );
 
 		$key = ( true === $count ) ? md5( 'affwp_affiliates_count' . serialize( $args ) ) : md5( 'affwp_affiliates_' . serialize( $args ) );
 

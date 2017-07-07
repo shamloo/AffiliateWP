@@ -359,20 +359,20 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 			$args['number'] = 999999999999;
 		}
 
-		$join = '';
-		$sc   = sidecar();
+		$join  = '';
+		$claws = claws();
 
 		// Specific payouts.
 		if( ! empty( $args['payout_id'] ) ) {
 
-			$sc->where( 'payout_id' )->in( $args['payout_id'], 'int' );
+			$claws->where( 'payout_id' )->in( $args['payout_id'], 'int' );
 
 		}
 
 		// Affiliate(s).
 		if ( ! empty( $args['affiliate_id'] ) ) {
 
-			$sc->where( 'affiliate_id' )->in( $args['affiliate_id'], 'int' );
+			$claws->where( 'affiliate_id' )->in( $args['affiliate_id'], 'int' );
 
 		}
 
@@ -388,9 +388,9 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 			if ( ! empty( $payout_ids ) ) {
 
 				if ( ! empty( $args['search'] ) ) {
-					$sc->where( 'payout_id' )->like( $payout_ids );
+					$claws->where( 'payout_id' )->like( $payout_ids );
 				} else {
-					$sc->where( 'payout_id' )->in( $payout_ids, 'int' );
+					$claws->where( 'payout_id' )->in( $payout_ids, 'int' );
 				}
 			}
 
@@ -404,7 +404,7 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 
 			if ( is_array( $amount ) && ! empty( $amount['min'] ) && ! empty( $amount['max'] ) ) {
 
-				$sc->where( 'amount' )->between( array( $amount['min'], $amount['max'] ), 'float' );
+				$claws->where( 'amount' )->between( array( $amount['min'], $amount['max'] ), 'float' );
 
 			} else {
 
@@ -415,7 +415,7 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 						$compare = '=';
 					}
 
-					$sc->where( 'amount', $compare, $amount, 'float' );
+					$claws->where( 'amount', $compare, $amount, 'float' );
 				}
 			}
 
@@ -424,14 +424,14 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 		// Payout method.
 		if ( ! empty( $args['payout_method'] ) ) {
 
-			$sc->where( 'payout_method' )->equals( $payment_method );
+			$claws->where( 'payout_method' )->equals( $payment_method );
 
 		}
 
 		// Owners.
 		if ( ! empty( $args['owner'] ) ) {
 
-			$sc->where( 'owner' )->in( $args['owner'], 'int' );
+			$claws->where( 'owner' )->in( $args['owner'], 'int' );
 
 		}
 
@@ -442,7 +442,7 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 				$args['status'] = 'paid';
 			}
 
-			$sc->where( 'status' )->equals( $args['status'] );
+			$claws->where( 'status' )->equals( $args['status'] );
 
 		}
 
@@ -461,7 +461,7 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 
 					$start = date( $format, strtotime( $args['date']['start'] ) );
 
-					$sc->where( 'date' )->gte( $start );
+					$claws->where( 'date' )->gte( $start );
 
 				}
 
@@ -475,7 +475,7 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 
 					$end = date( $format, strtotime( $args['date']['end'] ) );
 
-					$sc->where( 'date' )->lte( $end );
+					$claws->where( 'date' )->lte( $end );
 
 				}
 
@@ -485,7 +485,7 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 				$month = date( 'm', strtotime( $args['date'] ) );
 				$day   = date( 'd', strtotime( $args['date'] ) );
 
-				$sc->raw_sql( "$year = YEAR ( date ) AND $month = MONTH ( date ) AND $day = DAY ( date )", 'where' );
+				$claws->raw_sql( "$year = YEAR ( date ) AND $month = MONTH ( date ) AND $day = DAY ( date )", 'where' );
 			}
 
 		}
@@ -522,7 +522,7 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 			}
 		}
 
-		$where = $sc->get_sql( 'where' );
+		$where = $claws->get_sql( 'where' );
 
 		$key = ( true === $count ) ? md5( 'affwp_payouts_count' . serialize( $args ) ) : md5( 'affwp_payouts_' . serialize( $args ) );
 
