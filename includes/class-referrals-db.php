@@ -510,9 +510,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 		if( ! empty( $args['description'] ) ) {
 
 			if( ! empty( $args['search'] ) ) {
-				$description = esc_sql( $args['description'] );
-
-				$claws->add_clause_sql( "LOWER(`description`) LIKE LOWER('%%" . $description . "%%') ", 'where' );
+				$claws->add_clause_sql( "LOWER(`description`) LIKE LOWER('%%" . $wpdb->esc_like( $args['description'] ) . "%%') ", 'where' );
 			} else {
 				$claws->where( 'description' )->equals( $args['description'] );
 			}
