@@ -151,23 +151,22 @@ namespace Sandhills {
 		 * @param mixed           $values           Single value of varying types, or array of values.
 		 * @param string|callable $callback_or_type Sanitization callback to pass values through, or shorthand
 		 *                                          types to use preset callbacks. Default 'esc_sql'.
-		 * @param string          $compare          MySQL operator used for comparing the $value. Accepts '=', '!=',
+		 * @param string          $compare_type     MySQL operator used for comparing the $value. Accepts '=', '!=',
 		 *                                          '>', '>=', '<', '<=', 'LIKE', 'NOT LIKE', 'IN', 'NOT IN', 'BETWEEN',
 		 *                                          'NOT BETWEEN', 'EXISTS' or 'NOT EXISTS'.
 		 *                                          Default is 'IN' when `$value` is an array, '=' otherwise.
-		 *
 		 * @return \Sandhills\Claws Current Claws instance.
 		 */
-		public function where( $field, $compare = null, $values = null, $callback_or_type = 'esc_sql' ) {
+		public function where( $field, $compare_type = null, $values = null, $callback_or_type = 'esc_sql' ) {
 			$this->set_current_clause( 'where' );
 			$this->set_current_field( $field );
 
 			// Handle shorthand comparison phrases.
-			if ( isset( $compare ) && isset( $values ) ) {
+			if ( isset( $compare_type ) && isset( $values ) ) {
 
 				$callback = $this->get_callback( $callback_or_type );
 
-				$this->compare( $compare, $values, $callback );
+				$this->compare( $compare_type, $values, $callback );
 			}
 
 			return $this;
@@ -361,7 +360,7 @@ namespace Sandhills {
 		 *
 		 * @return \Sandhills\Claws Current Claws instance.
 		 */
-		public function like( $values, $callback_or_type = '', $operator = 'OR' ) {
+		public function like( $values, $callback_or_type = 'esc_like', $operator = 'OR' ) {
 			$sql = $this->get_like_sql( $values, $callback_or_type, 'LIKE', $operator );
 
 			$this->add_clause_sql( $sql );
@@ -383,7 +382,7 @@ namespace Sandhills {
 		 *
 		 * @return \Sandhills\Claws Current Claws instance.
 		 */
-		public function not_like( $values, $callback_or_type = '', $operator = 'OR' ) {
+		public function not_like( $values, $callback_or_type = 'esc_like', $operator = 'OR' ) {
 			$sql = $this->get_like_sql( $values, $callback_or_type, 'NOT LIKE', $operator );
 
 			$this->add_clause_sql( $sql );
@@ -538,15 +537,15 @@ namespace Sandhills {
 		 * @param array            $values           Array of values to compare.
 		 * @param string|callable  $callback_or_type Sanitization callback to pass values through, or shorthand
 		 *                                           types to use preset callbacks.
-		 * @param string           $compare          Comparison to make. Accepts '=', '!=', '<', '>', '<=', or '>='.
+		 * @param string           $compare_type     Comparison type to make. Accepts '=', '!=', '<', '>', '<=', or '>='.
 		 *                                           Default '='.
 		 * @param string           $operator         Optional. Operator to use between multiple sets of value comparisons.
 		 *                                           Accepts 'OR' or 'AND'. Default 'OR'.
 		 * @return string Raw, sanitized SQL.
 		 */
-		protected function get_comparison_sql( $values, $callback_or_type, $compare, $operator = 'OR' ) {
-			if ( ! in_array( $compare, array( '=', '!=', '<', '>', '<=', '>=' ) ) ) {
-				$compare = '=';
+		protected function get_comparison_sql( $values, $callback_or_type, $compare_type, $operator = 'OR' ) {
+			if ( ! in_array( $compare_type, array( '=', '!=', '<', '>', '<=', '>=' ) ) ) {
+				$compare_type = '=';
 			}
 
 			$callback = $this->get_callback( $callback_or_type );
@@ -556,7 +555,7 @@ namespace Sandhills {
 			// Sanitize the values and built the SQL.
 			$values = array_map( $callback, $values );
 
-			return $this->build_comparison_sql( $values, $compare, $operator );
+			return $this->build_comparison_sql( $values, $compare_type, $operator );
 		}
 
 		/**
@@ -565,22 +564,16 @@ namespace Sandhills {
 		 * @acccess protected
 		 * @since   1.0.0
 		 *
-		 * @param array  $values   Array of values.
-		 * @param string $compare  Type of comparison.
-		 * @param string $operator Operator to use between value comparisons.
+		 * @param array  $values       Array of values.
+		 * @param string $compare_type Comparison type to make. Accepts '=', '!=', '<', '>', '<=', or '>='.
+		 *                             Default '='.
+		 * @param string $operator     Operator to use between value comparisons.
 		 * @return string Comparison SQL.
 		 */
-		protected function build_comparison_sql( $values, $compare, $operator ) {
+		protected function build_comparison_sql( $values, $compare_type, $operator ) {
 			$sql = '';
 
-			$value_count = count( $values );
-
-			// Start the phrase.
-			if ( $value_count > 1 ) {
-				$sql .= '( ';
-			}
-
-
+			$count   = count( $values );
 			$current = 0;
 			$field   = $this->get_current_field();
 
@@ -591,16 +584,16 @@ namespace Sandhills {
 					$value = "'{$value}'";
 				}
 
-				$sql .= "`{$field}` {$compare} {$value}";
+				$sql .= "`{$field}` {$compare_type} {$value}";
 
-				if ( $value_count > 1 && ++$current !== $value_count ) {
+				if ( ++$current !== $count ) {
 					$sql .= " {$operator} ";
 				}
 			}
 
 			// Finish the phrase.
-			if ( $value_count > 1 ) {
-				$sql .= ' )';
+			if ( $count > 1 ) {
+				$sql = '( ' . $sql . ' )';
 			}
 
 			return $sql;
@@ -615,16 +608,16 @@ namespace Sandhills {
 		 * @param array           $values           Array of values to compare.
 		 * @param string|callable $callback_or_type Sanitization callback to pass values through, or shorthand
 		 *                                          types to use preset callbacks.
-		 * @param string          $compare          Comparison to make. Accepts 'IN' or 'NOT IN'.
+		 * @param string          $compare_type     Comparison to make. Accepts 'IN' or 'NOT IN'.
 		 * @return string Raw, sanitized SQL.
 		 */
-		protected function get_in_sql( $values, $callback_or_type, $compare ) {
+		protected function get_in_sql( $values, $callback_or_type, $compare_type ) {
 			$field    = $this->get_current_field();
 			$callback = $this->get_callback( $callback_or_type );
-			$compare  = strtoupper( $compare );
+			$compare_type  = strtoupper( $compare_type );
 
-			if ( ! in_array( $compare, array( 'IN', 'NOT IN' ) ) ) {
-				$compare = 'IN';
+			if ( ! in_array( $compare_type, array( 'IN', 'NOT IN' ) ) ) {
+				$compare_type = 'IN';
 			}
 
 			// Escape values.
@@ -640,7 +633,7 @@ namespace Sandhills {
 
 			$values = implode( ', ', $values );
 
-			$sql = "{$field} {$compare}( {$values} )";
+			$sql = "{$field} {$compare_type}( {$values} )";
 
 			return $sql;
 		}
@@ -654,22 +647,19 @@ namespace Sandhills {
 		 * @param array           $values           Array of values to compare.
 		 * @param string|callable $callback_or_type Sanitization callback to pass values through, or shorthand
 		 *                                          types to use preset callbacks.
-		 * @param string          $compare          Comparison to make. Accepts 'LIKE' or 'NOT LIKE'.
+		 * @param string          $compare_type     Comparison to make. Accepts 'LIKE' or 'NOT LIKE'.
 		 * @return string Raw, sanitized SQL.
 		 */
-		protected function get_like_sql( $values, $callback_or_type, $compare, $operator ) {
-			if ( null === $callback_or_type ) {
-				$callback_or_type = array( $this, 'esc_like' );
-			}
+		protected function get_like_sql( $values, $callback_or_type, $compare_type, $operator ) {
+			$sql = '';
 
-			$sql      = '';
-			$callback = $this->get_callback( $callback_or_type );
-			$field    = $this->get_current_field();
-			$values   = $this->prepare_values( $values );
-			$compare  = strtoupper( $compare );
+			$callback     = $this->get_callback( $callback_or_type );
+			$field        = $this->get_current_field();
+			$values       = $this->prepare_values( $values );
+			$compare_type = strtoupper( $compare_type );
 
-			if ( ! in_array( $compare, array( 'LIKE', 'NOT LIKE' ) ) ) {
-				$compare = 'LIKE';
+			if ( ! in_array( $compare_type, array( 'LIKE', 'NOT LIKE' ) ) ) {
+				$compare_type = 'LIKE';
 			}
 
 			$values = array_map( $callback, $values );
@@ -679,7 +669,7 @@ namespace Sandhills {
 
 			// Escape values and build the SQL.
 			foreach ( $values as $value ) {
-				$sql .= "{$field} {$compare} '%%{$value}%%'";
+				$sql .= "{$field} {$compare_type} '%%{$value}%%'";
 
 				if ( $value_count > 1 && ++$current !== $value_count ) {
 					$sql .= " {$operator} ";
@@ -698,10 +688,10 @@ namespace Sandhills {
 		 * @param array           $values           Array of values to compare.
 		 * @param string|callable $callback_or_type Sanitization callback to pass values through, or shorthand
 		 *                                          types to use preset callbacks.
-		 * @param string $compare Comparison to make. Accepts '=' or '
+		 * @param string          $compare_type     Comparison to make. Accepts 'BETWEEN' or 'NOT BETWEEN'.
 		 * @return string Raw, sanitized SQL.
 		 */
-		protected function get_between_sql( $values, $callback_or_type, $compare ) {
+		protected function get_between_sql( $values, $callback_or_type, $compare_type ) {
 			$sql = '';
 
 			// Bail if `$values` isn't an array or there aren't at least two values.
@@ -709,10 +699,10 @@ namespace Sandhills {
 				return $sql;
 			}
 
-			$compare = strtoupper( $compare );
+			$compare_type = strtoupper( $compare_type );
 
-			if ( ! in_array( $compare, array( 'BETWEEN', 'NOT BETWEEN' ) ) ) {
-				$compare = 'BETWEEN';
+			if ( ! in_array( $compare_type, array( 'BETWEEN', 'NOT BETWEEN' ) ) ) {
+				$compare_type = 'BETWEEN';
 			}
 
 			$field    = $this->get_current_field();
@@ -732,7 +722,7 @@ namespace Sandhills {
 				return $value;
 			}, $values );
 
-			$sql .= "( `{$field}` {$compare} {$values[0]} AND {$values[1]} )";
+			$sql .= "( `{$field}` {$compare_type} {$values[0]} AND {$values[1]} )";
 
 			return $sql;
 		}
@@ -743,43 +733,12 @@ namespace Sandhills {
 		 * @access public
 		 * @since  1.0.0
 		 *
-		 * @param string|callable $type Standard type to retrieve a callback for, or an already-callable.
+		 * @param string|callable $callback_or_type Standard type to retrieve a callback for, or an callback.
 		 * @return callable Callback.
 		 */
-		public function get_callback( $type ) {
+		public function get_callback( $callback_or_type ) {
 
-			if ( is_callable( $type ) ) {
-
-				$callback = $type;
-
-			} else {
-
-				switch( $type ) {
-
-					case 'int':
-					case 'integer':
-						$callback = 'intval';
-						break;
-
-					case 'float':
-					case 'double':
-						$callback = 'floatval';
-						break;
-
-					case 'string':
-						$callback = 'sanitize_text_field';
-						break;
-
-					case 'key':
-						$callback = 'sanitize_key';
-						break;
-
-					default:
-						$callback = 'esc_sql';
-						break;
-				}
-
-			}
+			$callback = is_callable( $callback_or_type ) ? $callback_or_type : $this->get_callback_for_type( $callback_or_type );
 
 			/**
 			 * Filters the callback to use for a given type.
@@ -791,6 +750,48 @@ namespace Sandhills {
 			 * @param \Sandhills\Claws $this     Current Sidebar instance.
 			 */
 			return apply_filters( 'claws_callback_for_type', $callback, $type, $this );
+		}
+
+		/**
+		 * Determines the right callback for a given type of value.
+		 *
+		 * @access public
+		 * @since  1.0.0
+		 *
+		 * @param string $type Type of value to retrieve a callback for.
+		 * @return string|callable Callback string.
+		 */
+		public function get_callback_for_type( $type ) {
+			switch( $type ) {
+
+				case 'int':
+				case 'integer':
+					$callback = 'intval';
+					break;
+
+				case 'float':
+				case 'double':
+					$callback = 'floatval';
+					break;
+
+				case 'string':
+					$callback = 'sanitize_text_field';
+					break;
+
+				case 'key':
+					$callback = 'sanitize_key';
+					break;
+
+				case 'esc_like':
+					$callback = array( $this, 'esc_like' );
+					break;
+
+				default:
+					$callback = 'esc_sql';
+					break;
+			}
+
+			return $callback;
 		}
 
 		/**
