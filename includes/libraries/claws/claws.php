@@ -128,13 +128,13 @@ namespace Sandhills {
 
 			/*
 			 * Prior to PHP 7, reserved keywords could not be used in method names,
-			 * so having an or() method wouldn't be allowed. Using __call() allows
+			 * so having or()/and() methods wouldn't be allowed. Using __call() allows
 			 * us to circumvent that problem.
 			 */
 			switch( $name ) {
 
 				case 'or':
-					$clause = isset( $args[1] ) ? $args[1] : null;
+					$clause = isset( $args[0] ) ? $args[0] : null;
 
 					// Shared logic.
 					$this->__set_current_operator( 'OR', $clause );
@@ -143,7 +143,7 @@ namespace Sandhills {
 					break;
 
 				case 'and':
-					$clause = isset( $args[1] ) ? $args[1] : null;
+					$clause = isset( $args[0] ) ? $args[0] : null;
 
 					// Shared logic.
 					$this->__set_current_operator( 'AND', $clause );
