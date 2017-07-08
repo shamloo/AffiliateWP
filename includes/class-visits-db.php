@@ -306,9 +306,9 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 			if ( filter_var( $args['search'], FILTER_VALIDATE_IP ) ) {
 				$claws->where( 'ip' )->like( $args['search'] );
 			} else {
-				$search_value = esc_sql( $args['search'] );
-
-				$claws->add_clause_sql( "( `referrer` LIKE '%%" . $search_value . "%%' OR `url` LIKE '%%" . $search_value . "%%' )", 'where' );
+				$claws->where( 'referrer' )->like( $args['search'], array( $this, 'esc_like' ) )
+					->or()
+					->where( 'url' )->like( $args['search'], array( $this, 'esc_like' ) );
 			}
 		}
 

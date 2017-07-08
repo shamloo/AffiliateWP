@@ -207,7 +207,10 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 					$user    = get_user_by( 'email', $search_value );
 					$user_id = $user ? absint( $user->ID ) : 0;
 
-					$claws->add_clause_sql( "`user_id` = '" . $user_id . "' OR `payment_email` = '" . esc_sql( $search_value ) . "'", 'where' );
+					$claws->where( 'user_id', '=', $user_id, 'absint' )
+					      ->or()
+					      ->where( 'payment_email', '=', $search_value );
+
 
 				} else {
 
