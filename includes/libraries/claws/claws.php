@@ -39,13 +39,13 @@ namespace Sandhills {
 		private $current_field;
 
 		/**
-		 * Represents the current input value(s).
+		 * Used for carrying the operator between methods when doing complex operations.
 		 *
 		 * @access private
 		 * @since  1.0.0
-		 * @var    mixed
+		 * @var    string
 		 */
-		private $current_value;
+		private $current_operator;
 
 		/**
 		 * Stores clauses in progress for retrieval.
@@ -57,15 +57,36 @@ namespace Sandhills {
 		private $clauses_in_progress = array();
 
 		/**
+		 * Whether the current operation is amending the previous phrase.
+		 *
+		 * Used when chaining multiple comparisons of different fields together
+		 * in the same phrase.
+		 *
+		 * @access private
+		 * @since  1.0.0
+		 * @var    bool
+		 */
+		private $amending_previous = false;
+
+		/**
+		 * Holds the value of the previously-stored phrase when set.
+		 *
+		 * Used in complex phrase-building.
+		 *
+		 * @access private
+		 * @since  1.0.0
+		 * @var    string
+		 */
+		private $previous_phrase;
+
+		/**
 		 * Whitelist of clauses Claws is built to handle.
 		 *
 		 * @access private
 		 * @since  1.0.0
 		 * @var    array
 		 */
-		private $allowed_clauses = array(
-			'select', 'where', 'join', 'orderby', 'order', 'count'
-		);
+		private $allowed_clauses = array( 'where' );
 
 		/**
 		 * Whitelist of allowed comparison operators.
@@ -148,32 +169,6 @@ namespace Sandhills {
 		}
 
 		/**
-		 * Appends raw SQL to the given clause.
-		 *
-		 * Important: Sanitization and escaping should be handled before passing SQL to this method.
-		 *
-		 * This method is for the case where you need SQL that can't easily be created using one of
-		 * the other generation methods.
-		 *
-		 * @access public
-		 * @since  1.0.0
-		 *
-		 * @param string      $sql    Raw, sanitized and escaped SQL.
-		 * @param null|string $clause Optional. Clause to append the SQL to. Default is the current clause.
-		 *
-		 * @return \Sandhills\Claws Current Claws instance.
-		 */
-		public function raw_sql( $sql, $clause = null ) {
-			if ( ! isset( $clause ) || ! in_array( $clause, $this->allowed_clauses, true ) ) {
-				$clause = $this->get_current_clause();
-			}
-
-			$this->clauses_in_progress[ $clause ][] = $sql;
-
-			return $this;
-		}
-
-		/**
 		 * Handles '=' value comparison.
 		 *
 		 * @access public
@@ -188,10 +183,9 @@ namespace Sandhills {
 		 * @return \Sandhills\Claws Current Claws instance.
 		 */
 		public function equals( $values, $callback_or_type = 'esc_sql', $operator = 'OR' ) {
-			$current_clause = $this->get_current_clause();
-			$sql            = $this->get_comparison_sql( $values, $callback_or_type, '=', $operator );
+			$sql = $this->get_comparison_sql( $values, $callback_or_type, '=', $operator );
 
-			$this->clauses_in_progress[ $current_clause ][] = $sql;
+			$this->add_clause_sql( $sql );
 
 			return $this;
 		}
@@ -211,10 +205,9 @@ namespace Sandhills {
 		 * @return \Sandhills\Claws Current Claws instance.
 		 */
 		public function doesnt_equal( $values, $callback_or_type = 'esc_sql', $operator = 'OR' ) {
-			$current_clause = $this->get_current_clause();
-			$sql            = $this->get_comparison_sql( $values, $callback_or_type, '!=', $operator );
+			$sql = $this->get_comparison_sql( $values, $callback_or_type, '!=', $operator );
 
-			$this->clauses_in_progress[ $current_clause ][] = $sql;
+			$this->add_clause_sql( $sql );
 
 			return $this;
 		}
@@ -234,10 +227,9 @@ namespace Sandhills {
 		 * @return \Sandhills\Claws Current Claws instance.
 		 */
 		public function gt( $values, $callback_or_type = 'esc_sql', $operator = 'OR' ) {
-			$current_clause = $this->get_current_clause();
-			$sql            = $this->get_comparison_sql( $values, $callback_or_type, '>', $operator );
+			$sql = $this->get_comparison_sql( $values, $callback_or_type, '>', $operator );
 
-			$this->clauses_in_progress[ $current_clause ][] = $sql;
+			$this->add_clause_sql( $sql );
 
 			return $this;
 		}
@@ -257,10 +249,9 @@ namespace Sandhills {
 		 * @return \Sandhills\Claws Current Claws instance.
 		 */
 		public function lt( $values, $callback_or_type = 'esc_sql', $operator = 'OR' ) {
-			$current_clause = $this->get_current_clause();
-			$sql            = $this->get_comparison_sql( $values, $callback_or_type, '<', $operator );
+			$sql = $this->get_comparison_sql( $values, $callback_or_type, '<', $operator );
 
-			$this->clauses_in_progress[ $current_clause ][] = $sql;
+			$this->add_clause_sql( $sql );
 
 			return $this;
 		}
@@ -280,10 +271,9 @@ namespace Sandhills {
 		 * @return \Sandhills\Claws Current Claws instance.
 		 */
 		public function gte( $values, $callback_or_type = 'esc_sql', $operator = 'OR' ) {
-			$current_clause = $this->get_current_clause();
-			$sql            = $this->get_comparison_sql( $values, $callback_or_type, '>=', $operator );
+			$sql = $this->get_comparison_sql( $values, $callback_or_type, '>=', $operator );
 
-			$this->clauses_in_progress[ $current_clause ][] = $sql;
+			$this->add_clause_sql( $sql );
 
 			return $this;
 		}
@@ -303,10 +293,9 @@ namespace Sandhills {
 		 * @return \Sandhills\Claws Current Claws instance.
 		 */
 		public function lte( $values, $callback_or_type = 'esc_sql', $operator = 'OR' ) {
-			$current_clause = $this->get_current_clause();
-			$sql            = $this->get_comparison_sql( $values, $callback_or_type, '<=', $operator );
+			$sql = $this->get_comparison_sql( $values, $callback_or_type, '<=', $operator );
 
-			$this->clauses_in_progress[ $current_clause ][] = $sql;
+			$this->add_clause_sql( $sql );
 
 			return $this;
 		}
@@ -326,10 +315,9 @@ namespace Sandhills {
 		 * @return \Sandhills\Claws Current Claws instance.
 		 */
 		public function like( $values, $callback_or_type = 'esc_sql', $operator = 'OR' ) {
-			$current_clause = $this->get_current_clause();
-			$sql            = $this->get_like_sql( $values, $callback_or_type, 'LIKE' );
+			$sql = $this->get_like_sql( $values, $callback_or_type, 'LIKE' );
 
-			$this->clauses_in_progress[ $current_clause ][] = $sql;
+			$this->add_clause_sql( $sql );
 
 			return $this;
 		}
@@ -349,10 +337,9 @@ namespace Sandhills {
 		 * @return \Sandhills\Claws Current Claws instance.
 		 */
 		public function not_like( $values, $callback_or_type = 'esc_sql', $operator = 'OR' ) {
-			$current_clause = $this->get_current_clause();
-			$sql            = $this->get_like_sql( $values, $callback_or_type, 'NOT LIKE' );
+			$sql = $this->get_like_sql( $values, $callback_or_type, 'NOT LIKE', $operator );
 
-			$this->clauses_in_progress[ $current_clause ][] = $sql;
+			$this->add_clause_sql( $sql );
 
 			return $this;
 		}
@@ -372,17 +359,14 @@ namespace Sandhills {
 		 * @return \Sandhills\Claws Current Claws instance.
 		 */
 		public function in( $values, $callback_or_type = 'esc_sql', $operator = 'OR' ) {
-			$current_clause = $this->get_current_clause();
-
 			if ( ! is_array( $values ) ) {
 
 				$this->equals( $values, $callback_or_type, $operator );
 
 			} else {
-
 				$sql = $this->get_in_sql( $values, $callback_or_type, 'IN' );
 
-				$this->clauses_in_progress[ $current_clause ][] = $sql;
+				$this->add_clause_sql( $sql );
 			}
 
 			return $this;
@@ -403,8 +387,6 @@ namespace Sandhills {
 		 * @return \Sandhills\Claws Current Claws instance.
 		 */
 		public function not_in( $values, $callback_or_type = 'esc_sql', $operator = 'OR' ) {
-			$current_clause = $this->get_current_clause();
-
 			if ( ! is_array( $values ) ) {
 
 				$this->doesnt_equal( $values, $callback_or_type, $operator );
@@ -413,7 +395,7 @@ namespace Sandhills {
 
 				$sql = $this->get_in_sql( $values, $callback_or_type, 'NOT IN' );
 
-				$this->clauses_in_progress[ $current_clause ][] = $sql;
+				$this->add_clause_sql( $sql );
 			}
 
 			return $this;
@@ -436,10 +418,9 @@ namespace Sandhills {
 		 * @return \Sandhills\Claws Current Claws instance.
 		 */
 		public function between( $values, $callback_or_type = 'esc_sql' ) {
-			$current_clause = $this->get_current_clause();
-			$sql            = $this->get_between_sql( $values, $callback_or_type, 'BETWEEN' );
+			$sql = $this->get_between_sql( $values, $callback_or_type, 'BETWEEN' );
 
-			$this->clauses_in_progress[ $current_clause ][] = $sql;
+			$this->add_clause_sql( $sql );
 
 			return $this;
 		}
@@ -457,10 +438,9 @@ namespace Sandhills {
 		 * @return \Sandhills\Claws Current Claws instance.
 		 */
 		public function not_between( $values, $callback_or_type = 'esc_sql' ) {
-			$current_clause = $this->get_current_clause();
-			$sql            = $this->get_between_sql( $values, $callback_or_type, 'NOT BETWEEN' );
+			$sql = $this->get_between_sql( $values, $callback_or_type, 'NOT BETWEEN' );
 
-			$this->clauses_in_progress[ $current_clause ][] = $sql;
+			$this->add_clause_sql( $sql );
 
 			return $this;
 		}
@@ -502,6 +482,45 @@ namespace Sandhills {
 		}
 
 		/**
+		 * Flags the previously-stored phrase to be amended and appended with an 'OR' operator.
+		 *
+		 * @access public
+		 * @since  1.0.0
+		 *
+		 * @param null|string $clause Optional. Clause to amend the previous chunk for.
+		 *                            Default is the current clause.
+		 */
+		public function or( $clause = null ) {
+			$this->amending_previous = true;
+			$this->set_current_operator( 'OR' );
+
+			if ( ! isset( $clause ) || ! in_array( $clause, $this->allowed_clauses, true ) ) {
+				$clause = $this->get_current_clause();
+			}
+
+			$chunks = $this->clauses_in_progress[ $clause ];
+
+			if ( ! empty( $chunks ) ) {
+				$this->previous_phrase = end( $chunks );
+			}
+		}
+
+		/**
+		 * Flags the previously-stored phrase to be amended and appended with an 'AND' operator.
+		 *
+		 * @access public
+		 * @since  1.0.0
+		 *
+		 * @param null|string $clause Optional. Clause to amend the previous chunk for.
+		 *                            Default is the current clause.
+		 */
+		public function and( $clause = null ) {
+			$this->or( $clause );
+
+			$this->set_current_operator( 'AND' );
+		}
+
+		/**
 		 * Helper used by direct comparison methods to build SQL.
 		 *
 		 * @access protected
@@ -536,8 +555,7 @@ namespace Sandhills {
 				$sql .= '( ';
 			}
 
-			$current_field = $this->get_current_field();
-			$value_type    = gettype( $values[0] );
+			$field = $this->get_current_field();
 
 			$current = 0;
 
@@ -548,7 +566,7 @@ namespace Sandhills {
 					$value = "'{$value}'";
 				}
 
-				$sql .= "`{$current_field}` {$compare} {$value}";
+				$sql .= "`{$field}` {$compare} {$value}";
 
 				if ( $value_count > 1 && ++$current !== $value_count ) {
 					$sql .= " {$operator} ";
@@ -576,8 +594,7 @@ namespace Sandhills {
 		 * @return string Raw, sanitized SQL.
 		 */
 		protected function get_in_sql( $values, $callback_or_type, $compare ) {
-			$current_field  = $this->get_current_field();
-
+			$field    = $this->get_current_field();
 			$callback = $this->get_callback( $callback_or_type );
 			$compare  = strtoupper( $compare );
 
@@ -598,7 +615,7 @@ namespace Sandhills {
 
 			$values = implode( ', ', $values );
 
-			$sql = "{$current_field} {$compare}( {$values} )";
+			$sql = "{$field} {$compare}( {$values} )";
 
 			return $sql;
 		}
@@ -615,17 +632,29 @@ namespace Sandhills {
 		 * @param string          $compare          Comparison to make. Accepts 'LIKE' or 'NOT LIKE'.
 		 * @return string Raw, sanitized SQL.
 		 */
-		protected function get_like_sql( $values, $callback_or_type, $compare ) {
+		protected function get_like_sql( $values, $callback_or_type, $compare, $operator ) {
+			$sql      = '';
 			$callback = $this->get_callback( $callback_or_type );
 			$field    = $this->get_current_field();
+			$values   = is_array( $values ) ? $values : (array) $values;
 			$compare  = strtoupper( $compare );
 
 			if ( ! in_array( $compare, array( 'LIKE', 'NOT LIKE' ) ) ) {
 				$compare = 'LIKE';
 			}
 
-			// Escape values.
-			$sql = "{$field} {$compare} '%%{$values}%%'";
+			$value_count = count( $values );
+
+			$current = 0;
+
+			// Escape values and build the SQL.
+			foreach ( $values as $value ) {
+				$sql .= "{$field} {$compare} '%%" . $this->esc_like( $value ) . "%%'";
+
+				if ( $value_count > 1 && ++$current !== $value_count ) {
+					$sql .= " {$operator} ";
+				}
+			}
 
 			return $sql;
 		}
@@ -654,8 +683,8 @@ namespace Sandhills {
 				$compare = 'BETWEEN';
 			}
 
-			$current_field = $this->get_current_field();
-			$callback      = $this->get_callback( $callback_or_type );
+			$field    = $this->get_current_field();
+			$callback = $this->get_callback( $callback_or_type );
 
 			$sql = '';
 
@@ -673,7 +702,7 @@ namespace Sandhills {
 				return $value;
 			}, $values );
 
-			$sql .= "( `{$current_field}` {$compare} {$values[0]} AND {$values[1]} )";
+			$sql .= "( `{$field}` {$compare} {$values[0]} AND {$values[1]} )";
 
 			return $sql;
 		}
@@ -778,15 +807,69 @@ namespace Sandhills {
 		}
 
 		/**
+		 * Escapes a value used in a 'LIKE' comparison.
+		 *
+		 * @access protected
+		 * @since  1.0.0
+		 *
+		 * @param mixed $like LIKE comparison value.
+		 * @return string Escaped value.
+		 */
+		protected function esc_like( $like ) {
+			return addcslashes( $like, '_%\\' );
+		}
+
+		/**
+		 * Adds prepared SQL to the current clause.
+		 *
+		 * @access protected
+		 * @since  1.0.0
+		 *
+		 * @param string      $sql    Prepared SQL to add to the clause.
+		 * @param null|string $clause Optional. Clause to add the SQL to. Default is the current clause.
+		 */
+		protected function add_clause_sql( $sql, $clause = null ) {
+			if ( ! isset( $clause ) || ! in_array( $clause, $this->allowed_clauses, true ) ) {
+				$clause = $this->get_current_clause();
+			}
+
+			$this->previous_phrase = $sql;
+			$this->clauses_in_progress[ $clause ][] = $this->previous_phrase;
+		}
+
+		/**
+		 * Replaces the previous phrase with the given prepared SQL.
+		 *
+		 * @access protected
+		 * @since  1.0.0
+		 *
+		 * @param string      $sql    Prepared SQL to replace the phrase with.
+		 * @param null|string $clause Optional. Clause to replace the last phrase for. Default is the current clause.
+		 */
+		protected function replace_previous_phrase( $sql, $clause = null ) {
+			if ( ! isset( $clause ) || ! in_array( $clause, $this->allowed_clauses, true ) ) {
+				$clause = $this->get_current_clause();
+			}
+
+			// Pop off the last phrase.
+			array_pop( $this->clauses_in_progress[ $clause ] );
+
+			// Replace it with the new one.
+			$this->add_clause_sql( $sql, $clause );
+		}
+
+		/**
 		 * Retrieves raw, sanitized SQL for the current clause.
 		 *
 		 * @access public
 		 * @since  1.0.0
 		 *
-		 * @param null|string $clause Optional. Clause to build SQL for. Default is the current clause.
+		 * @param null|string $clause     Optional. Clause to build SQL for. Default is the current clause.
+		 * @param bool        $reset_vars Optional. Whether to reset the clause, field, and operator vars
+		 *                                after retrieving the clause's SQL. Default true.
 		 * @return string Raw, sanitized SQL.
 		 */
-		public function get_sql( $clause = null ) {
+		public function get_sql( $clause = null, $reset_vars = true ) {
 			$sql = '';
 
 			if ( ! isset( $clause ) || ! in_array( $clause, $this->allowed_clauses, true ) ) {
@@ -807,7 +890,9 @@ namespace Sandhills {
 					}
 				}
 
-				$this->reset_vars();
+				if ( true === $reset_vars ) {
+					$this->reset_vars();
+				}
 			}
 
 			return $sql;
@@ -820,7 +905,6 @@ namespace Sandhills {
 		 * @since  1.0.0
 		 *
 		 * @param string $clause Clause to set as current.
-		 *
 		 * @return \Sandhills\Claws Current claws instance.
 		 */
 		public function set_current_clause( $clause ) {
@@ -852,7 +936,6 @@ namespace Sandhills {
 		 * @since  1.0.0
 		 *
 		 * @param string $field Field to set as current.
-		 *
 		 * @return \Sandhills\Claws Current claws instance.
 		 */
 		public function set_current_field( $field ) {
@@ -874,7 +957,52 @@ namespace Sandhills {
 		}
 
 		/**
-		 * Resets the current clause.
+		 * Sets the current operator for use in complex phrase building.
+		 *
+		 * @access public
+		 * @since  1.0.0
+		 *
+		 * @param string $operator Operator to persist between method calls. Accepts 'OR' or 'AND'.
+		 * @return \Sandhills\Claws Current claws instance.
+		 */
+		public function set_current_operator( $operator ) {
+			$operator = strtoupper( $operator );
+
+			if ( ! in_array( $operator, array( 'OR', 'AND' ) ) ) {
+				$operator = 'OR';
+			}
+
+			$this->current_operator = $operator;
+
+			return $this;
+		}
+
+		/**
+		 * Retrieves the current operator (for use in complex phrase building).
+		 *
+		 * @access public
+		 * @since  1.0.0
+		 *
+		 * @return string Current operator.
+		 */
+		public function get_current_operator() {
+			return $this->current_operator;
+		}
+
+		/**
+		 * Retrieves the previous phrase for the given clause.
+		 *
+		 * @access public
+		 * @since  1.0.0
+		 *
+		 * @return string Previous phrase SQL.
+		 */
+		public function get_previous_phrase() {
+			return $this->previous_phrase;
+		}
+
+		/**
+		 * Resets the current clause, field, and operator.
 		 *
 		 * @access public
 		 * @since  1.0.0
@@ -882,6 +1010,7 @@ namespace Sandhills {
 		public function reset_vars() {
 			$this->current_clause = null;
 			$this->current_field = null;
+			$this->current_operator = null;
 		}
 	}
 }
@@ -889,7 +1018,7 @@ namespace Sandhills {
 namespace {
 
 	/**
-	 * Shorthand helper for retrieving the Claws instance.
+	 * Shorthand helper for retrieving a Claws instance.
 	 *
 	 * @since 1.0.0
 	 *

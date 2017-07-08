@@ -295,7 +295,7 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 				$month = date( 'm', strtotime( $args['date'] ) );
 				$day   = date( 'd', strtotime( $args['date'] ) );
 
-				$claws->raw_sql( "$year = YEAR ( date ) AND $month = MONTH ( date ) AND $day = DAY ( date )", 'where' );
+				$claws->add_clause_sql( "$year = YEAR ( date ) AND $month = MONTH ( date ) AND $day = DAY ( date )", 'where' );
 			}
 
 		}
@@ -308,7 +308,7 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 			} else {
 				$search_value = esc_sql( $args['search'] );
 
-				$claws->raw_sql( "( `referrer` LIKE '%%" . $search_value . "%%' OR `url` LIKE '%%" . $search_value . "%%' )", 'where' );
+				$claws->add_clause_sql( "( `referrer` LIKE '%%" . $search_value . "%%' OR `url` LIKE '%%" . $search_value . "%%' )", 'where' );
 			}
 		}
 

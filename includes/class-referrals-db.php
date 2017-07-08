@@ -448,7 +448,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 				$month = date( 'm', strtotime( $args['date'] ) );
 				$day   = date( 'd', strtotime( $args['date'] ) );
 
-				$claws->raw_sql( "$year = YEAR ( date ) AND $month = MONTH ( date ) AND $day = DAY ( date )", 'where' );
+				$claws->add_clause_sql( "$year = YEAR ( date ) AND $month = MONTH ( date ) AND $day = DAY ( date )", 'where' );
 			}
 
 		}
@@ -512,7 +512,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 			if( ! empty( $args['search'] ) ) {
 				$description = esc_sql( $args['description'] );
 
-				$claws->raw_sql( "LOWER(`description`) LIKE LOWER('%%" . $description . "%%') ", 'where' );
+				$claws->add_clause_sql( "LOWER(`description`) LIKE LOWER('%%" . $description . "%%') ", 'where' );
 			} else {
 				$claws->where( 'description' )->equals( $args['description'] );
 			}

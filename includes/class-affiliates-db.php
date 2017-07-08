@@ -207,7 +207,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 					$user    = get_user_by( 'email', $search_value );
 					$user_id = $user ? absint( $user->ID ) : 0;
 
-					$claws->raw_sql( "`user_id` = '" . $user_id . "' OR `payment_email` = '" . esc_sql( $search_value ) . "'", 'where' );
+					$claws->add_clause_sql( "`user_id` = '" . $user_id . "' OR `payment_email` = '" . esc_sql( $search_value ) . "'", 'where' );
 
 				} else {
 
@@ -237,7 +237,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 				$month = date( 'm', strtotime( $args['date'] ) );
 				$day   = date( 'd', strtotime( $args['date'] ) );
 
-				$claws->raw_sql( "$year = YEAR ( date_registered ) AND $month = MONTH ( date_registered ) AND $day = DAY ( date_registered )", 'where' );
+				$claws->add_clause_sql( "$year = YEAR ( date_registered ) AND $month = MONTH ( date_registered ) AND $day = DAY ( date_registered )", 'where' );
 			}
 
 		}
