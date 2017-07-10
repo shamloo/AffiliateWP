@@ -2,15 +2,6 @@
 
 function affiliate_wp_install() {
 
-	// Needed for site-related functionality.
-	if ( ! is_multisite() ) {
-		if ( true === version_compare( $GLOBALS['wp_version'], '4.6', '>=' ) ) {
-			require_once ABSPATH . WPINC . '/class-wp-site-query.php';
-			require_once ABSPATH . WPINC . '/class-wp-network-query.php';
-		}
-		require_once ABSPATH . WPINC . '/ms-blogs.php';
-	}
-
 	// Create affiliate caps
 	$roles = new Affiliate_WP_Capabilities;
 	$roles->add_caps();
@@ -66,32 +57,34 @@ function affiliate_wp_install() {
 	// Clear rewrite rules
 	$affiliate_wp_install->rewrites->flush_rewrites();
 
-	// Set past upgrade routines complete for all sites.
-	if ( ! is_multisite() ) {
-
-		$sites = array( 1 );
-
-	} elseif ( true === version_compare( $GLOBALS['wp_version'], '4.6', '<' ) ) {
-
-		$sites = wp_list_pluck( 'blog_id', wp_get_sites() );
-
-	} else {
-
-		$sites = get_sites( array( 'fields' => 'ids' ) );
-
-	}
-
 	$completed_upgrades = array(
 		'upgrade_v20_recount_unpaid_earnings'
 	);
 
-	foreach ( $sites as $site_id ) {
+	// Set past upgrade routines complete for all sites.
+	if ( is_multisite() ) {
 
-		switch_to_blog( $site_id );
+		if ( true === version_compare( $GLOBALS['wp_version'], '4.6', '<' ) ) {
+
+			$sites = wp_list_pluck( 'blog_id', wp_get_sites() );
+
+		} else {
+
+			$sites = get_sites( array( 'fields' => 'ids' ) );
+
+		}
+
+		foreach ( $sites as $site_id ) {
+			switch_to_blog( $site_id );
+
+			update_option( 'affwp_completed_upgrades', $completed_upgrades );
+
+			restore_current_blog();
+		}
+
+	} else {
 
 		update_option( 'affwp_completed_upgrades', $completed_upgrades );
-
-		restore_current_blog();
 
 	}
 
