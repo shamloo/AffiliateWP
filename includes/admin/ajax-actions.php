@@ -60,21 +60,25 @@ function affwp_search_users() {
 	// Add search string to args.
 	$args['search'] = '*' . mb_strtolower( htmlentities2( trim( $_REQUEST['term'] ) ) ) . '*';
 
-	// Get users matching search.
-	$found_users = get_users( $args );
-
 	$user_list = array();
 
-	if ( $found_users ) {
-		foreach( $found_users as $user ) {
-			$label = empty( $user->user_email ) ? $user->user_login : "{$user->user_login} ({$user->user_email})";
+	if ( ! empty( $affiliate_users ) ) {
 
-			$user_list[] = array(
-				'label'   => $label,
-				'value'   => $user->user_login,
-				'user_id' => $user->ID
-			);
+		// Get users matching search.
+		$found_users = get_users( $args );
+
+		if ( $found_users ) {
+			foreach( $found_users as $user ) {
+				$label = empty( $user->user_email ) ? $user->user_login : "{$user->user_login} ({$user->user_email})";
+
+				$user_list[] = array(
+					'label'   => $label,
+					'value'   => $user->user_login,
+					'user_id' => $user->ID
+				);
+			}
 		}
+
 	}
 
 	wp_die( json_encode( $user_list ) );
