@@ -210,6 +210,76 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers ::affwp_abs_number_round()
+	 */
+	public function test_abs_number_round_positive_number_without_separators_should_be_unchanged() {
+		$this->assertEquals( '5', affwp_abs_number_round( '5' ) );
+	}
+
+	/**
+	 * @covers ::affwp_abs_number_round()
+	 */
+	public function test_abs_number_round_negative_number_without_separators_should_be_changed_to_positive() {
+		$this->assertEquals( '5', affwp_abs_number_round( '-5' ) );
+	}
+
+	/**
+	 * @covers ::affwp_abs_number_round()
+	 */
+	public function test_abs_number_round_with_period_decimal_separator_should_be_unchanged() {
+		$this->assertEquals( '0.50', affwp_abs_number_round( '0.50' ) );
+	}
+
+	/**
+	 * @covers ::affwp_abs_number_round()
+	 */
+	public function test_abs_number_round_with_comma_decimal_separator_should_be_should_be_normalized() {
+		$this->assertEquals( '0.50', affwp_abs_number_round( '0,50' ) );
+	}
+
+	/**
+	 * @covers ::affwp_abs_number_round()
+	 */
+	public function test_abs_number_round_with_period_thousands_and_comma_decimal_seps_should_be_normalized() {
+		$this->assertEquals( '1234.56', affwp_abs_number_round( '1.234,56' ) );
+	}
+
+	/**
+	 * @covers ::affwp_abs_number_round()
+	 */
+	public function test_abs_number_round_with_space_thousands_and_comma_decimal_seps_should_be_normalized() {
+		$this->assertEquals( '1234.56', affwp_abs_number_round( '1 234,56' ) );
+	}
+
+	/**
+	 * @covers ::affwp_abs_number_round()
+	 */
+	public function test_abs_number_round_with_space_thousands_and_period_decimal_seps_should_be_normalized() {
+		$this->assertEquals( '1234.56', affwp_abs_number_round( '1 234.56' ) );
+	}
+
+	/**
+	 * @covers ::affwp_abs_number_round()
+	 */
+	public function test_abs_number_round_with_comma_thousands_separator_should_be_normalized() {
+		$this->assertEquals( '1234', affwp_abs_number_round( '1,234' ) );
+	}
+
+	/**
+	 * @covers ::affwp_abs_number_round()
+	 */
+	public function test_abs_number_round_with_period_thousands_separator_should_be_normalized() {
+		$this->assertEquals( '1234', affwp_abs_number_round( '1.234' ) );
+	}
+
+	/**
+	 * @covers ::affwp_abs_number_round()
+	 */
+	public function test_abs_number_round_with_space_thousands_separator_should_be_normalized() {
+		$this->assertEquals( '1234', affwp_abs_number_round( '1 234' ) );
+	}
+
+	/**
 	 * @covers ::affwp_get_logout_url
 	 */
 	public function test_affwp_get_logout_url() {
@@ -280,6 +350,201 @@ class Tests extends UnitTestCase {
 	 */
 	public function test_admin_url_should_return_affiliate_wp_page_if_invalid_type() {
 		$this->assertSame( 'http://' . WP_TESTS_DOMAIN . '/wp-admin/admin.php?page=affiliate-wp', affwp_admin_url( 'foo' ) );
+	}
+
+	/**
+	 * @covers ::affwp_get_affiliate_import_fields()
+	 */
+	public function test_get_affiliate_import_fields_default_fields() {
+		$fields = array(
+			'email'           => __( 'Email (required)', 'affiliate-wp' ),
+			'username'        => __( 'Username', 'affiliate-wp' ),
+			'name'            => __( 'First/Full Name', 'affiliate-wp' ),
+			'last_name'       => __( 'Last Name', 'affiliate-wp' ),
+			'payment_email'   => __( 'Payment Email', 'affiliate-wp' ),
+			'rate'            => __( 'Rate', 'affiliate-wp' ),
+			'rate_type'       => __( 'Rate Type', 'affiliate-wp' ),
+			'earnings'        => __( 'Earnings', 'afiliate-wp' ),
+			'unpaid_earnings' => __( 'Unpaid Earnings', 'affiliate-wp' ),
+			'referrals'       => __( 'Referral Count', 'affiliate-wp' ),
+			'visits'          => __( 'Visit Count', 'affiliate-wp' ),
+			'status'          => __( 'Status', 'affiliate-wp' ),
+			'website_url'     => __( 'Website', 'affiliate-wp' ),
+			'date_registered' => __( 'Registration Date', 'affiliate-wp' ),
+		);
+
+		$this->assertEqualSets( $fields, affwp_get_affiliate_import_fields() );
+	}
+
+	/**
+	 * @covers ::affwp_get_affiliate_import_fields()
+	 */
+	public function test_get_affiliate_import_fields_with_required_field_email_unset_should_still_contain_field() {
+		add_filter( 'affwp_affiliate_import_fields', function( $fields ) {
+			unset( $fields['email'] );
+		} );
+
+		$this->assertArrayHasKey( 'email', affwp_get_affiliate_import_fields() );
+	}
+
+	/**
+	 * @covers ::affwp_get_referral_import_fields()
+	 */
+	public function test_get_referral_import_fields_default_fields() {
+		$fields = array(
+			'affiliate'       => __( 'Affiliate ID or Username (required)', 'affiliate-wp' ),
+			'amount'          => __( 'Amount (required)', 'affiliate-wp' ),
+			'email'           => __( 'Affiliate Email', 'affiliate-wp' ),
+			'username'        => __( 'Affiliate Username', 'affiliate-wp' ),
+			'first_name'      => __( 'Affiliate First/Full Name', 'affiliate-wp' ),
+			'last_name'       => __( 'Affiliate Last Name', 'affiliate-wp' ),
+			'payment_email'   => __( 'Payment Email', 'affiliate-wp' ),
+			'currency'        => __( 'Currency', 'affiliate-wp' ),
+			'description'     => __( 'Description', 'affiliate-wp' ),
+			'campaign'        => __( 'Campaign', 'affiliate-wp' ),
+			'reference'       => __( 'Reference', 'affiliate-wp' ),
+			'context'         => __( 'Context', 'affiliate-wp' ),
+			'status'          => __( 'Status', 'affiliate-wp' ),
+			'date'            => __( 'Date', 'affiliate-wp' )
+		);
+
+		$this->assertEqualSets( $fields, affwp_get_referral_import_fields() );
+	}
+
+	/**
+	 * @covers ::affwp_get_referral_import_fields()
+	 */
+	public function test_get_referral_import_fields_with_required_field_affiliate_unset_should_still_contain_field() {
+		add_filter( 'affwp_referral_import_fields', function( $fields ) {
+			unset( $fields['affiliate'] );
+		} );
+
+		$this->assertArrayHasKey( 'affiliate', affwp_get_referral_import_fields() );
+	}
+
+	/**
+	 * @covers ::affwp_get_referral_import_fields()
+	 */
+	public function test_get_referral_import_fields_with_required_field_amount_unset_should_still_contain_field() {
+		add_filter( 'affwp_referral_import_fields', function( $fields ) {
+			unset( $fields['amount'] );
+		} );
+
+		$this->assertArrayHasKey( 'amount', affwp_get_referral_import_fields() );
+	}
+
+	/**
+	 * @covers ::affwp_do_import_fields()
+	 */
+	public function test_do_import_fields_with_valid_field_type_should_output_fields_markup() {
+		ob_start();
+
+		affwp_do_import_fields( 'affiliates' );
+
+		$output   = ob_get_clean();
+		$expected = '<select name="affwp-import-field[email]" class="affwp-import-csv-column">';
+
+		$this->assertContains( $expected, $output );
+	}
+
+	/**
+	 * @covers ::affwp_do_import_fields()
+	 */
+	public function test_do_import_fields_with_invalid_field_type_should_output_nothing() {
+		ob_start();
+
+		affwp_do_import_fields( 'foo' );
+
+		$output = ob_get_clean();
+
+		$this->assertSame( '', $output );
+	}
+
+	/**
+	 * @covers ::affwp_required_field_attr()
+	 */
+	public function test_required_field_attr_with_invalid_field_should_return_an_empty_string() {
+		$this->assertSame( '', affwp_required_field_attr( 'foo' ) );
+	}
+
+	/**
+	 * @covers ::affwp_required_field_attr()
+	 */
+	public function test_required_field_attr_with_required_your_name_field_should_return_a_required_attribute() {
+		$original_required_fields = affiliate_wp()->settings->get( 'required_registration_fields', array() );
+
+		affiliate_wp()->settings->set( array(
+			'required_registration_fields' => array(
+				'your_name' => __( 'Your Name', 'affiliate-wp' )
+			)
+		) );
+
+		$this->assertSame( " required='required'", affwp_required_field_attr( 'your_name' ) );
+
+		// Clean up.
+		affiliate_wp()->settings->set( array(
+			'required_registration_fields' => $original_required_fields
+		) );
+	}
+
+	/**
+	 * @covers ::affwp_required_field_attr()
+	 */
+	public function test_required_field_attr_with_required_website_url_field_should_return_a_required_attribute() {
+		$original_required_fields = affiliate_wp()->settings->get( 'required_registration_fields', array() );
+
+		affiliate_wp()->settings->set( array(
+			'required_registration_fields' => array(
+				'website_url' => 'https://affiliatewp.com'
+			)
+		) );
+
+		$this->assertSame( " required='required'", affwp_required_field_attr( 'website_url' ) );
+
+		// Clean up.
+		affiliate_wp()->settings->set( array(
+			'required_registration_fields' => $original_required_fields
+		) );
+	}
+
+	/**
+	 * @covers ::affwp_required_field_attr()
+	 */
+	public function test_required_field_attr_with_required_payment_email_field_should_return_a_required_attribute() {
+		$original_required_fields = affiliate_wp()->settings->get( 'required_registration_fields', array() );
+
+		affiliate_wp()->settings->set( array(
+			'required_registration_fields' => array(
+				'payment_email' => 'test@affiliatewp.dev'
+			)
+		) );
+
+		$this->assertSame( " required='required'", affwp_required_field_attr( 'payment_email' ) );
+
+		// Clean up.
+		affiliate_wp()->settings->set( array(
+			'required_registration_fields' => $original_required_fields
+		) );
+	}
+
+	/**
+	 * @covers ::affwp_required_field_attr()
+	 */
+	public function test_required_field_attr_with_required_promotion_method_field_should_return_a_required_attribute() {
+		$original_required_fields = affiliate_wp()->settings->get( 'required_registration_fields', array() );
+
+		affiliate_wp()->settings->set( array(
+			'required_registration_fields' => array(
+				'promotion_method' => 'foo'
+			)
+		) );
+
+		$this->assertSame( " required='required'", affwp_required_field_attr( 'promotion_method' ) );
+
+		// Clean up.
+		affiliate_wp()->settings->set( array(
+			'required_registration_fields' => $original_required_fields
+		) );
 	}
 
 }

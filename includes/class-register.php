@@ -330,11 +330,7 @@ class Affiliate_WP_Register {
 		}
 
 		// website URL
-		$website_url = isset( $_POST['affwp_user_url'] ) ? esc_url( $_POST['affwp_user_url'] ) : '';
-
-		if ( $website_url ) {
-			wp_update_user( array( 'ID' => $user_id, 'user_url' => $website_url ) );
-		}
+		$website_url = isset( $_POST['affwp_user_url'] ) ? sanitize_text_field( $_POST['affwp_user_url'] ) : '';
 
 		$status = affiliate_wp()->settings->get( 'require_approval' ) ? 'pending' : 'active';
 
@@ -342,6 +338,7 @@ class Affiliate_WP_Register {
 			'user_id'       => $user_id,
 			'payment_email' => ! empty( $_POST['affwp_payment_email'] ) ? sanitize_text_field( $_POST['affwp_payment_email'] ) : '',
 			'status'        => $status,
+			'website_url'   => $website_url,
 		) );
 
 		if ( ! is_user_logged_in() ) {

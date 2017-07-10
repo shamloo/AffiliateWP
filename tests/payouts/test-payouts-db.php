@@ -672,6 +672,17 @@ class Tests extends UnitTestCase {
 	/**
 	 * @covers Affiliate_WP_Payouts_DB::get_payouts()
 	 */
+	public function test_get_payouts_should_return_array_of_Payout_objects_if_not_count_query() {
+		$results = affiliate_wp()->affiliates->payouts->get_payouts();
+
+		// Check a random referral.
+		$this->assertContainsOnlyType( 'AffWP\Affiliate\Payout', $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_Payouts_DB::get_payouts()
+	 * @group database-fields
+	 */
 	public function test_get_payouts_fields_ids_should_return_an_array_of_ids_only() {
 		$results = affiliate_wp()->affiliates->payouts->get_payouts( array(
 			'fields' => 'ids',
@@ -683,6 +694,7 @@ class Tests extends UnitTestCase {
 
 	/**
 	 * @covers Affiliate_WP_Payouts_DB::get_payouts()
+	 * @group database-fields
 	 */
 	public function test_get_payouts_invalid_fields_arg_should_return_regular_Payout_object_results() {
 		$payouts = array_map( 'affwp_get_payout', self::$payouts );
@@ -692,6 +704,57 @@ class Tests extends UnitTestCase {
 		) );
 
 		$this->assertEqualSets( $payouts, $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_Payouts_DB::get_payouts()
+	 * @group database-fields
+	 */
+	public function test_get_payouts_fields_ids_should_return_an_array_of_integer_ids() {
+		$results = affiliate_wp()->affiliates->payouts->get_payouts( array(
+			'fields' => 'ids'
+		) );
+
+		$this->assertContainsOnlyType( 'integer', $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_Payouts_DB::get_payouts()
+	 * @group database-fields
+	 */
+	public function test_get_payouts_with_no_fields_should_return_an_array_of_affiliate_objects() {
+		$results = affiliate_wp()->affiliates->payouts->get_payouts();
+
+		$this->assertContainsOnlyType( 'AffWP\Affiliate\Payout', $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_Payouts_DB::get_payouts()
+	 * @group database-fields
+	 */
+	public function test_get_payouts_with_multiple_valid_fields_should_return_an_array_of_stdClass_objects() {
+		$results = affiliate_wp()->affiliates->payouts->get_payouts( array(
+			'fields' => array( 'payout_id', 'payout_method' )
+		) );
+
+		$this->assertContainsOnlyType( 'stdClass', $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_Payouts_DB::get_payouts()
+	 * @group database-fields
+	 */
+	public function test_get_payouts_fields_array_with_multiple_valid_fields_should_return_objects_with_those_fields_only() {
+		$fields = array( 'payout_id', 'referrals' );
+
+		$result = affiliate_wp()->affiliates->payouts->get_payouts( array(
+			'fields' => $fields
+		) );
+
+		$object_vars = get_object_vars( $result[0] );
+
+		$this->assertEqualSets( $fields, array_keys( $object_vars ) );
+
 	}
 
 	/**
