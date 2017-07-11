@@ -507,7 +507,7 @@ namespace Sandhills {
 		 * @return \Sandhills\Claws Current Claws instance.
 		 */
 		public function exists( $values, $callback_or_type = 'esc_sql', $operator = 'OR' ) {
-			return $this;
+			return $this->equals( $values, $callback_or_type, $operator );
 		}
 
 		/**
@@ -516,7 +516,6 @@ namespace Sandhills {
 		 * @access public
 		 * @since  1.0.0
 		 *
-		 * @param mixed           $values           Value of varying types, or array of values.
 		 * @param string|callable $callback_or_type Optional. Sanitization callback to pass values through, or shorthand
 		 *                                          types to use preset callbacks. Default 'esc_sql'.
 		 * @param string          $operator         Optional. If `$value` is an array, whether to use 'OR' or 'AND' when
@@ -524,7 +523,11 @@ namespace Sandhills {
 		 *
 		 * @return \Sandhills\Claws Current Claws instance.
 		 */
-		public function not_exists( $values, $callback_or_type = 'esc_sql', $operator = 'OR' ) {
+		public function not_exists( $callback_or_type = 'esc_sql', $operator = 'OR' ) {
+			$sql = $this->build_comparison_sql( array( '' ), 'IS NULL', $operator );
+
+			$this->add_clause_sql( $sql );
+
 			return $this;
 		}
 
@@ -571,6 +574,8 @@ namespace Sandhills {
 		 * @return string Comparison SQL.
 		 */
 		protected function build_comparison_sql( $values, $compare_type, $operator ) {
+			global $wpdb;
+
 			$sql = '';
 
 			$count   = count( $values );
@@ -579,9 +584,12 @@ namespace Sandhills {
 
 			// Loop through the values and bring in $operator if needed.
 			foreach ( $values as $value ) {
+				$type = $this->get_cast_for_type( gettype( $value ) );
 
-				if ( 'string' === gettype( $value ) ) {
-					$value = "'{$value}'";
+				$value = $wpdb->prepare( '%s', $value );
+
+				if ( 'CHAR' !== $type ) {
+					$value = "CAST( {$value} AS {$type} )";
 				}
 
 				$sql .= "`{$field}` {$compare_type} {$value}";
@@ -669,7 +677,9 @@ namespace Sandhills {
 
 			// Escape values and build the SQL.
 			foreach ( $values as $value ) {
-				$sql .= "{$field} {$compare_type} '%%{$value}%%'";
+				$value = $wpdb->prepare( '%s', $value );
+
+				$sql .= "`{$field}` {$compare_type} '%%{$value}%%'";
 
 				if ( $value_count > 1 && ++$current !== $value_count ) {
 					$sql .= " {$operator} ";
@@ -692,6 +702,8 @@ namespace Sandhills {
 		 * @return string Raw, sanitized SQL.
 		 */
 		protected function get_between_sql( $values, $callback_or_type, $compare_type ) {
+			global $wpdb;
+
 			$sql = '';
 
 			// Bail if `$values` isn't an array or there aren't at least two values.
@@ -712,19 +724,20 @@ namespace Sandhills {
 			$values = array_slice( $values, 0, 2 );
 
 			// Sanitize the values according to the callback and cast dates.
-			$values = array_map( function( $value ) use ( $callback ) {
+			$values = array_map( function( $value ) use ( $callback, $wpdb ) {
 				$value = call_user_func( $callback, $value );
 
 				if ( false !== strpos( $value, ':' ) ) {
-					$value = "CAST( '{$value}' AS DATE)";
+					$value = $wpdb->prepare( '%s', $value );
+					$value = "CAST( {$value} AS DATE)";
 				}
 
 				return $value;
 			}, $values );
 
-			$sql .= "( `{$field}` {$compare_type} {$values[0]} AND {$values[1]} )";
+			$sql .= "( `{$field}` {$compare_type} %s AND %s )";
 
-			return $sql;
+			return $wpdb->prepare( $sql, $values );
 		}
 
 		/**
@@ -792,6 +805,35 @@ namespace Sandhills {
 			}
 
 			return $callback;
+		}
+
+		/**
+		 * Retrieves the CAST value for a given value type.
+		 *
+		 * @access public
+		 * @since  1.0.0
+		 *
+		 * @see WP_Meta_Query::get_cast_for_type()
+		 *
+		 * @param string $type Value type (as derived from gettype()).
+		 * @return string MySQL-ready CAST type.
+		 */
+		public function get_cast_for_type( $type ) {
+			$type = strtoupper( $type );
+
+			if ( ! preg_match( '/^(?:BINARY|CHAR|DATE|DATETIME|SIGNED|UNSIGNED|TIME|DOUBLE|INTEGER|NUMERIC(?:\(\d+(?:,\s?\d+)?\))?|DECIMAL(?:\(\d+(?:,\s?\d+)?\))?)$/', $type ) ) {
+				return 'CHAR';
+			}
+
+			if ( 'INTEGER' === $type || 'NUMERIC' === $type ) {
+				$type = 'SIGNED';
+			}
+
+			if ( 'DOUBLE' === $type ) {
+				$type = 'DECIMAL';
+			}
+
+			return $type;
 		}
 
 		/**
@@ -957,7 +999,7 @@ namespace Sandhills {
 		 * @return string Current clause name.
 		 */
 		public function get_clause( $clause = null ) {
-			if ( ! isset( $clause ) || ( isset( $clause ) && ! in_array( $clause, $this->allowed_clauses, true ) ) ) {
+			if ( ! isset( $clause ) || ! in_array( $clause, $this->allowed_clauses, true ) ) {
 				$clause = $this->current_clause;
 			}
 
