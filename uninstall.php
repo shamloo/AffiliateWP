@@ -28,17 +28,6 @@ if( $affiliate_wp_settings->get( 'uninstall_on_delete' ) ) {
 	$caps = new Affiliate_WP_Capabilities;
 	$caps->remove_caps();
 
-	$db_segments = array(
-		'affiliate_wp_affiliates',
-		'affiliate_wp_affiliatemeta',
-		'affiliate_wp_campaigns',
-		'affiliate_wp_creatives',
-		'affiliate_wp_payouts',
-		'affiliate_wp_referrals',
-		'affiliate_wp_rest_consumers',
-		'affiliate_wp_visits'
-	);
-
 	if ( is_multisite() ) {
 
 		if ( true === version_compare( $GLOBALS['wp_version'], '4.6', '<' ) ) {
