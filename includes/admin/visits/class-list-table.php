@@ -384,11 +384,13 @@ class AffWP_Visits_Table extends List_Table {
 			'referral_status' => $status
 		) );
 
-		$this->total_count = affiliate_wp()->visits->count( $args );
 
 		// Retrieve the "current" total count for pagination purposes.
-		$args['number']      = -1;
-		$this->current_count = affiliate_wp()->visits->count( $args );
+		$count_args = $args;
+		$count_args['number'] = -1;
+
+		$this->total_count = affiliate_wp()->visits->count( $args );
+		$this->current_count = affiliate_wp()->visits->count( $count_args );
 
 		return affiliate_wp()->visits->get_visits( $args );
 
