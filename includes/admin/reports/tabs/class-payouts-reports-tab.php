@@ -75,7 +75,7 @@ class Tab extends Reports\Tab {
 				'label'           => __( 'Total Earnings Paid (All Time)', 'affiliate-wp' ),
 				'type'            => 'amount',
 				'context'         => 'primary',
-				'data'            => array_sum( $payouts ),
+				'data'            => ! empty( $payouts ) ? array_sum( $payouts ) : 0,
 				'comparison_data' => sprintf( __( 'Affiliate: <a href="%1$s">%2$s</a>', 'affiliate-wp' ),
 					esc_url( $this->affiliate_link ),
 					$this->affiliate_name
@@ -119,7 +119,7 @@ class Tab extends Reports\Tab {
 				'label'           => __( 'Total Earnings Paid', 'affiliate-wp' ),
 				'type'            => 'amount',
 				'context'         => 'secondary',
-				'data'            => array_sum( $payouts ),
+				'data'            => ! empty( $payouts ) ? array_sum( $payouts ) : 0,
 				'comparison_data' => sprintf( __( 'Affiliate: <a href="%1$s">%2$s</a> | %3$s', 'affiliate-wp' ),
 					esc_url( $this->affiliate_link ),
 					$this->affiliate_name,
@@ -133,7 +133,7 @@ class Tab extends Reports\Tab {
 				'label'   => __( 'Total Earnings Paid', 'affiliate-wp' ),
 				'type'    => 'amount',
 				'context' => 'secondary',
-				'data'    => array_sum( $payouts ),
+				'data'    => ! empty( $payouts ) ? array_sum( $payouts ) : 0,
 				'comparison_data' => $this->get_date_comparison_label(),
 			) );
 		}
@@ -165,7 +165,7 @@ class Tab extends Reports\Tab {
 				'label'           => __( 'Total Earnings Generated', 'affiliate-wp' ),
 				'type'            => 'amount',
 				'context'         => 'tertiary',
-				'data'            => array_sum( $referrals ),
+				'data'            => ! empty( $referrals ) ? array_sum( $referrals ) : 0,
 				'comparison_data' => sprintf( __( 'Affiliate: <a href="%1$s">%2$s</a> | %3$s', 'affiliate-wp' ),
 					esc_url( $this->affiliate_link ),
 					$this->affiliate_name,
@@ -179,7 +179,7 @@ class Tab extends Reports\Tab {
 				'label' => __( 'Total Earnings Generated', 'affiliate-wp' ),
 				'type'  => 'amount',
 				'context' => 'tertiary',
-				'data'    => array_sum( $referrals ),
+				'data'    => ! empty( $referrals ) ? array_sum( $referrals ) : 0,
 				'comparison_data' => $this->get_date_comparison_label(),
 			) );
 		}
@@ -239,34 +239,34 @@ class Tab extends Reports\Tab {
 			'affiliate_id' => $affiliate_id
 		) );
 
-		if ( ! $payouts ) {
-			$payouts = array( 0 );
-		}
+		if ( ! empty( $payouts ) ) {
 
-		if ( $this->affiliate_id ) {
+			if ( $this->affiliate_id ) {
 
-			$this->register_tile( 'affiliate_average_payout_amount', array(
-				'label'           => __( 'Average Payout', 'affiliate-wp' ),
-				'type'            => 'amount',
-				'context'         => 'secondary',
-				'data'            => array_sum( $payouts ) / count( $payouts ),
-				'comparison_data' => sprintf( __( 'Affiliate: <a href="%1$s">%2$s</a> | %3$s', 'affiliate-wp' ),
-					esc_url( $this->affiliate_link ),
-					$this->affiliate_name,
-					$this->get_date_comparison_label()
-				),
-			) );
+				$this->register_tile( 'affiliate_average_payout_amount', array(
+					'label'           => __( 'Average Payout', 'affiliate-wp' ),
+					'type'            => 'amount',
+					'context'         => 'secondary',
+					'data'            => array_sum( $payouts ) / count( $payouts ),
+					'comparison_data' => sprintf( __( 'Affiliate: <a href="%1$s">%2$s</a> | %3$s', 'affiliate-wp' ),
+						esc_url( $this->affiliate_link ),
+						$this->affiliate_name,
+						$this->get_date_comparison_label()
+					),
+				) );
 
 
-		} else {
+			} else {
 
-			$this->register_tile( 'average_payout_amount', array(
-				'label'           => __( 'Average Payout', 'affiliate-wp' ),
-				'type'            => 'amount',
-				'context'         => 'secondary',
-				'data'            => array_sum( $payouts ) / count( $payouts ),
-				'comparison_data' => $this->get_date_comparison_label(),
-			) );
+				$this->register_tile( 'average_payout_amount', array(
+					'label'           => __( 'Average Payout', 'affiliate-wp' ),
+					'type'            => 'amount',
+					'context'         => 'secondary',
+					'data'            => array_sum( $payouts ) / count( $payouts ),
+					'comparison_data' => $this->get_date_comparison_label(),
+				) );
+
+			}
 
 		}
 	}
@@ -289,34 +289,38 @@ class Tab extends Reports\Tab {
 			'affiliate_id' => $affiliate_id
 		) );
 
-		$counts = array();
+		if ( ! empty( $payout_referrals ) ) {
 
-		foreach ( $payout_referrals as $referrals ) {
-			$counts[] = count( explode( ',', $referrals ) );
-		}
+			$counts = array();
 
-		if ( $this->affiliate_id ) {
+			foreach ( $payout_referrals as $referrals ) {
+				$counts[] = count( explode( ',', $referrals ) );
+			}
 
-			$this->register_tile( 'affiliate_average_referrals_per_payout', array(
-				'label'           => __( 'Average Referrals Per Payout (All Time)', 'affiliate-wp' ),
-				'type'            => 'number',
-				'context'         => 'tertiary',
-				'data'            => array_sum( $counts ) / count( $payout_referrals ),
-				'comparison_data' => sprintf( __( 'Affiliate: <a href="%1$s">%2$s</a>', 'affiliate-wp' ),
-					esc_url( $this->affiliate_link ),
-					$this->affiliate_name
-				),
-			) );
+			if ( $this->affiliate_id ) {
 
-		} else {
+				$this->register_tile( 'affiliate_average_referrals_per_payout', array(
+					'label'           => __( 'Average Referrals Per Payout (All Time)', 'affiliate-wp' ),
+					'type'            => 'number',
+					'context'         => 'tertiary',
+					'data'            => array_sum( $counts ) / count( $payout_referrals ),
+					'comparison_data' => sprintf( __( 'Affiliate: <a href="%1$s">%2$s</a>', 'affiliate-wp' ),
+						esc_url( $this->affiliate_link ),
+						$this->affiliate_name
+					),
+				) );
 
-			$this->register_tile( 'average_referrals_per_payout', array(
-				'label'           => __( 'Average Referrals Per Payout', 'affiliate-wp' ),
-				'type'            => 'number',
-				'context'         => 'tertiary',
-				'data'            => array_sum( $counts ) / count( $payout_referrals ),
-				'comparison_data' => __( 'All Time', 'affiliate-wp' ),
-			) );
+			} else {
+
+				$this->register_tile( 'average_referrals_per_payout', array(
+					'label'           => __( 'Average Referrals Per Payout', 'affiliate-wp' ),
+					'type'            => 'number',
+					'context'         => 'tertiary',
+					'data'            => array_sum( $counts ) / count( $payout_referrals ),
+					'comparison_data' => __( 'All Time', 'affiliate-wp' ),
+				) );
+
+			}
 
 		}
 	}
