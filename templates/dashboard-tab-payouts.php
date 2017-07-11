@@ -28,7 +28,7 @@
 	 */
 	do_action( 'affwp_payouts_dashboard_before_table', $affiliate_id ); ?>
 
-	<table id="affwp-affiliate-dashboard-payouts" class="affwp-table" aria-describedby="affwp-table-summary">
+	<table class="affwp-table affwp-affiliate-dashboard-payouts" aria-describedby="affwp-table-summary">
 		<thead>
 			<tr>
 				<th class="payout-date"><?php _e( 'Date', 'affiliate-wp' ); ?></th>

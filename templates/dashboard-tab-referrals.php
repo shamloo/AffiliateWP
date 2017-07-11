@@ -29,7 +29,7 @@ $affiliate_id = affwp_get_affiliate_id();
 	do_action( 'affwp_referrals_dashboard_before_table', $affiliate_id );
 	?>
 
-	<table id="affwp-affiliate-dashboard-referrals" class="affwp-table">
+	<table class="affwp-table affwp-affiliate-dashboard-referrals">
 		<thead>
 			<tr>
 				<th class="referral-amount"><?php _e( 'Amount', 'affiliate-wp' ); ?></th>

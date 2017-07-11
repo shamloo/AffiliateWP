@@ -127,23 +127,23 @@ p.affwp-error {
 	width: auto;
 }
 
-#affwp-affiliate-dashboard-visits {
+.affwp-affiliate-dashboard-visits {
 	table-layout: fixed;
 }
 
-#affwp-affiliate-dashboard-visits .visit-url {
+.affwp-affiliate-dashboard-visits .visit-url {
 	width: 30%;
 }
 
-#affwp-affiliate-dashboard-visits .referring-url {
+.affwp-affiliate-dashboard-visits .referring-url {
 	width: 30%;
 }
 
-#affwp-affiliate-dashboard-visits .referral-status {
+.affwp-affiliate-dashboard-visits .referral-status {
 	width: 15%;
 }
 
-#affwp-affiliate-dashboard-visits .visit-date {
+.affwp-affiliate-dashboard-visits .visit-date {
 	width: 25%;
 }
 

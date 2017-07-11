@@ -21,7 +21,7 @@
 	);
 	?>
 
-	<table id="affwp-affiliate-dashboard-visits" class="affwp-table" aria-describedby="affwp-table-summary">
+	<table class="affwp-table affwp-affiliate-dashboard-visits" aria-describedby="affwp-table-summary">
 		<thead>
 			<tr>
 				<th class="visit-url"><?php _e( 'URL', 'affiliate-wp' ); ?></th>
