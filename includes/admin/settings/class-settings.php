@@ -720,7 +720,7 @@ class Affiliate_WP_Settings {
 						'name' => __( 'Generate coupons', 'affiliate-wp' ),
 						'desc' => sprintf( __( 'Choose the integrations to enable for auto-generated coupons. For each integration enabled, a coupon will automatically be generated for all affiliates, when their affiliate account is both registered and approved. Refer to the <a href="%s" target="_blank">documentation</a> for help using this option.', 'affiliate-wp' ), 'http://docs.affiliatewp.com/article/TODO' ),
 						'type' => 'multicheck',
-						'options' => affiliate_wp()->affiliates->coupons->coupon_templates()
+						'options' => affiliate_wp()->affiliates->coupons->get_supported_integrations()
 					)
 				)
 			),

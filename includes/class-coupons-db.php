@@ -732,8 +732,9 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 		$supported = affwp_has_coupon_support_list();
 
 		foreach ( $enabled as $integration => $integration_term ) {
-			if ( in_array( $integration, $supported ) ) {
-				$available[] = $integration_term;
+
+			if ( array_key_exists( $integration, $supported ) ) {
+				$available[ $integration ] = $integration_term;
 			}
 		}
 

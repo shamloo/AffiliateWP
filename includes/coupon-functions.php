@@ -266,16 +266,16 @@ function affwp_has_coupon_support_list() {
 	 * @since 2.1
 	 */
 	return apply_filters( 'affwp_has_coupon_support_list', array(
-			'Easy Digital Downloads'    => 'edd',
-			'Gravity Forms'             => 'gravityforms',
-			'iThemes Exchange'          => 'exchange',
-			'Jigoshop'                  => 'jigoshop',
-			'LifterLMS'                 => 'lifterlms',
-			'MemberPress'               => 'memberpress',
-			'Paid Memberships Pro'      => 'pmp',
-			'Paid Member Subscriptions' => 'pms',
-			'Restrict Content Pro'      => 'rcp',
-			'WooCommerce'               => 'woocommerce'
+			'edd'          => 'Easy Digital Downloads',
+			'gravityforms' => 'Gravity Forms' ,
+			'exchange'     => 'iThemes Exchange',
+			'jigoshop'     => 'Jigoshop',
+			'lifterlms'    => 'LifterLMS',
+			'memberpress'  => 'MemberPress',
+			'pmp'          => 'Paid Memberships Pro',
+			'pms'          => 'Paid Member Subscriptions',
+			'rcp'          => 'Restrict Content Pro',
+			'woocommerce'  => 'WooCommerce'
 
 		)
 	);
@@ -297,8 +297,7 @@ function affwp_has_coupon_support( $integration ) {
 
 	$integrations = affiliate_wp()->integrations->get_enabled_integrations();
 	$supported    = affwp_has_coupon_support_list();
-
-	$has_support = in_array( $integration, $supported, true ) && array_key_exists( $integration, $integrations );
+	$has_support  = array_key_exists( $integration, $integrations );
 
 	/**
 	 * Filters whether the given coupon integration is supported.
