@@ -563,6 +563,9 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 			case 'edd':
 				$url = admin_url( 'edit.php?post_type=download&page=edd-discounts&edd-action=edit_discount&discount=' ) . $integration_coupon_id;
 				break;
+			case 'woocommerce':
+				$url = get_edit_post_link( $integration_coupon_id, '' );
+				break;
 
 			default : break;
 		}
@@ -728,9 +731,9 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 		$enabled   = affiliate_wp()->integrations->get_enabled_integrations();
 		$supported = affwp_has_coupon_support_list();
 
-		foreach ( $enabled as $integration ) {
+		foreach ( $enabled as $integration => $integration_term ) {
 			if ( in_array( $integration, $supported ) ) {
-				$available[] = $integration;
+				$available[] = $integration_term;
 			}
 		}
 
@@ -744,6 +747,17 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 
 	}
 
+
+	public function coupon_templates() {
+		$templates = $this->get_coupon_templates();
+
+		if ( empty( $templates ) ) {
+			affiliate_wp()->utils->log( 'No coupon templates were found.' );
+			return false;
+		}
+
+		echo $templates;
+	}
 	/**
 	 * Returns a list of integrations which are currently-enabled, have coupon support,
 	 * and have a coupon template presently set.
@@ -764,7 +778,7 @@ class Affiliate_WP_Coupons_DB extends Affiliate_WP_DB {
 		foreach ( $integrations as $integration ) {
 
 			if ( 0 !== affwp_get_coupon_template_id( $integration ) ) {
-				$templates[] = $integration;
+				$templates[ $integration ] = affwp_get_coupon_template_id( $integration );
 			}
 		}
 
