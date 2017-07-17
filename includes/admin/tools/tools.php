@@ -340,7 +340,7 @@ function affwp_export_import_tab() {
 								<option value="paid"><?php esc_html_e( 'Paid', 'affiliate-wp' ); ?></option>
 								<option value="unpaid"><?php esc_html_e( 'Failed', 'affiliate-wp' ); ?></option>
 							</select>
-							<div class="description"><?php esc_html_e( 'To search for an affiliate, enter the affiliate&#8217;s login name, first name, or last name. Leave blank to export referrals for all affiliates.', 'affiliate-wp' ); ?></div>
+							<div class="description"><?php esc_html_e( 'To search for an affiliate, enter the affiliate&#8217;s login name, first name, or last name. Leave blank to export payouts for all affiliates.', 'affiliate-wp' ); ?></div>
 						</p>
 						<p>
 							<?php submit_button( __( 'Export', 'affiliate-wp' ), 'secondary', 'export-payouts-submit', false ); ?>
@@ -365,7 +365,7 @@ function affwp_export_import_tab() {
 								<option value="converted"><?php esc_html_e( 'Converted', 'affiliate-wp' ); ?></option>
 								<option value="unconverted"><?php esc_html_e( 'Unconverted', 'affiliate-wp' ); ?></option>
 							</select>
-							<div class="description"><?php esc_html_e( 'To search for an affiliate, enter the affiliate&#8217;s login name, first name, or last name. Leave blank to export referrals for all affiliates.', 'affiliate-wp' ); ?></div>
+							<div class="description"><?php esc_html_e( 'To search for an affiliate, enter the affiliate&#8217;s login name, first name, or last name. Leave blank to export visits for all affiliates.', 'affiliate-wp' ); ?></div>
 						</p>
 						<p>
 							<?php submit_button( __( 'Export', 'affiliate-wp' ), 'secondary', 'export-visits-submit', false ); ?>
