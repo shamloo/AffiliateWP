@@ -56,6 +56,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 		// Affiliate Area link in My Account menu.
 		add_filter( 'woocommerce_account_menu_items', array( $this, 'my_account_affiliate_area_link' ), 100 );
+		add_filter( 'woocommerce_get_endpoint_url',   array( $this, 'my_account_endpoint_url' ), 100, 2 );
 		add_filter( 'woocommerce_get_settings_account', array( $this, 'account_settings' ) );
 	}
 
@@ -777,34 +778,51 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 				 * @param int    $affiliate_area_page Affiliate Area page ID.
 				 */
 				$title = apply_filters( 'affwp_woocommerce_affiliate_area_title', get_the_title( $affiliate_area_page ), $affiliate_area_page );
-				$slug  = get_post_field( 'post_name', $affiliate_area_page );
 
-				if ( $slug ) {
+				/*
+				 * Normally this would be $slug => $title, but we're going to intercept the 'affiliate-area'
+				 * value directly when overriding the endpoint URL in the 'woocommerce_get_endpoint_url' hook.
+				 */
+				$affiliate_area = array( 'affiliate-area' => $title );
 
-					$affiliate_area = array( $slug => $title );
+				$last_link = array();
 
-					$last_link = array();
+				if ( array_key_exists( 'customer-logout', $items ) ) {
 
-					if ( array_key_exists( 'customer-logout', $items ) ) {
+					// Grab the last link (probably the logout link).
+					$last_link = array_slice( $items, count( $items ) - 1, 1, true );
 
-						// Grab the last link (probably the logout link).
-						$last_link = array_slice( $items, count( $items ) - 1, 1, true );
-
-						// Pop the last link off the end.
-						array_pop( $items );
-
-					}
-
-					// Inject the Affiliate Area link 2nd to last, reinserting the last link.
-					$items = array_merge( $items, $affiliate_area, $last_link );
+					// Pop the last link off the end.
+					array_pop( $items );
 
 				}
+
+				// Inject the Affiliate Area link 2nd to last, reinserting the last link.
+				$items = array_merge( $items, $affiliate_area, $last_link );
 			}
 
 		}
 
 		return $items;
 
+	}
+
+	/**
+	 * Overrides the WooCommerce My Account endpoint URL for the affiliate area link.
+	 *
+	 * @access public
+	 * @since  2.1.3
+	 *
+	 * @param string $url      My Account endpoint URL.
+	 * @param string $endpoint Endpoint slug.
+	 * @return string (Maybe) filtered endpoint URL.
+	 */
+	public function my_account_endpoint_url( $url, $endpoint ) {
+		if ( 'affiliate-area' === $endpoint ) {
+			$url = affwp_get_affiliate_area_page_url();
+		}
+
+		return $url;
 	}
 
 	/**
