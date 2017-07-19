@@ -540,8 +540,14 @@ function affwp_abs_number_round( $val, $precision = 2 ) {
 
 	$period_decimal_sep   = preg_match( '/\.\d{1,2}$/', $val );
 	$comma_decimal_sep    = preg_match( '/\,\d{1,2}$/', $val );
-	$period_space_thousands_sep = preg_match( '/\d{1,3}(?:[.|\s]\d{3})+/', $val );
-	$comma_thousands_sep        = preg_match( '/\d{1,3}(?:,\d{3})+/', $val );
+
+	// Only attempt to determine thousands separators if the number is in the thousands.
+	if ( preg_match( '/^\d{4,}/', $val ) ) {
+		$period_space_thousands_sep = preg_match( '/\d{1,3}(?:[.|\s]\d{3})+/', $val );
+		$comma_thousands_sep        = preg_match( '/\d{1,3}(?:,\d{3})+/', $val );
+	} else {
+		$period_space_thousands_sep = $comma_thousands_sep = 0;
+	}
 
 	// Convert period and space thousand separators.
 	if ( $period_space_thousands_sep ) {
