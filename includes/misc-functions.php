@@ -542,7 +542,7 @@ function affwp_abs_number_round( $val, $precision = 2 ) {
 	$comma_decimal_sep    = preg_match( '/\,\d{1,2}$/', $val );
 
 	// Only attempt to determine thousands separators if the number is in the thousands.
-	if ( preg_match( '/^\d{4,}/', $val ) ) {
+	if ( 0 !== preg_match( '/^\d{4,}/', $val ) ) {
 		$period_space_thousands_sep = preg_match( '/\d{1,3}(?:[.|\s]\d{3})+/', $val );
 		$comma_thousands_sep        = preg_match( '/\d{1,3}(?:,\d{3})+/', $val );
 	} else {
