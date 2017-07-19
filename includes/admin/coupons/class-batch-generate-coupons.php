@@ -129,7 +129,8 @@ class Generate_Coupons extends Utils\Batch_Process implements Batch\With_PreFetc
 			return 'done';
 		}
 
-		$generated = array();
+		$generated   = array();
+		$to_generate = affiliate_wp()->settings->get( 'coupon_integrations' );
 
 		foreach ( $affiliate_ids as $affiliate_id ) {
 			$args = array(
