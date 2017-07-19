@@ -280,6 +280,15 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers ::affwp_abs_number_round()
+	 */
+	public function test_abs_number_round_with_non_thousands_number_should_not_take_thousands_separators_into_account() {
+		// Referrals: 27, Visits 1313.
+		$rate = floatval( 27 / 1313 );
+		$this->assertEquals( '2.06', affwp_abs_number_round( $rate * 100 ) );
+	}
+
+	/**
 	 * @covers ::affwp_get_logout_url
 	 */
 	public function test_affwp_get_logout_url() {

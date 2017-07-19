@@ -544,7 +544,7 @@ function affwp_abs_number_round( $val, $precision = 2 ) {
 	$comma_thousands_sep        = preg_match( '/\d{1,3}(?:,\d{3})+/', $val );
 
 	// Convert period and space thousand separators.
-	if ( $period_space_thousands_sep ) {
+	if ( $period_space_thousands_sep  && 0 === preg_match( '/\d{4,}$/', $val ) ) {
 		$val = str_replace( ' ', '', $val );
 
 		if ( ! $comma_decimal_sep ) {
