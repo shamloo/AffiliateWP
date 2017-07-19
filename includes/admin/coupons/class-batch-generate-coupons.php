@@ -139,7 +139,9 @@ class Generate_Coupons extends Utils\Batch_Process implements Batch\With_PreFetc
 				'integration_coupon_id' => $this->integration_coupon_id
 			);
 
-			$added = affwp_add_coupon( $args );
+			if ( affwp_generate_integration_coupon( $args ) ) {
+				$added = affwp_add_coupon( $args );
+			}
 
 			if ( $added ) {
 				$generated[] = $added;

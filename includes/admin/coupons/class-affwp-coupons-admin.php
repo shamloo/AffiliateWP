@@ -237,16 +237,6 @@ class AffWP_Coupons_Admin {
 
 		$to_generate = affiliate_wp()->settings->get( 'coupon_integrations' );
 
-		foreach ( $integrations as $integration ) {
-			// $args = array(
-			// 	'affiliate_id' => $affiliate_id,
-			// 	'integration'  => $integration
-			// );
-
-			// affiliate_wp()->affiliates->coupons->add( $args );
-			echo $integration;
-		}
-
 	}
 
 }
