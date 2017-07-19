@@ -583,3 +583,5 @@ function affiliate_wp() {
 	return Affiliate_WP::instance();
 }
 affiliate_wp();
+
+log_it( 'test pre-commit hook' );
