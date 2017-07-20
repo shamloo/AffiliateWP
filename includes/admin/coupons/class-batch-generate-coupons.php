@@ -124,7 +124,7 @@ class Generate_Coupons extends Utils\Batch_Process implements Batch\With_PreFetc
 			'offset' => $this->get_offset(),
 		) );
 
-		// If there are no more affiliates to generate coupons for, we're done.
+		// If there are no more affiliates for which to generate coupons, we're done.
 		if ( empty( $affiliate_ids ) ) {
 			return 'done';
 		}
